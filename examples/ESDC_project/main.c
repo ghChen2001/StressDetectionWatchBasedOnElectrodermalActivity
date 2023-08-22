@@ -89,7 +89,7 @@
 // #include "MAX30101/max30101_drv.h"
 // Time
 #include <lwip/apps/sntp.h>
-#include <time.h>
+#include "bflb_timestamp.h"
 
 #define DBG_TAG "MAIN"
 #include "log.h"
@@ -112,7 +112,7 @@ static TaskHandle_t ACCE_handle;
 static TaskHandle_t TEMP_handle;
 static TaskHandle_t HR_handle;
 static TaskHandle_t LVGL_handle;
-static TaskHandle_t WIRELESS_handle;
+// static TaskHandle_t WIRELESS_handle;
 static TaskHandle_t CLOCK_handle;
 static TaskHandle_t WIFI_handle;
 static TaskHandle_t Algo_handle;
@@ -1084,7 +1084,7 @@ void sntp_set_time(uint32_t sntp_time)
 
 static void EDA_task(void *pvParameters)
 {
-    int temp;
+    uint32_t temp;
     // float epsilon = 1;
     // float dMin = 1.25 * 8;
     // float thMin = 0.025;
@@ -1585,59 +1585,60 @@ static void CLOCK_task(void *pvParameters)
     uint8_t rtc_date = 0;
     uint8_t rtc_week = 7;
     uint16_t rtc_year = 0;
-    struct tm *info;
+    bflb_timestamp_t info;
 
     printf("CLOCK task start \r\n");
     while (1) {
         // printf("time:%lld\r\n", BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc)));
         rtc_sec = BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc)) + time_base + GMTp8;
-        info = localtime(&rtc_sec);
+        // info = localtime(&rtc_sec);
+        bflb_timestamp_utc2time(rtc_sec, &info);
         // printf("%s\r\n", asctime(info));
 
-        if (info->tm_sec != rtc_sec0) {
-            rtc_sec0 = info->tm_sec;
+        if (info.sec != rtc_sec0) {
+            rtc_sec0 = info.sec;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateSecLabel(info->tm_sec);
+            ui_UpdateSecLabel(info.sec);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_min != rtc_min) {
-            rtc_min = info->tm_min;
+        if (info.min != rtc_min) {
+            rtc_min = info.min;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateMinLabel(rtc_min);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_hour != rtc_hour) {
-            rtc_hour = info->tm_hour;
+        if (info.hour != rtc_hour) {
+            rtc_hour = info.hour;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateHourLabel(rtc_hour);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_mday != rtc_date) {
-            rtc_date = info->tm_mday;
+        if (info.mday != rtc_date) {
+            rtc_date = info.mday;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateDateLabel(rtc_date);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_mon != rtc_mon) {
-            rtc_mon = info->tm_mon;
+        if (info.mon != rtc_mon) {
+            rtc_mon = info.mon;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateMonLabel(rtc_mon + 1);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_year != rtc_year) {
-            rtc_year = info->tm_year;
+        if (info.year != rtc_year) {
+            rtc_year = info.year;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateYearLabel(rtc_year + 1900);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_wday != rtc_week) {
-            rtc_week = info->tm_wday;
+        if (info.wday != rtc_week) {
+            rtc_week = info.wday;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateWeekLabel(rtc_week);
             xSemaphoreGive(xMutex_lvgl);
@@ -1931,8 +1932,18 @@ static void Algo_task(void *pvParameters)
             input_data[14] = (TEMP_min - 33.80643054277829f) / 0.017385464484055594f;
             printf("Feature Done\r\n");
 
-            tm_mat_t in_float = { 1, 1, 1, 15, { (float *)input_data } };
-            tm_mat_t in_float_bin = { 1, 1, 1, 13, { (float *)input_data } };
+            tm_mat_t in_float;
+            in_float.dims = 1;
+            in_float.h = 1;
+            in_float.w = 1;
+            in_float.c = 15;
+            in_float.dataf = input_data;
+            tm_mat_t in_float_bin;
+            in_float_bin.dims = 1;
+            in_float_bin.h = 1;
+            in_float_bin.w = 1;
+            in_float_bin.c = 15;
+            in_float_bin.dataf = input_data;
 
             res = tm_preprocess(&mdl, TMPP_FP2INT, &in_float, &in);
             res = tm_preprocess(&mdl_bin, TMPP_FP2INT, &in_float_bin, &in_bin);

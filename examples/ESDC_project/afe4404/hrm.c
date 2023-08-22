@@ -21,6 +21,7 @@ unsigned char movingWindowCount, movingWindowSize, smallest, foundPeak, totalFou
 unsigned int freq;
 unsigned long currentRatio = 0;
 unsigned int peakDistance;
+void updateInterWindow(int *interArrayWindow);
 
 void initStatHRM(void)
 {

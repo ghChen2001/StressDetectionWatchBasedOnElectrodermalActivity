@@ -136,7 +136,7 @@
 
 #define LWIP_TIMEVAL_PRIVATE      0 // use sys/time.h for struct timeval
 
-//#define LWIP_PROVIDE_ERRNO
+// #define PLATFORM_PRIVDE_ERRNO 0
 #ifndef PLATFORM_PRIVDE_ERRNO
 #define LWIP_PROVIDE_ERRNO 1
 #endif

@@ -24,6 +24,7 @@ void ui_UpdateHourLabel(uint8_t hour);
 void ui_UpdateMonLabel(uint8_t mon);
 void ui_UpdateWeekLabel(uint8_t week);
 void ui_UpdateYearLabel(uint16_t year);
+void ui_UpdateDateLabel(uint8_t date);
 void ui_UpdateMentalLabel(int classNum, float posb);
 void ui_setWifiImg(uint8_t isConnected);
 void ui_setBleImg(uint8_t isConnected);

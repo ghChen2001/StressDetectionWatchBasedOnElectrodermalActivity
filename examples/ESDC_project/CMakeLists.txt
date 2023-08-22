@@ -20,7 +20,7 @@ sdk_add_include_directories(./myproject)
 sdk_add_include_directories(./Algorithm/my_findpeaks)
 # sdk_add_include_directories(./qpOASES/include)
 sdk_add_include_directories(./Algorithm/CControl/headers)
-sdk_add_include_directories(./cJSON)
+# sdk_add_include_directories(./cJSON)
 
 
 target_sources(app PRIVATE ./AD5940/ad5940.c)
@@ -36,7 +36,7 @@ target_sources(app PRIVATE ./afe4404/hrm.c)
 target_sources(app PRIVATE ./onenet/onenet_post.c)
 target_sources(app PRIVATE ./embedded_pedometer/count_steps.c)
 # target_sources(app PRIVATE ./Algorithm/sparsEDA/sparsEDA.c)
-target_sources(app PRIVATE ./cJSON/cJSON.c)
+# target_sources(app PRIVATE ./cJSON/cJSON.c)
 
 file(GLOB_RECURSE CControl "${CMAKE_CURRENT_SOURCE_DIR}/Algorithm/CControl/Sources/*.c")
 target_sources(app PRIVATE ${CControl})
