@@ -7,4 +7,4 @@ Wearable Watch for Stress Classification on BL618.
 
 # Project Architecture
 
-![Project Architecture](fig1.png)
+![Project Architecture](fig1.svg)
