@@ -40,8 +40,15 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
 /* MCU LCD Common interface */
 
-static lv_color_t draw_buf_1[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* A buffer */
-static lv_color_t draw_buf_2[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* An other buffer */
+// static lv_color_t draw_buf_1[LCD_W * LCD_H /6] __attribute__((aligned(64))); /* A buffer */
+// static lv_color_t draw_buf_2[LCD_W * LCD_H/6] __attribute__((aligned(64))); /* An other buffer */
+#if defined(CONFIG_PSRAM)
+static lv_color_t draw_buf_1[LCD_W * LCD_H / 4] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(64)));
+static lv_color_t draw_buf_2[LCD_W * LCD_H / 4] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(64)));
+#else
+#error "No config psram!"
+#endif
+
 static volatile lv_disp_drv_t *p_disp_drv_cb = NULL;
 
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
@@ -136,7 +143,7 @@ void lv_port_disp_init(void)
 /* MCU LCD Common interface */
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
 
-    lv_disp_draw_buf_init((lv_disp_draw_buf_t *)&draw_buf_dsc, draw_buf_1, draw_buf_2, LCD_W * LCD_H / 8); /*Initialize the display buffer*/
+    lv_disp_draw_buf_init((lv_disp_draw_buf_t *)&draw_buf_dsc, draw_buf_1, draw_buf_2, LCD_W * LCD_H / 4); /*Initialize the display buffer*/
 
 /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
@@ -160,6 +167,9 @@ void lv_port_disp_init(void)
 /* MCU LCD Common interface */
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
     disp_drv_dsc.sw_rotate = 0;
+    disp_drv_dsc.direct_mode = 0;
+    disp_drv_dsc.full_refresh = 0;
+    disp_drv_dsc.screen_transp = 0;
 
 /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
@@ -258,12 +268,13 @@ void disp_init(void)
 
 static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p)
 {
-    static uint8_t rotated_dir = 0;
-    if (rotated_dir != disp_drv->rotated) {
-        rotated_dir = disp_drv->rotated;
-        lcd_set_dir(rotated_dir, 0);
-    }
+    // static uint8_t rotated_dir = 0;
+    // if (rotated_dir != disp_drv->rotated) {
+    //     rotated_dir = disp_drv->rotated;
+    //     lcd_set_dir(rotated_dir, 0);
+    // }
     p_disp_drv_cb = disp_drv;
+    // printf("Flush\r\n");
     lcd_draw_picture_nonblocking(area->x1, area->y1, area->x2, area->y2, (lcd_color_t *)color_p);
 }
 

@@ -64,7 +64,7 @@
 			<target name="make" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 				<buildCommand>make</buildCommand>
 				<buildArguments>build CHIP=bl616 BOARD=bl616dk -C</buildArguments>
-				<buildTarget>examples/helloworld</buildTarget>
+				<buildTarget>examples/ESDC_project</buildTarget>
 				<stopOnError>true</stopOnError>
 				<useDefaultCommand>false</useDefaultCommand>
 				<runAllBuilders>true</runAllBuilders>
@@ -79,8 +79,8 @@
 			</target>
 			<target name="flash" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 				<buildCommand>make</buildCommand>
-				<buildArguments>flash CHIP=bl616 -C</buildArguments>
-				<buildTarget>examples/helloworld</buildTarget>
+				<buildArguments>flash CHIP=bl616 COMX=COM4 -C</buildArguments>
+				<buildTarget>examples/ESDC_project</buildTarget>
 				<stopOnError>true</stopOnError>
 				<useDefaultCommand>false</useDefaultCommand>
 				<runAllBuilders>true</runAllBuilders>

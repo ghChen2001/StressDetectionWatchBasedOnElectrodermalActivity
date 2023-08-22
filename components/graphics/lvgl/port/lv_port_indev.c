@@ -101,7 +101,7 @@ void lv_port_indev_init(void)
     indev_drv.read_cb = touchpad_read;
     indev_touchpad = lv_indev_drv_register(&indev_drv);
 
-#if 1
+#if 0
     lv_obj_t *touchpad_cursor = lv_img_create(lv_scr_act());
     lv_img_set_src(touchpad_cursor, LV_SYMBOL_EDIT);
     lv_obj_clear_flag(touchpad_cursor, LV_OBJ_FLAG_CLICKABLE);

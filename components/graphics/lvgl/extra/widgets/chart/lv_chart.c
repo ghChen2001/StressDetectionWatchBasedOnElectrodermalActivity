@@ -534,11 +534,17 @@ void lv_chart_set_next_value(lv_obj_t * obj, lv_chart_series_t * ser, lv_coord_t
     LV_ASSERT_OBJ(obj, MY_CLASS);
     LV_ASSERT_NULL(ser);
 
+    // printf("1\r\n");
     lv_chart_t * chart  = (lv_chart_t *)obj;
+    // printf("1.1 %d\r\n", ser->start_point);
     ser->y_points[ser->start_point] = value;
+    // printf("2\r\n");
     invalidate_point(obj, ser->start_point);
+    // printf("3\r\n");
     ser->start_point = (ser->start_point + 1) % chart->point_cnt;
+    // printf("4\r\n");
     invalidate_point(obj, ser->start_point);
+    // printf("5\r\n");
 }
 
 void lv_chart_set_next_value2(lv_obj_t * obj, lv_chart_series_t * ser, lv_coord_t x_value, lv_coord_t y_value)

@@ -53,7 +53,8 @@
  * NTP timestamps instead.
  */
 #if !defined SNTP_SET_SYSTEM_TIME || defined __DOXYGEN__
-#define SNTP_SET_SYSTEM_TIME(sec)   LWIP_UNUSED_ARG(sec)
+// #define SNTP_SET_SYSTEM_TIME(sec)   LWIP_UNUSED_ARG(sec)
+#define SNTP_SET_SYSTEM_TIME(sec) sntp_set_time(sec)
 #endif
 
 /** The maximum number of SNTP servers that can be set */
@@ -79,7 +80,7 @@
  * SNTP_DEBUG: Enable debugging for SNTP.
  */
 #if !defined SNTP_DEBUG || defined __DOXYGEN__
-#define SNTP_DEBUG                  LWIP_DBG_OFF
+#define SNTP_DEBUG                  LWIP_DBG_ON
 #endif
 
 /** SNTP server port */

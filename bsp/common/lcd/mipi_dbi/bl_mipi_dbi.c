@@ -1,4 +1,6 @@
 #include "../lcd.h"
+#include "bflb_dbi.h"
+#include "hardware/dbi_reg.h"
 
 #if (defined(LCD_DBI_INTERFACE_TYPE) && (LCD_DBI_INTERFACE_TYPE == 1))
 
@@ -32,6 +34,8 @@ static struct bflb_dma_channel_lli_transfer_s dma_tx_transfers[1];
 
 static volatile bool dbi_async_flag = false;
 static volatile bool dbi_async_cycle_fill_flag = false;
+
+static volatile bool Isstarted = false;
 
 static void dbi_tc_callback(int irq, void *arg)
 {
@@ -195,6 +199,7 @@ int lcd_dbi_transmit_cmd_pixel_sync(uint8_t cmd, uint32_t *pixel, size_t pixel_n
     return 0;
 }
 
+#ifndef LCD_DISP_QSPI_GC9B71
 int lcd_dbi_transmit_cmd_pixel_async(uint8_t cmd, uint32_t *pixel, size_t pixel_num)
 {
     uint32_t data_size;
@@ -203,6 +208,7 @@ int lcd_dbi_transmit_cmd_pixel_async(uint8_t cmd, uint32_t *pixel, size_t pixel_
 
     /* get data size */
     data_size = bflb_dbi_feature_control(dbi_hd, DBI_CMD_GET_SIZE_OF_PIXEL_CNT, pixel_num);
+    printf("%d\r\n", data_size);
 
     /* dma transfers cfg */
     dma_tx_transfers[0].src_addr = (uint32_t)pixel;
@@ -227,21 +233,134 @@ int lcd_dbi_transmit_cmd_pixel_async(uint8_t cmd, uint32_t *pixel, size_t pixel_
 
     return 0;
 }
+#else
+int lcd_dbi_transmit_cmd_pixel_async(uint8_t cmd, uint32_t *pixel, size_t pixel_num)
+{
+    uint32_t data_size;
+    uint32_t reg_base;
+    uint32_t regval;
+
+    reg_base = dbi_hd->reg_base;
+
+    dbi_async_flag = true;
+
+    /* get data size in bytes */
+    data_size = bflb_dbi_feature_control(dbi_hd, DBI_CMD_GET_SIZE_OF_PIXEL_CNT, pixel_num);
+    // printf("%d\r\n", data_size);
+
+    /* dma transfers cfg */
+    dma_tx_transfers[0].src_addr = (uint32_t)pixel;
+    dma_tx_transfers[0].dst_addr = DMA_ADDR_DBI_TDR;
+    dma_tx_transfers[0].nbytes = data_size;
+    bflb_dma_channel_lli_reload(dbi_dma_hd, dma_tx_llipool, LCD_DBI_DMA_LLI_NUM, dma_tx_transfers, 1);
+
+    /* trigger dbi data transfer */
+    // bflb_dbi_send_cmd_pixel(dbi_hd, cmd, pixel_num, NULL);
+
+    /* disable DBI transaction */
+    regval = getreg32(reg_base + DBI_CONFIG_OFFSET);
+    regval &= ~DBI_CR_DBI_EN;
+    putreg32(regval, reg_base + DBI_CONFIG_OFFSET);
+
+    if (((regval & DBI_CR_DBI_CMD_EN) == 0) && (pixel_num == 0)) {
+        /* There is no data or command phase, nothing to do */
+        return 0;
+    }
+
+    /* pixel mode  */
+    regval |= DBI_CR_DBI_DAT_TP;
+
+    /* write mode  */
+    regval |= DBI_CR_DBI_DAT_WR;
+
+    /* pixle data phase enable */
+    if (pixel_num) {
+        regval |= DBI_CR_DBI_DAT_EN;
+    } else {
+        regval &= ~DBI_CR_DBI_DAT_EN;
+    }
+    putreg32(regval, reg_base + DBI_CONFIG_OFFSET);
+
+    // /* clear fifo*/
+    // regval = getreg32(reg_base + DBI_FIFO_CONFIG_0_OFFSET);
+    // regval |= DBI_TX_FIFO_CLR;
+    // putreg32(regval, reg_base + DBI_FIFO_CONFIG_0_OFFSET);
+
+    if (!Isstarted) {
+        
+        
+        Isstarted = true;
+    }
+    /* enabled DMA request for dbi */
+    bflb_dbi_link_txdma(dbi_hd, true);
+    /* unmask int */
+    bflb_dbi_tcint_mask(dbi_hd, false);
+    /* clean cache */
+    bflb_l1c_dcache_clean_range((void *)pixel, data_size);
+    /* enable dma */
+    bflb_dma_channel_start(dbi_dma_hd);
+
+    /* set cmd  */
+    if (regval & DBI_CR_DBI_CMD_EN) {
+        regval = getreg32(reg_base + DBI_CMD_OFFSET);
+        regval &= ~DBI_CR_DBI_CMD_MASK;
+        regval |= cmd << DBI_CR_DBI_CMD_SHIFT;
+        putreg32(regval, reg_base + DBI_CMD_OFFSET);
+    }
+
+    /* pixel cnt */
+    if (pixel_num) {
+        regval = getreg32(reg_base + DBI_PIX_CNT_OFFSET);
+        regval &= ~DBI_CR_DBI_PIX_CNT_MASK;
+        regval |= ((pixel_num - 1) << DBI_CR_DBI_PIX_CNT_SHIFT) & DBI_CR_DBI_PIX_CNT_MASK;
+        putreg32(regval, reg_base + DBI_PIX_CNT_OFFSET);
+    }
+
+    /* clear complete interrupt  */
+    regval = getreg32(reg_base + DBI_INT_STS_OFFSET);
+    regval |= DBI_CR_DBI_END_CLR;
+    putreg32(regval, reg_base + DBI_INT_STS_OFFSET);
+
+    /* trigger the transaction */
+    regval = getreg32(reg_base + DBI_CONFIG_OFFSET);
+    regval |= DBI_CR_DBI_EN;
+    putreg32(regval, reg_base + DBI_CONFIG_OFFSET);
+
+    return 0;
+}
+#endif
 
 int lcd_dbi_transmit_cmd_pixel_fill_sync(uint8_t cmd, uint32_t pixel_val, size_t pixel_num)
 {
     uint32_t words_cnt;
     uint8_t fifo_cnt;
+    uint32_t regval;
+    uint32_t reg_base;
 
-    /* get data size */
+    /* get data size in words */
     words_cnt = bflb_dbi_feature_control(dbi_hd, DBI_CMD_GET_SIZE_OF_PIXEL_CNT, pixel_num) / 4;
+
+    reg_base = dbi_hd->reg_base;
+
+    /* clear fifo */
+    regval = getreg32(reg_base + DBI_FIFO_CONFIG_0_OFFSET);
+    regval |= DBI_TX_FIFO_CLR;
+    putreg32(regval, reg_base + DBI_FIFO_CONFIG_0_OFFSET);
+
+    /* fill the fifo in advance */
+    fifo_cnt = bflb_dbi_feature_control(dbi_hd, DBI_CMD_GET_TX_FIFO_CNT, 0); // get fifo available count
+    fifo_cnt = words_cnt > fifo_cnt ? fifo_cnt : words_cnt;
+    words_cnt -= fifo_cnt;
+    for (; fifo_cnt > 0; fifo_cnt--) {
+        putreg32(pixel_val, DMA_ADDR_DBI_TDR);
+    }
 
     /* trigger dbi data transfer */
     bflb_dbi_send_cmd_pixel(dbi_hd, cmd, pixel_num, NULL);
 
     /* fill data into fifo */
     for (; words_cnt > 0;) {
-        fifo_cnt = bflb_dbi_feature_control(dbi_hd, DBI_CMD_GET_TX_FIFO_CNT, 0);
+        fifo_cnt = bflb_dbi_feature_control(dbi_hd, DBI_CMD_GET_TX_FIFO_CNT, 0); // get fifo available count
         fifo_cnt = words_cnt > fifo_cnt ? fifo_cnt : words_cnt;
         words_cnt -= fifo_cnt;
 

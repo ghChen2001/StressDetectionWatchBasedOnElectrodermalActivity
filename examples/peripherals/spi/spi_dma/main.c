@@ -39,6 +39,21 @@ void sram_init()
     }
 }
 
+void spi_isr(int irq, void *arg)
+{
+    uint32_t intstatus = bflb_spi_get_intstatus(spi0);
+    if (intstatus & SPI_INTSTS_TC) {
+        bflb_spi_int_clear(spi0, SPI_INTCLR_TC);
+        printf("tc done int\r\n");
+    }
+    if (intstatus & SPI_INTSTS_TX_FIFO) {
+        printf("tx fifo\r\n");
+    }
+    if (intstatus & SPI_INTSTS_RX_FIFO) {
+        printf("rx fifo\r\n");
+    }
+}
+
 int main(void)
 {
     struct bflb_dma_channel_lli_pool_s tx_llipool[1];
@@ -95,6 +110,10 @@ int main(void)
     bflb_spi_link_txdma(spi0, true);
     bflb_spi_link_rxdma(spi0, true);
 
+    bflb_spi_tcint_mask(spi0, false);
+    bflb_irq_attach(spi0->irq_num, spi_isr, NULL);
+    bflb_irq_enable(spi0->irq_num);
+
     printf("\n\rspi dma test\n\r");
 
     dma0_ch0 = bflb_device_get_by_name("dma0_ch0");
@@ -117,7 +136,8 @@ int main(void)
     bflb_dma_channel_lli_reload(dma0_ch0, tx_llipool, 1, tx_transfers, 1);
     bflb_dma_channel_lli_reload(dma0_ch1, rx_llipool, 1, rx_transfers, 1);
     bflb_dma_channel_start(dma0_ch0);
-    bflb_dma_channel_start(dma0_ch1);
+    //bflb_mtimer_delay_ms(1);
+    //bflb_dma_channel_start(dma0_ch1);
 
     while (dma_tc_flag0 != 1) {
         bflb_mtimer_delay_ms(1);

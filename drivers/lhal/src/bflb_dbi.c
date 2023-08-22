@@ -533,10 +533,12 @@ int bflb_dbi_send_cmd_pixel(struct bflb_device_s *dev, uint8_t cmd, uint32_t pix
         putreg32(regval, reg_base + DBI_PIX_CNT_OFFSET);
     }
 
-    /* clear fifo */
-    regval = getreg32(reg_base + DBI_FIFO_CONFIG_0_OFFSET);
-    regval |= DBI_TX_FIFO_CLR;
-    putreg32(regval, reg_base + DBI_FIFO_CONFIG_0_OFFSET);
+    if (pixel_buff != NULL) {
+        /* clear fifo for non-DMA mode */
+        regval = getreg32(reg_base + DBI_FIFO_CONFIG_0_OFFSET);
+        regval |= DBI_TX_FIFO_CLR;
+        putreg32(regval, reg_base + DBI_FIFO_CONFIG_0_OFFSET);
+    }
 
     /* clear complete interrupt  */
     regval = getreg32(reg_base + DBI_INT_STS_OFFSET);
@@ -550,6 +552,8 @@ int bflb_dbi_send_cmd_pixel(struct bflb_device_s *dev, uint8_t cmd, uint32_t pix
 
     /* No need to fill in fifo, for DMA mode */
     if (pixel_buff == NULL) {
+        // printf("bflb_dbi_send_cmd_pixel Returned.\r\n");
+        // while(1);
         return 0;
     }
 

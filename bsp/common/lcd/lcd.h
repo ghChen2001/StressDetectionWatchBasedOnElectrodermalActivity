@@ -71,6 +71,15 @@
 #define LCD_COLOR_DEPTH              GC9C01_DISP_QSPI_COLOR_DEPTH
 #define _LCD_FUNC_DEFINE(_func, ...) gc9c01_disp_qspi_##_func(__VA_ARGS__)
 
+#elif defined LCD_DISP_QSPI_GC9B71
+
+#include "disp_qspi/gc9b71_disp_qspi.h"
+#define LCD_INTERFACE_TYPE           LCD_INTERFACE_DBI
+#define LCD_W                        GC9B71_DISP_QSPI_W
+#define LCD_H                        GC9B71_DISP_QSPI_H
+#define LCD_COLOR_DEPTH              GC9B71_DISP_QSPI_COLOR_DEPTH
+#define _LCD_FUNC_DEFINE(_func, ...) gc9b71_qspi_##_func(__VA_ARGS__)
+
 #elif defined LCD_DPI_ILI9488
 
 #include "mipi_dpi/ili9488_dpi.h"

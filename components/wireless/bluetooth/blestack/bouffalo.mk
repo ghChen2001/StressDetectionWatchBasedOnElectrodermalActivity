@@ -132,6 +132,14 @@ ifeq ($(CONFIG_BT_BAS_SERVER),1)
 ble_stack_srcs   += src/services/bas.c
 endif
 
+ifeq ($(CONFIG_BT_HRS_SERVER),1)
+ble_stack_srcs   += src/services/hrs.c
+endif
+
+ifeq ($(CONFIG_BT_MYSVC_SERVER),1)
+ble_stack_srcs   += src/services/mysvc.c
+endif
+
 ifeq ($(CONFIG_BT_SCPS_SERVER),1)
 ble_stack_srcs   += src/services/scps.c
 endif

@@ -54,6 +54,13 @@ typedef struct
 #define TOUCH_MAX_POINT                GT911_I2C_MAX_POINT
 #define _TOUCH_FUNC_DEFINE(_func, ...) gt911_i2c_##_func(__VA_ARGS__)
 
+#elif defined TOUCH_I2C_CST816D
+
+#include "cst816d_i2c.h"
+#define TOUCH_INTERFACE_TYPE           TOUCH_INTERFACE_I2C
+#define TOUCH_MAX_POINT                CST816D_I2C_MAX_POINT
+#define _TOUCH_FUNC_DEFINE(_func, ...) cst816d_i2c_##_func(__VA_ARGS__)
+
 #elif
 #error "Please select a touch type"
 #endif

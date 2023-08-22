@@ -39,6 +39,11 @@ target_sources(app PRIVATE lcd/spi/ili9488_spi.c)
 target_sources(app PRIVATE lcd/spi/st7796_spi.c)
 target_sources(app PRIVATE lcd/spi/st7789v_spi.c)
 
+# target_sources(app PRIVATE lcd/mipi_dpi/standard_dpi.c)
+# target_sources(app PRIVATE lcd/mipi_dpi/ili9488_dpi.c)
+# target_sources(app PRIVATE lcd/mipi_dpi/gc9503v_dpi.c)
+
+target_sources(app PRIVATE lcd/disp_qspi/gc9b71_disp_qspi.c)
 sdk_add_include_directories(lcd)
 endif()
 
@@ -47,6 +52,7 @@ if(CONFIG_BSP_TOUCH)
 target_sources(app PRIVATE touch/touch.c)
 target_sources(app PRIVATE touch/ft6x36_i2c.c)
 target_sources(app PRIVATE touch/gt911_i2c.c)
+target_sources(app PRIVATE touch/cst816d_i2c.c)
 sdk_add_include_directories(touch)
 endif()
 

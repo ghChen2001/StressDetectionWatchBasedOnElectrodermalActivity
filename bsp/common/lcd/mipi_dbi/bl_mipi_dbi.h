@@ -35,7 +35,13 @@ int lcd_dbi_transmit_cmd_pixel_fill_sync(uint8_t cmd, uint32_t pixel_val, size_t
 int lcd_dbi_is_busy(void);
 int lcd_dbi_async_callback_enable(bool enable);
 int lcd_dbi_async_callback_register(void (*callback)(void));
+
+#ifndef LCD_DISP_QSPI_GC9B71
 int lcd_dbi_transmit_cmd_pixel_async(uint8_t cmd, uint32_t *pixel, size_t pixel_num);
+#else
+int lcd_dbi_transmit_cmd_pixel_async(uint8_t cmd, uint32_t *pixel, size_t pixel_num);
+#endif
+
 int lcd_dbi_transmit_cmd_pixel_fill_async(uint8_t cmd, uint32_t pixel_val, size_t pixel_num);
 
 #endif

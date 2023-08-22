@@ -81,8 +81,9 @@ static void ble_start_adv(void)
 {
     struct bt_le_adv_param param;
     int err = -1;
-    struct bt_data adv_data[1] = {
-        BT_DATA_BYTES(BT_DATA_FLAGS, BT_LE_AD_NO_BREDR | BT_LE_AD_GENERAL)
+    struct bt_data adv_data[] = {
+        BT_DATA_BYTES(BT_DATA_FLAGS, BT_LE_AD_NO_BREDR | BT_LE_AD_GENERAL),
+        //BT_DATA_BYTES(BT_DATA_NAME_COMPLETE, "SmartWatch_1234")
     };
     struct bt_data adv_rsp[1] = {
         BT_DATA_BYTES(BT_DATA_MANUFACTURER_DATA, "BL616")
@@ -148,6 +149,8 @@ int main(void)
 
     vTaskStartScheduler();
 
-    while (1) {
+
+        while (1)
+    {
     }
 }

@@ -22,7 +22,7 @@
     LCD_SPI_ST7796
     LCD_SPI_ST7789V
 */
-#define LCD_SPI_ST7796
+#define LCD_SPI_ST7789V
 
 /* dbi ili9488 config */
 #if defined LCD_DBI_ILI9488
@@ -374,11 +374,11 @@
     #define LCD_SPI_HARD_4_PIXEL_CNT_MAX (800 * 640)
 
     /* spi pin, hardware controlled */
-    #define LCD_SPI_HARD_4_PIN_CLK   GPIO_PIN_13
-    #define LCD_SPI_HARD_4_PIN_DAT   GPIO_PIN_15
+    #define LCD_SPI_HARD_4_PIN_CLK   GPIO_PIN_17
+    #define LCD_SPI_HARD_4_PIN_DAT   GPIO_PIN_19
     /* cs/dc pin, software controlled */
-    #define LCD_SPI_HARD_4_PIN_CS   GPIO_PIN_14
-    #define LCD_SPI_HARD_4_PIN_DC   GPIO_PIN_16
+    #define LCD_SPI_HARD_4_PIN_CS   GPIO_PIN_18
+    #define LCD_SPI_HARD_4_PIN_DC   GPIO_PIN_20
 
 #endif
 
