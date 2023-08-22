@@ -1,0 +1,8 @@
+digraph "bflb_audac_volume_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_audac_volume_config_s\n|+ mute_ramp_en\l+ mute_up_ramp_rate\l+ mute_down_ramp_rate\l+ volume_update_mode\l+ volume_ramp_rate\l+ volume_zero_cross_timeout\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="AUDAC volume configuration structure"];
+}

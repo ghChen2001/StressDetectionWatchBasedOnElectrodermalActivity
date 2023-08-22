@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_emac.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__emac_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_emac.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__emac_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_EMAC_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_EMAC_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga754f210b5d4f6c92782b67809b109c1d">   14</a></span><span class="preprocessor">#define EMAC_DO_FLUSH_DATA (1)</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">/* EMAC clock use external or use internal; 0: used external 1: used internal */</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga5dfed92b635a13e78650d93f7a889375">   17</a></span><span class="preprocessor">#define EMAC_CLK_USE_EXTERNAL (0)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga1bdc24ed3972295838d919b1028e35b2">   18</a></span><span class="preprocessor">#define EMAC_CLK_USE_INTERNAL (1)</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#gae835c753f7c01dbe6b5358316abbe546">   23</a></span><span class="preprocessor">#define EMAC_CMD_NO_PREAMBLE_MODE (0x01)</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#ga78a946d716043bd210a644dc66741878">   24</a></span><span class="preprocessor">#define EMAC_CMD_EN_PROMISCUOUS   (0x02)</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#gaac137fe6c21057e250b2b583b54aa0cc">   25</a></span><span class="preprocessor">#define EMAC_CMD_FRAME_GAP_CHECK  (0x03)</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#ga0501d64bded05418402c43745e05e294">   26</a></span><span class="preprocessor">#define EMAC_CMD_FULL_DUPLEX      (0x04)</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#ga3dc3a08570e5b91fc398d57da8c34698">   27</a></span><span class="preprocessor">#define EMAC_CMD_EN_TX_CRC_FIELD  (0x05)</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#gac4429a5c47ab0169a0e2b8a8112b8f6e">   28</a></span><span class="preprocessor">#define EMAC_CMD_RECV_HUGE_FRAMES (0x06)</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#ga3c6bc088665095b41c61841ced7aad85">   29</a></span><span class="preprocessor">#define EMAC_CMD_EN_AUTO_PADDING  (0x07)</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#gabdedf53d283e80034af4ffeea16a53cf">   30</a></span><span class="preprocessor">#define EMAC_CMD_RECV_SMALL_FRAME (0x08)</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#gaf669f9c387cfe4d2f23ddbb63c516376">   31</a></span><span class="preprocessor">#define EMAC_CMD_SET_PHY_ADDRESS  (0x09)</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#gae8159e219f1277cf599953390c06664f">   32</a></span><span class="preprocessor">#define EMAC_CMD_SET_MAC_ADDRESS  (0x0A)</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#ga7bab31f926e7800dc99224208ed76283">   33</a></span><span class="preprocessor">#define EMAC_CMD_SET_PACKET_GAP   (0x0B)</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#ga922180c28e11aac155cfe9854cfba83d">   34</a></span><span class="preprocessor">#define EMAC_CMD_SET_MIN_FRAME    (0x0C)</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#gad3d050b1820903c7393c010c013885f6">   35</a></span><span class="preprocessor">#define EMAC_CMD_SET_MAX_FRAME    (0x0D)</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#ga580e5c7c153911db5125da9b85e6ef92">   36</a></span><span class="preprocessor">#define EMAC_CMD_SET_MAXRET       (0x0E)</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="group___e_m_a_c___c_m_d.html#gafd3cfa14701283628ff44c070772bc5a">   37</a></span><span class="preprocessor">#define EMAC_CMD_SET_COLLVALID    (0x0F)</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___p_h_y___s_t_a_t_e.html#gabdc9433be6df0a6daeb74c6dc069c561">   45</a></span><span class="preprocessor">#define PHY_STATE_DOWN    (0) </span><span class="comment">/* PHY is not usable */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="group___p_h_y___s_t_a_t_e.html#ga348dce18afd7181eed75db63e2107159">   46</a></span><span class="preprocessor">#define PHY_STATE_READY   (1) </span><span class="comment">/* PHY is OK, wait for controller */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___p_h_y___s_t_a_t_e.html#gaa7441b92dba5157a172df6388b052318">   47</a></span><span class="preprocessor">#define PHY_STATE_UP      (2) </span><span class="comment">/* Network is ready for TX/RX */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group___p_h_y___s_t_a_t_e.html#ga336ca9b4cecd996ababac9f9a1a12346">   48</a></span><span class="preprocessor">#define PHY_STATE_RUNNING (3) </span><span class="comment">/* working */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___p_h_y___s_t_a_t_e.html#gaba2b9fe866463088a1d471a89ff6f577">   49</a></span><span class="preprocessor">#define PHY_STATE_NOLINK  (4) </span><span class="comment">/* no cable connected */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___p_h_y___s_t_a_t_e.html#gaebee5374099d81ef51db5e73bb6489d9">   50</a></span><span class="preprocessor">#define PHY_STATE_STOPPED (5) </span><span class="comment">/* PHY has been stopped */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___p_h_y___s_t_a_t_e.html#gaafa68c244e27e7e5c18342bf4ca89bf4">   51</a></span><span class="preprocessor">#define PHY_STATE_TESTING (6) </span><span class="comment">/* in test mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">/* EMAC PACKET */</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga25dc83a891a69cc22085990ca8d72bb6">   57</a></span><span class="preprocessor">#define EMAC_NORMAL_PACKET   (uint32_t)(0)</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga027f51a1ee524978d79cbffeba0d21c9">   58</a></span><span class="preprocessor">#define EMAC_FRAGMENT_PACKET (uint32_t)(0x01)</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga21660f263d8d9623badf2908a000b10b">   59</a></span><span class="preprocessor">#define EMAC_NOCOPY_PACKET   (uint32_t)(0x02)</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">/* ETH packet size */</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">/* ETH     | Header | Extra | VLAN tag | Payload   | CRC | */</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">/* Size    | 14     | 2     | 4        | 46 ~ 1500 | 4   | */</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga15e493eedd0128d55c89df6d7c2c6c47">   64</a></span><span class="preprocessor">#define ETH_MAX_PACKET_SIZE          ((uint32_t)1524U) </span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga0dd989fc5922a49701ae930f3c8cbada">   65</a></span><span class="preprocessor">#define ETH_HEADER_SZIE              ((uint32_t)14U)   </span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga6be302136e0434536d049406760485b1">   66</a></span><span class="preprocessor">#define ETH_CRC_SIZE                 ((uint32_t)4U)    </span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga68fa821143b2ea457846f294a19def87">   67</a></span><span class="preprocessor">#define ETH_EXTRA_SIZE               ((uint32_t)2U)    </span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gadd3a85426a611ef73a08ed202b89344d">   68</a></span><span class="preprocessor">#define ETH_VLAN_TAG_SIZE            ((uint32_t)4U)    </span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga0fe155d9b74937ec6b67809c3d73a558">   69</a></span><span class="preprocessor">#define ETH_MIN_ETH_PAYLOAD_SIZE     ((uint32_t)46U)   </span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gaa23a2264af49f86c13a5358198d3ad33">   70</a></span><span class="preprocessor">#define ETH_MAX_ETH_PAYLOAD_SIZE     ((uint32_t)1500U) </span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga6ce4363b63e342922e65fbd634be68b6">   71</a></span><span class="preprocessor">#define ETH_JUMBO_FRAME_PAYLOAD_SIZE ((uint32_t)9000U) </span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">/* ETH tx &amp; rx buffer size */</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#ifndef ETH_TX_BUFFER_SIZE</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga05bc450811322341c2fcc68442f12680">   75</a></span><span class="preprocessor">#define ETH_TX_BUFFER_SIZE (ETH_MAX_PACKET_SIZE)</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#ifndef ETH_RX_BUFFER_SIZE</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga34b919b347ebbe67e03f1b72f498ddd5">   78</a></span><span class="preprocessor">#define ETH_RX_BUFFER_SIZE (ETH_MAX_PACKET_SIZE)</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">/* emac interrupt UNMASK/MASK define */</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga07e8f25e7e0122d02238db95e1acad8f">   82</a></span><span class="preprocessor">#define EMAC_INT_EN_TX_DONE  (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga8239732818987bbeecce145b1b9fc508">   83</a></span><span class="preprocessor">#define EMAC_INT_EN_TX_ERROR (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gabb668b1c69cbfe4ed0846bf480af2079">   84</a></span><span class="preprocessor">#define EMAC_INT_EN_RX_DONE  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gabdbd262e3722a268b3f9da6c216764d7">   85</a></span><span class="preprocessor">#define EMAC_INT_EN_RX_ERROR (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gae05def1d82a8e396c4357bb651a79c52">   86</a></span><span class="preprocessor">#define EMAC_INT_EN_RX_BUSY  (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga96f56f7315cc09680adfa1774e2b7916">   87</a></span><span class="preprocessor">#define EMAC_INT_EN_TX_CTRL  (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga078ae4358c621b36dc64174aeeea9f19">   88</a></span><span class="preprocessor">#define EMAC_INT_EN_RX_CTRL  (1 &lt;&lt; 6)</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gad2d5530fd37dd10fd90b5c7909361602">   89</a></span><span class="preprocessor">#define EMAC_INT_EN_ALL      (0x7f &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">/* emac interrupt status define */</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga7e297fda3467287625a5c884f69021d6">   92</a></span><span class="preprocessor">#define EMAC_INT_STS_TX_DONE  (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gaeb1a99e730918fe1973d6a6328e39b35">   93</a></span><span class="preprocessor">#define EMAC_INT_STS_TX_ERROR (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gaf1693e3e768c9a51d1472fdefe3a2f69">   94</a></span><span class="preprocessor">#define EMAC_INT_STS_RX_DONE  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga87ff17d5587a2e82d29784263aa81434">   95</a></span><span class="preprocessor">#define EMAC_INT_STS_RX_ERROR (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gaa90a6630bc2b4287853ab0191fd03aab">   96</a></span><span class="preprocessor">#define EMAC_INT_STS_RX_BUSY  (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga0cbad4e37716eb285f58e37bfd05b0e3">   97</a></span><span class="preprocessor">#define EMAC_INT_STS_TX_CTRL  (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga2bd4cec21ba7eb400fced3c9fa97e3e6">   98</a></span><span class="preprocessor">#define EMAC_INT_STS_RX_CTRL  (1 &lt;&lt; 6)</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gad79b7bed14667e0f0734ca4c400a23d2">   99</a></span><span class="preprocessor">#define EMAC_INT_STS_ALL      (0x7f &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">/* emac buffer descriptors type define */</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga28e30d8c71bcc14324d830e5c6d8a2dc">  102</a></span><span class="preprocessor">#define EMAC_BD_TYPE_INVLAID (0)</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga1646af5dd6c3464d1aa7f263f54c5553">  103</a></span><span class="preprocessor">#define EMAC_BD_TYPE_TX      (1)</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga681ef36dedd189c8a884302d3ff5861d">  104</a></span><span class="preprocessor">#define EMAC_BD_TYPE_RX      (2)</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga757e6cdbe6a99bba050b185470845c10">  105</a></span><span class="preprocessor">#define EMAC_BD_TYPE_NONE    (3)</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga146e964af37ad149ea54df496a1f1f61">  106</a></span><span class="preprocessor">#define EMAC_BD_TYPE_MAX     (0x7FFFFFFF)</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="structbflb__emac__config__s.html">  118</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__emac__config__s.html">bflb_emac_config_s</a> {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="structbflb__emac__config__s.html#a6ebc8ec06b7e6d8e4bf58018c643cbca">  119</a></span>    uint8_t <a class="code hl_variable" href="structbflb__emac__config__s.html#a6ebc8ec06b7e6d8e4bf58018c643cbca">mac_addr</a>[6];</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="structbflb__emac__config__s.html#a8b65258c39461b58872cd04b3605a2c2">  120</a></span>    uint8_t <a class="code hl_variable" href="structbflb__emac__config__s.html#a8b65258c39461b58872cd04b3605a2c2">inside_clk</a>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="structbflb__emac__config__s.html#a2ee998e43ba72f6002565e4fdd6fd619">  121</a></span>    uint8_t <a class="code hl_variable" href="structbflb__emac__config__s.html#a2ee998e43ba72f6002565e4fdd6fd619">mii_clk_div</a>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="structbflb__emac__config__s.html#a77b52dc7386011dfd34604559653259f">  122</a></span>    uint16_t <a class="code hl_variable" href="structbflb__emac__config__s.html#a77b52dc7386011dfd34604559653259f">min_frame_len</a>;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="structbflb__emac__config__s.html#a833ed726737b2bb0bede203756b6fdb5">  123</a></span>    uint16_t <a class="code hl_variable" href="structbflb__emac__config__s.html#a833ed726737b2bb0bede203756b6fdb5">max_frame_len</a>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>};</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="structbflb__emac__phy__cfg__s.html">  137</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__emac__phy__cfg__s.html">bflb_emac_phy_cfg_s</a> {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="structbflb__emac__phy__cfg__s.html#af6a06e0ababe8924d64c1b9fd3eb5712">  138</a></span>    uint8_t <a class="code hl_variable" href="structbflb__emac__phy__cfg__s.html#af6a06e0ababe8924d64c1b9fd3eb5712">auto_negotiation</a>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="structbflb__emac__phy__cfg__s.html#a22dec7f33c46618453cac5784e10f1c0">  139</a></span>    uint8_t <a class="code hl_variable" href="structbflb__emac__phy__cfg__s.html#a22dec7f33c46618453cac5784e10f1c0">full_duplex</a>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="structbflb__emac__phy__cfg__s.html#a52d60d3cbbc09ae2c37def51b334864c">  140</a></span>    uint8_t <a class="code hl_variable" href="structbflb__emac__phy__cfg__s.html#a52d60d3cbbc09ae2c37def51b334864c">phy_state</a>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="structbflb__emac__phy__cfg__s.html#ad67859057978aa2280e40bcce265e593">  141</a></span>    uint8_t <a class="code hl_variable" href="structbflb__emac__phy__cfg__s.html#ad67859057978aa2280e40bcce265e593">use_irq</a>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="structbflb__emac__phy__cfg__s.html#a12633132d07532aac2bd05fa1d5c8a72">  142</a></span>    uint16_t <a class="code hl_variable" href="structbflb__emac__phy__cfg__s.html#a12633132d07532aac2bd05fa1d5c8a72">speed</a>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="structbflb__emac__phy__cfg__s.html#af47fefff5fddc106bbfbd3e5ce464e8d">  143</a></span>    uint16_t <a class="code hl_variable" href="structbflb__emac__phy__cfg__s.html#af47fefff5fddc106bbfbd3e5ce464e8d">phy_address</a>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="structbflb__emac__phy__cfg__s.html#a431496d2d329aa7e2e70275ad75646cb">  144</a></span>    uint32_t <a class="code hl_variable" href="structbflb__emac__phy__cfg__s.html#a431496d2d329aa7e2e70275ad75646cb">phy_id</a>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>};</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gade07fc40dd8ac8fa719e7866300fb9cf">  157</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#gade07fc40dd8ac8fa719e7866300fb9cf">bflb_emac_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__emac__config__s.html">bflb_emac_config_s</a> *config);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga2c7005d6766b109ab00218a83d4cc677">  164</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga2c7005d6766b109ab00218a83d4cc677">bflb_emac_stop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga4ba55af47509b7bd8d40bdec7a09389c">  171</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga4ba55af47509b7bd8d40bdec7a09389c">bflb_emac_start</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga78a380f8be6d492c8707adaf40736346">  178</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga78a380f8be6d492c8707adaf40736346">bflb_emac_start_tx</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gafa96615cefde8509fb34e92562987ba0">  185</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#gafa96615cefde8509fb34e92562987ba0">bflb_emac_stop_tx</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga2547c0f4f8709a56d55382fb989e6139">  192</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga2547c0f4f8709a56d55382fb989e6139">bflb_emac_start_rx</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga0a329905504b418bdfe34c4806e5b330">  199</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga0a329905504b418bdfe34c4806e5b330">bflb_emac_stop_rx</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gaeaad8cd7c5efb302d5452b55653351d2">  210</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#gaeaad8cd7c5efb302d5452b55653351d2">bflb_emac_bd_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t *eth_tx_buff, uint8_t tx_buf_count, uint8_t *eth_rx_buff, uint8_t rx_buf_count);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga3670ebde6687cade59d985d0d2113095">  219</a></span>uint32_t <a class="code hl_function" href="group___e_m_a_c.html#ga3670ebde6687cade59d985d0d2113095">bflb_emac_bd_get_cur_active</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t bdt);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga16c93ed854631458e964ab27b7f2eaa2">  226</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga16c93ed854631458e964ab27b7f2eaa2">bflb_emac_bd_rx_enqueue</a>(uint32_t index);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gab019b644c4feb8b4c4ae6bed29e27f77">  233</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#gab019b644c4feb8b4c4ae6bed29e27f77">bflb_emac_bd_rx_on_err</a>(uint32_t index);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga0706db4e6f56cdf40c92d8ee502578cf">  240</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga0706db4e6f56cdf40c92d8ee502578cf">bflb_emac_bd_tx_dequeue</a>(uint32_t index);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga4042f22db030655583c5ae86173097df">  247</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga4042f22db030655583c5ae86173097df">bflb_emac_bd_tx_on_err</a>(uint32_t index);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gad7e29eb889500a2fab159fba65170e79">  257</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___e_m_a_c.html#gad7e29eb889500a2fab159fba65170e79">bflb_emac_bd_tx_enqueue</a>(uint32_t flags, uint32_t len, <span class="keyword">const</span> uint8_t *data_in);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga0ab7b942b08a09cf52854bac9c516ced">  267</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___e_m_a_c.html#ga0ab7b942b08a09cf52854bac9c516ced">bflb_emac_bd_rx_dequeue</a>(uint32_t flags, uint32_t *len, uint8_t *data_out);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gaea2e1f1df01b487d08e09eb2b98ff8ac">  274</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___e_m_a_c.html#gaea2e1f1df01b487d08e09eb2b98ff8ac">emac_bd_fragment_support</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gaf2ff2672ccdb3bc78b9783b92ce2e930">  283</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#gaf2ff2672ccdb3bc78b9783b92ce2e930">bflb_emac_int_enable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t flag, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga40562aa653d21c6eebf828e813c1555b">  291</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___e_m_a_c.html#ga40562aa653d21c6eebf828e813c1555b">bflb_emac_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t flag);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga60d45a7eba9739f8bed4e7aaf762f8c4">  299</a></span>uint32_t <a class="code hl_function" href="group___e_m_a_c.html#ga60d45a7eba9739f8bed4e7aaf762f8c4">bflb_emac_get_int_status</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#gae929b5ea4954220670b96db95be6fbe8">  309</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___e_m_a_c.html#gae929b5ea4954220670b96db95be6fbe8">bflb_emac_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga59e4d3b7fc7b3edda3e1889ae7e6dff6">  319</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___e_m_a_c.html#ga59e4d3b7fc7b3edda3e1889ae7e6dff6">bflb_emac_phy_reg_read</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t phy_reg, uint16_t *phy_reg_val);</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno"><a class="line" href="group___e_m_a_c.html#ga7a0de9d5136f37d1b8ab7af8e997d53d">  329</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___e_m_a_c.html#ga7a0de9d5136f37d1b8ab7af8e997d53d">bflb_emac_phy_reg_write</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t phy_reg, uint16_t phy_reg_val);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span> </div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>}</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga0706db4e6f56cdf40c92d8ee502578cf"><div class="ttname"><a href="group___e_m_a_c.html#ga0706db4e6f56cdf40c92d8ee502578cf">bflb_emac_bd_tx_dequeue</a></div><div class="ttdeci">void bflb_emac_bd_tx_dequeue(uint32_t index)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga0a329905504b418bdfe34c4806e5b330"><div class="ttname"><a href="group___e_m_a_c.html#ga0a329905504b418bdfe34c4806e5b330">bflb_emac_stop_rx</a></div><div class="ttdeci">void bflb_emac_stop_rx(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga0ab7b942b08a09cf52854bac9c516ced"><div class="ttname"><a href="group___e_m_a_c.html#ga0ab7b942b08a09cf52854bac9c516ced">bflb_emac_bd_rx_dequeue</a></div><div class="ttdeci">int bflb_emac_bd_rx_dequeue(uint32_t flags, uint32_t *len, uint8_t *data_out)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga16c93ed854631458e964ab27b7f2eaa2"><div class="ttname"><a href="group___e_m_a_c.html#ga16c93ed854631458e964ab27b7f2eaa2">bflb_emac_bd_rx_enqueue</a></div><div class="ttdeci">void bflb_emac_bd_rx_enqueue(uint32_t index)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga2547c0f4f8709a56d55382fb989e6139"><div class="ttname"><a href="group___e_m_a_c.html#ga2547c0f4f8709a56d55382fb989e6139">bflb_emac_start_rx</a></div><div class="ttdeci">void bflb_emac_start_rx(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga2c7005d6766b109ab00218a83d4cc677"><div class="ttname"><a href="group___e_m_a_c.html#ga2c7005d6766b109ab00218a83d4cc677">bflb_emac_stop</a></div><div class="ttdeci">void bflb_emac_stop(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga3670ebde6687cade59d985d0d2113095"><div class="ttname"><a href="group___e_m_a_c.html#ga3670ebde6687cade59d985d0d2113095">bflb_emac_bd_get_cur_active</a></div><div class="ttdeci">uint32_t bflb_emac_bd_get_cur_active(struct bflb_device_s *dev, uint8_t bdt)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga4042f22db030655583c5ae86173097df"><div class="ttname"><a href="group___e_m_a_c.html#ga4042f22db030655583c5ae86173097df">bflb_emac_bd_tx_on_err</a></div><div class="ttdeci">void bflb_emac_bd_tx_on_err(uint32_t index)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga40562aa653d21c6eebf828e813c1555b"><div class="ttname"><a href="group___e_m_a_c.html#ga40562aa653d21c6eebf828e813c1555b">bflb_emac_int_clear</a></div><div class="ttdeci">void bflb_emac_int_clear(struct bflb_device_s *dev, uint32_t flag)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga4ba55af47509b7bd8d40bdec7a09389c"><div class="ttname"><a href="group___e_m_a_c.html#ga4ba55af47509b7bd8d40bdec7a09389c">bflb_emac_start</a></div><div class="ttdeci">void bflb_emac_start(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga59e4d3b7fc7b3edda3e1889ae7e6dff6"><div class="ttname"><a href="group___e_m_a_c.html#ga59e4d3b7fc7b3edda3e1889ae7e6dff6">bflb_emac_phy_reg_read</a></div><div class="ttdeci">int bflb_emac_phy_reg_read(struct bflb_device_s *dev, uint16_t phy_reg, uint16_t *phy_reg_val)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga60d45a7eba9739f8bed4e7aaf762f8c4"><div class="ttname"><a href="group___e_m_a_c.html#ga60d45a7eba9739f8bed4e7aaf762f8c4">bflb_emac_get_int_status</a></div><div class="ttdeci">uint32_t bflb_emac_get_int_status(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga78a380f8be6d492c8707adaf40736346"><div class="ttname"><a href="group___e_m_a_c.html#ga78a380f8be6d492c8707adaf40736346">bflb_emac_start_tx</a></div><div class="ttdeci">void bflb_emac_start_tx(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_ga7a0de9d5136f37d1b8ab7af8e997d53d"><div class="ttname"><a href="group___e_m_a_c.html#ga7a0de9d5136f37d1b8ab7af8e997d53d">bflb_emac_phy_reg_write</a></div><div class="ttdeci">int bflb_emac_phy_reg_write(struct bflb_device_s *dev, uint16_t phy_reg, uint16_t phy_reg_val)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_gab019b644c4feb8b4c4ae6bed29e27f77"><div class="ttname"><a href="group___e_m_a_c.html#gab019b644c4feb8b4c4ae6bed29e27f77">bflb_emac_bd_rx_on_err</a></div><div class="ttdeci">void bflb_emac_bd_rx_on_err(uint32_t index)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_gad7e29eb889500a2fab159fba65170e79"><div class="ttname"><a href="group___e_m_a_c.html#gad7e29eb889500a2fab159fba65170e79">bflb_emac_bd_tx_enqueue</a></div><div class="ttdeci">int bflb_emac_bd_tx_enqueue(uint32_t flags, uint32_t len, const uint8_t *data_in)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_gade07fc40dd8ac8fa719e7866300fb9cf"><div class="ttname"><a href="group___e_m_a_c.html#gade07fc40dd8ac8fa719e7866300fb9cf">bflb_emac_init</a></div><div class="ttdeci">void bflb_emac_init(struct bflb_device_s *dev, const struct bflb_emac_config_s *config)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_gae929b5ea4954220670b96db95be6fbe8"><div class="ttname"><a href="group___e_m_a_c.html#gae929b5ea4954220670b96db95be6fbe8">bflb_emac_feature_control</a></div><div class="ttdeci">int bflb_emac_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_gaea2e1f1df01b487d08e09eb2b98ff8ac"><div class="ttname"><a href="group___e_m_a_c.html#gaea2e1f1df01b487d08e09eb2b98ff8ac">emac_bd_fragment_support</a></div><div class="ttdeci">int emac_bd_fragment_support(void)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_gaeaad8cd7c5efb302d5452b55653351d2"><div class="ttname"><a href="group___e_m_a_c.html#gaeaad8cd7c5efb302d5452b55653351d2">bflb_emac_bd_init</a></div><div class="ttdeci">void bflb_emac_bd_init(struct bflb_device_s *dev, uint8_t *eth_tx_buff, uint8_t tx_buf_count, uint8_t *eth_rx_buff, uint8_t rx_buf_count)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_gaf2ff2672ccdb3bc78b9783b92ce2e930"><div class="ttname"><a href="group___e_m_a_c.html#gaf2ff2672ccdb3bc78b9783b92ce2e930">bflb_emac_int_enable</a></div><div class="ttdeci">void bflb_emac_int_enable(struct bflb_device_s *dev, uint32_t flag, bool enable)</div></div>
+<div class="ttc" id="agroup___e_m_a_c_html_gafa96615cefde8509fb34e92562987ba0"><div class="ttname"><a href="group___e_m_a_c.html#gafa96615cefde8509fb34e92562987ba0">bflb_emac_stop_tx</a></div><div class="ttdeci">void bflb_emac_stop_tx(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__emac__config__s_html"><div class="ttname"><a href="structbflb__emac__config__s.html">bflb_emac_config_s</a></div><div class="ttdoc">EMAC configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00118">bflb_emac.h:118</a></div></div>
+<div class="ttc" id="astructbflb__emac__config__s_html_a2ee998e43ba72f6002565e4fdd6fd619"><div class="ttname"><a href="structbflb__emac__config__s.html#a2ee998e43ba72f6002565e4fdd6fd619">bflb_emac_config_s::mii_clk_div</a></div><div class="ttdeci">uint8_t mii_clk_div</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00121">bflb_emac.h:121</a></div></div>
+<div class="ttc" id="astructbflb__emac__config__s_html_a6ebc8ec06b7e6d8e4bf58018c643cbca"><div class="ttname"><a href="structbflb__emac__config__s.html#a6ebc8ec06b7e6d8e4bf58018c643cbca">bflb_emac_config_s::mac_addr</a></div><div class="ttdeci">uint8_t mac_addr[6]</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00119">bflb_emac.h:119</a></div></div>
+<div class="ttc" id="astructbflb__emac__config__s_html_a77b52dc7386011dfd34604559653259f"><div class="ttname"><a href="structbflb__emac__config__s.html#a77b52dc7386011dfd34604559653259f">bflb_emac_config_s::min_frame_len</a></div><div class="ttdeci">uint16_t min_frame_len</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00122">bflb_emac.h:122</a></div></div>
+<div class="ttc" id="astructbflb__emac__config__s_html_a833ed726737b2bb0bede203756b6fdb5"><div class="ttname"><a href="structbflb__emac__config__s.html#a833ed726737b2bb0bede203756b6fdb5">bflb_emac_config_s::max_frame_len</a></div><div class="ttdeci">uint16_t max_frame_len</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00123">bflb_emac.h:123</a></div></div>
+<div class="ttc" id="astructbflb__emac__config__s_html_a8b65258c39461b58872cd04b3605a2c2"><div class="ttname"><a href="structbflb__emac__config__s.html#a8b65258c39461b58872cd04b3605a2c2">bflb_emac_config_s::inside_clk</a></div><div class="ttdeci">uint8_t inside_clk</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00120">bflb_emac.h:120</a></div></div>
+<div class="ttc" id="astructbflb__emac__phy__cfg__s_html"><div class="ttname"><a href="structbflb__emac__phy__cfg__s.html">bflb_emac_phy_cfg_s</a></div><div class="ttdoc">EMAC phy configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00137">bflb_emac.h:137</a></div></div>
+<div class="ttc" id="astructbflb__emac__phy__cfg__s_html_a12633132d07532aac2bd05fa1d5c8a72"><div class="ttname"><a href="structbflb__emac__phy__cfg__s.html#a12633132d07532aac2bd05fa1d5c8a72">bflb_emac_phy_cfg_s::speed</a></div><div class="ttdeci">uint16_t speed</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00142">bflb_emac.h:142</a></div></div>
+<div class="ttc" id="astructbflb__emac__phy__cfg__s_html_a22dec7f33c46618453cac5784e10f1c0"><div class="ttname"><a href="structbflb__emac__phy__cfg__s.html#a22dec7f33c46618453cac5784e10f1c0">bflb_emac_phy_cfg_s::full_duplex</a></div><div class="ttdeci">uint8_t full_duplex</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00139">bflb_emac.h:139</a></div></div>
+<div class="ttc" id="astructbflb__emac__phy__cfg__s_html_a431496d2d329aa7e2e70275ad75646cb"><div class="ttname"><a href="structbflb__emac__phy__cfg__s.html#a431496d2d329aa7e2e70275ad75646cb">bflb_emac_phy_cfg_s::phy_id</a></div><div class="ttdeci">uint32_t phy_id</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00144">bflb_emac.h:144</a></div></div>
+<div class="ttc" id="astructbflb__emac__phy__cfg__s_html_a52d60d3cbbc09ae2c37def51b334864c"><div class="ttname"><a href="structbflb__emac__phy__cfg__s.html#a52d60d3cbbc09ae2c37def51b334864c">bflb_emac_phy_cfg_s::phy_state</a></div><div class="ttdeci">uint8_t phy_state</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00140">bflb_emac.h:140</a></div></div>
+<div class="ttc" id="astructbflb__emac__phy__cfg__s_html_ad67859057978aa2280e40bcce265e593"><div class="ttname"><a href="structbflb__emac__phy__cfg__s.html#ad67859057978aa2280e40bcce265e593">bflb_emac_phy_cfg_s::use_irq</a></div><div class="ttdeci">uint8_t use_irq</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00141">bflb_emac.h:141</a></div></div>
+<div class="ttc" id="astructbflb__emac__phy__cfg__s_html_af47fefff5fddc106bbfbd3e5ce464e8d"><div class="ttname"><a href="structbflb__emac__phy__cfg__s.html#af47fefff5fddc106bbfbd3e5ce464e8d">bflb_emac_phy_cfg_s::phy_address</a></div><div class="ttdeci">uint16_t phy_address</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00143">bflb_emac.h:143</a></div></div>
+<div class="ttc" id="astructbflb__emac__phy__cfg__s_html_af6a06e0ababe8924d64c1b9fd3eb5712"><div class="ttname"><a href="structbflb__emac__phy__cfg__s.html#af6a06e0ababe8924d64c1b9fd3eb5712">bflb_emac_phy_cfg_s::auto_negotiation</a></div><div class="ttdeci">uint8_t auto_negotiation</div><div class="ttdef"><b>Definition:</b> <a href="bflb__emac_8h_source.html#l00138">bflb_emac.h:138</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__emac_8h.html">bflb_emac.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

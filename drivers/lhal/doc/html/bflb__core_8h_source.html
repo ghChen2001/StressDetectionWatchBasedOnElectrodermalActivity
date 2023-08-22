@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_core.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__core_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_core.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__core_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_CORE_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_CORE_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;errno.h&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;risc-v/csr.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;risc-v/riscv_arch.h&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;compiler/compiler_gcc.h&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;compiler/compiler_ld.h&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__list_8h.html">bflb_list.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__mtimer_8h.html">bflb_mtimer.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__irq_8h.html">bflb_irq.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__common_8h.html">bflb_common.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702) &amp;&amp; !defined(BL702L) &amp;&amp; \</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">    !defined(BL616) &amp;&amp; !defined(BL606P) &amp;&amp; !defined(BL808) &amp;&amp; !defined(BL628)</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#error please define a supported chip</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#ifdef CONFIG_PARAM_ASSERT</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#define ASSERT_PARAM(expr) ((expr) ? (void)0 : assert_func(__FILE__, __LINE__, __FUNCTION__, #expr))</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> assert_func(uint8_t *file, uint32_t line, uint8_t *function, uint8_t *<span class="keywordtype">string</span>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga815e9aa9922ff14fe9cf4548dabdf48f">   36</a></span><span class="preprocessor">#define ASSERT_PARAM(expr) ((void)0U)</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#if defined(BL702)</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#define BFLB_PSRAM_BASE 0x26000000</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#elif defined(BL616)</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#define BFLB_PSRAM_BASE 0xA8000000</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#elif defined(BL808)</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define BFLB_PSRAM_BASE 0x50000000</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#elif defined(BL606P)</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#define BFLB_PSRAM_BASE 0x54000000</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gaf3dcd0a7879a7b5d68d8d96d9eea326e">   49</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_ADC      0</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga26d232ebfc08449a791537dcf9a74237">   50</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_DAC      1</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga3780cd4fa9e998fe169d4d038db7ef99">   51</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_AUDIOADC 2</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga674ea0e7edac5e5d3d84169fbf8a4e73">   52</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_AUDIODAC 3</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga28feae8bbe918ebc9d5386f5d0f7a17e">   53</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_GPIO     4</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga949cd07b2d09269b0e06e889f4492b3e">   54</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_UART     5</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga38132c9f916afabebf6de38ab5e15244">   55</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_SPI      6</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga06901a26f2f67a45202fd24b22fb6cf7">   56</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_I2C      7</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga7e6dee831a7216e6ec4b91a5962ba5c6">   57</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_DMA      8</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga7c9ea19dea01f70705dce05b72b02c86">   58</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_I2S      9</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gacecc1b0415909eafc555162dbbf0df6d">   59</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_IR       10</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gab0d177085d9b7a7fcbaf9502e5317cbb">   60</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_TIMER    11</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga4a40d19b3ccb8df3e5238b15853185ef">   61</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_PWM      12</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gadf3ddbd493ad048e72f42606caf9974a">   62</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_CAMERA   14</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gad2053ea2d6d7cc2f7bbc52c109657c38">   63</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_FLASH    15</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gac2c370b1cacb99adc5a6e8301d90c306">   64</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_QSPI     16</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga4e4892739f01951ff4f67befef300c11">   65</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_SDH      17</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga6db31023b4a5f5444bc49cdd1b0dfbbe">   66</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_SDU      18</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga778fd99f8d5a563ba6117c060af32a6a">   67</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_ETH      19</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gac3cae9d9280538175adab2758ce7fbc9">   68</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_RTC      20</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gae9d21025dd47117a1e2498bda892d43a">   69</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_CRC      21</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga3f85440c8ee4bb1d8518a45664fc6d5c">   70</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_RNG      22</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga6f32a4a0f771f1dcc1da3e396af71867">   71</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_MIPI     23</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga0750d51b620c8c45b23bd138a41a7afa">   72</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_DPI      24</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga3b0fb7c691f0657a5e2fc78fc0c23269">   73</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_DSI      25</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gadd37a8c2dd594dfeb718008c61e88dfc">   74</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_CSI      26</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gab1d811de169d88cb17f202e88079d45a">   75</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_USB      27</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gac556b467c10bcceef9dedcd208f1ab27">   76</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_AES      28</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga6d262fe4e21351fe959170544db0c172">   77</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_SHA      29</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gab1aa4e7439342fefd347cb2c17c424df">   78</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_MD5      30</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga92a0f64474c95626bdebc3a33e908316">   79</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_TRNG     31</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gacfea993c3f27a9f71ee07cd09b501228">   80</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_PKA      32</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gac690b16dca82b1aa8e06b651aa9ea975">   81</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_CKS      33</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gae952679e5237a37db2a67661c020223a">   82</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_MJPEG    34</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga9dc16372bee78a5888a08765554aebc2">   83</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_KYS      35</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga73099e8c6ed59b2255f46fc95f280385">   84</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_DBI      36</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga83667bb515b95b57f370b1561f0e3727">   85</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_WDT      37</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga7c4062e062978f15b8848a82300ebcae">   86</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_EF_CTRL  38</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga724a50767d5691073f631edf5f7dbbd0">   87</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_SDIO2    39</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga52f551b90259ff69529de93ad9679340">   88</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_SDIO3    40</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#gae2145ce0722dc21f4502dcd510bd5fa2">   89</a></span><span class="preprocessor">#define BFLB_DEVICE_TYPE_PLFMDMA  41</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="structbflb__device__s.html">   91</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structbflb__device__s.html#a8f8f80d37794cde9472343e4487ba3eb">   92</a></span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_variable" href="structbflb__device__s.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="structbflb__device__s.html#a465f51dd551ab70426d44eb8b4629739">   93</a></span>    uint32_t <a class="code hl_variable" href="structbflb__device__s.html#a465f51dd551ab70426d44eb8b4629739">reg_base</a>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="structbflb__device__s.html#aa2cd6eb58e8b54063a451083e5025bc4">   94</a></span>    uint8_t <a class="code hl_variable" href="structbflb__device__s.html#aa2cd6eb58e8b54063a451083e5025bc4">irq_num</a>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="structbflb__device__s.html#a266732d9c228f9bac150e7554734d112">   95</a></span>    uint8_t <a class="code hl_variable" href="structbflb__device__s.html#a266732d9c228f9bac150e7554734d112">idx</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structbflb__device__s.html#aefed51c503202d95e7418fc3ab1d23bc">   96</a></span>    uint8_t <a class="code hl_variable" href="structbflb__device__s.html#aefed51c503202d95e7418fc3ab1d23bc">sub_idx</a>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="structbflb__device__s.html#ace8b85a2a77b6b95bdd30d52574f4092">   97</a></span>    uint8_t <a class="code hl_variable" href="structbflb__device__s.html#ace8b85a2a77b6b95bdd30d52574f4092">dev_type</a>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="structbflb__device__s.html#a0f53d287ac7c064d1a49d4bd93ca1cb9">   98</a></span>    <span class="keywordtype">void</span> *<a class="code hl_variable" href="structbflb__device__s.html#a0f53d287ac7c064d1a49d4bd93ca1cb9">user_data</a>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>};</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga611e2003f34c5b4099d0934ae20b8816">  111</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *<a class="code hl_function" href="group___c_o_r_e.html#ga611e2003f34c5b4099d0934ae20b8816">bflb_device_get_by_name</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_variable" href="structbflb__device__s.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga5ebf8527c97c6e505db731d6bb6a2695">  120</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *<a class="code hl_function" href="group___c_o_r_e.html#ga5ebf8527c97c6e505db731d6bb6a2695">bflb_device_get_by_id</a>(uint8_t type, uint8_t <a class="code hl_variable" href="structbflb__device__s.html#a266732d9c228f9bac150e7554734d112">idx</a>);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="group___c_o_r_e.html#ga8495452c935ad5691129a62abf481e94">  128</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___c_o_r_e.html#ga8495452c935ad5691129a62abf481e94">bflb_device_set_userdata</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *device, <span class="keywordtype">void</span> *<a class="code hl_variable" href="structbflb__device__s.html#a0f53d287ac7c064d1a49d4bd93ca1cb9">user_data</a>);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__common_8h_html"><div class="ttname"><a href="bflb__common_8h.html">bflb_common.h</a></div></div>
+<div class="ttc" id="abflb__irq_8h_html"><div class="ttname"><a href="bflb__irq_8h.html">bflb_irq.h</a></div></div>
+<div class="ttc" id="abflb__list_8h_html"><div class="ttname"><a href="bflb__list_8h.html">bflb_list.h</a></div></div>
+<div class="ttc" id="abflb__mtimer_8h_html"><div class="ttname"><a href="bflb__mtimer_8h.html">bflb_mtimer.h</a></div></div>
+<div class="ttc" id="agroup___c_o_r_e_html_ga5ebf8527c97c6e505db731d6bb6a2695"><div class="ttname"><a href="group___c_o_r_e.html#ga5ebf8527c97c6e505db731d6bb6a2695">bflb_device_get_by_id</a></div><div class="ttdeci">struct bflb_device_s * bflb_device_get_by_id(uint8_t type, uint8_t idx)</div><div class="ttdoc">Get device handle by type and index.</div></div>
+<div class="ttc" id="agroup___c_o_r_e_html_ga611e2003f34c5b4099d0934ae20b8816"><div class="ttname"><a href="group___c_o_r_e.html#ga611e2003f34c5b4099d0934ae20b8816">bflb_device_get_by_name</a></div><div class="ttdeci">struct bflb_device_s * bflb_device_get_by_name(const char *name)</div><div class="ttdoc">Get device handle by name.</div></div>
+<div class="ttc" id="agroup___c_o_r_e_html_ga8495452c935ad5691129a62abf481e94"><div class="ttname"><a href="group___c_o_r_e.html#ga8495452c935ad5691129a62abf481e94">bflb_device_set_userdata</a></div><div class="ttdeci">void bflb_device_set_userdata(struct bflb_device_s *device, void *user_data)</div><div class="ttdoc">Set user data into device handle.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html_a0f53d287ac7c064d1a49d4bd93ca1cb9"><div class="ttname"><a href="structbflb__device__s.html#a0f53d287ac7c064d1a49d4bd93ca1cb9">bflb_device_s::user_data</a></div><div class="ttdeci">void * user_data</div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00098">bflb_core.h:98</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html_a266732d9c228f9bac150e7554734d112"><div class="ttname"><a href="structbflb__device__s.html#a266732d9c228f9bac150e7554734d112">bflb_device_s::idx</a></div><div class="ttdeci">uint8_t idx</div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00095">bflb_core.h:95</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html_a465f51dd551ab70426d44eb8b4629739"><div class="ttname"><a href="structbflb__device__s.html#a465f51dd551ab70426d44eb8b4629739">bflb_device_s::reg_base</a></div><div class="ttdeci">uint32_t reg_base</div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00093">bflb_core.h:93</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="structbflb__device__s.html#a8f8f80d37794cde9472343e4487ba3eb">bflb_device_s::name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00092">bflb_core.h:92</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html_aa2cd6eb58e8b54063a451083e5025bc4"><div class="ttname"><a href="structbflb__device__s.html#aa2cd6eb58e8b54063a451083e5025bc4">bflb_device_s::irq_num</a></div><div class="ttdeci">uint8_t irq_num</div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00094">bflb_core.h:94</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html_ace8b85a2a77b6b95bdd30d52574f4092"><div class="ttname"><a href="structbflb__device__s.html#ace8b85a2a77b6b95bdd30d52574f4092">bflb_device_s::dev_type</a></div><div class="ttdeci">uint8_t dev_type</div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00097">bflb_core.h:97</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html_aefed51c503202d95e7418fc3ab1d23bc"><div class="ttname"><a href="structbflb__device__s.html#aefed51c503202d95e7418fc3ab1d23bc">bflb_device_s::sub_idx</a></div><div class="ttdeci">uint8_t sub_idx</div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00096">bflb_core.h:96</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__core_8h.html">bflb_core.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_audac.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__audac_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_audac.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__audac_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_AUDAC_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_AUDAC_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a8e6e5ea24ccfd63e30b69c4331969672">    9</a></span><span class="preprocessor">#define AUDAC_SAMPLING_RATE_8K                      0</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a0df8ef9c67013efd29b190439bb12fc0">   10</a></span><span class="preprocessor">#define AUDAC_SAMPLING_RATE_16K                     1</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a7cb730975dcc57418310daecdb0b3c06">   11</a></span><span class="preprocessor">#define AUDAC_SAMPLING_RATE_22P05K                  5</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a2fcdf20e270cc2ab4c37075953308387">   12</a></span><span class="preprocessor">#define AUDAC_SAMPLING_RATE_24K                     3</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#abb1972f22905078473423af444558806">   13</a></span><span class="preprocessor">#define AUDAC_SAMPLING_RATE_32K                     2</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#ada1e2ffb89ed8a7e6d6cfa14f4e34261">   14</a></span><span class="preprocessor">#define AUDAC_SAMPLING_RATE_44P1K                   6</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#ab85f4bf608883465c477a4ca67c36487">   15</a></span><span class="preprocessor">#define AUDAC_SAMPLING_RATE_48K                     4</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a8bc933382430c8c2c8411eb579628c6d">   23</a></span><span class="preprocessor">#define AUDAC_OUTPUT_MODE_PWM                       0</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a63fa1154121ae3de1d6ec2a9c8930e70">   24</a></span><span class="preprocessor">#define AUDAC_OUTPUT_MODE_GPDAC_CH_A                1</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#aac9e286c34e49c6a7972969463f198b5">   25</a></span><span class="preprocessor">#define AUDAC_OUTPUT_MODE_GPDAC_CH_B                2</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#aad3e4b388387a7ad795d92c0e7b14f6e">   26</a></span><span class="preprocessor">#define AUDAC_OUTPUT_MODE_GPDAC_CH_A_B              3</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#ac0b643b49f1e9205f8a201bbd541d025">   34</a></span><span class="preprocessor">#define AUDAC_SOURCE_CHANNEL_SINGLE                 0x01</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a5f6c4007ae14340d812fac95beaaee8c">   35</a></span><span class="preprocessor">#define AUDAC_SOURCE_CHANNEL_DUAL                   0x03</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#aef9b9c1b0c455906f1f0d70fe67e3dd8">   43</a></span><span class="preprocessor">#define AUDAC_MIXER_MODE_ONLY_L                     0</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a063a21c8d216b15703051a2757ca8f8e">   44</a></span><span class="preprocessor">#define AUDAC_MIXER_MODE_ONLY_R                     1</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a2faa4fb0e8d64010d93f31f7198b75a4">   45</a></span><span class="preprocessor">#define AUDAC_MIXER_MODE_SUM                        2</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a7c4386dfc5bf1baba7124daa4a504b2d">   46</a></span><span class="preprocessor">#define AUDAC_MIXER_MODE_AVERAGE                    3</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#abbac95fdcf9247857c7757f65bf86539">   54</a></span><span class="preprocessor">#define AUDAC_DATA_FORMAT_16BIT                     3</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a78685657a137fa56255dfaed09145bed">   55</a></span><span class="preprocessor">#define AUDAC_DATA_FORMAT_20BIT                     2</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a4225549f24b3647a7b8dc073248572a1">   56</a></span><span class="preprocessor">#define AUDAC_DATA_FORMAT_24BIT                     1</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#abd102e928edeac07c6bf217c6711510a">   57</a></span><span class="preprocessor">#define AUDAC_DATA_FORMAT_32BIT                     0</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#aa2360fb2f2119d42845ad4fc74c001a0">   65</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_2                        0</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a6f23018b65f80e35d36af16780ec9ede">   66</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_4                        1</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a68b2c1a9883d38a81202cdcd33e5e1c0">   67</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_8                        2</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#ad50bcf358eda01809bab958b104a6cca">   68</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_16                       3</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a431e5b08e6ff8ba9bc945705e56c0cc3">   69</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_32                       4</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#ae98abc97948a2edae72a6049e1535235">   70</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_64                       5</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a967763ca3222a306e820df2c0466bdfb">   71</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_128                      6</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a0cb9e00c4e16f43cbc53f1fb8b2dc55e">   72</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_256                      7</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#af12121fabea897e7ffed83ceec83c7ef">   73</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_512                      8</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#acb330cfc6d4559e90db5147cab3e23d4">   74</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_1024                     9</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a2cdd7fcc50668e1bc259c25405146fa7">   75</a></span><span class="preprocessor">#define AUDAC_RAMP_RATE_FS_2048                     10</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#a8b79543529885acb97eca30de953b817">   83</a></span><span class="preprocessor">#define AUDAC_VOLUME_UPDATE_MODE_FORCE              0</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#af5f048c4691121db2269921d9a1236e7">   84</a></span><span class="preprocessor">#define AUDAC_VOLUME_UPDATE_MODE_RAMP               1</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="bflb__audac_8h.html#add0edc9b78eaf78a899bc123741c3f6b">   85</a></span><span class="preprocessor">#define AUDAC_VOLUME_UPDATE_MODE_RAMP_ZERO_CROSSING 2</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gaf98fdd6db5d6cd46eb1bf6ba6559884d">   93</a></span><span class="preprocessor">#define AUDAC_INTSTS_VOLUME_RAMP                    (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gabf3e3d237073aaaec9c189afbce2934e">   94</a></span><span class="preprocessor">#define AUDAC_INTSTS_FIFO_OVER                      (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga1bd0113c96afc9f555f6a1f86b861626">   95</a></span><span class="preprocessor">#define AUDAC_INTSTS_FIFO_UNDER                     (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gadaa895b22c881c45ef4b03d249118910">   96</a></span><span class="preprocessor">#define AUDAC_INTSTS_FIFO_AVAILABLE                 (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___c_m_d.html#gaf019457e30357920222b76701f231a76">  101</a></span><span class="preprocessor">#define AUDAC_CMD_PLAY_START                        (0x01)</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___c_m_d.html#ga32920f2d47a8649c7d98d290e66c4ba9">  102</a></span><span class="preprocessor">#define AUDAC_CMD_PLAY_STOP                         (0x02)</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___c_m_d.html#ga8f0079624afda4385f954776443943e6">  103</a></span><span class="preprocessor">#define AUDAC_CMD_SET_MUTE                          (0x03)</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___c_m_d.html#ga77a0cb8b4fbce87ea218460a5ee82d67">  104</a></span><span class="preprocessor">#define AUDAC_CMD_SET_VOLUME_VAL                    (0x04)</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___c_m_d.html#ga8cf4aa7d4249c6f4aef84217f0f96c16">  105</a></span><span class="preprocessor">#define AUDAC_CMD_CLEAR_TX_FIFO                     (0x05)</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___c_m_d.html#gab198fb033b22ba6fdb8a57f52e146285">  106</a></span><span class="preprocessor">#define AUDAC_CMD_GET_TX_FIFO_CNT                   (0x06)</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="structbflb__audac__init__config__s.html">  123</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__audac__init__config__s.html">bflb_audac_init_config_s</a> {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gac6acfbe1e112e8c6e587b7a21555c260">  124</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gac6acfbe1e112e8c6e587b7a21555c260">sampling_rate</a>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga0a83ba0b008ad9583db56ec661e96556">  125</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga0a83ba0b008ad9583db56ec661e96556">output_mode</a>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga77ef0b77d7c16412c8814fcaa282fff4">  126</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga77ef0b77d7c16412c8814fcaa282fff4">source_channels_num</a>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga91d23dca250f81573c0076686579f03e">  127</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga91d23dca250f81573c0076686579f03e">mixer_mode</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga23203f61f15a6d699306a2b7d994046c">  128</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga23203f61f15a6d699306a2b7d994046c">data_format</a>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga27cf32b1a08dabd2b7c6488bd9b5ee9c">  129</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga27cf32b1a08dabd2b7c6488bd9b5ee9c">fifo_threshold</a>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>};</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="structbflb__audac__volume__config__s.html">  142</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__audac__volume__config__s.html">bflb_audac_volume_config_s</a> {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga675b312fbaeccb6780c7144e05b51bcf">  143</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga675b312fbaeccb6780c7144e05b51bcf">mute_ramp_en</a>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gafc0d205c967d60997602dfba87b75797">  144</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gafc0d205c967d60997602dfba87b75797">mute_up_ramp_rate</a>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga4a6f7c727bd8e2f40e5c83c56b4d05ca">  145</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga4a6f7c727bd8e2f40e5c83c56b4d05ca">mute_down_ramp_rate</a>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga5d4bbc3d367a641cc92be5c95b53cd41">  146</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga5d4bbc3d367a641cc92be5c95b53cd41">volume_update_mode</a>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gacc3cf540640babd886591da724758c71">  147</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gacc3cf540640babd886591da724758c71">volume_ramp_rate</a>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga098f7148571a7667966e87834f586339">  148</a></span>    uint8_t <a class="code hl_variable" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga098f7148571a7667966e87834f586339">volume_zero_cross_timeout</a>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>};</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga117fc10d9d496d3084938b60ec8ae100">  151</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga117fc10d9d496d3084938b60ec8ae100">bflb_audac_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__audac__init__config__s.html">bflb_audac_init_config_s</a> *config);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gad55f180a08bf35f0d357409cba034305">  153</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gad55f180a08bf35f0d357409cba034305">bflb_audac_volume_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__audac__volume__config__s.html">bflb_audac_volume_config_s</a> *vol_cfg);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga271e6b35c94fd67434c9498b4e2e545f">  155</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga271e6b35c94fd67434c9498b4e2e545f">bflb_audac_link_rxdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga8f2410c3ded1b9d6e3b34f133ac459af">  157</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga8f2410c3ded1b9d6e3b34f133ac459af">bflb_audac_int_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t mask);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga5265a635405595fb39ebdda8b77b9753">  159</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga5265a635405595fb39ebdda8b77b9753">bflb_audac_get_intstatus</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gad08e8c59bf28967b2fa5680818848ba6">  161</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gad08e8c59bf28967b2fa5680818848ba6">bflb_audac_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gaf8598b8c154b746bb6eee6e7494f7107">  163</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___a_u_d_a_c___i_n_t_s_t_s.html#gaf8598b8c154b746bb6eee6e7494f7107">bflb_audac_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga098f7148571a7667966e87834f586339"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga098f7148571a7667966e87834f586339">bflb_audac_volume_config_s::volume_zero_cross_timeout</a></div><div class="ttdeci">uint8_t volume_zero_cross_timeout</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00148">bflb_audac.h:148</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga0a83ba0b008ad9583db56ec661e96556"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga0a83ba0b008ad9583db56ec661e96556">bflb_audac_init_config_s::output_mode</a></div><div class="ttdeci">uint8_t output_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00125">bflb_audac.h:125</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga117fc10d9d496d3084938b60ec8ae100"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga117fc10d9d496d3084938b60ec8ae100">bflb_audac_init</a></div><div class="ttdeci">int bflb_audac_init(struct bflb_device_s *dev, const struct bflb_audac_init_config_s *config)</div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga23203f61f15a6d699306a2b7d994046c"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga23203f61f15a6d699306a2b7d994046c">bflb_audac_init_config_s::data_format</a></div><div class="ttdeci">uint8_t data_format</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00128">bflb_audac.h:128</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga271e6b35c94fd67434c9498b4e2e545f"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga271e6b35c94fd67434c9498b4e2e545f">bflb_audac_link_rxdma</a></div><div class="ttdeci">int bflb_audac_link_rxdma(struct bflb_device_s *dev, bool enable)</div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga27cf32b1a08dabd2b7c6488bd9b5ee9c"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga27cf32b1a08dabd2b7c6488bd9b5ee9c">bflb_audac_init_config_s::fifo_threshold</a></div><div class="ttdeci">uint8_t fifo_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00129">bflb_audac.h:129</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga4a6f7c727bd8e2f40e5c83c56b4d05ca"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga4a6f7c727bd8e2f40e5c83c56b4d05ca">bflb_audac_volume_config_s::mute_down_ramp_rate</a></div><div class="ttdeci">uint8_t mute_down_ramp_rate</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00145">bflb_audac.h:145</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga5265a635405595fb39ebdda8b77b9753"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga5265a635405595fb39ebdda8b77b9753">bflb_audac_get_intstatus</a></div><div class="ttdeci">int bflb_audac_get_intstatus(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga5d4bbc3d367a641cc92be5c95b53cd41"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga5d4bbc3d367a641cc92be5c95b53cd41">bflb_audac_volume_config_s::volume_update_mode</a></div><div class="ttdeci">uint8_t volume_update_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00146">bflb_audac.h:146</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga675b312fbaeccb6780c7144e05b51bcf"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga675b312fbaeccb6780c7144e05b51bcf">bflb_audac_volume_config_s::mute_ramp_en</a></div><div class="ttdeci">bool mute_ramp_en</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00143">bflb_audac.h:143</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga77ef0b77d7c16412c8814fcaa282fff4"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga77ef0b77d7c16412c8814fcaa282fff4">bflb_audac_init_config_s::source_channels_num</a></div><div class="ttdeci">uint8_t source_channels_num</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00126">bflb_audac.h:126</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga8f2410c3ded1b9d6e3b34f133ac459af"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga8f2410c3ded1b9d6e3b34f133ac459af">bflb_audac_int_mask</a></div><div class="ttdeci">int bflb_audac_int_mask(struct bflb_device_s *dev, uint32_t mask)</div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_ga91d23dca250f81573c0076686579f03e"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#ga91d23dca250f81573c0076686579f03e">bflb_audac_init_config_s::mixer_mode</a></div><div class="ttdeci">uint8_t mixer_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00127">bflb_audac.h:127</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_gac6acfbe1e112e8c6e587b7a21555c260"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#gac6acfbe1e112e8c6e587b7a21555c260">bflb_audac_init_config_s::sampling_rate</a></div><div class="ttdeci">uint8_t sampling_rate</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00124">bflb_audac.h:124</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_gacc3cf540640babd886591da724758c71"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#gacc3cf540640babd886591da724758c71">bflb_audac_volume_config_s::volume_ramp_rate</a></div><div class="ttdeci">uint8_t volume_ramp_rate</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00147">bflb_audac.h:147</a></div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_gad08e8c59bf28967b2fa5680818848ba6"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#gad08e8c59bf28967b2fa5680818848ba6">bflb_audac_int_clear</a></div><div class="ttdeci">int bflb_audac_int_clear(struct bflb_device_s *dev, uint32_t int_clear)</div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_gad55f180a08bf35f0d357409cba034305"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#gad55f180a08bf35f0d357409cba034305">bflb_audac_volume_init</a></div><div class="ttdeci">int bflb_audac_volume_init(struct bflb_device_s *dev, const struct bflb_audac_volume_config_s *vol_cfg)</div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_gaf8598b8c154b746bb6eee6e7494f7107"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#gaf8598b8c154b746bb6eee6e7494f7107">bflb_audac_feature_control</a></div><div class="ttdeci">int bflb_audac_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div></div>
+<div class="ttc" id="agroup___a_u_d_a_c___i_n_t_s_t_s_html_gafc0d205c967d60997602dfba87b75797"><div class="ttname"><a href="group___a_u_d_a_c___i_n_t_s_t_s.html#gafc0d205c967d60997602dfba87b75797">bflb_audac_volume_config_s::mute_up_ramp_rate</a></div><div class="ttdeci">uint8_t mute_up_ramp_rate</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00144">bflb_audac.h:144</a></div></div>
+<div class="ttc" id="astructbflb__audac__init__config__s_html"><div class="ttname"><a href="structbflb__audac__init__config__s.html">bflb_audac_init_config_s</a></div><div class="ttdoc">AUDAC initialization configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00123">bflb_audac.h:123</a></div></div>
+<div class="ttc" id="astructbflb__audac__volume__config__s_html"><div class="ttname"><a href="structbflb__audac__volume__config__s.html">bflb_audac_volume_config_s</a></div><div class="ttdoc">AUDAC volume configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__audac_8h_source.html#l00142">bflb_audac.h:142</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__audac_8h.html">bflb_audac.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

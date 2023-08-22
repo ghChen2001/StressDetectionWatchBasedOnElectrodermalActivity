@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_core.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__core_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">bflb_core.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;risc-v/csr.h&gt;</code><br />
+<code>#include &lt;risc-v/riscv_arch.h&gt;</code><br />
+<code>#include &lt;compiler/compiler_gcc.h&gt;</code><br />
+<code>#include &lt;compiler/compiler_ld.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="bflb__list_8h_source.html">bflb_list.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="bflb__mtimer_8h_source.html">bflb_mtimer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="bflb__irq_8h_source.html">bflb_irq.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="bflb__common_8h_source.html">bflb_common.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+bflb_core.h 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__core_8h__incl.png" border="0" usemap="#ainclude_2bflb__core_8h" alt=""/></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+此图展示该文件直接或间接的被哪些文件引用了:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__core_8h__dep__incl.png" border="0" usemap="#ainclude_2bflb__core_8hdep" alt=""/></div>
+</div>
+</div>
+<p><a href="bflb__core_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__device__s.html">bflb_device_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga815e9aa9922ff14fe9cf4548dabdf48f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga815e9aa9922ff14fe9cf4548dabdf48f">ASSERT_PARAM</a>(expr)&#160;&#160;&#160;((void)0U)</td></tr>
+<tr class="separator:ga815e9aa9922ff14fe9cf4548dabdf48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf3dcd0a7879a7b5d68d8d96d9eea326e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gaf3dcd0a7879a7b5d68d8d96d9eea326e">BFLB_DEVICE_TYPE_ADC</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:gaf3dcd0a7879a7b5d68d8d96d9eea326e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga26d232ebfc08449a791537dcf9a74237"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga26d232ebfc08449a791537dcf9a74237">BFLB_DEVICE_TYPE_DAC</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga26d232ebfc08449a791537dcf9a74237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3780cd4fa9e998fe169d4d038db7ef99"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga3780cd4fa9e998fe169d4d038db7ef99">BFLB_DEVICE_TYPE_AUDIOADC</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ga3780cd4fa9e998fe169d4d038db7ef99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga674ea0e7edac5e5d3d84169fbf8a4e73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga674ea0e7edac5e5d3d84169fbf8a4e73">BFLB_DEVICE_TYPE_AUDIODAC</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:ga674ea0e7edac5e5d3d84169fbf8a4e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga28feae8bbe918ebc9d5386f5d0f7a17e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga28feae8bbe918ebc9d5386f5d0f7a17e">BFLB_DEVICE_TYPE_GPIO</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:ga28feae8bbe918ebc9d5386f5d0f7a17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga949cd07b2d09269b0e06e889f4492b3e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga949cd07b2d09269b0e06e889f4492b3e">BFLB_DEVICE_TYPE_UART</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:ga949cd07b2d09269b0e06e889f4492b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga38132c9f916afabebf6de38ab5e15244"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga38132c9f916afabebf6de38ab5e15244">BFLB_DEVICE_TYPE_SPI</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:ga38132c9f916afabebf6de38ab5e15244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga06901a26f2f67a45202fd24b22fb6cf7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga06901a26f2f67a45202fd24b22fb6cf7">BFLB_DEVICE_TYPE_I2C</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:ga06901a26f2f67a45202fd24b22fb6cf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7e6dee831a7216e6ec4b91a5962ba5c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga7e6dee831a7216e6ec4b91a5962ba5c6">BFLB_DEVICE_TYPE_DMA</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:ga7e6dee831a7216e6ec4b91a5962ba5c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c9ea19dea01f70705dce05b72b02c86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga7c9ea19dea01f70705dce05b72b02c86">BFLB_DEVICE_TYPE_I2S</a>&#160;&#160;&#160;9</td></tr>
+<tr class="separator:ga7c9ea19dea01f70705dce05b72b02c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacecc1b0415909eafc555162dbbf0df6d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gacecc1b0415909eafc555162dbbf0df6d">BFLB_DEVICE_TYPE_IR</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:gacecc1b0415909eafc555162dbbf0df6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab0d177085d9b7a7fcbaf9502e5317cbb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gab0d177085d9b7a7fcbaf9502e5317cbb">BFLB_DEVICE_TYPE_TIMER</a>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:gab0d177085d9b7a7fcbaf9502e5317cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4a40d19b3ccb8df3e5238b15853185ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga4a40d19b3ccb8df3e5238b15853185ef">BFLB_DEVICE_TYPE_PWM</a>&#160;&#160;&#160;12</td></tr>
+<tr class="separator:ga4a40d19b3ccb8df3e5238b15853185ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadf3ddbd493ad048e72f42606caf9974a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gadf3ddbd493ad048e72f42606caf9974a">BFLB_DEVICE_TYPE_CAMERA</a>&#160;&#160;&#160;14</td></tr>
+<tr class="separator:gadf3ddbd493ad048e72f42606caf9974a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad2053ea2d6d7cc2f7bbc52c109657c38"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gad2053ea2d6d7cc2f7bbc52c109657c38">BFLB_DEVICE_TYPE_FLASH</a>&#160;&#160;&#160;15</td></tr>
+<tr class="separator:gad2053ea2d6d7cc2f7bbc52c109657c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac2c370b1cacb99adc5a6e8301d90c306"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gac2c370b1cacb99adc5a6e8301d90c306">BFLB_DEVICE_TYPE_QSPI</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:gac2c370b1cacb99adc5a6e8301d90c306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4e4892739f01951ff4f67befef300c11"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga4e4892739f01951ff4f67befef300c11">BFLB_DEVICE_TYPE_SDH</a>&#160;&#160;&#160;17</td></tr>
+<tr class="separator:ga4e4892739f01951ff4f67befef300c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6db31023b4a5f5444bc49cdd1b0dfbbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga6db31023b4a5f5444bc49cdd1b0dfbbe">BFLB_DEVICE_TYPE_SDU</a>&#160;&#160;&#160;18</td></tr>
+<tr class="separator:ga6db31023b4a5f5444bc49cdd1b0dfbbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga778fd99f8d5a563ba6117c060af32a6a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga778fd99f8d5a563ba6117c060af32a6a">BFLB_DEVICE_TYPE_ETH</a>&#160;&#160;&#160;19</td></tr>
+<tr class="separator:ga778fd99f8d5a563ba6117c060af32a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac3cae9d9280538175adab2758ce7fbc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gac3cae9d9280538175adab2758ce7fbc9">BFLB_DEVICE_TYPE_RTC</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:gac3cae9d9280538175adab2758ce7fbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae9d21025dd47117a1e2498bda892d43a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gae9d21025dd47117a1e2498bda892d43a">BFLB_DEVICE_TYPE_CRC</a>&#160;&#160;&#160;21</td></tr>
+<tr class="separator:gae9d21025dd47117a1e2498bda892d43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3f85440c8ee4bb1d8518a45664fc6d5c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga3f85440c8ee4bb1d8518a45664fc6d5c">BFLB_DEVICE_TYPE_RNG</a>&#160;&#160;&#160;22</td></tr>
+<tr class="separator:ga3f85440c8ee4bb1d8518a45664fc6d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6f32a4a0f771f1dcc1da3e396af71867"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga6f32a4a0f771f1dcc1da3e396af71867">BFLB_DEVICE_TYPE_MIPI</a>&#160;&#160;&#160;23</td></tr>
+<tr class="separator:ga6f32a4a0f771f1dcc1da3e396af71867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0750d51b620c8c45b23bd138a41a7afa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga0750d51b620c8c45b23bd138a41a7afa">BFLB_DEVICE_TYPE_DPI</a>&#160;&#160;&#160;24</td></tr>
+<tr class="separator:ga0750d51b620c8c45b23bd138a41a7afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3b0fb7c691f0657a5e2fc78fc0c23269"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga3b0fb7c691f0657a5e2fc78fc0c23269">BFLB_DEVICE_TYPE_DSI</a>&#160;&#160;&#160;25</td></tr>
+<tr class="separator:ga3b0fb7c691f0657a5e2fc78fc0c23269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadd37a8c2dd594dfeb718008c61e88dfc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gadd37a8c2dd594dfeb718008c61e88dfc">BFLB_DEVICE_TYPE_CSI</a>&#160;&#160;&#160;26</td></tr>
+<tr class="separator:gadd37a8c2dd594dfeb718008c61e88dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab1d811de169d88cb17f202e88079d45a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gab1d811de169d88cb17f202e88079d45a">BFLB_DEVICE_TYPE_USB</a>&#160;&#160;&#160;27</td></tr>
+<tr class="separator:gab1d811de169d88cb17f202e88079d45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac556b467c10bcceef9dedcd208f1ab27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gac556b467c10bcceef9dedcd208f1ab27">BFLB_DEVICE_TYPE_AES</a>&#160;&#160;&#160;28</td></tr>
+<tr class="separator:gac556b467c10bcceef9dedcd208f1ab27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6d262fe4e21351fe959170544db0c172"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga6d262fe4e21351fe959170544db0c172">BFLB_DEVICE_TYPE_SHA</a>&#160;&#160;&#160;29</td></tr>
+<tr class="separator:ga6d262fe4e21351fe959170544db0c172"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab1aa4e7439342fefd347cb2c17c424df"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gab1aa4e7439342fefd347cb2c17c424df">BFLB_DEVICE_TYPE_MD5</a>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:gab1aa4e7439342fefd347cb2c17c424df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga92a0f64474c95626bdebc3a33e908316"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga92a0f64474c95626bdebc3a33e908316">BFLB_DEVICE_TYPE_TRNG</a>&#160;&#160;&#160;31</td></tr>
+<tr class="separator:ga92a0f64474c95626bdebc3a33e908316"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacfea993c3f27a9f71ee07cd09b501228"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gacfea993c3f27a9f71ee07cd09b501228">BFLB_DEVICE_TYPE_PKA</a>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:gacfea993c3f27a9f71ee07cd09b501228"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac690b16dca82b1aa8e06b651aa9ea975"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gac690b16dca82b1aa8e06b651aa9ea975">BFLB_DEVICE_TYPE_CKS</a>&#160;&#160;&#160;33</td></tr>
+<tr class="separator:gac690b16dca82b1aa8e06b651aa9ea975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae952679e5237a37db2a67661c020223a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gae952679e5237a37db2a67661c020223a">BFLB_DEVICE_TYPE_MJPEG</a>&#160;&#160;&#160;34</td></tr>
+<tr class="separator:gae952679e5237a37db2a67661c020223a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9dc16372bee78a5888a08765554aebc2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga9dc16372bee78a5888a08765554aebc2">BFLB_DEVICE_TYPE_KYS</a>&#160;&#160;&#160;35</td></tr>
+<tr class="separator:ga9dc16372bee78a5888a08765554aebc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga73099e8c6ed59b2255f46fc95f280385"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga73099e8c6ed59b2255f46fc95f280385">BFLB_DEVICE_TYPE_DBI</a>&#160;&#160;&#160;36</td></tr>
+<tr class="separator:ga73099e8c6ed59b2255f46fc95f280385"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga83667bb515b95b57f370b1561f0e3727"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga83667bb515b95b57f370b1561f0e3727">BFLB_DEVICE_TYPE_WDT</a>&#160;&#160;&#160;37</td></tr>
+<tr class="separator:ga83667bb515b95b57f370b1561f0e3727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c4062e062978f15b8848a82300ebcae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga7c4062e062978f15b8848a82300ebcae">BFLB_DEVICE_TYPE_EF_CTRL</a>&#160;&#160;&#160;38</td></tr>
+<tr class="separator:ga7c4062e062978f15b8848a82300ebcae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga724a50767d5691073f631edf5f7dbbd0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga724a50767d5691073f631edf5f7dbbd0">BFLB_DEVICE_TYPE_SDIO2</a>&#160;&#160;&#160;39</td></tr>
+<tr class="separator:ga724a50767d5691073f631edf5f7dbbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga52f551b90259ff69529de93ad9679340"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga52f551b90259ff69529de93ad9679340">BFLB_DEVICE_TYPE_SDIO3</a>&#160;&#160;&#160;40</td></tr>
+<tr class="separator:ga52f551b90259ff69529de93ad9679340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae2145ce0722dc21f4502dcd510bd5fa2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#gae2145ce0722dc21f4502dcd510bd5fa2">BFLB_DEVICE_TYPE_PLFMDMA</a>&#160;&#160;&#160;41</td></tr>
+<tr class="separator:gae2145ce0722dc21f4502dcd510bd5fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga611e2003f34c5b4099d0934ae20b8816"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga611e2003f34c5b4099d0934ae20b8816">bflb_device_get_by_name</a> (const char *name)</td></tr>
+<tr class="memdesc:ga611e2003f34c5b4099d0934ae20b8816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get device handle by name.  <br /></td></tr>
+<tr class="separator:ga611e2003f34c5b4099d0934ae20b8816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5ebf8527c97c6e505db731d6bb6a2695"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga5ebf8527c97c6e505db731d6bb6a2695">bflb_device_get_by_id</a> (uint8_t type, uint8_t idx)</td></tr>
+<tr class="memdesc:ga5ebf8527c97c6e505db731d6bb6a2695"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get device handle by type and index.  <br /></td></tr>
+<tr class="separator:ga5ebf8527c97c6e505db731d6bb6a2695"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8495452c935ad5691129a62abf481e94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_o_r_e.html#ga8495452c935ad5691129a62abf481e94">bflb_device_set_userdata</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *device, void *user_data)</td></tr>
+<tr class="memdesc:ga8495452c935ad5691129a62abf481e94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set user data into device handle.  <br /></td></tr>
+<tr class="separator:ga8495452c935ad5691129a62abf481e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__core_8h.html">bflb_core.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

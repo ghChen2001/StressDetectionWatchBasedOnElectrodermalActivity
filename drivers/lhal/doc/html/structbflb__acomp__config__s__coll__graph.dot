@@ -1,0 +1,8 @@
+digraph "bflb_acomp_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_acomp_config_s\n|+ mux_en\l+ pos_chan_sel\l+ neg_chan_sel\l+ vio_sel\l+ scaling_factor\l+ bias_prog\l+ hysteresis_pos_volt\l+ hysteresis_neg_volt\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="ACOMP configuration structure"];
+}

@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_spi_psram.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__spi__psram_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_spi_psram.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__spi__psram_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#ifndef __BFLB_SPI_PSRAM_H__</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#define __BFLB_SPI_PSRAM_H__</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &quot;sf_ctrl_reg.h&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__common_8h.html">bflb_common.h</a>&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &quot;bflb_sf_ctrl.h&quot;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#ga319747e2de520670d9aa03e1bb54e88d">   59</a></span><span class="preprocessor">#define PSRAM_DRIVE_STRENGTH_50_OHMS      0  </span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#ga9ce41090e88c54e7037f10c85c575b89">   60</a></span><span class="preprocessor">#define PSRAM_DRIVE_STRENGTH_100_OHMS     1  </span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#gaf0b5709ba5f73d3bc3506795e1bdd71c">   61</a></span><span class="preprocessor">#define PSRAM_DRIVE_STRENGTH_200_OHMS     2  </span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#ga5de8a0c4701aa46ebc21f4c75f0797f9">   66</a></span><span class="preprocessor">#define PSRAM_BURST_LENGTH_16_BYTES       0  </span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#ga90aacc342dd8009594950cc6a870241d">   67</a></span><span class="preprocessor">#define PSRAM_BURST_LENGTH_32_BYTES       1  </span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#ga674a93bc67f6a8ac4f8513dd660f974d">   68</a></span><span class="preprocessor">#define PSRAM_BURST_LENGTH_64_BYTES       2  </span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#gac6ddf798308f3ac90bea8dca46665af7">   69</a></span><span class="preprocessor">#define PSRAM_BURST_LENGTH_512_BYTES      3 </span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#ga3501bf71a914339786dfe4a3881e18e9">   74</a></span><span class="preprocessor">#define PSRAM_SPI_CTRL_MODE               0  </span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___types.html#gabfdbcf8a49a3d849c40f881c1fd5661b">   75</a></span><span class="preprocessor">#define PSRAM_QPI_CTRL_MODE               1  </span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="structspi__psram__cfg__type.html">   80</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gaa9d61c9a6b7c4a00e401cae609540076">   81</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gaa9d61c9a6b7c4a00e401cae609540076">read_id_cmd</a>;                  </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gab58ceb0c2aeb9a955da8f417c5fdb2cd">   82</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gab58ceb0c2aeb9a955da8f417c5fdb2cd">read_id_dmy_clk</a>;              </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gab7b65c82140e5dba1453fdf55a57bdca">   83</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gab7b65c82140e5dba1453fdf55a57bdca">burst_toggle_cmd</a>;             </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gab87b5a04d15f3561bbdbf24689467401">   84</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gab87b5a04d15f3561bbdbf24689467401">reset_enable_cmd</a>;             </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gab495634764d2d31061a03086d388a194">   85</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gab495634764d2d31061a03086d388a194">reset_cmd</a>;                    </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga0b7a65abfc3522878984d03f2eeee62d">   86</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga0b7a65abfc3522878984d03f2eeee62d">enter_quad_mode_cmd</a>;          </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga2a82d9e6e8300a86cd34f4871663b808">   87</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga2a82d9e6e8300a86cd34f4871663b808">exit_quad_mode_cmd</a>;           </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gac27d5d0c2492e28dc4f548eaf0a92214">   88</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gac27d5d0c2492e28dc4f548eaf0a92214">read_reg_cmd</a>;                 </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga5fe375760355821b971ee27ab17d355b">   89</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga5fe375760355821b971ee27ab17d355b">read_reg_dmy_clk</a>;             </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gac87c835c64eace596bea93eeb4bdc696">   90</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gac87c835c64eace596bea93eeb4bdc696">write_reg_cmd</a>;                </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga1489f3fc2624df2bde5fe71d3b1e51fd">   91</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga1489f3fc2624df2bde5fe71d3b1e51fd">read_cmd</a>;                     </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gaada9387a16d4c99a017d407cd31a5214">   92</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gaada9387a16d4c99a017d407cd31a5214">read_dmy_clk</a>;                 </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gaf95d8022c37aabb07a8a5aa74aa7b22a">   93</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gaf95d8022c37aabb07a8a5aa74aa7b22a">f_read_cmd</a>;                   </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gae9976ad4f6c241d435aadceff28afa48">   94</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gae9976ad4f6c241d435aadceff28afa48">f_read_dmy_clk</a>;               </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga7bd6493336d2f093dc3707f089cb3746">   95</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga7bd6493336d2f093dc3707f089cb3746">f_read_quad_cmd</a>;              </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga9e3685136474d84c30f90279a2743825">   96</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga9e3685136474d84c30f90279a2743825">f_read_quad_dmy_clk</a>;          </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gaeda6d78d400f2995eb2a38cf4b1a7274">   97</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gaeda6d78d400f2995eb2a38cf4b1a7274">write_cmd</a>;                    </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga31898ab95cf83d09fe9edadf30238c1c">   98</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga31898ab95cf83d09fe9edadf30238c1c">quad_write_cmd</a>;               </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gaa8cb01d55a3737db45ba5b9991864677">   99</a></span>    uint16_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gaa8cb01d55a3737db45ba5b9991864677">page_size</a>;                   </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#if defined(BL702L)</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    uint8_t burst_toggle_en;              </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga6398c881542a335a69d2288796fdca1e">  103</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga6398c881542a335a69d2288796fdca1e">ctrl_mode</a>;                    </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gaeb07837ee28db477d8fad094c81a120f">  104</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#gaeb07837ee28db477d8fad094c81a120f">drive_strength</a>;               </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga29c7d4ce067b5ead5dc4073fdb683c2a">  105</a></span>    uint8_t <a class="code hl_variable" href="group___p_s_r_a_m___public___functions.html#ga29c7d4ce067b5ead5dc4073fdb683c2a">burst_length</a>;                 </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga260bee5e5285af1af2904bd56518c093">  129</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga260bee5e5285af1af2904bd56518c093">bflb_psram_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, <span class="keyword">struct</span> sf_ctrl_cmds_cfg *cmds_cfg,</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                     <span class="keyword">struct</span> sf_ctrl_psram_cfg *sf_ctrl_psram_cfg);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gafaad9d4fbedad4235af37f9ed8a4f38e">  131</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#gafaad9d4fbedad4235af37f9ed8a4f38e">bflb_psram_readreg</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t *reg_value);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gad3ed0baa4868f53ac277b9d5cff07750">  132</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#gad3ed0baa4868f53ac277b9d5cff07750">bflb_psram_writereg</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t *reg_value);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga4f1522118d83031c862e9bd7ad504fe7">  133</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga4f1522118d83031c862e9bd7ad504fe7">bflb_psram_setdrivestrength</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga5a44f37129564c85559e739e2dd420c1">  134</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga5a44f37129564c85559e739e2dd420c1">bflb_psram_setburstwrap</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga4511585aa201f810fd709cfaa74f4f2e">  135</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga4511585aa201f810fd709cfaa74f4f2e">bflb_psram_readid</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t *data);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gaf4ba9ae78a8017658c6b3bf9ce2be156">  136</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#gaf4ba9ae78a8017658c6b3bf9ce2be156">bflb_psram_enterquadmode</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga67c6e388ef22a3ee12d8bf54e5211af0">  137</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga67c6e388ef22a3ee12d8bf54e5211af0">bflb_psram_exitquadmode</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga7a776b5dc54c9315b5e87272013bd5a6">  138</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga7a776b5dc54c9315b5e87272013bd5a6">bflb_psram_toggleburstlength</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t ctrl_mode);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gaeb6b146d4dc31f629641487207fe3df1">  139</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#gaeb6b146d4dc31f629641487207fe3df1">bflb_psram_softwarereset</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t ctrl_mode);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga54e017426727c54b8da57731d126bf16">  140</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga54e017426727c54b8da57731d126bf16">bflb_psram_set_idbus_cfg</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t io_mode, uint32_t addr, uint32_t len);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga598c969b9a168ddb7da7c5a05262cfbd">  141</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga598c969b9a168ddb7da7c5a05262cfbd">bflb_psram_cache_write_set</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t io_mode, uint8_t wt_en,</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                               uint8_t wb_en, uint8_t wa_en);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#gae42eab3b80f0937da793b085af0f8a94">  143</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#gae42eab3b80f0937da793b085af0f8a94">bflb_psram_write</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t io_mode, uint32_t addr, uint8_t *data, uint32_t len);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="group___p_s_r_a_m___public___functions.html#ga04053b4a4d81f9775ab7ac875c3b8c6e">  144</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_s_r_a_m___public___functions.html#ga04053b4a4d81f9775ab7ac875c3b8c6e">bflb_psram_read</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a> *psram_cfg, uint8_t io_mode, uint32_t addr, uint8_t *data, uint32_t len);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="preprocessor">#endif </span><span class="comment">/* __BFLB_SPI_PSRAM_H__ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="abflb__common_8h_html"><div class="ttname"><a href="bflb__common_8h.html">bflb_common.h</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga04053b4a4d81f9775ab7ac875c3b8c6e"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga04053b4a4d81f9775ab7ac875c3b8c6e">bflb_psram_read</a></div><div class="ttdeci">int bflb_psram_read(struct spi_psram_cfg_type *psram_cfg, uint8_t io_mode, uint32_t addr, uint8_t *data, uint32_t len)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga0b7a65abfc3522878984d03f2eeee62d"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga0b7a65abfc3522878984d03f2eeee62d">spi_psram_cfg_type::enter_quad_mode_cmd</a></div><div class="ttdeci">uint8_t enter_quad_mode_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00086">bflb_spi_psram.h:86</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga1489f3fc2624df2bde5fe71d3b1e51fd"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga1489f3fc2624df2bde5fe71d3b1e51fd">spi_psram_cfg_type::read_cmd</a></div><div class="ttdeci">uint8_t read_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00091">bflb_spi_psram.h:91</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga260bee5e5285af1af2904bd56518c093"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga260bee5e5285af1af2904bd56518c093">bflb_psram_init</a></div><div class="ttdeci">void bflb_psram_init(struct spi_psram_cfg_type *psram_cfg, struct sf_ctrl_cmds_cfg *cmds_cfg, struct sf_ctrl_psram_cfg *sf_ctrl_psram_cfg)</div><div class="ttdoc">PSRAM Functions</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga29c7d4ce067b5ead5dc4073fdb683c2a"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga29c7d4ce067b5ead5dc4073fdb683c2a">spi_psram_cfg_type::burst_length</a></div><div class="ttdeci">uint8_t burst_length</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00105">bflb_spi_psram.h:105</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga2a82d9e6e8300a86cd34f4871663b808"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga2a82d9e6e8300a86cd34f4871663b808">spi_psram_cfg_type::exit_quad_mode_cmd</a></div><div class="ttdeci">uint8_t exit_quad_mode_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00087">bflb_spi_psram.h:87</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga31898ab95cf83d09fe9edadf30238c1c"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga31898ab95cf83d09fe9edadf30238c1c">spi_psram_cfg_type::quad_write_cmd</a></div><div class="ttdeci">uint8_t quad_write_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00098">bflb_spi_psram.h:98</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga4511585aa201f810fd709cfaa74f4f2e"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga4511585aa201f810fd709cfaa74f4f2e">bflb_psram_readid</a></div><div class="ttdeci">void bflb_psram_readid(struct spi_psram_cfg_type *psram_cfg, uint8_t *data)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga4f1522118d83031c862e9bd7ad504fe7"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga4f1522118d83031c862e9bd7ad504fe7">bflb_psram_setdrivestrength</a></div><div class="ttdeci">int bflb_psram_setdrivestrength(struct spi_psram_cfg_type *psram_cfg)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga54e017426727c54b8da57731d126bf16"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga54e017426727c54b8da57731d126bf16">bflb_psram_set_idbus_cfg</a></div><div class="ttdeci">int bflb_psram_set_idbus_cfg(struct spi_psram_cfg_type *psram_cfg, uint8_t io_mode, uint32_t addr, uint32_t len)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga598c969b9a168ddb7da7c5a05262cfbd"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga598c969b9a168ddb7da7c5a05262cfbd">bflb_psram_cache_write_set</a></div><div class="ttdeci">int bflb_psram_cache_write_set(struct spi_psram_cfg_type *psram_cfg, uint8_t io_mode, uint8_t wt_en, uint8_t wb_en, uint8_t wa_en)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga5a44f37129564c85559e739e2dd420c1"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga5a44f37129564c85559e739e2dd420c1">bflb_psram_setburstwrap</a></div><div class="ttdeci">int bflb_psram_setburstwrap(struct spi_psram_cfg_type *psram_cfg)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga5fe375760355821b971ee27ab17d355b"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga5fe375760355821b971ee27ab17d355b">spi_psram_cfg_type::read_reg_dmy_clk</a></div><div class="ttdeci">uint8_t read_reg_dmy_clk</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00089">bflb_spi_psram.h:89</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga6398c881542a335a69d2288796fdca1e"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga6398c881542a335a69d2288796fdca1e">spi_psram_cfg_type::ctrl_mode</a></div><div class="ttdeci">uint8_t ctrl_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00103">bflb_spi_psram.h:103</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga67c6e388ef22a3ee12d8bf54e5211af0"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga67c6e388ef22a3ee12d8bf54e5211af0">bflb_psram_exitquadmode</a></div><div class="ttdeci">int bflb_psram_exitquadmode(struct spi_psram_cfg_type *psram_cfg)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga7a776b5dc54c9315b5e87272013bd5a6"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga7a776b5dc54c9315b5e87272013bd5a6">bflb_psram_toggleburstlength</a></div><div class="ttdeci">int bflb_psram_toggleburstlength(struct spi_psram_cfg_type *psram_cfg, uint8_t ctrl_mode)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga7bd6493336d2f093dc3707f089cb3746"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga7bd6493336d2f093dc3707f089cb3746">spi_psram_cfg_type::f_read_quad_cmd</a></div><div class="ttdeci">uint8_t f_read_quad_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00095">bflb_spi_psram.h:95</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_ga9e3685136474d84c30f90279a2743825"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#ga9e3685136474d84c30f90279a2743825">spi_psram_cfg_type::f_read_quad_dmy_clk</a></div><div class="ttdeci">uint8_t f_read_quad_dmy_clk</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00096">bflb_spi_psram.h:96</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gaa8cb01d55a3737db45ba5b9991864677"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gaa8cb01d55a3737db45ba5b9991864677">spi_psram_cfg_type::page_size</a></div><div class="ttdeci">uint16_t page_size</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00099">bflb_spi_psram.h:99</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gaa9d61c9a6b7c4a00e401cae609540076"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gaa9d61c9a6b7c4a00e401cae609540076">spi_psram_cfg_type::read_id_cmd</a></div><div class="ttdeci">uint8_t read_id_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00081">bflb_spi_psram.h:81</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gaada9387a16d4c99a017d407cd31a5214"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gaada9387a16d4c99a017d407cd31a5214">spi_psram_cfg_type::read_dmy_clk</a></div><div class="ttdeci">uint8_t read_dmy_clk</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00092">bflb_spi_psram.h:92</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gab495634764d2d31061a03086d388a194"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gab495634764d2d31061a03086d388a194">spi_psram_cfg_type::reset_cmd</a></div><div class="ttdeci">uint8_t reset_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00085">bflb_spi_psram.h:85</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gab58ceb0c2aeb9a955da8f417c5fdb2cd"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gab58ceb0c2aeb9a955da8f417c5fdb2cd">spi_psram_cfg_type::read_id_dmy_clk</a></div><div class="ttdeci">uint8_t read_id_dmy_clk</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00082">bflb_spi_psram.h:82</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gab7b65c82140e5dba1453fdf55a57bdca"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gab7b65c82140e5dba1453fdf55a57bdca">spi_psram_cfg_type::burst_toggle_cmd</a></div><div class="ttdeci">uint8_t burst_toggle_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00083">bflb_spi_psram.h:83</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gab87b5a04d15f3561bbdbf24689467401"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gab87b5a04d15f3561bbdbf24689467401">spi_psram_cfg_type::reset_enable_cmd</a></div><div class="ttdeci">uint8_t reset_enable_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00084">bflb_spi_psram.h:84</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gac27d5d0c2492e28dc4f548eaf0a92214"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gac27d5d0c2492e28dc4f548eaf0a92214">spi_psram_cfg_type::read_reg_cmd</a></div><div class="ttdeci">uint8_t read_reg_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00088">bflb_spi_psram.h:88</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gac87c835c64eace596bea93eeb4bdc696"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gac87c835c64eace596bea93eeb4bdc696">spi_psram_cfg_type::write_reg_cmd</a></div><div class="ttdeci">uint8_t write_reg_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00090">bflb_spi_psram.h:90</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gad3ed0baa4868f53ac277b9d5cff07750"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gad3ed0baa4868f53ac277b9d5cff07750">bflb_psram_writereg</a></div><div class="ttdeci">void bflb_psram_writereg(struct spi_psram_cfg_type *psram_cfg, uint8_t *reg_value)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gae42eab3b80f0937da793b085af0f8a94"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gae42eab3b80f0937da793b085af0f8a94">bflb_psram_write</a></div><div class="ttdeci">int bflb_psram_write(struct spi_psram_cfg_type *psram_cfg, uint8_t io_mode, uint32_t addr, uint8_t *data, uint32_t len)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gae9976ad4f6c241d435aadceff28afa48"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gae9976ad4f6c241d435aadceff28afa48">spi_psram_cfg_type::f_read_dmy_clk</a></div><div class="ttdeci">uint8_t f_read_dmy_clk</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00094">bflb_spi_psram.h:94</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gaeb07837ee28db477d8fad094c81a120f"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gaeb07837ee28db477d8fad094c81a120f">spi_psram_cfg_type::drive_strength</a></div><div class="ttdeci">uint8_t drive_strength</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00104">bflb_spi_psram.h:104</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gaeb6b146d4dc31f629641487207fe3df1"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gaeb6b146d4dc31f629641487207fe3df1">bflb_psram_softwarereset</a></div><div class="ttdeci">int bflb_psram_softwarereset(struct spi_psram_cfg_type *psram_cfg, uint8_t ctrl_mode)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gaeda6d78d400f2995eb2a38cf4b1a7274"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gaeda6d78d400f2995eb2a38cf4b1a7274">spi_psram_cfg_type::write_cmd</a></div><div class="ttdeci">uint8_t write_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00097">bflb_spi_psram.h:97</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gaf4ba9ae78a8017658c6b3bf9ce2be156"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gaf4ba9ae78a8017658c6b3bf9ce2be156">bflb_psram_enterquadmode</a></div><div class="ttdeci">int bflb_psram_enterquadmode(struct spi_psram_cfg_type *psram_cfg)</div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gaf95d8022c37aabb07a8a5aa74aa7b22a"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gaf95d8022c37aabb07a8a5aa74aa7b22a">spi_psram_cfg_type::f_read_cmd</a></div><div class="ttdeci">uint8_t f_read_cmd</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00093">bflb_spi_psram.h:93</a></div></div>
+<div class="ttc" id="agroup___p_s_r_a_m___public___functions_html_gafaad9d4fbedad4235af37f9ed8a4f38e"><div class="ttname"><a href="group___p_s_r_a_m___public___functions.html#gafaad9d4fbedad4235af37f9ed8a4f38e">bflb_psram_readreg</a></div><div class="ttdeci">void bflb_psram_readreg(struct spi_psram_cfg_type *psram_cfg, uint8_t *reg_value)</div></div>
+<div class="ttc" id="astructspi__psram__cfg__type_html"><div class="ttname"><a href="structspi__psram__cfg__type.html">spi_psram_cfg_type</a></div><div class="ttdoc">Psram ctrl configuration structure type definition</div><div class="ttdef"><b>Definition:</b> <a href="bflb__spi__psram_8h_source.html#l00080">bflb_spi_psram.h:80</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__spi__psram_8h.html">bflb_spi_psram.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+digraph "bflb_ir_rx_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_ir_rx_config_s\n|+ rx_mode\l+ input_inverse\l+ deglitch_enable\l+ deglitch_cnt\l+ data_threshold\l+ end_threshold\l+ fifo_threshold\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="IR RX configuration structure"];
+}

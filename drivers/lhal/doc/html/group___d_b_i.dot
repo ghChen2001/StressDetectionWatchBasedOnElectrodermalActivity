@@ -1,0 +1,27 @@
+digraph "DBI"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="DBI",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node6 [label="dbi clock phase and\l polarity definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_b_i___c_l_o_c_k___m_o_d_e.html",tooltip=" "];
+  Node10 [label="dbi feature control\l cmd definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_b_i___c_m_d.html",tooltip=" "];
+  Node9 [label="dbi interrupt clear\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_b_i___i_n_t_c_l_r.html",tooltip=" "];
+  Node3 [label="dbi working mode definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_b_i___m_o_d_e.html",tooltip=" "];
+  Node4 [label="dbi fifo input pixel\l format, the FIFO are\l filled in 32-bits width\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html",tooltip=" "];
+  Node5 [label="dbi output pixel format\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_b_i___p_i_x_e_l___o_u_t_p_u_t___f_o_r_m_a_t.html",tooltip=" "];
+  Node7 [label="dbi qspi wire num definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_b_i___q_s_p_i___w_i_r_e___n_u_m.html",tooltip=" "];
+  Node2 [label="LHAL",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___l_h_a_l.html",tooltip=" "];
+  Node8 [label="dbi interrupt status\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___s_p_i___i_n_t_s_t_s.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node8 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node9 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node10 [shape=plaintext, dir="back", style="solid"];
+}

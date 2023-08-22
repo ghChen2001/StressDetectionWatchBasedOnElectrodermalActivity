@@ -1,0 +1,756 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: ADC</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___a_d_c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">ADC<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+ADC 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___a_d_c.png" border="0" usemap="#agroup______a__d__c" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___a_d_c___c_h_a_n_n_e_l"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c___c_h_a_n_n_e_l.html">adc channel definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___a_d_c___c_l_k___d_i_v"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c___c_l_k___d_i_v.html">adc clock divison definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___a_d_c___r_e_s_o_l_u_t_i_o_n"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c___r_e_s_o_l_u_t_i_o_n.html">adc resolution definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___a_d_c___v_r_e_f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c___v_r_e_f.html">adc reference select definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___a_d_c___t_s_e_n___m_o_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c___t_s_e_n___m_o_d.html">adc tsen mode definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___a_d_c___i_n_t_s_t_s"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c___i_n_t_s_t_s.html">adc interrupt status definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___a_d_c___i_n_t_c_l_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c___i_n_t_c_l_r.html">adc interrupt clear definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__adc__config__s.html">bflb_adc_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC configuration structure  <a href="structbflb__adc__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__adc__channel__s.html">bflb_adc_channel_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC channel select  <a href="structbflb__adc__channel__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__adc__result__s.html">bflb_adc_result_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC result select  <a href="structbflb__adc__result__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gae9e3fe7563cda8ad66f23273238cfdea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#gae9e3fe7563cda8ad66f23273238cfdea">bflb_adc_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const struct <a class="el" href="structbflb__adc__config__s.html">bflb_adc_config_s</a> *config)</td></tr>
+<tr class="memdesc:gae9e3fe7563cda8ad66f23273238cfdea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize adc.  <br /></td></tr>
+<tr class="separator:gae9e3fe7563cda8ad66f23273238cfdea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga100b2a1fd8d2ae837c6e8a12b7ad4f4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga100b2a1fd8d2ae837c6e8a12b7ad4f4a">bflb_adc_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga100b2a1fd8d2ae837c6e8a12b7ad4f4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize adc.  <br /></td></tr>
+<tr class="separator:ga100b2a1fd8d2ae837c6e8a12b7ad4f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga57729c79f3a19731734f41236d533fd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga57729c79f3a19731734f41236d533fd1">bflb_adc_link_rxdma</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool enable)</td></tr>
+<tr class="memdesc:ga57729c79f3a19731734f41236d533fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable adc rx dma.  <br /></td></tr>
+<tr class="separator:ga57729c79f3a19731734f41236d533fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4028bafee8ad1076865a3bff38ba9e1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga4028bafee8ad1076865a3bff38ba9e1e">bflb_adc_channel_config</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, struct <a class="el" href="structbflb__adc__channel__s.html">bflb_adc_channel_s</a> *chan, uint8_t channels)</td></tr>
+<tr class="memdesc:ga4028bafee8ad1076865a3bff38ba9e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config adc channels to sample.  <br /></td></tr>
+<tr class="separator:ga4028bafee8ad1076865a3bff38ba9e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabdd4bade82497d34f38abc8366ecbd00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#gabdd4bade82497d34f38abc8366ecbd00">bflb_adc_start_conversion</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gabdd4bade82497d34f38abc8366ecbd00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start adc conversion  <br /></td></tr>
+<tr class="separator:gabdd4bade82497d34f38abc8366ecbd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga513ec5befe7e584bbef809348eeed9d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga513ec5befe7e584bbef809348eeed9d8">bflb_adc_stop_conversion</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga513ec5befe7e584bbef809348eeed9d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop adc conversion  <br /></td></tr>
+<tr class="separator:ga513ec5befe7e584bbef809348eeed9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gada85355354e480256a51d5d57cf0f11e"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#gada85355354e480256a51d5d57cf0f11e">bflb_adc_get_count</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gada85355354e480256a51d5d57cf0f11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get adc number of completed conversions  <br /></td></tr>
+<tr class="separator:gada85355354e480256a51d5d57cf0f11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaddf2c5e921f301ac4b53f659f302a646"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#gaddf2c5e921f301ac4b53f659f302a646">bflb_adc_read_raw</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gaddf2c5e921f301ac4b53f659f302a646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read adc conversion value  <br /></td></tr>
+<tr class="separator:gaddf2c5e921f301ac4b53f659f302a646"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab8e1e372c9f77bd0e50a9ff50db59e63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#gab8e1e372c9f77bd0e50a9ff50db59e63">bflb_adc_rxint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:gab8e1e372c9f77bd0e50a9ff50db59e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable adc conversion completion interrupt. Triggerring when a channel conversion is completed.  <br /></td></tr>
+<tr class="separator:gab8e1e372c9f77bd0e50a9ff50db59e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga20889bd28943d711d0c2a252bcca6a7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga20889bd28943d711d0c2a252bcca6a7e">bflb_adc_errint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga20889bd28943d711d0c2a252bcca6a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable adc error interrupt.  <br /></td></tr>
+<tr class="separator:ga20889bd28943d711d0c2a252bcca6a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga96b3b1e90f9b2fb23898b4b34f22332a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga96b3b1e90f9b2fb23898b4b34f22332a">bflb_adc_get_intstatus</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga96b3b1e90f9b2fb23898b4b34f22332a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get adc interrupt instatus.  <br /></td></tr>
+<tr class="separator:ga96b3b1e90f9b2fb23898b4b34f22332a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61f9648e2e15fa66baf133faec15acc6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga61f9648e2e15fa66baf133faec15acc6">bflb_adc_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear)</td></tr>
+<tr class="memdesc:ga61f9648e2e15fa66baf133faec15acc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear adc interrupt instatus.  <br /></td></tr>
+<tr class="separator:ga61f9648e2e15fa66baf133faec15acc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3eb27b3dcb72274e11e18bb120e6aca4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga3eb27b3dcb72274e11e18bb120e6aca4">bflb_adc_parse_result</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t *buffer, struct <a class="el" href="structbflb__adc__result__s.html">bflb_adc_result_s</a> *result, uint16_t count)</td></tr>
+<tr class="memdesc:ga3eb27b3dcb72274e11e18bb120e6aca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse adc conversion value into millivolt and actual numerical value.  <br /></td></tr>
+<tr class="separator:ga3eb27b3dcb72274e11e18bb120e6aca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga57e58d365476fc7ded989bd7958609ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#ga57e58d365476fc7ded989bd7958609ac">bflb_adc_tsen_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t tsen_mod)</td></tr>
+<tr class="memdesc:ga57e58d365476fc7ded989bd7958609ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize adc temperature sensor  <br /></td></tr>
+<tr class="separator:ga57e58d365476fc7ded989bd7958609ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad13b35931e06939954adb989d8a63a4d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#gad13b35931e06939954adb989d8a63a4d">bflb_adc_tsen_get_temp</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gad13b35931e06939954adb989d8a63a4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get adc temperature  <br /></td></tr>
+<tr class="separator:gad13b35931e06939954adb989d8a63a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaec64432cb27e5031184fa7398c93bea4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#gaec64432cb27e5031184fa7398c93bea4">bflb_adc_vbat_enable</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gaec64432cb27e5031184fa7398c93bea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable adc vbat power.  <br /></td></tr>
+<tr class="separator:gaec64432cb27e5031184fa7398c93bea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac07233fc5671b42b8c080bd6db6aaa4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_d_c.html#gac07233fc5671b42b8c080bd6db6aaa4b">bflb_adc_vbat_disable</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gac07233fc5671b42b8c080bd6db6aaa4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable adc vbat power.  <br /></td></tr>
+<tr class="separator:gac07233fc5671b42b8c080bd6db6aaa4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">函数说明</h2>
+<a id="ga4028bafee8ad1076865a3bff38ba9e1e" name="ga4028bafee8ad1076865a3bff38ba9e1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4028bafee8ad1076865a3bff38ba9e1e">&#9670;&#160;</a></span>bflb_adc_channel_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_adc_channel_config </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structbflb__adc__channel__s.html">bflb_adc_channel_s</a> *&#160;</td>
+          <td class="paramname"><em>chan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channels</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config adc channels to sample. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">chan</td><td>pointer to the channel configurations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">channels</td><td>pair number of channels </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>Zero on success; a negated errno value on failure </dd></dl>
+
+</div>
+</div>
+<a id="ga100b2a1fd8d2ae837c6e8a12b7ad4f4a" name="ga100b2a1fd8d2ae837c6e8a12b7ad4f4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga100b2a1fd8d2ae837c6e8a12b7ad4f4a">&#9670;&#160;</a></span>bflb_adc_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize adc. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga20889bd28943d711d0c2a252bcca6a7e" name="ga20889bd28943d711d0c2a252bcca6a7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga20889bd28943d711d0c2a252bcca6a7e">&#9670;&#160;</a></span>bflb_adc_errint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_errint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable adc error interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gada85355354e480256a51d5d57cf0f11e" name="gada85355354e480256a51d5d57cf0f11e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gada85355354e480256a51d5d57cf0f11e">&#9670;&#160;</a></span>bflb_adc_get_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t bflb_adc_get_count </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get adc number of completed conversions </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>number of completed conversions </dd></dl>
+
+</div>
+</div>
+<a id="ga96b3b1e90f9b2fb23898b4b34f22332a" name="ga96b3b1e90f9b2fb23898b4b34f22332a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga96b3b1e90f9b2fb23898b4b34f22332a">&#9670;&#160;</a></span>bflb_adc_get_intstatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_adc_get_intstatus </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get adc interrupt instatus. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>interrupt instatus value, use <a class="el" href="group___a_d_c___i_n_t_s_t_s.html">adc interrupt status definition</a> </dd></dl>
+
+</div>
+</div>
+<a id="gae9e3fe7563cda8ad66f23273238cfdea" name="gae9e3fe7563cda8ad66f23273238cfdea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae9e3fe7563cda8ad66f23273238cfdea">&#9670;&#160;</a></span>bflb_adc_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structbflb__adc__config__s.html">bflb_adc_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize adc. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>pointer to save adc configuration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga61f9648e2e15fa66baf133faec15acc6" name="ga61f9648e2e15fa66baf133faec15acc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga61f9648e2e15fa66baf133faec15acc6">&#9670;&#160;</a></span>bflb_adc_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear adc interrupt instatus. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_clear</td><td>interrupt clear value, use <a class="el" href="group___a_d_c___i_n_t_c_l_r.html">adc interrupt clear definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga57729c79f3a19731734f41236d533fd1" name="ga57729c79f3a19731734f41236d533fd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga57729c79f3a19731734f41236d533fd1">&#9670;&#160;</a></span>bflb_adc_link_rxdma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_link_rxdma </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable adc rx dma. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga3eb27b3dcb72274e11e18bb120e6aca4" name="ga3eb27b3dcb72274e11e18bb120e6aca4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3eb27b3dcb72274e11e18bb120e6aca4">&#9670;&#160;</a></span>bflb_adc_parse_result()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_parse_result </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structbflb__adc__result__s.html">bflb_adc_result_s</a> *&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse adc conversion value into millivolt and actual numerical value. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buffer</td><td>pointer to adc original value from bflb_adc_read_raw api </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>pointer to save parse result </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>count to parse </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaddf2c5e921f301ac4b53f659f302a646" name="gaddf2c5e921f301ac4b53f659f302a646"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaddf2c5e921f301ac4b53f659f302a646">&#9670;&#160;</a></span>bflb_adc_read_raw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_adc_read_raw </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read adc conversion value </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>conversion value </dd></dl>
+
+</div>
+</div>
+<a id="gab8e1e372c9f77bd0e50a9ff50db59e63" name="gab8e1e372c9f77bd0e50a9ff50db59e63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab8e1e372c9f77bd0e50a9ff50db59e63">&#9670;&#160;</a></span>bflb_adc_rxint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_rxint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable adc conversion completion interrupt. Triggerring when a channel conversion is completed. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gabdd4bade82497d34f38abc8366ecbd00" name="gabdd4bade82497d34f38abc8366ecbd00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabdd4bade82497d34f38abc8366ecbd00">&#9670;&#160;</a></span>bflb_adc_start_conversion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_start_conversion </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start adc conversion </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga513ec5befe7e584bbef809348eeed9d8" name="ga513ec5befe7e584bbef809348eeed9d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga513ec5befe7e584bbef809348eeed9d8">&#9670;&#160;</a></span>bflb_adc_stop_conversion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_stop_conversion </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop adc conversion </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gad13b35931e06939954adb989d8a63a4d" name="gad13b35931e06939954adb989d8a63a4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad13b35931e06939954adb989d8a63a4d">&#9670;&#160;</a></span>bflb_adc_tsen_get_temp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float bflb_adc_tsen_get_temp </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get adc temperature </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>temperature </dd></dl>
+
+</div>
+</div>
+<a id="ga57e58d365476fc7ded989bd7958609ac" name="ga57e58d365476fc7ded989bd7958609ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga57e58d365476fc7ded989bd7958609ac">&#9670;&#160;</a></span>bflb_adc_tsen_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_tsen_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>tsen_mod</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize adc temperature sensor </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tsen_mod</td><td>temperature sensor mode, use <a class="el" href="group___a_d_c___t_s_e_n___m_o_d.html">adc tsen mode definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gac07233fc5671b42b8c080bd6db6aaa4b" name="gac07233fc5671b42b8c080bd6db6aaa4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac07233fc5671b42b8c080bd6db6aaa4b">&#9670;&#160;</a></span>bflb_adc_vbat_disable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_vbat_disable </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disable adc vbat power. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaec64432cb27e5031184fa7398c93bea4" name="gaec64432cb27e5031184fa7398c93bea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaec64432cb27e5031184fa7398c93bea4">&#9670;&#160;</a></span>bflb_adc_vbat_enable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_adc_vbat_enable </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable adc vbat power. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

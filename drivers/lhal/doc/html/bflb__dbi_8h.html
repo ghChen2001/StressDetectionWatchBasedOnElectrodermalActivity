@@ -1,0 +1,708 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_dbi.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__dbi_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">bflb_dbi.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="bflb__core_8h_source.html">bflb_core.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+bflb_dbi.h 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__dbi_8h__incl.png" border="0" usemap="#ainclude_2bflb__dbi_8h" alt=""/></div>
+</div>
+</div>
+<p><a href="bflb__dbi_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__dbi__config__s.html">bflb_dbi_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DBI configuration structure  <a href="structbflb__dbi__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:gae42d3415d7ddd420b74b6ebfa6333f16"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i.html#gae42d3415d7ddd420b74b6ebfa6333f16">DBI_WRITE_PIXEL_CNT_MAX</a>&#160;&#160;&#160;0x00FFFFFF</td></tr>
+<tr class="separator:gae42d3415d7ddd420b74b6ebfa6333f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3283f49e3d4c328467ce0cf91c01d0b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___m_o_d_e.html#ga3283f49e3d4c328467ce0cf91c01d0b2">DBI_MODE_TYPE_B</a>&#160;&#160;&#160;0 /* mipi-dbi typeB 8-wire-data mode */</td></tr>
+<tr class="separator:ga3283f49e3d4c328467ce0cf91c01d0b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga128ac9dd61246c000b9bfcce87602aa8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___m_o_d_e.html#ga128ac9dd61246c000b9bfcce87602aa8">DBI_MODE_TYPE_C_4_WIRE</a>&#160;&#160;&#160;1 /* mipi-dbi typeC 4-wire mode */</td></tr>
+<tr class="separator:ga128ac9dd61246c000b9bfcce87602aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0b9b4537596e988337e3290f5958c684"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___m_o_d_e.html#ga0b9b4537596e988337e3290f5958c684">DBI_MODE_TYPE_C_3_WIRE</a>&#160;&#160;&#160;2 /* mipi-dbi typeC 3-wire mode */</td></tr>
+<tr class="separator:ga0b9b4537596e988337e3290f5958c684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7897072f11b51dcd99740eb5c11adb86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga7897072f11b51dcd99740eb5c11adb86">DBI_PIXEL_INPUT_FORMAT_NBGR_8888</a>&#160;&#160;&#160;0 /* 32-bit/pixel, memory byte: [0]-&gt;pixel[0][R], [1]-&gt;pixel[0][G], [2]-&gt;pixel[0][B], [3]-&gt;invalid, [4]-&gt;pixel[1][R], ... */</td></tr>
+<tr class="separator:ga7897072f11b51dcd99740eb5c11adb86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga60e2bfc4e030ff7b1bf463b133744ab7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga60e2bfc4e030ff7b1bf463b133744ab7">DBI_PIXEL_INPUT_FORMAT_NRGB_8888</a>&#160;&#160;&#160;1 /* 32-bit/pixel, memory byte: [0]-&gt;pixel[0][B], [1]-&gt;pixel[0][G], [2]-&gt;pixel[0][R], [3]-&gt;invalid, [4]-&gt;pixel[1][B], ... */</td></tr>
+<tr class="separator:ga60e2bfc4e030ff7b1bf463b133744ab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac7c1149e5be74cd2f8dd22182c395545"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#gac7c1149e5be74cd2f8dd22182c395545">DBI_PIXEL_INPUT_FORMAT_BGRN_8888</a>&#160;&#160;&#160;2 /* 32-bit/pixel, memory byte: [0]-&gt;invalid, [1]-&gt;pixel[0][R], [2]-&gt;pixel[0][G], [3]-&gt;pixel[0][B], [4]-&gt;invalid, [5]-&gt;pixel[1][R], ... */</td></tr>
+<tr class="separator:gac7c1149e5be74cd2f8dd22182c395545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7ebd9dad691f8a51364ab9622b45d499"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga7ebd9dad691f8a51364ab9622b45d499">DBI_PIXEL_INPUT_FORMAT_RGBN_8888</a>&#160;&#160;&#160;3 /* 32-bit/pixel, memory byte: [0]-&gt;invalid, [1]-&gt;pixel[0][B], [2]-&gt;pixel[0][G], [3]-&gt;pixel[0][R], [4]-&gt;invalid, [5]-&gt;pixel[1][B], ... */</td></tr>
+<tr class="separator:ga7ebd9dad691f8a51364ab9622b45d499"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf85adea1101d04fe900a217251b778da"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#gaf85adea1101d04fe900a217251b778da">DBI_PIXEL_INPUT_FORMAT_RGB_888</a>&#160;&#160;&#160;4 /* 24-bit/pixel, memory byte: [0]-&gt;pixel[0][R], [1]-&gt;pixel[0][G], [2]-&gt;pixel[0][B], [3]-&gt;pixel[1][R], [4]-&gt;pixel[1][G], ... */</td></tr>
+<tr class="separator:gaf85adea1101d04fe900a217251b778da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga764e9ca63fa6a08baf8c47e026706bda"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga764e9ca63fa6a08baf8c47e026706bda">DBI_PIXEL_INPUT_FORMAT_BGR_888</a>&#160;&#160;&#160;5 /* 24-bit/pixel, memory byte: [0]-&gt;pixel[0][B], [1]-&gt;pixel[0][G], [2]-&gt;pixel[0][R], [3]-&gt;pixel[1][B], [4]-&gt;pixel[1][G], ... */</td></tr>
+<tr class="separator:ga764e9ca63fa6a08baf8c47e026706bda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga30450dde362ddfa09a5d8023f6f50910"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga30450dde362ddfa09a5d8023f6f50910">DBI_PIXEL_INPUT_FORMAT_BGR_565</a>&#160;&#160;&#160;6 /* 16-bit/pixel, */</td></tr>
+<tr class="separator:ga30450dde362ddfa09a5d8023f6f50910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab4ba0a210eea49b4494ccf2f062111cd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#gab4ba0a210eea49b4494ccf2f062111cd">DBI_PIXEL_INPUT_FORMAT_RGB_565</a>&#160;&#160;&#160;7 /* 16-bit/pixel, */</td></tr>
+<tr class="separator:gab4ba0a210eea49b4494ccf2f062111cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae5e4c50e0dd451607437b2280240335a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___o_u_t_p_u_t___f_o_r_m_a_t.html#gae5e4c50e0dd451607437b2280240335a">DBI_PIXEL_OUTPUT_FORMAT_RGB_565</a>&#160;&#160;&#160;0 /* 16-bit/pixel */</td></tr>
+<tr class="separator:gae5e4c50e0dd451607437b2280240335a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga961c9d1fccb3e0ca4d451172e4e44be4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___p_i_x_e_l___o_u_t_p_u_t___f_o_r_m_a_t.html#ga961c9d1fccb3e0ca4d451172e4e44be4">DBI_PIXEL_OUTPUT_FORMAT_RGB_888</a>&#160;&#160;&#160;1 /* 24-bit/pixel, Compatible with RGB666 format */</td></tr>
+<tr class="separator:ga961c9d1fccb3e0ca4d451172e4e44be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ebc16ab3152c2c0616d5d0dae67f071"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_l_o_c_k___m_o_d_e.html#ga0ebc16ab3152c2c0616d5d0dae67f071">DBI_CLOCK_MODE_0</a>&#160;&#160;&#160;0 /* CPOL=0 CHPHA=0 */</td></tr>
+<tr class="separator:ga0ebc16ab3152c2c0616d5d0dae67f071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga70f10b69cf0671b9de71d554e1df2f01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_l_o_c_k___m_o_d_e.html#ga70f10b69cf0671b9de71d554e1df2f01">DBI_CLOCK_MODE_1</a>&#160;&#160;&#160;1 /* CPOL=0 CHPHA=1 */</td></tr>
+<tr class="separator:ga70f10b69cf0671b9de71d554e1df2f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga661bf08d0c27ef0678a62edaf3b36d9c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_l_o_c_k___m_o_d_e.html#ga661bf08d0c27ef0678a62edaf3b36d9c">DBI_CLOCK_MODE_2</a>&#160;&#160;&#160;2 /* CPOL=1 CHPHA=0 */</td></tr>
+<tr class="separator:ga661bf08d0c27ef0678a62edaf3b36d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga93949be5fc53f9d225592a3e2148b22b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_l_o_c_k___m_o_d_e.html#ga93949be5fc53f9d225592a3e2148b22b">DBI_CLOCK_MODE_3</a>&#160;&#160;&#160;3 /* CPOL=1 CHPHA=1 */</td></tr>
+<tr class="separator:ga93949be5fc53f9d225592a3e2148b22b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa660d2153faa76b52aa3d6baee10ad51"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___q_s_p_i___w_i_r_e___n_u_m.html#gaa660d2153faa76b52aa3d6baee10ad51">DBI_QSPI_WIRE_NUM_1</a>&#160;&#160;&#160;0 /* 1-wire mode */</td></tr>
+<tr class="separator:gaa660d2153faa76b52aa3d6baee10ad51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacd399e9ab78c7b3bf62ae2ed8b50775c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___q_s_p_i___w_i_r_e___n_u_m.html#gacd399e9ab78c7b3bf62ae2ed8b50775c">DBI_QSPI_WIRE_NUM_4</a>&#160;&#160;&#160;1 /* 4-wire mode */</td></tr>
+<tr class="separator:gacd399e9ab78c7b3bf62ae2ed8b50775c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae3492474469c17d5831eb3b42feba580"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___i_n_t_s_t_s.html#gae3492474469c17d5831eb3b42feba580">DBI_INTSTS_TC</a>&#160;&#160;&#160;(1 &lt;&lt; 0)</td></tr>
+<tr class="separator:gae3492474469c17d5831eb3b42feba580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga588666cb55e1353396a924d76af6736e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___i_n_t_s_t_s.html#ga588666cb55e1353396a924d76af6736e">SPI_INTSTS_TX_FIFO</a>&#160;&#160;&#160;(1 &lt;&lt; 1)</td></tr>
+<tr class="separator:ga588666cb55e1353396a924d76af6736e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae6ff2da0d9aed6364c47f85ba98278cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___i_n_t_s_t_s.html#gae6ff2da0d9aed6364c47f85ba98278cc">SPI_INTSTS_FIFO_ERR</a>&#160;&#160;&#160;(1 &lt;&lt; 2)</td></tr>
+<tr class="separator:gae6ff2da0d9aed6364c47f85ba98278cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga46a5c2f7067d340300b0f35152ffde93"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___i_n_t_c_l_r.html#ga46a5c2f7067d340300b0f35152ffde93">DBI_INTCLR_TC</a>&#160;&#160;&#160;(1 &lt;&lt; 0)</td></tr>
+<tr class="separator:ga46a5c2f7067d340300b0f35152ffde93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad4821d47f63c54c6712b487b0a269483"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_m_d.html#gad4821d47f63c54c6712b487b0a269483">DBI_CMD_CLEAR_TX_FIFO</a>&#160;&#160;&#160;(0x01)</td></tr>
+<tr class="separator:gad4821d47f63c54c6712b487b0a269483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga818aaf4a000b471fc2d7251c2b7f45bb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_m_d.html#ga818aaf4a000b471fc2d7251c2b7f45bb">DBI_CMD_GET_TX_FIFO_CNT</a>&#160;&#160;&#160;(0x02)</td></tr>
+<tr class="separator:ga818aaf4a000b471fc2d7251c2b7f45bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1235aa0d19400f1f58b404d2d8f8f7b4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_m_d.html#ga1235aa0d19400f1f58b404d2d8f8f7b4">DBI_CMD_MASK_CMD_PHASE</a>&#160;&#160;&#160;(0x03)</td></tr>
+<tr class="separator:ga1235aa0d19400f1f58b404d2d8f8f7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga75e5522277f42e4f1d0ff91afc4fd9ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_m_d.html#ga75e5522277f42e4f1d0ff91afc4fd9ca">DBI_CMD_CS_CONTINUE</a>&#160;&#160;&#160;(0x04)</td></tr>
+<tr class="separator:ga75e5522277f42e4f1d0ff91afc4fd9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae0266ccf350ebe5d66b43456f7fc2356"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_m_d.html#gae0266ccf350ebe5d66b43456f7fc2356">DBI_CMD_SET_DUMMY_CNT</a>&#160;&#160;&#160;(0x05)</td></tr>
+<tr class="separator:gae0266ccf350ebe5d66b43456f7fc2356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga973cd9f69d535d4f30ff39bf05df91bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_m_d.html#ga973cd9f69d535d4f30ff39bf05df91bf">DBI_CMD_GET_SIZE_OF_PIXEL_CNT</a>&#160;&#160;&#160;(0x06)</td></tr>
+<tr class="separator:ga973cd9f69d535d4f30ff39bf05df91bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacbef1c8534e498601c7dbe10330d3d7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_m_d.html#gacbef1c8534e498601c7dbe10330d3d7e">DBI_CMD_INPUT_PIXEL_FORMAT</a>&#160;&#160;&#160;(0x07)</td></tr>
+<tr class="separator:gacbef1c8534e498601c7dbe10330d3d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3f7f759a4345182471a487fd8ebdbe5a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_b_i___c_m_d.html#ga3f7f759a4345182471a487fd8ebdbe5a">DBI_CMD_OUTPUT_PIXEL_FORMAT</a>&#160;&#160;&#160;(0x08)</td></tr>
+<tr class="separator:ga3f7f759a4345182471a487fd8ebdbe5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a4b599b8baa39703c98b9e6c70b9e55f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#a4b599b8baa39703c98b9e6c70b9e55f5">bflb_dbi_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const struct <a class="el" href="structbflb__dbi__config__s.html">bflb_dbi_config_s</a> *config)</td></tr>
+<tr class="memdesc:a4b599b8baa39703c98b9e6c70b9e55f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize dbi.  <br /></td></tr>
+<tr class="separator:a4b599b8baa39703c98b9e6c70b9e55f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd1919ee314fabd4bca9500aea8750c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#a4dd1919ee314fabd4bca9500aea8750c">bflb_dbi_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:a4dd1919ee314fabd4bca9500aea8750c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize dbi.  <br /></td></tr>
+<tr class="separator:a4dd1919ee314fabd4bca9500aea8750c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab599b5cfca36556bb3fb9d0429d1bc3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#aab599b5cfca36556bb3fb9d0429d1bc3">bflb_dbi_send_cmd_data</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmd, uint8_t data_len, uint8_t *data_buff)</td></tr>
+<tr class="memdesc:aab599b5cfca36556bb3fb9d0429d1bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send cmd with pixel data, send cmd -&gt; send address(only QSPI mode) -&gt; send parameter_data.  <br /></td></tr>
+<tr class="separator:aab599b5cfca36556bb3fb9d0429d1bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3f79de103232642fd8f0cdef69635b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#ab3f79de103232642fd8f0cdef69635b8">bflb_dbi_send_cmd_read_data</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmd, uint8_t data_len, uint8_t *data_buff)</td></tr>
+<tr class="memdesc:ab3f79de103232642fd8f0cdef69635b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">To read the data after sending the command, send cmd -&gt; send address(only QSPI mode) -&gt; read parameter_data.  <br /></td></tr>
+<tr class="separator:ab3f79de103232642fd8f0cdef69635b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae019c99cbe12ea3593dfeb8f2266e075"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#ae019c99cbe12ea3593dfeb8f2266e075">bflb_dbi_send_cmd_pixel</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmd, uint32_t pixel_cnt, void *pixel_buff)</td></tr>
+<tr class="memdesc:ae019c99cbe12ea3593dfeb8f2266e075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send cmd with pixel data, send cmd -&gt; send address(only QSPI mode) -&gt; send pixel_data,  <br /></td></tr>
+<tr class="separator:ae019c99cbe12ea3593dfeb8f2266e075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab090d3672865ff1ac4b3f110e14b01ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#ab090d3672865ff1ac4b3f110e14b01ac">bflb_dbi_link_txdma</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool enable)</td></tr>
+<tr class="memdesc:ab090d3672865ff1ac4b3f110e14b01ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable dbi tx dma.  <br /></td></tr>
+<tr class="separator:ab090d3672865ff1ac4b3f110e14b01ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6529fc8a7869e32d9e5245b2eaf9cc34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#a6529fc8a7869e32d9e5245b2eaf9cc34">bflb_dbi_txint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:a6529fc8a7869e32d9e5245b2eaf9cc34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable dbi rx fifo threhold interrupt.  <br /></td></tr>
+<tr class="separator:a6529fc8a7869e32d9e5245b2eaf9cc34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d892fe664d9e9e46ead3debaf0c30d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#ae7d892fe664d9e9e46ead3debaf0c30d">bflb_dbi_tcint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ae7d892fe664d9e9e46ead3debaf0c30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable dbi transfer completion interrupt.  <br /></td></tr>
+<tr class="separator:ae7d892fe664d9e9e46ead3debaf0c30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac268d84d4af8b0934ebbaa974a165596"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#ac268d84d4af8b0934ebbaa974a165596">bflb_dbi_errint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ac268d84d4af8b0934ebbaa974a165596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable dbi error interrupt.  <br /></td></tr>
+<tr class="separator:ac268d84d4af8b0934ebbaa974a165596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af56b54b6db47ddf8482881d65695cc51"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#af56b54b6db47ddf8482881d65695cc51">bflb_dbi_get_intstatus</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:af56b54b6db47ddf8482881d65695cc51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get dbi interrupt status.  <br /></td></tr>
+<tr class="separator:af56b54b6db47ddf8482881d65695cc51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7a118bffa36205ede0184cb6a12508e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#ac7a118bffa36205ede0184cb6a12508e">bflb_dbi_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear)</td></tr>
+<tr class="memdesc:ac7a118bffa36205ede0184cb6a12508e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear dbi interrupt status.  <br /></td></tr>
+<tr class="separator:ac7a118bffa36205ede0184cb6a12508e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a248126cfc70f6160186bba99c165cfdf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__dbi_8h.html#a248126cfc70f6160186bba99c165cfdf">bflb_dbi_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="memdesc:a248126cfc70f6160186bba99c165cfdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control dbi feature.  <br /></td></tr>
+<tr class="separator:a248126cfc70f6160186bba99c165cfdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">函数说明</h2>
+<a id="a4dd1919ee314fabd4bca9500aea8750c" name="a4dd1919ee314fabd4bca9500aea8750c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd1919ee314fabd4bca9500aea8750c">&#9670;&#160;</a></span>bflb_dbi_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dbi_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize dbi. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac268d84d4af8b0934ebbaa974a165596" name="ac268d84d4af8b0934ebbaa974a165596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac268d84d4af8b0934ebbaa974a165596">&#9670;&#160;</a></span>bflb_dbi_errint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dbi_errint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable dbi error interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a248126cfc70f6160186bba99c165cfdf" name="a248126cfc70f6160186bba99c165cfdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a248126cfc70f6160186bba99c165cfdf">&#9670;&#160;</a></span>bflb_dbi_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_dbi_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control dbi feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>feature command, use <a class="el" href="group___d_b_i___c_m_d.html">dbi feature control cmd definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="af56b54b6db47ddf8482881d65695cc51" name="af56b54b6db47ddf8482881d65695cc51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af56b54b6db47ddf8482881d65695cc51">&#9670;&#160;</a></span>bflb_dbi_get_intstatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_dbi_get_intstatus </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get dbi interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>interrupt status, use DBI_INTSTS </dd></dl>
+
+</div>
+</div>
+<a id="a4b599b8baa39703c98b9e6c70b9e55f5" name="a4b599b8baa39703c98b9e6c70b9e55f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b599b8baa39703c98b9e6c70b9e55f5">&#9670;&#160;</a></span>bflb_dbi_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dbi_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structbflb__dbi__config__s.html">bflb_dbi_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize dbi. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>pointer to save dbi config </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac7a118bffa36205ede0184cb6a12508e" name="ac7a118bffa36205ede0184cb6a12508e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7a118bffa36205ede0184cb6a12508e">&#9670;&#160;</a></span>bflb_dbi_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dbi_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear dbi interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_clear</td><td>clear value, use <a class="el" href="group___s_p_i___i_n_t_c_l_r.html">spi interrupt clear definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab090d3672865ff1ac4b3f110e14b01ac" name="ab090d3672865ff1ac4b3f110e14b01ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab090d3672865ff1ac4b3f110e14b01ac">&#9670;&#160;</a></span>bflb_dbi_link_txdma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dbi_link_txdma </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable dbi tx dma. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aab599b5cfca36556bb3fb9d0429d1bc3" name="aab599b5cfca36556bb3fb9d0429d1bc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab599b5cfca36556bb3fb9d0429d1bc3">&#9670;&#160;</a></span>bflb_dbi_send_cmd_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_dbi_send_cmd_data </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data_buff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send cmd with pixel data, send cmd -&gt; send address(only QSPI mode) -&gt; send parameter_data. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>command </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data_len</td><td>Parameter length (byte), The maximum is DBI_WRITE_DATA_BYTE_MAX </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data_buff</td><td>Parameter buffer, Cannot be null </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ae019c99cbe12ea3593dfeb8f2266e075" name="ae019c99cbe12ea3593dfeb8f2266e075"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae019c99cbe12ea3593dfeb8f2266e075">&#9670;&#160;</a></span>bflb_dbi_send_cmd_pixel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_dbi_send_cmd_pixel </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>pixel_cnt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pixel_buff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send cmd with pixel data, send cmd -&gt; send address(only QSPI mode) -&gt; send pixel_data, </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>command </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pixel_cnt</td><td>Number of pixels,The maximum is DBI_WRITE_PIXEL_CNT_MAX </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pixel_buff</td><td>Pixels buffer, NULL when using DMA, in which case data needs to be transferred by DMA later, and wait for the transfer to complete </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ab3f79de103232642fd8f0cdef69635b8" name="ab3f79de103232642fd8f0cdef69635b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3f79de103232642fd8f0cdef69635b8">&#9670;&#160;</a></span>bflb_dbi_send_cmd_read_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_dbi_send_cmd_read_data </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data_len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data_buff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>To read the data after sending the command, send cmd -&gt; send address(only QSPI mode) -&gt; read parameter_data. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>command </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data_len</td><td>Length of data to be read (byte), The maximum is DBI_READ_DATA_BYTE_MAX </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data_buff</td><td>Buff of data to be read, discard data if null </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ae7d892fe664d9e9e46ead3debaf0c30d" name="ae7d892fe664d9e9e46ead3debaf0c30d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d892fe664d9e9e46ead3debaf0c30d">&#9670;&#160;</a></span>bflb_dbi_tcint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dbi_tcint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable dbi transfer completion interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6529fc8a7869e32d9e5245b2eaf9cc34" name="a6529fc8a7869e32d9e5245b2eaf9cc34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6529fc8a7869e32d9e5245b2eaf9cc34">&#9670;&#160;</a></span>bflb_dbi_txint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dbi_txint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable dbi rx fifo threhold interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__dbi_8h.html">bflb_dbi.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,944 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: MJPEG</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___m_j_p_e_g.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">MJPEG<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+MJPEG 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___m_j_p_e_g.png" border="0" usemap="#agroup______m__j__p__e__g" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___m_j_p_e_g___f_o_r_m_a_t"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g___f_o_r_m_a_t.html">mjpeg format definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___m_j_p_e_g___i_n_t_s_t_s"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g___i_n_t_s_t_s.html">mjpeg interrupt status definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___m_j_p_e_g___i_n_t_c_l_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g___i_n_t_c_l_r.html">mjpeg interrupt clear definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___m_j_p_e_g___c_m_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g___c_m_d.html">mjpeg feature control cmd definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__mjpeg__config__s.html">bflb_mjpeg_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MJPEG configuration structure  <a href="structbflb__mjpeg__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga4a9f19b5f92b0f7e486a8659b1f9d13c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga4a9f19b5f92b0f7e486a8659b1f9d13c">MJPEG_MAX_FRAME_COUNT</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:ga4a9f19b5f92b0f7e486a8659b1f9d13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga515511786efc5acdce53b71200d975db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga515511786efc5acdce53b71200d975db">bflb_mjpeg_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const struct <a class="el" href="structbflb__mjpeg__config__s.html">bflb_mjpeg_config_s</a> *config)</td></tr>
+<tr class="memdesc:ga515511786efc5acdce53b71200d975db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize mjpeg.  <br /></td></tr>
+<tr class="separator:ga515511786efc5acdce53b71200d975db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga81fcb107f7d84a6225a907ab31350b84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga81fcb107f7d84a6225a907ab31350b84">bflb_mjpeg_start</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga81fcb107f7d84a6225a907ab31350b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start mjpeg compression with camera.  <br /></td></tr>
+<tr class="separator:ga81fcb107f7d84a6225a907ab31350b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4d4cbb08ae5b03411a8623d8b7012599"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga4d4cbb08ae5b03411a8623d8b7012599">bflb_mjpeg_stop</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga4d4cbb08ae5b03411a8623d8b7012599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop mjpeg compression with camera.  <br /></td></tr>
+<tr class="separator:ga4d4cbb08ae5b03411a8623d8b7012599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7f82cc89ccf4e4089568d918724c9361"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga7f82cc89ccf4e4089568d918724c9361">bflb_mjpeg_sw_run</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t frame_count)</td></tr>
+<tr class="memdesc:ga7f82cc89ccf4e4089568d918724c9361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start mjpeg compression without camera.  <br /></td></tr>
+<tr class="separator:ga7f82cc89ccf4e4089568d918724c9361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gade344595984e08dfa05dd043bcb5d0b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#gade344595984e08dfa05dd043bcb5d0b2">bflb_mjpeg_kick_run</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t kick_count)</td></tr>
+<tr class="memdesc:gade344595984e08dfa05dd043bcb5d0b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start mjpeg kick mode compression without camera.  <br /></td></tr>
+<tr class="separator:gade344595984e08dfa05dd043bcb5d0b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6f97d50b6932fe62fe28eb6c39e2d905"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga6f97d50b6932fe62fe28eb6c39e2d905">bflb_mjpeg_kick_stop</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga6f97d50b6932fe62fe28eb6c39e2d905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop mjpeg kick mode compression without camera.  <br /></td></tr>
+<tr class="separator:ga6f97d50b6932fe62fe28eb6c39e2d905"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4485c427cc5fa08b960efcc72bf4989c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga4485c427cc5fa08b960efcc72bf4989c">bflb_mjpeg_kick</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga4485c427cc5fa08b960efcc72bf4989c"><td class="mdescLeft">&#160;</td><td class="mdescRight">kick one times compression without camera.  <br /></td></tr>
+<tr class="separator:ga4485c427cc5fa08b960efcc72bf4989c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga68b58f0ba33be9f1e91d1c896198c616"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga68b58f0ba33be9f1e91d1c896198c616">bflb_mjpeg_tcint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga68b58f0ba33be9f1e91d1c896198c616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable mjpeg one frame compression completion interrupt.  <br /></td></tr>
+<tr class="separator:ga68b58f0ba33be9f1e91d1c896198c616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga35ffd8537e32b07da0819bfe71dfc1f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga35ffd8537e32b07da0819bfe71dfc1f3">bflb_mjpeg_errint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga35ffd8537e32b07da0819bfe71dfc1f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable mjpeg error interrupt.  <br /></td></tr>
+<tr class="separator:ga35ffd8537e32b07da0819bfe71dfc1f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa9738941f1e6e168a5194f4ebb9e7d3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#gafa9738941f1e6e168a5194f4ebb9e7d3">bflb_mjpeg_get_intstatus</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gafa9738941f1e6e168a5194f4ebb9e7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get mjpeg interrupt status.  <br /></td></tr>
+<tr class="separator:gafa9738941f1e6e168a5194f4ebb9e7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2d264a33f7cf74b7cba3597827cc77cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga2d264a33f7cf74b7cba3597827cc77cf">bflb_mjpeg_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear)</td></tr>
+<tr class="memdesc:ga2d264a33f7cf74b7cba3597827cc77cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear mjpeg interrupt status.  <br /></td></tr>
+<tr class="separator:ga2d264a33f7cf74b7cba3597827cc77cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa39e69bbdd8daf881322253b21a168c9"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#gaa39e69bbdd8daf881322253b21a168c9">bflb_mjpeg_get_frame_count</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gaa39e69bbdd8daf881322253b21a168c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of frame count that has compressed.  <br /></td></tr>
+<tr class="separator:gaa39e69bbdd8daf881322253b21a168c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga51f8c9a745688a2f3d0af34f7e121492"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga51f8c9a745688a2f3d0af34f7e121492">bflb_mjpeg_pop_one_frame</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga51f8c9a745688a2f3d0af34f7e121492"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drop one frame that has compressed.  <br /></td></tr>
+<tr class="separator:ga51f8c9a745688a2f3d0af34f7e121492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab964e83889cdca00d1bbede75a93a224"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#gab964e83889cdca00d1bbede75a93a224">bflb_mjpeg_get_frame_info</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t **pic)</td></tr>
+<tr class="memdesc:gab964e83889cdca00d1bbede75a93a224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get one frame information.  <br /></td></tr>
+<tr class="separator:gab964e83889cdca00d1bbede75a93a224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafc4e57da23a54af02f8b1343dce0c74a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#gafc4e57da23a54af02f8b1343dce0c74a">bflb_mjpeg_calculate_quantize_table</a> (uint8_t quality, uint16_t *input_table, uint16_t *output_table)</td></tr>
+<tr class="memdesc:gafc4e57da23a54af02f8b1343dce0c74a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate jpeg quantize table.  <br /></td></tr>
+<tr class="separator:gafc4e57da23a54af02f8b1343dce0c74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga17dc4babbf42d42fc77f7f14d520b26c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga17dc4babbf42d42fc77f7f14d520b26c">bflb_mjpeg_fill_quantize_table</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t *input_yy, uint16_t *input_uv)</td></tr>
+<tr class="memdesc:ga17dc4babbf42d42fc77f7f14d520b26c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill quantize table into mjpeg register.  <br /></td></tr>
+<tr class="separator:ga17dc4babbf42d42fc77f7f14d520b26c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafd1f14e9197d5df833e80ef97bacb536"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#gafd1f14e9197d5df833e80ef97bacb536">bflb_mjpeg_fill_jpeg_header_tail</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t *header, uint32_t header_len)</td></tr>
+<tr class="memdesc:gafd1f14e9197d5df833e80ef97bacb536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill jpeg header into mjpeg register and enable hardware auto adding jpeg tail.  <br /></td></tr>
+<tr class="separator:gafd1f14e9197d5df833e80ef97bacb536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga68f570ffd4751a68f77fa83d67913d93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga68f570ffd4751a68f77fa83d67913d93">bflb_mjpeg_set_yuv420sp_cam_input</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t yy, uint8_t uv)</td></tr>
+<tr class="memdesc:ga68f570ffd4751a68f77fa83d67913d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set mjpeg input when uses camera with yuv402sp.  <br /></td></tr>
+<tr class="separator:ga68f570ffd4751a68f77fa83d67913d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3b3bbd2427d7cbf9b18d73042417a026"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga3b3bbd2427d7cbf9b18d73042417a026">bflb_mjpeg_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="memdesc:ga3b3bbd2427d7cbf9b18d73042417a026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control mjpeg feature.  <br /></td></tr>
+<tr class="separator:ga3b3bbd2427d7cbf9b18d73042417a026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga369b3b763f568e4e39a72505c12f2499"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_j_p_e_g.html#ga369b3b763f568e4e39a72505c12f2499">bflb_mjpeg_update_input_output_buff</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, void *input_buf0, void *input_buf1, void *output_buff, size_t output_buff_size)</td></tr>
+<tr class="memdesc:ga369b3b763f568e4e39a72505c12f2499"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control mjpeg feature.  <br /></td></tr>
+<tr class="separator:ga369b3b763f568e4e39a72505c12f2499"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="ga4a9f19b5f92b0f7e486a8659b1f9d13c" name="ga4a9f19b5f92b0f7e486a8659b1f9d13c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4a9f19b5f92b0f7e486a8659b1f9d13c">&#9670;&#160;</a></span>MJPEG_MAX_FRAME_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MJPEG_MAX_FRAME_COUNT&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__mjpeg_8h_source.html">bflb_mjpeg.h</a> 第 <a class="el" href="bflb__mjpeg_8h_source.html#l00055">55</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="gafc4e57da23a54af02f8b1343dce0c74a" name="gafc4e57da23a54af02f8b1343dce0c74a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafc4e57da23a54af02f8b1343dce0c74a">&#9670;&#160;</a></span>bflb_mjpeg_calculate_quantize_table()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_calculate_quantize_table </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>quality</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>input_table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>output_table</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate jpeg quantize table. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">quality</td><td>image quality </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_table</td><td>pointer to save input table </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">output_table</td><td>pointer to save output table </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga35ffd8537e32b07da0819bfe71dfc1f3" name="ga35ffd8537e32b07da0819bfe71dfc1f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga35ffd8537e32b07da0819bfe71dfc1f3">&#9670;&#160;</a></span>bflb_mjpeg_errint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_errint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable mjpeg error interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga3b3bbd2427d7cbf9b18d73042417a026" name="ga3b3bbd2427d7cbf9b18d73042417a026"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3b3bbd2427d7cbf9b18d73042417a026">&#9670;&#160;</a></span>bflb_mjpeg_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_mjpeg_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control mjpeg feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>feature command </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="gafd1f14e9197d5df833e80ef97bacb536" name="gafd1f14e9197d5df833e80ef97bacb536"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafd1f14e9197d5df833e80ef97bacb536">&#9670;&#160;</a></span>bflb_mjpeg_fill_jpeg_header_tail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_fill_jpeg_header_tail </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>header</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>header_len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fill jpeg header into mjpeg register and enable hardware auto adding jpeg tail. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">header</td><td>pointer to jpeg header </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">header_len</td><td>jpeg header length </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga17dc4babbf42d42fc77f7f14d520b26c" name="ga17dc4babbf42d42fc77f7f14d520b26c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga17dc4babbf42d42fc77f7f14d520b26c">&#9670;&#160;</a></span>bflb_mjpeg_fill_quantize_table()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_fill_quantize_table </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>input_yy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>input_uv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fill quantize table into mjpeg register. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_yy</td><td>yy quantize table </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_uv</td><td>uv quantize table </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaa39e69bbdd8daf881322253b21a168c9" name="gaa39e69bbdd8daf881322253b21a168c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa39e69bbdd8daf881322253b21a168c9">&#9670;&#160;</a></span>bflb_mjpeg_get_frame_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t bflb_mjpeg_get_frame_count </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get number of frame count that has compressed. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>compressed frame count </dd></dl>
+
+</div>
+</div>
+<a id="gab964e83889cdca00d1bbede75a93a224" name="gab964e83889cdca00d1bbede75a93a224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab964e83889cdca00d1bbede75a93a224">&#9670;&#160;</a></span>bflb_mjpeg_get_frame_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_mjpeg_get_frame_info </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t **&#160;</td>
+          <td class="paramname"><em>pic</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get one frame information. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pic</td><td>pointer to save frame address. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>frame length </dd></dl>
+
+</div>
+</div>
+<a id="gafa9738941f1e6e168a5194f4ebb9e7d3" name="gafa9738941f1e6e168a5194f4ebb9e7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa9738941f1e6e168a5194f4ebb9e7d3">&#9670;&#160;</a></span>bflb_mjpeg_get_intstatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_mjpeg_get_intstatus </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get mjpeg interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>interrupt status </dd></dl>
+
+</div>
+</div>
+<a id="ga515511786efc5acdce53b71200d975db" name="ga515511786efc5acdce53b71200d975db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga515511786efc5acdce53b71200d975db">&#9670;&#160;</a></span>bflb_mjpeg_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structbflb__mjpeg__config__s.html">bflb_mjpeg_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize mjpeg. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>pointer to save mjpeg config </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga2d264a33f7cf74b7cba3597827cc77cf" name="ga2d264a33f7cf74b7cba3597827cc77cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2d264a33f7cf74b7cba3597827cc77cf">&#9670;&#160;</a></span>bflb_mjpeg_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear mjpeg interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_clear</td><td>clear value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga4485c427cc5fa08b960efcc72bf4989c" name="ga4485c427cc5fa08b960efcc72bf4989c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4485c427cc5fa08b960efcc72bf4989c">&#9670;&#160;</a></span>bflb_mjpeg_kick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_kick </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>kick one times compression without camera. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gade344595984e08dfa05dd043bcb5d0b2" name="gade344595984e08dfa05dd043bcb5d0b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gade344595984e08dfa05dd043bcb5d0b2">&#9670;&#160;</a></span>bflb_mjpeg_kick_run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_kick_run </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>kick_count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start mjpeg kick mode compression without camera. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">kick_count</td><td>kick block horizontal count to compress </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga6f97d50b6932fe62fe28eb6c39e2d905" name="ga6f97d50b6932fe62fe28eb6c39e2d905"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6f97d50b6932fe62fe28eb6c39e2d905">&#9670;&#160;</a></span>bflb_mjpeg_kick_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_kick_stop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop mjpeg kick mode compression without camera. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga51f8c9a745688a2f3d0af34f7e121492" name="ga51f8c9a745688a2f3d0af34f7e121492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga51f8c9a745688a2f3d0af34f7e121492">&#9670;&#160;</a></span>bflb_mjpeg_pop_one_frame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_pop_one_frame </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Drop one frame that has compressed. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga68f570ffd4751a68f77fa83d67913d93" name="ga68f570ffd4751a68f77fa83d67913d93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga68f570ffd4751a68f77fa83d67913d93">&#9670;&#160;</a></span>bflb_mjpeg_set_yuv420sp_cam_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_set_yuv420sp_cam_input </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>yy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>uv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set mjpeg input when uses camera with yuv402sp. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">yy</td><td>camera id for yy </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uv</td><td>camera id for uv </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga81fcb107f7d84a6225a907ab31350b84" name="ga81fcb107f7d84a6225a907ab31350b84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga81fcb107f7d84a6225a907ab31350b84">&#9670;&#160;</a></span>bflb_mjpeg_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_start </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start mjpeg compression with camera. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga4d4cbb08ae5b03411a8623d8b7012599" name="ga4d4cbb08ae5b03411a8623d8b7012599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4d4cbb08ae5b03411a8623d8b7012599">&#9670;&#160;</a></span>bflb_mjpeg_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_stop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop mjpeg compression with camera. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga7f82cc89ccf4e4089568d918724c9361" name="ga7f82cc89ccf4e4089568d918724c9361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7f82cc89ccf4e4089568d918724c9361">&#9670;&#160;</a></span>bflb_mjpeg_sw_run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_sw_run </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>frame_count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start mjpeg compression without camera. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">frame_count</td><td>frame count to compress </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga68b58f0ba33be9f1e91d1c896198c616" name="ga68b58f0ba33be9f1e91d1c896198c616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga68b58f0ba33be9f1e91d1c896198c616">&#9670;&#160;</a></span>bflb_mjpeg_tcint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_tcint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable mjpeg one frame compression completion interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga369b3b763f568e4e39a72505c12f2499" name="ga369b3b763f568e4e39a72505c12f2499"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga369b3b763f568e4e39a72505c12f2499">&#9670;&#160;</a></span>bflb_mjpeg_update_input_output_buff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_mjpeg_update_input_output_buff </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>input_buf0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>input_buf1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>output_buff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>output_buff_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control mjpeg feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_buf0</td><td>input buffer 0 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">input_buf1</td><td>input buffer 1 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">output_buff</td><td>output buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">output_buff_size</td><td>size of output buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_flash.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__flash_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_flash.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__flash_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_FLASH_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_FLASH_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;bflb_sflash.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___i_o_m_o_d_e.html#ga956342cd18f6b0d99effea829782f9b4">   18</a></span><span class="preprocessor">#define FLASH_IOMODE_NIO 0 </span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___i_o_m_o_d_e.html#ga0000b4a865e01ff912c4cddb0bc245af">   19</a></span><span class="preprocessor">#define FLASH_IOMODE_DO  1 </span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___i_o_m_o_d_e.html#ga200341403ea9207bab61911fc786d948">   20</a></span><span class="preprocessor">#define FLASH_IOMODE_QO  2 </span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___i_o_m_o_d_e.html#ga425751120f68122e3bc3633eb44328da">   21</a></span><span class="preprocessor">#define FLASH_IOMODE_DIO 3 </span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___i_o_m_o_d_e.html#ga144bc8bd6e583ebc54542f26b482e535">   22</a></span><span class="preprocessor">#define FLASH_IOMODE_QIO 4 </span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___a_e_s___k_e_y___t_y_p_e.html#gad8ba2587cfe0bc39737e729e255274c9">   30</a></span><span class="preprocessor">#define FLASH_AES_KEY_128BITS        0</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___a_e_s___k_e_y___t_y_p_e.html#gad2d639dc2586ab77cebc07f68210ff4c">   31</a></span><span class="preprocessor">#define FLASH_AES_KEY_192BITS        2</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___a_e_s___k_e_y___t_y_p_e.html#ga9d2c1c5af049488fee74c312ab67f747">   32</a></span><span class="preprocessor">#define FLASH_AES_KEY_256BITS        1</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h___a_e_s___k_e_y___t_y_p_e.html#gafa73f70069defd501e482a65c2d16056">   33</a></span><span class="preprocessor">#define FLASH_AES_KEY_DOUBLE_128BITS 3</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#if defined(BL602) || defined(BL702) || defined(BL702L)</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#define FLASH_XIP_BASE (0x23000000)</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#elif defined(BL616) || defined(BL628)</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#define FLASH_XIP_BASE (0xA0000000)</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#elif defined(BL808) || defined(BL606P)</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#define FLASH_XIP_BASE (0x58000000)</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html">   46</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__flash__aes__config__s.html">bflb_flash_aes_config_s</a> {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html#a567a4f90db38e0ee54da2b2c05e186b2">   47</a></span>    uint8_t <a class="code hl_variable" href="structbflb__flash__aes__config__s.html#a567a4f90db38e0ee54da2b2c05e186b2">region</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html#adb4a3b0b17ce6e63b8c505eb573a9656">   48</a></span>    uint8_t <a class="code hl_variable" href="structbflb__flash__aes__config__s.html#adb4a3b0b17ce6e63b8c505eb573a9656">region_enable</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html#a2a79e0425b2270af4f16e659193b1e1f">   49</a></span>    uint8_t <a class="code hl_variable" href="structbflb__flash__aes__config__s.html#a2a79e0425b2270af4f16e659193b1e1f">lock_enable</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html#aa60a0c39d29c4a6fdaac5bfc05f1dbec">   50</a></span>    <span class="keyword">const</span> uint8_t *<a class="code hl_variable" href="structbflb__flash__aes__config__s.html#aa60a0c39d29c4a6fdaac5bfc05f1dbec">key</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html#aa91255741ff765f06d6514c4a24d0ac1">   51</a></span>    uint8_t <a class="code hl_variable" href="structbflb__flash__aes__config__s.html#aa91255741ff765f06d6514c4a24d0ac1">keybits</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html#a37af4c67a3b518996596545e430769e2">   52</a></span>    uint8_t *<a class="code hl_variable" href="structbflb__flash__aes__config__s.html#a37af4c67a3b518996596545e430769e2">iv</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html#a94ee8b3c3c313a37430d52949bd0e8cb">   53</a></span>    uint32_t <a class="code hl_variable" href="structbflb__flash__aes__config__s.html#a94ee8b3c3c313a37430d52949bd0e8cb">start_addr</a>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structbflb__flash__aes__config__s.html#a9069ee0acb6f027f9cb2d2e837da0abd">   54</a></span>    uint32_t <a class="code hl_variable" href="structbflb__flash__aes__config__s.html#a9069ee0acb6f027f9cb2d2e837da0abd">end_addr</a>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#gadd041cd6144cb1388299ad25d2baff40">   66</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___f_l_a_s_h.html#gadd041cd6144cb1388299ad25d2baff40">bflb_flash_init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#if defined(BL616) || defined(BL606P) || defined(BL808)</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keywordtype">void</span> bflb_flash_set_cmds(spi_flash_cfg_type *p_flash_cfg);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga816b7132861ca59bc2c252a78e92c6bd">   82</a></span>uint32_t <a class="code hl_function" href="group___f_l_a_s_h.html#ga816b7132861ca59bc2c252a78e92c6bd">bflb_flash_get_jedec_id</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga4e4071959e172acbaf598361b0bd59ca">   90</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___f_l_a_s_h.html#ga4e4071959e172acbaf598361b0bd59ca">bflb_flash_get_cfg</a>(uint8_t **cfg_addr, uint32_t *len);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga2a2903be71c18a098eb5c1ede6439874">   97</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___f_l_a_s_h.html#ga2a2903be71c18a098eb5c1ede6439874">bflb_flash_set_iomode</a>(uint8_t iomode);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga82b4f67d86d59910275c883e581bf076">  104</a></span>uint32_t <a class="code hl_function" href="group___f_l_a_s_h.html#ga82b4f67d86d59910275c883e581bf076">bflb_flash_get_image_offset</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#gab043bc6e258bdfdd8c03becec99e65aa">  113</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___f_l_a_s_h.html#gab043bc6e258bdfdd8c03becec99e65aa">bflb_flash_erase</a>(uint32_t addr, uint32_t len);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga5399f73a73f4c7a97ffb45e3a55f8cad">  123</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___f_l_a_s_h.html#ga5399f73a73f4c7a97ffb45e3a55f8cad">bflb_flash_write</a>(uint32_t addr, uint8_t *data, uint32_t len);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga7cbe8119c87b75865ca9a56e43875dac">  133</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___f_l_a_s_h.html#ga7cbe8119c87b75865ca9a56e43875dac">bflb_flash_read</a>(uint32_t addr, uint8_t *data, uint32_t len);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#gaea9c040c2aba5ff73cef7868904ea105">  144</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___f_l_a_s_h.html#gaea9c040c2aba5ff73cef7868904ea105">bflb_flash_set_cache</a>(uint8_t cont_read, uint8_t cache_enable, uint8_t cache_way_disable, uint32_t flash_offset);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga39805e33414ceba720171085e75062b2">  151</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___f_l_a_s_h.html#ga39805e33414ceba720171085e75062b2">bflb_flash_aes_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__flash__aes__config__s.html">bflb_flash_aes_config_s</a> *config);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga0a711bd6032c00989201610c39430999">  157</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___f_l_a_s_h.html#ga0a711bd6032c00989201610c39430999">bflb_flash_aes_enable</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="group___f_l_a_s_h.html#ga5b876ed73f645c20b507afb1bf62a878">  163</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___f_l_a_s_h.html#ga5b876ed73f645c20b507afb1bf62a878">bflb_flash_aes_disable</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga0a711bd6032c00989201610c39430999"><div class="ttname"><a href="group___f_l_a_s_h.html#ga0a711bd6032c00989201610c39430999">bflb_flash_aes_enable</a></div><div class="ttdeci">void bflb_flash_aes_enable(void)</div><div class="ttdoc">Enable flash decrypt with aes.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga2a2903be71c18a098eb5c1ede6439874"><div class="ttname"><a href="group___f_l_a_s_h.html#ga2a2903be71c18a098eb5c1ede6439874">bflb_flash_set_iomode</a></div><div class="ttdeci">void bflb_flash_set_iomode(uint8_t iomode)</div><div class="ttdoc">Set flash iomode.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga39805e33414ceba720171085e75062b2"><div class="ttname"><a href="group___f_l_a_s_h.html#ga39805e33414ceba720171085e75062b2">bflb_flash_aes_init</a></div><div class="ttdeci">void bflb_flash_aes_init(struct bflb_flash_aes_config_s *config)</div><div class="ttdoc">Initialize flash aes controller.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga4e4071959e172acbaf598361b0bd59ca"><div class="ttname"><a href="group___f_l_a_s_h.html#ga4e4071959e172acbaf598361b0bd59ca">bflb_flash_get_cfg</a></div><div class="ttdeci">void bflb_flash_get_cfg(uint8_t **cfg_addr, uint32_t *len)</div><div class="ttdoc">Get flash config.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga5399f73a73f4c7a97ffb45e3a55f8cad"><div class="ttname"><a href="group___f_l_a_s_h.html#ga5399f73a73f4c7a97ffb45e3a55f8cad">bflb_flash_write</a></div><div class="ttdeci">int bflb_flash_write(uint32_t addr, uint8_t *data, uint32_t len)</div><div class="ttdoc">Write data into flash.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga5b876ed73f645c20b507afb1bf62a878"><div class="ttname"><a href="group___f_l_a_s_h.html#ga5b876ed73f645c20b507afb1bf62a878">bflb_flash_aes_disable</a></div><div class="ttdeci">void bflb_flash_aes_disable(void)</div><div class="ttdoc">Disable flash decrypt with aes.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga7cbe8119c87b75865ca9a56e43875dac"><div class="ttname"><a href="group___f_l_a_s_h.html#ga7cbe8119c87b75865ca9a56e43875dac">bflb_flash_read</a></div><div class="ttdeci">int bflb_flash_read(uint32_t addr, uint8_t *data, uint32_t len)</div><div class="ttdoc">Read data from flash.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga816b7132861ca59bc2c252a78e92c6bd"><div class="ttname"><a href="group___f_l_a_s_h.html#ga816b7132861ca59bc2c252a78e92c6bd">bflb_flash_get_jedec_id</a></div><div class="ttdeci">uint32_t bflb_flash_get_jedec_id(void)</div><div class="ttdoc">Get flash jedec id.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_ga82b4f67d86d59910275c883e581bf076"><div class="ttname"><a href="group___f_l_a_s_h.html#ga82b4f67d86d59910275c883e581bf076">bflb_flash_get_image_offset</a></div><div class="ttdeci">uint32_t bflb_flash_get_image_offset(void)</div><div class="ttdoc">Get flash image offset.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_gab043bc6e258bdfdd8c03becec99e65aa"><div class="ttname"><a href="group___f_l_a_s_h.html#gab043bc6e258bdfdd8c03becec99e65aa">bflb_flash_erase</a></div><div class="ttdeci">int bflb_flash_erase(uint32_t addr, uint32_t len)</div><div class="ttdoc">Erase flash with sectors.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_gadd041cd6144cb1388299ad25d2baff40"><div class="ttname"><a href="group___f_l_a_s_h.html#gadd041cd6144cb1388299ad25d2baff40">bflb_flash_init</a></div><div class="ttdeci">int bflb_flash_init(void)</div><div class="ttdoc">Initialize flash.</div></div>
+<div class="ttc" id="agroup___f_l_a_s_h_html_gaea9c040c2aba5ff73cef7868904ea105"><div class="ttname"><a href="group___f_l_a_s_h.html#gaea9c040c2aba5ff73cef7868904ea105">bflb_flash_set_cache</a></div><div class="ttdeci">int bflb_flash_set_cache(uint8_t cont_read, uint8_t cache_enable, uint8_t cache_way_disable, uint32_t flash_offset)</div><div class="ttdoc">Config flash cache.</div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html"><div class="ttname"><a href="structbflb__flash__aes__config__s.html">bflb_flash_aes_config_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00046">bflb_flash.h:46</a></div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html_a2a79e0425b2270af4f16e659193b1e1f"><div class="ttname"><a href="structbflb__flash__aes__config__s.html#a2a79e0425b2270af4f16e659193b1e1f">bflb_flash_aes_config_s::lock_enable</a></div><div class="ttdeci">uint8_t lock_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00049">bflb_flash.h:49</a></div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html_a37af4c67a3b518996596545e430769e2"><div class="ttname"><a href="structbflb__flash__aes__config__s.html#a37af4c67a3b518996596545e430769e2">bflb_flash_aes_config_s::iv</a></div><div class="ttdeci">uint8_t * iv</div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00052">bflb_flash.h:52</a></div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html_a567a4f90db38e0ee54da2b2c05e186b2"><div class="ttname"><a href="structbflb__flash__aes__config__s.html#a567a4f90db38e0ee54da2b2c05e186b2">bflb_flash_aes_config_s::region</a></div><div class="ttdeci">uint8_t region</div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00047">bflb_flash.h:47</a></div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html_a9069ee0acb6f027f9cb2d2e837da0abd"><div class="ttname"><a href="structbflb__flash__aes__config__s.html#a9069ee0acb6f027f9cb2d2e837da0abd">bflb_flash_aes_config_s::end_addr</a></div><div class="ttdeci">uint32_t end_addr</div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00054">bflb_flash.h:54</a></div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html_a94ee8b3c3c313a37430d52949bd0e8cb"><div class="ttname"><a href="structbflb__flash__aes__config__s.html#a94ee8b3c3c313a37430d52949bd0e8cb">bflb_flash_aes_config_s::start_addr</a></div><div class="ttdeci">uint32_t start_addr</div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00053">bflb_flash.h:53</a></div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html_aa60a0c39d29c4a6fdaac5bfc05f1dbec"><div class="ttname"><a href="structbflb__flash__aes__config__s.html#aa60a0c39d29c4a6fdaac5bfc05f1dbec">bflb_flash_aes_config_s::key</a></div><div class="ttdeci">const uint8_t * key</div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00050">bflb_flash.h:50</a></div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html_aa91255741ff765f06d6514c4a24d0ac1"><div class="ttname"><a href="structbflb__flash__aes__config__s.html#aa91255741ff765f06d6514c4a24d0ac1">bflb_flash_aes_config_s::keybits</a></div><div class="ttdeci">uint8_t keybits</div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00051">bflb_flash.h:51</a></div></div>
+<div class="ttc" id="astructbflb__flash__aes__config__s_html_adb4a3b0b17ce6e63b8c505eb573a9656"><div class="ttname"><a href="structbflb__flash__aes__config__s.html#adb4a3b0b17ce6e63b8c505eb573a9656">bflb_flash_aes_config_s::region_enable</a></div><div class="ttdeci">uint8_t region_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__flash_8h_source.html#l00048">bflb_flash.h:48</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__flash_8h.html">bflb_flash.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

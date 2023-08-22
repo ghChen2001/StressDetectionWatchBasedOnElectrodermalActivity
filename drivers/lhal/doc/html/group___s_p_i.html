@@ -1,0 +1,698 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: SPI</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___s_p_i.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">SPI<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+SPI 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___s_p_i.png" border="0" usemap="#agroup______s__p__i" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___s_p_i___r_o_l_e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___r_o_l_e.html">spi role definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___s_p_i___m_o_d_e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___m_o_d_e.html">spi mode definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___s_p_i___d_a_t_a___w_i_d_t_h"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___d_a_t_a___w_i_d_t_h.html">spi data width definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___s_p_i___b_i_t___o_r_d_e_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___b_i_t___o_r_d_e_r.html">spi bit order definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___s_p_i___b_y_t_e___o_r_d_e_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___b_y_t_e___o_r_d_e_r.html">spi byte order definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___s_p_i___i_n_t_s_t_s"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___i_n_t_s_t_s.html">dbi interrupt status definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___s_p_i___i_n_t_c_l_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___i_n_t_c_l_r.html">spi interrupt clear definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___s_p_i___c_m_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i___c_m_d.html">spi feature control cmd definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__spi__config__s.html">bflb_spi_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI configuration structure  <a href="structbflb__spi__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga7e05c39582589e88f8602c604b8956e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga7e05c39582589e88f8602c604b8956e9">bflb_spi_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const struct <a class="el" href="structbflb__spi__config__s.html">bflb_spi_config_s</a> *config)</td></tr>
+<tr class="memdesc:ga7e05c39582589e88f8602c604b8956e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize spi.  <br /></td></tr>
+<tr class="separator:ga7e05c39582589e88f8602c604b8956e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac1f53b8256d731c32128329f5d6d27e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#gac1f53b8256d731c32128329f5d6d27e4">bflb_spi_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gac1f53b8256d731c32128329f5d6d27e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize spi.  <br /></td></tr>
+<tr class="separator:gac1f53b8256d731c32128329f5d6d27e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga60322f69c6eb8c5e3730f13ab70faf9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga60322f69c6eb8c5e3730f13ab70faf9d">bflb_spi_link_txdma</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool enable)</td></tr>
+<tr class="memdesc:ga60322f69c6eb8c5e3730f13ab70faf9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable spi tx dma.  <br /></td></tr>
+<tr class="separator:ga60322f69c6eb8c5e3730f13ab70faf9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaad678238626bf5479e2f51f0e28f43a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#gaad678238626bf5479e2f51f0e28f43a4">bflb_spi_link_rxdma</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool enable)</td></tr>
+<tr class="memdesc:gaad678238626bf5479e2f51f0e28f43a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable spi rx dma.  <br /></td></tr>
+<tr class="separator:gaad678238626bf5479e2f51f0e28f43a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1faebf28605dc4a3f419edeeaadfa77b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga1faebf28605dc4a3f419edeeaadfa77b">bflb_spi_poll_send</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t data)</td></tr>
+<tr class="memdesc:ga1faebf28605dc4a3f419edeeaadfa77b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send and receive one data on spi.  <br /></td></tr>
+<tr class="separator:ga1faebf28605dc4a3f419edeeaadfa77b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga26cfbdea44686c2cd078209b4bced731"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga26cfbdea44686c2cd078209b4bced731">bflb_spi_poll_exchange</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const void *txbuffer, void *rxbuffer, size_t nbytes)</td></tr>
+<tr class="memdesc:ga26cfbdea44686c2cd078209b4bced731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send and receive a block of data on spi.  <br /></td></tr>
+<tr class="separator:ga26cfbdea44686c2cd078209b4bced731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac1d59262b7b0b20ec1e84be6269d3dea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#gac1d59262b7b0b20ec1e84be6269d3dea">bflb_spi_isbusy</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gac1d59262b7b0b20ec1e84be6269d3dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if spi is busy.  <br /></td></tr>
+<tr class="separator:gac1d59262b7b0b20ec1e84be6269d3dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c1b09c8944c9077b70e3b4a1eb6c2ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga7c1b09c8944c9077b70e3b4a1eb6c2ba">bflb_spi_txint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga7c1b09c8944c9077b70e3b4a1eb6c2ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable spi rx fifo threhold interrupt.  <br /></td></tr>
+<tr class="separator:ga7c1b09c8944c9077b70e3b4a1eb6c2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6947037bd5b576da7cbdd25cf1756cb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga6947037bd5b576da7cbdd25cf1756cb6">bflb_spi_rxint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga6947037bd5b576da7cbdd25cf1756cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable spi rx fifo threhold interrupt.  <br /></td></tr>
+<tr class="separator:ga6947037bd5b576da7cbdd25cf1756cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2119e37942e85b7e1860681466589819"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga2119e37942e85b7e1860681466589819">bflb_spi_tcint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga2119e37942e85b7e1860681466589819"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable spi transfer done interrupt.  <br /></td></tr>
+<tr class="separator:ga2119e37942e85b7e1860681466589819"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga45177a77e905538d3bc4942ca5c2c3c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga45177a77e905538d3bc4942ca5c2c3c4">bflb_spi_errint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga45177a77e905538d3bc4942ca5c2c3c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable spi error interrupt.  <br /></td></tr>
+<tr class="separator:ga45177a77e905538d3bc4942ca5c2c3c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac1b6a342d3e784e8bae6c62555959f65"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#gac1b6a342d3e784e8bae6c62555959f65">bflb_spi_get_intstatus</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gac1b6a342d3e784e8bae6c62555959f65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get spi interrupt status.  <br /></td></tr>
+<tr class="separator:gac1b6a342d3e784e8bae6c62555959f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa6586475534d15f03b57e0c0c8cf2c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#gafa6586475534d15f03b57e0c0c8cf2c8">bflb_spi_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear)</td></tr>
+<tr class="memdesc:gafa6586475534d15f03b57e0c0c8cf2c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear spi interrupt status.  <br /></td></tr>
+<tr class="separator:gafa6586475534d15f03b57e0c0c8cf2c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1c08d5aad2b9829473ce988ab243db7a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_p_i.html#ga1c08d5aad2b9829473ce988ab243db7a">bflb_spi_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="memdesc:ga1c08d5aad2b9829473ce988ab243db7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control spi feature.  <br /></td></tr>
+<tr class="separator:ga1c08d5aad2b9829473ce988ab243db7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">函数说明</h2>
+<a id="gac1f53b8256d731c32128329f5d6d27e4" name="gac1f53b8256d731c32128329f5d6d27e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1f53b8256d731c32128329f5d6d27e4">&#9670;&#160;</a></span>bflb_spi_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize spi. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga45177a77e905538d3bc4942ca5c2c3c4" name="ga45177a77e905538d3bc4942ca5c2c3c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga45177a77e905538d3bc4942ca5c2c3c4">&#9670;&#160;</a></span>bflb_spi_errint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_errint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable spi error interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga1c08d5aad2b9829473ce988ab243db7a" name="ga1c08d5aad2b9829473ce988ab243db7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1c08d5aad2b9829473ce988ab243db7a">&#9670;&#160;</a></span>bflb_spi_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_spi_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control spi feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>feature command, use <a class="el" href="group___s_p_i___c_m_d.html">spi feature control cmd definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="gac1b6a342d3e784e8bae6c62555959f65" name="gac1b6a342d3e784e8bae6c62555959f65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1b6a342d3e784e8bae6c62555959f65">&#9670;&#160;</a></span>bflb_spi_get_intstatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_spi_get_intstatus </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get spi interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>interrupt status, use <a class="el" href="group___s_p_i___i_n_t_s_t_s.html">dbi interrupt status definition</a> </dd></dl>
+
+</div>
+</div>
+<a id="ga7e05c39582589e88f8602c604b8956e9" name="ga7e05c39582589e88f8602c604b8956e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7e05c39582589e88f8602c604b8956e9">&#9670;&#160;</a></span>bflb_spi_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structbflb__spi__config__s.html">bflb_spi_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize spi. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>pointer to save spi config </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gafa6586475534d15f03b57e0c0c8cf2c8" name="gafa6586475534d15f03b57e0c0c8cf2c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa6586475534d15f03b57e0c0c8cf2c8">&#9670;&#160;</a></span>bflb_spi_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear spi interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_clear</td><td>clear value, use <a class="el" href="group___s_p_i___i_n_t_c_l_r.html">spi interrupt clear definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gac1d59262b7b0b20ec1e84be6269d3dea" name="gac1d59262b7b0b20ec1e84be6269d3dea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1d59262b7b0b20ec1e84be6269d3dea">&#9670;&#160;</a></span>bflb_spi_isbusy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bflb_spi_isbusy </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if spi is busy. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true means busy, otherwise not. </dd></dl>
+
+</div>
+</div>
+<a id="gaad678238626bf5479e2f51f0e28f43a4" name="gaad678238626bf5479e2f51f0e28f43a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaad678238626bf5479e2f51f0e28f43a4">&#9670;&#160;</a></span>bflb_spi_link_rxdma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_link_rxdma </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable spi rx dma. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga60322f69c6eb8c5e3730f13ab70faf9d" name="ga60322f69c6eb8c5e3730f13ab70faf9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga60322f69c6eb8c5e3730f13ab70faf9d">&#9670;&#160;</a></span>bflb_spi_link_txdma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_link_txdma </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable spi tx dma. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga26cfbdea44686c2cd078209b4bced731" name="ga26cfbdea44686c2cd078209b4bced731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga26cfbdea44686c2cd078209b4bced731">&#9670;&#160;</a></span>bflb_spi_poll_exchange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_spi_poll_exchange </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>txbuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>rxbuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nbytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send and receive a block of data on spi. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">txbuffer</td><td>pointer to send buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rxbuffer</td><td>pointer to receive buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nbytes</td><td>bytes to send </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="ga1faebf28605dc4a3f419edeeaadfa77b" name="ga1faebf28605dc4a3f419edeeaadfa77b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1faebf28605dc4a3f419edeeaadfa77b">&#9670;&#160;</a></span>bflb_spi_poll_send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_spi_poll_send </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send and receive one data on spi. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>data to send </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>receive data </dd></dl>
+
+</div>
+</div>
+<a id="ga6947037bd5b576da7cbdd25cf1756cb6" name="ga6947037bd5b576da7cbdd25cf1756cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6947037bd5b576da7cbdd25cf1756cb6">&#9670;&#160;</a></span>bflb_spi_rxint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_rxint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable spi rx fifo threhold interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga2119e37942e85b7e1860681466589819" name="ga2119e37942e85b7e1860681466589819"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2119e37942e85b7e1860681466589819">&#9670;&#160;</a></span>bflb_spi_tcint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_tcint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable spi transfer done interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga7c1b09c8944c9077b70e3b4a1eb6c2ba" name="ga7c1b09c8944c9077b70e3b4a1eb6c2ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7c1b09c8944c9077b70e3b4a1eb6c2ba">&#9670;&#160;</a></span>bflb_spi_txint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_spi_txint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable spi rx fifo threhold interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

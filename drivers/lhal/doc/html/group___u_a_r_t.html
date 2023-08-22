@@ -1,0 +1,892 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: UART</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___u_a_r_t.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">UART<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+UART 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___u_a_r_t.png" border="0" usemap="#agroup______u__a__r__t" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___u_a_r_t___d_i_r_e_c_t_i_o_n"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___d_i_r_e_c_t_i_o_n.html">uart direction enable definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___u_a_r_t___d_a_t_a_b_i_t_s"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___d_a_t_a_b_i_t_s.html">uart data bits definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___u_a_r_t___s_t_o_p_b_i_t_s"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___s_t_o_p_b_i_t_s.html">uart stop bits definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___u_a_r_t___p_a_r_i_t_y"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___p_a_r_i_t_y.html">uart parity definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___u_a_r_t___b_i_t_o_r_d_e_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___b_i_t_o_r_d_e_r.html">uart bitorder definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___u_a_r_t___f_l_o_w_c_t_r_l"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___f_l_o_w_c_t_r_l.html">uart flow ctrl definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___u_a_r_t___i_n_t_s_t_s"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___i_n_t_s_t_s.html">uart interrupt status definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___u_a_r_t___i_n_t_c_l_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___i_n_t_c_l_r.html">uart interrupt clear definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___u_a_r_t___c_m_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___c_m_d.html">uart feature control cmd definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__uart__ir__config__s.html">bflb_uart_ir_config_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__uart__config__s.html">bflb_uart_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART configuration structure  <a href="structbflb__uart__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga91540b3c16949538fb8f45be0025ec01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga91540b3c16949538fb8f45be0025ec01">UART_AUTO_BAUD_START</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ga91540b3c16949538fb8f45be0025ec01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaabdee42b9a8ebba674ba05c0fb5bb65f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#gaabdee42b9a8ebba674ba05c0fb5bb65f">UART_AUTO_BAUD_0X55</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:gaabdee42b9a8ebba674ba05c0fb5bb65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gadaa8fcef33551022fb77c0c15082f812"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#gadaa8fcef33551022fb77c0c15082f812">bflb_uart_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const struct <a class="el" href="structbflb__uart__config__s.html">bflb_uart_config_s</a> *config)</td></tr>
+<tr class="memdesc:gadaa8fcef33551022fb77c0c15082f812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize uart.  <br /></td></tr>
+<tr class="separator:gadaa8fcef33551022fb77c0c15082f812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5236cde4cfab5205031721229f90e36b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga5236cde4cfab5205031721229f90e36b">bflb_uart_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga5236cde4cfab5205031721229f90e36b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize uart.  <br /></td></tr>
+<tr class="separator:ga5236cde4cfab5205031721229f90e36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4fb819cc02488dd44a83d096daa1c17b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga4fb819cc02488dd44a83d096daa1c17b">bflb_uart_enable</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga4fb819cc02488dd44a83d096daa1c17b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable uart.  <br /></td></tr>
+<tr class="separator:ga4fb819cc02488dd44a83d096daa1c17b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga097f538f52025d559c6567fc4a8229b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga097f538f52025d559c6567fc4a8229b5">bflb_uart_disable</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga097f538f52025d559c6567fc4a8229b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable uart.  <br /></td></tr>
+<tr class="separator:ga097f538f52025d559c6567fc4a8229b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0b1079811fe34f94b8564ec356c1d388"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga0b1079811fe34f94b8564ec356c1d388">bflb_uart_link_txdma</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool enable)</td></tr>
+<tr class="memdesc:ga0b1079811fe34f94b8564ec356c1d388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable uart tx dma.  <br /></td></tr>
+<tr class="separator:ga0b1079811fe34f94b8564ec356c1d388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf173df993ab9daf71841c7f907e83d9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#gaf173df993ab9daf71841c7f907e83d9c">bflb_uart_link_rxdma</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool enable)</td></tr>
+<tr class="memdesc:gaf173df993ab9daf71841c7f907e83d9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable uart rx dma.  <br /></td></tr>
+<tr class="separator:gaf173df993ab9daf71841c7f907e83d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61129fb75d0b8199c2b0b3b6203bb5b6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga61129fb75d0b8199c2b0b3b6203bb5b6">bflb_uart_putchar</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int ch)</td></tr>
+<tr class="memdesc:ga61129fb75d0b8199c2b0b3b6203bb5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put one char on uart.  <br /></td></tr>
+<tr class="separator:ga61129fb75d0b8199c2b0b3b6203bb5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ffc081cd4f94b4c8f189d0c4507b4f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga8ffc081cd4f94b4c8f189d0c4507b4f3">bflb_uart_getchar</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga8ffc081cd4f94b4c8f189d0c4507b4f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get char from uart.  <br /></td></tr>
+<tr class="separator:ga8ffc081cd4f94b4c8f189d0c4507b4f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5802dcd8ad6c67792c0e5732118156df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga5802dcd8ad6c67792c0e5732118156df">bflb_uart_put</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t *data, uint32_t len)</td></tr>
+<tr class="memdesc:ga5802dcd8ad6c67792c0e5732118156df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put a block of data on uart.This is a poll api.  <br /></td></tr>
+<tr class="separator:ga5802dcd8ad6c67792c0e5732118156df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafc4580ff0ad7569a25c57dc80c7503ce"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#gafc4580ff0ad7569a25c57dc80c7503ce">bflb_uart_get</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t *data, uint32_t len)</td></tr>
+<tr class="memdesc:gafc4580ff0ad7569a25c57dc80c7503ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a block of data from uart. This is a asynchronous api.  <br /></td></tr>
+<tr class="separator:gafc4580ff0ad7569a25c57dc80c7503ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad5d58af0277018692b6ec6883f975297"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#gad5d58af0277018692b6ec6883f975297">bflb_uart_txready</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gad5d58af0277018692b6ec6883f975297"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is free space in tx fifo.  <br /></td></tr>
+<tr class="separator:gad5d58af0277018692b6ec6883f975297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab7baaea2f0cc821131811786a048f6fe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#gab7baaea2f0cc821131811786a048f6fe">bflb_uart_txempty</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gab7baaea2f0cc821131811786a048f6fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is no data in tx fifo.  <br /></td></tr>
+<tr class="separator:gab7baaea2f0cc821131811786a048f6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7028ddf0f3c99bca4491077083756c50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga7028ddf0f3c99bca4491077083756c50">bflb_uart_rxavailable</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga7028ddf0f3c99bca4491077083756c50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is data in rx fifo.  <br /></td></tr>
+<tr class="separator:ga7028ddf0f3c99bca4491077083756c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga636d3792df964db1a62f647614069e06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga636d3792df964db1a62f647614069e06">bflb_uart_txint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga636d3792df964db1a62f647614069e06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable uart tx fifo threhold interrupt.  <br /></td></tr>
+<tr class="separator:ga636d3792df964db1a62f647614069e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad52ff0678af7ee5c277f8406e51017ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#gad52ff0678af7ee5c277f8406e51017ea">bflb_uart_rxint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:gad52ff0678af7ee5c277f8406e51017ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable uart rx fifo threhold interrupt.  <br /></td></tr>
+<tr class="separator:gad52ff0678af7ee5c277f8406e51017ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad6b1cac54c69a815446ea54e5076a749"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#gad6b1cac54c69a815446ea54e5076a749">bflb_uart_errint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:gad6b1cac54c69a815446ea54e5076a749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable uart error interrupt.  <br /></td></tr>
+<tr class="separator:gad6b1cac54c69a815446ea54e5076a749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5c71074a8f8988fe2b5bea86354592ed"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga5c71074a8f8988fe2b5bea86354592ed">bflb_uart_get_intstatus</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga5c71074a8f8988fe2b5bea86354592ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get uart interrupt status.  <br /></td></tr>
+<tr class="separator:ga5c71074a8f8988fe2b5bea86354592ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga82b99a54cd221a1d6805eba2d8e24000"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga82b99a54cd221a1d6805eba2d8e24000">bflb_uart_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear)</td></tr>
+<tr class="memdesc:ga82b99a54cd221a1d6805eba2d8e24000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear uart interrupt status.  <br /></td></tr>
+<tr class="separator:ga82b99a54cd221a1d6805eba2d8e24000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7b7c823cc1d756068846784fdfbb2932"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t.html#ga7b7c823cc1d756068846784fdfbb2932">bflb_uart_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="memdesc:ga7b7c823cc1d756068846784fdfbb2932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control uart feature.  <br /></td></tr>
+<tr class="separator:ga7b7c823cc1d756068846784fdfbb2932"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="gaabdee42b9a8ebba674ba05c0fb5bb65f" name="gaabdee42b9a8ebba674ba05c0fb5bb65f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaabdee42b9a8ebba674ba05c0fb5bb65f">&#9670;&#160;</a></span>UART_AUTO_BAUD_0X55</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UART_AUTO_BAUD_0X55&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__uart_8h_source.html">bflb_uart.h</a> 第 <a class="el" href="bflb__uart_8h_source.html#l00162">162</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga91540b3c16949538fb8f45be0025ec01" name="ga91540b3c16949538fb8f45be0025ec01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga91540b3c16949538fb8f45be0025ec01">&#9670;&#160;</a></span>UART_AUTO_BAUD_START</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UART_AUTO_BAUD_START&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__uart_8h_source.html">bflb_uart.h</a> 第 <a class="el" href="bflb__uart_8h_source.html#l00161">161</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="ga5236cde4cfab5205031721229f90e36b" name="ga5236cde4cfab5205031721229f90e36b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5236cde4cfab5205031721229f90e36b">&#9670;&#160;</a></span>bflb_uart_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize uart. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga097f538f52025d559c6567fc4a8229b5" name="ga097f538f52025d559c6567fc4a8229b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga097f538f52025d559c6567fc4a8229b5">&#9670;&#160;</a></span>bflb_uart_disable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_disable </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disable uart. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga4fb819cc02488dd44a83d096daa1c17b" name="ga4fb819cc02488dd44a83d096daa1c17b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4fb819cc02488dd44a83d096daa1c17b">&#9670;&#160;</a></span>bflb_uart_enable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_enable </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable uart. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gad6b1cac54c69a815446ea54e5076a749" name="gad6b1cac54c69a815446ea54e5076a749"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad6b1cac54c69a815446ea54e5076a749">&#9670;&#160;</a></span>bflb_uart_errint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_errint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable uart error interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga7b7c823cc1d756068846784fdfbb2932" name="ga7b7c823cc1d756068846784fdfbb2932"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7b7c823cc1d756068846784fdfbb2932">&#9670;&#160;</a></span>bflb_uart_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_uart_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control uart feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>feature command, use <a class="el" href="group___u_a_r_t___c_m_d.html">uart feature control cmd definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="gafc4580ff0ad7569a25c57dc80c7503ce" name="gafc4580ff0ad7569a25c57dc80c7503ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafc4580ff0ad7569a25c57dc80c7503ce">&#9670;&#160;</a></span>bflb_uart_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_uart_get </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a block of data from uart. This is a asynchronous api. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>pointer to save received data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>max length wants to receive </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>actual received length </dd></dl>
+
+</div>
+</div>
+<a id="ga5c71074a8f8988fe2b5bea86354592ed" name="ga5c71074a8f8988fe2b5bea86354592ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5c71074a8f8988fe2b5bea86354592ed">&#9670;&#160;</a></span>bflb_uart_get_intstatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_uart_get_intstatus </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get uart interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>interrupt status, use <a class="el" href="group___u_a_r_t___i_n_t_s_t_s.html">uart interrupt status definition</a> </dd></dl>
+
+</div>
+</div>
+<a id="ga8ffc081cd4f94b4c8f189d0c4507b4f3" name="ga8ffc081cd4f94b4c8f189d0c4507b4f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8ffc081cd4f94b4c8f189d0c4507b4f3">&#9670;&#160;</a></span>bflb_uart_getchar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_uart_getchar </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get char from uart. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure, otherwise received char. </dd></dl>
+
+</div>
+</div>
+<a id="gadaa8fcef33551022fb77c0c15082f812" name="gadaa8fcef33551022fb77c0c15082f812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadaa8fcef33551022fb77c0c15082f812">&#9670;&#160;</a></span>bflb_uart_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structbflb__uart__config__s.html">bflb_uart_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize uart. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>pointer to save uart config </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga82b99a54cd221a1d6805eba2d8e24000" name="ga82b99a54cd221a1d6805eba2d8e24000"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga82b99a54cd221a1d6805eba2d8e24000">&#9670;&#160;</a></span>bflb_uart_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear uart interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_clear</td><td>clear value, use <a class="el" href="group___u_a_r_t___i_n_t_c_l_r.html">uart interrupt clear definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaf173df993ab9daf71841c7f907e83d9c" name="gaf173df993ab9daf71841c7f907e83d9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf173df993ab9daf71841c7f907e83d9c">&#9670;&#160;</a></span>bflb_uart_link_rxdma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_link_rxdma </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable uart rx dma. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga0b1079811fe34f94b8564ec356c1d388" name="ga0b1079811fe34f94b8564ec356c1d388"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0b1079811fe34f94b8564ec356c1d388">&#9670;&#160;</a></span>bflb_uart_link_txdma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_link_txdma </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable uart tx dma. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga5802dcd8ad6c67792c0e5732118156df" name="ga5802dcd8ad6c67792c0e5732118156df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5802dcd8ad6c67792c0e5732118156df">&#9670;&#160;</a></span>bflb_uart_put()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_uart_put </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Put a block of data on uart.This is a poll api. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>pointer to save send data </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>length to send </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="ga61129fb75d0b8199c2b0b3b6203bb5b6" name="ga61129fb75d0b8199c2b0b3b6203bb5b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga61129fb75d0b8199c2b0b3b6203bb5b6">&#9670;&#160;</a></span>bflb_uart_putchar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_uart_putchar </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Put one char on uart. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ch</td><td>char </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="ga7028ddf0f3c99bca4491077083756c50" name="ga7028ddf0f3c99bca4491077083756c50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7028ddf0f3c99bca4491077083756c50">&#9670;&#160;</a></span>bflb_uart_rxavailable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bflb_uart_rxavailable </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if there is data in rx fifo. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true means yes.Otherwise there is no data in rx fifo </dd></dl>
+
+</div>
+</div>
+<a id="gad52ff0678af7ee5c277f8406e51017ea" name="gad52ff0678af7ee5c277f8406e51017ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad52ff0678af7ee5c277f8406e51017ea">&#9670;&#160;</a></span>bflb_uart_rxint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_rxint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable uart rx fifo threhold interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gab7baaea2f0cc821131811786a048f6fe" name="gab7baaea2f0cc821131811786a048f6fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab7baaea2f0cc821131811786a048f6fe">&#9670;&#160;</a></span>bflb_uart_txempty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bflb_uart_txempty </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if there is no data in tx fifo. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>Return true if all characters have been sent </dd></dl>
+
+</div>
+</div>
+<a id="ga636d3792df964db1a62f647614069e06" name="ga636d3792df964db1a62f647614069e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga636d3792df964db1a62f647614069e06">&#9670;&#160;</a></span>bflb_uart_txint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_uart_txint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable uart tx fifo threhold interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gad5d58af0277018692b6ec6883f975297" name="gad5d58af0277018692b6ec6883f975297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad5d58af0277018692b6ec6883f975297">&#9670;&#160;</a></span>bflb_uart_txready()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bflb_uart_txready </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if there is free space in tx fifo. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>Return true if the tranmsit hardware is ready to send another byte </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

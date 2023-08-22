@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_csi.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__csi_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_csi.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__csi_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_CSI_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_CSI_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="group___c_s_i___l_a_n_e___n_u_m_b_e_r.html#gaaeb952827c6bc4974dae2cef3b542c9c">   17</a></span><span class="preprocessor">#define CSI_LANE_NUMBER_1 0</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___c_s_i___l_a_n_e___n_u_m_b_e_r.html#gaaa56da8d779763a97dce044b01cd9e66">   18</a></span><span class="preprocessor">#define CSI_LANE_NUMBER_2 1</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_s_t_s.html#ga0eba3a43d6c23ce7add06744fbf4b81c">   26</a></span><span class="preprocessor">#define CSI_INTSTS_GENERIC_PACKET        (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_s_t_s.html#gabd219f3287ddfe20899e3e4b3adc0697">   27</a></span><span class="preprocessor">#define CSI_INTSTS_LANE_MERGE_ERROR      (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_s_t_s.html#ga2329379465c13ee44f022dae351c6828">   28</a></span><span class="preprocessor">#define CSI_INTSTS_ECC_ERROR             (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_s_t_s.html#ga59574857605143a348e5cd20ebb16b1a">   29</a></span><span class="preprocessor">#define CSI_INTSTS_CRC_ERROR             (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_s_t_s.html#gad07b9ca54528ba337030e6568485a9da">   30</a></span><span class="preprocessor">#define CSI_INTSTS_PHY_HS_SOT_ERROR      (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_s_t_s.html#ga6ce0d8d4501d6c683dd0236990c12a2c">   31</a></span><span class="preprocessor">#define CSI_INTSTS_PHY_HS_SOT_SYNC_ERROR (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_m_a_s_k.html#ga67b34637c0768d5b4ba0421387921301">   39</a></span><span class="preprocessor">#define CSI_INTMASK_GENERIC_PACKET        (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_m_a_s_k.html#ga343b6a10ead73f06fa2efe7c7cf95460">   40</a></span><span class="preprocessor">#define CSI_INTMASK_LANE_MERGE_ERROR      (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_m_a_s_k.html#gac6fa024a04d37d2f6776d399ce242827">   41</a></span><span class="preprocessor">#define CSI_INTMASK_ECC_ERROR             (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_m_a_s_k.html#ga398a236ad6ede0f196c57b3cd04f7a68">   42</a></span><span class="preprocessor">#define CSI_INTMASK_CRC_ERROR             (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_m_a_s_k.html#ga20eebf00b6d7bab40436f3a32c921407">   43</a></span><span class="preprocessor">#define CSI_INTMASK_PHY_HS_SOT_ERROR      (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_m_a_s_k.html#gae824a2d3c3642f5ceb5f38c09c441eca">   44</a></span><span class="preprocessor">#define CSI_INTMASK_PHY_HS_SOT_SYNC_ERROR (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_c_l_r.html#gad5e9620784618c2eb0f6d5df18dc62f6">   52</a></span><span class="preprocessor">#define CSI_INTCLR_GENERIC_PACKET        (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_c_l_r.html#ga77356481faf15d287c6e5ef758e3e216">   53</a></span><span class="preprocessor">#define CSI_INTCLR_LANE_MERGE_ERROR      (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_c_l_r.html#gad247fe17d1eeb4d70f05d87bc444d383">   54</a></span><span class="preprocessor">#define CSI_INTCLR_ECC_ERROR             (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_c_l_r.html#ga23196f87709c2c6ca92451d74073ffb7">   55</a></span><span class="preprocessor">#define CSI_INTCLR_CRC_ERROR             (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_c_l_r.html#gad4b1826e950a794336cad964803b207f">   56</a></span><span class="preprocessor">#define CSI_INTCLR_PHY_HS_SOT_ERROR      (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group___c_s_i___i_n_t_c_l_r.html#ga1ba17d689744b08eed6e2df3f530fa03">   57</a></span><span class="preprocessor">#define CSI_INTCLR_PHY_HS_SOT_SYNC_ERROR (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="structbflb__csi__config__s.html">   69</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__csi__config__s.html">bflb_csi_config_s</a> {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="structbflb__csi__config__s.html#ac4d764ccab6bbc74d8d8bfc5bb672164">   70</a></span>    uint8_t <a class="code hl_variable" href="structbflb__csi__config__s.html#ac4d764ccab6bbc74d8d8bfc5bb672164">lane_number</a>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="structbflb__csi__config__s.html#ae7794fa060279ca32daf3e1233c97917">   71</a></span>    uint32_t <a class="code hl_variable" href="structbflb__csi__config__s.html#ae7794fa060279ca32daf3e1233c97917">tx_clk_escape</a>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structbflb__csi__config__s.html#a350c3caa804772de60c0b3ee25e8af4f">   72</a></span>    uint32_t <a class="code hl_variable" href="structbflb__csi__config__s.html#a350c3caa804772de60c0b3ee25e8af4f">data_rate</a>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___c_s_i.html#gab1315d4339f7b4f32df057d4501be1b6">   85</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___c_s_i.html#gab1315d4339f7b4f32df057d4501be1b6">bflb_csi_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__csi__config__s.html">bflb_csi_config_s</a> *config);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___c_s_i.html#ga6a29a1b61227f37bece5e060ca1afca0">   92</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___c_s_i.html#ga6a29a1b61227f37bece5e060ca1afca0">bflb_csi_start</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="group___c_s_i.html#gabf033b9053dc5d24e292c28d4f6aee72">   99</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___c_s_i.html#gabf033b9053dc5d24e292c28d4f6aee72">bflb_csi_stop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="group___c_s_i.html#gaa6840bc8217302b2af72233b70c1ca98">  109</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___c_s_i.html#gaa6840bc8217302b2af72233b70c1ca98">bflb_csi_set_line_threshold</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t resolution_x, uint32_t pixel_clock, uint32_t dsp_clock);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="group___c_s_i.html#ga24dab1f2284647c9d5673054f3ef23bc">  118</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___c_s_i.html#ga24dab1f2284647c9d5673054f3ef23bc">bflb_csi_int_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_type, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="group___c_s_i.html#ga1f513c226f4c4eed6b3b7aefcdd160ee">  126</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___c_s_i.html#ga1f513c226f4c4eed6b3b7aefcdd160ee">bflb_csi_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_type);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="group___c_s_i.html#gadec05c644bc8b8694f0414ce51a0658f">  134</a></span>uint32_t <a class="code hl_function" href="group___c_s_i.html#gadec05c644bc8b8694f0414ce51a0658f">bflb_csi_get_intstatus</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="group___c_s_i.html#gab26ec20cade98f132615092f0afeca91">  144</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___c_s_i.html#gab26ec20cade98f132615092f0afeca91">bflb_csi_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___c_s_i_html_ga1f513c226f4c4eed6b3b7aefcdd160ee"><div class="ttname"><a href="group___c_s_i.html#ga1f513c226f4c4eed6b3b7aefcdd160ee">bflb_csi_int_clear</a></div><div class="ttdeci">void bflb_csi_int_clear(struct bflb_device_s *dev, uint32_t int_type)</div><div class="ttdoc">Clear csi interrupt.</div></div>
+<div class="ttc" id="agroup___c_s_i_html_ga24dab1f2284647c9d5673054f3ef23bc"><div class="ttname"><a href="group___c_s_i.html#ga24dab1f2284647c9d5673054f3ef23bc">bflb_csi_int_mask</a></div><div class="ttdeci">void bflb_csi_int_mask(struct bflb_device_s *dev, uint32_t int_type, bool mask)</div><div class="ttdoc">Mask or unmask csi interrupt.</div></div>
+<div class="ttc" id="agroup___c_s_i_html_ga6a29a1b61227f37bece5e060ca1afca0"><div class="ttname"><a href="group___c_s_i.html#ga6a29a1b61227f37bece5e060ca1afca0">bflb_csi_start</a></div><div class="ttdeci">void bflb_csi_start(struct bflb_device_s *dev)</div><div class="ttdoc">Enable csi.</div></div>
+<div class="ttc" id="agroup___c_s_i_html_gaa6840bc8217302b2af72233b70c1ca98"><div class="ttname"><a href="group___c_s_i.html#gaa6840bc8217302b2af72233b70c1ca98">bflb_csi_set_line_threshold</a></div><div class="ttdeci">void bflb_csi_set_line_threshold(struct bflb_device_s *dev, uint16_t resolution_x, uint32_t pixel_clock, uint32_t dsp_clock)</div><div class="ttdoc">Set threshold of line buffer, data will be sent to following module when threshold reached.</div></div>
+<div class="ttc" id="agroup___c_s_i_html_gab1315d4339f7b4f32df057d4501be1b6"><div class="ttname"><a href="group___c_s_i.html#gab1315d4339f7b4f32df057d4501be1b6">bflb_csi_init</a></div><div class="ttdeci">void bflb_csi_init(struct bflb_device_s *dev, const struct bflb_csi_config_s *config)</div><div class="ttdoc">Initialize csi.</div></div>
+<div class="ttc" id="agroup___c_s_i_html_gab26ec20cade98f132615092f0afeca91"><div class="ttname"><a href="group___c_s_i.html#gab26ec20cade98f132615092f0afeca91">bflb_csi_feature_control</a></div><div class="ttdeci">int bflb_csi_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div><div class="ttdoc">Control csi feature.</div></div>
+<div class="ttc" id="agroup___c_s_i_html_gabf033b9053dc5d24e292c28d4f6aee72"><div class="ttname"><a href="group___c_s_i.html#gabf033b9053dc5d24e292c28d4f6aee72">bflb_csi_stop</a></div><div class="ttdeci">void bflb_csi_stop(struct bflb_device_s *dev)</div><div class="ttdoc">Disable csi.</div></div>
+<div class="ttc" id="agroup___c_s_i_html_gadec05c644bc8b8694f0414ce51a0658f"><div class="ttname"><a href="group___c_s_i.html#gadec05c644bc8b8694f0414ce51a0658f">bflb_csi_get_intstatus</a></div><div class="ttdeci">uint32_t bflb_csi_get_intstatus(struct bflb_device_s *dev)</div><div class="ttdoc">Get csi interrupt status.</div></div>
+<div class="ttc" id="astructbflb__csi__config__s_html"><div class="ttname"><a href="structbflb__csi__config__s.html">bflb_csi_config_s</a></div><div class="ttdoc">CSI configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__csi_8h_source.html#l00069">bflb_csi.h:69</a></div></div>
+<div class="ttc" id="astructbflb__csi__config__s_html_a350c3caa804772de60c0b3ee25e8af4f"><div class="ttname"><a href="structbflb__csi__config__s.html#a350c3caa804772de60c0b3ee25e8af4f">bflb_csi_config_s::data_rate</a></div><div class="ttdeci">uint32_t data_rate</div><div class="ttdef"><b>Definition:</b> <a href="bflb__csi_8h_source.html#l00072">bflb_csi.h:72</a></div></div>
+<div class="ttc" id="astructbflb__csi__config__s_html_ac4d764ccab6bbc74d8d8bfc5bb672164"><div class="ttname"><a href="structbflb__csi__config__s.html#ac4d764ccab6bbc74d8d8bfc5bb672164">bflb_csi_config_s::lane_number</a></div><div class="ttdeci">uint8_t lane_number</div><div class="ttdef"><b>Definition:</b> <a href="bflb__csi_8h_source.html#l00070">bflb_csi.h:70</a></div></div>
+<div class="ttc" id="astructbflb__csi__config__s_html_ae7794fa060279ca32daf3e1233c97917"><div class="ttname"><a href="structbflb__csi__config__s.html#ae7794fa060279ca32daf3e1233c97917">bflb_csi_config_s::tx_clk_escape</a></div><div class="ttdeci">uint32_t tx_clk_escape</div><div class="ttdef"><b>Definition:</b> <a href="bflb__csi_8h_source.html#l00071">bflb_csi.h:71</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__csi_8h.html">bflb_csi.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

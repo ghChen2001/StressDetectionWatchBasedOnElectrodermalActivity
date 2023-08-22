@@ -1,0 +1,25 @@
+digraph "I2S"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="I2S",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node5 [label="i2s mode definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i2_s___c_h_a_n_n_e_l___m_o_d_e.html",tooltip=" "];
+  Node8 [label="i2s feature control\l cmd definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i2_s___c_m_d.html",tooltip=" "];
+  Node9 [label="i2s data enable type",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i2_s___c_m_d___d_a_t_a___e_n_a_b_l_e___t_y_p_e.html",tooltip=" "];
+  Node4 [label="i2s mode definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i2_s___f_o_r_m_a_t___m_o_d_e.html",tooltip=" "];
+  Node7 [label="i2s interrupt status\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i2_s___i_n_t_s_t_s.html",tooltip=" "];
+  Node3 [label="i2s role definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i2_s___r_o_l_e.html",tooltip=" "];
+  Node6 [label="i2s slot width definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i2_s___s_l_o_t___w_i_d_t_h.html",tooltip=" "];
+  Node2 [label="LHAL",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___l_h_a_l.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node8 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node9 [shape=plaintext, dir="back", style="solid"];
+}

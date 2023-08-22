@@ -1,0 +1,8 @@
+digraph "bflb_timer_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_timer_config_s\n|+ counter_mode\l+ clock_source\l+ clock_div\l+ trigger_comp_id\l+ comp0_val\l+ comp1_val\l+ comp2_val\l+ preload_val\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="TIMER configuration structure"];
+}

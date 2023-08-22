@@ -1,0 +1,8 @@
+digraph "bflb_sha_link_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_sha_link_s\n|+ __pad0__\l+ sha_mode\l+ __pad1__\l+ sha_newhash_dis\l+ __pad2__\l+ sha_intclr\l+ sha_intset\l+ __pad3__\l+ sha_mode_ext\l+ __pad4__\l+ sha_msglen\l+ sha_srcaddr\l+ result\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_platform_dma.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__platform__dma_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_platform_dma.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__platform__dma_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_PLATFORM_DMA_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_PLATFORM_DMA_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="group___l_h_a_l.html#ga1f14b7ab6e215aa0e1f604ed4e1d6810">   10</a></span><span class="preprocessor">#define PLFM_DMA_CHANNEL_MAX 5</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structbflb__platform__dma__desc.html">   16</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__platform__dma__desc.html">bflb_platform_dma_desc</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structbflb__platform__dma__desc.html#a0d6d2cdb1162c6355e40ab772fa5debc">   19</a></span>    uint32_t <a class="code hl_variable" href="structbflb__platform__dma__desc.html#a0d6d2cdb1162c6355e40ab772fa5debc">src</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structbflb__platform__dma__desc.html#ac7ff690a484d51e719933e5c6c0d3703">   22</a></span>    uint32_t <a class="code hl_variable" href="structbflb__platform__dma__desc.html#ac7ff690a484d51e719933e5c6c0d3703">dest</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structbflb__platform__dma__desc.html#a1892eba2086d12ac2b09005aeb09ea3b">   24</a></span>    uint16_t <a class="code hl_variable" href="structbflb__platform__dma__desc.html#a1892eba2086d12ac2b09005aeb09ea3b">length</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structbflb__platform__dma__desc.html#a27f146de1f92b92649fabc946807c69c">   26</a></span>    uint16_t <a class="code hl_variable" href="structbflb__platform__dma__desc.html#a27f146de1f92b92649fabc946807c69c">ctrl</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structbflb__platform__dma__desc.html#a9b4556b86497af3cd53528515556b0f3">   28</a></span>    uint32_t <a class="code hl_variable" href="structbflb__platform__dma__desc.html#a9b4556b86497af3cd53528515556b0f3">next</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structbflb__platform__dma__env__tag.html">   32</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__platform__dma__env__tag.html">bflb_platform_dma_env_tag</a> {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structbflb__platform__dma__env__tag.html#a0e368ea04d7e719eee2aefe5a8723eb4">   36</a></span>    <span class="keyword">volatile</span> <span class="keyword">struct </span><a class="code hl_struct" href="structbflb__platform__dma__desc.html">bflb_platform_dma_desc</a> *<a class="code hl_variable" href="structbflb__platform__dma__env__tag.html#a0e368ea04d7e719eee2aefe5a8723eb4">last_dma</a>[<a class="code hl_define" href="group___l_h_a_l.html#ga1f14b7ab6e215aa0e1f604ed4e1d6810">PLFM_DMA_CHANNEL_MAX</a>];</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>};</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga2087901740ec86c25f192beec62c41e1">   50</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga2087901740ec86c25f192beec62c41e1">bflb_platform_dma_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga2af72a59f0d6331e8f827fd727c78b10">   62</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga2af72a59f0d6331e8f827fd727c78b10">bflb_platform_dma_push</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__platform__dma__desc.html">bflb_platform_dma_desc</a> *first, <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__platform__dma__desc.html">bflb_platform_dma_desc</a> *last);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="group___p_l_a_t_f_o_r_m___d_m_a.html#gaaf0dc87bf7cd7961a049062449585e67">   72</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_l_a_t_f_o_r_m___d_m_a.html#gaaf0dc87bf7cd7961a049062449585e67">bflb_platform_dma_buserr_isr</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga60f8d2d63507861b112d001a3f9ebda5">   81</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga60f8d2d63507861b112d001a3f9ebda5">bflb_platform_dma_wait_eot</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga7a842a44b79827d5c874f3972448827a">   90</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga7a842a44b79827d5c874f3972448827a">bflb_platform_dma_clear_eot</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___l_h_a_l_html_ga1f14b7ab6e215aa0e1f604ed4e1d6810"><div class="ttname"><a href="group___l_h_a_l.html#ga1f14b7ab6e215aa0e1f604ed4e1d6810">PLFM_DMA_CHANNEL_MAX</a></div><div class="ttdeci">#define PLFM_DMA_CHANNEL_MAX</div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00010">bflb_platform_dma.h:10</a></div></div>
+<div class="ttc" id="agroup___p_l_a_t_f_o_r_m___d_m_a_html_ga2087901740ec86c25f192beec62c41e1"><div class="ttname"><a href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga2087901740ec86c25f192beec62c41e1">bflb_platform_dma_init</a></div><div class="ttdeci">void bflb_platform_dma_init(struct bflb_device_s *dev)</div><div class="ttdoc">Initialize the bridge DMA registers</div></div>
+<div class="ttc" id="agroup___p_l_a_t_f_o_r_m___d_m_a_html_ga2af72a59f0d6331e8f827fd727c78b10"><div class="ttname"><a href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga2af72a59f0d6331e8f827fd727c78b10">bflb_platform_dma_push</a></div><div class="ttdeci">void bflb_platform_dma_push(struct bflb_device_s *dev, struct bflb_platform_dma_desc *first, struct bflb_platform_dma_desc *last)</div><div class="ttdoc">Chains a chained list of descriptors in the DMA</div></div>
+<div class="ttc" id="agroup___p_l_a_t_f_o_r_m___d_m_a_html_ga60f8d2d63507861b112d001a3f9ebda5"><div class="ttname"><a href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga60f8d2d63507861b112d001a3f9ebda5">bflb_platform_dma_wait_eot</a></div><div class="ttdeci">void bflb_platform_dma_wait_eot(struct bflb_device_s *dev)</div><div class="ttdoc">Active wait until DMA channel become inactive</div></div>
+<div class="ttc" id="agroup___p_l_a_t_f_o_r_m___d_m_a_html_ga7a842a44b79827d5c874f3972448827a"><div class="ttname"><a href="group___p_l_a_t_f_o_r_m___d_m_a.html#ga7a842a44b79827d5c874f3972448827a">bflb_platform_dma_clear_eot</a></div><div class="ttdeci">void bflb_platform_dma_clear_eot(struct bflb_device_s *dev)</div><div class="ttdoc">Active wait until DMA channel become inactive</div></div>
+<div class="ttc" id="agroup___p_l_a_t_f_o_r_m___d_m_a_html_gaaf0dc87bf7cd7961a049062449585e67"><div class="ttname"><a href="group___p_l_a_t_f_o_r_m___d_m_a.html#gaaf0dc87bf7cd7961a049062449585e67">bflb_platform_dma_buserr_isr</a></div><div class="ttdeci">void bflb_platform_dma_buserr_isr(struct bflb_device_s *dev)</div><div class="ttdoc">Interrupt service routine when a bus error is detected while in a DMA transfer. This error is conside...</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__platform__dma__desc_html"><div class="ttname"><a href="structbflb__platform__dma__desc.html">bflb_platform_dma_desc</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00016">bflb_platform_dma.h:16</a></div></div>
+<div class="ttc" id="astructbflb__platform__dma__desc_html_a0d6d2cdb1162c6355e40ab772fa5debc"><div class="ttname"><a href="structbflb__platform__dma__desc.html#a0d6d2cdb1162c6355e40ab772fa5debc">bflb_platform_dma_desc::src</a></div><div class="ttdeci">uint32_t src</div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00019">bflb_platform_dma.h:19</a></div></div>
+<div class="ttc" id="astructbflb__platform__dma__desc_html_a1892eba2086d12ac2b09005aeb09ea3b"><div class="ttname"><a href="structbflb__platform__dma__desc.html#a1892eba2086d12ac2b09005aeb09ea3b">bflb_platform_dma_desc::length</a></div><div class="ttdeci">uint16_t length</div><div class="ttdoc">Complete length of the buffer in memory</div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00024">bflb_platform_dma.h:24</a></div></div>
+<div class="ttc" id="astructbflb__platform__dma__desc_html_a27f146de1f92b92649fabc946807c69c"><div class="ttname"><a href="structbflb__platform__dma__desc.html#a27f146de1f92b92649fabc946807c69c">bflb_platform_dma_desc::ctrl</a></div><div class="ttdeci">uint16_t ctrl</div><div class="ttdoc">Control word for the DMA engine (e.g. for interrupt generation)</div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00026">bflb_platform_dma.h:26</a></div></div>
+<div class="ttc" id="astructbflb__platform__dma__desc_html_a9b4556b86497af3cd53528515556b0f3"><div class="ttname"><a href="structbflb__platform__dma__desc.html#a9b4556b86497af3cd53528515556b0f3">bflb_platform_dma_desc::next</a></div><div class="ttdeci">uint32_t next</div><div class="ttdoc">Pointer to the next element of the chained list</div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00028">bflb_platform_dma.h:28</a></div></div>
+<div class="ttc" id="astructbflb__platform__dma__desc_html_ac7ff690a484d51e719933e5c6c0d3703"><div class="ttname"><a href="structbflb__platform__dma__desc.html#ac7ff690a484d51e719933e5c6c0d3703">bflb_platform_dma_desc::dest</a></div><div class="ttdeci">uint32_t dest</div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00022">bflb_platform_dma.h:22</a></div></div>
+<div class="ttc" id="astructbflb__platform__dma__env__tag_html"><div class="ttname"><a href="structbflb__platform__dma__env__tag.html">bflb_platform_dma_env_tag</a></div><div class="ttdoc">Structure describing the DMA driver environment</div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00032">bflb_platform_dma.h:32</a></div></div>
+<div class="ttc" id="astructbflb__platform__dma__env__tag_html_a0e368ea04d7e719eee2aefe5a8723eb4"><div class="ttname"><a href="structbflb__platform__dma__env__tag.html#a0e368ea04d7e719eee2aefe5a8723eb4">bflb_platform_dma_env_tag::last_dma</a></div><div class="ttdeci">volatile struct bflb_platform_dma_desc * last_dma[PLFM_DMA_CHANNEL_MAX]</div><div class="ttdef"><b>Definition:</b> <a href="bflb__platform__dma_8h_source.html#l00036">bflb_platform_dma.h:36</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__platform__dma_8h.html">bflb_platform_dma.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

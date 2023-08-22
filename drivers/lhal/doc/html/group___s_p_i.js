@@ -1,0 +1,35 @@
+var group___s_p_i =
+[
+    [ "spi role definition", "group___s_p_i___r_o_l_e.html", "group___s_p_i___r_o_l_e" ],
+    [ "spi mode definition", "group___s_p_i___m_o_d_e.html", "group___s_p_i___m_o_d_e" ],
+    [ "spi data width definition", "group___s_p_i___d_a_t_a___w_i_d_t_h.html", "group___s_p_i___d_a_t_a___w_i_d_t_h" ],
+    [ "spi bit order definition", "group___s_p_i___b_i_t___o_r_d_e_r.html", "group___s_p_i___b_i_t___o_r_d_e_r" ],
+    [ "spi byte order definition", "group___s_p_i___b_y_t_e___o_r_d_e_r.html", "group___s_p_i___b_y_t_e___o_r_d_e_r" ],
+    [ "dbi interrupt status definition", "group___s_p_i___i_n_t_s_t_s.html", "group___s_p_i___i_n_t_s_t_s" ],
+    [ "spi interrupt clear definition", "group___s_p_i___i_n_t_c_l_r.html", "group___s_p_i___i_n_t_c_l_r" ],
+    [ "spi feature control cmd definition", "group___s_p_i___c_m_d.html", "group___s_p_i___c_m_d" ],
+    [ "bflb_spi_config_s", "structbflb__spi__config__s.html", [
+      [ "bit_order", "structbflb__spi__config__s.html#ab2f5400eb39c8663b5ef005339a888ed", null ],
+      [ "byte_order", "structbflb__spi__config__s.html#a771972bd0134f00af2d9ba343e914c37", null ],
+      [ "data_width", "structbflb__spi__config__s.html#a138ef01d0684d0ef0dd3df4bc5440216", null ],
+      [ "freq", "structbflb__spi__config__s.html#aacfad457f5366fa9265eb0a89e43f23b", null ],
+      [ "mode", "structbflb__spi__config__s.html#a37e90f5e3bd99fac2021fb3a326607d4", null ],
+      [ "role", "structbflb__spi__config__s.html#a5b9aeb2bb7989ef331f452dd9626f139", null ],
+      [ "rx_fifo_threshold", "structbflb__spi__config__s.html#aa0373e4e879c0e1818154519eec34c7c", null ],
+      [ "tx_fifo_threshold", "structbflb__spi__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74", null ]
+    ] ],
+    [ "bflb_spi_deinit", "group___s_p_i.html#gac1f53b8256d731c32128329f5d6d27e4", null ],
+    [ "bflb_spi_errint_mask", "group___s_p_i.html#ga45177a77e905538d3bc4942ca5c2c3c4", null ],
+    [ "bflb_spi_feature_control", "group___s_p_i.html#ga1c08d5aad2b9829473ce988ab243db7a", null ],
+    [ "bflb_spi_get_intstatus", "group___s_p_i.html#gac1b6a342d3e784e8bae6c62555959f65", null ],
+    [ "bflb_spi_init", "group___s_p_i.html#ga7e05c39582589e88f8602c604b8956e9", null ],
+    [ "bflb_spi_int_clear", "group___s_p_i.html#gafa6586475534d15f03b57e0c0c8cf2c8", null ],
+    [ "bflb_spi_isbusy", "group___s_p_i.html#gac1d59262b7b0b20ec1e84be6269d3dea", null ],
+    [ "bflb_spi_link_rxdma", "group___s_p_i.html#gaad678238626bf5479e2f51f0e28f43a4", null ],
+    [ "bflb_spi_link_txdma", "group___s_p_i.html#ga60322f69c6eb8c5e3730f13ab70faf9d", null ],
+    [ "bflb_spi_poll_exchange", "group___s_p_i.html#ga26cfbdea44686c2cd078209b4bced731", null ],
+    [ "bflb_spi_poll_send", "group___s_p_i.html#ga1faebf28605dc4a3f419edeeaadfa77b", null ],
+    [ "bflb_spi_rxint_mask", "group___s_p_i.html#ga6947037bd5b576da7cbdd25cf1756cb6", null ],
+    [ "bflb_spi_tcint_mask", "group___s_p_i.html#ga2119e37942e85b7e1860681466589819", null ],
+    [ "bflb_spi_txint_mask", "group___s_p_i.html#ga7c1b09c8944c9077b70e3b4a1eb6c2ba", null ]
+];

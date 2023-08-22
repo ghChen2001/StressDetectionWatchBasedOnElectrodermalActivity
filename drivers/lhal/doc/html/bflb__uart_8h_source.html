@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_uart.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__uart_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_uart.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__uart_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_UART_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_UART_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="group___u_a_r_t___d_i_r_e_c_t_i_o_n.html#ga3c51bb247d0baca7c132aad585264d75">   17</a></span><span class="preprocessor">#define UART_DIRECTION_TX     (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___u_a_r_t___d_i_r_e_c_t_i_o_n.html#gad951a0df0cb62e9648201275e8485f18">   18</a></span><span class="preprocessor">#define UART_DIRECTION_RX     (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="group___u_a_r_t___d_i_r_e_c_t_i_o_n.html#gae141e2cde89ce28c6c7b57f77d1b21d3">   19</a></span><span class="preprocessor">#define UART_DIRECTION_TXRX   (UART_DIRECTION_TX | UART_DIRECTION_RX)</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="group___u_a_r_t___d_i_r_e_c_t_i_o_n.html#ga8bc592078e56b57e50d0e4ee151fc591">   20</a></span><span class="preprocessor">#define UART_DIRECTION_MASK   UART_DIRECTION_TXRX</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___u_a_r_t___d_a_t_a_b_i_t_s.html#ga773c33256ba858c30a3e44224e72006e">   28</a></span><span class="preprocessor">#define UART_DATA_BITS_5      0</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group___u_a_r_t___d_a_t_a_b_i_t_s.html#ga884167ec1c3ee319b54ad1df0ecde5fb">   29</a></span><span class="preprocessor">#define UART_DATA_BITS_6      1</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group___u_a_r_t___d_a_t_a_b_i_t_s.html#ga333f7c0af9e714a4ea5de0b90b61e8ac">   30</a></span><span class="preprocessor">#define UART_DATA_BITS_7      2</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="group___u_a_r_t___d_a_t_a_b_i_t_s.html#ga55a24dd075ce24daa83e72068cb0e4af">   31</a></span><span class="preprocessor">#define UART_DATA_BITS_8      3</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group___u_a_r_t___s_t_o_p_b_i_t_s.html#ga6d73dd0668124ffa07e5f7f601fcbc22">   39</a></span><span class="preprocessor">#define UART_STOP_BITS_0_5    0</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group___u_a_r_t___s_t_o_p_b_i_t_s.html#ga8c4f4e1ad92fa1b49f3ce2247ba9af0e">   40</a></span><span class="preprocessor">#define UART_STOP_BITS_1      1</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="group___u_a_r_t___s_t_o_p_b_i_t_s.html#ga8bdcb7453c9daee296376e1e4be82fa9">   41</a></span><span class="preprocessor">#define UART_STOP_BITS_1_5    2</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="group___u_a_r_t___s_t_o_p_b_i_t_s.html#gae6a1358ec412906d299a8ee4fa104796">   42</a></span><span class="preprocessor">#define UART_STOP_BITS_2      3</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___u_a_r_t___p_a_r_i_t_y.html#ga270dea6e1a92dd83fe58802450bdd60c">   50</a></span><span class="preprocessor">#define UART_PARITY_NONE      0</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___u_a_r_t___p_a_r_i_t_y.html#ga229615e64964f68f7a856ea6ffea359e">   51</a></span><span class="preprocessor">#define UART_PARITY_ODD       1</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group___u_a_r_t___p_a_r_i_t_y.html#ga063b14ac42ef9e8f4246c17a586b14eb">   52</a></span><span class="preprocessor">#define UART_PARITY_EVEN      2</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group___u_a_r_t___p_a_r_i_t_y.html#ga8cb7d86a9ed87158677314c01f358cb6">   53</a></span><span class="preprocessor">#define UART_PARITY_MARK      3</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___u_a_r_t___p_a_r_i_t_y.html#ga306c559681a17e95516d3a3f2f8533bb">   54</a></span><span class="preprocessor">#define UART_PARITY_SPACE     4</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="group___u_a_r_t___b_i_t_o_r_d_e_r.html#ga6db32ac5262c397fe279cac89e730f89">   62</a></span><span class="preprocessor">#define UART_LSB_FIRST        0</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group___u_a_r_t___b_i_t_o_r_d_e_r.html#gab2b3190f67c9953ddc77d15de36f5e9f">   63</a></span><span class="preprocessor">#define UART_MSB_FIRST        1</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___u_a_r_t___f_l_o_w_c_t_r_l.html#ga04d2a2973e94e2f9ce67d4f829fe2e3c">   71</a></span><span class="preprocessor">#define UART_FLOWCTRL_NONE    0</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="group___u_a_r_t___f_l_o_w_c_t_r_l.html#ga59f6d8376880f186100db302ef836a99">   72</a></span><span class="preprocessor">#define UART_FLOWCTRL_RTS     (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group___u_a_r_t___f_l_o_w_c_t_r_l.html#ga1b8c228c94d11fe103c86483cb20f51b">   73</a></span><span class="preprocessor">#define UART_FLOWCTRL_CTS     (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="group___u_a_r_t___f_l_o_w_c_t_r_l.html#ga5c1595d48d79426c5c8ef57406d1b2f7">   74</a></span><span class="preprocessor">#define UART_FLOWCTRL_RTS_CTS (UART_FLOWCTRL_RTS | UART_FLOWCTRL_CTS)</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#ga9f6f9b09f3fc709f965eaef14372a6d4">   82</a></span><span class="preprocessor">#define UART_INTSTS_TX_END    (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#gac01a1a57cb2a938ff34d5382dfd1f65a">   83</a></span><span class="preprocessor">#define UART_INTSTS_RX_END    (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#ga8c0f75095cfce586ef0b1ef0e757439e">   84</a></span><span class="preprocessor">#define UART_INTSTS_TX_FIFO   (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#ga6e0a250a6e7bd0c5645d8bc1d55b0843">   85</a></span><span class="preprocessor">#define UART_INTSTS_RX_FIFO   (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#gac731e8389895c67bd5ac44955e1a7d27">   86</a></span><span class="preprocessor">#define UART_INTSTS_RTO       (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#gad81c3e25cf6065b400f85a8ab685fe36">   87</a></span><span class="preprocessor">#define UART_INTSTS_PCE       (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#ga1022ddaa4c873de02e5693ce069d67a6">   88</a></span><span class="preprocessor">#define UART_INTSTS_TX_FER    (1 &lt;&lt; 6)</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#gafdbdca92d8a59e506c06557df4552da0">   89</a></span><span class="preprocessor">#define UART_INTSTS_RX_FER    (1 &lt;&lt; 7)</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">#if !defined(BL602)</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#ga74c52083749ee57c0c7066877dc35cc1">   91</a></span><span class="preprocessor">#define UART_INTSTS_RX_LSE (1 &lt;&lt; 8)</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#gaea83fd1d283c462378dc3897ff2c09da">   94</a></span><span class="preprocessor">#define UART_INTSTS_RX_BCR (1 &lt;&lt; 9)</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#ga72261acb6a2236a119aaf45326c488c2">   95</a></span><span class="preprocessor">#define UART_INTSTS_RX_ADS (1 &lt;&lt; 10)</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_s_t_s.html#ga1bfe937b275f185725768f463ea80b3c">   96</a></span><span class="preprocessor">#define UART_INTSTS_RX_AD5 (1 &lt;&lt; 11)</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_c_l_r.html#gafff93512f5f88143fc5a922f3164cd11">  105</a></span><span class="preprocessor">#define UART_INTCLR_TX_END (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_c_l_r.html#gaff2630dc42e179e1da375efb88c901b7">  106</a></span><span class="preprocessor">#define UART_INTCLR_RX_END (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_c_l_r.html#ga7e2146d9a22ae7384669370375352123">  107</a></span><span class="preprocessor">#define UART_INTCLR_RTO    (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_c_l_r.html#gacd12c42f096634957f80ea174aaee0ba">  108</a></span><span class="preprocessor">#define UART_INTCLR_PCE    (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">#if !defined(BL602)</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_c_l_r.html#gad79230640097e782291d6ddaa85ffe2b">  110</a></span><span class="preprocessor">#define UART_INTCLR_RX_LSE (1 &lt;&lt; 8)</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702)</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_c_l_r.html#ga97e63915fa5bcfa20f01e7510cf3eea3">  113</a></span><span class="preprocessor">#define UART_INTCLR_RX_BCR (1 &lt;&lt; 9)</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_c_l_r.html#ga7d98356b2f74c1c7e4f7d70163b417d3">  114</a></span><span class="preprocessor">#define UART_INTCLR_RX_ADS (1 &lt;&lt; 10)</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="group___u_a_r_t___i_n_t_c_l_r.html#ga448a141af77b1966ffaa4e933b70f99d">  115</a></span><span class="preprocessor">#define UART_INTCLR_RX_AD5 (1 &lt;&lt; 11)</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gaf8e7580148c72f3fb249ec2a4a38c91d">  124</a></span><span class="preprocessor">#define UART_CMD_SET_BAUD_RATE           (0x01)</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga6470d86895a14a7b655f71460e91ba21">  125</a></span><span class="preprocessor">#define UART_CMD_SET_DATA_BITS           (0x02)</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gab90c9453df7fb983bf7066b90a5ca596">  126</a></span><span class="preprocessor">#define UART_CMD_SET_STOP_BITS           (0x03)</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga479b20631fc9d29cb1075ab5e1ee606e">  127</a></span><span class="preprocessor">#define UART_CMD_SET_PARITY_BITS         (0x04)</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gae41ee0cfe7658e4980d5f3e361f046ab">  128</a></span><span class="preprocessor">#define UART_CMD_CLR_TX_FIFO             (0x05)</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga1bee1eb6ea6861989263a91caf0f7dad">  129</a></span><span class="preprocessor">#define UART_CMD_CLR_RX_FIFO             (0x06)</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gafae8ebc62e432677da5fa5a55f89c6db">  130</a></span><span class="preprocessor">#define UART_CMD_SET_RTO_VALUE           (0x07)</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gab0008895867b92eb9d89406fca132bd8">  131</a></span><span class="preprocessor">#define UART_CMD_SET_RTS_VALUE           (0x08)</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gaa28640ddb3879535d8a0cd8bd9728bd8">  132</a></span><span class="preprocessor">#define UART_CMD_GET_TX_FIFO_CNT         (0x09)</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga669fa07c7aa27a7abf95db658ec60264">  133</a></span><span class="preprocessor">#define UART_CMD_GET_RX_FIFO_CNT         (0x0a)</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gaf59096329187c35e530948ebf6b715a8">  134</a></span><span class="preprocessor">#define UART_CMD_SET_AUTO_BAUD           (0x0b)</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga03871b645c07fda6b342e72a67f83cba">  135</a></span><span class="preprocessor">#define UART_CMD_GET_AUTO_BAUD           (0x0c)</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga0a92e4877276c6f78ccb8177f4079340">  136</a></span><span class="preprocessor">#define UART_CMD_SET_BREAK_VALUE         (0x0d)</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gafcf9b458dba6e280660da4ea5f07cfe9">  137</a></span><span class="preprocessor">#define UART_CMD_SET_TX_LIN_VALUE        (0x0e)</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga7b602033e32fed7fb596f0b2cbb92ade">  138</a></span><span class="preprocessor">#define UART_CMD_SET_RX_LIN_VALUE        (0x0f)</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga2b43b5e817d7e0666a74c83ffa0ff685">  139</a></span><span class="preprocessor">#define UART_CMD_SET_GLITCH_VALUE        (0x10)</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gae3354337b3cfc54807bef7588103100e">  140</a></span><span class="preprocessor">#define UART_CMD_SET_TX_RS485_EN         (0x11)</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga2a3751a34edad4dac9dfc65b5d750e49">  141</a></span><span class="preprocessor">#define UART_CMD_SET_TX_RS485_POLARITY   (0x12)</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga01322d451115b7e85e72f31dfcf5ed2f">  142</a></span><span class="preprocessor">#define UART_CMD_SET_ABR_ALLOWABLE_ERROR (0x13)</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga0e521e8595e917b6c66fa8786e36d1e0">  143</a></span><span class="preprocessor">#define UART_CMD_SET_SW_RTS_CONTROL      (0x14)</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gaebfbba8edc9d66114a5cf7a611be6b83">  144</a></span><span class="preprocessor">#define UART_CMD_IR_CONFIG               (0x15)</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gaaba0426edcc5adc3f20d45ce2ba72ab2">  145</a></span><span class="preprocessor">#define UART_CMD_SET_TX_FREERUN          (0x16)</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gaee959239da2a1f190c865db9aa83dedb">  146</a></span><span class="preprocessor">#define UART_CMD_SET_TX_END_INTERRUPT    (0x17)</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga8a6acaa7947086ee5208013d1b68d41e">  147</a></span><span class="preprocessor">#define UART_CMD_SET_RX_END_INTERRUPT    (0x18)</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gafc15a7162fa4485abf73bca6526592eb">  148</a></span><span class="preprocessor">#define UART_CMD_SET_TX_TRANSFER_LEN     (0x19)</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga5375df54cad838bddc9d4fccba9a4710">  149</a></span><span class="preprocessor">#define UART_CMD_SET_RX_TRANSFER_LEN     (0x20)</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga9716bc2ebaa097263bece4ef24e8106b">  150</a></span><span class="preprocessor">#define UART_CMD_SET_TX_EN               (0x21)</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga86cbb8a2c865882b01f0ebe4d091a426">  151</a></span><span class="preprocessor">#define UART_CMD_SET_BCR_END_INTERRUPT   (0x22)</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga7a5013cbd29512e73ee63f24fc87b069">  152</a></span><span class="preprocessor">#define UART_CMD_GET_BCR_COUNT           (0x23)</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gafdabb5f9d60f09be178c64ca1d904039">  153</a></span><span class="preprocessor">#define UART_CMD_SET_CTS_EN              (0x24)</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#ga612c97e59922bd5937ad1ec828aea2f8">  154</a></span><span class="preprocessor">#define UART_CMD_SET_TX_FIFO_THREHOLD    (0x25)</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="group___u_a_r_t___c_m_d.html#gabf7f455168aa15a5621ef62ebbf6770f">  155</a></span><span class="preprocessor">#define UART_CMD_SET_RX_FIFO_THREHOLD    (0x26)</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga91540b3c16949538fb8f45be0025ec01">  161</a></span><span class="preprocessor">#define UART_AUTO_BAUD_START             0</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#gaabdee42b9a8ebba674ba05c0fb5bb65f">  162</a></span><span class="preprocessor">#define UART_AUTO_BAUD_0X55              1</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="structbflb__uart__ir__config__s.html">  164</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__uart__ir__config__s.html">bflb_uart_ir_config_s</a> {</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="structbflb__uart__ir__config__s.html#ac06b9e6080eb16695fcf0c39cd781103">  165</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structbflb__uart__ir__config__s.html#ac06b9e6080eb16695fcf0c39cd781103">tx_en</a>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="structbflb__uart__ir__config__s.html#a7b29f2c3194b65d27115206a3828a2f3">  166</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structbflb__uart__ir__config__s.html#a7b29f2c3194b65d27115206a3828a2f3">rx_en</a>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="structbflb__uart__ir__config__s.html#a9dfc6409f10019d1eb640ebc2c37e34a">  167</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structbflb__uart__ir__config__s.html#a9dfc6409f10019d1eb640ebc2c37e34a">tx_inverse</a>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="structbflb__uart__ir__config__s.html#aa48de3613f511da63962b008c47db5b1">  168</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structbflb__uart__ir__config__s.html#aa48de3613f511da63962b008c47db5b1">rx_inverse</a>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="structbflb__uart__ir__config__s.html#ad3878ce307d56dc5318675be635ddbae">  169</a></span>    uint16_t <a class="code hl_variable" href="structbflb__uart__ir__config__s.html#ad3878ce307d56dc5318675be635ddbae">tx_pluse_start</a>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="structbflb__uart__ir__config__s.html#aa4f1a662a5dae5462ebb50c3d37bc210">  170</a></span>    uint16_t <a class="code hl_variable" href="structbflb__uart__ir__config__s.html#aa4f1a662a5dae5462ebb50c3d37bc210">tx_pluse_stop</a>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="structbflb__uart__ir__config__s.html#af1f2507d49df8730b8e4044b9a072e8e">  171</a></span>    uint16_t <a class="code hl_variable" href="structbflb__uart__ir__config__s.html#af1f2507d49df8730b8e4044b9a072e8e">rx_pluse_start</a>;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>};</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html">  187</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__uart__config__s.html">bflb_uart_config_s</a> {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#ac4f06ea26ed6bd7ae83b92d64ac10b78">  188</a></span>    uint32_t <a class="code hl_variable" href="structbflb__uart__config__s.html#ac4f06ea26ed6bd7ae83b92d64ac10b78">baudrate</a>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#ac6116d5235e13e059e591879c46d7174">  189</a></span>    uint8_t <a class="code hl_variable" href="structbflb__uart__config__s.html#ac6116d5235e13e059e591879c46d7174">direction</a>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#a6ad5ab806aecadd6cc55918f18742678">  190</a></span>    uint8_t <a class="code hl_variable" href="structbflb__uart__config__s.html#a6ad5ab806aecadd6cc55918f18742678">data_bits</a>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#ae847d8b7e1095e0ae8d6eb1e4a281585">  191</a></span>    uint8_t <a class="code hl_variable" href="structbflb__uart__config__s.html#ae847d8b7e1095e0ae8d6eb1e4a281585">stop_bits</a>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#aa0e72b59c63431c62f5b5eba36a65d17">  192</a></span>    uint8_t <a class="code hl_variable" href="structbflb__uart__config__s.html#aa0e72b59c63431c62f5b5eba36a65d17">parity</a>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#ab2f5400eb39c8663b5ef005339a888ed">  193</a></span>    uint8_t <a class="code hl_variable" href="structbflb__uart__config__s.html#ab2f5400eb39c8663b5ef005339a888ed">bit_order</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#ab180a2eb93996b47859e8ae55421334f">  194</a></span>    uint8_t <a class="code hl_variable" href="structbflb__uart__config__s.html#ab180a2eb93996b47859e8ae55421334f">flow_ctrl</a>;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">  195</a></span>    uint8_t <a class="code hl_variable" href="structbflb__uart__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">tx_fifo_threshold</a>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="structbflb__uart__config__s.html#aa0373e4e879c0e1818154519eec34c7c">  196</a></span>    uint8_t <a class="code hl_variable" href="structbflb__uart__config__s.html#aa0373e4e879c0e1818154519eec34c7c">rx_fifo_threshold</a>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>};</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#gadaa8fcef33551022fb77c0c15082f812">  209</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#gadaa8fcef33551022fb77c0c15082f812">bflb_uart_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__uart__config__s.html">bflb_uart_config_s</a> *config);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga5236cde4cfab5205031721229f90e36b">  216</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#ga5236cde4cfab5205031721229f90e36b">bflb_uart_deinit</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga4fb819cc02488dd44a83d096daa1c17b">  223</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#ga4fb819cc02488dd44a83d096daa1c17b">bflb_uart_enable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga097f538f52025d559c6567fc4a8229b5">  230</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#ga097f538f52025d559c6567fc4a8229b5">bflb_uart_disable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga0b1079811fe34f94b8564ec356c1d388">  238</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#ga0b1079811fe34f94b8564ec356c1d388">bflb_uart_link_txdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#gaf173df993ab9daf71841c7f907e83d9c">  246</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#gaf173df993ab9daf71841c7f907e83d9c">bflb_uart_link_rxdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga61129fb75d0b8199c2b0b3b6203bb5b6">  255</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___u_a_r_t.html#ga61129fb75d0b8199c2b0b3b6203bb5b6">bflb_uart_putchar</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> ch);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga8ffc081cd4f94b4c8f189d0c4507b4f3">  263</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___u_a_r_t.html#ga8ffc081cd4f94b4c8f189d0c4507b4f3">bflb_uart_getchar</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga5802dcd8ad6c67792c0e5732118156df">  273</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___u_a_r_t.html#ga5802dcd8ad6c67792c0e5732118156df">bflb_uart_put</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t *data, uint32_t len);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#gafc4580ff0ad7569a25c57dc80c7503ce">  283</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___u_a_r_t.html#gafc4580ff0ad7569a25c57dc80c7503ce">bflb_uart_get</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t *data, uint32_t len);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#gad5d58af0277018692b6ec6883f975297">  291</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="group___u_a_r_t.html#gad5d58af0277018692b6ec6883f975297">bflb_uart_txready</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#gab7baaea2f0cc821131811786a048f6fe">  299</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="group___u_a_r_t.html#gab7baaea2f0cc821131811786a048f6fe">bflb_uart_txempty</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga7028ddf0f3c99bca4491077083756c50">  307</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="group___u_a_r_t.html#ga7028ddf0f3c99bca4491077083756c50">bflb_uart_rxavailable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga636d3792df964db1a62f647614069e06">  315</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#ga636d3792df964db1a62f647614069e06">bflb_uart_txint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#gad52ff0678af7ee5c277f8406e51017ea">  323</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#gad52ff0678af7ee5c277f8406e51017ea">bflb_uart_rxint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#gad6b1cac54c69a815446ea54e5076a749">  331</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#gad6b1cac54c69a815446ea54e5076a749">bflb_uart_errint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga5c71074a8f8988fe2b5bea86354592ed">  339</a></span>uint32_t <a class="code hl_function" href="group___u_a_r_t.html#ga5c71074a8f8988fe2b5bea86354592ed">bflb_uart_get_intstatus</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga82b99a54cd221a1d6805eba2d8e24000">  347</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___u_a_r_t.html#ga82b99a54cd221a1d6805eba2d8e24000">bflb_uart_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear);</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno"><a class="line" href="group___u_a_r_t.html#ga7b7c823cc1d756068846784fdfbb2932">  357</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___u_a_r_t.html#ga7b7c823cc1d756068846784fdfbb2932">bflb_uart_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>}</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga097f538f52025d559c6567fc4a8229b5"><div class="ttname"><a href="group___u_a_r_t.html#ga097f538f52025d559c6567fc4a8229b5">bflb_uart_disable</a></div><div class="ttdeci">void bflb_uart_disable(struct bflb_device_s *dev)</div><div class="ttdoc">Disable uart.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga0b1079811fe34f94b8564ec356c1d388"><div class="ttname"><a href="group___u_a_r_t.html#ga0b1079811fe34f94b8564ec356c1d388">bflb_uart_link_txdma</a></div><div class="ttdeci">void bflb_uart_link_txdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable uart tx dma.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga4fb819cc02488dd44a83d096daa1c17b"><div class="ttname"><a href="group___u_a_r_t.html#ga4fb819cc02488dd44a83d096daa1c17b">bflb_uart_enable</a></div><div class="ttdeci">void bflb_uart_enable(struct bflb_device_s *dev)</div><div class="ttdoc">Enable uart.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga5236cde4cfab5205031721229f90e36b"><div class="ttname"><a href="group___u_a_r_t.html#ga5236cde4cfab5205031721229f90e36b">bflb_uart_deinit</a></div><div class="ttdeci">void bflb_uart_deinit(struct bflb_device_s *dev)</div><div class="ttdoc">Deinitialize uart.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga5802dcd8ad6c67792c0e5732118156df"><div class="ttname"><a href="group___u_a_r_t.html#ga5802dcd8ad6c67792c0e5732118156df">bflb_uart_put</a></div><div class="ttdeci">int bflb_uart_put(struct bflb_device_s *dev, uint8_t *data, uint32_t len)</div><div class="ttdoc">Put a block of data on uart.This is a poll api.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga5c71074a8f8988fe2b5bea86354592ed"><div class="ttname"><a href="group___u_a_r_t.html#ga5c71074a8f8988fe2b5bea86354592ed">bflb_uart_get_intstatus</a></div><div class="ttdeci">uint32_t bflb_uart_get_intstatus(struct bflb_device_s *dev)</div><div class="ttdoc">Get uart interrupt status.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga61129fb75d0b8199c2b0b3b6203bb5b6"><div class="ttname"><a href="group___u_a_r_t.html#ga61129fb75d0b8199c2b0b3b6203bb5b6">bflb_uart_putchar</a></div><div class="ttdeci">int bflb_uart_putchar(struct bflb_device_s *dev, int ch)</div><div class="ttdoc">Put one char on uart.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga636d3792df964db1a62f647614069e06"><div class="ttname"><a href="group___u_a_r_t.html#ga636d3792df964db1a62f647614069e06">bflb_uart_txint_mask</a></div><div class="ttdeci">void bflb_uart_txint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable uart tx fifo threhold interrupt.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga7028ddf0f3c99bca4491077083756c50"><div class="ttname"><a href="group___u_a_r_t.html#ga7028ddf0f3c99bca4491077083756c50">bflb_uart_rxavailable</a></div><div class="ttdeci">bool bflb_uart_rxavailable(struct bflb_device_s *dev)</div><div class="ttdoc">Check if there is data in rx fifo.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga7b7c823cc1d756068846784fdfbb2932"><div class="ttname"><a href="group___u_a_r_t.html#ga7b7c823cc1d756068846784fdfbb2932">bflb_uart_feature_control</a></div><div class="ttdeci">int bflb_uart_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div><div class="ttdoc">Control uart feature.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga82b99a54cd221a1d6805eba2d8e24000"><div class="ttname"><a href="group___u_a_r_t.html#ga82b99a54cd221a1d6805eba2d8e24000">bflb_uart_int_clear</a></div><div class="ttdeci">void bflb_uart_int_clear(struct bflb_device_s *dev, uint32_t int_clear)</div><div class="ttdoc">Clear uart interrupt status.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga8ffc081cd4f94b4c8f189d0c4507b4f3"><div class="ttname"><a href="group___u_a_r_t.html#ga8ffc081cd4f94b4c8f189d0c4507b4f3">bflb_uart_getchar</a></div><div class="ttdeci">int bflb_uart_getchar(struct bflb_device_s *dev)</div><div class="ttdoc">Get char from uart.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_gab7baaea2f0cc821131811786a048f6fe"><div class="ttname"><a href="group___u_a_r_t.html#gab7baaea2f0cc821131811786a048f6fe">bflb_uart_txempty</a></div><div class="ttdeci">bool bflb_uart_txempty(struct bflb_device_s *dev)</div><div class="ttdoc">Check if there is no data in tx fifo.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_gad52ff0678af7ee5c277f8406e51017ea"><div class="ttname"><a href="group___u_a_r_t.html#gad52ff0678af7ee5c277f8406e51017ea">bflb_uart_rxint_mask</a></div><div class="ttdeci">void bflb_uart_rxint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable uart rx fifo threhold interrupt.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_gad5d58af0277018692b6ec6883f975297"><div class="ttname"><a href="group___u_a_r_t.html#gad5d58af0277018692b6ec6883f975297">bflb_uart_txready</a></div><div class="ttdeci">bool bflb_uart_txready(struct bflb_device_s *dev)</div><div class="ttdoc">Check if there is free space in tx fifo.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_gad6b1cac54c69a815446ea54e5076a749"><div class="ttname"><a href="group___u_a_r_t.html#gad6b1cac54c69a815446ea54e5076a749">bflb_uart_errint_mask</a></div><div class="ttdeci">void bflb_uart_errint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable uart error interrupt.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_gadaa8fcef33551022fb77c0c15082f812"><div class="ttname"><a href="group___u_a_r_t.html#gadaa8fcef33551022fb77c0c15082f812">bflb_uart_init</a></div><div class="ttdeci">void bflb_uart_init(struct bflb_device_s *dev, const struct bflb_uart_config_s *config)</div><div class="ttdoc">Initialize uart.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_gaf173df993ab9daf71841c7f907e83d9c"><div class="ttname"><a href="group___u_a_r_t.html#gaf173df993ab9daf71841c7f907e83d9c">bflb_uart_link_rxdma</a></div><div class="ttdeci">void bflb_uart_link_rxdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable uart rx dma.</div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_gafc4580ff0ad7569a25c57dc80c7503ce"><div class="ttname"><a href="group___u_a_r_t.html#gafc4580ff0ad7569a25c57dc80c7503ce">bflb_uart_get</a></div><div class="ttdeci">int bflb_uart_get(struct bflb_device_s *dev, uint8_t *data, uint32_t len)</div><div class="ttdoc">Get a block of data from uart. This is a asynchronous api.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html"><div class="ttname"><a href="structbflb__uart__config__s.html">bflb_uart_config_s</a></div><div class="ttdoc">UART configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00187">bflb_uart.h:187</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_a6ad5ab806aecadd6cc55918f18742678"><div class="ttname"><a href="structbflb__uart__config__s.html#a6ad5ab806aecadd6cc55918f18742678">bflb_uart_config_s::data_bits</a></div><div class="ttdeci">uint8_t data_bits</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00190">bflb_uart.h:190</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_a8e1ba6dad959cca0b42ebd0ea3b09b74"><div class="ttname"><a href="structbflb__uart__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">bflb_uart_config_s::tx_fifo_threshold</a></div><div class="ttdeci">uint8_t tx_fifo_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00195">bflb_uart.h:195</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_aa0373e4e879c0e1818154519eec34c7c"><div class="ttname"><a href="structbflb__uart__config__s.html#aa0373e4e879c0e1818154519eec34c7c">bflb_uart_config_s::rx_fifo_threshold</a></div><div class="ttdeci">uint8_t rx_fifo_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00196">bflb_uart.h:196</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_aa0e72b59c63431c62f5b5eba36a65d17"><div class="ttname"><a href="structbflb__uart__config__s.html#aa0e72b59c63431c62f5b5eba36a65d17">bflb_uart_config_s::parity</a></div><div class="ttdeci">uint8_t parity</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00192">bflb_uart.h:192</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_ab180a2eb93996b47859e8ae55421334f"><div class="ttname"><a href="structbflb__uart__config__s.html#ab180a2eb93996b47859e8ae55421334f">bflb_uart_config_s::flow_ctrl</a></div><div class="ttdeci">uint8_t flow_ctrl</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00194">bflb_uart.h:194</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_ab2f5400eb39c8663b5ef005339a888ed"><div class="ttname"><a href="structbflb__uart__config__s.html#ab2f5400eb39c8663b5ef005339a888ed">bflb_uart_config_s::bit_order</a></div><div class="ttdeci">uint8_t bit_order</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00193">bflb_uart.h:193</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_ac4f06ea26ed6bd7ae83b92d64ac10b78"><div class="ttname"><a href="structbflb__uart__config__s.html#ac4f06ea26ed6bd7ae83b92d64ac10b78">bflb_uart_config_s::baudrate</a></div><div class="ttdeci">uint32_t baudrate</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00188">bflb_uart.h:188</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_ac6116d5235e13e059e591879c46d7174"><div class="ttname"><a href="structbflb__uart__config__s.html#ac6116d5235e13e059e591879c46d7174">bflb_uart_config_s::direction</a></div><div class="ttdeci">uint8_t direction</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00189">bflb_uart.h:189</a></div></div>
+<div class="ttc" id="astructbflb__uart__config__s_html_ae847d8b7e1095e0ae8d6eb1e4a281585"><div class="ttname"><a href="structbflb__uart__config__s.html#ae847d8b7e1095e0ae8d6eb1e4a281585">bflb_uart_config_s::stop_bits</a></div><div class="ttdeci">uint8_t stop_bits</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00191">bflb_uart.h:191</a></div></div>
+<div class="ttc" id="astructbflb__uart__ir__config__s_html"><div class="ttname"><a href="structbflb__uart__ir__config__s.html">bflb_uart_ir_config_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00164">bflb_uart.h:164</a></div></div>
+<div class="ttc" id="astructbflb__uart__ir__config__s_html_a7b29f2c3194b65d27115206a3828a2f3"><div class="ttname"><a href="structbflb__uart__ir__config__s.html#a7b29f2c3194b65d27115206a3828a2f3">bflb_uart_ir_config_s::rx_en</a></div><div class="ttdeci">bool rx_en</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00166">bflb_uart.h:166</a></div></div>
+<div class="ttc" id="astructbflb__uart__ir__config__s_html_a9dfc6409f10019d1eb640ebc2c37e34a"><div class="ttname"><a href="structbflb__uart__ir__config__s.html#a9dfc6409f10019d1eb640ebc2c37e34a">bflb_uart_ir_config_s::tx_inverse</a></div><div class="ttdeci">bool tx_inverse</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00167">bflb_uart.h:167</a></div></div>
+<div class="ttc" id="astructbflb__uart__ir__config__s_html_aa48de3613f511da63962b008c47db5b1"><div class="ttname"><a href="structbflb__uart__ir__config__s.html#aa48de3613f511da63962b008c47db5b1">bflb_uart_ir_config_s::rx_inverse</a></div><div class="ttdeci">bool rx_inverse</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00168">bflb_uart.h:168</a></div></div>
+<div class="ttc" id="astructbflb__uart__ir__config__s_html_aa4f1a662a5dae5462ebb50c3d37bc210"><div class="ttname"><a href="structbflb__uart__ir__config__s.html#aa4f1a662a5dae5462ebb50c3d37bc210">bflb_uart_ir_config_s::tx_pluse_stop</a></div><div class="ttdeci">uint16_t tx_pluse_stop</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00170">bflb_uart.h:170</a></div></div>
+<div class="ttc" id="astructbflb__uart__ir__config__s_html_ac06b9e6080eb16695fcf0c39cd781103"><div class="ttname"><a href="structbflb__uart__ir__config__s.html#ac06b9e6080eb16695fcf0c39cd781103">bflb_uart_ir_config_s::tx_en</a></div><div class="ttdeci">bool tx_en</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00165">bflb_uart.h:165</a></div></div>
+<div class="ttc" id="astructbflb__uart__ir__config__s_html_ad3878ce307d56dc5318675be635ddbae"><div class="ttname"><a href="structbflb__uart__ir__config__s.html#ad3878ce307d56dc5318675be635ddbae">bflb_uart_ir_config_s::tx_pluse_start</a></div><div class="ttdeci">uint16_t tx_pluse_start</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00169">bflb_uart.h:169</a></div></div>
+<div class="ttc" id="astructbflb__uart__ir__config__s_html_af1f2507d49df8730b8e4044b9a072e8e"><div class="ttname"><a href="structbflb__uart__ir__config__s.html#af1f2507d49df8730b8e4044b9a072e8e">bflb_uart_ir_config_s::rx_pluse_start</a></div><div class="ttdeci">uint16_t rx_pluse_start</div><div class="ttdef"><b>Definition:</b> <a href="bflb__uart_8h_source.html#l00171">bflb_uart.h:171</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__uart_8h.html">bflb_uart.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

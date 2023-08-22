@@ -1,0 +1,8 @@
+digraph "bflb_emac_phy_cfg_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_emac_phy_cfg_s\n|+ auto_negotiation\l+ full_duplex\l+ phy_state\l+ use_irq\l+ speed\l+ phy_address\l+ phy_id\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="EMAC phy configuration structure"];
+}

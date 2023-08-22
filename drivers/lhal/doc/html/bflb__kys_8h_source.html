@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_kys.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__kys_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_kys.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__kys_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_KYS_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_KYS_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="structbflb__kys__config__s.html">    6</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__kys__config__s.html">bflb_kys_config_s</a> {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="structbflb__kys__config__s.html#ae739ef8fb1ba860a6b2c9e312cc65e86">    7</a></span>    uint8_t <a class="code hl_variable" href="structbflb__kys__config__s.html#ae739ef8fb1ba860a6b2c9e312cc65e86">col</a>;           <span class="comment">/* Col of keyboard,max:8 */</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="structbflb__kys__config__s.html#ab86a0a249da45b017b7cb9bbb6982177">    8</a></span>    uint8_t <a class="code hl_variable" href="structbflb__kys__config__s.html#ab86a0a249da45b017b7cb9bbb6982177">row</a>;           <span class="comment">/* Row of keyboard,max:8 */</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="structbflb__kys__config__s.html#a8a32ab827bb35c113a13e5ea814b69f0">    9</a></span>    uint8_t <a class="code hl_variable" href="structbflb__kys__config__s.html#a8a32ab827bb35c113a13e5ea814b69f0">deglitch_en</a>;   <span class="comment">/* Disable deglitch function */</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="structbflb__kys__config__s.html#a01aabd81d5f3a6e38f6b8f9178794fc9">   10</a></span>    uint8_t <a class="code hl_variable" href="structbflb__kys__config__s.html#a01aabd81d5f3a6e38f6b8f9178794fc9">deglitch_cnt</a>;  <span class="comment">/* Deglitch count */</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structbflb__kys__config__s.html#aa617c7a4c969e38c3ee4ddfbfb4b3e15">   11</a></span>    uint8_t <a class="code hl_variable" href="structbflb__kys__config__s.html#aa617c7a4c969e38c3ee4ddfbfb4b3e15">idle_duration</a>; <span class="comment">/* Idle duration between column scans */</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="structbflb__kys__config__s.html#af9bb536f6241fd9d667c3ab7635ab9d2">   12</a></span>    uint8_t <a class="code hl_variable" href="structbflb__kys__config__s.html#af9bb536f6241fd9d667c3ab7635ab9d2">ghost_en</a>;      <span class="comment">/* Disable ghost key event detection */</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>};</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/* keyscan interrupt enable define */</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#if defined(BL702)</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define KEYSCAN_INT_EN (0x1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#ae1a547a418723b814be0c0f4a0b7c39a">   19</a></span><span class="preprocessor">#define KEYSCAN_INT_EN_DONE          (0x1 &lt;&lt; 7)</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a7227615029ac34d097983ec6010abe78">   20</a></span><span class="preprocessor">#define KEYSCAN_INT_EN_FIFOFULL      (0x1 &lt;&lt; 8)</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a17117cd5fbefc5ff2f249d5bea425dfd">   21</a></span><span class="preprocessor">#define KEYSCAN_INT_EN_FIFOHALF      (0x1 &lt;&lt; 9)</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a4e28ea86d9eb1f1a22f4885009122d7f">   22</a></span><span class="preprocessor">#define KEYSCAN_INT_EN_FIFOQUARTER   (0x1 &lt;&lt; 10)</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a67ca5462d7f6df358046f398e1195fcf">   23</a></span><span class="preprocessor">#define KEYSCAN_INT_EN_FIFO_NONEMPTY (0x1 &lt;&lt; 11)</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#af9b842bb4134ad377ced0ee2470a6fdf">   24</a></span><span class="preprocessor">#define KEYSCAN_INT_EN_GHOST         (0x1 &lt;&lt; 12)</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">/* keyscan interrupt clear */</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#if defined(BL702L)</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#define KEYSCAN_INT_CLR_DONE  (0x1 &lt;&lt; 7)</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define KEYSCAN_INT_CLR_FIFO  (0x1 &lt;&lt; 8)</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#define KEYSCAN_INT_CLR_GHOST (0x1 &lt;&lt; 12)</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#if defined(BL702)</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">/* keyscan keycode status and clear */</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define KEYSCAN_STS_KEYCODE0 (0x1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#define KEYSCAN_STS_KEYCODE1 (0x1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#define KEYSCAN_STS_KEYCODE2 (0x1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#define KEYSCAN_STS_KEYCODE3 (0x1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a819c562387502ecddc8d1d583414ba3e">   42</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__kys_8h.html#a819c562387502ecddc8d1d583414ba3e">bflb_kys_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__kys__config__s.html">bflb_kys_config_s</a> *config);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#ac124a187e532eb36d0f193b2e95ba213">   43</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__kys_8h.html#ac124a187e532eb36d0f193b2e95ba213">bflb_kys_enable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a8ecc8b4539780d4cbaf5645f18ec09b9">   44</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__kys_8h.html#a8ecc8b4539780d4cbaf5645f18ec09b9">bflb_kys_disable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a442b569b6af89c655aeff9b14f95dc91">   45</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__kys_8h.html#a442b569b6af89c655aeff9b14f95dc91">bflb_kys_int_enable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t flag, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a1156b30a0234ee512004891cb8f9804c">   46</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__kys_8h.html#a1156b30a0234ee512004891cb8f9804c">bflb_kys_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t flag);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#ac7dca6dbc19663f5ccfa6844a2a5a6b3">   47</a></span>uint32_t <a class="code hl_function" href="bflb__kys_8h.html#ac7dca6dbc19663f5ccfa6844a2a5a6b3">bflb_kys_get_int_status</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#if defined(BL702L)</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordtype">void</span> bflb_kys_get_fifo_info(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t *fifo_head, uint8_t *fifo_tail, uint8_t *fifo_valid_cnt);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="bflb__kys_8h.html#a5c815f7be1747335dd9fad3b7716aad7">   51</a></span>uint8_t <a class="code hl_function" href="bflb__kys_8h.html#a5c815f7be1747335dd9fad3b7716aad7">bflb_kys_read_keyvalue</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t index);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif </span><span class="comment">// _BFLB_KYS_H</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="abflb__kys_8h_html_a1156b30a0234ee512004891cb8f9804c"><div class="ttname"><a href="bflb__kys_8h.html#a1156b30a0234ee512004891cb8f9804c">bflb_kys_int_clear</a></div><div class="ttdeci">void bflb_kys_int_clear(struct bflb_device_s *dev, uint32_t flag)</div></div>
+<div class="ttc" id="abflb__kys_8h_html_a442b569b6af89c655aeff9b14f95dc91"><div class="ttname"><a href="bflb__kys_8h.html#a442b569b6af89c655aeff9b14f95dc91">bflb_kys_int_enable</a></div><div class="ttdeci">void bflb_kys_int_enable(struct bflb_device_s *dev, uint32_t flag, bool enable)</div></div>
+<div class="ttc" id="abflb__kys_8h_html_a5c815f7be1747335dd9fad3b7716aad7"><div class="ttname"><a href="bflb__kys_8h.html#a5c815f7be1747335dd9fad3b7716aad7">bflb_kys_read_keyvalue</a></div><div class="ttdeci">uint8_t bflb_kys_read_keyvalue(struct bflb_device_s *dev, uint8_t index)</div></div>
+<div class="ttc" id="abflb__kys_8h_html_a819c562387502ecddc8d1d583414ba3e"><div class="ttname"><a href="bflb__kys_8h.html#a819c562387502ecddc8d1d583414ba3e">bflb_kys_init</a></div><div class="ttdeci">void bflb_kys_init(struct bflb_device_s *dev, const struct bflb_kys_config_s *config)</div></div>
+<div class="ttc" id="abflb__kys_8h_html_a8ecc8b4539780d4cbaf5645f18ec09b9"><div class="ttname"><a href="bflb__kys_8h.html#a8ecc8b4539780d4cbaf5645f18ec09b9">bflb_kys_disable</a></div><div class="ttdeci">void bflb_kys_disable(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="abflb__kys_8h_html_ac124a187e532eb36d0f193b2e95ba213"><div class="ttname"><a href="bflb__kys_8h.html#ac124a187e532eb36d0f193b2e95ba213">bflb_kys_enable</a></div><div class="ttdeci">void bflb_kys_enable(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="abflb__kys_8h_html_ac7dca6dbc19663f5ccfa6844a2a5a6b3"><div class="ttname"><a href="bflb__kys_8h.html#ac7dca6dbc19663f5ccfa6844a2a5a6b3">bflb_kys_get_int_status</a></div><div class="ttdeci">uint32_t bflb_kys_get_int_status(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__kys__config__s_html"><div class="ttname"><a href="structbflb__kys__config__s.html">bflb_kys_config_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__kys_8h_source.html#l00006">bflb_kys.h:6</a></div></div>
+<div class="ttc" id="astructbflb__kys__config__s_html_a01aabd81d5f3a6e38f6b8f9178794fc9"><div class="ttname"><a href="structbflb__kys__config__s.html#a01aabd81d5f3a6e38f6b8f9178794fc9">bflb_kys_config_s::deglitch_cnt</a></div><div class="ttdeci">uint8_t deglitch_cnt</div><div class="ttdef"><b>Definition:</b> <a href="bflb__kys_8h_source.html#l00010">bflb_kys.h:10</a></div></div>
+<div class="ttc" id="astructbflb__kys__config__s_html_a8a32ab827bb35c113a13e5ea814b69f0"><div class="ttname"><a href="structbflb__kys__config__s.html#a8a32ab827bb35c113a13e5ea814b69f0">bflb_kys_config_s::deglitch_en</a></div><div class="ttdeci">uint8_t deglitch_en</div><div class="ttdef"><b>Definition:</b> <a href="bflb__kys_8h_source.html#l00009">bflb_kys.h:9</a></div></div>
+<div class="ttc" id="astructbflb__kys__config__s_html_aa617c7a4c969e38c3ee4ddfbfb4b3e15"><div class="ttname"><a href="structbflb__kys__config__s.html#aa617c7a4c969e38c3ee4ddfbfb4b3e15">bflb_kys_config_s::idle_duration</a></div><div class="ttdeci">uint8_t idle_duration</div><div class="ttdef"><b>Definition:</b> <a href="bflb__kys_8h_source.html#l00011">bflb_kys.h:11</a></div></div>
+<div class="ttc" id="astructbflb__kys__config__s_html_ab86a0a249da45b017b7cb9bbb6982177"><div class="ttname"><a href="structbflb__kys__config__s.html#ab86a0a249da45b017b7cb9bbb6982177">bflb_kys_config_s::row</a></div><div class="ttdeci">uint8_t row</div><div class="ttdef"><b>Definition:</b> <a href="bflb__kys_8h_source.html#l00008">bflb_kys.h:8</a></div></div>
+<div class="ttc" id="astructbflb__kys__config__s_html_ae739ef8fb1ba860a6b2c9e312cc65e86"><div class="ttname"><a href="structbflb__kys__config__s.html#ae739ef8fb1ba860a6b2c9e312cc65e86">bflb_kys_config_s::col</a></div><div class="ttdeci">uint8_t col</div><div class="ttdef"><b>Definition:</b> <a href="bflb__kys_8h_source.html#l00007">bflb_kys.h:7</a></div></div>
+<div class="ttc" id="astructbflb__kys__config__s_html_af9bb536f6241fd9d667c3ab7635ab9d2"><div class="ttname"><a href="structbflb__kys__config__s.html#af9bb536f6241fd9d667c3ab7635ab9d2">bflb_kys_config_s::ghost_en</a></div><div class="ttdeci">uint8_t ghost_en</div><div class="ttdef"><b>Definition:</b> <a href="bflb__kys_8h_source.html#l00012">bflb_kys.h:12</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__kys_8h.html">bflb_kys.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

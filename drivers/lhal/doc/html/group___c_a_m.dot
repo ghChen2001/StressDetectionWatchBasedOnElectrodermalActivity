@@ -1,0 +1,29 @@
+digraph "CAM"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="CAM",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node10 [label="CAMERA burst length\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___b_u_r_s_t.html",tooltip=" "];
+  Node11 [label="CAMERA feature control\l cmd definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___c_m_d.html",tooltip=" "];
+  Node3 [label="CAMERA input format\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___i_n_p_u_t___f_o_r_m_a_t.html",tooltip=" "];
+  Node9 [label="CAMERA input source\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___i_n_p_u_t___s_o_u_r_c_e.html",tooltip=" "];
+  Node7 [label="CAMERA interrupt clear\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___i_n_t_c_l_r.html",tooltip=" "];
+  Node6 [label="CAMERA interrupt mask\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___i_n_t_m_a_s_k.html",tooltip=" "];
+  Node5 [label="CAMERA interrupt status\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___i_n_t_s_t_s.html",tooltip=" "];
+  Node4 [label="CAMERA output format\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___o_u_t_p_u_t___f_o_r_m_a_t.html",tooltip=" "];
+  Node8 [label="CAMERA hsync/vsync\l polarity active level\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___c_a_m___p_o_l_a_r_i_t_y.html",tooltip=" "];
+  Node2 [label="LHAL",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___l_h_a_l.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node8 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node9 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node10 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node11 [shape=plaintext, dir="back", style="solid"];
+}

@@ -1,0 +1,8 @@
+digraph "bflb_dma_lli_control_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_dma_lli_control_s\n|+ TransferSize\l+ SBSize\l+ dst_min_mode\l+ DBSize\l+ dst_add_mode\l+ SWidth\l+ reserved_20\l+ DWidth\l+ fix_cnt\l+ SLargerD\l和 6 更多...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+}

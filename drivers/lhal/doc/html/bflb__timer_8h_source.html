@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_timer.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__timer_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_timer.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__timer_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_TIMER_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_TIMER_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#if !defined(BL702L)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_l_k___s_o_u_r_c_e.html#ga361e113f2be40f8d5610c364849c4294">   18</a></span><span class="preprocessor">#define TIMER_CLKSRC_BCLK 0</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_l_k___s_o_u_r_c_e.html#gac7dc957038beba8de44286b5082bbcc1">   20</a></span><span class="preprocessor">#define TIMER_CLKSRC_32K  1</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_l_k___s_o_u_r_c_e.html#gaa8ac8093aa87365136d11a15603c2722">   21</a></span><span class="preprocessor">#define TIMER_CLKSRC_1K   2</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_l_k___s_o_u_r_c_e.html#ga3257d0a2e57f92607ce4340cd7aa44d9">   22</a></span><span class="preprocessor">#define TIMER_CLKSRC_XTAL 3</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#if !defined(BL702) &amp;&amp; !defined(BL602)</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_l_k___s_o_u_r_c_e.html#gad2fca813c88f9bc84be2c21bdffba74c">   24</a></span><span class="preprocessor">#define TIMER_CLKSRC_GPIO 4</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_l_k___s_o_u_r_c_e.html#ga4361cea7acbbbfd5e88693f1ff027783">   26</a></span><span class="preprocessor">#define TIMER_CLKSRC_NO   5</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_o_u_n_t_e_r___m_o_d_e.html#ga1a5aabc9ad60ea7f10fe58f588da9460">   34</a></span><span class="preprocessor">#define TIMER_COUNTER_MODE_PROLOAD 0</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_o_u_n_t_e_r___m_o_d_e.html#gae0a8c1a21b4284631e7a79535c5af1da">   35</a></span><span class="preprocessor">#define TIMER_COUNTER_MODE_UP      1</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_o_m_p___i_d.html#gaa7d7d8fcea539c0f8a24ecec68da42b1">   43</a></span><span class="preprocessor">#define TIMER_COMP_ID_0 0</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_o_m_p___i_d.html#ga20fda91089563ea24058c806f47ae442">   44</a></span><span class="preprocessor">#define TIMER_COMP_ID_1 1</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_o_m_p___i_d.html#ga99c206908f76d946354427a7d9ab06ca">   45</a></span><span class="preprocessor">#define TIMER_COMP_ID_2 2</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_o_m_p___i_d.html#gaa1785021b6fd3c9deb47f74bc4d1ba17">   46</a></span><span class="preprocessor">#define TIMER_COMP_NONE 3</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_a_p_t_u_r_e___p_o_l_a_r_i_t_y.html#gadfd2fbc0de8fdf6572ccdd58702305df">   54</a></span><span class="preprocessor">#define TIMER_CAPTURE_POLARITY_POSITIVE 0</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r___c_a_p_t_u_r_e___p_o_l_a_r_i_t_y.html#gaec2adb383b6e69a682bd03bc8654573f">   55</a></span><span class="preprocessor">#define TIMER_CAPTURE_POLARITY_NEGATIVE 1</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html">   72</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__timer__config__s.html">bflb_timer_config_s</a> {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html#aa7c1f56ee6c2363ee903422261485a97">   73</a></span>    uint8_t <a class="code hl_variable" href="structbflb__timer__config__s.html#aa7c1f56ee6c2363ee903422261485a97">counter_mode</a>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html#a6003e1827ee8f3f5d490821912fcf974">   74</a></span>    uint8_t <a class="code hl_variable" href="structbflb__timer__config__s.html#a6003e1827ee8f3f5d490821912fcf974">clock_source</a>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html#a0ac87e81313703c15648a29b2de96e9b">   75</a></span>    uint8_t <a class="code hl_variable" href="structbflb__timer__config__s.html#a0ac87e81313703c15648a29b2de96e9b">clock_div</a>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html#afbe8bd496d2827bd6815ed560b50bc52">   76</a></span>    uint8_t <a class="code hl_variable" href="structbflb__timer__config__s.html#afbe8bd496d2827bd6815ed560b50bc52">trigger_comp_id</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html#af3e4da2f4ed458819a42ae4de9f8e1b4">   77</a></span>    uint32_t <a class="code hl_variable" href="structbflb__timer__config__s.html#af3e4da2f4ed458819a42ae4de9f8e1b4">comp0_val</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html#ad894ddc5a102ff5ec2b2565133e1d4e9">   78</a></span>    uint32_t <a class="code hl_variable" href="structbflb__timer__config__s.html#ad894ddc5a102ff5ec2b2565133e1d4e9">comp1_val</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html#a83e2ad32b27d32e63023373d55adc3dd">   79</a></span>    uint32_t <a class="code hl_variable" href="structbflb__timer__config__s.html#a83e2ad32b27d32e63023373d55adc3dd">comp2_val</a>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="structbflb__timer__config__s.html#a78637417521596776a1335735a590b4f">   80</a></span>    uint32_t <a class="code hl_variable" href="structbflb__timer__config__s.html#a78637417521596776a1335735a590b4f">preload_val</a>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>};</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="structbflb__timer__capture__config__s.html">   89</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__timer__capture__config__s.html">bflb_timer_capture_config_s</a> {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="structbflb__timer__capture__config__s.html#ab40a673fb19c1e650e1f79de91788aa5">   90</a></span>    uint8_t <a class="code hl_variable" href="structbflb__timer__capture__config__s.html#ab40a673fb19c1e650e1f79de91788aa5">pin</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="structbflb__timer__capture__config__s.html#a2916d65ca772240e340b837b6d766cd8">   91</a></span>    uint8_t <a class="code hl_variable" href="structbflb__timer__capture__config__s.html#a2916d65ca772240e340b837b6d766cd8">polarity</a>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>};</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#gaa9e8c19cb1a11dd9a9a928fc4303c12b">  104</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#gaa9e8c19cb1a11dd9a9a928fc4303c12b">bflb_timer_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__timer__config__s.html">bflb_timer_config_s</a> *config);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#ga131292305692c30b67090b4eca1e2144">  111</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#ga131292305692c30b67090b4eca1e2144">bflb_timer_deinit</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#gaa1bc4e2657d05f9462f4ac5caf44c919">  118</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#gaa1bc4e2657d05f9462f4ac5caf44c919">bflb_timer_start</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#ga98a4d64661af382855bb9c9de51c9e1c">  125</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#ga98a4d64661af382855bb9c9de51c9e1c">bflb_timer_stop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#ga3e658c05b0011b67c2bbb122fd586514">  133</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#ga3e658c05b0011b67c2bbb122fd586514">bflb_timer_set_preloadvalue</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t val);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#ga676b9c7284046b98b8a62ff16e11638a">  142</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#ga676b9c7284046b98b8a62ff16e11638a">bflb_timer_set_compvalue</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmp_no, uint32_t val);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#ga66f42b1cacce2dc48f8b7a0cc585c76a">  151</a></span>uint32_t <a class="code hl_function" href="group___t_i_m_e_r.html#ga66f42b1cacce2dc48f8b7a0cc585c76a">bflb_timer_get_compvalue</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmp_no);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#gafc0115823255f856c8399766d6502709">  159</a></span>uint32_t <a class="code hl_function" href="group___t_i_m_e_r.html#gafc0115823255f856c8399766d6502709">bflb_timer_get_countervalue</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#ga1c0decb06a4138bc78c8e2b2302f3cf9">  168</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#ga1c0decb06a4138bc78c8e2b2302f3cf9">bflb_timer_compint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmp_no, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#ga9cf45b0f2fc1328b6c40cc5f3858ff0b">  177</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="group___t_i_m_e_r.html#ga9cf45b0f2fc1328b6c40cc5f3858ff0b">bflb_timer_get_compint_status</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmp_no);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#gabf3a9916a1b9377e91a3cb23b31a3750">  185</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#gabf3a9916a1b9377e91a3cb23b31a3750">bflb_timer_compint_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmp_no);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="preprocessor">#if !defined(BL702) || !defined(BL602)</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#gadce9d5b5c6140efe14c0d60a0906e3cf">  188</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___t_i_m_e_r.html#gadce9d5b5c6140efe14c0d60a0906e3cf">bflb_timer_capture_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__timer__capture__config__s.html">bflb_timer_capture_config_s</a> *config);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="group___t_i_m_e_r.html#gab50ec4c94fe2abfcc40942ac85a1c6f1">  189</a></span>uint32_t <a class="code hl_function" href="group___t_i_m_e_r.html#gab50ec4c94fe2abfcc40942ac85a1c6f1">bflb_timer_capture_get_pulsewidth</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>}</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_ga131292305692c30b67090b4eca1e2144"><div class="ttname"><a href="group___t_i_m_e_r.html#ga131292305692c30b67090b4eca1e2144">bflb_timer_deinit</a></div><div class="ttdeci">void bflb_timer_deinit(struct bflb_device_s *dev)</div><div class="ttdoc">Deinitialize timer.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_ga1c0decb06a4138bc78c8e2b2302f3cf9"><div class="ttname"><a href="group___t_i_m_e_r.html#ga1c0decb06a4138bc78c8e2b2302f3cf9">bflb_timer_compint_mask</a></div><div class="ttdeci">void bflb_timer_compint_mask(struct bflb_device_s *dev, uint8_t cmp_no, bool mask)</div><div class="ttdoc">Enable or disable timer interrupt of corresponding compare id.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_ga3e658c05b0011b67c2bbb122fd586514"><div class="ttname"><a href="group___t_i_m_e_r.html#ga3e658c05b0011b67c2bbb122fd586514">bflb_timer_set_preloadvalue</a></div><div class="ttdeci">void bflb_timer_set_preloadvalue(struct bflb_device_s *dev, uint32_t val)</div><div class="ttdoc">Set timer preload value.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_ga66f42b1cacce2dc48f8b7a0cc585c76a"><div class="ttname"><a href="group___t_i_m_e_r.html#ga66f42b1cacce2dc48f8b7a0cc585c76a">bflb_timer_get_compvalue</a></div><div class="ttdeci">uint32_t bflb_timer_get_compvalue(struct bflb_device_s *dev, uint8_t cmp_no)</div><div class="ttdoc">Get compare value of corresponding compare id.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_ga676b9c7284046b98b8a62ff16e11638a"><div class="ttname"><a href="group___t_i_m_e_r.html#ga676b9c7284046b98b8a62ff16e11638a">bflb_timer_set_compvalue</a></div><div class="ttdeci">void bflb_timer_set_compvalue(struct bflb_device_s *dev, uint8_t cmp_no, uint32_t val)</div><div class="ttdoc">Set compare value of corresponding compare id.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_ga98a4d64661af382855bb9c9de51c9e1c"><div class="ttname"><a href="group___t_i_m_e_r.html#ga98a4d64661af382855bb9c9de51c9e1c">bflb_timer_stop</a></div><div class="ttdeci">void bflb_timer_stop(struct bflb_device_s *dev)</div><div class="ttdoc">Stop timer.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_ga9cf45b0f2fc1328b6c40cc5f3858ff0b"><div class="ttname"><a href="group___t_i_m_e_r.html#ga9cf45b0f2fc1328b6c40cc5f3858ff0b">bflb_timer_get_compint_status</a></div><div class="ttdeci">bool bflb_timer_get_compint_status(struct bflb_device_s *dev, uint8_t cmp_no)</div><div class="ttdoc">Get timer interrupt status of corresponding compare id.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_gaa1bc4e2657d05f9462f4ac5caf44c919"><div class="ttname"><a href="group___t_i_m_e_r.html#gaa1bc4e2657d05f9462f4ac5caf44c919">bflb_timer_start</a></div><div class="ttdeci">void bflb_timer_start(struct bflb_device_s *dev)</div><div class="ttdoc">Start timer.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_gaa9e8c19cb1a11dd9a9a928fc4303c12b"><div class="ttname"><a href="group___t_i_m_e_r.html#gaa9e8c19cb1a11dd9a9a928fc4303c12b">bflb_timer_init</a></div><div class="ttdeci">void bflb_timer_init(struct bflb_device_s *dev, const struct bflb_timer_config_s *config)</div><div class="ttdoc">Initialize timer.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_gab50ec4c94fe2abfcc40942ac85a1c6f1"><div class="ttname"><a href="group___t_i_m_e_r.html#gab50ec4c94fe2abfcc40942ac85a1c6f1">bflb_timer_capture_get_pulsewidth</a></div><div class="ttdeci">uint32_t bflb_timer_capture_get_pulsewidth(struct bflb_device_s *dev)</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_gabf3a9916a1b9377e91a3cb23b31a3750"><div class="ttname"><a href="group___t_i_m_e_r.html#gabf3a9916a1b9377e91a3cb23b31a3750">bflb_timer_compint_clear</a></div><div class="ttdeci">void bflb_timer_compint_clear(struct bflb_device_s *dev, uint8_t cmp_no)</div><div class="ttdoc">Clear timer interrupt status of corresponding compare id.</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_gadce9d5b5c6140efe14c0d60a0906e3cf"><div class="ttname"><a href="group___t_i_m_e_r.html#gadce9d5b5c6140efe14c0d60a0906e3cf">bflb_timer_capture_init</a></div><div class="ttdeci">void bflb_timer_capture_init(struct bflb_device_s *dev, const struct bflb_timer_capture_config_s *config)</div></div>
+<div class="ttc" id="agroup___t_i_m_e_r_html_gafc0115823255f856c8399766d6502709"><div class="ttname"><a href="group___t_i_m_e_r.html#gafc0115823255f856c8399766d6502709">bflb_timer_get_countervalue</a></div><div class="ttdeci">uint32_t bflb_timer_get_countervalue(struct bflb_device_s *dev)</div><div class="ttdoc">Get timer counter value.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__timer__capture__config__s_html"><div class="ttname"><a href="structbflb__timer__capture__config__s.html">bflb_timer_capture_config_s</a></div><div class="ttdoc">TIMER capture configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00089">bflb_timer.h:89</a></div></div>
+<div class="ttc" id="astructbflb__timer__capture__config__s_html_a2916d65ca772240e340b837b6d766cd8"><div class="ttname"><a href="structbflb__timer__capture__config__s.html#a2916d65ca772240e340b837b6d766cd8">bflb_timer_capture_config_s::polarity</a></div><div class="ttdeci">uint8_t polarity</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00091">bflb_timer.h:91</a></div></div>
+<div class="ttc" id="astructbflb__timer__capture__config__s_html_ab40a673fb19c1e650e1f79de91788aa5"><div class="ttname"><a href="structbflb__timer__capture__config__s.html#ab40a673fb19c1e650e1f79de91788aa5">bflb_timer_capture_config_s::pin</a></div><div class="ttdeci">uint8_t pin</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00090">bflb_timer.h:90</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html"><div class="ttname"><a href="structbflb__timer__config__s.html">bflb_timer_config_s</a></div><div class="ttdoc">TIMER configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00072">bflb_timer.h:72</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html_a0ac87e81313703c15648a29b2de96e9b"><div class="ttname"><a href="structbflb__timer__config__s.html#a0ac87e81313703c15648a29b2de96e9b">bflb_timer_config_s::clock_div</a></div><div class="ttdeci">uint8_t clock_div</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00075">bflb_timer.h:75</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html_a6003e1827ee8f3f5d490821912fcf974"><div class="ttname"><a href="structbflb__timer__config__s.html#a6003e1827ee8f3f5d490821912fcf974">bflb_timer_config_s::clock_source</a></div><div class="ttdeci">uint8_t clock_source</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00074">bflb_timer.h:74</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html_a78637417521596776a1335735a590b4f"><div class="ttname"><a href="structbflb__timer__config__s.html#a78637417521596776a1335735a590b4f">bflb_timer_config_s::preload_val</a></div><div class="ttdeci">uint32_t preload_val</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00080">bflb_timer.h:80</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html_a83e2ad32b27d32e63023373d55adc3dd"><div class="ttname"><a href="structbflb__timer__config__s.html#a83e2ad32b27d32e63023373d55adc3dd">bflb_timer_config_s::comp2_val</a></div><div class="ttdeci">uint32_t comp2_val</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00079">bflb_timer.h:79</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html_aa7c1f56ee6c2363ee903422261485a97"><div class="ttname"><a href="structbflb__timer__config__s.html#aa7c1f56ee6c2363ee903422261485a97">bflb_timer_config_s::counter_mode</a></div><div class="ttdeci">uint8_t counter_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00073">bflb_timer.h:73</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html_ad894ddc5a102ff5ec2b2565133e1d4e9"><div class="ttname"><a href="structbflb__timer__config__s.html#ad894ddc5a102ff5ec2b2565133e1d4e9">bflb_timer_config_s::comp1_val</a></div><div class="ttdeci">uint32_t comp1_val</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00078">bflb_timer.h:78</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html_af3e4da2f4ed458819a42ae4de9f8e1b4"><div class="ttname"><a href="structbflb__timer__config__s.html#af3e4da2f4ed458819a42ae4de9f8e1b4">bflb_timer_config_s::comp0_val</a></div><div class="ttdeci">uint32_t comp0_val</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00077">bflb_timer.h:77</a></div></div>
+<div class="ttc" id="astructbflb__timer__config__s_html_afbe8bd496d2827bd6815ed560b50bc52"><div class="ttname"><a href="structbflb__timer__config__s.html#afbe8bd496d2827bd6815ed560b50bc52">bflb_timer_config_s::trigger_comp_id</a></div><div class="ttdeci">uint8_t trigger_comp_id</div><div class="ttdef"><b>Definition:</b> <a href="bflb__timer_8h_source.html#l00076">bflb_timer.h:76</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__timer_8h.html">bflb_timer.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

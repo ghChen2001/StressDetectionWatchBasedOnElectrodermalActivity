@@ -1,0 +1,8 @@
+digraph "bflb_uart_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_uart_config_s\n|+ baudrate\l+ direction\l+ data_bits\l+ stop_bits\l+ parity\l+ bit_order\l+ flow_ctrl\l+ tx_fifo_threshold\l+ rx_fifo_threshold\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="UART configuration structure"];
+}

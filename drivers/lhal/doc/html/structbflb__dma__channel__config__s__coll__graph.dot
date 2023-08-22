@@ -1,0 +1,8 @@
+digraph "bflb_dma_channel_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_dma_channel_config_s\n|+ direction\l+ src_req\l+ dst_req\l+ src_addr_inc\l+ dst_addr_inc\l+ src_burst_count\l+ dst_burst_count\l+ src_width\l+ dst_width\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="DMA configuration structure"];
+}

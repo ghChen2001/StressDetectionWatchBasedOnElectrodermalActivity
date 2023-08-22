@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: DMA</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___d_m_a.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">DMA<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+DMA 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___d_m_a.png" border="0" usemap="#agroup______d__m__a" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___d_m_a___d_i_r_e_c_t_i_o_n"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a___d_i_r_e_c_t_i_o_n.html">dma transfer direction definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___d_m_a___a_d_d_r___i_n_c_r_e_m_e_n_t"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a___a_d_d_r___i_n_c_r_e_m_e_n_t.html">dma source and destination address increment definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___d_m_a___d_a_t_a___w_i_d_t_h"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a___d_a_t_a___w_i_d_t_h.html">dma data width definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___d_m_a___b_u_r_s_t___c_o_u_n_t"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a___b_u_r_s_t___c_o_u_n_t.html">dma burst increment count definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___d_m_a___c_m_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a___c_m_d.html">dma feature control cmd definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionbflb__dma__lli__control__s.html">bflb_dma_lli_control_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__dma__channel__lli__pool__s.html">bflb_dma_channel_lli_pool_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DMA channel lli pool structure  <a href="structbflb__dma__channel__lli__pool__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__dma__channel__lli__transfer__s.html">bflb_dma_channel_lli_transfer_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DMA channel lli transfer structure  <a href="structbflb__dma__channel__lli__transfer__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__dma__channel__config__s.html">bflb_dma_channel_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DMA configuration structure  <a href="structbflb__dma__channel__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga27798bda62ef1525b59152ec53f8dbe1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga27798bda62ef1525b59152ec53f8dbe1">bflb_dma_channel_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const struct <a class="el" href="structbflb__dma__channel__config__s.html">bflb_dma_channel_config_s</a> *config)</td></tr>
+<tr class="memdesc:ga27798bda62ef1525b59152ec53f8dbe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize dma channel.  <br /></td></tr>
+<tr class="separator:ga27798bda62ef1525b59152ec53f8dbe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa435cd40820ce5ce9b33360877d433d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#gaa435cd40820ce5ce9b33360877d433d2">bflb_dma_channel_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gaa435cd40820ce5ce9b33360877d433d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize dma channel.  <br /></td></tr>
+<tr class="separator:gaa435cd40820ce5ce9b33360877d433d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf94b696acf79e3c987755ef79435e8a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#gaf94b696acf79e3c987755ef79435e8a9">bflb_dma_channel_start</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gaf94b696acf79e3c987755ef79435e8a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start dma channel transfer.  <br /></td></tr>
+<tr class="separator:gaf94b696acf79e3c987755ef79435e8a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga97694fd00e8e38c4d9457462aa055477"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga97694fd00e8e38c4d9457462aa055477">bflb_dma_channel_stop</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga97694fd00e8e38c4d9457462aa055477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop dma channel transfer.  <br /></td></tr>
+<tr class="separator:ga97694fd00e8e38c4d9457462aa055477"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga81ae4cf9b6c2a6ca42e74520b74fa203"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga81ae4cf9b6c2a6ca42e74520b74fa203">bflb_dma_channel_isbusy</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga81ae4cf9b6c2a6ca42e74520b74fa203"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if dma channel is in busy.  <br /></td></tr>
+<tr class="separator:ga81ae4cf9b6c2a6ca42e74520b74fa203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga619531259b8a5037248fe8f89d1aadbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga619531259b8a5037248fe8f89d1aadbf">bflb_dma_channel_irq_attach</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, void(*callback)(void *arg), void *arg)</td></tr>
+<tr class="memdesc:ga619531259b8a5037248fe8f89d1aadbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register dma channel transmission completion interrupt callback.  <br /></td></tr>
+<tr class="separator:ga619531259b8a5037248fe8f89d1aadbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaca3597684b184fe5c250d62aa58ccc92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#gaca3597684b184fe5c250d62aa58ccc92">bflb_dma_channel_irq_detach</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gaca3597684b184fe5c250d62aa58ccc92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unregister dma channel transmission completion interrupt callback.  <br /></td></tr>
+<tr class="separator:gaca3597684b184fe5c250d62aa58ccc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga474dd84d6195e1e5adc60947f3316453"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga474dd84d6195e1e5adc60947f3316453">bflb_dma_channel_lli_reload</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, struct <a class="el" href="structbflb__dma__channel__lli__pool__s.html">bflb_dma_channel_lli_pool_s</a> *lli_pool, uint32_t max_lli_count, struct <a class="el" href="structbflb__dma__channel__lli__transfer__s.html">bflb_dma_channel_lli_transfer_s</a> *transfer, uint32_t count)</td></tr>
+<tr class="memdesc:ga474dd84d6195e1e5adc60947f3316453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config dma channel lli.  <br /></td></tr>
+<tr class="separator:ga474dd84d6195e1e5adc60947f3316453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9144517bd10bedbb3e1994d81fe41987"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga9144517bd10bedbb3e1994d81fe41987">bflb_dma_channel_lli_link_head</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, struct <a class="el" href="structbflb__dma__channel__lli__pool__s.html">bflb_dma_channel_lli_pool_s</a> *lli_pool, uint32_t used_lli_count)</td></tr>
+<tr class="memdesc:ga9144517bd10bedbb3e1994d81fe41987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable lli continueous mode.  <br /></td></tr>
+<tr class="separator:ga9144517bd10bedbb3e1994d81fe41987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafda8f906799fc351ec0c667eb272972f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#gafda8f906799fc351ec0c667eb272972f">bflb_dma_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="memdesc:gafda8f906799fc351ec0c667eb272972f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control dma feature.  <br /></td></tr>
+<tr class="separator:gafda8f906799fc351ec0c667eb272972f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga197a07e9057dd908311bdbf1111b3894"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga197a07e9057dd908311bdbf1111b3894">bflb_dma_channel_tcint_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool mask)</td></tr>
+<tr class="memdesc:ga197a07e9057dd908311bdbf1111b3894"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable dma channel transmission completion interrupt.  <br /></td></tr>
+<tr class="separator:ga197a07e9057dd908311bdbf1111b3894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e283bd0ba4a8438d7dac01ae34e808f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga1e283bd0ba4a8438d7dac01ae34e808f">bflb_dma_channel_get_tcint_status</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga1e283bd0ba4a8438d7dac01ae34e808f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if dma channel transfers completely.  <br /></td></tr>
+<tr class="separator:ga1e283bd0ba4a8438d7dac01ae34e808f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga94077efffc3e947ff8b9e4d6d5ea239e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___d_m_a.html#ga94077efffc3e947ff8b9e4d6d5ea239e">bflb_dma_channel_tcint_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga94077efffc3e947ff8b9e4d6d5ea239e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear dma channel transmission completion interrupt status.  <br /></td></tr>
+<tr class="separator:ga94077efffc3e947ff8b9e4d6d5ea239e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">函数说明</h2>
+<a id="gaa435cd40820ce5ce9b33360877d433d2" name="gaa435cd40820ce5ce9b33360877d433d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa435cd40820ce5ce9b33360877d433d2">&#9670;&#160;</a></span>bflb_dma_channel_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize dma channel. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga1e283bd0ba4a8438d7dac01ae34e808f" name="ga1e283bd0ba4a8438d7dac01ae34e808f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1e283bd0ba4a8438d7dac01ae34e808f">&#9670;&#160;</a></span>bflb_dma_channel_get_tcint_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bflb_dma_channel_get_tcint_status </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if dma channel transfers completely. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true means yes, false means no. </dd></dl>
+
+</div>
+</div>
+<a id="ga27798bda62ef1525b59152ec53f8dbe1" name="ga27798bda62ef1525b59152ec53f8dbe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga27798bda62ef1525b59152ec53f8dbe1">&#9670;&#160;</a></span>bflb_dma_channel_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structbflb__dma__channel__config__s.html">bflb_dma_channel_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize dma channel. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>pointer to save dma channel configuration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga619531259b8a5037248fe8f89d1aadbf" name="ga619531259b8a5037248fe8f89d1aadbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga619531259b8a5037248fe8f89d1aadbf">&#9670;&#160;</a></span>bflb_dma_channel_irq_attach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_irq_attach </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(void *arg)&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register dma channel transmission completion interrupt callback. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">callback</td><td>interrupt callback </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaca3597684b184fe5c250d62aa58ccc92" name="gaca3597684b184fe5c250d62aa58ccc92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaca3597684b184fe5c250d62aa58ccc92">&#9670;&#160;</a></span>bflb_dma_channel_irq_detach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_irq_detach </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unregister dma channel transmission completion interrupt callback. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga81ae4cf9b6c2a6ca42e74520b74fa203" name="ga81ae4cf9b6c2a6ca42e74520b74fa203"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga81ae4cf9b6c2a6ca42e74520b74fa203">&#9670;&#160;</a></span>bflb_dma_channel_isbusy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bflb_dma_channel_isbusy </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if dma channel is in busy. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true means dma channel does not transfer completely, otherwise transfers completely. </dd></dl>
+
+</div>
+</div>
+<a id="ga9144517bd10bedbb3e1994d81fe41987" name="ga9144517bd10bedbb3e1994d81fe41987"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9144517bd10bedbb3e1994d81fe41987">&#9670;&#160;</a></span>bflb_dma_channel_lli_link_head()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_lli_link_head </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structbflb__dma__channel__lli__pool__s.html">bflb_dma_channel_lli_pool_s</a> *&#160;</td>
+          <td class="paramname"><em>lli_pool</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>used_lli_count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable lli continueous mode. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lli_pool</td><td>pointer to lli pool </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">used_lli_count</td><td>number of used lli. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga474dd84d6195e1e5adc60947f3316453" name="ga474dd84d6195e1e5adc60947f3316453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga474dd84d6195e1e5adc60947f3316453">&#9670;&#160;</a></span>bflb_dma_channel_lli_reload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_dma_channel_lli_reload </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structbflb__dma__channel__lli__pool__s.html">bflb_dma_channel_lli_pool_s</a> *&#160;</td>
+          <td class="paramname"><em>lli_pool</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>max_lli_count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structbflb__dma__channel__lli__transfer__s.html">bflb_dma_channel_lli_transfer_s</a> *&#160;</td>
+          <td class="paramname"><em>transfer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config dma channel lli. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lli_pool</td><td>pointer to lli pool </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_lli_count</td><td>lli pool size </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">transfer</td><td>pointer to transfer structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>transfer count. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure, otherwise means number of used lli. </dd></dl>
+
+</div>
+</div>
+<a id="gaf94b696acf79e3c987755ef79435e8a9" name="gaf94b696acf79e3c987755ef79435e8a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf94b696acf79e3c987755ef79435e8a9">&#9670;&#160;</a></span>bflb_dma_channel_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_start </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start dma channel transfer. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga97694fd00e8e38c4d9457462aa055477" name="ga97694fd00e8e38c4d9457462aa055477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga97694fd00e8e38c4d9457462aa055477">&#9670;&#160;</a></span>bflb_dma_channel_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_stop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop dma channel transfer. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga94077efffc3e947ff8b9e4d6d5ea239e" name="ga94077efffc3e947ff8b9e4d6d5ea239e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga94077efffc3e947ff8b9e4d6d5ea239e">&#9670;&#160;</a></span>bflb_dma_channel_tcint_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_tcint_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear dma channel transmission completion interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga197a07e9057dd908311bdbf1111b3894" name="ga197a07e9057dd908311bdbf1111b3894"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga197a07e9057dd908311bdbf1111b3894">&#9670;&#160;</a></span>bflb_dma_channel_tcint_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_dma_channel_tcint_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable dma channel transmission completion interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gafda8f906799fc351ec0c667eb272972f" name="gafda8f906799fc351ec0c667eb272972f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafda8f906799fc351ec0c667eb272972f">&#9670;&#160;</a></span>bflb_dma_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_dma_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control dma feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>feature command. use <a class="el" href="group___d_m_a___c_m_d.html">dma feature control cmd definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

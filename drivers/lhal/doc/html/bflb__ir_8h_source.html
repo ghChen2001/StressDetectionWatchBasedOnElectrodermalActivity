@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_ir.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__ir_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_ir.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__ir_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_IR_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_IR_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#if !defined(BL616)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___i_r___t_x___m_o_d_e.html#ga70df28557387b1acf4a6a9cfaecd6ca2">   18</a></span><span class="preprocessor">#define IR_TX_NEC       0</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="group___i_r___t_x___m_o_d_e.html#ga1141b14dbfda8ececbf13c91d10af5f7">   19</a></span><span class="preprocessor">#define IR_TX_RC5       1</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="group___i_r___t_x___m_o_d_e.html#gafd1ec188c2e7402c126c1693e1d79507">   20</a></span><span class="preprocessor">#define IR_TX_SWM       2</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="group___i_r___t_x___m_o_d_e.html#gae6696542a3d7cae7107618af5b6ebb4b">   21</a></span><span class="preprocessor">#define IR_TX_CUSTOMIZE 3</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702)</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group___i_r___t_x___f_i_f_o___w_i_d_t_h.html#gad3cd3008e3f19526bf1649bc2f643328">   30</a></span><span class="preprocessor">#define IR_TX_FIFO_WIDTH_8BIT  0</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="group___i_r___t_x___f_i_f_o___w_i_d_t_h.html#gaaf86b17b3df6c684b01333c136452d92">   31</a></span><span class="preprocessor">#define IR_TX_FIFO_WIDTH_16BIT 1</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="group___i_r___t_x___f_i_f_o___w_i_d_t_h.html#gac80a72ef3d0f8d234bd9afbb37a9144a">   32</a></span><span class="preprocessor">#define IR_TX_FIFO_WIDTH_24BIT 2</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="group___i_r___t_x___f_i_f_o___w_i_d_t_h.html#gadc29b420355ddbc7a64c07dc73ae9a9d">   34</a></span><span class="preprocessor">#define IR_TX_FIFO_WIDTH_32BIT 3</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="group___i_r___t_x___i_n_t_e_n.html#gad80a78bf3a351a477896892e1e075fa9">   42</a></span><span class="preprocessor">#define IR_TX_INTEN_END (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702)</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___i_r___t_x___i_n_t_e_n.html#gaa366fc8ea4b742b128265d09da345d8a">   44</a></span><span class="preprocessor">#define IR_TX_INTEN_FIFO (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___i_r___t_x___i_n_t_e_n.html#ga3dc61e94d711f72be3eaeb94d00c22c6">   45</a></span><span class="preprocessor">#define IR_TX_INTEN_FER  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___i_r___t_x___i_n_t_s_t_s.html#ga192cd01d8094c7cf3cb10c687a6a98d9">   54</a></span><span class="preprocessor">#define IR_TX_INTSTS_END (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702)</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="group___i_r___t_x___i_n_t_s_t_s.html#ga7100fb09cd2e8e597ddee8dfb07b7999">   56</a></span><span class="preprocessor">#define IR_TX_INTSTS_FIFO (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group___i_r___t_x___i_n_t_s_t_s.html#gac850c958c2802397ca4c72513f3fcbe6">   57</a></span><span class="preprocessor">#define IR_TX_INTSTS_FER  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#if !defined(BL702L)</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group___i_r___r_x___m_o_d_e.html#ga82f21a70278938df7318f997eb305f4d">   69</a></span><span class="preprocessor">#define IR_RX_NEC 0</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="group___i_r___r_x___m_o_d_e.html#ga3317f1fd975307149b6ddcd7daaba927">   70</a></span><span class="preprocessor">#define IR_RX_RC5 1</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___i_r___r_x___m_o_d_e.html#gac7b649c9cbbd63718b1ff2e96376687c">   71</a></span><span class="preprocessor">#define IR_RX_SWM 2</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="group___i_r___r_x___i_n_t_e_n.html#ga4e41d29389dcfbcae30e590f424e9c8d">   79</a></span><span class="preprocessor">#define IR_RX_INTEN_END (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702)</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="group___i_r___r_x___i_n_t_e_n.html#ga09827998a4528207ed46dfb50fe40a46">   81</a></span><span class="preprocessor">#define IR_RX_INTEN_FIFO (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group___i_r___r_x___i_n_t_e_n.html#ga517f831e579da54094a74f553d85e146">   82</a></span><span class="preprocessor">#define IR_RX_INTEN_FER  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="group___i_r___r_x___i_n_t_s_t_s.html#ga017a99ef52788426b166be5ccd1a5146">   91</a></span><span class="preprocessor">#define IR_RX_INTSTS_END (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702)</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="group___i_r___r_x___i_n_t_s_t_s.html#gacb8333152eb512500531c179b3a39cba">   93</a></span><span class="preprocessor">#define IR_RX_INTSTS_FIFO (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="group___i_r___r_x___i_n_t_s_t_s.html#ga45b2c81a08246cea4cd960a2e6132b2b">   94</a></span><span class="preprocessor">#define IR_RX_INTSTS_FER  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#if !defined(BL616)</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html">  133</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__ir__tx__config__s.html">bflb_ir_tx_config_s</a> {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a2cdf02113fb9c15b11d571ea10bd2d05">  134</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a2cdf02113fb9c15b11d571ea10bd2d05">tx_mode</a>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a6ad5ab806aecadd6cc55918f18742678">  135</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a6ad5ab806aecadd6cc55918f18742678">data_bits</a>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a74d1a9d1eb256259081b47d7f1ff74c2">  136</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a74d1a9d1eb256259081b47d7f1ff74c2">tail_inverse</a>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#aa2461dd0d7767767e7b732876007fcd4">  137</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#aa2461dd0d7767767e7b732876007fcd4">tail_enable</a>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a33f1e794f5d259c7cfa32a7469812124">  138</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a33f1e794f5d259c7cfa32a7469812124">head_inverse</a>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#adcda6be9ca66328c1b364e2d20259c0c">  139</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#adcda6be9ca66328c1b364e2d20259c0c">head_enable</a>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#ab4e698e0877a73ecc1fd25615eab72a9">  140</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#ab4e698e0877a73ecc1fd25615eab72a9">logic1_inverse</a>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a22323cd7396d088d0da68cbdbd533835">  141</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a22323cd7396d088d0da68cbdbd533835">logic0_inverse</a>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a9430da6fe04a3507d867ec8e7573e10f">  142</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a9430da6fe04a3507d867ec8e7573e10f">data_enable</a>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a6e2a1382bba574f3a86997e1f72169bf">  143</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a6e2a1382bba574f3a86997e1f72169bf">swm_enable</a>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a0edcc1914e109782e590edd2b1b0897e">  144</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a0edcc1914e109782e590edd2b1b0897e">output_modulation</a>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a1012fb508fd8370d258e7151cd8e6dc5">  145</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a1012fb508fd8370d258e7151cd8e6dc5">output_inverse</a>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a39402f212bde65835d9395ab38182935">  146</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a39402f212bde65835d9395ab38182935">freerun_enable</a>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#aded943f7dfff5db8f404f3dfbab337ac">  147</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#aded943f7dfff5db8f404f3dfbab337ac">continue_enable</a>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#aeb423c0c9ca6a667b19c372c0c9f5c0c">  148</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#aeb423c0c9ca6a667b19c372c0c9f5c0c">fifo_width</a>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a27cf32b1a08dabd2b7c6488bd9b5ee9c">  149</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a27cf32b1a08dabd2b7c6488bd9b5ee9c">fifo_threshold</a>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#ac99c1c04409e1af992a8ce9bb1559ab8">  150</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#ac99c1c04409e1af992a8ce9bb1559ab8">logic0_pulse_width_1</a>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a86f13ff33a7d7b82a1c670edfbee3e8f">  151</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a86f13ff33a7d7b82a1c670edfbee3e8f">logic0_pulse_width_0</a>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#af0d56204e7b0496995a5648412cb8778">  152</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#af0d56204e7b0496995a5648412cb8778">logic1_pulse_width_1</a>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a83122a79d841282f78f6f41342ced348">  153</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a83122a79d841282f78f6f41342ced348">logic1_pulse_width_0</a>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#aa2456ab7e692107782522e176d185c27">  154</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#aa2456ab7e692107782522e176d185c27">head_pulse_width_1</a>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#abd7f7493581aeb782ea49ba193a6e694">  155</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#abd7f7493581aeb782ea49ba193a6e694">head_pulse_width_0</a>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#aaca0f6f0c3e7767341835e763e6ab818">  156</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#aaca0f6f0c3e7767341835e763e6ab818">tail_pulse_width_1</a>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a873db2d49c6ceaca3fb207edd05788b5">  157</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a873db2d49c6ceaca3fb207edd05788b5">tail_pulse_width_0</a>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a26309b640ee622e0f4dfcf48373930c3">  158</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a26309b640ee622e0f4dfcf48373930c3">modu_width_1</a>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#aa6c1495ea5a9ab038d47cae9cfd3f890">  159</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#aa6c1495ea5a9ab038d47cae9cfd3f890">modu_width_0</a>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="structbflb__ir__tx__config__s.html#a4183b5d4b420df578c3b2692e08104b0">  160</a></span>    uint16_t <a class="code hl_variable" href="structbflb__ir__tx__config__s.html#a4183b5d4b420df578c3b2692e08104b0">pulse_width_unit</a>;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>};</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="preprocessor">#if !defined(BL702L)</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="structbflb__ir__rx__config__s.html">  176</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__ir__rx__config__s.html">bflb_ir_rx_config_s</a> {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="structbflb__ir__rx__config__s.html#ab952e6f74eac47d280e18e383b40bca5">  177</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__rx__config__s.html#ab952e6f74eac47d280e18e383b40bca5">rx_mode</a>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="structbflb__ir__rx__config__s.html#a9b9c0b044a4fc2fd5ae7e2f52620c5f3">  178</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__rx__config__s.html#a9b9c0b044a4fc2fd5ae7e2f52620c5f3">input_inverse</a>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="structbflb__ir__rx__config__s.html#ae20f03209878eaeb61969b5f27abf8b5">  179</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__rx__config__s.html#ae20f03209878eaeb61969b5f27abf8b5">deglitch_enable</a>;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="structbflb__ir__rx__config__s.html#a01aabd81d5f3a6e38f6b8f9178794fc9">  180</a></span>    uint8_t <a class="code hl_variable" href="structbflb__ir__rx__config__s.html#a01aabd81d5f3a6e38f6b8f9178794fc9">deglitch_cnt</a>;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="structbflb__ir__rx__config__s.html#a0f5372276ff2b41db9bfe8d4bf2d2061">  181</a></span>    uint16_t <a class="code hl_variable" href="structbflb__ir__rx__config__s.html#a0f5372276ff2b41db9bfe8d4bf2d2061">data_threshold</a>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="structbflb__ir__rx__config__s.html#a37dbc334b7c2260355d3f0bb0d6d125d">  182</a></span>    uint16_t <a class="code hl_variable" href="structbflb__ir__rx__config__s.html#a37dbc334b7c2260355d3f0bb0d6d125d">end_threshold</a>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="structbflb__ir__rx__config__s.html#a171db27032875051cf928b15b4950bd4">  183</a></span>    uint16_t <a class="code hl_variable" href="structbflb__ir__rx__config__s.html#a171db27032875051cf928b15b4950bd4">fifo_threshold</a>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>};</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="preprocessor">#if !defined(BL616)</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="group___i_r.html#ga6010ab8e7474ac352e3b80054e2ebd10">  198</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#ga6010ab8e7474ac352e3b80054e2ebd10">bflb_ir_tx_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__ir__tx__config__s.html">bflb_ir_tx_config_s</a> *config);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="group___i_r.html#gac91442a1ea268c0b3620cc6548d74aee">  207</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#gac91442a1ea268c0b3620cc6548d74aee">bflb_ir_send</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t *data, uint32_t length);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="group___i_r.html#gac6dcb100e19fca4522c81fd090a02ac3">  216</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#gac6dcb100e19fca4522c81fd090a02ac3">bflb_ir_swm_send</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t *data, uint8_t length);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="group___i_r.html#gae4536f259573ce18be4c795fdadcb6ca">  224</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#gae4536f259573ce18be4c795fdadcb6ca">bflb_ir_tx_enable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="group___i_r.html#gab22c0062baa01c714213551452e78853">  233</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#gab22c0062baa01c714213551452e78853">bflb_ir_txint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t int_type, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="group___i_r.html#ga543d01a964c70fa6a4c6fcf2ecbf5aa7">  241</a></span>uint32_t <a class="code hl_function" href="group___i_r.html#ga543d01a964c70fa6a4c6fcf2ecbf5aa7">bflb_ir_get_txint_status</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="group___i_r.html#ga257e9aab2101cca6fc17d54514e33c5e">  248</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#ga257e9aab2101cca6fc17d54514e33c5e">bflb_ir_txint_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="preprocessor">#if !defined(BL602) &amp;&amp; !defined(BL702)</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="group___i_r.html#gab1427f7dafc5563c853b986ac14cbdfa">  257</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#gab1427f7dafc5563c853b986ac14cbdfa">bflb_ir_link_txdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno"><a class="line" href="group___i_r.html#ga0df4d70107e63e221fbe4bd0fad8f231">  265</a></span>uint8_t <a class="code hl_function" href="group___i_r.html#ga0df4d70107e63e221fbe4bd0fad8f231">bflb_ir_get_txfifo_cnt</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno"><a class="line" href="group___i_r.html#gac5762548bcf1c8f09238f2b656010f29">  272</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#gac5762548bcf1c8f09238f2b656010f29">bflb_ir_txfifo_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="preprocessor">#if !defined(BL702L)</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno"><a class="line" href="group___i_r.html#ga24a9ee97c1bb7cf8df9f6322c21bf696">  283</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#ga24a9ee97c1bb7cf8df9f6322c21bf696">bflb_ir_rx_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__ir__rx__config__s.html">bflb_ir_rx_config_s</a> *config);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno"><a class="line" href="group___i_r.html#gad0bd922a64912db0ece4d6bff7657da3">  292</a></span>uint8_t <a class="code hl_function" href="group___i_r.html#gad0bd922a64912db0ece4d6bff7657da3">bflb_ir_receive</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint64_t *data);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno"><a class="line" href="group___i_r.html#gae56a5b7bbc00e2a7ecf234b5b11c19ea">  302</a></span>uint8_t <a class="code hl_function" href="group___i_r.html#gae56a5b7bbc00e2a7ecf234b5b11c19ea">bflb_ir_swm_receive</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t *data, uint8_t length);</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="group___i_r.html#gad43e435d5fd43af7eca2fd293b04049e">  310</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#gad43e435d5fd43af7eca2fd293b04049e">bflb_ir_rx_enable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno"><a class="line" href="group___i_r.html#gaae0f1e1e1a2b7963149cb6a5d272a114">  318</a></span>uint8_t <a class="code hl_function" href="group___i_r.html#gaae0f1e1e1a2b7963149cb6a5d272a114">bflb_ir_get_rxfifo_cnt</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno"><a class="line" href="group___i_r.html#gab5d0b387d17599830f45ab505b4edc38">  325</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#gab5d0b387d17599830f45ab505b4edc38">bflb_ir_rxfifo_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno"><a class="line" href="group___i_r.html#ga90adcf5e7d51b67947eff5eb8e626ad1">  334</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#ga90adcf5e7d51b67947eff5eb8e626ad1">bflb_ir_rxint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t int_type, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="group___i_r.html#ga75b6e1a0b269cd73b26be8c626a7d9bf">  342</a></span>uint32_t <a class="code hl_function" href="group___i_r.html#ga75b6e1a0b269cd73b26be8c626a7d9bf">bflb_ir_get_rxint_status</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno"><a class="line" href="group___i_r.html#ga21457e02c152efffb5bbf37cdd531627">  349</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i_r.html#ga21457e02c152efffb5bbf37cdd531627">bflb_ir_rxint_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno"><a class="line" href="group___i_r.html#ga50815445b712e78a7f0e408a29f44789">  361</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___i_r.html#ga50815445b712e78a7f0e408a29f44789">bflb_ir_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span> </div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>}</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___i_r_html_ga0df4d70107e63e221fbe4bd0fad8f231"><div class="ttname"><a href="group___i_r.html#ga0df4d70107e63e221fbe4bd0fad8f231">bflb_ir_get_txfifo_cnt</a></div><div class="ttdeci">uint8_t bflb_ir_get_txfifo_cnt(struct bflb_device_s *dev)</div><div class="ttdoc">Get ir tx fifo available count.</div></div>
+<div class="ttc" id="agroup___i_r_html_ga21457e02c152efffb5bbf37cdd531627"><div class="ttname"><a href="group___i_r.html#ga21457e02c152efffb5bbf37cdd531627">bflb_ir_rxint_clear</a></div><div class="ttdeci">void bflb_ir_rxint_clear(struct bflb_device_s *dev)</div><div class="ttdoc">Clear ir rx interrupt.</div></div>
+<div class="ttc" id="agroup___i_r_html_ga24a9ee97c1bb7cf8df9f6322c21bf696"><div class="ttname"><a href="group___i_r.html#ga24a9ee97c1bb7cf8df9f6322c21bf696">bflb_ir_rx_init</a></div><div class="ttdeci">void bflb_ir_rx_init(struct bflb_device_s *dev, const struct bflb_ir_rx_config_s *config)</div><div class="ttdoc">Initialize ir rx.</div></div>
+<div class="ttc" id="agroup___i_r_html_ga257e9aab2101cca6fc17d54514e33c5e"><div class="ttname"><a href="group___i_r.html#ga257e9aab2101cca6fc17d54514e33c5e">bflb_ir_txint_clear</a></div><div class="ttdeci">void bflb_ir_txint_clear(struct bflb_device_s *dev)</div><div class="ttdoc">Clear ir tx interrupt.</div></div>
+<div class="ttc" id="agroup___i_r_html_ga50815445b712e78a7f0e408a29f44789"><div class="ttname"><a href="group___i_r.html#ga50815445b712e78a7f0e408a29f44789">bflb_ir_feature_control</a></div><div class="ttdeci">int bflb_ir_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div><div class="ttdoc">Control ir feature.</div></div>
+<div class="ttc" id="agroup___i_r_html_ga543d01a964c70fa6a4c6fcf2ecbf5aa7"><div class="ttname"><a href="group___i_r.html#ga543d01a964c70fa6a4c6fcf2ecbf5aa7">bflb_ir_get_txint_status</a></div><div class="ttdeci">uint32_t bflb_ir_get_txint_status(struct bflb_device_s *dev)</div><div class="ttdoc">Get ir tx interrupt status.</div></div>
+<div class="ttc" id="agroup___i_r_html_ga6010ab8e7474ac352e3b80054e2ebd10"><div class="ttname"><a href="group___i_r.html#ga6010ab8e7474ac352e3b80054e2ebd10">bflb_ir_tx_init</a></div><div class="ttdeci">void bflb_ir_tx_init(struct bflb_device_s *dev, const struct bflb_ir_tx_config_s *config)</div><div class="ttdoc">Initialize ir tx.</div></div>
+<div class="ttc" id="agroup___i_r_html_ga75b6e1a0b269cd73b26be8c626a7d9bf"><div class="ttname"><a href="group___i_r.html#ga75b6e1a0b269cd73b26be8c626a7d9bf">bflb_ir_get_rxint_status</a></div><div class="ttdeci">uint32_t bflb_ir_get_rxint_status(struct bflb_device_s *dev)</div><div class="ttdoc">Get ir rx interrupt status.</div></div>
+<div class="ttc" id="agroup___i_r_html_ga90adcf5e7d51b67947eff5eb8e626ad1"><div class="ttname"><a href="group___i_r.html#ga90adcf5e7d51b67947eff5eb8e626ad1">bflb_ir_rxint_mask</a></div><div class="ttdeci">void bflb_ir_rxint_mask(struct bflb_device_s *dev, uint8_t int_type, bool mask)</div><div class="ttdoc">Mask ir rx interrupt.</div></div>
+<div class="ttc" id="agroup___i_r_html_gaae0f1e1e1a2b7963149cb6a5d272a114"><div class="ttname"><a href="group___i_r.html#gaae0f1e1e1a2b7963149cb6a5d272a114">bflb_ir_get_rxfifo_cnt</a></div><div class="ttdeci">uint8_t bflb_ir_get_rxfifo_cnt(struct bflb_device_s *dev)</div><div class="ttdoc">Get ir rx fifo available count.</div></div>
+<div class="ttc" id="agroup___i_r_html_gab1427f7dafc5563c853b986ac14cbdfa"><div class="ttname"><a href="group___i_r.html#gab1427f7dafc5563c853b986ac14cbdfa">bflb_ir_link_txdma</a></div><div class="ttdeci">void bflb_ir_link_txdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable or disable ir tx dma mode.</div></div>
+<div class="ttc" id="agroup___i_r_html_gab22c0062baa01c714213551452e78853"><div class="ttname"><a href="group___i_r.html#gab22c0062baa01c714213551452e78853">bflb_ir_txint_mask</a></div><div class="ttdeci">void bflb_ir_txint_mask(struct bflb_device_s *dev, uint8_t int_type, bool mask)</div><div class="ttdoc">Mask or unmask ir tx interrupt.</div></div>
+<div class="ttc" id="agroup___i_r_html_gab5d0b387d17599830f45ab505b4edc38"><div class="ttname"><a href="group___i_r.html#gab5d0b387d17599830f45ab505b4edc38">bflb_ir_rxfifo_clear</a></div><div class="ttdeci">void bflb_ir_rxfifo_clear(struct bflb_device_s *dev)</div><div class="ttdoc">Clear ir rx fifo.</div></div>
+<div class="ttc" id="agroup___i_r_html_gac5762548bcf1c8f09238f2b656010f29"><div class="ttname"><a href="group___i_r.html#gac5762548bcf1c8f09238f2b656010f29">bflb_ir_txfifo_clear</a></div><div class="ttdeci">void bflb_ir_txfifo_clear(struct bflb_device_s *dev)</div><div class="ttdoc">Clear ir tx fifo.</div></div>
+<div class="ttc" id="agroup___i_r_html_gac6dcb100e19fca4522c81fd090a02ac3"><div class="ttname"><a href="group___i_r.html#gac6dcb100e19fca4522c81fd090a02ac3">bflb_ir_swm_send</a></div><div class="ttdeci">void bflb_ir_swm_send(struct bflb_device_s *dev, uint16_t *data, uint8_t length)</div><div class="ttdoc">Send data in software mode.</div></div>
+<div class="ttc" id="agroup___i_r_html_gac91442a1ea268c0b3620cc6548d74aee"><div class="ttname"><a href="group___i_r.html#gac91442a1ea268c0b3620cc6548d74aee">bflb_ir_send</a></div><div class="ttdeci">void bflb_ir_send(struct bflb_device_s *dev, uint32_t *data, uint32_t length)</div><div class="ttdoc">Send data in NEC/RC5/customize mode.</div></div>
+<div class="ttc" id="agroup___i_r_html_gad0bd922a64912db0ece4d6bff7657da3"><div class="ttname"><a href="group___i_r.html#gad0bd922a64912db0ece4d6bff7657da3">bflb_ir_receive</a></div><div class="ttdeci">uint8_t bflb_ir_receive(struct bflb_device_s *dev, uint64_t *data)</div><div class="ttdoc">Receive data in NEC/RC5/customize mode.</div></div>
+<div class="ttc" id="agroup___i_r_html_gad43e435d5fd43af7eca2fd293b04049e"><div class="ttname"><a href="group___i_r.html#gad43e435d5fd43af7eca2fd293b04049e">bflb_ir_rx_enable</a></div><div class="ttdeci">void bflb_ir_rx_enable(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable or disable ir rx.</div></div>
+<div class="ttc" id="agroup___i_r_html_gae4536f259573ce18be4c795fdadcb6ca"><div class="ttname"><a href="group___i_r.html#gae4536f259573ce18be4c795fdadcb6ca">bflb_ir_tx_enable</a></div><div class="ttdeci">void bflb_ir_tx_enable(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable or disable ir tx.</div></div>
+<div class="ttc" id="agroup___i_r_html_gae56a5b7bbc00e2a7ecf234b5b11c19ea"><div class="ttname"><a href="group___i_r.html#gae56a5b7bbc00e2a7ecf234b5b11c19ea">bflb_ir_swm_receive</a></div><div class="ttdeci">uint8_t bflb_ir_swm_receive(struct bflb_device_s *dev, uint16_t *data, uint8_t length)</div><div class="ttdoc">Receive data in software mode.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__ir__rx__config__s_html"><div class="ttname"><a href="structbflb__ir__rx__config__s.html">bflb_ir_rx_config_s</a></div><div class="ttdoc">IR RX configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00176">bflb_ir.h:176</a></div></div>
+<div class="ttc" id="astructbflb__ir__rx__config__s_html_a01aabd81d5f3a6e38f6b8f9178794fc9"><div class="ttname"><a href="structbflb__ir__rx__config__s.html#a01aabd81d5f3a6e38f6b8f9178794fc9">bflb_ir_rx_config_s::deglitch_cnt</a></div><div class="ttdeci">uint8_t deglitch_cnt</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00180">bflb_ir.h:180</a></div></div>
+<div class="ttc" id="astructbflb__ir__rx__config__s_html_a0f5372276ff2b41db9bfe8d4bf2d2061"><div class="ttname"><a href="structbflb__ir__rx__config__s.html#a0f5372276ff2b41db9bfe8d4bf2d2061">bflb_ir_rx_config_s::data_threshold</a></div><div class="ttdeci">uint16_t data_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00181">bflb_ir.h:181</a></div></div>
+<div class="ttc" id="astructbflb__ir__rx__config__s_html_a171db27032875051cf928b15b4950bd4"><div class="ttname"><a href="structbflb__ir__rx__config__s.html#a171db27032875051cf928b15b4950bd4">bflb_ir_rx_config_s::fifo_threshold</a></div><div class="ttdeci">uint16_t fifo_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00183">bflb_ir.h:183</a></div></div>
+<div class="ttc" id="astructbflb__ir__rx__config__s_html_a37dbc334b7c2260355d3f0bb0d6d125d"><div class="ttname"><a href="structbflb__ir__rx__config__s.html#a37dbc334b7c2260355d3f0bb0d6d125d">bflb_ir_rx_config_s::end_threshold</a></div><div class="ttdeci">uint16_t end_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00182">bflb_ir.h:182</a></div></div>
+<div class="ttc" id="astructbflb__ir__rx__config__s_html_a9b9c0b044a4fc2fd5ae7e2f52620c5f3"><div class="ttname"><a href="structbflb__ir__rx__config__s.html#a9b9c0b044a4fc2fd5ae7e2f52620c5f3">bflb_ir_rx_config_s::input_inverse</a></div><div class="ttdeci">uint8_t input_inverse</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00178">bflb_ir.h:178</a></div></div>
+<div class="ttc" id="astructbflb__ir__rx__config__s_html_ab952e6f74eac47d280e18e383b40bca5"><div class="ttname"><a href="structbflb__ir__rx__config__s.html#ab952e6f74eac47d280e18e383b40bca5">bflb_ir_rx_config_s::rx_mode</a></div><div class="ttdeci">uint8_t rx_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00177">bflb_ir.h:177</a></div></div>
+<div class="ttc" id="astructbflb__ir__rx__config__s_html_ae20f03209878eaeb61969b5f27abf8b5"><div class="ttname"><a href="structbflb__ir__rx__config__s.html#ae20f03209878eaeb61969b5f27abf8b5">bflb_ir_rx_config_s::deglitch_enable</a></div><div class="ttdeci">uint8_t deglitch_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00179">bflb_ir.h:179</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html"><div class="ttname"><a href="structbflb__ir__tx__config__s.html">bflb_ir_tx_config_s</a></div><div class="ttdoc">IR TX configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00133">bflb_ir.h:133</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a0edcc1914e109782e590edd2b1b0897e"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a0edcc1914e109782e590edd2b1b0897e">bflb_ir_tx_config_s::output_modulation</a></div><div class="ttdeci">uint8_t output_modulation</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00144">bflb_ir.h:144</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a1012fb508fd8370d258e7151cd8e6dc5"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a1012fb508fd8370d258e7151cd8e6dc5">bflb_ir_tx_config_s::output_inverse</a></div><div class="ttdeci">uint8_t output_inverse</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00145">bflb_ir.h:145</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a22323cd7396d088d0da68cbdbd533835"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a22323cd7396d088d0da68cbdbd533835">bflb_ir_tx_config_s::logic0_inverse</a></div><div class="ttdeci">uint8_t logic0_inverse</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00141">bflb_ir.h:141</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a26309b640ee622e0f4dfcf48373930c3"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a26309b640ee622e0f4dfcf48373930c3">bflb_ir_tx_config_s::modu_width_1</a></div><div class="ttdeci">uint8_t modu_width_1</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00158">bflb_ir.h:158</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a27cf32b1a08dabd2b7c6488bd9b5ee9c"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a27cf32b1a08dabd2b7c6488bd9b5ee9c">bflb_ir_tx_config_s::fifo_threshold</a></div><div class="ttdeci">uint8_t fifo_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00149">bflb_ir.h:149</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a2cdf02113fb9c15b11d571ea10bd2d05"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a2cdf02113fb9c15b11d571ea10bd2d05">bflb_ir_tx_config_s::tx_mode</a></div><div class="ttdeci">uint8_t tx_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00134">bflb_ir.h:134</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a33f1e794f5d259c7cfa32a7469812124"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a33f1e794f5d259c7cfa32a7469812124">bflb_ir_tx_config_s::head_inverse</a></div><div class="ttdeci">uint8_t head_inverse</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00138">bflb_ir.h:138</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a39402f212bde65835d9395ab38182935"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a39402f212bde65835d9395ab38182935">bflb_ir_tx_config_s::freerun_enable</a></div><div class="ttdeci">uint8_t freerun_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00146">bflb_ir.h:146</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a4183b5d4b420df578c3b2692e08104b0"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a4183b5d4b420df578c3b2692e08104b0">bflb_ir_tx_config_s::pulse_width_unit</a></div><div class="ttdeci">uint16_t pulse_width_unit</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00160">bflb_ir.h:160</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a6ad5ab806aecadd6cc55918f18742678"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a6ad5ab806aecadd6cc55918f18742678">bflb_ir_tx_config_s::data_bits</a></div><div class="ttdeci">uint8_t data_bits</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00135">bflb_ir.h:135</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a6e2a1382bba574f3a86997e1f72169bf"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a6e2a1382bba574f3a86997e1f72169bf">bflb_ir_tx_config_s::swm_enable</a></div><div class="ttdeci">uint8_t swm_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00143">bflb_ir.h:143</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a74d1a9d1eb256259081b47d7f1ff74c2"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a74d1a9d1eb256259081b47d7f1ff74c2">bflb_ir_tx_config_s::tail_inverse</a></div><div class="ttdeci">uint8_t tail_inverse</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00136">bflb_ir.h:136</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a83122a79d841282f78f6f41342ced348"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a83122a79d841282f78f6f41342ced348">bflb_ir_tx_config_s::logic1_pulse_width_0</a></div><div class="ttdeci">uint8_t logic1_pulse_width_0</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00153">bflb_ir.h:153</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a86f13ff33a7d7b82a1c670edfbee3e8f"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a86f13ff33a7d7b82a1c670edfbee3e8f">bflb_ir_tx_config_s::logic0_pulse_width_0</a></div><div class="ttdeci">uint8_t logic0_pulse_width_0</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00151">bflb_ir.h:151</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a873db2d49c6ceaca3fb207edd05788b5"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a873db2d49c6ceaca3fb207edd05788b5">bflb_ir_tx_config_s::tail_pulse_width_0</a></div><div class="ttdeci">uint8_t tail_pulse_width_0</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00157">bflb_ir.h:157</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_a9430da6fe04a3507d867ec8e7573e10f"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#a9430da6fe04a3507d867ec8e7573e10f">bflb_ir_tx_config_s::data_enable</a></div><div class="ttdeci">uint8_t data_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00142">bflb_ir.h:142</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_aa2456ab7e692107782522e176d185c27"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#aa2456ab7e692107782522e176d185c27">bflb_ir_tx_config_s::head_pulse_width_1</a></div><div class="ttdeci">uint8_t head_pulse_width_1</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00154">bflb_ir.h:154</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_aa2461dd0d7767767e7b732876007fcd4"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#aa2461dd0d7767767e7b732876007fcd4">bflb_ir_tx_config_s::tail_enable</a></div><div class="ttdeci">uint8_t tail_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00137">bflb_ir.h:137</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_aa6c1495ea5a9ab038d47cae9cfd3f890"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#aa6c1495ea5a9ab038d47cae9cfd3f890">bflb_ir_tx_config_s::modu_width_0</a></div><div class="ttdeci">uint8_t modu_width_0</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00159">bflb_ir.h:159</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_aaca0f6f0c3e7767341835e763e6ab818"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#aaca0f6f0c3e7767341835e763e6ab818">bflb_ir_tx_config_s::tail_pulse_width_1</a></div><div class="ttdeci">uint8_t tail_pulse_width_1</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00156">bflb_ir.h:156</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_ab4e698e0877a73ecc1fd25615eab72a9"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#ab4e698e0877a73ecc1fd25615eab72a9">bflb_ir_tx_config_s::logic1_inverse</a></div><div class="ttdeci">uint8_t logic1_inverse</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00140">bflb_ir.h:140</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_abd7f7493581aeb782ea49ba193a6e694"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#abd7f7493581aeb782ea49ba193a6e694">bflb_ir_tx_config_s::head_pulse_width_0</a></div><div class="ttdeci">uint8_t head_pulse_width_0</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00155">bflb_ir.h:155</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_ac99c1c04409e1af992a8ce9bb1559ab8"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#ac99c1c04409e1af992a8ce9bb1559ab8">bflb_ir_tx_config_s::logic0_pulse_width_1</a></div><div class="ttdeci">uint8_t logic0_pulse_width_1</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00150">bflb_ir.h:150</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_adcda6be9ca66328c1b364e2d20259c0c"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#adcda6be9ca66328c1b364e2d20259c0c">bflb_ir_tx_config_s::head_enable</a></div><div class="ttdeci">uint8_t head_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00139">bflb_ir.h:139</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_aded943f7dfff5db8f404f3dfbab337ac"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#aded943f7dfff5db8f404f3dfbab337ac">bflb_ir_tx_config_s::continue_enable</a></div><div class="ttdeci">uint8_t continue_enable</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00147">bflb_ir.h:147</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_aeb423c0c9ca6a667b19c372c0c9f5c0c"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#aeb423c0c9ca6a667b19c372c0c9f5c0c">bflb_ir_tx_config_s::fifo_width</a></div><div class="ttdeci">uint8_t fifo_width</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00148">bflb_ir.h:148</a></div></div>
+<div class="ttc" id="astructbflb__ir__tx__config__s_html_af0d56204e7b0496995a5648412cb8778"><div class="ttname"><a href="structbflb__ir__tx__config__s.html#af0d56204e7b0496995a5648412cb8778">bflb_ir_tx_config_s::logic1_pulse_width_1</a></div><div class="ttdeci">uint8_t logic1_pulse_width_1</div><div class="ttdef"><b>Definition:</b> <a href="bflb__ir_8h_source.html#l00152">bflb_ir.h:152</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__ir_8h.html">bflb_ir.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

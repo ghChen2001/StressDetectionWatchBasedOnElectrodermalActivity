@@ -1,0 +1,10 @@
+digraph "bflb_platform_dma_env_tag"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_platform_dma_env_tag\n||}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Structure describing the DMA driver environment"];
+  Node2 -> Node1 [color="grey25",style="solid",label=" +last_dma" ,arrowhead="odiamond"];
+  Node2 [shape=record,label="{bflb_platform_dma_desc\n|+ src\l+ dest\l+ length\l+ ctrl\l+ next\l|}",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structbflb__platform__dma__desc.html",tooltip=" "];
+}

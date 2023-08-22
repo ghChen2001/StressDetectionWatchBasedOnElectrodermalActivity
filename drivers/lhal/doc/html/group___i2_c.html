@@ -1,0 +1,592 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: I2C</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___i2_c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">I2C<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+I2C 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___i2_c.png" border="0" usemap="#agroup______i2__c" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___i2_c___i_n_t_s_t_s"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c___i_n_t_s_t_s.html">i2c interrupt status definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___i2_c___i_n_t_c_l_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c___i_n_t_c_l_r.html">i2c interrupt clear definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___i2_c___i_n_t_e_n"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c___i_n_t_e_n.html">i2c interrupt enable definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__i2c__msg__s.html">bflb_i2c_msg_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">I2C message structure  <a href="structbflb__i2c__msg__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga628b15712aa9462e6e292d1bb4f79479"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga628b15712aa9462e6e292d1bb4f79479">I2C_M_READ</a>&#160;&#160;&#160;0x0001 /* Read data, from slave to master */</td></tr>
+<tr class="separator:ga628b15712aa9462e6e292d1bb4f79479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe53ff15e0717ccbd1d4c656c09ee53a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#gabe53ff15e0717ccbd1d4c656c09ee53a">I2C_M_TEN</a>&#160;&#160;&#160;0x0002 /* Ten bit address */</td></tr>
+<tr class="separator:gabe53ff15e0717ccbd1d4c656c09ee53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5770018b4190e45284f6f555f1b2dbea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga5770018b4190e45284f6f555f1b2dbea">I2C_M_DMA</a>&#160;&#160;&#160;0x0004 /* Enable dma mode */</td></tr>
+<tr class="separator:ga5770018b4190e45284f6f555f1b2dbea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7693e822915d4a60d97ed4c94cf713ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga7693e822915d4a60d97ed4c94cf713ae">I2C_M_NOSTOP</a>&#160;&#160;&#160;0x0040 /* Message should not end with a STOP */</td></tr>
+<tr class="separator:ga7693e822915d4a60d97ed4c94cf713ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7a467d37a113d97496f0fa69c6c15650"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga7a467d37a113d97496f0fa69c6c15650">I2C_M_NOSTART</a>&#160;&#160;&#160;0x0080 /* Message should not begin with a START */</td></tr>
+<tr class="separator:ga7a467d37a113d97496f0fa69c6c15650"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga07ee2b824dde586f5596befbd9640162"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga07ee2b824dde586f5596befbd9640162">bflb_i2c_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t frequency)</td></tr>
+<tr class="memdesc:ga07ee2b824dde586f5596befbd9640162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize i2c.  <br /></td></tr>
+<tr class="separator:ga07ee2b824dde586f5596befbd9640162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9cd4a46d9de706a1e60b33e09b68cefd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga9cd4a46d9de706a1e60b33e09b68cefd">bflb_i2c_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga9cd4a46d9de706a1e60b33e09b68cefd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize i2c.  <br /></td></tr>
+<tr class="separator:ga9cd4a46d9de706a1e60b33e09b68cefd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga355a12ad37e4b1cbfb9dde5f77dcff79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga355a12ad37e4b1cbfb9dde5f77dcff79">bflb_i2c_link_txdma</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool enable)</td></tr>
+<tr class="memdesc:ga355a12ad37e4b1cbfb9dde5f77dcff79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable i2c tx dma.  <br /></td></tr>
+<tr class="separator:ga355a12ad37e4b1cbfb9dde5f77dcff79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf0b0b72728adb0184ab8730351198a4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#gaf0b0b72728adb0184ab8730351198a4d">bflb_i2c_link_rxdma</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, bool enable)</td></tr>
+<tr class="memdesc:gaf0b0b72728adb0184ab8730351198a4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable i2c rx dma.  <br /></td></tr>
+<tr class="separator:gaf0b0b72728adb0184ab8730351198a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2bca4f4ea239f8962ac4bdea8f99e0fd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga2bca4f4ea239f8962ac4bdea8f99e0fd">bflb_i2c_transfer</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, struct <a class="el" href="structbflb__i2c__msg__s.html">bflb_i2c_msg_s</a> *msgs, int count)</td></tr>
+<tr class="memdesc:ga2bca4f4ea239f8962ac4bdea8f99e0fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start transferring i2c message.  <br /></td></tr>
+<tr class="separator:ga2bca4f4ea239f8962ac4bdea8f99e0fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6b06cc0ad74f151c3c4c74b8c9d14259"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga6b06cc0ad74f151c3c4c74b8c9d14259">bflb_i2c_int_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_type, bool mask)</td></tr>
+<tr class="memdesc:ga6b06cc0ad74f151c3c4c74b8c9d14259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable i2c interrupt.  <br /></td></tr>
+<tr class="separator:ga6b06cc0ad74f151c3c4c74b8c9d14259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga64f8628e8deffa78775b0ee499973176"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga64f8628e8deffa78775b0ee499973176">bflb_i2c_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear)</td></tr>
+<tr class="memdesc:ga64f8628e8deffa78775b0ee499973176"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear i2c interrupt status.  <br /></td></tr>
+<tr class="separator:ga64f8628e8deffa78775b0ee499973176"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga81a47107497c32b09c4e63a690a21739"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#ga81a47107497c32b09c4e63a690a21739">bflb_i2c_get_intstatus</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga81a47107497c32b09c4e63a690a21739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get i2c interrupt status.  <br /></td></tr>
+<tr class="separator:ga81a47107497c32b09c4e63a690a21739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac115ded9f0c76af3e5ae62d6fa3f934f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___i2_c.html#gac115ded9f0c76af3e5ae62d6fa3f934f">bflb_i2c_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="memdesc:gac115ded9f0c76af3e5ae62d6fa3f934f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control i2c feature.  <br /></td></tr>
+<tr class="separator:gac115ded9f0c76af3e5ae62d6fa3f934f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="ga5770018b4190e45284f6f555f1b2dbea" name="ga5770018b4190e45284f6f555f1b2dbea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5770018b4190e45284f6f555f1b2dbea">&#9670;&#160;</a></span>I2C_M_DMA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I2C_M_DMA&#160;&#160;&#160;0x0004 /* Enable dma mode */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__i2c_8h_source.html">bflb_i2c.h</a> 第 <a class="el" href="bflb__i2c_8h_source.html#l00047">47</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga7a467d37a113d97496f0fa69c6c15650" name="ga7a467d37a113d97496f0fa69c6c15650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7a467d37a113d97496f0fa69c6c15650">&#9670;&#160;</a></span>I2C_M_NOSTART</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I2C_M_NOSTART&#160;&#160;&#160;0x0080 /* Message should not begin with a START */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__i2c_8h_source.html">bflb_i2c.h</a> 第 <a class="el" href="bflb__i2c_8h_source.html#l00049">49</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga7693e822915d4a60d97ed4c94cf713ae" name="ga7693e822915d4a60d97ed4c94cf713ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7693e822915d4a60d97ed4c94cf713ae">&#9670;&#160;</a></span>I2C_M_NOSTOP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I2C_M_NOSTOP&#160;&#160;&#160;0x0040 /* Message should not end with a STOP */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__i2c_8h_source.html">bflb_i2c.h</a> 第 <a class="el" href="bflb__i2c_8h_source.html#l00048">48</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga628b15712aa9462e6e292d1bb4f79479" name="ga628b15712aa9462e6e292d1bb4f79479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga628b15712aa9462e6e292d1bb4f79479">&#9670;&#160;</a></span>I2C_M_READ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I2C_M_READ&#160;&#160;&#160;0x0001 /* Read data, from slave to master */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__i2c_8h_source.html">bflb_i2c.h</a> 第 <a class="el" href="bflb__i2c_8h_source.html#l00045">45</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gabe53ff15e0717ccbd1d4c656c09ee53a" name="gabe53ff15e0717ccbd1d4c656c09ee53a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe53ff15e0717ccbd1d4c656c09ee53a">&#9670;&#160;</a></span>I2C_M_TEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define I2C_M_TEN&#160;&#160;&#160;0x0002 /* Ten bit address */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__i2c_8h_source.html">bflb_i2c.h</a> 第 <a class="el" href="bflb__i2c_8h_source.html#l00046">46</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="ga9cd4a46d9de706a1e60b33e09b68cefd" name="ga9cd4a46d9de706a1e60b33e09b68cefd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9cd4a46d9de706a1e60b33e09b68cefd">&#9670;&#160;</a></span>bflb_i2c_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_i2c_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize i2c. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gac115ded9f0c76af3e5ae62d6fa3f934f" name="gac115ded9f0c76af3e5ae62d6fa3f934f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac115ded9f0c76af3e5ae62d6fa3f934f">&#9670;&#160;</a></span>bflb_i2c_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_i2c_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control i2c feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>feature command </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="ga81a47107497c32b09c4e63a690a21739" name="ga81a47107497c32b09c4e63a690a21739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga81a47107497c32b09c4e63a690a21739">&#9670;&#160;</a></span>bflb_i2c_get_intstatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_i2c_get_intstatus </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get i2c interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>interrupt status value, use <a class="el" href="group___i2_c___i_n_t_s_t_s.html">i2c interrupt status definition</a> </dd></dl>
+
+</div>
+</div>
+<a id="ga07ee2b824dde586f5596befbd9640162" name="ga07ee2b824dde586f5596befbd9640162"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga07ee2b824dde586f5596befbd9640162">&#9670;&#160;</a></span>bflb_i2c_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_i2c_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>frequency</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize i2c. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">frequency</td><td>i2c frequency, range from 305Hz to 400KHz </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga64f8628e8deffa78775b0ee499973176" name="ga64f8628e8deffa78775b0ee499973176"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga64f8628e8deffa78775b0ee499973176">&#9670;&#160;</a></span>bflb_i2c_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_i2c_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear i2c interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_clear</td><td>clear value, use <a class="el" href="group___i2_c___i_n_t_c_l_r.html">i2c interrupt clear definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga6b06cc0ad74f151c3c4c74b8c9d14259" name="ga6b06cc0ad74f151c3c4c74b8c9d14259"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6b06cc0ad74f151c3c4c74b8c9d14259">&#9670;&#160;</a></span>bflb_i2c_int_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_i2c_int_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable i2c interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_type</td><td>interrupt type ,use <a class="el" href="group___i2_c___i_n_t_e_n.html">i2c interrupt enable definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaf0b0b72728adb0184ab8730351198a4d" name="gaf0b0b72728adb0184ab8730351198a4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf0b0b72728adb0184ab8730351198a4d">&#9670;&#160;</a></span>bflb_i2c_link_rxdma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_i2c_link_rxdma </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable i2c rx dma. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga355a12ad37e4b1cbfb9dde5f77dcff79" name="ga355a12ad37e4b1cbfb9dde5f77dcff79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga355a12ad37e4b1cbfb9dde5f77dcff79">&#9670;&#160;</a></span>bflb_i2c_link_txdma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_i2c_link_txdma </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable i2c tx dma. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga2bca4f4ea239f8962ac4bdea8f99e0fd" name="ga2bca4f4ea239f8962ac4bdea8f99e0fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2bca4f4ea239f8962ac4bdea8f99e0fd">&#9670;&#160;</a></span>bflb_i2c_transfer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_i2c_transfer </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structbflb__i2c__msg__s.html">bflb_i2c_msg_s</a> *&#160;</td>
+          <td class="paramname"><em>msgs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start transferring i2c message. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">msgs</td><td>pointer to i2c message </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>message count </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

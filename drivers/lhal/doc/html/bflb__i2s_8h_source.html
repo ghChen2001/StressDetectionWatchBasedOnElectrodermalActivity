@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_i2s.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__i2s_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_i2s.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__i2s_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_I2S_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_I2S_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="group___i2_s___r_o_l_e.html#ga1b26d6d7f71b0bfc6c39783655330b80">   17</a></span><span class="preprocessor">#define I2S_ROLE_MASTER 0</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___i2_s___r_o_l_e.html#gaeeb481cd02c9960ccbdd3d94e0ac86c2">   18</a></span><span class="preprocessor">#define I2S_ROLE_SLAVE  1</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group___i2_s___f_o_r_m_a_t___m_o_d_e.html#ga7c5d6bac0ca2067db908e7979f025bfc">   26</a></span><span class="preprocessor">#define I2S_MODE_LEFT_JUSTIFIED       0 </span><span class="comment">/* left-justified or Phillips standard */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group___i2_s___f_o_r_m_a_t___m_o_d_e.html#ga6f3599cbefa57f6a49dedafb98034635">   27</a></span><span class="preprocessor">#define I2S_MODE_RIGHT_JUSTIFIED      1 </span><span class="comment">/* right-justified */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___i2_s___f_o_r_m_a_t___m_o_d_e.html#ga51803fc794fc07c6930c8a0d89235491">   28</a></span><span class="preprocessor">#define I2S_MODE_DSP_SHORT_FRAME_SYNC 2 </span><span class="comment">/* dsp modeA/B short frame sync */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group___i2_s___f_o_r_m_a_t___m_o_d_e.html#ga1138e536847637f441544fc32676c813">   29</a></span><span class="preprocessor">#define I2S_MODE_DSP_LONG_FRAME_SYNC  3 </span><span class="comment">/* dsp modeA/B long frame sync */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="group___i2_s___c_h_a_n_n_e_l___m_o_d_e.html#gae0ae2928d4e03f637a3f9aecd12f3c26">   37</a></span><span class="preprocessor">#define I2S_CHANNEL_MODE_NUM_1 0</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="group___i2_s___c_h_a_n_n_e_l___m_o_d_e.html#ga2b12bddbb486bfabf9085a11eaa85821">   38</a></span><span class="preprocessor">#define I2S_CHANNEL_MODE_NUM_2 1</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group___i2_s___c_h_a_n_n_e_l___m_o_d_e.html#ga21fc5f6fbd89901f0b29f7887ce0de83">   39</a></span><span class="preprocessor">#define I2S_CHANNEL_MODE_NUM_3 2 </span><span class="comment">/* only DSP mode, frame_size must equal data_size */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group___i2_s___c_h_a_n_n_e_l___m_o_d_e.html#ga2f2eaa224f5f0f108fe0f20ef8d260c8">   40</a></span><span class="preprocessor">#define I2S_CHANNEL_MODE_NUM_4 3 </span><span class="comment">/* only DSP mode, frame_size must equal data_size */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="group___i2_s___c_h_a_n_n_e_l___m_o_d_e.html#gad3b5b4caf09341c5b5af46d83946002c">   41</a></span><span class="preprocessor">#define I2S_CHANNEL_MODE_NUM_6 4 </span><span class="comment">/* only DSP mode, frame_size must equal data_size */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___i2_s___s_l_o_t___w_i_d_t_h.html#ga53f9538bafc344645614b79855a22102">   49</a></span><span class="preprocessor">#define I2S_SLOT_WIDTH_8  0</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___i2_s___s_l_o_t___w_i_d_t_h.html#ga109f43e1bcd97b71efd1782d9ad6ffa1">   50</a></span><span class="preprocessor">#define I2S_SLOT_WIDTH_16 1</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___i2_s___s_l_o_t___w_i_d_t_h.html#ga669383618b70f8fe8a93d42df390441b">   51</a></span><span class="preprocessor">#define I2S_SLOT_WIDTH_24 2</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group___i2_s___s_l_o_t___w_i_d_t_h.html#gadae5958e853d54068f59ff10c27618fd">   52</a></span><span class="preprocessor">#define I2S_SLOT_WIDTH_32 3</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="group___i2_s___i_n_t_s_t_s.html#ga20ed8f1c263ad43d947ae08310150965">   60</a></span><span class="preprocessor">#define I2S_INTSTS_TX_FIFO  (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="group___i2_s___i_n_t_s_t_s.html#ga6a28541e5cdc834da1f99f0b5d4c9e39">   61</a></span><span class="preprocessor">#define I2S_INTSTS_RX_FIFO  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="group___i2_s___i_n_t_s_t_s.html#gafcd45c3fc19b6117dbb3032f6e704564">   62</a></span><span class="preprocessor">#define I2S_INTSTS_FIFO_ERR (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d.html#ga941e1b0b02dad361a4928c1cb8f76894">   70</a></span><span class="preprocessor">#define I2S_CMD_CLEAR_TX_FIFO    (0x01)</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d.html#gae1f63dd596b35eb4eda5384c14b28623">   71</a></span><span class="preprocessor">#define I2S_CMD_CLEAR_RX_FIFO    (0x02)</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d.html#gadd5f9bd6681f3f85b2e562f84580f8c7">   72</a></span><span class="preprocessor">#define I2S_CMD_RX_DEGLITCH      (0x03)</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d.html#ga124dfe4ab866f7430e98552ddfcf3d04">   73</a></span><span class="preprocessor">#define I2S_CMD_DATA_ENABLE      (0x04)</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d.html#gae927bb554021db65966084f55f8f1738">   74</a></span><span class="preprocessor">#define I2S_CMD_CHANNEL_LR_MERGE (0x05)</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d.html#gaa9c09e96339b8e04021ecb1566142cd9">   75</a></span><span class="preprocessor">#define I2S_CMD_CHANNEL_LR_EXCHG (0x06)</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d.html#gaefbbe14bb2c06ee88bb9de589a3c5dcc">   76</a></span><span class="preprocessor">#define I2S_CMD_MUTE             (0x07)</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d.html#ga0a66cec428859dacc2273e89ffe8b5ce">   77</a></span><span class="preprocessor">#define I2S_CMD_BIT_REVERSE      (0x08)</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d___d_a_t_a___e_n_a_b_l_e___t_y_p_e.html#gab8bf3422b062d9d921fdc61172c092a4">   85</a></span><span class="preprocessor">#define I2S_CMD_DATA_ENABLE_TX (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___i2_s___c_m_d___d_a_t_a___e_n_a_b_l_e___t_y_p_e.html#gab7667b839e4b29719999cbf20bd52392">   86</a></span><span class="preprocessor">#define I2S_CMD_DATA_ENABLE_RX (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html">  105</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__i2s__config__s.html">bflb_i2s_config_s</a> {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#ac2bc7c747023b5bd8f1acfc9f9018412">  106</a></span>    uint32_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#ac2bc7c747023b5bd8f1acfc9f9018412">bclk_freq_hz</a>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#a5b9aeb2bb7989ef331f452dd9626f139">  107</a></span>    uint8_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#a5b9aeb2bb7989ef331f452dd9626f139">role</a>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#a287d5d6b90323696ca98058bf11faca5">  108</a></span>    uint8_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#a287d5d6b90323696ca98058bf11faca5">format_mode</a>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#a86bf698b3e845afedec41d98bc96f519">  109</a></span>    uint8_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#a86bf698b3e845afedec41d98bc96f519">channel_mode</a>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#a8bbdbde5b3d5f7c08cb77cb29b16558d">  110</a></span>    uint8_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#a8bbdbde5b3d5f7c08cb77cb29b16558d">frame_width</a>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#a138ef01d0684d0ef0dd3df4bc5440216">  111</a></span>    uint8_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#a138ef01d0684d0ef0dd3df4bc5440216">data_width</a>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#a51ce37744b6d8c10b0e30710e070e0c2">  112</a></span>    uint8_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#a51ce37744b6d8c10b0e30710e070e0c2">fs_offset_cycle</a>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">  114</a></span>    uint8_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">tx_fifo_threshold</a>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="structbflb__i2s__config__s.html#aa0373e4e879c0e1818154519eec34c7c">  115</a></span>    uint8_t <a class="code hl_variable" href="structbflb__i2s__config__s.html#aa0373e4e879c0e1818154519eec34c7c">rx_fifo_threshold</a>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>};</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="group___i2_s.html#gac5ff432cbe6b49aff8a970f62d287a51">  128</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_s.html#gac5ff432cbe6b49aff8a970f62d287a51">bflb_i2s_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__i2s__config__s.html">bflb_i2s_config_s</a> *config);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="group___i2_s.html#ga11f6df513aa5d32b91cde35bef8b7db6">  135</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_s.html#ga11f6df513aa5d32b91cde35bef8b7db6">bflb_i2s_deinit</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="group___i2_s.html#ga24592e522a22761106630e7c41aff132">  143</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_s.html#ga24592e522a22761106630e7c41aff132">bflb_i2s_link_txdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="group___i2_s.html#ga9665d823d1dff6115fc8bb83bc3d7ab0">  151</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_s.html#ga9665d823d1dff6115fc8bb83bc3d7ab0">bflb_i2s_link_rxdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="group___i2_s.html#gad05ac808f148247e12ae715eb00dc421">  159</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_s.html#gad05ac808f148247e12ae715eb00dc421">bflb_i2s_txint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="group___i2_s.html#ga033391d4e0bb5774227eeffdb63e93e7">  167</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_s.html#ga033391d4e0bb5774227eeffdb63e93e7">bflb_i2s_rxint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="group___i2_s.html#gab701663a74dcb8cc5b37a7946d6b3b9f">  175</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_s.html#gab701663a74dcb8cc5b37a7946d6b3b9f">bflb_i2s_errint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="group___i2_s.html#gaccd71952114e535888d320325254da3a">  183</a></span>uint32_t <a class="code hl_function" href="group___i2_s.html#gaccd71952114e535888d320325254da3a">bflb_i2s_get_intstatus</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="group___i2_s.html#ga6561d6b7421c2e49ad84a37d0fe3eaa4">  193</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___i2_s.html#ga6561d6b7421c2e49ad84a37d0fe3eaa4">bflb_i2s_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>}</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___i2_s_html_ga033391d4e0bb5774227eeffdb63e93e7"><div class="ttname"><a href="group___i2_s.html#ga033391d4e0bb5774227eeffdb63e93e7">bflb_i2s_rxint_mask</a></div><div class="ttdeci">void bflb_i2s_rxint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable i2s rx fifo threhold interrupt.</div></div>
+<div class="ttc" id="agroup___i2_s_html_ga11f6df513aa5d32b91cde35bef8b7db6"><div class="ttname"><a href="group___i2_s.html#ga11f6df513aa5d32b91cde35bef8b7db6">bflb_i2s_deinit</a></div><div class="ttdeci">void bflb_i2s_deinit(struct bflb_device_s *dev)</div><div class="ttdoc">Deinitialize i2s.</div></div>
+<div class="ttc" id="agroup___i2_s_html_ga24592e522a22761106630e7c41aff132"><div class="ttname"><a href="group___i2_s.html#ga24592e522a22761106630e7c41aff132">bflb_i2s_link_txdma</a></div><div class="ttdeci">void bflb_i2s_link_txdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable i2s tx dma.</div></div>
+<div class="ttc" id="agroup___i2_s_html_ga6561d6b7421c2e49ad84a37d0fe3eaa4"><div class="ttname"><a href="group___i2_s.html#ga6561d6b7421c2e49ad84a37d0fe3eaa4">bflb_i2s_feature_control</a></div><div class="ttdeci">int bflb_i2s_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div><div class="ttdoc">Control i2s feature.</div></div>
+<div class="ttc" id="agroup___i2_s_html_ga9665d823d1dff6115fc8bb83bc3d7ab0"><div class="ttname"><a href="group___i2_s.html#ga9665d823d1dff6115fc8bb83bc3d7ab0">bflb_i2s_link_rxdma</a></div><div class="ttdeci">void bflb_i2s_link_rxdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable i2s rx dma.</div></div>
+<div class="ttc" id="agroup___i2_s_html_gab701663a74dcb8cc5b37a7946d6b3b9f"><div class="ttname"><a href="group___i2_s.html#gab701663a74dcb8cc5b37a7946d6b3b9f">bflb_i2s_errint_mask</a></div><div class="ttdeci">void bflb_i2s_errint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable i2s error interrupt.</div></div>
+<div class="ttc" id="agroup___i2_s_html_gac5ff432cbe6b49aff8a970f62d287a51"><div class="ttname"><a href="group___i2_s.html#gac5ff432cbe6b49aff8a970f62d287a51">bflb_i2s_init</a></div><div class="ttdeci">void bflb_i2s_init(struct bflb_device_s *dev, const struct bflb_i2s_config_s *config)</div><div class="ttdoc">Initialize i2s.</div></div>
+<div class="ttc" id="agroup___i2_s_html_gaccd71952114e535888d320325254da3a"><div class="ttname"><a href="group___i2_s.html#gaccd71952114e535888d320325254da3a">bflb_i2s_get_intstatus</a></div><div class="ttdeci">uint32_t bflb_i2s_get_intstatus(struct bflb_device_s *dev)</div><div class="ttdoc">Get i2s interrupt status.</div></div>
+<div class="ttc" id="agroup___i2_s_html_gad05ac808f148247e12ae715eb00dc421"><div class="ttname"><a href="group___i2_s.html#gad05ac808f148247e12ae715eb00dc421">bflb_i2s_txint_mask</a></div><div class="ttdeci">void bflb_i2s_txint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable i2s rx fifo threhold interrupt.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html"><div class="ttname"><a href="structbflb__i2s__config__s.html">bflb_i2s_config_s</a></div><div class="ttdoc">I2S configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00105">bflb_i2s.h:105</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_a138ef01d0684d0ef0dd3df4bc5440216"><div class="ttname"><a href="structbflb__i2s__config__s.html#a138ef01d0684d0ef0dd3df4bc5440216">bflb_i2s_config_s::data_width</a></div><div class="ttdeci">uint8_t data_width</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00111">bflb_i2s.h:111</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_a287d5d6b90323696ca98058bf11faca5"><div class="ttname"><a href="structbflb__i2s__config__s.html#a287d5d6b90323696ca98058bf11faca5">bflb_i2s_config_s::format_mode</a></div><div class="ttdeci">uint8_t format_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00108">bflb_i2s.h:108</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_a51ce37744b6d8c10b0e30710e070e0c2"><div class="ttname"><a href="structbflb__i2s__config__s.html#a51ce37744b6d8c10b0e30710e070e0c2">bflb_i2s_config_s::fs_offset_cycle</a></div><div class="ttdeci">uint8_t fs_offset_cycle</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00112">bflb_i2s.h:112</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_a5b9aeb2bb7989ef331f452dd9626f139"><div class="ttname"><a href="structbflb__i2s__config__s.html#a5b9aeb2bb7989ef331f452dd9626f139">bflb_i2s_config_s::role</a></div><div class="ttdeci">uint8_t role</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00107">bflb_i2s.h:107</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_a86bf698b3e845afedec41d98bc96f519"><div class="ttname"><a href="structbflb__i2s__config__s.html#a86bf698b3e845afedec41d98bc96f519">bflb_i2s_config_s::channel_mode</a></div><div class="ttdeci">uint8_t channel_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00109">bflb_i2s.h:109</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_a8bbdbde5b3d5f7c08cb77cb29b16558d"><div class="ttname"><a href="structbflb__i2s__config__s.html#a8bbdbde5b3d5f7c08cb77cb29b16558d">bflb_i2s_config_s::frame_width</a></div><div class="ttdeci">uint8_t frame_width</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00110">bflb_i2s.h:110</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_a8e1ba6dad959cca0b42ebd0ea3b09b74"><div class="ttname"><a href="structbflb__i2s__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">bflb_i2s_config_s::tx_fifo_threshold</a></div><div class="ttdeci">uint8_t tx_fifo_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00114">bflb_i2s.h:114</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_aa0373e4e879c0e1818154519eec34c7c"><div class="ttname"><a href="structbflb__i2s__config__s.html#aa0373e4e879c0e1818154519eec34c7c">bflb_i2s_config_s::rx_fifo_threshold</a></div><div class="ttdeci">uint8_t rx_fifo_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00115">bflb_i2s.h:115</a></div></div>
+<div class="ttc" id="astructbflb__i2s__config__s_html_ac2bc7c747023b5bd8f1acfc9f9018412"><div class="ttname"><a href="structbflb__i2s__config__s.html#ac2bc7c747023b5bd8f1acfc9f9018412">bflb_i2s_config_s::bclk_freq_hz</a></div><div class="ttdeci">uint32_t bclk_freq_hz</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2s_8h_source.html#l00106">bflb_i2s.h:106</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__i2s_8h.html">bflb_i2s.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

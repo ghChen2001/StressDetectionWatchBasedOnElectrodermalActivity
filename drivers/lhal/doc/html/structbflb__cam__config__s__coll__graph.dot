@@ -1,0 +1,8 @@
+digraph "bflb_cam_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_cam_config_s\n|+ input_format\l+ resolution_x\l+ resolution_y\l+ h_blank\l+ pixel_clock\l+ with_mjpeg\l+ input_source\l+ output_format\l+ output_bufaddr\l+ output_bufsize\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="CAM configuration structure"];
+}

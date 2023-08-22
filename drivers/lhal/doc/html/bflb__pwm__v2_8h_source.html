@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_pwm_v2.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__pwm__v2_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_pwm_v2.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__pwm__v2_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_PWM_V2_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_PWM_V2_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="group___p_w_m___c_h_a_n_n_e_l.html#ga3ce05ed0c4b23d9fd3257b49fec3b751">   17</a></span><span class="preprocessor">#define PWM_CH0       0</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___p_w_m___c_h_a_n_n_e_l.html#gaa762d631e9794aaecce90826faf4f402">   18</a></span><span class="preprocessor">#define PWM_CH1       1</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="group___p_w_m___c_h_a_n_n_e_l.html#ga6b50c0d5e200636bca31f4689760136e">   19</a></span><span class="preprocessor">#define PWM_CH2       2</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="group___p_w_m___c_h_a_n_n_e_l.html#ga5be6ec8a063e576d71f0d01570867b7b">   20</a></span><span class="preprocessor">#define PWM_CH3       3</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="group___p_w_m___c_h_a_n_n_e_l.html#gad94fa9a7e513e06ad20a249ba2a41472">   21</a></span><span class="preprocessor">#define PWM_V2_CH_MAX 4</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group___p_w_m___p_o_l_a_r_i_t_y.html#gae1b81028dc9aa7f635ed5106c3cbeef1">   29</a></span><span class="preprocessor">#define PWM_POLARITY_ACTIVE_LOW  0</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group___p_w_m___p_o_l_a_r_i_t_y.html#ga81e55d88e2b99fa54990f842ddf2a198">   30</a></span><span class="preprocessor">#define PWM_POLARITY_ACTIVE_HIGH 1</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="group___p_w_m___s_t_a_t_e.html#ga5523eac97813d0fc36685f2d46f206aa">   38</a></span><span class="preprocessor">#define PWM_STATE_INACTIVE 0</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group___p_w_m___s_t_a_t_e.html#ga1d75df28b4c8d81a7601d6ca94a24645">   39</a></span><span class="preprocessor">#define PWM_STATE_ACTIVE   1</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#ga411b28a212ede5092617a1f144edb747">   47</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_CH0_L  0</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#ga05a8fc6b3d3e3524510d5bb67bad7ed0">   48</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_CH0_H  1</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#gac6b4e3abf2c9b25b251f932c55858a1a">   49</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_CH1_L  2</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#ga13013f50ffc633d4ddcbbfb890e1d1da">   50</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_CH1_H  3</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#ga7502eb07d3b1dbeeea6a80ea2e5ae339">   51</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_CH2_L  4</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#gac1ec07e0cd4b7fa4bb747c7f26dc6c38">   52</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_CH2_H  5</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#ga4fc002f97b0e7c83f5766828b7a76138">   53</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_CH3_L  6</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#ga6794b3fee1df74e0c2af0f8448221d28">   54</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_CH3_H  7</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#ga5dfab57439939d663520b2fdebc496c6">   55</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_PERIOD 8</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html#ga4dc68492035d7b223b634fade4de4a1b">   56</a></span><span class="preprocessor">#define PWM_TRIG_ADC_SRC_NONE   0xF</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#ga44283b894f38747bb18e129404e61dde">   64</a></span><span class="preprocessor">#define PWM_INTEN_CH0_L  (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#ga91f983c47e4aec7dd64a65b7e2314576">   65</a></span><span class="preprocessor">#define PWM_INTEN_CH0_H  (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#ga8a45d6215dc0437117a4bdd8f8cde259">   66</a></span><span class="preprocessor">#define PWM_INTEN_CH1_L  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#gac0f718848a2623ef854a8153b0cb0ea7">   67</a></span><span class="preprocessor">#define PWM_INTEN_CH1_H  (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#ga353da89a5f8db53d4a3b4e4ed88656e8">   68</a></span><span class="preprocessor">#define PWM_INTEN_CH2_L  (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#gaf84df754d92b1f8b8e736b6d09b3dda7">   69</a></span><span class="preprocessor">#define PWM_INTEN_CH2_H  (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#gadc009904764e824d455d0f10e95761eb">   70</a></span><span class="preprocessor">#define PWM_INTEN_CH3_L  (1 &lt;&lt; 6)</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#gab243208f9bae912f8258e6807f372e45">   71</a></span><span class="preprocessor">#define PWM_INTEN_CH3_H  (1 &lt;&lt; 7)</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#ga47587b5b9e5b187b971ce0a10664a693">   72</a></span><span class="preprocessor">#define PWM_INTEN_PERIOD (1 &lt;&lt; 8)</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#gad7f76180fa63efd022dcec15edbf861e">   73</a></span><span class="preprocessor">#define PWM_INTEN_BRAKE  (1 &lt;&lt; 9)</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_e_n.html#ga92a6331ae793a975db8364d43430392d">   74</a></span><span class="preprocessor">#define PWM_INTEN_REPT   (1 &lt;&lt; 10)</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#gaacdf6ec3c2fb48664a49a6e8b22e9f0f">   82</a></span><span class="preprocessor">#define PWM_INTSTS_CH0_L  (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#gaa7e10b231238f5938ce01362a7584d50">   83</a></span><span class="preprocessor">#define PWM_INTSTS_CH0_H  (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#gab8812bb26c2076275493d3ebb2e12d86">   84</a></span><span class="preprocessor">#define PWM_INTSTS_CH1_L  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#ga90f40315ab59872b6c7ea2c874b5d154">   85</a></span><span class="preprocessor">#define PWM_INTSTS_CH1_H  (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#ga6843f3b816a42dfb4f51ebcdce655b93">   86</a></span><span class="preprocessor">#define PWM_INTSTS_CH2_L  (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#ga9cb7f0039f9778b7f459441bd5915217">   87</a></span><span class="preprocessor">#define PWM_INTSTS_CH2_H  (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#gad153cbbe6474f6fbd3a755a89fd42d6b">   88</a></span><span class="preprocessor">#define PWM_INTSTS_CH3_L  (1 &lt;&lt; 6)</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#ga1d33bf8eef3eaf1006f589cfcc6d2c80">   89</a></span><span class="preprocessor">#define PWM_INTSTS_CH3_H  (1 &lt;&lt; 7)</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#ga21c670c07d02c64e2fa012f85ca11392">   90</a></span><span class="preprocessor">#define PWM_INTSTS_PERIOD (1 &lt;&lt; 8)</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#ga72678c720eec1fe7d555a8f8527ad0ff">   91</a></span><span class="preprocessor">#define PWM_INTSTS_BRAKE  (1 &lt;&lt; 9)</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_s_t_s.html#gaf29a5b61623652da45dcd0e16a97fc36">   92</a></span><span class="preprocessor">#define PWM_INTSTS_REPT   (1 &lt;&lt; 10)</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#ga2dadd6250d3ad5b729e7ebbcf317f0f2">  100</a></span><span class="preprocessor">#define PWM_INTCLR_CH0_L  (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#ga151f0827dfe7eb9f6d10e47e52c20ed2">  101</a></span><span class="preprocessor">#define PWM_INTCLR_CH0_H  (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#gafccde82c4a733675fe46cbfcf1d953a7">  102</a></span><span class="preprocessor">#define PWM_INTCLR_CH1_L  (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#gab04ab5cabbeb346c6c2c9e32b20dc888">  103</a></span><span class="preprocessor">#define PWM_INTCLR_CH1_H  (1 &lt;&lt; 3)</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#ga156c01fea9806cea11b3bbad1601b460">  104</a></span><span class="preprocessor">#define PWM_INTCLR_CH2_L  (1 &lt;&lt; 4)</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#ga8e1299542390d1e6f9e8e26d720eab41">  105</a></span><span class="preprocessor">#define PWM_INTCLR_CH2_H  (1 &lt;&lt; 5)</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#ga69c53506f825d35ade8648a4745ac1f9">  106</a></span><span class="preprocessor">#define PWM_INTCLR_CH3_L  (1 &lt;&lt; 6)</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#ga5a7f3f68858402cf24367ede6adfbe42">  107</a></span><span class="preprocessor">#define PWM_INTCLR_CH3_H  (1 &lt;&lt; 7)</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#ga16a1981dfe98425842b01f5013240dea">  108</a></span><span class="preprocessor">#define PWM_INTCLR_PERIOD (1 &lt;&lt; 8)</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#ga7f7f5698fbfffeddfbfdac775bd0ab15">  109</a></span><span class="preprocessor">#define PWM_INTCLR_BRAKE  (1 &lt;&lt; 9)</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="group___p_w_m___i_n_t_c_l_r.html#gad5ce914c7eac3164ea637c0e1b371cb5">  110</a></span><span class="preprocessor">#define PWM_INTCLR_REPT   (1 &lt;&lt; 10)</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="group___p_w_m___c_m_d.html#gae93ab8a3544d7d6b522f846582c6bdf2">  118</a></span><span class="preprocessor">#define PWM_CMD_SET_TRIG_ADC_SRC       (0x01)</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="group___p_w_m___c_m_d.html#gac07129f674b1420d3f49ef783a76b4b6">  119</a></span><span class="preprocessor">#define PWM_CMD_SET_EXT_BRAKE_POLARITY (0x02)</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="group___p_w_m___c_m_d.html#ga7878eac26b7a77ad6b73a91e153c702f">  120</a></span><span class="preprocessor">#define PWM_CMD_SET_EXT_BRAKE_ENABLE   (0x03)</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="group___p_w_m___c_m_d.html#ga228e6dc60af8677fd9f85289bddd3e2a">  121</a></span><span class="preprocessor">#define PWM_CMD_SET_SW_BRAKE_ENABLE    (0x04)</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="group___p_w_m___c_m_d.html#gaa3265de03b372ae6221d9fc29e838a7c">  122</a></span><span class="preprocessor">#define PWM_CMD_SET_STOP_ON_REPT       (0x05)</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="group___p_w_m___c_m_d.html#ga0604cf8aa6265255ba3b722e9a01f4c9">  123</a></span><span class="preprocessor">#define PWM_CMD_SET_REPT_COUNT         (0x06)</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__channel__config__s.html">  139</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__pwm__v2__channel__config__s.html">bflb_pwm_v2_channel_config_s</a> {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__channel__config__s.html#a6c11a1149b31278198d274e74f1cc80d">  140</a></span>    uint8_t <a class="code hl_variable" href="structbflb__pwm__v2__channel__config__s.html#a6c11a1149b31278198d274e74f1cc80d">positive_polarity</a>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__channel__config__s.html#a2cb7c53de9260b8b7f53843d1cb39d55">  141</a></span>    uint8_t <a class="code hl_variable" href="structbflb__pwm__v2__channel__config__s.html#a2cb7c53de9260b8b7f53843d1cb39d55">negative_polarity</a>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__channel__config__s.html#a485dc8062f0af159c7081c24837fee61">  142</a></span>    uint8_t <a class="code hl_variable" href="structbflb__pwm__v2__channel__config__s.html#a485dc8062f0af159c7081c24837fee61">positive_stop_state</a>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__channel__config__s.html#acb78812b025c277b80786ae28478b6a5">  143</a></span>    uint8_t <a class="code hl_variable" href="structbflb__pwm__v2__channel__config__s.html#acb78812b025c277b80786ae28478b6a5">negative_stop_state</a>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__channel__config__s.html#a1ecdc94350ecb3448c87f0fd500ab182">  144</a></span>    uint8_t <a class="code hl_variable" href="structbflb__pwm__v2__channel__config__s.html#a1ecdc94350ecb3448c87f0fd500ab182">positive_brake_state</a>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__channel__config__s.html#a0fb653ef65abb861716ae3e0a91355cc">  145</a></span>    uint8_t <a class="code hl_variable" href="structbflb__pwm__v2__channel__config__s.html#a0fb653ef65abb861716ae3e0a91355cc">negative_brake_state</a>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__channel__config__s.html#a84a6c672a20df0ae81a62672a6cc524b">  146</a></span>    uint8_t <a class="code hl_variable" href="structbflb__pwm__v2__channel__config__s.html#a84a6c672a20df0ae81a62672a6cc524b">dead_time</a>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>};</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__config__s.html">  156</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__pwm__v2__config__s.html">bflb_pwm_v2_config_s</a> {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__config__s.html#ac8a2bd114f6a151dc9d8824e48f4ab16">  157</a></span>    uint8_t <a class="code hl_variable" href="structbflb__pwm__v2__config__s.html#ac8a2bd114f6a151dc9d8824e48f4ab16">clk_source</a>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__config__s.html#a7a562f1e80628b09a75909d4ff536dfe">  158</a></span>    uint16_t <a class="code hl_variable" href="structbflb__pwm__v2__config__s.html#a7a562f1e80628b09a75909d4ff536dfe">clk_div</a>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="structbflb__pwm__v2__config__s.html#a258408d6d5d13a24bfa5211d81ce1682">  159</a></span>    uint16_t <a class="code hl_variable" href="structbflb__pwm__v2__config__s.html#a258408d6d5d13a24bfa5211d81ce1682">period</a>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>};</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#gaebe752425d0d5274d0ea236bcbe2cf4d">  172</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#gaebe752425d0d5274d0ea236bcbe2cf4d">bflb_pwm_v2_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__pwm__v2__config__s.html">bflb_pwm_v2_config_s</a> *config);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga573560a3d405d60760f612f365cbbb2f">  179</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga573560a3d405d60760f612f365cbbb2f">bflb_pwm_v2_deinit</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga7aa986ea3756c7ca52a99f4b9b48038d">  186</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga7aa986ea3756c7ca52a99f4b9b48038d">bflb_pwm_v2_start</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga8ad88b1f711137cef439610941d2959d">  193</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga8ad88b1f711137cef439610941d2959d">bflb_pwm_v2_stop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga505bbdd58ba16072a7db918044b6d2c2">  201</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga505bbdd58ba16072a7db918044b6d2c2">bflb_pwm_v2_set_period</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t period);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga56ace284656b349d293905e872765555">  209</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga56ace284656b349d293905e872765555">bflb_pwm_v2_get_frequency</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#gaa16f944199e41ac07329bc6d2e305a11">  218</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#gaa16f944199e41ac07329bc6d2e305a11">bflb_pwm_v2_channel_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch, <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__pwm__v2__channel__config__s.html">bflb_pwm_v2_channel_config_s</a> *config);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga90c3852ddee88492d1724b8220e7c2ee">  228</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga90c3852ddee88492d1724b8220e7c2ee">bflb_pwm_v2_channel_set_threshold</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch, uint16_t low_threhold, uint16_t high_threhold);</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga7659395c34da7f43fdcca647bd3af3dd">  236</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga7659395c34da7f43fdcca647bd3af3dd">bflb_pwm_v2_channel_positive_start</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga28debc3dd855b924521f2cfd097d4bf9">  244</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga28debc3dd855b924521f2cfd097d4bf9">bflb_pwm_v2_channel_negative_start</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga5ea025609520e5b89eed1d2fc7eee291">  252</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga5ea025609520e5b89eed1d2fc7eee291">bflb_pwm_v2_channel_positive_stop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#gaa292a10591106a130b95501f33b1c6bb">  260</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#gaa292a10591106a130b95501f33b1c6bb">bflb_pwm_v2_channel_negative_stop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga75a3b00cd63d8559bf2e067ed3b9aece">  269</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga75a3b00cd63d8559bf2e067ed3b9aece">bflb_pwm_v2_int_enable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_en, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga1eb266f78def6834f5bfaf6d4a18f87c">  277</a></span>uint32_t <a class="code hl_function" href="group___p_w_m___v2.html#ga1eb266f78def6834f5bfaf6d4a18f87c">bflb_pwm_v2_get_intstatus</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#ga62bee666da3d8899e7ea9ade9f56cdfc">  285</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___p_w_m___v2.html#ga62bee666da3d8899e7ea9ade9f56cdfc">bflb_pwm_v2_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear);</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno"><a class="line" href="group___p_w_m___v2.html#gae9d64fb62fad22c64467767b9e001a60">  295</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___p_w_m___v2.html#gae9d64fb62fad22c64467767b9e001a60">bflb_pwm_v2_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>}</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga1eb266f78def6834f5bfaf6d4a18f87c"><div class="ttname"><a href="group___p_w_m___v2.html#ga1eb266f78def6834f5bfaf6d4a18f87c">bflb_pwm_v2_get_intstatus</a></div><div class="ttdeci">uint32_t bflb_pwm_v2_get_intstatus(struct bflb_device_s *dev)</div><div class="ttdoc">Get pwm interrupt status.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga28debc3dd855b924521f2cfd097d4bf9"><div class="ttname"><a href="group___p_w_m___v2.html#ga28debc3dd855b924521f2cfd097d4bf9">bflb_pwm_v2_channel_negative_start</a></div><div class="ttdeci">void bflb_pwm_v2_channel_negative_start(struct bflb_device_s *dev, uint8_t ch)</div><div class="ttdoc">Start pwm negative output.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga505bbdd58ba16072a7db918044b6d2c2"><div class="ttname"><a href="group___p_w_m___v2.html#ga505bbdd58ba16072a7db918044b6d2c2">bflb_pwm_v2_set_period</a></div><div class="ttdeci">void bflb_pwm_v2_set_period(struct bflb_device_s *dev, uint16_t period)</div><div class="ttdoc">Set pwm period to change pwm frequence. Frequcence(hz) = pwm source clock /div/period.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga56ace284656b349d293905e872765555"><div class="ttname"><a href="group___p_w_m___v2.html#ga56ace284656b349d293905e872765555">bflb_pwm_v2_get_frequency</a></div><div class="ttdeci">float bflb_pwm_v2_get_frequency(struct bflb_device_s *dev)</div><div class="ttdoc">Get pwm frequcency.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga573560a3d405d60760f612f365cbbb2f"><div class="ttname"><a href="group___p_w_m___v2.html#ga573560a3d405d60760f612f365cbbb2f">bflb_pwm_v2_deinit</a></div><div class="ttdeci">void bflb_pwm_v2_deinit(struct bflb_device_s *dev)</div><div class="ttdoc">Deinitialize pwm.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga5ea025609520e5b89eed1d2fc7eee291"><div class="ttname"><a href="group___p_w_m___v2.html#ga5ea025609520e5b89eed1d2fc7eee291">bflb_pwm_v2_channel_positive_stop</a></div><div class="ttdeci">void bflb_pwm_v2_channel_positive_stop(struct bflb_device_s *dev, uint8_t ch)</div><div class="ttdoc">Stop pwm positive output.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga62bee666da3d8899e7ea9ade9f56cdfc"><div class="ttname"><a href="group___p_w_m___v2.html#ga62bee666da3d8899e7ea9ade9f56cdfc">bflb_pwm_v2_int_clear</a></div><div class="ttdeci">void bflb_pwm_v2_int_clear(struct bflb_device_s *dev, uint32_t int_clear)</div><div class="ttdoc">Clear pwm interrupt status.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga75a3b00cd63d8559bf2e067ed3b9aece"><div class="ttname"><a href="group___p_w_m___v2.html#ga75a3b00cd63d8559bf2e067ed3b9aece">bflb_pwm_v2_int_enable</a></div><div class="ttdeci">void bflb_pwm_v2_int_enable(struct bflb_device_s *dev, uint32_t int_en, bool enable)</div><div class="ttdoc">Enable pwm interrupt.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga7659395c34da7f43fdcca647bd3af3dd"><div class="ttname"><a href="group___p_w_m___v2.html#ga7659395c34da7f43fdcca647bd3af3dd">bflb_pwm_v2_channel_positive_start</a></div><div class="ttdeci">void bflb_pwm_v2_channel_positive_start(struct bflb_device_s *dev, uint8_t ch)</div><div class="ttdoc">Start pwm positive output.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga7aa986ea3756c7ca52a99f4b9b48038d"><div class="ttname"><a href="group___p_w_m___v2.html#ga7aa986ea3756c7ca52a99f4b9b48038d">bflb_pwm_v2_start</a></div><div class="ttdeci">void bflb_pwm_v2_start(struct bflb_device_s *dev)</div><div class="ttdoc">Start pwm output.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga8ad88b1f711137cef439610941d2959d"><div class="ttname"><a href="group___p_w_m___v2.html#ga8ad88b1f711137cef439610941d2959d">bflb_pwm_v2_stop</a></div><div class="ttdeci">void bflb_pwm_v2_stop(struct bflb_device_s *dev)</div><div class="ttdoc">Stop pwm output.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_ga90c3852ddee88492d1724b8220e7c2ee"><div class="ttname"><a href="group___p_w_m___v2.html#ga90c3852ddee88492d1724b8220e7c2ee">bflb_pwm_v2_channel_set_threshold</a></div><div class="ttdeci">void bflb_pwm_v2_channel_set_threshold(struct bflb_device_s *dev, uint8_t ch, uint16_t low_threhold, uint16_t high_threhold)</div><div class="ttdoc">Set pwm dutycycle. Dutycycle(%) = (high_threhold - low_threhold)/period * 100%.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_gaa16f944199e41ac07329bc6d2e305a11"><div class="ttname"><a href="group___p_w_m___v2.html#gaa16f944199e41ac07329bc6d2e305a11">bflb_pwm_v2_channel_init</a></div><div class="ttdeci">void bflb_pwm_v2_channel_init(struct bflb_device_s *dev, uint8_t ch, struct bflb_pwm_v2_channel_config_s *config)</div><div class="ttdoc">Config pwm channel.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_gaa292a10591106a130b95501f33b1c6bb"><div class="ttname"><a href="group___p_w_m___v2.html#gaa292a10591106a130b95501f33b1c6bb">bflb_pwm_v2_channel_negative_stop</a></div><div class="ttdeci">void bflb_pwm_v2_channel_negative_stop(struct bflb_device_s *dev, uint8_t ch)</div><div class="ttdoc">Stop pwm negative output.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_gae9d64fb62fad22c64467767b9e001a60"><div class="ttname"><a href="group___p_w_m___v2.html#gae9d64fb62fad22c64467767b9e001a60">bflb_pwm_v2_feature_control</a></div><div class="ttdeci">int bflb_pwm_v2_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div><div class="ttdoc">Control pwm feature.</div></div>
+<div class="ttc" id="agroup___p_w_m___v2_html_gaebe752425d0d5274d0ea236bcbe2cf4d"><div class="ttname"><a href="group___p_w_m___v2.html#gaebe752425d0d5274d0ea236bcbe2cf4d">bflb_pwm_v2_init</a></div><div class="ttdeci">void bflb_pwm_v2_init(struct bflb_device_s *dev, const struct bflb_pwm_v2_config_s *config)</div><div class="ttdoc">Initialize pwm.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__channel__config__s_html"><div class="ttname"><a href="structbflb__pwm__v2__channel__config__s.html">bflb_pwm_v2_channel_config_s</a></div><div class="ttdoc">PWM channel configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00139">bflb_pwm_v2.h:139</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__channel__config__s_html_a0fb653ef65abb861716ae3e0a91355cc"><div class="ttname"><a href="structbflb__pwm__v2__channel__config__s.html#a0fb653ef65abb861716ae3e0a91355cc">bflb_pwm_v2_channel_config_s::negative_brake_state</a></div><div class="ttdeci">uint8_t negative_brake_state</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00145">bflb_pwm_v2.h:145</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__channel__config__s_html_a1ecdc94350ecb3448c87f0fd500ab182"><div class="ttname"><a href="structbflb__pwm__v2__channel__config__s.html#a1ecdc94350ecb3448c87f0fd500ab182">bflb_pwm_v2_channel_config_s::positive_brake_state</a></div><div class="ttdeci">uint8_t positive_brake_state</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00144">bflb_pwm_v2.h:144</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__channel__config__s_html_a2cb7c53de9260b8b7f53843d1cb39d55"><div class="ttname"><a href="structbflb__pwm__v2__channel__config__s.html#a2cb7c53de9260b8b7f53843d1cb39d55">bflb_pwm_v2_channel_config_s::negative_polarity</a></div><div class="ttdeci">uint8_t negative_polarity</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00141">bflb_pwm_v2.h:141</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__channel__config__s_html_a485dc8062f0af159c7081c24837fee61"><div class="ttname"><a href="structbflb__pwm__v2__channel__config__s.html#a485dc8062f0af159c7081c24837fee61">bflb_pwm_v2_channel_config_s::positive_stop_state</a></div><div class="ttdeci">uint8_t positive_stop_state</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00142">bflb_pwm_v2.h:142</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__channel__config__s_html_a6c11a1149b31278198d274e74f1cc80d"><div class="ttname"><a href="structbflb__pwm__v2__channel__config__s.html#a6c11a1149b31278198d274e74f1cc80d">bflb_pwm_v2_channel_config_s::positive_polarity</a></div><div class="ttdeci">uint8_t positive_polarity</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00140">bflb_pwm_v2.h:140</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__channel__config__s_html_a84a6c672a20df0ae81a62672a6cc524b"><div class="ttname"><a href="structbflb__pwm__v2__channel__config__s.html#a84a6c672a20df0ae81a62672a6cc524b">bflb_pwm_v2_channel_config_s::dead_time</a></div><div class="ttdeci">uint8_t dead_time</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00146">bflb_pwm_v2.h:146</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__channel__config__s_html_acb78812b025c277b80786ae28478b6a5"><div class="ttname"><a href="structbflb__pwm__v2__channel__config__s.html#acb78812b025c277b80786ae28478b6a5">bflb_pwm_v2_channel_config_s::negative_stop_state</a></div><div class="ttdeci">uint8_t negative_stop_state</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00143">bflb_pwm_v2.h:143</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__config__s_html"><div class="ttname"><a href="structbflb__pwm__v2__config__s.html">bflb_pwm_v2_config_s</a></div><div class="ttdoc">PWM configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00156">bflb_pwm_v2.h:156</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__config__s_html_a258408d6d5d13a24bfa5211d81ce1682"><div class="ttname"><a href="structbflb__pwm__v2__config__s.html#a258408d6d5d13a24bfa5211d81ce1682">bflb_pwm_v2_config_s::period</a></div><div class="ttdeci">uint16_t period</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00159">bflb_pwm_v2.h:159</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__config__s_html_a7a562f1e80628b09a75909d4ff536dfe"><div class="ttname"><a href="structbflb__pwm__v2__config__s.html#a7a562f1e80628b09a75909d4ff536dfe">bflb_pwm_v2_config_s::clk_div</a></div><div class="ttdeci">uint16_t clk_div</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00158">bflb_pwm_v2.h:158</a></div></div>
+<div class="ttc" id="astructbflb__pwm__v2__config__s_html_ac8a2bd114f6a151dc9d8824e48f4ab16"><div class="ttname"><a href="structbflb__pwm__v2__config__s.html#ac8a2bd114f6a151dc9d8824e48f4ab16">bflb_pwm_v2_config_s::clk_source</a></div><div class="ttdeci">uint8_t clk_source</div><div class="ttdef"><b>Definition:</b> <a href="bflb__pwm__v2_8h_source.html#l00157">bflb_pwm_v2.h:157</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__pwm__v2_8h.html">bflb_pwm_v2.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

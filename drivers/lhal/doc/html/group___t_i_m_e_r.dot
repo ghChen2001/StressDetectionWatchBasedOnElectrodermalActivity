@@ -1,0 +1,19 @@
+digraph "TIMER"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node2 [label="LHAL",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___l_h_a_l.html",tooltip=" "];
+  Node1 [label="TIMER",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node6 [label="timer capture polarity\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___t_i_m_e_r___c_a_p_t_u_r_e___p_o_l_a_r_i_t_y.html",tooltip=" "];
+  Node3 [label="timer clock source\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___t_i_m_e_r___c_l_k___s_o_u_r_c_e.html",tooltip=" "];
+  Node5 [label="timer compare id definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___t_i_m_e_r___c_o_m_p___i_d.html",tooltip=" "];
+  Node4 [label="timer counter mode\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___t_i_m_e_r___c_o_u_n_t_e_r___m_o_d_e.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+}

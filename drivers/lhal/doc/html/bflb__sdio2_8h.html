@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_sdio2.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__sdio2_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">bflb_sdio2.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>This file is the low hardware abstraction layer file  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="bflb__core_8h_source.html">bflb_core.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+bflb_sdio2.h 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__sdio2_8h__incl.png" border="0" usemap="#ainclude_2bflb__sdio2_8h" alt=""/></div>
+</div>
+</div>
+<p><a href="bflb__sdio2_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a381d2d9af6a965fdf6000939930479dd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#a381d2d9af6a965fdf6000939930479dd">SDIO2_BYTE_PER_BUF</a>&#160;&#160;&#160;(1024 * 2)</td></tr>
+<tr class="separator:a381d2d9af6a965fdf6000939930479dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c78645224adc68f9d92d28055d8e9b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#a1c78645224adc68f9d92d28055d8e9b7">SDIO2_MAX_PORT_NUM</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:a1c78645224adc68f9d92d28055d8e9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70778512bfeb6729099315a0801982de"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#a70778512bfeb6729099315a0801982de">SDIO2_MAX_FUNC</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a70778512bfeb6729099315a0801982de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a177345301564274ecd85888baba8dfbb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#a177345301564274ecd85888baba8dfbb">bflb_sdio2_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:a177345301564274ecd85888baba8dfbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08f51cea0321e7c1ec7b03f387f218ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#a08f51cea0321e7c1ec7b03f387f218ea">bflb_sdio2_check_host_ready</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:a08f51cea0321e7c1ec7b03f387f218ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4426cb748ba7b492d8d73f586d4f19"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#a0f4426cb748ba7b492d8d73f586d4f19">bflb_sdio2_get_block_size</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:a0f4426cb748ba7b492d8d73f586d4f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0338c41f5237f6fb334c00e77e2b27bd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#a0338c41f5237f6fb334c00e77e2b27bd">bflb_sdio2_tx_rx_queue_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:a0338c41f5237f6fb334c00e77e2b27bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accce5898592b46ad84833b4b7b3a1aca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#accce5898592b46ad84833b4b7b3a1aca">bflb_sdio2_send_data</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int qos, uintptr_t *buff, int len)</td></tr>
+<tr class="separator:accce5898592b46ad84833b4b7b3a1aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac218acff930ea948331e416859ea4e54"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#ac218acff930ea948331e416859ea4e54">bflb_sdio2_recv_data</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int qos, uintptr_t *buff, int *len)</td></tr>
+<tr class="separator:ac218acff930ea948331e416859ea4e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e351cd0bf574eb4101ad4b22eb5c7b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sdio2_8h.html#a0e351cd0bf574eb4101ad4b22eb5c7b9">bflb_sdio2_isr</a> (int irq, void *arg)</td></tr>
+<tr class="separator:a0e351cd0bf574eb4101ad4b22eb5c7b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>This file is the low hardware abstraction layer file </p>
+<dl class="section version"><dt>版本</dt><dd>V1.0 </dd></dl>
+<dl class="section date"><dt>日期</dt><dd>2022-09-27 </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd></dd></dl>
+<h2><center>&copy; COPYRIGHT(c) 2022 Bouffalo Lab</center></h2>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p><ol type="1">
+<li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
+<li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
+<li>Neither the name of Bouffalo Lab nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.</li>
+</ol>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sdio2_8h_source.html">bflb_sdio2.h</a> 中定义.</p>
+</div><h2 class="groupheader">宏定义说明</h2>
+<a id="a381d2d9af6a965fdf6000939930479dd" name="a381d2d9af6a965fdf6000939930479dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a381d2d9af6a965fdf6000939930479dd">&#9670;&#160;</a></span>SDIO2_BYTE_PER_BUF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SDIO2_BYTE_PER_BUF&#160;&#160;&#160;(1024 * 2)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sdio2_8h_source.html">bflb_sdio2.h</a> 第 <a class="el" href="bflb__sdio2_8h_source.html#l00059">59</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a70778512bfeb6729099315a0801982de" name="a70778512bfeb6729099315a0801982de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70778512bfeb6729099315a0801982de">&#9670;&#160;</a></span>SDIO2_MAX_FUNC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SDIO2_MAX_FUNC&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sdio2_8h_source.html">bflb_sdio2.h</a> 第 <a class="el" href="bflb__sdio2_8h_source.html#l00061">61</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1c78645224adc68f9d92d28055d8e9b7" name="a1c78645224adc68f9d92d28055d8e9b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c78645224adc68f9d92d28055d8e9b7">&#9670;&#160;</a></span>SDIO2_MAX_PORT_NUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SDIO2_MAX_PORT_NUM&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sdio2_8h_source.html">bflb_sdio2.h</a> 第 <a class="el" href="bflb__sdio2_8h_source.html#l00060">60</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a08f51cea0321e7c1ec7b03f387f218ea" name="a08f51cea0321e7c1ec7b03f387f218ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08f51cea0321e7c1ec7b03f387f218ea">&#9670;&#160;</a></span>bflb_sdio2_check_host_ready()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_sdio2_check_host_ready </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f4426cb748ba7b492d8d73f586d4f19" name="a0f4426cb748ba7b492d8d73f586d4f19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f4426cb748ba7b492d8d73f586d4f19">&#9670;&#160;</a></span>bflb_sdio2_get_block_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_sdio2_get_block_size </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a177345301564274ecd85888baba8dfbb" name="a177345301564274ecd85888baba8dfbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a177345301564274ecd85888baba8dfbb">&#9670;&#160;</a></span>bflb_sdio2_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_sdio2_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e351cd0bf574eb4101ad4b22eb5c7b9" name="a0e351cd0bf574eb4101ad4b22eb5c7b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e351cd0bf574eb4101ad4b22eb5c7b9">&#9670;&#160;</a></span>bflb_sdio2_isr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_sdio2_isr </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>irq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac218acff930ea948331e416859ea4e54" name="ac218acff930ea948331e416859ea4e54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac218acff930ea948331e416859ea4e54">&#9670;&#160;</a></span>bflb_sdio2_recv_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_sdio2_recv_data </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>qos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uintptr_t *&#160;</td>
+          <td class="paramname"><em>buff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accce5898592b46ad84833b4b7b3a1aca" name="accce5898592b46ad84833b4b7b3a1aca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accce5898592b46ad84833b4b7b3a1aca">&#9670;&#160;</a></span>bflb_sdio2_send_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_sdio2_send_data </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>qos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uintptr_t *&#160;</td>
+          <td class="paramname"><em>buff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0338c41f5237f6fb334c00e77e2b27bd" name="a0338c41f5237f6fb334c00e77e2b27bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0338c41f5237f6fb334c00e77e2b27bd">&#9670;&#160;</a></span>bflb_sdio2_tx_rx_queue_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_sdio2_tx_rx_queue_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__sdio2_8h.html">bflb_sdio2.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

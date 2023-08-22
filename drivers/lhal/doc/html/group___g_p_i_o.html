@@ -1,0 +1,1168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: GPIO</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___g_p_i_o.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">GPIO<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+GPIO 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___g_p_i_o.png" border="0" usemap="#agroup______g__p__i__o" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___g_p_i_o___p_i_n"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a></td></tr>
+<tr class="memdesc:group___g_p_i_o___p_i_n"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gpio pin definitions <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html">gpio interrupt trigger mode definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___g_p_i_o___u_a_r_t___f_u_n_c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html">gpio uart function definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___g_p_i_o___c_m_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o___c_m_d.html">gpio feature control cmd definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga1060b1db7540e7897b8bde83d4e9672e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga1060b1db7540e7897b8bde83d4e9672e">GPIO_FUNC_SHIFT</a>&#160;&#160;&#160;(0) /* Bits 0-4: GPIO function */</td></tr>
+<tr class="separator:ga1060b1db7540e7897b8bde83d4e9672e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1a58add76522e59dae1283d0a93be0e9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga1a58add76522e59dae1283d0a93be0e9">GPIO_FUNC_MASK</a>&#160;&#160;&#160;(0x1f &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga1060b1db7540e7897b8bde83d4e9672e">GPIO_FUNC_SHIFT</a>)</td></tr>
+<tr class="separator:ga1a58add76522e59dae1283d0a93be0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8a34769f8ff8c76f7bcbe39788048d44"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>&#160;&#160;&#160;(5) /* Bits 5-6: Port Mode */</td></tr>
+<tr class="separator:ga8a34769f8ff8c76f7bcbe39788048d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga60078f74d184e10418a0e1d074d6dd43"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga60078f74d184e10418a0e1d074d6dd43">GPIO_MODE_MASK</a>&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>)</td></tr>
+<tr class="separator:ga60078f74d184e10418a0e1d074d6dd43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7be6a0cc9aa65da1d4ee5751b4085853"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga7be6a0cc9aa65da1d4ee5751b4085853">GPIO_INPUT</a>&#160;&#160;&#160;(0 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>) /* Input Enable */</td></tr>
+<tr class="separator:ga7be6a0cc9aa65da1d4ee5751b4085853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0db9fe8a278e6ab7c5c6f14fe58e5eb1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga0db9fe8a278e6ab7c5c6f14fe58e5eb1">GPIO_OUTPUT</a>&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>) /* Output Enable */</td></tr>
+<tr class="separator:ga0db9fe8a278e6ab7c5c6f14fe58e5eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2e0f16f4e9972b0e1e914d64f87cd6f6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga2e0f16f4e9972b0e1e914d64f87cd6f6">GPIO_ANALOG</a>&#160;&#160;&#160;(2 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>) /* Analog Enable */</td></tr>
+<tr class="separator:ga2e0f16f4e9972b0e1e914d64f87cd6f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga93b05986e204be4a7f8d52bfc1b1bd01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga93b05986e204be4a7f8d52bfc1b1bd01">GPIO_ALTERNATE</a>&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>) /* Alternate Enable */</td></tr>
+<tr class="separator:ga93b05986e204be4a7f8d52bfc1b1bd01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c0b27b8050aeeeacceb0443bfa798e4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>&#160;&#160;&#160;(7) /* Bits 7-8: Pull-up/down */</td></tr>
+<tr class="separator:ga7c0b27b8050aeeeacceb0443bfa798e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ca9d068fb34ae1e9095f0f7a69e6819"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga8ca9d068fb34ae1e9095f0f7a69e6819">GPIO_PUPD_MASK</a>&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>)</td></tr>
+<tr class="separator:ga8ca9d068fb34ae1e9095f0f7a69e6819"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6fad128e3332409968b8866c439257ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga6fad128e3332409968b8866c439257ed">GPIO_FLOAT</a>&#160;&#160;&#160;(0 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>) /* No pull-up, pull-down */</td></tr>
+<tr class="separator:ga6fad128e3332409968b8866c439257ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae689bc8f5c42d6df7bd54a8dd372e072"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gae689bc8f5c42d6df7bd54a8dd372e072">GPIO_PULLUP</a>&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>) /* Pull-up */</td></tr>
+<tr class="separator:gae689bc8f5c42d6df7bd54a8dd372e072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga75d958d0410c36da7f27d1f4f5c36c14"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga75d958d0410c36da7f27d1f4f5c36c14">GPIO_PULLDOWN</a>&#160;&#160;&#160;(2 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>) /* Pull-down */</td></tr>
+<tr class="separator:ga75d958d0410c36da7f27d1f4f5c36c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab16c6f0794cabd260604fa91ee873cb6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gab16c6f0794cabd260604fa91ee873cb6">GPIO_SMT_SHIFT</a>&#160;&#160;&#160;(9) /* Bits 9: SMT Enable */</td></tr>
+<tr class="separator:gab16c6f0794cabd260604fa91ee873cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa9db5d468e59f87bf6e160ee86762658"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gaa9db5d468e59f87bf6e160ee86762658">GPIO_SMT_MASK</a>&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#gab16c6f0794cabd260604fa91ee873cb6">GPIO_SMT_SHIFT</a>)</td></tr>
+<tr class="separator:gaa9db5d468e59f87bf6e160ee86762658"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2209604969178e37f19745cf3396345c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga2209604969178e37f19745cf3396345c">GPIO_SMT_DIS</a>&#160;&#160;&#160;(0 &lt;&lt; <a class="el" href="group___g_p_i_o.html#gab16c6f0794cabd260604fa91ee873cb6">GPIO_SMT_SHIFT</a>)</td></tr>
+<tr class="separator:ga2209604969178e37f19745cf3396345c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae0e99ce5ddb875ac689d8cb5464e3fa1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gae0e99ce5ddb875ac689d8cb5464e3fa1">GPIO_SMT_EN</a>&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#gab16c6f0794cabd260604fa91ee873cb6">GPIO_SMT_SHIFT</a>)</td></tr>
+<tr class="separator:gae0e99ce5ddb875ac689d8cb5464e3fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6303be03d81e485aeb5e7b91ee154d01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>&#160;&#160;&#160;(10) /* Bits 10-11: Drive */</td></tr>
+<tr class="separator:ga6303be03d81e485aeb5e7b91ee154d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac2c006905c7b129ea49e4a3def5c404a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gac2c006905c7b129ea49e4a3def5c404a">GPIO_DRV_MASK</a>&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td></tr>
+<tr class="separator:gac2c006905c7b129ea49e4a3def5c404a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa14b0a35338da58bffed6350351c0a4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gaa14b0a35338da58bffed6350351c0a4f">GPIO_DRV_0</a>&#160;&#160;&#160;(0 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td></tr>
+<tr class="separator:gaa14b0a35338da58bffed6350351c0a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa8d49b1a5c517f00bd5a6f54ce75c7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gafa8d49b1a5c517f00bd5a6f54ce75c7e">GPIO_DRV_1</a>&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td></tr>
+<tr class="separator:gafa8d49b1a5c517f00bd5a6f54ce75c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga541829fc941aba32111be35264185a18"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga541829fc941aba32111be35264185a18">GPIO_DRV_2</a>&#160;&#160;&#160;(2 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td></tr>
+<tr class="separator:ga541829fc941aba32111be35264185a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad5c15a02c2427f90779da93d43ebd045"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gad5c15a02c2427f90779da93d43ebd045">GPIO_DRV_3</a>&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td></tr>
+<tr class="separator:gad5c15a02c2427f90779da93d43ebd045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gacc9eb1afacf4438799130b1eaa3caf0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gacc9eb1afacf4438799130b1eaa3caf0d">bflb_gpio_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin, uint32_t cfgset)</td></tr>
+<tr class="memdesc:gacc9eb1afacf4438799130b1eaa3caf0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize gpio pin.  <br /></td></tr>
+<tr class="separator:gacc9eb1afacf4438799130b1eaa3caf0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4201e013ff263d31fbb964400fa5965c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga4201e013ff263d31fbb964400fa5965c">bflb_gpio_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin)</td></tr>
+<tr class="memdesc:ga4201e013ff263d31fbb964400fa5965c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize gpio pin with input float.  <br /></td></tr>
+<tr class="separator:ga4201e013ff263d31fbb964400fa5965c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae6b2f72f8e72e21b1e040f3db538f5fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gae6b2f72f8e72e21b1e040f3db538f5fe">bflb_gpio_set</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin)</td></tr>
+<tr class="memdesc:gae6b2f72f8e72e21b1e040f3db538f5fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write gpio pin with high level.  <br /></td></tr>
+<tr class="separator:gae6b2f72f8e72e21b1e040f3db538f5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1fc8afcc5a9846e55e1c1a541084bcbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga1fc8afcc5a9846e55e1c1a541084bcbf">bflb_gpio_reset</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin)</td></tr>
+<tr class="memdesc:ga1fc8afcc5a9846e55e1c1a541084bcbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write gpio pin with low level.  <br /></td></tr>
+<tr class="separator:ga1fc8afcc5a9846e55e1c1a541084bcbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga51893aa9d07fcf6c3673bd910b06f917"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga51893aa9d07fcf6c3673bd910b06f917">bflb_gpio_read</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin)</td></tr>
+<tr class="memdesc:ga51893aa9d07fcf6c3673bd910b06f917"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read level from gpio pin.  <br /></td></tr>
+<tr class="separator:ga51893aa9d07fcf6c3673bd910b06f917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga100d7d2818d2958219189fba23c92429"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga100d7d2818d2958219189fba23c92429">bflb_gpio_pin0_31_write</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t val)</td></tr>
+<tr class="memdesc:ga100d7d2818d2958219189fba23c92429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write gpio pin 0~31.  <br /></td></tr>
+<tr class="separator:ga100d7d2818d2958219189fba23c92429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8a32386932e1ec18e97db0720f4721f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga8a32386932e1ec18e97db0720f4721f2">bflb_gpio_pin32_63_write</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t val)</td></tr>
+<tr class="memdesc:ga8a32386932e1ec18e97db0720f4721f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write gpio pin 32~63.  <br /></td></tr>
+<tr class="separator:ga8a32386932e1ec18e97db0720f4721f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1ce402e64e2fa5efdf7bed782deb375c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga1ce402e64e2fa5efdf7bed782deb375c">bflb_gpio_pin0_31_read</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga1ce402e64e2fa5efdf7bed782deb375c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read level from gpio pin 0~31.  <br /></td></tr>
+<tr class="separator:ga1ce402e64e2fa5efdf7bed782deb375c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac77cabea1b357ba8d61f2cb6b90604b9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#gac77cabea1b357ba8d61f2cb6b90604b9">bflb_gpio_pin32_63_read</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gac77cabea1b357ba8d61f2cb6b90604b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read level from gpio pin 32~63.  <br /></td></tr>
+<tr class="separator:gac77cabea1b357ba8d61f2cb6b90604b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga84583de93be66b0f626d9a5ff733949f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga84583de93be66b0f626d9a5ff733949f">bflb_gpio_int_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin, uint8_t trig_mode)</td></tr>
+<tr class="memdesc:ga84583de93be66b0f626d9a5ff733949f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config gpio pin interrupt.  <br /></td></tr>
+<tr class="separator:ga84583de93be66b0f626d9a5ff733949f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga89c407476a5367e76de991014cb7b4e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga89c407476a5367e76de991014cb7b4e2">bflb_gpio_int_mask</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin, bool mask)</td></tr>
+<tr class="memdesc:ga89c407476a5367e76de991014cb7b4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable gpio pin interrupt.  <br /></td></tr>
+<tr class="separator:ga89c407476a5367e76de991014cb7b4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8b384ec3955a791e9f6ca2db79ab53b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga8b384ec3955a791e9f6ca2db79ab53b7">bflb_gpio_get_intstatus</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin)</td></tr>
+<tr class="memdesc:ga8b384ec3955a791e9f6ca2db79ab53b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get gpio pin interrupt status.  <br /></td></tr>
+<tr class="separator:ga8b384ec3955a791e9f6ca2db79ab53b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c937bc6f35d25eb21c41640858deabe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga4c937bc6f35d25eb21c41640858deabe">bflb_gpio_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin)</td></tr>
+<tr class="memdesc:ga4c937bc6f35d25eb21c41640858deabe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear gpio pin interrupt status.  <br /></td></tr>
+<tr class="separator:ga4c937bc6f35d25eb21c41640858deabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga92270da8095103a7ceb6a49b80a4b938"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga92270da8095103a7ceb6a49b80a4b938">bflb_gpio_uart_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin, uint8_t uart_func)</td></tr>
+<tr class="memdesc:ga92270da8095103a7ceb6a49b80a4b938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config gpio pin with uart function.  <br /></td></tr>
+<tr class="separator:ga92270da8095103a7ceb6a49b80a4b938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga04d78fe971e41bd7cd6bd47f88122d1a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_p_i_o.html#ga04d78fe971e41bd7cd6bd47f88122d1a">bflb_gpio_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="memdesc:ga04d78fe971e41bd7cd6bd47f88122d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control gpio feature.  <br /></td></tr>
+<tr class="separator:ga04d78fe971e41bd7cd6bd47f88122d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="ga93b05986e204be4a7f8d52bfc1b1bd01" name="ga93b05986e204be4a7f8d52bfc1b1bd01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga93b05986e204be4a7f8d52bfc1b1bd01">&#9670;&#160;</a></span>GPIO_ALTERNATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_ALTERNATE&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>) /* Alternate Enable */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00170">170</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga2e0f16f4e9972b0e1e914d64f87cd6f6" name="ga2e0f16f4e9972b0e1e914d64f87cd6f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2e0f16f4e9972b0e1e914d64f87cd6f6">&#9670;&#160;</a></span>GPIO_ANALOG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_ANALOG&#160;&#160;&#160;(2 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>) /* Analog Enable */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00169">169</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaa14b0a35338da58bffed6350351c0a4f" name="gaa14b0a35338da58bffed6350351c0a4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa14b0a35338da58bffed6350351c0a4f">&#9670;&#160;</a></span>GPIO_DRV_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_DRV_0&#160;&#160;&#160;(0 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00185">185</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gafa8d49b1a5c517f00bd5a6f54ce75c7e" name="gafa8d49b1a5c517f00bd5a6f54ce75c7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa8d49b1a5c517f00bd5a6f54ce75c7e">&#9670;&#160;</a></span>GPIO_DRV_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_DRV_1&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00186">186</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga541829fc941aba32111be35264185a18" name="ga541829fc941aba32111be35264185a18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga541829fc941aba32111be35264185a18">&#9670;&#160;</a></span>GPIO_DRV_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_DRV_2&#160;&#160;&#160;(2 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00187">187</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gad5c15a02c2427f90779da93d43ebd045" name="gad5c15a02c2427f90779da93d43ebd045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad5c15a02c2427f90779da93d43ebd045">&#9670;&#160;</a></span>GPIO_DRV_3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_DRV_3&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00188">188</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gac2c006905c7b129ea49e4a3def5c404a" name="gac2c006905c7b129ea49e4a3def5c404a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac2c006905c7b129ea49e4a3def5c404a">&#9670;&#160;</a></span>GPIO_DRV_MASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_DRV_MASK&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">GPIO_DRV_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00184">184</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga6303be03d81e485aeb5e7b91ee154d01" name="ga6303be03d81e485aeb5e7b91ee154d01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6303be03d81e485aeb5e7b91ee154d01">&#9670;&#160;</a></span>GPIO_DRV_SHIFT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_DRV_SHIFT&#160;&#160;&#160;(10) /* Bits 10-11: Drive */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00183">183</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga6fad128e3332409968b8866c439257ed" name="ga6fad128e3332409968b8866c439257ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6fad128e3332409968b8866c439257ed">&#9670;&#160;</a></span>GPIO_FLOAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_FLOAT&#160;&#160;&#160;(0 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>) /* No pull-up, pull-down */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00174">174</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga1a58add76522e59dae1283d0a93be0e9" name="ga1a58add76522e59dae1283d0a93be0e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1a58add76522e59dae1283d0a93be0e9">&#9670;&#160;</a></span>GPIO_FUNC_MASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_FUNC_MASK&#160;&#160;&#160;(0x1f &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga1060b1db7540e7897b8bde83d4e9672e">GPIO_FUNC_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00086">86</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga1060b1db7540e7897b8bde83d4e9672e" name="ga1060b1db7540e7897b8bde83d4e9672e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1060b1db7540e7897b8bde83d4e9672e">&#9670;&#160;</a></span>GPIO_FUNC_SHIFT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_FUNC_SHIFT&#160;&#160;&#160;(0) /* Bits 0-4: GPIO function */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00085">85</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga7be6a0cc9aa65da1d4ee5751b4085853" name="ga7be6a0cc9aa65da1d4ee5751b4085853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7be6a0cc9aa65da1d4ee5751b4085853">&#9670;&#160;</a></span>GPIO_INPUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_INPUT&#160;&#160;&#160;(0 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>) /* Input Enable */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00167">167</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga60078f74d184e10418a0e1d074d6dd43" name="ga60078f74d184e10418a0e1d074d6dd43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga60078f74d184e10418a0e1d074d6dd43">&#9670;&#160;</a></span>GPIO_MODE_MASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_MODE_MASK&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00166">166</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga8a34769f8ff8c76f7bcbe39788048d44" name="ga8a34769f8ff8c76f7bcbe39788048d44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a34769f8ff8c76f7bcbe39788048d44">&#9670;&#160;</a></span>GPIO_MODE_SHIFT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_MODE_SHIFT&#160;&#160;&#160;(5) /* Bits 5-6: Port Mode */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00165">165</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga0db9fe8a278e6ab7c5c6f14fe58e5eb1" name="ga0db9fe8a278e6ab7c5c6f14fe58e5eb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0db9fe8a278e6ab7c5c6f14fe58e5eb1">&#9670;&#160;</a></span>GPIO_OUTPUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_OUTPUT&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">GPIO_MODE_SHIFT</a>) /* Output Enable */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00168">168</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga75d958d0410c36da7f27d1f4f5c36c14" name="ga75d958d0410c36da7f27d1f4f5c36c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga75d958d0410c36da7f27d1f4f5c36c14">&#9670;&#160;</a></span>GPIO_PULLDOWN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_PULLDOWN&#160;&#160;&#160;(2 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>) /* Pull-down */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00176">176</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gae689bc8f5c42d6df7bd54a8dd372e072" name="gae689bc8f5c42d6df7bd54a8dd372e072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae689bc8f5c42d6df7bd54a8dd372e072">&#9670;&#160;</a></span>GPIO_PULLUP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_PULLUP&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>) /* Pull-up */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00175">175</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga8ca9d068fb34ae1e9095f0f7a69e6819" name="ga8ca9d068fb34ae1e9095f0f7a69e6819"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8ca9d068fb34ae1e9095f0f7a69e6819">&#9670;&#160;</a></span>GPIO_PUPD_MASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_PUPD_MASK&#160;&#160;&#160;(3 &lt;&lt; <a class="el" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">GPIO_PUPD_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00173">173</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga7c0b27b8050aeeeacceb0443bfa798e4" name="ga7c0b27b8050aeeeacceb0443bfa798e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7c0b27b8050aeeeacceb0443bfa798e4">&#9670;&#160;</a></span>GPIO_PUPD_SHIFT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_PUPD_SHIFT&#160;&#160;&#160;(7) /* Bits 7-8: Pull-up/down */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00172">172</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga2209604969178e37f19745cf3396345c" name="ga2209604969178e37f19745cf3396345c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2209604969178e37f19745cf3396345c">&#9670;&#160;</a></span>GPIO_SMT_DIS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_SMT_DIS&#160;&#160;&#160;(0 &lt;&lt; <a class="el" href="group___g_p_i_o.html#gab16c6f0794cabd260604fa91ee873cb6">GPIO_SMT_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00180">180</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gae0e99ce5ddb875ac689d8cb5464e3fa1" name="gae0e99ce5ddb875ac689d8cb5464e3fa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae0e99ce5ddb875ac689d8cb5464e3fa1">&#9670;&#160;</a></span>GPIO_SMT_EN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_SMT_EN&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#gab16c6f0794cabd260604fa91ee873cb6">GPIO_SMT_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00181">181</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaa9db5d468e59f87bf6e160ee86762658" name="gaa9db5d468e59f87bf6e160ee86762658"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa9db5d468e59f87bf6e160ee86762658">&#9670;&#160;</a></span>GPIO_SMT_MASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_SMT_MASK&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="group___g_p_i_o.html#gab16c6f0794cabd260604fa91ee873cb6">GPIO_SMT_SHIFT</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00179">179</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gab16c6f0794cabd260604fa91ee873cb6" name="gab16c6f0794cabd260604fa91ee873cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab16c6f0794cabd260604fa91ee873cb6">&#9670;&#160;</a></span>GPIO_SMT_SHIFT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GPIO_SMT_SHIFT&#160;&#160;&#160;(9) /* Bits 9: SMT Enable */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__gpio_8h_source.html">bflb_gpio.h</a> 第 <a class="el" href="bflb__gpio_8h_source.html#l00178">178</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="ga4201e013ff263d31fbb964400fa5965c" name="ga4201e013ff263d31fbb964400fa5965c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4201e013ff263d31fbb964400fa5965c">&#9670;&#160;</a></span>bflb_gpio_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize gpio pin with input float. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga04d78fe971e41bd7cd6bd47f88122d1a" name="ga04d78fe971e41bd7cd6bd47f88122d1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga04d78fe971e41bd7cd6bd47f88122d1a">&#9670;&#160;</a></span>bflb_gpio_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_gpio_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control gpio feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>feature command, use <a class="el" href="group___g_p_i_o___c_m_d.html">gpio feature control cmd definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="ga8b384ec3955a791e9f6ca2db79ab53b7" name="ga8b384ec3955a791e9f6ca2db79ab53b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8b384ec3955a791e9f6ca2db79ab53b7">&#9670;&#160;</a></span>bflb_gpio_get_intstatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bflb_gpio_get_intstatus </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get gpio pin interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true means yes, false means no </dd></dl>
+
+</div>
+</div>
+<a id="gacc9eb1afacf4438799130b1eaa3caf0d" name="gacc9eb1afacf4438799130b1eaa3caf0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacc9eb1afacf4438799130b1eaa3caf0d">&#9670;&#160;</a></span>bflb_gpio_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>cfgset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize gpio pin. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cfgset</td><td>gpio config mask </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga4c937bc6f35d25eb21c41640858deabe" name="ga4c937bc6f35d25eb21c41640858deabe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4c937bc6f35d25eb21c41640858deabe">&#9670;&#160;</a></span>bflb_gpio_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear gpio pin interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga84583de93be66b0f626d9a5ff733949f" name="ga84583de93be66b0f626d9a5ff733949f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga84583de93be66b0f626d9a5ff733949f">&#9670;&#160;</a></span>bflb_gpio_int_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_int_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>trig_mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config gpio pin interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">trig_mode</td><td>mode to trigger interrupt </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga89c407476a5367e76de991014cb7b4e2" name="ga89c407476a5367e76de991014cb7b4e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga89c407476a5367e76de991014cb7b4e2">&#9670;&#160;</a></span>bflb_gpio_int_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_int_mask </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable gpio pin interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>true means disable, false means enable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga1ce402e64e2fa5efdf7bed782deb375c" name="ga1ce402e64e2fa5efdf7bed782deb375c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1ce402e64e2fa5efdf7bed782deb375c">&#9670;&#160;</a></span>bflb_gpio_pin0_31_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_gpio_pin0_31_read </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read level from gpio pin 0~31. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>level of gpio pin 0~31 </dd></dl>
+
+</div>
+</div>
+<a id="ga100d7d2818d2958219189fba23c92429" name="ga100d7d2818d2958219189fba23c92429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga100d7d2818d2958219189fba23c92429">&#9670;&#160;</a></span>bflb_gpio_pin0_31_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_pin0_31_write </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write gpio pin 0~31. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">val</td><td>gpio pin 0~31 value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gac77cabea1b357ba8d61f2cb6b90604b9" name="gac77cabea1b357ba8d61f2cb6b90604b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac77cabea1b357ba8d61f2cb6b90604b9">&#9670;&#160;</a></span>bflb_gpio_pin32_63_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_gpio_pin32_63_read </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read level from gpio pin 32~63. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>level of gpio pin32~63 </dd></dl>
+
+</div>
+</div>
+<a id="ga8a32386932e1ec18e97db0720f4721f2" name="ga8a32386932e1ec18e97db0720f4721f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a32386932e1ec18e97db0720f4721f2">&#9670;&#160;</a></span>bflb_gpio_pin32_63_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_pin32_63_write </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write gpio pin 32~63. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">val</td><td>gpio pin 32~63 value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga51893aa9d07fcf6c3673bd910b06f917" name="ga51893aa9d07fcf6c3673bd910b06f917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga51893aa9d07fcf6c3673bd910b06f917">&#9670;&#160;</a></span>bflb_gpio_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool bflb_gpio_read </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read level from gpio pin. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true means high level, otherwise low level </dd></dl>
+
+</div>
+</div>
+<a id="ga1fc8afcc5a9846e55e1c1a541084bcbf" name="ga1fc8afcc5a9846e55e1c1a541084bcbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1fc8afcc5a9846e55e1c1a541084bcbf">&#9670;&#160;</a></span>bflb_gpio_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_reset </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write gpio pin with low level. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gae6b2f72f8e72e21b1e040f3db538f5fe" name="gae6b2f72f8e72e21b1e040f3db538f5fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae6b2f72f8e72e21b1e040f3db538f5fe">&#9670;&#160;</a></span>bflb_gpio_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_set </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write gpio pin with high level. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga92270da8095103a7ceb6a49b80a4b938" name="ga92270da8095103a7ceb6a49b80a4b938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga92270da8095103a7ceb6a49b80a4b938">&#9670;&#160;</a></span>bflb_gpio_uart_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_gpio_uart_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>uart_func</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config gpio pin with uart function. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>gpio pin, use <a class="el" href="group___g_p_i_o___p_i_n.html">gpio pin definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uart_func</td><td>uart function, use <a class="el" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html">gpio uart function definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

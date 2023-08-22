@@ -1,0 +1,1053 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_sec_aes.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__sec__aes_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle"><div class="title">bflb_sec_aes.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="bflb__core_8h_source.html">bflb_core.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+bflb_sec_aes.h 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__sec__aes_8h__incl.png" border="0" usemap="#ainclude_2bflb__sec__aes_8h" alt=""/></div>
+</div>
+</div>
+<p><a href="bflb__sec__aes_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__aes__link__s.html">bflb_aes_link_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__aes__xts__link__s.html">bflb_aes_xts_link_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga80f586ff9d5f9d29ad835333ea22c8a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_e_s___m_o_d_e.html#ga80f586ff9d5f9d29ad835333ea22c8a9">AES_MODE_ECB</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ga80f586ff9d5f9d29ad835333ea22c8a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab86059d1ddc10b2befcd10d6272360f6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_e_s___m_o_d_e.html#gab86059d1ddc10b2befcd10d6272360f6">AES_MODE_CTR</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:gab86059d1ddc10b2befcd10d6272360f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7225765eac8a038c4b5ee829b06c431f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_e_s___m_o_d_e.html#ga7225765eac8a038c4b5ee829b06c431f">AES_MODE_CBC</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ga7225765eac8a038c4b5ee829b06c431f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab03fe2de235330484c1b9a47302ecf4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_e_s___m_o_d_e.html#gab03fe2de235330484c1b9a47302ecf4f">AES_MODE_XTS</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:gab03fe2de235330484c1b9a47302ecf4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0cd23bcac5f6405cbaadeed19f429090"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_e_s___l_i_n_k___k_e_y_b_i_t_s.html#ga0cd23bcac5f6405cbaadeed19f429090">AES_LINK_KEY_128BITS</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ga0cd23bcac5f6405cbaadeed19f429090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1cdee3b90d5147b0ea67fd13054d799c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_e_s___l_i_n_k___k_e_y_b_i_t_s.html#ga1cdee3b90d5147b0ea67fd13054d799c">AES_LINK_KEY_192BITS</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ga1cdee3b90d5147b0ea67fd13054d799c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1ea4317c080d50806e6483240c34ff35"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_e_s___l_i_n_k___k_e_y_b_i_t_s.html#ga1ea4317c080d50806e6483240c34ff35">AES_LINK_KEY_256BITS</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga1ea4317c080d50806e6483240c34ff35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5031b7b9176fa2c6e2a3eb46347d8dfc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___a_e_s___l_i_n_k___k_e_y_b_i_t_s.html#ga5031b7b9176fa2c6e2a3eb46347d8dfc">AES_LINK_KEY_DOUBLE_128BITS</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:ga5031b7b9176fa2c6e2a3eb46347d8dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa65ca3d59c1f4d617e6ddd1cca78268d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gaa65ca3d59c1f4d617e6ddd1cca78268d">AES_LINK_XTS_MODE1</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:gaa65ca3d59c1f4d617e6ddd1cca78268d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8b9c564fafd9347575ab995401740025"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#ga8b9c564fafd9347575ab995401740025">AES_LINK_XTS_MODE2</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga8b9c564fafd9347575ab995401740025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gad28c0110b46ec5fcf68b2881f543f66d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structbflb__aes__link__s.html">bflb_aes_link_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gad28c0110b46ec5fcf68b2881f543f66d">__attribute__</a> ((aligned(4)))</td></tr>
+<tr class="separator:gad28c0110b46ec5fcf68b2881f543f66d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga66f54e835018a4818fb66f7f483054ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#ga66f54e835018a4818fb66f7f483054ca">bflb_aes_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga66f54e835018a4818fb66f7f483054ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable aes.  <br /></td></tr>
+<tr class="separator:ga66f54e835018a4818fb66f7f483054ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac4e98d4fbbff0db715f8c7e13a3a7cbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gac4e98d4fbbff0db715f8c7e13a3a7cbe">bflb_aes_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gac4e98d4fbbff0db715f8c7e13a3a7cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable aes.  <br /></td></tr>
+<tr class="separator:gac4e98d4fbbff0db715f8c7e13a3a7cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae690822689d8c8508aa92d4404d4709b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gae690822689d8c8508aa92d4404d4709b">bflb_aes_set_hwkey</a> (uint8_t keysel)</td></tr>
+<tr class="memdesc:gae690822689d8c8508aa92d4404d4709b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set aes hardware key.  <br /></td></tr>
+<tr class="separator:gae690822689d8c8508aa92d4404d4709b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadf542acde12a8a96c6068d5fb4918a9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gadf542acde12a8a96c6068d5fb4918a9b">bflb_aes_set_hwkey_source</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t source)</td></tr>
+<tr class="memdesc:gadf542acde12a8a96c6068d5fb4918a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set aes hardware key source.  <br /></td></tr>
+<tr class="separator:gadf542acde12a8a96c6068d5fb4918a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae25c4e29f865eae64e27472aad132a21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gae25c4e29f865eae64e27472aad132a21">bflb_aes_set_mode</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t mode)</td></tr>
+<tr class="memdesc:gae25c4e29f865eae64e27472aad132a21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set aes mode.  <br /></td></tr>
+<tr class="separator:gae25c4e29f865eae64e27472aad132a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga96a778d9c838a2ea3a30d8ad8b1a25bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#ga96a778d9c838a2ea3a30d8ad8b1a25bd">bflb_aes_setkey</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const uint8_t *key, uint16_t keybits)</td></tr>
+<tr class="memdesc:ga96a778d9c838a2ea3a30d8ad8b1a25bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set aes key.  <br /></td></tr>
+<tr class="separator:ga96a778d9c838a2ea3a30d8ad8b1a25bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gace28675b5591874474a3933500599f13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gace28675b5591874474a3933500599f13">bflb_aes_encrypt</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const uint8_t *input, const uint8_t *iv, uint8_t *output, uint32_t len)</td></tr>
+<tr class="memdesc:gace28675b5591874474a3933500599f13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform aes encrypt.  <br /></td></tr>
+<tr class="separator:gace28675b5591874474a3933500599f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga397920b43da94148b7a5f023bc564513"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#ga397920b43da94148b7a5f023bc564513">bflb_aes_decrypt</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const uint8_t *input, const uint8_t *iv, uint8_t *output, uint32_t len)</td></tr>
+<tr class="memdesc:ga397920b43da94148b7a5f023bc564513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform aes decrypt.  <br /></td></tr>
+<tr class="separator:ga397920b43da94148b7a5f023bc564513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadd386e987103d0a44d2ada4ee4d1a239"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gadd386e987103d0a44d2ada4ee4d1a239">bflb_aes_link_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gadd386e987103d0a44d2ada4ee4d1a239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable aes link mode.  <br /></td></tr>
+<tr class="separator:gadd386e987103d0a44d2ada4ee4d1a239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga03b4267a2db9f63ce592995447c1ddbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#ga03b4267a2db9f63ce592995447c1ddbd">bflb_aes_link_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga03b4267a2db9f63ce592995447c1ddbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable aes link mode.  <br /></td></tr>
+<tr class="separator:ga03b4267a2db9f63ce592995447c1ddbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8b45e517287291eb2b01e4f82c7ad29e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#ga8b45e517287291eb2b01e4f82c7ad29e">bflb_aes_link_update</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t link_addr, const uint8_t *input, uint8_t *output, uint32_t len)</td></tr>
+<tr class="memdesc:ga8b45e517287291eb2b01e4f82c7ad29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform encrypt or decrypt with link mode.  <br /></td></tr>
+<tr class="separator:ga8b45e517287291eb2b01e4f82c7ad29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab98115aa0fca732bfc5035263241cabf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gab98115aa0fca732bfc5035263241cabf">bflb_group0_request_aes_access</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gab98115aa0fca732bfc5035263241cabf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable aes in group0.  <br /></td></tr>
+<tr class="separator:gab98115aa0fca732bfc5035263241cabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad687df3c71376bb82dfc89877bde202c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___a_e_s.html#gad687df3c71376bb82dfc89877bde202c">bflb_group0_release_aes_access</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:gad687df3c71376bb82dfc89877bde202c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable aes in group0.  <br /></td></tr>
+<tr class="separator:gad687df3c71376bb82dfc89877bde202c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a3e57c2ef1c3ffb36722f000cc1156824"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a3e57c2ef1c3ffb36722f000cc1156824">__pad0__</a></td></tr>
+<tr class="separator:a3e57c2ef1c3ffb36722f000cc1156824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c0f22648bda6303ea2169602aceacb4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a9c0f22648bda6303ea2169602aceacb4">aes_key</a></td></tr>
+<tr class="separator:a9c0f22648bda6303ea2169602aceacb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad75a10a2d6969543f287fc00ca7d428f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#ad75a10a2d6969543f287fc00ca7d428f">aes_dec_en</a></td></tr>
+<tr class="separator:ad75a10a2d6969543f287fc00ca7d428f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6922ed0aff9ee98fa2d3b3960a6ae4b9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a6922ed0aff9ee98fa2d3b3960a6ae4b9">aes_newkey_dis</a></td></tr>
+<tr class="separator:a6922ed0aff9ee98fa2d3b3960a6ae4b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a733cf791066fb4906988e310bb031394"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a733cf791066fb4906988e310bb031394">aes_hwkey_en</a></td></tr>
+<tr class="separator:a733cf791066fb4906988e310bb031394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6712ba6dd1d5b43d2d56ff8ac4e275a7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a6712ba6dd1d5b43d2d56ff8ac4e275a7">__pad1__</a></td></tr>
+<tr class="separator:a6712ba6dd1d5b43d2d56ff8ac4e275a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cedca6555292c99c5a9209acb1f7aaa"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a7cedca6555292c99c5a9209acb1f7aaa">aes_intclr</a></td></tr>
+<tr class="separator:a7cedca6555292c99c5a9209acb1f7aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad88c9ef79c1ea752efe7fc70a9cf3d07"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#ad88c9ef79c1ea752efe7fc70a9cf3d07">aes_intset</a></td></tr>
+<tr class="separator:ad88c9ef79c1ea752efe7fc70a9cf3d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce12a63de64ef64ae2d59d128251cae"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a9ce12a63de64ef64ae2d59d128251cae">__pad2__</a></td></tr>
+<tr class="separator:a9ce12a63de64ef64ae2d59d128251cae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d1d073b57fe6424d0216b5b90517702"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a2d1d073b57fe6424d0216b5b90517702">aes_mode</a></td></tr>
+<tr class="separator:a2d1d073b57fe6424d0216b5b90517702"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a586a99015d921a27b4a946fca3ab1d58"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a586a99015d921a27b4a946fca3ab1d58">aes_newiv_dis</a></td></tr>
+<tr class="separator:a586a99015d921a27b4a946fca3ab1d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63876bb36df637dbde7fcf068ae2f20a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a63876bb36df637dbde7fcf068ae2f20a">aes_xts</a></td></tr>
+<tr class="separator:a63876bb36df637dbde7fcf068ae2f20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230e4cd3ca33fd4fd561bc7cb5f70b84"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a230e4cd3ca33fd4fd561bc7cb5f70b84">aes_msglen</a></td></tr>
+<tr class="separator:a230e4cd3ca33fd4fd561bc7cb5f70b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5223ecf091e671330294763b56f11b71"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a5223ecf091e671330294763b56f11b71">aes_srcaddr</a></td></tr>
+<tr class="separator:a5223ecf091e671330294763b56f11b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa646d74c4a49f456e67084c47eed83"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a0fa646d74c4a49f456e67084c47eed83">aes_dstaddr</a></td></tr>
+<tr class="separator:a0fa646d74c4a49f456e67084c47eed83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1ceeadf0f5ca02a94e6ded1ae2efa5b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#ab1ceeadf0f5ca02a94e6ded1ae2efa5b">aes_iv0</a></td></tr>
+<tr class="separator:ab1ceeadf0f5ca02a94e6ded1ae2efa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9511f6bf00508e78856287123bc781fe"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a9511f6bf00508e78856287123bc781fe">aes_iv1</a></td></tr>
+<tr class="separator:a9511f6bf00508e78856287123bc781fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9ed9aa3531e151d077341f2dda810f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a3a9ed9aa3531e151d077341f2dda810f">aes_iv2</a></td></tr>
+<tr class="separator:a3a9ed9aa3531e151d077341f2dda810f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a848f41d789f3d62a8399a15fd020ba"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a7a848f41d789f3d62a8399a15fd020ba">aes_iv3</a></td></tr>
+<tr class="separator:a7a848f41d789f3d62a8399a15fd020ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76469541c3c44dcc317274373b484144"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a76469541c3c44dcc317274373b484144">aes_key0</a></td></tr>
+<tr class="separator:a76469541c3c44dcc317274373b484144"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d36af08d9885d2b61834bb2128feed3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a2d36af08d9885d2b61834bb2128feed3">aes_key1</a></td></tr>
+<tr class="separator:a2d36af08d9885d2b61834bb2128feed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d00a36f59e0766c30278d7770121239"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a8d00a36f59e0766c30278d7770121239">aes_key2</a></td></tr>
+<tr class="separator:a8d00a36f59e0766c30278d7770121239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7870997384c0b8fdb3169faa85feb48e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a7870997384c0b8fdb3169faa85feb48e">aes_key3</a></td></tr>
+<tr class="separator:a7870997384c0b8fdb3169faa85feb48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3246522be543067a88f273d7d4a3fd55"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a3246522be543067a88f273d7d4a3fd55">aes_key4</a></td></tr>
+<tr class="separator:a3246522be543067a88f273d7d4a3fd55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a765e402d3ce64be1d5e424bd96eb562d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a765e402d3ce64be1d5e424bd96eb562d">aes_key5</a></td></tr>
+<tr class="separator:a765e402d3ce64be1d5e424bd96eb562d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c4f448d8d27bf424c16b9ef2047510f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a9c4f448d8d27bf424c16b9ef2047510f">aes_key6</a></td></tr>
+<tr class="separator:a9c4f448d8d27bf424c16b9ef2047510f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7389adc1a2ba5fdbcb0fff76f289c50b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a7389adc1a2ba5fdbcb0fff76f289c50b">aes_key7</a></td></tr>
+<tr class="separator:a7389adc1a2ba5fdbcb0fff76f289c50b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45f78214f98d8d75de892769bdbaa6c6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a45f78214f98d8d75de892769bdbaa6c6">aes_key10</a></td></tr>
+<tr class="separator:a45f78214f98d8d75de892769bdbaa6c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae272d6767833af93afb719099cd9035c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#ae272d6767833af93afb719099cd9035c">aes_key11</a></td></tr>
+<tr class="separator:ae272d6767833af93afb719099cd9035c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a108b0c29a04a6bee68996e52fd283041"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a108b0c29a04a6bee68996e52fd283041">aes_key12</a></td></tr>
+<tr class="separator:a108b0c29a04a6bee68996e52fd283041"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8dc4cee48e56120a20ee645152a199c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#ad8dc4cee48e56120a20ee645152a199c">aes_key13</a></td></tr>
+<tr class="separator:ad8dc4cee48e56120a20ee645152a199c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f5d527d43e40847f6c56b6360db46b2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a5f5d527d43e40847f6c56b6360db46b2">aes_key14</a></td></tr>
+<tr class="separator:a5f5d527d43e40847f6c56b6360db46b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a275ecdcef24f2945a415a13903677d6b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a275ecdcef24f2945a415a13903677d6b">aes_key15</a></td></tr>
+<tr class="separator:a275ecdcef24f2945a415a13903677d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8491eaad56dd0840f6d47e6917c8d9e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#ae8491eaad56dd0840f6d47e6917c8d9e">aes_key16</a></td></tr>
+<tr class="separator:ae8491eaad56dd0840f6d47e6917c8d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe7f63be2829b27b508e483c8fb7add3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#afe7f63be2829b27b508e483c8fb7add3">aes_key17</a></td></tr>
+<tr class="separator:afe7f63be2829b27b508e483c8fb7add3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4854608c0e776f0704a4d9a4b98ea57d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a4854608c0e776f0704a4d9a4b98ea57d">__pad3__</a></td></tr>
+<tr class="separator:a4854608c0e776f0704a4d9a4b98ea57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56b7c913f71e38906eb48d106f1f007d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a56b7c913f71e38906eb48d106f1f007d">aes_unitlen</a></td></tr>
+<tr class="separator:a56b7c913f71e38906eb48d106f1f007d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c307b4500294ede9dc0ef8eea86c358"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a7c307b4500294ede9dc0ef8eea86c358">aes_key20</a></td></tr>
+<tr class="separator:a7c307b4500294ede9dc0ef8eea86c358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112afd9c9eb3646f847647bae90a2a60"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a112afd9c9eb3646f847647bae90a2a60">aes_key21</a></td></tr>
+<tr class="separator:a112afd9c9eb3646f847647bae90a2a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a823c4bd104876ff1288893f88b02147b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a823c4bd104876ff1288893f88b02147b">aes_key22</a></td></tr>
+<tr class="separator:a823c4bd104876ff1288893f88b02147b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31af588f3f85c6f6c4f8d7b98831d9ed"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a31af588f3f85c6f6c4f8d7b98831d9ed">aes_key23</a></td></tr>
+<tr class="separator:a31af588f3f85c6f6c4f8d7b98831d9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af04e92913769636bb9a9bdc1220ae578"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#af04e92913769636bb9a9bdc1220ae578">aes_key24</a></td></tr>
+<tr class="separator:af04e92913769636bb9a9bdc1220ae578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace9cf92ed3ae97954181a217548acb89"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#ace9cf92ed3ae97954181a217548acb89">aes_key25</a></td></tr>
+<tr class="separator:ace9cf92ed3ae97954181a217548acb89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b1eb6a0bb39d30c1ac38c4ea746978"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#ab1b1eb6a0bb39d30c1ac38c4ea746978">aes_key26</a></td></tr>
+<tr class="separator:ab1b1eb6a0bb39d30c1ac38c4ea746978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9041b3e7d4035c294dbed7389d72574d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__sec__aes_8h.html#a9041b3e7d4035c294dbed7389d72574d">aes_key27</a></td></tr>
+<tr class="separator:a9041b3e7d4035c294dbed7389d72574d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">变量说明</h2>
+<a id="a3e57c2ef1c3ffb36722f000cc1156824" name="a3e57c2ef1c3ffb36722f000cc1156824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e57c2ef1c3ffb36722f000cc1156824">&#9670;&#160;</a></span>__pad0__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t __pad0__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[2:0]Reserved </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00000">0</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6712ba6dd1d5b43d2d56ff8ac4e275a7" name="a6712ba6dd1d5b43d2d56ff8ac4e275a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6712ba6dd1d5b43d2d56ff8ac4e275a7">&#9670;&#160;</a></span>__pad1__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t __pad1__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[8]Reserved </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00005">5</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9ce12a63de64ef64ae2d59d128251cae" name="a9ce12a63de64ef64ae2d59d128251cae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ce12a63de64ef64ae2d59d128251cae">&#9670;&#160;</a></span>__pad2__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t __pad2__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[11]Reserved </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00008">8</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4854608c0e776f0704a4d9a4b98ea57d" name="a4854608c0e776f0704a4d9a4b98ea57d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4854608c0e776f0704a4d9a4b98ea57d">&#9670;&#160;</a></span>__pad3__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t __pad3__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[15:0]Reserved </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00027">27</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad75a10a2d6969543f287fc00ca7d428f" name="ad75a10a2d6969543f287fc00ca7d428f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad75a10a2d6969543f287fc00ca7d428f">&#9670;&#160;</a></span>aes_dec_en</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_dec_en</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[5]Encode or decode </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00002">2</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0fa646d74c4a49f456e67084c47eed83" name="a0fa646d74c4a49f456e67084c47eed83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fa646d74c4a49f456e67084c47eed83">&#9670;&#160;</a></span>aes_dstaddr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_dstaddr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Message destination address </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00014">14</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a733cf791066fb4906988e310bb031394" name="a733cf791066fb4906988e310bb031394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a733cf791066fb4906988e310bb031394">&#9670;&#160;</a></span>aes_hwkey_en</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_hwkey_en</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[7]Enable or disable using hardware hey </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00004">4</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7cedca6555292c99c5a9209acb1f7aaa" name="a7cedca6555292c99c5a9209acb1f7aaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cedca6555292c99c5a9209acb1f7aaa">&#9670;&#160;</a></span>aes_intclr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_intclr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[9]Clear interrupt </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00006">6</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad88c9ef79c1ea752efe7fc70a9cf3d07" name="ad88c9ef79c1ea752efe7fc70a9cf3d07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad88c9ef79c1ea752efe7fc70a9cf3d07">&#9670;&#160;</a></span>aes_intset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_intset</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[10]Set interrupt </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00007">7</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab1ceeadf0f5ca02a94e6ded1ae2efa5b" name="ab1ceeadf0f5ca02a94e6ded1ae2efa5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1ceeadf0f5ca02a94e6ded1ae2efa5b">&#9670;&#160;</a></span>aes_iv0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_iv0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian initial vector(MSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00015">15</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9511f6bf00508e78856287123bc781fe" name="a9511f6bf00508e78856287123bc781fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9511f6bf00508e78856287123bc781fe">&#9670;&#160;</a></span>aes_iv1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_iv1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian initial vector </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00016">16</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3a9ed9aa3531e151d077341f2dda810f" name="a3a9ed9aa3531e151d077341f2dda810f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a9ed9aa3531e151d077341f2dda810f">&#9670;&#160;</a></span>aes_iv2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_iv2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian initial vector </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00017">17</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7a848f41d789f3d62a8399a15fd020ba" name="a7a848f41d789f3d62a8399a15fd020ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a848f41d789f3d62a8399a15fd020ba">&#9670;&#160;</a></span>aes_iv3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_iv3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian initial vector(LSB)(CTR mode:counter initial value) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00018">18</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9c0f22648bda6303ea2169602aceacb4" name="a9c0f22648bda6303ea2169602aceacb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c0f22648bda6303ea2169602aceacb4">&#9670;&#160;</a></span>aes_key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[4:3]128-bit/256-bit/192-bit/128-bit-double key mode select </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00001">1</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a76469541c3c44dcc317274373b484144" name="a76469541c3c44dcc317274373b484144"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76469541c3c44dcc317274373b484144">&#9670;&#160;</a></span>aes_key0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key(aes-128/256 key MSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00019">19</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2d36af08d9885d2b61834bb2128feed3" name="a2d36af08d9885d2b61834bb2128feed3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d36af08d9885d2b61834bb2128feed3">&#9670;&#160;</a></span>aes_key1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00020">20</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a45f78214f98d8d75de892769bdbaa6c6" name="a45f78214f98d8d75de892769bdbaa6c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45f78214f98d8d75de892769bdbaa6c6">&#9670;&#160;</a></span>aes_key10</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key(aes-128/256 key MSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00019">19</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae272d6767833af93afb719099cd9035c" name="ae272d6767833af93afb719099cd9035c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae272d6767833af93afb719099cd9035c">&#9670;&#160;</a></span>aes_key11</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key1 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00020">20</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a108b0c29a04a6bee68996e52fd283041" name="a108b0c29a04a6bee68996e52fd283041"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a108b0c29a04a6bee68996e52fd283041">&#9670;&#160;</a></span>aes_key12</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key1 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00021">21</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad8dc4cee48e56120a20ee645152a199c" name="ad8dc4cee48e56120a20ee645152a199c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8dc4cee48e56120a20ee645152a199c">&#9670;&#160;</a></span>aes_key13</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key1(aes-128 key LSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00022">22</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5f5d527d43e40847f6c56b6360db46b2" name="a5f5d527d43e40847f6c56b6360db46b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f5d527d43e40847f6c56b6360db46b2">&#9670;&#160;</a></span>aes_key14</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key1 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00023">23</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a275ecdcef24f2945a415a13903677d6b" name="a275ecdcef24f2945a415a13903677d6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a275ecdcef24f2945a415a13903677d6b">&#9670;&#160;</a></span>aes_key15</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key1 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00024">24</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae8491eaad56dd0840f6d47e6917c8d9e" name="ae8491eaad56dd0840f6d47e6917c8d9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8491eaad56dd0840f6d47e6917c8d9e">&#9670;&#160;</a></span>aes_key16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key1 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00025">25</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afe7f63be2829b27b508e483c8fb7add3" name="afe7f63be2829b27b508e483c8fb7add3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe7f63be2829b27b508e483c8fb7add3">&#9670;&#160;</a></span>aes_key17</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key17</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key1(aes-256 key LSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00026">26</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8d00a36f59e0766c30278d7770121239" name="a8d00a36f59e0766c30278d7770121239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d00a36f59e0766c30278d7770121239">&#9670;&#160;</a></span>aes_key2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00021">21</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7c307b4500294ede9dc0ef8eea86c358" name="a7c307b4500294ede9dc0ef8eea86c358"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c307b4500294ede9dc0ef8eea86c358">&#9670;&#160;</a></span>aes_key20</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key2(aes-128/256 key MSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00029">29</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a112afd9c9eb3646f847647bae90a2a60" name="a112afd9c9eb3646f847647bae90a2a60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a112afd9c9eb3646f847647bae90a2a60">&#9670;&#160;</a></span>aes_key21</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key21</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key2 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00030">30</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a823c4bd104876ff1288893f88b02147b" name="a823c4bd104876ff1288893f88b02147b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a823c4bd104876ff1288893f88b02147b">&#9670;&#160;</a></span>aes_key22</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key22</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key2 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00031">31</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a31af588f3f85c6f6c4f8d7b98831d9ed" name="a31af588f3f85c6f6c4f8d7b98831d9ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31af588f3f85c6f6c4f8d7b98831d9ed">&#9670;&#160;</a></span>aes_key23</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key23</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key2(aes-128 key LSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00032">32</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af04e92913769636bb9a9bdc1220ae578" name="af04e92913769636bb9a9bdc1220ae578"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af04e92913769636bb9a9bdc1220ae578">&#9670;&#160;</a></span>aes_key24</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key2 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00033">33</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ace9cf92ed3ae97954181a217548acb89" name="ace9cf92ed3ae97954181a217548acb89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace9cf92ed3ae97954181a217548acb89">&#9670;&#160;</a></span>aes_key25</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key2 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00034">34</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab1b1eb6a0bb39d30c1ac38c4ea746978" name="ab1b1eb6a0bb39d30c1ac38c4ea746978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1b1eb6a0bb39d30c1ac38c4ea746978">&#9670;&#160;</a></span>aes_key26</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key26</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key2 </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00035">35</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9041b3e7d4035c294dbed7389d72574d" name="a9041b3e7d4035c294dbed7389d72574d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9041b3e7d4035c294dbed7389d72574d">&#9670;&#160;</a></span>aes_key27</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key27</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key2(aes-256 key LSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00036">36</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7870997384c0b8fdb3169faa85feb48e" name="a7870997384c0b8fdb3169faa85feb48e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7870997384c0b8fdb3169faa85feb48e">&#9670;&#160;</a></span>aes_key3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key(aes-128 key LSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00022">22</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3246522be543067a88f273d7d4a3fd55" name="a3246522be543067a88f273d7d4a3fd55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3246522be543067a88f273d7d4a3fd55">&#9670;&#160;</a></span>aes_key4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00023">23</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a765e402d3ce64be1d5e424bd96eb562d" name="a765e402d3ce64be1d5e424bd96eb562d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a765e402d3ce64be1d5e424bd96eb562d">&#9670;&#160;</a></span>aes_key5</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00024">24</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9c4f448d8d27bf424c16b9ef2047510f" name="a9c4f448d8d27bf424c16b9ef2047510f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c4f448d8d27bf424c16b9ef2047510f">&#9670;&#160;</a></span>aes_key6</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00025">25</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7389adc1a2ba5fdbcb0fff76f289c50b" name="a7389adc1a2ba5fdbcb0fff76f289c50b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7389adc1a2ba5fdbcb0fff76f289c50b">&#9670;&#160;</a></span>aes_key7</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_key7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Big endian aes key(aes-256 key LSB) </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00026">26</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2d1d073b57fe6424d0216b5b90517702" name="a2d1d073b57fe6424d0216b5b90517702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d1d073b57fe6424d0216b5b90517702">&#9670;&#160;</a></span>aes_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[13:12]ECB/CTR/CBC mode select </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00009">9</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a230e4cd3ca33fd4fd561bc7cb5f70b84" name="a230e4cd3ca33fd4fd561bc7cb5f70b84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a230e4cd3ca33fd4fd561bc7cb5f70b84">&#9670;&#160;</a></span>aes_msglen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_msglen</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[31:16]Number of 128-bit block </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00012">12</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a586a99015d921a27b4a946fca3ab1d58" name="a586a99015d921a27b4a946fca3ab1d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a586a99015d921a27b4a946fca3ab1d58">&#9670;&#160;</a></span>aes_newiv_dis</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_newiv_dis</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[14]Use new iv or use same iv as last one </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00010">10</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6922ed0aff9ee98fa2d3b3960a6ae4b9" name="a6922ed0aff9ee98fa2d3b3960a6ae4b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6922ed0aff9ee98fa2d3b3960a6ae4b9">&#9670;&#160;</a></span>aes_newkey_dis</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_newkey_dis</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[6]Use new key or use same key as last one </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00003">3</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5223ecf091e671330294763b56f11b71" name="a5223ecf091e671330294763b56f11b71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5223ecf091e671330294763b56f11b71">&#9670;&#160;</a></span>aes_srcaddr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_srcaddr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Message source address </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00013">13</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a56b7c913f71e38906eb48d106f1f007d" name="a56b7c913f71e38906eb48d106f1f007d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56b7c913f71e38906eb48d106f1f007d">&#9670;&#160;</a></span>aes_unitlen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_unitlen</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[31:16]Big endian aes unit len </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00028">28</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a63876bb36df637dbde7fcf068ae2f20a" name="a63876bb36df637dbde7fcf068ae2f20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63876bb36df637dbde7fcf068ae2f20a">&#9670;&#160;</a></span>aes_xts</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t aes_xts</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>[15]XTS mode select </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__aes_8h_source.html">bflb_sec_aes.h</a> 第 <a class="el" href="bflb__sec__aes_8h_source.html#l00011">11</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__sec__aes_8h.html">bflb_sec_aes.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

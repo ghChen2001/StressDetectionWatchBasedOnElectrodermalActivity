@@ -1,0 +1,25 @@
+digraph "IR"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="IR",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node8 [label="ir rx interrupt enable\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i_r___r_x___i_n_t_e_n.html",tooltip=" "];
+  Node9 [label="ir rx interrupt status\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i_r___r_x___i_n_t_s_t_s.html",tooltip=" "];
+  Node7 [label="ir rx mode definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i_r___r_x___m_o_d_e.html",tooltip=" "];
+  Node4 [label="ir tx fifo width valid\l width definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i_r___t_x___f_i_f_o___w_i_d_t_h.html",tooltip=" "];
+  Node5 [label="ir tx interrupt enable\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i_r___t_x___i_n_t_e_n.html",tooltip=" "];
+  Node6 [label="ir tx interrupt status\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i_r___t_x___i_n_t_s_t_s.html",tooltip=" "];
+  Node3 [label="ir tx mode definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___i_r___t_x___m_o_d_e.html",tooltip=" "];
+  Node2 [label="LHAL",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___l_h_a_l.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node8 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node9 [shape=plaintext, dir="back", style="solid"];
+}

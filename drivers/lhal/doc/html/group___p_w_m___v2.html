@@ -1,0 +1,771 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: PWM_V2</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___p_w_m___v2.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">PWM_V2<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+PWM_V2 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___p_w_m___v2.png" border="0" usemap="#agroup______p__w__m______v2" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___p_w_m___c_h_a_n_n_e_l"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___c_h_a_n_n_e_l.html">pwm channel definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___p_w_m___p_o_l_a_r_i_t_y"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___p_o_l_a_r_i_t_y.html">pwm polarity definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___p_w_m___s_t_a_t_e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___s_t_a_t_e.html">pwm state definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___p_w_m___t_r_i_g___s_d_c___s_r_c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___t_r_i_g___s_d_c___s_r_c.html">pwm trigger adc source definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___p_w_m___i_n_t_e_n"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___i_n_t_e_n.html">pwm interrupt enable definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___p_w_m___i_n_t_s_t_s"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___i_n_t_s_t_s.html">pwm interrupt status definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___p_w_m___i_n_t_c_l_r"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___i_n_t_c_l_r.html">pwm interrupt clear definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___p_w_m___c_m_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___c_m_d.html">pwm feature control cmd definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__pwm__v2__channel__config__s.html">bflb_pwm_v2_channel_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">PWM channel configuration structure  <a href="structbflb__pwm__v2__channel__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__pwm__v2__config__s.html">bflb_pwm_v2_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">PWM configuration structure  <a href="structbflb__pwm__v2__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gaebe752425d0d5274d0ea236bcbe2cf4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#gaebe752425d0d5274d0ea236bcbe2cf4d">bflb_pwm_v2_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const struct <a class="el" href="structbflb__pwm__v2__config__s.html">bflb_pwm_v2_config_s</a> *config)</td></tr>
+<tr class="memdesc:gaebe752425d0d5274d0ea236bcbe2cf4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize pwm.  <br /></td></tr>
+<tr class="separator:gaebe752425d0d5274d0ea236bcbe2cf4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga573560a3d405d60760f612f365cbbb2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga573560a3d405d60760f612f365cbbb2f">bflb_pwm_v2_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga573560a3d405d60760f612f365cbbb2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize pwm.  <br /></td></tr>
+<tr class="separator:ga573560a3d405d60760f612f365cbbb2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7aa986ea3756c7ca52a99f4b9b48038d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga7aa986ea3756c7ca52a99f4b9b48038d">bflb_pwm_v2_start</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga7aa986ea3756c7ca52a99f4b9b48038d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start pwm output.  <br /></td></tr>
+<tr class="separator:ga7aa986ea3756c7ca52a99f4b9b48038d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ad88b1f711137cef439610941d2959d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga8ad88b1f711137cef439610941d2959d">bflb_pwm_v2_stop</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga8ad88b1f711137cef439610941d2959d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop pwm output.  <br /></td></tr>
+<tr class="separator:ga8ad88b1f711137cef439610941d2959d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga505bbdd58ba16072a7db918044b6d2c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga505bbdd58ba16072a7db918044b6d2c2">bflb_pwm_v2_set_period</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t period)</td></tr>
+<tr class="memdesc:ga505bbdd58ba16072a7db918044b6d2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pwm period to change pwm frequence. Frequcence(hz) = pwm source clock /div/period.  <br /></td></tr>
+<tr class="separator:ga505bbdd58ba16072a7db918044b6d2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga56ace284656b349d293905e872765555"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga56ace284656b349d293905e872765555">bflb_pwm_v2_get_frequency</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga56ace284656b349d293905e872765555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pwm frequcency.  <br /></td></tr>
+<tr class="separator:ga56ace284656b349d293905e872765555"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa16f944199e41ac07329bc6d2e305a11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#gaa16f944199e41ac07329bc6d2e305a11">bflb_pwm_v2_channel_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch, struct <a class="el" href="structbflb__pwm__v2__channel__config__s.html">bflb_pwm_v2_channel_config_s</a> *config)</td></tr>
+<tr class="memdesc:gaa16f944199e41ac07329bc6d2e305a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config pwm channel.  <br /></td></tr>
+<tr class="separator:gaa16f944199e41ac07329bc6d2e305a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga90c3852ddee88492d1724b8220e7c2ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga90c3852ddee88492d1724b8220e7c2ee">bflb_pwm_v2_channel_set_threshold</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch, uint16_t low_threhold, uint16_t high_threhold)</td></tr>
+<tr class="memdesc:ga90c3852ddee88492d1724b8220e7c2ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set pwm dutycycle. Dutycycle(%) = (high_threhold - low_threhold)/period * 100%.  <br /></td></tr>
+<tr class="separator:ga90c3852ddee88492d1724b8220e7c2ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7659395c34da7f43fdcca647bd3af3dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga7659395c34da7f43fdcca647bd3af3dd">bflb_pwm_v2_channel_positive_start</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch)</td></tr>
+<tr class="memdesc:ga7659395c34da7f43fdcca647bd3af3dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start pwm positive output.  <br /></td></tr>
+<tr class="separator:ga7659395c34da7f43fdcca647bd3af3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga28debc3dd855b924521f2cfd097d4bf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga28debc3dd855b924521f2cfd097d4bf9">bflb_pwm_v2_channel_negative_start</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch)</td></tr>
+<tr class="memdesc:ga28debc3dd855b924521f2cfd097d4bf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start pwm negative output.  <br /></td></tr>
+<tr class="separator:ga28debc3dd855b924521f2cfd097d4bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5ea025609520e5b89eed1d2fc7eee291"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga5ea025609520e5b89eed1d2fc7eee291">bflb_pwm_v2_channel_positive_stop</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch)</td></tr>
+<tr class="memdesc:ga5ea025609520e5b89eed1d2fc7eee291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop pwm positive output.  <br /></td></tr>
+<tr class="separator:ga5ea025609520e5b89eed1d2fc7eee291"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa292a10591106a130b95501f33b1c6bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#gaa292a10591106a130b95501f33b1c6bb">bflb_pwm_v2_channel_negative_stop</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch)</td></tr>
+<tr class="memdesc:gaa292a10591106a130b95501f33b1c6bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop pwm negative output.  <br /></td></tr>
+<tr class="separator:gaa292a10591106a130b95501f33b1c6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga75a3b00cd63d8559bf2e067ed3b9aece"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga75a3b00cd63d8559bf2e067ed3b9aece">bflb_pwm_v2_int_enable</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_en, bool enable)</td></tr>
+<tr class="memdesc:ga75a3b00cd63d8559bf2e067ed3b9aece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable pwm interrupt.  <br /></td></tr>
+<tr class="separator:ga75a3b00cd63d8559bf2e067ed3b9aece"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1eb266f78def6834f5bfaf6d4a18f87c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga1eb266f78def6834f5bfaf6d4a18f87c">bflb_pwm_v2_get_intstatus</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="memdesc:ga1eb266f78def6834f5bfaf6d4a18f87c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pwm interrupt status.  <br /></td></tr>
+<tr class="separator:ga1eb266f78def6834f5bfaf6d4a18f87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga62bee666da3d8899e7ea9ade9f56cdfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#ga62bee666da3d8899e7ea9ade9f56cdfc">bflb_pwm_v2_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear)</td></tr>
+<tr class="memdesc:ga62bee666da3d8899e7ea9ade9f56cdfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear pwm interrupt status.  <br /></td></tr>
+<tr class="separator:ga62bee666da3d8899e7ea9ade9f56cdfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae9d64fb62fad22c64467767b9e001a60"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_w_m___v2.html#gae9d64fb62fad22c64467767b9e001a60">bflb_pwm_v2_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="memdesc:gae9d64fb62fad22c64467767b9e001a60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control pwm feature.  <br /></td></tr>
+<tr class="separator:gae9d64fb62fad22c64467767b9e001a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">函数说明</h2>
+<a id="gaa16f944199e41ac07329bc6d2e305a11" name="gaa16f944199e41ac07329bc6d2e305a11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa16f944199e41ac07329bc6d2e305a11">&#9670;&#160;</a></span>bflb_pwm_v2_channel_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_channel_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>ch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structbflb__pwm__v2__channel__config__s.html">bflb_pwm_v2_channel_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config pwm channel. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ch</td><td>channel number </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>pointer to save pwm channel config </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga28debc3dd855b924521f2cfd097d4bf9" name="ga28debc3dd855b924521f2cfd097d4bf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga28debc3dd855b924521f2cfd097d4bf9">&#9670;&#160;</a></span>bflb_pwm_v2_channel_negative_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_channel_negative_start </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>ch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start pwm negative output. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ch</td><td>channel number </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaa292a10591106a130b95501f33b1c6bb" name="gaa292a10591106a130b95501f33b1c6bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa292a10591106a130b95501f33b1c6bb">&#9670;&#160;</a></span>bflb_pwm_v2_channel_negative_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_channel_negative_stop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>ch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop pwm negative output. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ch</td><td>channel number </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga7659395c34da7f43fdcca647bd3af3dd" name="ga7659395c34da7f43fdcca647bd3af3dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7659395c34da7f43fdcca647bd3af3dd">&#9670;&#160;</a></span>bflb_pwm_v2_channel_positive_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_channel_positive_start </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>ch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start pwm positive output. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ch</td><td>channel number </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga5ea025609520e5b89eed1d2fc7eee291" name="ga5ea025609520e5b89eed1d2fc7eee291"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5ea025609520e5b89eed1d2fc7eee291">&#9670;&#160;</a></span>bflb_pwm_v2_channel_positive_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_channel_positive_stop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>ch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop pwm positive output. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ch</td><td>channel number </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga90c3852ddee88492d1724b8220e7c2ee" name="ga90c3852ddee88492d1724b8220e7c2ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga90c3852ddee88492d1724b8220e7c2ee">&#9670;&#160;</a></span>bflb_pwm_v2_channel_set_threshold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_channel_set_threshold </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>ch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>low_threhold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>high_threhold</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set pwm dutycycle. Dutycycle(%) = (high_threhold - low_threhold)/period * 100%. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ch</td><td>channel number </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">low_threhold</td><td>pwm low threhold </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">high_threhold</td><td>pwm high threhold </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga573560a3d405d60760f612f365cbbb2f" name="ga573560a3d405d60760f612f365cbbb2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga573560a3d405d60760f612f365cbbb2f">&#9670;&#160;</a></span>bflb_pwm_v2_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize pwm. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gae9d64fb62fad22c64467767b9e001a60" name="gae9d64fb62fad22c64467767b9e001a60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae9d64fb62fad22c64467767b9e001a60">&#9670;&#160;</a></span>bflb_pwm_v2_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_pwm_v2_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control pwm feature. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>feature command, use <a class="el" href="group___p_w_m___c_m_d.html">pwm feature control cmd definition</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>user data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>A negated errno value on failure. </dd></dl>
+
+</div>
+</div>
+<a id="ga56ace284656b349d293905e872765555" name="ga56ace284656b349d293905e872765555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga56ace284656b349d293905e872765555">&#9670;&#160;</a></span>bflb_pwm_v2_get_frequency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float bflb_pwm_v2_get_frequency </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get pwm frequcency. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>frequcency </dd></dl>
+
+</div>
+</div>
+<a id="ga1eb266f78def6834f5bfaf6d4a18f87c" name="ga1eb266f78def6834f5bfaf6d4a18f87c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1eb266f78def6834f5bfaf6d4a18f87c">&#9670;&#160;</a></span>bflb_pwm_v2_get_intstatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_pwm_v2_get_intstatus </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get pwm interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>interrupt status, use <a class="el" href="group___p_w_m___i_n_t_s_t_s.html">pwm interrupt status definition</a> </dd></dl>
+
+</div>
+</div>
+<a id="gaebe752425d0d5274d0ea236bcbe2cf4d" name="gaebe752425d0d5274d0ea236bcbe2cf4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaebe752425d0d5274d0ea236bcbe2cf4d">&#9670;&#160;</a></span>bflb_pwm_v2_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structbflb__pwm__v2__config__s.html">bflb_pwm_v2_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize pwm. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>pointer to save pwm config </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga62bee666da3d8899e7ea9ade9f56cdfc" name="ga62bee666da3d8899e7ea9ade9f56cdfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga62bee666da3d8899e7ea9ade9f56cdfc">&#9670;&#160;</a></span>bflb_pwm_v2_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear pwm interrupt status. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_clear</td><td>clear value, use <a class="el" href="group___p_w_m___i_n_t_c_l_r.html">pwm interrupt clear definition</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga75a3b00cd63d8559bf2e067ed3b9aece" name="ga75a3b00cd63d8559bf2e067ed3b9aece"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga75a3b00cd63d8559bf2e067ed3b9aece">&#9670;&#160;</a></span>bflb_pwm_v2_int_enable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_int_enable </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>int_en</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable pwm interrupt. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">int_en</td><td>interrupt type </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>true means enable, otherwise disable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga505bbdd58ba16072a7db918044b6d2c2" name="ga505bbdd58ba16072a7db918044b6d2c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga505bbdd58ba16072a7db918044b6d2c2">&#9670;&#160;</a></span>bflb_pwm_v2_set_period()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_set_period </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>period</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set pwm period to change pwm frequence. Frequcence(hz) = pwm source clock /div/period. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">period</td><td>pwm period </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga7aa986ea3756c7ca52a99f4b9b48038d" name="ga7aa986ea3756c7ca52a99f4b9b48038d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7aa986ea3756c7ca52a99f4b9b48038d">&#9670;&#160;</a></span>bflb_pwm_v2_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_start </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start pwm output. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga8ad88b1f711137cef439610941d2959d" name="ga8ad88b1f711137cef439610941d2959d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8ad88b1f711137cef439610941d2959d">&#9670;&#160;</a></span>bflb_pwm_v2_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pwm_v2_stop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop pwm output. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>device handle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

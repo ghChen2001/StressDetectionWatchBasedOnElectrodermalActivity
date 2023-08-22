@@ -1,0 +1,8 @@
+digraph "bflb_ir_tx_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_ir_tx_config_s\n|+ tx_mode\l+ data_bits\l+ tail_inverse\l+ tail_enable\l+ head_inverse\l+ head_enable\l+ logic1_inverse\l+ logic0_inverse\l+ data_enable\l+ swm_enable\l和 17 更多...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="IR TX configuration structure"];
+}

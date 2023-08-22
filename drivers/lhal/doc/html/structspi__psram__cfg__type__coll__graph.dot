@@ -1,0 +1,8 @@
+digraph "spi_psram_cfg_type"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{spi_psram_cfg_type\n|+ read_id_cmd\l+ read_id_dmy_clk\l+ burst_toggle_cmd\l+ reset_enable_cmd\l+ reset_cmd\l+ enter_quad_mode_cmd\l+ exit_quad_mode_cmd\l+ read_reg_cmd\l+ read_reg_dmy_clk\l+ write_reg_cmd\l和 12 更多...\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Psram ctrl configuration structure type definition"];
+}

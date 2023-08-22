@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['acomp_0',['ACOMP',['../group___a_c_o_m_p.html',1,'']]],
+  ['adc_1',['ADC',['../group___a_d_c.html',1,'']]],
+  ['adc_20channel_20definition_2',['adc channel definition',['../group___a_d_c___c_h_a_n_n_e_l.html',1,'']]],
+  ['adc_20clock_20divison_20definition_3',['adc clock divison definition',['../group___a_d_c___c_l_k___d_i_v.html',1,'']]],
+  ['adc_20interrupt_20clear_20definition_4',['adc interrupt clear definition',['../group___a_d_c___i_n_t_c_l_r.html',1,'']]],
+  ['adc_20interrupt_20status_20definition_5',['adc interrupt status definition',['../group___a_d_c___i_n_t_s_t_s.html',1,'']]],
+  ['adc_20reference_20select_20definition_6',['adc reference select definition',['../group___a_d_c___v_r_e_f.html',1,'']]],
+  ['adc_20resolution_20definition_7',['adc resolution definition',['../group___a_d_c___r_e_s_o_l_u_t_i_o_n.html',1,'']]],
+  ['adc_20tsen_20mode_20definition_8',['adc tsen mode definition',['../group___a_d_c___t_s_e_n___m_o_d.html',1,'']]],
+  ['aes_20link_20mode_20keybits_20definition_9',['aes link mode keybits definition',['../group___a_e_s___l_i_n_k___k_e_y_b_i_t_s.html',1,'']]],
+  ['aes_20mode_20definition_10',['aes mode definition',['../group___a_e_s___m_o_d_e.html',1,'']]],
+  ['auadc_20data_20format_11',['auadc data format',['../group___a_u_a_d_c___d_a_t_a___f_o_r_m_a_t.html',1,'']]],
+  ['auadc_20feature_20control_20cmd_20definition_12',['auadc feature control cmd definition',['../group___a_u_a_d_c___c_m_d.html',1,'']]],
+  ['auadc_20input_20mode_13',['auadc input mode',['../group___a_u_a_d_c___i_n_p_u_t___m_o_d_e.html',1,'']]],
+  ['auadc_20interrupt_20status_20definition_14',['auadc interrupt status definition',['../group___a_u_a_d_c___i_n_t_m_a_s_k.html',1,'(全局命名空间)'],['../group___a_u_a_d_c___i_n_t_s_t_s.html',1,'(全局命名空间)']]],
+  ['auadc_20sampling_20rate_15',['auadc sampling rate',['../group___a_u_a_d_c___s_a_m_p_l_i_n_g___r_a_t_e.html',1,'']]],
+  ['audac_20data_20format_16',['audac data format',['../group___a_u_d_a_c___d_a_t_a___f_o_r_m_a_t.html',1,'']]],
+  ['audac_20feature_20control_20cmd_20definition_17',['audac feature control cmd definition',['../group___a_u_d_a_c___c_m_d.html',1,'']]],
+  ['audac_20interrupt_20status_20definition_18',['audac interrupt status definition',['../group___a_u_d_a_c___i_n_t_s_t_s.html',1,'']]],
+  ['audac_20mixer_20mode_2c_20this_20parameter_20is_20valid_20only_20in_20audac_5fsource_5fchannel_5fdual_20mode_19',['audac mixer mode, this parameter is valid only in AUDAC_SOURCE_CHANNEL_DUAL mode',['../group___a_u_d_a_c___m_i_x_e_r___m_o_d_e.html',1,'']]],
+  ['audac_20output_20mode_20',['audac output mode',['../group___a_u_d_a_c___o_u_t_p_u_t___m_o_d_e.html',1,'']]],
+  ['audac_20sampling_20rate_21',['audac sampling rate',['../group___a_u_d_a_c___s_a_m_p_l_i_n_g___r_a_t_e.html',1,'']]],
+  ['audac_20volume_20ramp_20rate_22',['audac volume ramp rate',['../group___a_u_d_a_c___r_a_m_p___r_a_t_e.html',1,'(全局命名空间)'],['../group___a_u_d_a_c___v_o_l_u_m_e___u_p_d_a_t_e___m_o_d_e.html',1,'(全局命名空间)']]]
+];

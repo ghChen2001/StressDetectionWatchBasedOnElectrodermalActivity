@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_acomp.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__acomp_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_acomp.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__acomp_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_ACOMP_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_ACOMP_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="group___analog.html#ga9182df014c38c8ade097934173a4be41">   17</a></span><span class="preprocessor">#define AON_ACOMP0_ID   0</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___analog.html#gaa7c54a80eb6176331797374f2b5198f7">   18</a></span><span class="preprocessor">#define AON_ACOMP1_ID   1</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="group___analog.html#ga4b748e9b1e9fec9239e9f8cd5ad8896f">   24</a></span><span class="preprocessor">#define AON_ACOMP_SCALING_FACTOR_0P25           0x00    </span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="group___analog.html#ga4b1c98764a269d1baa75a30027de2ff9">   25</a></span><span class="preprocessor">#define AON_ACOMP_SCALING_FACTOR_0P5            0x10    </span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group___analog.html#ga8f2b8c130b7ac505ddd2427d8d536edf">   26</a></span><span class="preprocessor">#define AON_ACOMP_SCALING_FACTOR_0P75           0x20    </span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group___analog.html#ga6c58f0651526f0bae2b3f830eeee6c42">   27</a></span><span class="preprocessor">#define AON_ACOMP_SCALING_FACTOR_1              0x30    </span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="group___analog.html#ga0468906d4f200617d5dff0e8ed758189">   32</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_ADC0                     0   </span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="group___analog.html#ga1f0c9738866409f9b19a50e7a319c242">   33</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_ADC1                     1   </span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="group___analog.html#ga922ff3cdd4b6260d515cf9a6533320f1">   34</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_ADC2                     2   </span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___analog.html#ga4250b77e63b2fbd57f55bf6188906776">   35</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_ADC3                     3   </span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___analog.html#gac63a2f71515276134dc12b4389077af3">   36</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_ADC4                     4   </span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="group___analog.html#ga9cfd793b7cca4765b8cbf5dda91b6958">   37</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_ADC5                     5   </span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="group___analog.html#gae81b375c4389407ffcd9c48dfe0a90b0">   38</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_ADC6                     6   </span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group___analog.html#ga63c34134585086cf0a9708d0ad9e77a3">   39</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_ADC7                     7   </span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group___analog.html#gabee0185d11c4b1b5bb821e7cc89cfd0f">   40</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_DACA                     8   </span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="group___analog.html#gae1718eb6ef0ebcfd953b12394975bc2b">   41</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_DACB                     9   </span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="group___analog.html#gadbb97a19d7ca7e02f8263aee191af8ed">   42</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_VREF_1P25V               10  </span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="group___analog.html#ga5a56fb94842b3f20bdde32f31600324c">   43</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_VIO_X_SCALING_FACTOR_1   11  </span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___analog.html#ga6814ed515fe2a7ecd7d3e46515e6a37b">   44</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_VIO_X_SCALING_FACTOR_2   12  </span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___analog.html#gaf1b156e677dae2463286f59b5bfe0d30">   45</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_VIO_X_SCALING_FACTOR_3   13  </span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="group___analog.html#gab5adb21b431af3a08254b17ad1c7c002">   46</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_VIO_X_SCALING_FACTOR_4   14  </span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___analog.html#ga8795f1da11e1a9a02710febe7a5d097f">   47</a></span><span class="preprocessor">#define AON_ACOMP_CHAN_VSS                      15  </span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group___analog.html#ga0084bf98e005fff54524917becdcb151">   52</a></span><span class="preprocessor">#define AON_ACOMP_BIAS_POWER_MODE1              0   </span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group___analog.html#ga6d386a293fecb8734558aef93f81bda3">   53</a></span><span class="preprocessor">#define AON_ACOMP_BIAS_POWER_MODE2              1   </span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___analog.html#gad3058b75d6581a437d4dfe03ab1ed5cd">   54</a></span><span class="preprocessor">#define AON_ACOMP_BIAS_POWER_MODE3              2   </span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___analog.html#gaa51655dc25d0467e6952756f4b8db51c">   55</a></span><span class="preprocessor">#define AON_ACOMP_BIAS_POWER_NONE               3   </span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="group___analog.html#ga239c6f56336400796b4ba5b0aed431ff">   60</a></span><span class="preprocessor">#define AON_ACOMP_HYSTERESIS_VOLT_NONE          0   </span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="group___analog.html#gaccb2153e5cdcb79bb07c6a3e3f47f4a3">   61</a></span><span class="preprocessor">#define AON_ACOMP_HYSTERESIS_VOLT_10MV          1   </span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="group___analog.html#ga4e73710b1c6685c065486d07fdb529a7">   62</a></span><span class="preprocessor">#define AON_ACOMP_HYSTERESIS_VOLT_20MV          2   </span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group___analog.html#ga20cb7e1283526cdb33edb66dff5ca7eb">   63</a></span><span class="preprocessor">#define AON_ACOMP_HYSTERESIS_VOLT_30MV          3   </span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group___analog.html#ga1941767a63e192e3c681fa396384c7f9">   64</a></span><span class="preprocessor">#define AON_ACOMP_HYSTERESIS_VOLT_40MV          4   </span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="group___analog.html#gab12d78d4bdc786404000473e850cf1fe">   65</a></span><span class="preprocessor">#define AON_ACOMP_HYSTERESIS_VOLT_50MV          5   </span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___analog.html#gaa5ff3c34aec2911d06cf31df3d1f3655">   66</a></span><span class="preprocessor">#define AON_ACOMP_HYSTERESIS_VOLT_60MV          6   </span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___analog.html#gaba5bcc5d2c2808f8c6dbc5be3b448999">   67</a></span><span class="preprocessor">#define AON_ACOMP_HYSTERESIS_VOLT_70MV          7   </span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="structbflb__acomp__config__s.html">   82</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__acomp__config__s.html">bflb_acomp_config_s</a> {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group___analog.html#gad62fbf4a12a840dab7a345947cbd27c4">   83</a></span>    uint8_t <a class="code hl_variable" href="group___analog.html#gad62fbf4a12a840dab7a345947cbd27c4">mux_en</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="group___analog.html#ga2e0cb65ed12a2017af82ea900c716ac8">   84</a></span>    uint8_t <a class="code hl_variable" href="group___analog.html#ga2e0cb65ed12a2017af82ea900c716ac8">pos_chan_sel</a>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___analog.html#ga028e2a7835f2e817af183c6f3d39a63c">   85</a></span>    uint8_t <a class="code hl_variable" href="group___analog.html#ga028e2a7835f2e817af183c6f3d39a63c">neg_chan_sel</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___analog.html#ga8c61efc5f939ae9136108f39092a1f28">   86</a></span>    uint8_t <a class="code hl_variable" href="group___analog.html#ga8c61efc5f939ae9136108f39092a1f28">vio_sel</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="group___analog.html#gafe17ffd7a94792ce54a11f6973cd31ad">   87</a></span>    uint8_t <a class="code hl_variable" href="group___analog.html#gafe17ffd7a94792ce54a11f6973cd31ad">scaling_factor</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="group___analog.html#gaf50a4c4c6ac4df94017288ed2355c5c4">   88</a></span>    uint8_t <a class="code hl_variable" href="group___analog.html#gaf50a4c4c6ac4df94017288ed2355c5c4">bias_prog</a>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___analog.html#gac06638db563bea932defe6dda6031565">   89</a></span>    uint8_t <a class="code hl_variable" href="group___analog.html#gac06638db563bea932defe6dda6031565">hysteresis_pos_volt</a>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="group___analog.html#ga4a7cd20a81bf612791d2444e605c3bc5">   90</a></span>    uint8_t <a class="code hl_variable" href="group___analog.html#ga4a7cd20a81bf612791d2444e605c3bc5">hysteresis_neg_volt</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>};</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="group___analog.html#gaa58390853729d054e62af0cc262902c6">  104</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___analog.html#gaa58390853729d054e62af0cc262902c6">bflb_acomp_init</a>(uint8_t acomp_id, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__acomp__config__s.html">bflb_acomp_config_s</a> *config);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="group___analog.html#gafa1090e4bcd5a79e4ba5abb225c6b498">  111</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___analog.html#gafa1090e4bcd5a79e4ba5abb225c6b498">bflb_acomp_enable</a>(uint8_t acomp_id);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="group___analog.html#ga6e707747cbb80c1c83704121d005c728">  118</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___analog.html#ga6e707747cbb80c1c83704121d005c728">bflb_acomp_disable</a>(uint8_t acomp_id);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="group___analog.html#ga77f9d781511458232efaa67e0482593c">  126</a></span>uint32_t <a class="code hl_function" href="group___analog.html#ga77f9d781511458232efaa67e0482593c">bflb_acomp_get_result</a>(uint8_t acomp_id);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="group___analog.html#ga94f47822bc30ca39f3ff6b8b11ee2f36">  135</a></span>uint32_t <a class="code hl_function" href="group___analog.html#ga94f47822bc30ca39f3ff6b8b11ee2f36">bflb_acomp_gpio_2_chanid</a>(uint32_t pin, uint32_t* channel);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="group___analog.html#gabc9045b8b275f272b6cbe5bb03c0e9cf">  144</a></span>uint32_t <a class="code hl_function" href="group___analog.html#gabc9045b8b275f272b6cbe5bb03c0e9cf">bflb_acomp_chanid_2_gpio</a>(uint32_t channel, uint32_t* pin);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="preprocessor">#if 0</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>uint32_t bflb_acomp_get_postive_input(uint8_t acomp_id);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___analog_html_ga028e2a7835f2e817af183c6f3d39a63c"><div class="ttname"><a href="group___analog.html#ga028e2a7835f2e817af183c6f3d39a63c">bflb_acomp_config_s::neg_chan_sel</a></div><div class="ttdeci">uint8_t neg_chan_sel</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00085">bflb_acomp.h:85</a></div></div>
+<div class="ttc" id="agroup___analog_html_ga2e0cb65ed12a2017af82ea900c716ac8"><div class="ttname"><a href="group___analog.html#ga2e0cb65ed12a2017af82ea900c716ac8">bflb_acomp_config_s::pos_chan_sel</a></div><div class="ttdeci">uint8_t pos_chan_sel</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00084">bflb_acomp.h:84</a></div></div>
+<div class="ttc" id="agroup___analog_html_ga4a7cd20a81bf612791d2444e605c3bc5"><div class="ttname"><a href="group___analog.html#ga4a7cd20a81bf612791d2444e605c3bc5">bflb_acomp_config_s::hysteresis_neg_volt</a></div><div class="ttdeci">uint8_t hysteresis_neg_volt</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00090">bflb_acomp.h:90</a></div></div>
+<div class="ttc" id="agroup___analog_html_ga6e707747cbb80c1c83704121d005c728"><div class="ttname"><a href="group___analog.html#ga6e707747cbb80c1c83704121d005c728">bflb_acomp_disable</a></div><div class="ttdeci">void bflb_acomp_disable(uint8_t acomp_id)</div><div class="ttdoc">Disable acomp.</div></div>
+<div class="ttc" id="agroup___analog_html_ga77f9d781511458232efaa67e0482593c"><div class="ttname"><a href="group___analog.html#ga77f9d781511458232efaa67e0482593c">bflb_acomp_get_result</a></div><div class="ttdeci">uint32_t bflb_acomp_get_result(uint8_t acomp_id)</div><div class="ttdoc">Get acomp result.</div></div>
+<div class="ttc" id="agroup___analog_html_ga8c61efc5f939ae9136108f39092a1f28"><div class="ttname"><a href="group___analog.html#ga8c61efc5f939ae9136108f39092a1f28">bflb_acomp_config_s::vio_sel</a></div><div class="ttdeci">uint8_t vio_sel</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00086">bflb_acomp.h:86</a></div></div>
+<div class="ttc" id="agroup___analog_html_ga94f47822bc30ca39f3ff6b8b11ee2f36"><div class="ttname"><a href="group___analog.html#ga94f47822bc30ca39f3ff6b8b11ee2f36">bflb_acomp_gpio_2_chanid</a></div><div class="ttdeci">uint32_t bflb_acomp_gpio_2_chanid(uint32_t pin, uint32_t *channel)</div><div class="ttdoc">gpio change adc_chan_id.</div></div>
+<div class="ttc" id="agroup___analog_html_gaa58390853729d054e62af0cc262902c6"><div class="ttname"><a href="group___analog.html#gaa58390853729d054e62af0cc262902c6">bflb_acomp_init</a></div><div class="ttdeci">void bflb_acomp_init(uint8_t acomp_id, const struct bflb_acomp_config_s *config)</div><div class="ttdoc">Initialize acomp.</div></div>
+<div class="ttc" id="agroup___analog_html_gabc9045b8b275f272b6cbe5bb03c0e9cf"><div class="ttname"><a href="group___analog.html#gabc9045b8b275f272b6cbe5bb03c0e9cf">bflb_acomp_chanid_2_gpio</a></div><div class="ttdeci">uint32_t bflb_acomp_chanid_2_gpio(uint32_t channel, uint32_t *pin)</div><div class="ttdoc">adc_chan_id change gpio index.</div></div>
+<div class="ttc" id="agroup___analog_html_gac06638db563bea932defe6dda6031565"><div class="ttname"><a href="group___analog.html#gac06638db563bea932defe6dda6031565">bflb_acomp_config_s::hysteresis_pos_volt</a></div><div class="ttdeci">uint8_t hysteresis_pos_volt</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00089">bflb_acomp.h:89</a></div></div>
+<div class="ttc" id="agroup___analog_html_gad62fbf4a12a840dab7a345947cbd27c4"><div class="ttname"><a href="group___analog.html#gad62fbf4a12a840dab7a345947cbd27c4">bflb_acomp_config_s::mux_en</a></div><div class="ttdeci">uint8_t mux_en</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00083">bflb_acomp.h:83</a></div></div>
+<div class="ttc" id="agroup___analog_html_gaf50a4c4c6ac4df94017288ed2355c5c4"><div class="ttname"><a href="group___analog.html#gaf50a4c4c6ac4df94017288ed2355c5c4">bflb_acomp_config_s::bias_prog</a></div><div class="ttdeci">uint8_t bias_prog</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00088">bflb_acomp.h:88</a></div></div>
+<div class="ttc" id="agroup___analog_html_gafa1090e4bcd5a79e4ba5abb225c6b498"><div class="ttname"><a href="group___analog.html#gafa1090e4bcd5a79e4ba5abb225c6b498">bflb_acomp_enable</a></div><div class="ttdeci">void bflb_acomp_enable(uint8_t acomp_id)</div><div class="ttdoc">Enable acomp.</div></div>
+<div class="ttc" id="agroup___analog_html_gafe17ffd7a94792ce54a11f6973cd31ad"><div class="ttname"><a href="group___analog.html#gafe17ffd7a94792ce54a11f6973cd31ad">bflb_acomp_config_s::scaling_factor</a></div><div class="ttdeci">uint8_t scaling_factor</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00087">bflb_acomp.h:87</a></div></div>
+<div class="ttc" id="astructbflb__acomp__config__s_html"><div class="ttname"><a href="structbflb__acomp__config__s.html">bflb_acomp_config_s</a></div><div class="ttdoc">ACOMP configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__acomp_8h_source.html#l00082">bflb_acomp.h:82</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__acomp_8h.html">bflb_acomp.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

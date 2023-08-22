@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_dbi.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__dbi_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_dbi.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__dbi_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_DBI_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_DBI_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#if defined(BL616)</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define DBI_QSPI_SUPPORT        1</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define DBI_YUV_SUPPORT         1</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define DBI_WRITE_DATA_BYTE_MAX 256</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#define DBI_READ_DATA_BYTE_MAX  8</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#define SPI_FIFO_NUM_MAX        8</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#elif defined(BL606P) || defined(BL808)</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#define DBI_QSPI_SUPPORT        0</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define DBI_YUV_SUPPORT         0</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#define DBI_WRITE_DATA_BYTE_MAX 4</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define DBI_READ_DATA_BYTE_MAX  4</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#define SPI_FIFO_NUM_MAX        8</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#error &quot;unknown device&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group___d_b_i.html#gae42d3415d7ddd420b74b6ebfa6333f16">   30</a></span><span class="preprocessor">#define DBI_WRITE_PIXEL_CNT_MAX 0x00FFFFFF</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___d_b_i___m_o_d_e.html#ga3283f49e3d4c328467ce0cf91c01d0b2">   35</a></span><span class="preprocessor">#define DBI_MODE_TYPE_B         0 </span><span class="comment">/* mipi-dbi typeB 8-wire-data mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___d_b_i___m_o_d_e.html#ga128ac9dd61246c000b9bfcce87602aa8">   36</a></span><span class="preprocessor">#define DBI_MODE_TYPE_C_4_WIRE  1 </span><span class="comment">/* mipi-dbi typeC 4-wire mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="group___d_b_i___m_o_d_e.html#ga0b9b4537596e988337e3290f5958c684">   37</a></span><span class="preprocessor">#define DBI_MODE_TYPE_C_3_WIRE  2 </span><span class="comment">/* mipi-dbi typeC 3-wire mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#if (DBI_QSPI_SUPPORT)</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#define DBI_MODE_EX_QSPI 3 </span><span class="comment">/* Not the mipi standard. Extra support for QSPI mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga7897072f11b51dcd99740eb5c11adb86">   48</a></span><span class="preprocessor">#define DBI_PIXEL_INPUT_FORMAT_NBGR_8888 0 </span><span class="comment">/* 32-bit/pixel, memory byte: [0]-&gt;pixel[0][R], [1]-&gt;pixel[0][G], [2]-&gt;pixel[0][B], [3]-&gt;invalid, [4]-&gt;pixel[1][R], ... */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga60e2bfc4e030ff7b1bf463b133744ab7">   49</a></span><span class="preprocessor">#define DBI_PIXEL_INPUT_FORMAT_NRGB_8888 1 </span><span class="comment">/* 32-bit/pixel, memory byte: [0]-&gt;pixel[0][B], [1]-&gt;pixel[0][G], [2]-&gt;pixel[0][R], [3]-&gt;invalid, [4]-&gt;pixel[1][B], ... */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#gac7c1149e5be74cd2f8dd22182c395545">   50</a></span><span class="preprocessor">#define DBI_PIXEL_INPUT_FORMAT_BGRN_8888 2 </span><span class="comment">/* 32-bit/pixel, memory byte: [0]-&gt;invalid, [1]-&gt;pixel[0][R], [2]-&gt;pixel[0][G], [3]-&gt;pixel[0][B], [4]-&gt;invalid, [5]-&gt;pixel[1][R], ... */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga7ebd9dad691f8a51364ab9622b45d499">   51</a></span><span class="preprocessor">#define DBI_PIXEL_INPUT_FORMAT_RGBN_8888 3 </span><span class="comment">/* 32-bit/pixel, memory byte: [0]-&gt;invalid, [1]-&gt;pixel[0][B], [2]-&gt;pixel[0][G], [3]-&gt;pixel[0][R], [4]-&gt;invalid, [5]-&gt;pixel[1][B], ... */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#gaf85adea1101d04fe900a217251b778da">   52</a></span><span class="preprocessor">#define DBI_PIXEL_INPUT_FORMAT_RGB_888   4 </span><span class="comment">/* 24-bit/pixel, memory byte: [0]-&gt;pixel[0][R], [1]-&gt;pixel[0][G], [2]-&gt;pixel[0][B], [3]-&gt;pixel[1][R], [4]-&gt;pixel[1][G], ... */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga764e9ca63fa6a08baf8c47e026706bda">   53</a></span><span class="preprocessor">#define DBI_PIXEL_INPUT_FORMAT_BGR_888   5 </span><span class="comment">/* 24-bit/pixel, memory byte: [0]-&gt;pixel[0][B], [1]-&gt;pixel[0][G], [2]-&gt;pixel[0][R], [3]-&gt;pixel[1][B], [4]-&gt;pixel[1][G], ... */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#ga30450dde362ddfa09a5d8023f6f50910">   54</a></span><span class="preprocessor">#define DBI_PIXEL_INPUT_FORMAT_BGR_565   6 </span><span class="comment">/* 16-bit/pixel, */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___i_n_p_u_t___f_o_r_m_a_t.html#gab4ba0a210eea49b4494ccf2f062111cd">   55</a></span><span class="preprocessor">#define DBI_PIXEL_INPUT_FORMAT_RGB_565   7 </span><span class="comment">/* 16-bit/pixel, */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___o_u_t_p_u_t___f_o_r_m_a_t.html#gae5e4c50e0dd451607437b2280240335a">   63</a></span><span class="preprocessor">#define DBI_PIXEL_OUTPUT_FORMAT_RGB_565  0 </span><span class="comment">/* 16-bit/pixel */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group___d_b_i___p_i_x_e_l___o_u_t_p_u_t___f_o_r_m_a_t.html#ga961c9d1fccb3e0ca4d451172e4e44be4">   64</a></span><span class="preprocessor">#define DBI_PIXEL_OUTPUT_FORMAT_RGB_888  1 </span><span class="comment">/* 24-bit/pixel, Compatible with RGB666 format */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="group___d_b_i___c_l_o_c_k___m_o_d_e.html#ga0ebc16ab3152c2c0616d5d0dae67f071">   72</a></span><span class="preprocessor">#define DBI_CLOCK_MODE_0                 0 </span><span class="comment">/* CPOL=0 CHPHA=0 */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group___d_b_i___c_l_o_c_k___m_o_d_e.html#ga70f10b69cf0671b9de71d554e1df2f01">   73</a></span><span class="preprocessor">#define DBI_CLOCK_MODE_1                 1 </span><span class="comment">/* CPOL=0 CHPHA=1 */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="group___d_b_i___c_l_o_c_k___m_o_d_e.html#ga661bf08d0c27ef0678a62edaf3b36d9c">   74</a></span><span class="preprocessor">#define DBI_CLOCK_MODE_2                 2 </span><span class="comment">/* CPOL=1 CHPHA=0 */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group___d_b_i___c_l_o_c_k___m_o_d_e.html#ga93949be5fc53f9d225592a3e2148b22b">   75</a></span><span class="preprocessor">#define DBI_CLOCK_MODE_3                 3 </span><span class="comment">/* CPOL=1 CHPHA=1 */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group___d_b_i___q_s_p_i___w_i_r_e___n_u_m.html#gaa660d2153faa76b52aa3d6baee10ad51">   83</a></span><span class="preprocessor">#define DBI_QSPI_WIRE_NUM_1              0 </span><span class="comment">/* 1-wire mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="group___d_b_i___q_s_p_i___w_i_r_e___n_u_m.html#gacd399e9ab78c7b3bf62ae2ed8b50775c">   84</a></span><span class="preprocessor">#define DBI_QSPI_WIRE_NUM_4              1 </span><span class="comment">/* 4-wire mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group___s_p_i___i_n_t_s_t_s.html#gae3492474469c17d5831eb3b42feba580">   92</a></span><span class="preprocessor">#define DBI_INTSTS_TC                    (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="group___s_p_i___i_n_t_s_t_s.html#ga588666cb55e1353396a924d76af6736e">   93</a></span><span class="preprocessor">#define SPI_INTSTS_TX_FIFO               (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="group___s_p_i___i_n_t_s_t_s.html#gae6ff2da0d9aed6364c47f85ba98278cc">   94</a></span><span class="preprocessor">#define SPI_INTSTS_FIFO_ERR              (1 &lt;&lt; 2)</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="group___d_b_i___i_n_t_c_l_r.html#ga46a5c2f7067d340300b0f35152ffde93">  102</a></span><span class="preprocessor">#define DBI_INTCLR_TC                    (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="group___d_b_i___c_m_d.html#gad4821d47f63c54c6712b487b0a269483">  110</a></span><span class="preprocessor">#define DBI_CMD_CLEAR_TX_FIFO            (0x01)</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="group___d_b_i___c_m_d.html#ga818aaf4a000b471fc2d7251c2b7f45bb">  111</a></span><span class="preprocessor">#define DBI_CMD_GET_TX_FIFO_CNT          (0x02)</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="group___d_b_i___c_m_d.html#ga1235aa0d19400f1f58b404d2d8f8f7b4">  112</a></span><span class="preprocessor">#define DBI_CMD_MASK_CMD_PHASE           (0x03)</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="group___d_b_i___c_m_d.html#ga75e5522277f42e4f1d0ff91afc4fd9ca">  113</a></span><span class="preprocessor">#define DBI_CMD_CS_CONTINUE              (0x04)</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="group___d_b_i___c_m_d.html#gae0266ccf350ebe5d66b43456f7fc2356">  114</a></span><span class="preprocessor">#define DBI_CMD_SET_DUMMY_CNT            (0x05)</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="group___d_b_i___c_m_d.html#ga973cd9f69d535d4f30ff39bf05df91bf">  115</a></span><span class="preprocessor">#define DBI_CMD_GET_SIZE_OF_PIXEL_CNT    (0x06)</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="group___d_b_i___c_m_d.html#gacbef1c8534e498601c7dbe10330d3d7e">  116</a></span><span class="preprocessor">#define DBI_CMD_INPUT_PIXEL_FORMAT       (0x07)</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="group___d_b_i___c_m_d.html#ga3f7f759a4345182471a487fd8ebdbe5a">  117</a></span><span class="preprocessor">#define DBI_CMD_OUTPUT_PIXEL_FORMAT      (0x08)</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#if (DBI_QSPI_SUPPORT)</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#define DBI_CMD_YUV_TO_RGB_ENABLE (0x10)</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="structbflb__dbi__config__s.html">  147</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__dbi__config__s.html">bflb_dbi_config_s</a> {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="structbflb__dbi__config__s.html#a3caf33aae7e6c3054f4bb197c5feddba">  148</a></span>    uint8_t <a class="code hl_variable" href="structbflb__dbi__config__s.html#a3caf33aae7e6c3054f4bb197c5feddba">dbi_mode</a>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="structbflb__dbi__config__s.html#a466be58257069b4f97b8063dadf1882a">  149</a></span>    uint8_t <a class="code hl_variable" href="structbflb__dbi__config__s.html#a466be58257069b4f97b8063dadf1882a">pixel_input_format</a>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="structbflb__dbi__config__s.html#a9e6b8e9481366de0586c768a67880a92">  150</a></span>    uint8_t <a class="code hl_variable" href="structbflb__dbi__config__s.html#a9e6b8e9481366de0586c768a67880a92">pixel_output_format</a>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="structbflb__dbi__config__s.html#a7e6f478e8117a47ea434b975c830b020">  151</a></span>    uint8_t <a class="code hl_variable" href="structbflb__dbi__config__s.html#a7e6f478e8117a47ea434b975c830b020">clk_mode</a>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="structbflb__dbi__config__s.html#a70886f08c2908829a8fdf6bef42764a8">  152</a></span>    uint32_t <a class="code hl_variable" href="structbflb__dbi__config__s.html#a70886f08c2908829a8fdf6bef42764a8">clk_freq_hz</a>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="structbflb__dbi__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">  153</a></span>    uint8_t <a class="code hl_variable" href="structbflb__dbi__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">tx_fifo_threshold</a>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="preprocessor">#if (DBI_QSPI_SUPPORT)</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    uint8_t cmd_wire_mode;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    uint8_t addr_wire_mode;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    uint8_t data_wire_mode;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>};</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#a4b599b8baa39703c98b9e6c70b9e55f5">  171</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__dbi_8h.html#a4b599b8baa39703c98b9e6c70b9e55f5">bflb_dbi_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__dbi__config__s.html">bflb_dbi_config_s</a> *config);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#a4dd1919ee314fabd4bca9500aea8750c">  178</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__dbi_8h.html#a4dd1919ee314fabd4bca9500aea8750c">bflb_dbi_deinit</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="preprocessor">#if DBI_QSPI_SUPPORT</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keywordtype">void</span> bflb_dbi_qspi_set_addr(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t addr_byte_size, uint32_t addr_val);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#aab599b5cfca36556bb3fb9d0429d1bc3">  201</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="bflb__dbi_8h.html#aab599b5cfca36556bb3fb9d0429d1bc3">bflb_dbi_send_cmd_data</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmd, uint8_t data_len, uint8_t *data_buff);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#ab3f79de103232642fd8f0cdef69635b8">  212</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="bflb__dbi_8h.html#ab3f79de103232642fd8f0cdef69635b8">bflb_dbi_send_cmd_read_data</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmd, uint8_t data_len, uint8_t *data_buff);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#ae019c99cbe12ea3593dfeb8f2266e075">  223</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="bflb__dbi_8h.html#ae019c99cbe12ea3593dfeb8f2266e075">bflb_dbi_send_cmd_pixel</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t cmd, uint32_t pixel_cnt, <span class="keywordtype">void</span> *pixel_buff);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#ab090d3672865ff1ac4b3f110e14b01ac">  231</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__dbi_8h.html#ab090d3672865ff1ac4b3f110e14b01ac">bflb_dbi_link_txdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#a6529fc8a7869e32d9e5245b2eaf9cc34">  239</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__dbi_8h.html#a6529fc8a7869e32d9e5245b2eaf9cc34">bflb_dbi_txint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#ae7d892fe664d9e9e46ead3debaf0c30d">  247</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__dbi_8h.html#ae7d892fe664d9e9e46ead3debaf0c30d">bflb_dbi_tcint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#ac268d84d4af8b0934ebbaa974a165596">  255</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__dbi_8h.html#ac268d84d4af8b0934ebbaa974a165596">bflb_dbi_errint_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#af56b54b6db47ddf8482881d65695cc51">  263</a></span>uint32_t <a class="code hl_function" href="bflb__dbi_8h.html#af56b54b6db47ddf8482881d65695cc51">bflb_dbi_get_intstatus</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#ac7a118bffa36205ede0184cb6a12508e">  271</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__dbi_8h.html#ac7a118bffa36205ede0184cb6a12508e">bflb_dbi_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear);</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno"><a class="line" href="bflb__dbi_8h.html#a248126cfc70f6160186bba99c165cfdf">  281</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="bflb__dbi_8h.html#a248126cfc70f6160186bba99c165cfdf">bflb_dbi_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>}</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="abflb__dbi_8h_html_a248126cfc70f6160186bba99c165cfdf"><div class="ttname"><a href="bflb__dbi_8h.html#a248126cfc70f6160186bba99c165cfdf">bflb_dbi_feature_control</a></div><div class="ttdeci">int bflb_dbi_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div><div class="ttdoc">Control dbi feature.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_a4b599b8baa39703c98b9e6c70b9e55f5"><div class="ttname"><a href="bflb__dbi_8h.html#a4b599b8baa39703c98b9e6c70b9e55f5">bflb_dbi_init</a></div><div class="ttdeci">void bflb_dbi_init(struct bflb_device_s *dev, const struct bflb_dbi_config_s *config)</div><div class="ttdoc">Initialize dbi.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_a4dd1919ee314fabd4bca9500aea8750c"><div class="ttname"><a href="bflb__dbi_8h.html#a4dd1919ee314fabd4bca9500aea8750c">bflb_dbi_deinit</a></div><div class="ttdeci">void bflb_dbi_deinit(struct bflb_device_s *dev)</div><div class="ttdoc">Deinitialize dbi.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_a6529fc8a7869e32d9e5245b2eaf9cc34"><div class="ttname"><a href="bflb__dbi_8h.html#a6529fc8a7869e32d9e5245b2eaf9cc34">bflb_dbi_txint_mask</a></div><div class="ttdeci">void bflb_dbi_txint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable dbi rx fifo threhold interrupt.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_aab599b5cfca36556bb3fb9d0429d1bc3"><div class="ttname"><a href="bflb__dbi_8h.html#aab599b5cfca36556bb3fb9d0429d1bc3">bflb_dbi_send_cmd_data</a></div><div class="ttdeci">int bflb_dbi_send_cmd_data(struct bflb_device_s *dev, uint8_t cmd, uint8_t data_len, uint8_t *data_buff)</div><div class="ttdoc">Send cmd with pixel data, send cmd -&gt; send address(only QSPI mode) -&gt; send parameter_data.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_ab090d3672865ff1ac4b3f110e14b01ac"><div class="ttname"><a href="bflb__dbi_8h.html#ab090d3672865ff1ac4b3f110e14b01ac">bflb_dbi_link_txdma</a></div><div class="ttdeci">void bflb_dbi_link_txdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable dbi tx dma.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_ab3f79de103232642fd8f0cdef69635b8"><div class="ttname"><a href="bflb__dbi_8h.html#ab3f79de103232642fd8f0cdef69635b8">bflb_dbi_send_cmd_read_data</a></div><div class="ttdeci">int bflb_dbi_send_cmd_read_data(struct bflb_device_s *dev, uint8_t cmd, uint8_t data_len, uint8_t *data_buff)</div><div class="ttdoc">To read the data after sending the command, send cmd -&gt; send address(only QSPI mode) -&gt; read paramete...</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_ac268d84d4af8b0934ebbaa974a165596"><div class="ttname"><a href="bflb__dbi_8h.html#ac268d84d4af8b0934ebbaa974a165596">bflb_dbi_errint_mask</a></div><div class="ttdeci">void bflb_dbi_errint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable dbi error interrupt.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_ac7a118bffa36205ede0184cb6a12508e"><div class="ttname"><a href="bflb__dbi_8h.html#ac7a118bffa36205ede0184cb6a12508e">bflb_dbi_int_clear</a></div><div class="ttdeci">void bflb_dbi_int_clear(struct bflb_device_s *dev, uint32_t int_clear)</div><div class="ttdoc">Clear dbi interrupt status.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_ae019c99cbe12ea3593dfeb8f2266e075"><div class="ttname"><a href="bflb__dbi_8h.html#ae019c99cbe12ea3593dfeb8f2266e075">bflb_dbi_send_cmd_pixel</a></div><div class="ttdeci">int bflb_dbi_send_cmd_pixel(struct bflb_device_s *dev, uint8_t cmd, uint32_t pixel_cnt, void *pixel_buff)</div><div class="ttdoc">Send cmd with pixel data, send cmd -&gt; send address(only QSPI mode) -&gt; send pixel_data,</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_ae7d892fe664d9e9e46ead3debaf0c30d"><div class="ttname"><a href="bflb__dbi_8h.html#ae7d892fe664d9e9e46ead3debaf0c30d">bflb_dbi_tcint_mask</a></div><div class="ttdeci">void bflb_dbi_tcint_mask(struct bflb_device_s *dev, bool mask)</div><div class="ttdoc">Enable or disable dbi transfer completion interrupt.</div></div>
+<div class="ttc" id="abflb__dbi_8h_html_af56b54b6db47ddf8482881d65695cc51"><div class="ttname"><a href="bflb__dbi_8h.html#af56b54b6db47ddf8482881d65695cc51">bflb_dbi_get_intstatus</a></div><div class="ttdeci">uint32_t bflb_dbi_get_intstatus(struct bflb_device_s *dev)</div><div class="ttdoc">Get dbi interrupt status.</div></div>
+<div class="ttc" id="astructbflb__dbi__config__s_html"><div class="ttname"><a href="structbflb__dbi__config__s.html">bflb_dbi_config_s</a></div><div class="ttdoc">DBI configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__dbi_8h_source.html#l00147">bflb_dbi.h:147</a></div></div>
+<div class="ttc" id="astructbflb__dbi__config__s_html_a3caf33aae7e6c3054f4bb197c5feddba"><div class="ttname"><a href="structbflb__dbi__config__s.html#a3caf33aae7e6c3054f4bb197c5feddba">bflb_dbi_config_s::dbi_mode</a></div><div class="ttdeci">uint8_t dbi_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__dbi_8h_source.html#l00148">bflb_dbi.h:148</a></div></div>
+<div class="ttc" id="astructbflb__dbi__config__s_html_a466be58257069b4f97b8063dadf1882a"><div class="ttname"><a href="structbflb__dbi__config__s.html#a466be58257069b4f97b8063dadf1882a">bflb_dbi_config_s::pixel_input_format</a></div><div class="ttdeci">uint8_t pixel_input_format</div><div class="ttdef"><b>Definition:</b> <a href="bflb__dbi_8h_source.html#l00149">bflb_dbi.h:149</a></div></div>
+<div class="ttc" id="astructbflb__dbi__config__s_html_a70886f08c2908829a8fdf6bef42764a8"><div class="ttname"><a href="structbflb__dbi__config__s.html#a70886f08c2908829a8fdf6bef42764a8">bflb_dbi_config_s::clk_freq_hz</a></div><div class="ttdeci">uint32_t clk_freq_hz</div><div class="ttdef"><b>Definition:</b> <a href="bflb__dbi_8h_source.html#l00152">bflb_dbi.h:152</a></div></div>
+<div class="ttc" id="astructbflb__dbi__config__s_html_a7e6f478e8117a47ea434b975c830b020"><div class="ttname"><a href="structbflb__dbi__config__s.html#a7e6f478e8117a47ea434b975c830b020">bflb_dbi_config_s::clk_mode</a></div><div class="ttdeci">uint8_t clk_mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__dbi_8h_source.html#l00151">bflb_dbi.h:151</a></div></div>
+<div class="ttc" id="astructbflb__dbi__config__s_html_a8e1ba6dad959cca0b42ebd0ea3b09b74"><div class="ttname"><a href="structbflb__dbi__config__s.html#a8e1ba6dad959cca0b42ebd0ea3b09b74">bflb_dbi_config_s::tx_fifo_threshold</a></div><div class="ttdeci">uint8_t tx_fifo_threshold</div><div class="ttdef"><b>Definition:</b> <a href="bflb__dbi_8h_source.html#l00153">bflb_dbi.h:153</a></div></div>
+<div class="ttc" id="astructbflb__dbi__config__s_html_a9e6b8e9481366de0586c768a67880a92"><div class="ttname"><a href="structbflb__dbi__config__s.html#a9e6b8e9481366de0586c768a67880a92">bflb_dbi_config_s::pixel_output_format</a></div><div class="ttdeci">uint8_t pixel_output_format</div><div class="ttdef"><b>Definition:</b> <a href="bflb__dbi_8h_source.html#l00150">bflb_dbi.h:150</a></div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__dbi_8h.html">bflb_dbi.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

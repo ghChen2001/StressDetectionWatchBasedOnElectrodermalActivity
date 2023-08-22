@@ -1,0 +1,1562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: EMAC</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___e_m_a_c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#groups">模块</a> &#124;
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">EMAC<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+EMAC 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___e_m_a_c.png" border="0" usemap="#agroup______e__m__a__c" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+模块</h2></td></tr>
+<tr class="memitem:group___e_m_a_c___c_m_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c___c_m_d.html">emac feature control cmd definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group___p_h_y___s_t_a_t_e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_h_y___s_t_a_t_e.html">phy state definition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__emac__config__s.html">bflb_emac_config_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">EMAC configuration structure  <a href="structbflb__emac__config__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__emac__phy__cfg__s.html">bflb_emac_phy_cfg_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">EMAC phy configuration structure  <a href="structbflb__emac__phy__cfg__s.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga754f210b5d4f6c92782b67809b109c1d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga754f210b5d4f6c92782b67809b109c1d">EMAC_DO_FLUSH_DATA</a>&#160;&#160;&#160;(1)</td></tr>
+<tr class="separator:ga754f210b5d4f6c92782b67809b109c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5dfed92b635a13e78650d93f7a889375"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga5dfed92b635a13e78650d93f7a889375">EMAC_CLK_USE_EXTERNAL</a>&#160;&#160;&#160;(0)</td></tr>
+<tr class="separator:ga5dfed92b635a13e78650d93f7a889375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1bdc24ed3972295838d919b1028e35b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga1bdc24ed3972295838d919b1028e35b2">EMAC_CLK_USE_INTERNAL</a>&#160;&#160;&#160;(1)</td></tr>
+<tr class="separator:ga1bdc24ed3972295838d919b1028e35b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga25dc83a891a69cc22085990ca8d72bb6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga25dc83a891a69cc22085990ca8d72bb6">EMAC_NORMAL_PACKET</a>&#160;&#160;&#160;(uint32_t)(0)</td></tr>
+<tr class="separator:ga25dc83a891a69cc22085990ca8d72bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga027f51a1ee524978d79cbffeba0d21c9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga027f51a1ee524978d79cbffeba0d21c9">EMAC_FRAGMENT_PACKET</a>&#160;&#160;&#160;(uint32_t)(0x01)</td></tr>
+<tr class="separator:ga027f51a1ee524978d79cbffeba0d21c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga21660f263d8d9623badf2908a000b10b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga21660f263d8d9623badf2908a000b10b">EMAC_NOCOPY_PACKET</a>&#160;&#160;&#160;(uint32_t)(0x02)</td></tr>
+<tr class="separator:ga21660f263d8d9623badf2908a000b10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga15e493eedd0128d55c89df6d7c2c6c47"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga15e493eedd0128d55c89df6d7c2c6c47">ETH_MAX_PACKET_SIZE</a>&#160;&#160;&#160;((uint32_t)1524U)</td></tr>
+<tr class="separator:ga15e493eedd0128d55c89df6d7c2c6c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0dd989fc5922a49701ae930f3c8cbada"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga0dd989fc5922a49701ae930f3c8cbada">ETH_HEADER_SZIE</a>&#160;&#160;&#160;((uint32_t)14U)</td></tr>
+<tr class="separator:ga0dd989fc5922a49701ae930f3c8cbada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6be302136e0434536d049406760485b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga6be302136e0434536d049406760485b1">ETH_CRC_SIZE</a>&#160;&#160;&#160;((uint32_t)4U)</td></tr>
+<tr class="separator:ga6be302136e0434536d049406760485b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga68fa821143b2ea457846f294a19def87"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga68fa821143b2ea457846f294a19def87">ETH_EXTRA_SIZE</a>&#160;&#160;&#160;((uint32_t)2U)</td></tr>
+<tr class="separator:ga68fa821143b2ea457846f294a19def87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadd3a85426a611ef73a08ed202b89344d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gadd3a85426a611ef73a08ed202b89344d">ETH_VLAN_TAG_SIZE</a>&#160;&#160;&#160;((uint32_t)4U)</td></tr>
+<tr class="separator:gadd3a85426a611ef73a08ed202b89344d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0fe155d9b74937ec6b67809c3d73a558"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga0fe155d9b74937ec6b67809c3d73a558">ETH_MIN_ETH_PAYLOAD_SIZE</a>&#160;&#160;&#160;((uint32_t)46U)</td></tr>
+<tr class="separator:ga0fe155d9b74937ec6b67809c3d73a558"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa23a2264af49f86c13a5358198d3ad33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gaa23a2264af49f86c13a5358198d3ad33">ETH_MAX_ETH_PAYLOAD_SIZE</a>&#160;&#160;&#160;((uint32_t)1500U)</td></tr>
+<tr class="separator:gaa23a2264af49f86c13a5358198d3ad33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6ce4363b63e342922e65fbd634be68b6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga6ce4363b63e342922e65fbd634be68b6">ETH_JUMBO_FRAME_PAYLOAD_SIZE</a>&#160;&#160;&#160;((uint32_t)9000U)</td></tr>
+<tr class="separator:ga6ce4363b63e342922e65fbd634be68b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga05bc450811322341c2fcc68442f12680"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga05bc450811322341c2fcc68442f12680">ETH_TX_BUFFER_SIZE</a>&#160;&#160;&#160;(<a class="el" href="group___e_m_a_c.html#ga15e493eedd0128d55c89df6d7c2c6c47">ETH_MAX_PACKET_SIZE</a>)</td></tr>
+<tr class="separator:ga05bc450811322341c2fcc68442f12680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga34b919b347ebbe67e03f1b72f498ddd5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga34b919b347ebbe67e03f1b72f498ddd5">ETH_RX_BUFFER_SIZE</a>&#160;&#160;&#160;(<a class="el" href="group___e_m_a_c.html#ga15e493eedd0128d55c89df6d7c2c6c47">ETH_MAX_PACKET_SIZE</a>)</td></tr>
+<tr class="separator:ga34b919b347ebbe67e03f1b72f498ddd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga07e8f25e7e0122d02238db95e1acad8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga07e8f25e7e0122d02238db95e1acad8f">EMAC_INT_EN_TX_DONE</a>&#160;&#160;&#160;(1 &lt;&lt; 0)</td></tr>
+<tr class="separator:ga07e8f25e7e0122d02238db95e1acad8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8239732818987bbeecce145b1b9fc508"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga8239732818987bbeecce145b1b9fc508">EMAC_INT_EN_TX_ERROR</a>&#160;&#160;&#160;(1 &lt;&lt; 1)</td></tr>
+<tr class="separator:ga8239732818987bbeecce145b1b9fc508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb668b1c69cbfe4ed0846bf480af2079"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gabb668b1c69cbfe4ed0846bf480af2079">EMAC_INT_EN_RX_DONE</a>&#160;&#160;&#160;(1 &lt;&lt; 2)</td></tr>
+<tr class="separator:gabb668b1c69cbfe4ed0846bf480af2079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabdbd262e3722a268b3f9da6c216764d7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gabdbd262e3722a268b3f9da6c216764d7">EMAC_INT_EN_RX_ERROR</a>&#160;&#160;&#160;(1 &lt;&lt; 3)</td></tr>
+<tr class="separator:gabdbd262e3722a268b3f9da6c216764d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae05def1d82a8e396c4357bb651a79c52"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gae05def1d82a8e396c4357bb651a79c52">EMAC_INT_EN_RX_BUSY</a>&#160;&#160;&#160;(1 &lt;&lt; 4)</td></tr>
+<tr class="separator:gae05def1d82a8e396c4357bb651a79c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga96f56f7315cc09680adfa1774e2b7916"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga96f56f7315cc09680adfa1774e2b7916">EMAC_INT_EN_TX_CTRL</a>&#160;&#160;&#160;(1 &lt;&lt; 5)</td></tr>
+<tr class="separator:ga96f56f7315cc09680adfa1774e2b7916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga078ae4358c621b36dc64174aeeea9f19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga078ae4358c621b36dc64174aeeea9f19">EMAC_INT_EN_RX_CTRL</a>&#160;&#160;&#160;(1 &lt;&lt; 6)</td></tr>
+<tr class="separator:ga078ae4358c621b36dc64174aeeea9f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad2d5530fd37dd10fd90b5c7909361602"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gad2d5530fd37dd10fd90b5c7909361602">EMAC_INT_EN_ALL</a>&#160;&#160;&#160;(0x7f &lt;&lt; 0)</td></tr>
+<tr class="separator:gad2d5530fd37dd10fd90b5c7909361602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7e297fda3467287625a5c884f69021d6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga7e297fda3467287625a5c884f69021d6">EMAC_INT_STS_TX_DONE</a>&#160;&#160;&#160;(1 &lt;&lt; 0)</td></tr>
+<tr class="separator:ga7e297fda3467287625a5c884f69021d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeb1a99e730918fe1973d6a6328e39b35"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gaeb1a99e730918fe1973d6a6328e39b35">EMAC_INT_STS_TX_ERROR</a>&#160;&#160;&#160;(1 &lt;&lt; 1)</td></tr>
+<tr class="separator:gaeb1a99e730918fe1973d6a6328e39b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf1693e3e768c9a51d1472fdefe3a2f69"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gaf1693e3e768c9a51d1472fdefe3a2f69">EMAC_INT_STS_RX_DONE</a>&#160;&#160;&#160;(1 &lt;&lt; 2)</td></tr>
+<tr class="separator:gaf1693e3e768c9a51d1472fdefe3a2f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga87ff17d5587a2e82d29784263aa81434"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga87ff17d5587a2e82d29784263aa81434">EMAC_INT_STS_RX_ERROR</a>&#160;&#160;&#160;(1 &lt;&lt; 3)</td></tr>
+<tr class="separator:ga87ff17d5587a2e82d29784263aa81434"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa90a6630bc2b4287853ab0191fd03aab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gaa90a6630bc2b4287853ab0191fd03aab">EMAC_INT_STS_RX_BUSY</a>&#160;&#160;&#160;(1 &lt;&lt; 4)</td></tr>
+<tr class="separator:gaa90a6630bc2b4287853ab0191fd03aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0cbad4e37716eb285f58e37bfd05b0e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga0cbad4e37716eb285f58e37bfd05b0e3">EMAC_INT_STS_TX_CTRL</a>&#160;&#160;&#160;(1 &lt;&lt; 5)</td></tr>
+<tr class="separator:ga0cbad4e37716eb285f58e37bfd05b0e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2bd4cec21ba7eb400fced3c9fa97e3e6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga2bd4cec21ba7eb400fced3c9fa97e3e6">EMAC_INT_STS_RX_CTRL</a>&#160;&#160;&#160;(1 &lt;&lt; 6)</td></tr>
+<tr class="separator:ga2bd4cec21ba7eb400fced3c9fa97e3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad79b7bed14667e0f0734ca4c400a23d2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gad79b7bed14667e0f0734ca4c400a23d2">EMAC_INT_STS_ALL</a>&#160;&#160;&#160;(0x7f &lt;&lt; 0)</td></tr>
+<tr class="separator:gad79b7bed14667e0f0734ca4c400a23d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga28e30d8c71bcc14324d830e5c6d8a2dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga28e30d8c71bcc14324d830e5c6d8a2dc">EMAC_BD_TYPE_INVLAID</a>&#160;&#160;&#160;(0)</td></tr>
+<tr class="separator:ga28e30d8c71bcc14324d830e5c6d8a2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1646af5dd6c3464d1aa7f263f54c5553"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga1646af5dd6c3464d1aa7f263f54c5553">EMAC_BD_TYPE_TX</a>&#160;&#160;&#160;(1)</td></tr>
+<tr class="separator:ga1646af5dd6c3464d1aa7f263f54c5553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga681ef36dedd189c8a884302d3ff5861d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga681ef36dedd189c8a884302d3ff5861d">EMAC_BD_TYPE_RX</a>&#160;&#160;&#160;(2)</td></tr>
+<tr class="separator:ga681ef36dedd189c8a884302d3ff5861d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga757e6cdbe6a99bba050b185470845c10"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga757e6cdbe6a99bba050b185470845c10">EMAC_BD_TYPE_NONE</a>&#160;&#160;&#160;(3)</td></tr>
+<tr class="separator:ga757e6cdbe6a99bba050b185470845c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga146e964af37ad149ea54df496a1f1f61"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga146e964af37ad149ea54df496a1f1f61">EMAC_BD_TYPE_MAX</a>&#160;&#160;&#160;(0x7FFFFFFF)</td></tr>
+<tr class="separator:ga146e964af37ad149ea54df496a1f1f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gade07fc40dd8ac8fa719e7866300fb9cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gade07fc40dd8ac8fa719e7866300fb9cf">bflb_emac_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, const struct <a class="el" href="structbflb__emac__config__s.html">bflb_emac_config_s</a> *config)</td></tr>
+<tr class="separator:gade07fc40dd8ac8fa719e7866300fb9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2c7005d6766b109ab00218a83d4cc677"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga2c7005d6766b109ab00218a83d4cc677">bflb_emac_stop</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:ga2c7005d6766b109ab00218a83d4cc677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4ba55af47509b7bd8d40bdec7a09389c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga4ba55af47509b7bd8d40bdec7a09389c">bflb_emac_start</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:ga4ba55af47509b7bd8d40bdec7a09389c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga78a380f8be6d492c8707adaf40736346"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga78a380f8be6d492c8707adaf40736346">bflb_emac_start_tx</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:ga78a380f8be6d492c8707adaf40736346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa96615cefde8509fb34e92562987ba0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gafa96615cefde8509fb34e92562987ba0">bflb_emac_stop_tx</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:gafa96615cefde8509fb34e92562987ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2547c0f4f8709a56d55382fb989e6139"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga2547c0f4f8709a56d55382fb989e6139">bflb_emac_start_rx</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:ga2547c0f4f8709a56d55382fb989e6139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0a329905504b418bdfe34c4806e5b330"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga0a329905504b418bdfe34c4806e5b330">bflb_emac_stop_rx</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:ga0a329905504b418bdfe34c4806e5b330"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeaad8cd7c5efb302d5452b55653351d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gaeaad8cd7c5efb302d5452b55653351d2">bflb_emac_bd_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t *eth_tx_buff, uint8_t tx_buf_count, uint8_t *eth_rx_buff, uint8_t rx_buf_count)</td></tr>
+<tr class="separator:gaeaad8cd7c5efb302d5452b55653351d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3670ebde6687cade59d985d0d2113095"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga3670ebde6687cade59d985d0d2113095">bflb_emac_bd_get_cur_active</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t bdt)</td></tr>
+<tr class="separator:ga3670ebde6687cade59d985d0d2113095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga16c93ed854631458e964ab27b7f2eaa2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga16c93ed854631458e964ab27b7f2eaa2">bflb_emac_bd_rx_enqueue</a> (uint32_t index)</td></tr>
+<tr class="separator:ga16c93ed854631458e964ab27b7f2eaa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab019b644c4feb8b4c4ae6bed29e27f77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gab019b644c4feb8b4c4ae6bed29e27f77">bflb_emac_bd_rx_on_err</a> (uint32_t index)</td></tr>
+<tr class="separator:gab019b644c4feb8b4c4ae6bed29e27f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0706db4e6f56cdf40c92d8ee502578cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga0706db4e6f56cdf40c92d8ee502578cf">bflb_emac_bd_tx_dequeue</a> (uint32_t index)</td></tr>
+<tr class="separator:ga0706db4e6f56cdf40c92d8ee502578cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4042f22db030655583c5ae86173097df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga4042f22db030655583c5ae86173097df">bflb_emac_bd_tx_on_err</a> (uint32_t index)</td></tr>
+<tr class="separator:ga4042f22db030655583c5ae86173097df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad7e29eb889500a2fab159fba65170e79"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gad7e29eb889500a2fab159fba65170e79">bflb_emac_bd_tx_enqueue</a> (uint32_t flags, uint32_t len, const uint8_t *data_in)</td></tr>
+<tr class="separator:gad7e29eb889500a2fab159fba65170e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ab7b942b08a09cf52854bac9c516ced"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga0ab7b942b08a09cf52854bac9c516ced">bflb_emac_bd_rx_dequeue</a> (uint32_t flags, uint32_t *len, uint8_t *data_out)</td></tr>
+<tr class="separator:ga0ab7b942b08a09cf52854bac9c516ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaea2e1f1df01b487d08e09eb2b98ff8ac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gaea2e1f1df01b487d08e09eb2b98ff8ac">emac_bd_fragment_support</a> (void)</td></tr>
+<tr class="separator:gaea2e1f1df01b487d08e09eb2b98ff8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf2ff2672ccdb3bc78b9783b92ce2e930"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gaf2ff2672ccdb3bc78b9783b92ce2e930">bflb_emac_int_enable</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t flag, bool enable)</td></tr>
+<tr class="separator:gaf2ff2672ccdb3bc78b9783b92ce2e930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga40562aa653d21c6eebf828e813c1555b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga40562aa653d21c6eebf828e813c1555b">bflb_emac_int_clear</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t flag)</td></tr>
+<tr class="separator:ga40562aa653d21c6eebf828e813c1555b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga60d45a7eba9739f8bed4e7aaf762f8c4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga60d45a7eba9739f8bed4e7aaf762f8c4">bflb_emac_get_int_status</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:ga60d45a7eba9739f8bed4e7aaf762f8c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae929b5ea4954220670b96db95be6fbe8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#gae929b5ea4954220670b96db95be6fbe8">bflb_emac_feature_control</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, int cmd, size_t arg)</td></tr>
+<tr class="separator:gae929b5ea4954220670b96db95be6fbe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga59e4d3b7fc7b3edda3e1889ae7e6dff6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga59e4d3b7fc7b3edda3e1889ae7e6dff6">bflb_emac_phy_reg_read</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t phy_reg, uint16_t *phy_reg_val)</td></tr>
+<tr class="separator:ga59e4d3b7fc7b3edda3e1889ae7e6dff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7a0de9d5136f37d1b8ab7af8e997d53d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___e_m_a_c.html#ga7a0de9d5136f37d1b8ab7af8e997d53d">bflb_emac_phy_reg_write</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t phy_reg, uint16_t phy_reg_val)</td></tr>
+<tr class="separator:ga7a0de9d5136f37d1b8ab7af8e997d53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="ga28e30d8c71bcc14324d830e5c6d8a2dc" name="ga28e30d8c71bcc14324d830e5c6d8a2dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga28e30d8c71bcc14324d830e5c6d8a2dc">&#9670;&#160;</a></span>EMAC_BD_TYPE_INVLAID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_BD_TYPE_INVLAID&#160;&#160;&#160;(0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00102">102</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga146e964af37ad149ea54df496a1f1f61" name="ga146e964af37ad149ea54df496a1f1f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga146e964af37ad149ea54df496a1f1f61">&#9670;&#160;</a></span>EMAC_BD_TYPE_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_BD_TYPE_MAX&#160;&#160;&#160;(0x7FFFFFFF)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00106">106</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga757e6cdbe6a99bba050b185470845c10" name="ga757e6cdbe6a99bba050b185470845c10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga757e6cdbe6a99bba050b185470845c10">&#9670;&#160;</a></span>EMAC_BD_TYPE_NONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_BD_TYPE_NONE&#160;&#160;&#160;(3)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00105">105</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga681ef36dedd189c8a884302d3ff5861d" name="ga681ef36dedd189c8a884302d3ff5861d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga681ef36dedd189c8a884302d3ff5861d">&#9670;&#160;</a></span>EMAC_BD_TYPE_RX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_BD_TYPE_RX&#160;&#160;&#160;(2)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00104">104</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga1646af5dd6c3464d1aa7f263f54c5553" name="ga1646af5dd6c3464d1aa7f263f54c5553"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1646af5dd6c3464d1aa7f263f54c5553">&#9670;&#160;</a></span>EMAC_BD_TYPE_TX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_BD_TYPE_TX&#160;&#160;&#160;(1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00103">103</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga5dfed92b635a13e78650d93f7a889375" name="ga5dfed92b635a13e78650d93f7a889375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5dfed92b635a13e78650d93f7a889375">&#9670;&#160;</a></span>EMAC_CLK_USE_EXTERNAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_CLK_USE_EXTERNAL&#160;&#160;&#160;(0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00017">17</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga1bdc24ed3972295838d919b1028e35b2" name="ga1bdc24ed3972295838d919b1028e35b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1bdc24ed3972295838d919b1028e35b2">&#9670;&#160;</a></span>EMAC_CLK_USE_INTERNAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_CLK_USE_INTERNAL&#160;&#160;&#160;(1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00018">18</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga754f210b5d4f6c92782b67809b109c1d" name="ga754f210b5d4f6c92782b67809b109c1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga754f210b5d4f6c92782b67809b109c1d">&#9670;&#160;</a></span>EMAC_DO_FLUSH_DATA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_DO_FLUSH_DATA&#160;&#160;&#160;(1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00014">14</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga027f51a1ee524978d79cbffeba0d21c9" name="ga027f51a1ee524978d79cbffeba0d21c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga027f51a1ee524978d79cbffeba0d21c9">&#9670;&#160;</a></span>EMAC_FRAGMENT_PACKET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_FRAGMENT_PACKET&#160;&#160;&#160;(uint32_t)(0x01)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00058">58</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gad2d5530fd37dd10fd90b5c7909361602" name="gad2d5530fd37dd10fd90b5c7909361602"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad2d5530fd37dd10fd90b5c7909361602">&#9670;&#160;</a></span>EMAC_INT_EN_ALL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_EN_ALL&#160;&#160;&#160;(0x7f &lt;&lt; 0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00089">89</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gae05def1d82a8e396c4357bb651a79c52" name="gae05def1d82a8e396c4357bb651a79c52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae05def1d82a8e396c4357bb651a79c52">&#9670;&#160;</a></span>EMAC_INT_EN_RX_BUSY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_EN_RX_BUSY&#160;&#160;&#160;(1 &lt;&lt; 4)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00086">86</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga078ae4358c621b36dc64174aeeea9f19" name="ga078ae4358c621b36dc64174aeeea9f19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga078ae4358c621b36dc64174aeeea9f19">&#9670;&#160;</a></span>EMAC_INT_EN_RX_CTRL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_EN_RX_CTRL&#160;&#160;&#160;(1 &lt;&lt; 6)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00088">88</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gabb668b1c69cbfe4ed0846bf480af2079" name="gabb668b1c69cbfe4ed0846bf480af2079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabb668b1c69cbfe4ed0846bf480af2079">&#9670;&#160;</a></span>EMAC_INT_EN_RX_DONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_EN_RX_DONE&#160;&#160;&#160;(1 &lt;&lt; 2)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00084">84</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gabdbd262e3722a268b3f9da6c216764d7" name="gabdbd262e3722a268b3f9da6c216764d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabdbd262e3722a268b3f9da6c216764d7">&#9670;&#160;</a></span>EMAC_INT_EN_RX_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_EN_RX_ERROR&#160;&#160;&#160;(1 &lt;&lt; 3)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00085">85</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga96f56f7315cc09680adfa1774e2b7916" name="ga96f56f7315cc09680adfa1774e2b7916"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga96f56f7315cc09680adfa1774e2b7916">&#9670;&#160;</a></span>EMAC_INT_EN_TX_CTRL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_EN_TX_CTRL&#160;&#160;&#160;(1 &lt;&lt; 5)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00087">87</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga07e8f25e7e0122d02238db95e1acad8f" name="ga07e8f25e7e0122d02238db95e1acad8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga07e8f25e7e0122d02238db95e1acad8f">&#9670;&#160;</a></span>EMAC_INT_EN_TX_DONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_EN_TX_DONE&#160;&#160;&#160;(1 &lt;&lt; 0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00082">82</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga8239732818987bbeecce145b1b9fc508" name="ga8239732818987bbeecce145b1b9fc508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8239732818987bbeecce145b1b9fc508">&#9670;&#160;</a></span>EMAC_INT_EN_TX_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_EN_TX_ERROR&#160;&#160;&#160;(1 &lt;&lt; 1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00083">83</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gad79b7bed14667e0f0734ca4c400a23d2" name="gad79b7bed14667e0f0734ca4c400a23d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad79b7bed14667e0f0734ca4c400a23d2">&#9670;&#160;</a></span>EMAC_INT_STS_ALL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_STS_ALL&#160;&#160;&#160;(0x7f &lt;&lt; 0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00099">99</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaa90a6630bc2b4287853ab0191fd03aab" name="gaa90a6630bc2b4287853ab0191fd03aab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa90a6630bc2b4287853ab0191fd03aab">&#9670;&#160;</a></span>EMAC_INT_STS_RX_BUSY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_STS_RX_BUSY&#160;&#160;&#160;(1 &lt;&lt; 4)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00096">96</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga2bd4cec21ba7eb400fced3c9fa97e3e6" name="ga2bd4cec21ba7eb400fced3c9fa97e3e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2bd4cec21ba7eb400fced3c9fa97e3e6">&#9670;&#160;</a></span>EMAC_INT_STS_RX_CTRL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_STS_RX_CTRL&#160;&#160;&#160;(1 &lt;&lt; 6)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00098">98</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf1693e3e768c9a51d1472fdefe3a2f69" name="gaf1693e3e768c9a51d1472fdefe3a2f69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf1693e3e768c9a51d1472fdefe3a2f69">&#9670;&#160;</a></span>EMAC_INT_STS_RX_DONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_STS_RX_DONE&#160;&#160;&#160;(1 &lt;&lt; 2)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00094">94</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga87ff17d5587a2e82d29784263aa81434" name="ga87ff17d5587a2e82d29784263aa81434"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga87ff17d5587a2e82d29784263aa81434">&#9670;&#160;</a></span>EMAC_INT_STS_RX_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_STS_RX_ERROR&#160;&#160;&#160;(1 &lt;&lt; 3)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00095">95</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga0cbad4e37716eb285f58e37bfd05b0e3" name="ga0cbad4e37716eb285f58e37bfd05b0e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0cbad4e37716eb285f58e37bfd05b0e3">&#9670;&#160;</a></span>EMAC_INT_STS_TX_CTRL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_STS_TX_CTRL&#160;&#160;&#160;(1 &lt;&lt; 5)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00097">97</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga7e297fda3467287625a5c884f69021d6" name="ga7e297fda3467287625a5c884f69021d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7e297fda3467287625a5c884f69021d6">&#9670;&#160;</a></span>EMAC_INT_STS_TX_DONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_STS_TX_DONE&#160;&#160;&#160;(1 &lt;&lt; 0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00092">92</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaeb1a99e730918fe1973d6a6328e39b35" name="gaeb1a99e730918fe1973d6a6328e39b35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeb1a99e730918fe1973d6a6328e39b35">&#9670;&#160;</a></span>EMAC_INT_STS_TX_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_INT_STS_TX_ERROR&#160;&#160;&#160;(1 &lt;&lt; 1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00093">93</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga21660f263d8d9623badf2908a000b10b" name="ga21660f263d8d9623badf2908a000b10b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga21660f263d8d9623badf2908a000b10b">&#9670;&#160;</a></span>EMAC_NOCOPY_PACKET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_NOCOPY_PACKET&#160;&#160;&#160;(uint32_t)(0x02)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00059">59</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga25dc83a891a69cc22085990ca8d72bb6" name="ga25dc83a891a69cc22085990ca8d72bb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga25dc83a891a69cc22085990ca8d72bb6">&#9670;&#160;</a></span>EMAC_NORMAL_PACKET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMAC_NORMAL_PACKET&#160;&#160;&#160;(uint32_t)(0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00057">57</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga6be302136e0434536d049406760485b1" name="ga6be302136e0434536d049406760485b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6be302136e0434536d049406760485b1">&#9670;&#160;</a></span>ETH_CRC_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_CRC_SIZE&#160;&#160;&#160;((uint32_t)4U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Ethernet CRC </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00066">66</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga68fa821143b2ea457846f294a19def87" name="ga68fa821143b2ea457846f294a19def87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga68fa821143b2ea457846f294a19def87">&#9670;&#160;</a></span>ETH_EXTRA_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_EXTRA_SIZE&#160;&#160;&#160;((uint32_t)2U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Extra bytes in some cases </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00067">67</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga0dd989fc5922a49701ae930f3c8cbada" name="ga0dd989fc5922a49701ae930f3c8cbada"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0dd989fc5922a49701ae930f3c8cbada">&#9670;&#160;</a></span>ETH_HEADER_SZIE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_HEADER_SZIE&#160;&#160;&#160;((uint32_t)14U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>6 byte Dest addr, 6 byte Src addr, 2 byte length/type </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00065">65</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga6ce4363b63e342922e65fbd634be68b6" name="ga6ce4363b63e342922e65fbd634be68b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6ce4363b63e342922e65fbd634be68b6">&#9670;&#160;</a></span>ETH_JUMBO_FRAME_PAYLOAD_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_JUMBO_FRAME_PAYLOAD_SIZE&#160;&#160;&#160;((uint32_t)9000U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Jumbo frame payload size </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00071">71</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaa23a2264af49f86c13a5358198d3ad33" name="gaa23a2264af49f86c13a5358198d3ad33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa23a2264af49f86c13a5358198d3ad33">&#9670;&#160;</a></span>ETH_MAX_ETH_PAYLOAD_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_MAX_ETH_PAYLOAD_SIZE&#160;&#160;&#160;((uint32_t)1500U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Maximum Ethernet payload size </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00070">70</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga15e493eedd0128d55c89df6d7c2c6c47" name="ga15e493eedd0128d55c89df6d7c2c6c47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga15e493eedd0128d55c89df6d7c2c6c47">&#9670;&#160;</a></span>ETH_MAX_PACKET_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_MAX_PACKET_SIZE&#160;&#160;&#160;((uint32_t)1524U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ETH_HEADER + ETH_EXTRA + ETH_VLAN_TAG + ETH_MAX_ETH_PAYLOAD + ETH_CRC </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00064">64</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga0fe155d9b74937ec6b67809c3d73a558" name="ga0fe155d9b74937ec6b67809c3d73a558"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0fe155d9b74937ec6b67809c3d73a558">&#9670;&#160;</a></span>ETH_MIN_ETH_PAYLOAD_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_MIN_ETH_PAYLOAD_SIZE&#160;&#160;&#160;((uint32_t)46U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Minimum Ethernet payload size </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00069">69</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga34b919b347ebbe67e03f1b72f498ddd5" name="ga34b919b347ebbe67e03f1b72f498ddd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga34b919b347ebbe67e03f1b72f498ddd5">&#9670;&#160;</a></span>ETH_RX_BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_RX_BUFFER_SIZE&#160;&#160;&#160;(<a class="el" href="group___e_m_a_c.html#ga15e493eedd0128d55c89df6d7c2c6c47">ETH_MAX_PACKET_SIZE</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00078">78</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga05bc450811322341c2fcc68442f12680" name="ga05bc450811322341c2fcc68442f12680"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga05bc450811322341c2fcc68442f12680">&#9670;&#160;</a></span>ETH_TX_BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_TX_BUFFER_SIZE&#160;&#160;&#160;(<a class="el" href="group___e_m_a_c.html#ga15e493eedd0128d55c89df6d7c2c6c47">ETH_MAX_PACKET_SIZE</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00075">75</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gadd3a85426a611ef73a08ed202b89344d" name="gadd3a85426a611ef73a08ed202b89344d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadd3a85426a611ef73a08ed202b89344d">&#9670;&#160;</a></span>ETH_VLAN_TAG_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ETH_VLAN_TAG_SIZE&#160;&#160;&#160;((uint32_t)4U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>optional 802.1q VLAN Tag </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__emac_8h_source.html">bflb_emac.h</a> 第 <a class="el" href="bflb__emac_8h_source.html#l00068">68</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="ga3670ebde6687cade59d985d0d2113095" name="ga3670ebde6687cade59d985d0d2113095"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3670ebde6687cade59d985d0d2113095">&#9670;&#160;</a></span>bflb_emac_bd_get_cur_active()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_emac_bd_get_cur_active </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>bdt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bdt</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="gaeaad8cd7c5efb302d5452b55653351d2" name="gaeaad8cd7c5efb302d5452b55653351d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeaad8cd7c5efb302d5452b55653351d2">&#9670;&#160;</a></span>bflb_emac_bd_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_bd_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>eth_tx_buff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>tx_buf_count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>eth_rx_buff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>rx_buf_count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">eth_tx_buff</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tx_buf_count</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">eth_rx_buff</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rx_buf_count</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga0ab7b942b08a09cf52854bac9c516ced" name="ga0ab7b942b08a09cf52854bac9c516ced"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ab7b942b08a09cf52854bac9c516ced">&#9670;&#160;</a></span>bflb_emac_bd_rx_dequeue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_emac_bd_rx_dequeue </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data_out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data_out</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="ga16c93ed854631458e964ab27b7f2eaa2" name="ga16c93ed854631458e964ab27b7f2eaa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga16c93ed854631458e964ab27b7f2eaa2">&#9670;&#160;</a></span>bflb_emac_bd_rx_enqueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_bd_rx_enqueue </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gab019b644c4feb8b4c4ae6bed29e27f77" name="gab019b644c4feb8b4c4ae6bed29e27f77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab019b644c4feb8b4c4ae6bed29e27f77">&#9670;&#160;</a></span>bflb_emac_bd_rx_on_err()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_bd_rx_on_err </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga0706db4e6f56cdf40c92d8ee502578cf" name="ga0706db4e6f56cdf40c92d8ee502578cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0706db4e6f56cdf40c92d8ee502578cf">&#9670;&#160;</a></span>bflb_emac_bd_tx_dequeue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_bd_tx_dequeue </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gad7e29eb889500a2fab159fba65170e79" name="gad7e29eb889500a2fab159fba65170e79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad7e29eb889500a2fab159fba65170e79">&#9670;&#160;</a></span>bflb_emac_bd_tx_enqueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_emac_bd_tx_enqueue </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data_in</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data_in</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="ga4042f22db030655583c5ae86173097df" name="ga4042f22db030655583c5ae86173097df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4042f22db030655583c5ae86173097df">&#9670;&#160;</a></span>bflb_emac_bd_tx_on_err()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_bd_tx_on_err </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gae929b5ea4954220670b96db95be6fbe8" name="gae929b5ea4954220670b96db95be6fbe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae929b5ea4954220670b96db95be6fbe8">&#9670;&#160;</a></span>bflb_emac_feature_control()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_emac_feature_control </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="ga60d45a7eba9739f8bed4e7aaf762f8c4" name="ga60d45a7eba9739f8bed4e7aaf762f8c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga60d45a7eba9739f8bed4e7aaf762f8c4">&#9670;&#160;</a></span>bflb_emac_get_int_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t bflb_emac_get_int_status </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="gade07fc40dd8ac8fa719e7866300fb9cf" name="gade07fc40dd8ac8fa719e7866300fb9cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gade07fc40dd8ac8fa719e7866300fb9cf">&#9670;&#160;</a></span>bflb_emac_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structbflb__emac__config__s.html">bflb_emac_config_s</a> *&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga40562aa653d21c6eebf828e813c1555b" name="ga40562aa653d21c6eebf828e813c1555b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga40562aa653d21c6eebf828e813c1555b">&#9670;&#160;</a></span>bflb_emac_int_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_int_clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flag</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaf2ff2672ccdb3bc78b9783b92ce2e930" name="gaf2ff2672ccdb3bc78b9783b92ce2e930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf2ff2672ccdb3bc78b9783b92ce2e930">&#9670;&#160;</a></span>bflb_emac_int_enable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_int_enable </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flag</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga59e4d3b7fc7b3edda3e1889ae7e6dff6" name="ga59e4d3b7fc7b3edda3e1889ae7e6dff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga59e4d3b7fc7b3edda3e1889ae7e6dff6">&#9670;&#160;</a></span>bflb_emac_phy_reg_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_emac_phy_reg_read </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>phy_reg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>phy_reg_val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">phy_reg</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">phy_reg_val</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="ga7a0de9d5136f37d1b8ab7af8e997d53d" name="ga7a0de9d5136f37d1b8ab7af8e997d53d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7a0de9d5136f37d1b8ab7af8e997d53d">&#9670;&#160;</a></span>bflb_emac_phy_reg_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int bflb_emac_phy_reg_write </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>phy_reg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>phy_reg_val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">phy_reg</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">phy_reg_val</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="ga4ba55af47509b7bd8d40bdec7a09389c" name="ga4ba55af47509b7bd8d40bdec7a09389c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4ba55af47509b7bd8d40bdec7a09389c">&#9670;&#160;</a></span>bflb_emac_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_start </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga2547c0f4f8709a56d55382fb989e6139" name="ga2547c0f4f8709a56d55382fb989e6139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2547c0f4f8709a56d55382fb989e6139">&#9670;&#160;</a></span>bflb_emac_start_rx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_start_rx </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga78a380f8be6d492c8707adaf40736346" name="ga78a380f8be6d492c8707adaf40736346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga78a380f8be6d492c8707adaf40736346">&#9670;&#160;</a></span>bflb_emac_start_tx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_start_tx </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga2c7005d6766b109ab00218a83d4cc677" name="ga2c7005d6766b109ab00218a83d4cc677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2c7005d6766b109ab00218a83d4cc677">&#9670;&#160;</a></span>bflb_emac_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_stop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga0a329905504b418bdfe34c4806e5b330" name="ga0a329905504b418bdfe34c4806e5b330"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0a329905504b418bdfe34c4806e5b330">&#9670;&#160;</a></span>bflb_emac_stop_rx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_stop_rx </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gafa96615cefde8509fb34e92562987ba0" name="gafa96615cefde8509fb34e92562987ba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa96615cefde8509fb34e92562987ba0">&#9670;&#160;</a></span>bflb_emac_stop_tx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_emac_stop_tx </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaea2e1f1df01b487d08e09eb2b98ff8ac" name="gaea2e1f1df01b487d08e09eb2b98ff8ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaea2e1f1df01b487d08e09eb2b98ff8ac">&#9670;&#160;</a></span>emac_bd_fragment_support()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int emac_bd_fragment_support </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>返回</dt><dd>int </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+digraph "ADC"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="ADC",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node3 [label="adc channel definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___a_d_c___c_h_a_n_n_e_l.html",tooltip=" "];
+  Node4 [label="adc clock divison definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___a_d_c___c_l_k___d_i_v.html",tooltip=" "];
+  Node9 [label="adc interrupt clear\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___a_d_c___i_n_t_c_l_r.html",tooltip=" "];
+  Node8 [label="adc interrupt status\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___a_d_c___i_n_t_s_t_s.html",tooltip=" "];
+  Node5 [label="adc resolution definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___a_d_c___r_e_s_o_l_u_t_i_o_n.html",tooltip=" "];
+  Node7 [label="adc tsen mode definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___a_d_c___t_s_e_n___m_o_d.html",tooltip=" "];
+  Node6 [label="adc reference select\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___a_d_c___v_r_e_f.html",tooltip=" "];
+  Node2 [label="LHAL",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___l_h_a_l.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node8 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node9 [shape=plaintext, dir="back", style="solid"];
+}

@@ -1,0 +1,2407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: SEC_PKA</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group___s_e_c___p_k_a.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">SEC_PKA<div class="ingroups"><a class="el" href="group___l_h_a_l.html">LHAL</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+SEC_PKA 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___s_e_c___p_k_a.png" border="0" usemap="#agroup______s__e__c______p__k__a" alt=""/></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga6f54bde9f463c4a8ecd1de19fe420861"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga6f54bde9f463c4a8ecd1de19fe420861">SEC_ENG_PKA_REG_SIZE_8</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga6f54bde9f463c4a8ecd1de19fe420861"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga82542401b111ddc91123e421acb5e1c2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga82542401b111ddc91123e421acb5e1c2">SEC_ENG_PKA_REG_SIZE_16</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ga82542401b111ddc91123e421acb5e1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga94a9ab10db7f0357cef88b5a22075ef2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga94a9ab10db7f0357cef88b5a22075ef2">SEC_ENG_PKA_REG_SIZE_32</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:ga94a9ab10db7f0357cef88b5a22075ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga552173b7d25f0ae6502f2b74edaaae9f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga552173b7d25f0ae6502f2b74edaaae9f">SEC_ENG_PKA_REG_SIZE_64</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:ga552173b7d25f0ae6502f2b74edaaae9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga39928cab6a99588bd112be7c8cc4f8ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga39928cab6a99588bd112be7c8cc4f8ce">SEC_ENG_PKA_REG_SIZE_96</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:ga39928cab6a99588bd112be7c8cc4f8ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae789067b7c2bfec2713fbc2d6137f0d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gae789067b7c2bfec2713fbc2d6137f0d8">SEC_ENG_PKA_REG_SIZE_128</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:gae789067b7c2bfec2713fbc2d6137f0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabaefddf9e471663a71c1b35c9c67ac65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gabaefddf9e471663a71c1b35c9c67ac65">SEC_ENG_PKA_REG_SIZE_192</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:gabaefddf9e471663a71c1b35c9c67ac65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga661a391462f423e15c61f0f5121b1e20"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga661a391462f423e15c61f0f5121b1e20">SEC_ENG_PKA_REG_SIZE_256</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:ga661a391462f423e15c61f0f5121b1e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab83e5c5137f661f4e6011ae7bf11e1b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gab83e5c5137f661f4e6011ae7bf11e1b3">SEC_ENG_PKA_REG_SIZE_384</a>&#160;&#160;&#160;9</td></tr>
+<tr class="separator:gab83e5c5137f661f4e6011ae7bf11e1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga073326878aec10773a8842faee03c7ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga073326878aec10773a8842faee03c7ca">SEC_ENG_PKA_REG_SIZE_512</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:ga073326878aec10773a8842faee03c7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad5f480aad20adac9d4b23fe2fd6fbae0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gad5f480aad20adac9d4b23fe2fd6fbae0">SEC_ENG_PKA_OP_PPSEL</a>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:gad5f480aad20adac9d4b23fe2fd6fbae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga241cf59e9ef971010f51ab858fc45dd6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga241cf59e9ef971010f51ab858fc45dd6">SEC_ENG_PKA_OP_LMOD2N</a>&#160;&#160;&#160;0x11</td></tr>
+<tr class="separator:ga241cf59e9ef971010f51ab858fc45dd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad9d5a78e5f41adfc8587becf835db18a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gad9d5a78e5f41adfc8587becf835db18a">SEC_ENG_PKA_OP_LDIV2N</a>&#160;&#160;&#160;0x12</td></tr>
+<tr class="separator:gad9d5a78e5f41adfc8587becf835db18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1d527507a4de9aceb5dc130a868590d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga1d527507a4de9aceb5dc130a868590d1">SEC_ENG_PKA_OP_LMUL2N</a>&#160;&#160;&#160;0x13</td></tr>
+<tr class="separator:ga1d527507a4de9aceb5dc130a868590d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf16271cd4c377cfd560bec584242aee8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaf16271cd4c377cfd560bec584242aee8">SEC_ENG_PKA_OP_LDIV</a>&#160;&#160;&#160;0x14</td></tr>
+<tr class="separator:gaf16271cd4c377cfd560bec584242aee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga02744c76aa6bce57fb3be63e90b2113e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga02744c76aa6bce57fb3be63e90b2113e">SEC_ENG_PKA_OP_LSQR</a>&#160;&#160;&#160;0x15</td></tr>
+<tr class="separator:ga02744c76aa6bce57fb3be63e90b2113e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf6cf44d8da59e97f9a4fcbbf63d46129"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaf6cf44d8da59e97f9a4fcbbf63d46129">SEC_ENG_PKA_OP_LMUL</a>&#160;&#160;&#160;0x16</td></tr>
+<tr class="separator:gaf6cf44d8da59e97f9a4fcbbf63d46129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab8c28ad4010e4239b3a9663372076cb0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gab8c28ad4010e4239b3a9663372076cb0">SEC_ENG_PKA_OP_LSUB</a>&#160;&#160;&#160;0x17</td></tr>
+<tr class="separator:gab8c28ad4010e4239b3a9663372076cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad6ebedf91841fbd945b82b10f1f18940"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gad6ebedf91841fbd945b82b10f1f18940">SEC_ENG_PKA_OP_LADD</a>&#160;&#160;&#160;0x18</td></tr>
+<tr class="separator:gad6ebedf91841fbd945b82b10f1f18940"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf53edba5c6044915dddc2692921f8aa8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaf53edba5c6044915dddc2692921f8aa8">SEC_ENG_PKA_OP_LCMP</a>&#160;&#160;&#160;0x19</td></tr>
+<tr class="separator:gaf53edba5c6044915dddc2692921f8aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaff46e7eea4173fae2157e861f6fc3a0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaff46e7eea4173fae2157e861f6fc3a0d">SEC_ENG_PKA_OP_MDIV2</a>&#160;&#160;&#160;0x21</td></tr>
+<tr class="separator:gaff46e7eea4173fae2157e861f6fc3a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab10fb9b2124356ae06181192e1e922c9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gab10fb9b2124356ae06181192e1e922c9">SEC_ENG_PKA_OP_MINV</a>&#160;&#160;&#160;0x22</td></tr>
+<tr class="separator:gab10fb9b2124356ae06181192e1e922c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga58e9c1d0984a321a3d63880f9592ddc7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga58e9c1d0984a321a3d63880f9592ddc7">SEC_ENG_PKA_OP_MEXP</a>&#160;&#160;&#160;0x23</td></tr>
+<tr class="separator:ga58e9c1d0984a321a3d63880f9592ddc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf2e84b4d73ff5e452edbc65e5849508c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaf2e84b4d73ff5e452edbc65e5849508c">SEC_ENG_PKA_OP_MSQR</a>&#160;&#160;&#160;0x24</td></tr>
+<tr class="separator:gaf2e84b4d73ff5e452edbc65e5849508c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga02795e31e5d05c0b0c5f7bdbb62f2c33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga02795e31e5d05c0b0c5f7bdbb62f2c33">SEC_ENG_PKA_OP_MMUL</a>&#160;&#160;&#160;0x25</td></tr>
+<tr class="separator:ga02795e31e5d05c0b0c5f7bdbb62f2c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa245c4ec2453a68784eca9e4418b0075"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaa245c4ec2453a68784eca9e4418b0075">SEC_ENG_PKA_OP_MREM</a>&#160;&#160;&#160;0x26</td></tr>
+<tr class="separator:gaa245c4ec2453a68784eca9e4418b0075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga23af457f96fa326e18ea0e378dd45529"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga23af457f96fa326e18ea0e378dd45529">SEC_ENG_PKA_OP_MSUB</a>&#160;&#160;&#160;0x27</td></tr>
+<tr class="separator:ga23af457f96fa326e18ea0e378dd45529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga58873e5dc4f79f8a1e0e61a430150b6d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga58873e5dc4f79f8a1e0e61a430150b6d">SEC_ENG_PKA_OP_MADD</a>&#160;&#160;&#160;0x28</td></tr>
+<tr class="separator:ga58873e5dc4f79f8a1e0e61a430150b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaee2b9ed5107fe694d983a399e3b0f98e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaee2b9ed5107fe694d983a399e3b0f98e">SEC_ENG_PKA_OP_RESIZE</a>&#160;&#160;&#160;0x31</td></tr>
+<tr class="separator:gaee2b9ed5107fe694d983a399e3b0f98e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaca1a81e3a2010ced376fc3e051262ccd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaca1a81e3a2010ced376fc3e051262ccd">SEC_ENG_PKA_OP_MOVDAT</a>&#160;&#160;&#160;0x32</td></tr>
+<tr class="separator:gaca1a81e3a2010ced376fc3e051262ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa6dd963df783f703f38e1a03196942ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaa6dd963df783f703f38e1a03196942ea">SEC_ENG_PKA_OP_NLIR</a>&#160;&#160;&#160;0x33</td></tr>
+<tr class="separator:gaa6dd963df783f703f38e1a03196942ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac6e2e1c92ba46d539e0140ee12c76512"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gac6e2e1c92ba46d539e0140ee12c76512">SEC_ENG_PKA_OP_SLIR</a>&#160;&#160;&#160;0x34</td></tr>
+<tr class="separator:gac6e2e1c92ba46d539e0140ee12c76512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab413877208a5a489377bcc5c0dc1e706"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gab413877208a5a489377bcc5c0dc1e706">SEC_ENG_PKA_OP_CLIR</a>&#160;&#160;&#160;0x35</td></tr>
+<tr class="separator:gab413877208a5a489377bcc5c0dc1e706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaec41a1b45d20c05ccae59314f0db27ff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaec41a1b45d20c05ccae59314f0db27ff">SEC_ENG_PKA_OP_CFLIRI_BUFFER</a>&#160;&#160;&#160;0x36</td></tr>
+<tr class="separator:gaec41a1b45d20c05ccae59314f0db27ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab678b4a9640d229e56eb13cfca4ca38b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gab678b4a9640d229e56eb13cfca4ca38b">SEC_ENG_PKA_OP_CTLIRI_PLD</a>&#160;&#160;&#160;0x37</td></tr>
+<tr class="separator:gab678b4a9640d229e56eb13cfca4ca38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4de307ff57f45f7178d7a8ff8371a6d2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga4de307ff57f45f7178d7a8ff8371a6d2">SEC_ENG_PKA_OP_CFLIR_BUFFER</a>&#160;&#160;&#160;0x38</td></tr>
+<tr class="separator:ga4de307ff57f45f7178d7a8ff8371a6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga90257c351ee1cd52691d4e792776b267"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga90257c351ee1cd52691d4e792776b267">SEC_ENG_PKA_OP_CTLIR_PLD</a>&#160;&#160;&#160;0x39</td></tr>
+<tr class="separator:ga90257c351ee1cd52691d4e792776b267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga5d095b7f461c8336ec7167b15a94bbba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga5d095b7f461c8336ec7167b15a94bbba">bflb_pka_init</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:ga5d095b7f461c8336ec7167b15a94bbba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga36a589b86f6e35bdfd0a993caeb8a09d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga36a589b86f6e35bdfd0a993caeb8a09d">bflb_pka_deinit</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev)</td></tr>
+<tr class="separator:ga36a589b86f6e35bdfd0a993caeb8a09d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga381159071ab8c7ebba0d129dd35dad4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga381159071ab8c7ebba0d129dd35dad4c">bflb_pka_lmod2n</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint16_t bit_shift, uint8_t lastop)</td></tr>
+<tr class="separator:ga381159071ab8c7ebba0d129dd35dad4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5199fba8969dc070b2418121719b4203"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga5199fba8969dc070b2418121719b4203">bflb_pka_ldiv2n</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint16_t bit_shift, uint8_t lastop)</td></tr>
+<tr class="separator:ga5199fba8969dc070b2418121719b4203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga04e727360c6cbd6cf34584656971614a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga04e727360c6cbd6cf34584656971614a">bflb_pka_lmul2n</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint16_t bit_shift, uint8_t lastop)</td></tr>
+<tr class="separator:ga04e727360c6cbd6cf34584656971614a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac7b7e6ab65708ef1816a91a0eccc76c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gac7b7e6ab65708ef1816a91a0eccc76c4">bflb_pka_ldiv</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s2_regindex, uint8_t s2_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:gac7b7e6ab65708ef1816a91a0eccc76c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8fe8743c9931ee0b914b8132e49e7471"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga8fe8743c9931ee0b914b8132e49e7471">bflb_pka_lsqr</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga8fe8743c9931ee0b914b8132e49e7471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7fa189381f1fe17a9c74b4a41f7da1aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga7fa189381f1fe17a9c74b4a41f7da1aa">bflb_pka_lmul</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s1_regindex, uint8_t s1_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga7fa189381f1fe17a9c74b4a41f7da1aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeaeb02ec5f65f5910db777ca0bda3900"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gaeaeb02ec5f65f5910db777ca0bda3900">bflb_pka_lsub</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s1_regindex, uint8_t s1_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:gaeaeb02ec5f65f5910db777ca0bda3900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae1705c768a27326a42dc17d3ddd18cbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gae1705c768a27326a42dc17d3ddd18cbd">bflb_pka_ladd</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s1_regindex, uint8_t s1_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:gae1705c768a27326a42dc17d3ddd18cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5735594d131030c8c62d8d22426d6200"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga5735594d131030c8c62d8d22426d6200">bflb_pka_lcmp</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t s1_regindex, uint8_t s1_regsize)</td></tr>
+<tr class="separator:ga5735594d131030c8c62d8d22426d6200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga473ae8390ea12a13ef4fd681fa828dc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga473ae8390ea12a13ef4fd681fa828dc4">bflb_pka_minv</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s2_regindex, uint8_t s2_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga473ae8390ea12a13ef4fd681fa828dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0f2893cbe220455b7ec9f36d18d94448"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga0f2893cbe220455b7ec9f36d18d94448">bflb_pka_mexp</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s1_regindex, uint8_t s1_regsize, uint8_t s2_regindex, uint8_t s2_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga0f2893cbe220455b7ec9f36d18d94448"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2740a0aa7456a22d633ed754a6f932e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga2740a0aa7456a22d633ed754a6f932e5">bflb_pka_msqr</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s2_regindex, uint8_t s2_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga2740a0aa7456a22d633ed754a6f932e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga288395bbe30cbd237e41d2bf1645fbe2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga288395bbe30cbd237e41d2bf1645fbe2">bflb_pka_mmul</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s1_regindex, uint8_t s1_regsize, uint8_t s2_regindex, uint8_t s2_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga288395bbe30cbd237e41d2bf1645fbe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad27030396cc35ac41d967305e6952cbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gad27030396cc35ac41d967305e6952cbe">bflb_pka_mrem</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s2_regindex, uint8_t s2_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:gad27030396cc35ac41d967305e6952cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga71bd897bf993cd631f6e9459b645a049"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga71bd897bf993cd631f6e9459b645a049">bflb_pka_msub</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s1_regindex, uint8_t s1_regsize, uint8_t s2_regindex, uint8_t s2_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga71bd897bf993cd631f6e9459b645a049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga76367eb55ebbd8b39e2862bc6b53c6a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga76367eb55ebbd8b39e2862bc6b53c6a7">bflb_pka_madd</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t s1_regindex, uint8_t s1_regsize, uint8_t s2_regindex, uint8_t s2_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga76367eb55ebbd8b39e2862bc6b53c6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8caf53b54530f55eb3a95c9053bd5c03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga8caf53b54530f55eb3a95c9053bd5c03">bflb_pka_regsize</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga8caf53b54530f55eb3a95c9053bd5c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga693cee5d0ed9e0ee82b24d2929e7fc93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga693cee5d0ed9e0ee82b24d2929e7fc93">bflb_pka_movdat</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:ga693cee5d0ed9e0ee82b24d2929e7fc93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabc202dec7d9e65876c823dcfd22a1bbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gabc202dec7d9e65876c823dcfd22a1bbe">bflb_pka_nlir</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s0_regindex, uint8_t s0_regsize, uint8_t d0_regindex, uint8_t d0_regsize, uint8_t lastop)</td></tr>
+<tr class="separator:gabc202dec7d9e65876c823dcfd22a1bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga223f7f05b6a826805848332bf3729357"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga223f7f05b6a826805848332bf3729357">bflb_pka_slir</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t regindex, uint8_t regsize, uint32_t data, uint8_t lastop)</td></tr>
+<tr class="separator:ga223f7f05b6a826805848332bf3729357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8131076727e1117ae7b350eb8c2b0d7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga8131076727e1117ae7b350eb8c2b0d7a">bflb_pka_clir</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t regindex, uint8_t regsize, uint16_t size, uint8_t lastop)</td></tr>
+<tr class="separator:ga8131076727e1117ae7b350eb8c2b0d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe8856db3740092de68aa5fec2b7ab90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#gabe8856db3740092de68aa5fec2b7ab90">bflb_pka_write</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t regindex, uint8_t regsize, const uint32_t *data, uint16_t size, uint8_t lastop)</td></tr>
+<tr class="separator:gabe8856db3740092de68aa5fec2b7ab90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga34a71b9d9f563f7887d1a44c50c390ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga34a71b9d9f563f7887d1a44c50c390ae">bflb_pka_read</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t regindex, uint8_t regsize, uint32_t *data, uint16_t size)</td></tr>
+<tr class="separator:ga34a71b9d9f563f7887d1a44c50c390ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga30433cb7bc9d54d1d49d5f6e81e7d9d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga30433cb7bc9d54d1d49d5f6e81e7d9d4">bflb_pka_gf2mont</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s_regindex, uint8_t s_regsize, uint8_t d_regindex, uint8_t d_regsize, uint8_t t_regindex, uint8_t t_regsize, uint8_t p_regindex, uint8_t p_regsize, uint32_t size)</td></tr>
+<tr class="separator:ga30433cb7bc9d54d1d49d5f6e81e7d9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga35a29f509958550ddeb7a63d2cf695a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___s_e_c___p_k_a.html#ga35a29f509958550ddeb7a63d2cf695a3">bflb_pka_mont2gf</a> (struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t s_regindex, uint8_t s_regsize, uint8_t d_regindex, uint8_t d_regsize, uint8_t invt_regindex, uint8_t invt_regsize, uint8_t t_regindex, uint8_t t_regsize, uint8_t p_regindex, uint8_t p_regsize)</td></tr>
+<tr class="separator:ga35a29f509958550ddeb7a63d2cf695a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="ga4de307ff57f45f7178d7a8ff8371a6d2" name="ga4de307ff57f45f7178d7a8ff8371a6d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4de307ff57f45f7178d7a8ff8371a6d2">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_CFLIR_BUFFER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_CFLIR_BUFFER&#160;&#160;&#160;0x38</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00050">50</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaec41a1b45d20c05ccae59314f0db27ff" name="gaec41a1b45d20c05ccae59314f0db27ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaec41a1b45d20c05ccae59314f0db27ff">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_CFLIRI_BUFFER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_CFLIRI_BUFFER&#160;&#160;&#160;0x36</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00048">48</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gab413877208a5a489377bcc5c0dc1e706" name="gab413877208a5a489377bcc5c0dc1e706"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab413877208a5a489377bcc5c0dc1e706">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_CLIR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_CLIR&#160;&#160;&#160;0x35</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00047">47</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga90257c351ee1cd52691d4e792776b267" name="ga90257c351ee1cd52691d4e792776b267"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga90257c351ee1cd52691d4e792776b267">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_CTLIR_PLD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_CTLIR_PLD&#160;&#160;&#160;0x39</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00051">51</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gab678b4a9640d229e56eb13cfca4ca38b" name="gab678b4a9640d229e56eb13cfca4ca38b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab678b4a9640d229e56eb13cfca4ca38b">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_CTLIRI_PLD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_CTLIRI_PLD&#160;&#160;&#160;0x37</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00049">49</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gad6ebedf91841fbd945b82b10f1f18940" name="gad6ebedf91841fbd945b82b10f1f18940"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad6ebedf91841fbd945b82b10f1f18940">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LADD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LADD&#160;&#160;&#160;0x18</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00033">33</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf53edba5c6044915dddc2692921f8aa8" name="gaf53edba5c6044915dddc2692921f8aa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf53edba5c6044915dddc2692921f8aa8">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LCMP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LCMP&#160;&#160;&#160;0x19</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00034">34</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf16271cd4c377cfd560bec584242aee8" name="gaf16271cd4c377cfd560bec584242aee8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf16271cd4c377cfd560bec584242aee8">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LDIV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LDIV&#160;&#160;&#160;0x14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00029">29</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gad9d5a78e5f41adfc8587becf835db18a" name="gad9d5a78e5f41adfc8587becf835db18a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad9d5a78e5f41adfc8587becf835db18a">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LDIV2N</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LDIV2N&#160;&#160;&#160;0x12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00027">27</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga241cf59e9ef971010f51ab858fc45dd6" name="ga241cf59e9ef971010f51ab858fc45dd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga241cf59e9ef971010f51ab858fc45dd6">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LMOD2N</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LMOD2N&#160;&#160;&#160;0x11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00026">26</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf6cf44d8da59e97f9a4fcbbf63d46129" name="gaf6cf44d8da59e97f9a4fcbbf63d46129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf6cf44d8da59e97f9a4fcbbf63d46129">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LMUL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LMUL&#160;&#160;&#160;0x16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00031">31</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga1d527507a4de9aceb5dc130a868590d1" name="ga1d527507a4de9aceb5dc130a868590d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1d527507a4de9aceb5dc130a868590d1">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LMUL2N</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LMUL2N&#160;&#160;&#160;0x13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00028">28</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga02744c76aa6bce57fb3be63e90b2113e" name="ga02744c76aa6bce57fb3be63e90b2113e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga02744c76aa6bce57fb3be63e90b2113e">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LSQR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LSQR&#160;&#160;&#160;0x15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00030">30</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gab8c28ad4010e4239b3a9663372076cb0" name="gab8c28ad4010e4239b3a9663372076cb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab8c28ad4010e4239b3a9663372076cb0">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_LSUB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_LSUB&#160;&#160;&#160;0x17</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00032">32</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga58873e5dc4f79f8a1e0e61a430150b6d" name="ga58873e5dc4f79f8a1e0e61a430150b6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga58873e5dc4f79f8a1e0e61a430150b6d">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MADD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MADD&#160;&#160;&#160;0x28</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00042">42</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaff46e7eea4173fae2157e861f6fc3a0d" name="gaff46e7eea4173fae2157e861f6fc3a0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaff46e7eea4173fae2157e861f6fc3a0d">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MDIV2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MDIV2&#160;&#160;&#160;0x21</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00035">35</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga58e9c1d0984a321a3d63880f9592ddc7" name="ga58e9c1d0984a321a3d63880f9592ddc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga58e9c1d0984a321a3d63880f9592ddc7">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MEXP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MEXP&#160;&#160;&#160;0x23</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00037">37</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gab10fb9b2124356ae06181192e1e922c9" name="gab10fb9b2124356ae06181192e1e922c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab10fb9b2124356ae06181192e1e922c9">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MINV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MINV&#160;&#160;&#160;0x22</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00036">36</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga02795e31e5d05c0b0c5f7bdbb62f2c33" name="ga02795e31e5d05c0b0c5f7bdbb62f2c33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga02795e31e5d05c0b0c5f7bdbb62f2c33">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MMUL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MMUL&#160;&#160;&#160;0x25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00039">39</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaca1a81e3a2010ced376fc3e051262ccd" name="gaca1a81e3a2010ced376fc3e051262ccd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaca1a81e3a2010ced376fc3e051262ccd">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MOVDAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MOVDAT&#160;&#160;&#160;0x32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00044">44</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaa245c4ec2453a68784eca9e4418b0075" name="gaa245c4ec2453a68784eca9e4418b0075"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa245c4ec2453a68784eca9e4418b0075">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MREM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MREM&#160;&#160;&#160;0x26</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00040">40</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaf2e84b4d73ff5e452edbc65e5849508c" name="gaf2e84b4d73ff5e452edbc65e5849508c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf2e84b4d73ff5e452edbc65e5849508c">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MSQR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MSQR&#160;&#160;&#160;0x24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00038">38</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga23af457f96fa326e18ea0e378dd45529" name="ga23af457f96fa326e18ea0e378dd45529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga23af457f96fa326e18ea0e378dd45529">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_MSUB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_MSUB&#160;&#160;&#160;0x27</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00041">41</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaa6dd963df783f703f38e1a03196942ea" name="gaa6dd963df783f703f38e1a03196942ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa6dd963df783f703f38e1a03196942ea">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_NLIR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_NLIR&#160;&#160;&#160;0x33</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00045">45</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gad5f480aad20adac9d4b23fe2fd6fbae0" name="gad5f480aad20adac9d4b23fe2fd6fbae0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad5f480aad20adac9d4b23fe2fd6fbae0">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_PPSEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_PPSEL&#160;&#160;&#160;0x00</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00025">25</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gaee2b9ed5107fe694d983a399e3b0f98e" name="gaee2b9ed5107fe694d983a399e3b0f98e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaee2b9ed5107fe694d983a399e3b0f98e">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_RESIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_RESIZE&#160;&#160;&#160;0x31</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00043">43</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gac6e2e1c92ba46d539e0140ee12c76512" name="gac6e2e1c92ba46d539e0140ee12c76512"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac6e2e1c92ba46d539e0140ee12c76512">&#9670;&#160;</a></span>SEC_ENG_PKA_OP_SLIR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_OP_SLIR&#160;&#160;&#160;0x34</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00046">46</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gae789067b7c2bfec2713fbc2d6137f0d8" name="gae789067b7c2bfec2713fbc2d6137f0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae789067b7c2bfec2713fbc2d6137f0d8">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_128</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_128&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00019">19</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga82542401b111ddc91123e421acb5e1c2" name="ga82542401b111ddc91123e421acb5e1c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga82542401b111ddc91123e421acb5e1c2">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_16&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00015">15</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gabaefddf9e471663a71c1b35c9c67ac65" name="gabaefddf9e471663a71c1b35c9c67ac65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabaefddf9e471663a71c1b35c9c67ac65">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_192</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_192&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00020">20</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga661a391462f423e15c61f0f5121b1e20" name="ga661a391462f423e15c61f0f5121b1e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga661a391462f423e15c61f0f5121b1e20">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_256</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_256&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00021">21</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga94a9ab10db7f0357cef88b5a22075ef2" name="ga94a9ab10db7f0357cef88b5a22075ef2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga94a9ab10db7f0357cef88b5a22075ef2">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_32&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00016">16</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gab83e5c5137f661f4e6011ae7bf11e1b3" name="gab83e5c5137f661f4e6011ae7bf11e1b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab83e5c5137f661f4e6011ae7bf11e1b3">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_384</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_384&#160;&#160;&#160;9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00022">22</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga073326878aec10773a8842faee03c7ca" name="ga073326878aec10773a8842faee03c7ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga073326878aec10773a8842faee03c7ca">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_512</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_512&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00023">23</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga552173b7d25f0ae6502f2b74edaaae9f" name="ga552173b7d25f0ae6502f2b74edaaae9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga552173b7d25f0ae6502f2b74edaaae9f">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_64</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_64&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00017">17</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga6f54bde9f463c4a8ecd1de19fe420861" name="ga6f54bde9f463c4a8ecd1de19fe420861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6f54bde9f463c4a8ecd1de19fe420861">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_8</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_8&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00014">14</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga39928cab6a99588bd112be7c8cc4f8ce" name="ga39928cab6a99588bd112be7c8cc4f8ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga39928cab6a99588bd112be7c8cc4f8ce">&#9670;&#160;</a></span>SEC_ENG_PKA_REG_SIZE_96</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEC_ENG_PKA_REG_SIZE_96&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="bflb__sec__pka_8h_source.html">bflb_sec_pka.h</a> 第 <a class="el" href="bflb__sec__pka_8h_source.html#l00018">18</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="ga8131076727e1117ae7b350eb8c2b0d7a" name="ga8131076727e1117ae7b350eb8c2b0d7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8131076727e1117ae7b350eb8c2b0d7a">&#9670;&#160;</a></span>bflb_pka_clir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_clir </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga36a589b86f6e35bdfd0a993caeb8a09d" name="ga36a589b86f6e35bdfd0a993caeb8a09d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga36a589b86f6e35bdfd0a993caeb8a09d">&#9670;&#160;</a></span>bflb_pka_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_deinit </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga30433cb7bc9d54d1d49d5f6e81e7d9d4" name="ga30433cb7bc9d54d1d49d5f6e81e7d9d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga30433cb7bc9d54d1d49d5f6e81e7d9d4">&#9670;&#160;</a></span>bflb_pka_gf2mont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_gf2mont </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>t_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>t_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>p_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>p_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga5d095b7f461c8336ec7167b15a94bbba" name="ga5d095b7f461c8336ec7167b15a94bbba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5d095b7f461c8336ec7167b15a94bbba">&#9670;&#160;</a></span>bflb_pka_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gae1705c768a27326a42dc17d3ddd18cbd" name="gae1705c768a27326a42dc17d3ddd18cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae1705c768a27326a42dc17d3ddd18cbd">&#9670;&#160;</a></span>bflb_pka_ladd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_ladd </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga5735594d131030c8c62d8d22426d6200" name="ga5735594d131030c8c62d8d22426d6200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5735594d131030c8c62d8d22426d6200">&#9670;&#160;</a></span>bflb_pka_lcmp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t bflb_pka_lcmp </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regsize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gac7b7e6ab65708ef1816a91a0eccc76c4" name="gac7b7e6ab65708ef1816a91a0eccc76c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac7b7e6ab65708ef1816a91a0eccc76c4">&#9670;&#160;</a></span>bflb_pka_ldiv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_ldiv </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga5199fba8969dc070b2418121719b4203" name="ga5199fba8969dc070b2418121719b4203"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5199fba8969dc070b2418121719b4203">&#9670;&#160;</a></span>bflb_pka_ldiv2n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_ldiv2n </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>bit_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga381159071ab8c7ebba0d129dd35dad4c" name="ga381159071ab8c7ebba0d129dd35dad4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga381159071ab8c7ebba0d129dd35dad4c">&#9670;&#160;</a></span>bflb_pka_lmod2n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_lmod2n </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>bit_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga7fa189381f1fe17a9c74b4a41f7da1aa" name="ga7fa189381f1fe17a9c74b4a41f7da1aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7fa189381f1fe17a9c74b4a41f7da1aa">&#9670;&#160;</a></span>bflb_pka_lmul()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_lmul </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga04e727360c6cbd6cf34584656971614a" name="ga04e727360c6cbd6cf34584656971614a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga04e727360c6cbd6cf34584656971614a">&#9670;&#160;</a></span>bflb_pka_lmul2n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_lmul2n </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>bit_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga8fe8743c9931ee0b914b8132e49e7471" name="ga8fe8743c9931ee0b914b8132e49e7471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8fe8743c9931ee0b914b8132e49e7471">&#9670;&#160;</a></span>bflb_pka_lsqr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_lsqr </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gaeaeb02ec5f65f5910db777ca0bda3900" name="gaeaeb02ec5f65f5910db777ca0bda3900"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeaeb02ec5f65f5910db777ca0bda3900">&#9670;&#160;</a></span>bflb_pka_lsub()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_lsub </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga76367eb55ebbd8b39e2862bc6b53c6a7" name="ga76367eb55ebbd8b39e2862bc6b53c6a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga76367eb55ebbd8b39e2862bc6b53c6a7">&#9670;&#160;</a></span>bflb_pka_madd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_madd </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga0f2893cbe220455b7ec9f36d18d94448" name="ga0f2893cbe220455b7ec9f36d18d94448"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0f2893cbe220455b7ec9f36d18d94448">&#9670;&#160;</a></span>bflb_pka_mexp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_mexp </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga473ae8390ea12a13ef4fd681fa828dc4" name="ga473ae8390ea12a13ef4fd681fa828dc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga473ae8390ea12a13ef4fd681fa828dc4">&#9670;&#160;</a></span>bflb_pka_minv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_minv </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga288395bbe30cbd237e41d2bf1645fbe2" name="ga288395bbe30cbd237e41d2bf1645fbe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga288395bbe30cbd237e41d2bf1645fbe2">&#9670;&#160;</a></span>bflb_pka_mmul()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_mmul </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga35a29f509958550ddeb7a63d2cf695a3" name="ga35a29f509958550ddeb7a63d2cf695a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga35a29f509958550ddeb7a63d2cf695a3">&#9670;&#160;</a></span>bflb_pka_mont2gf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_mont2gf </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>invt_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>invt_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>t_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>t_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>p_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>p_regsize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga693cee5d0ed9e0ee82b24d2929e7fc93" name="ga693cee5d0ed9e0ee82b24d2929e7fc93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga693cee5d0ed9e0ee82b24d2929e7fc93">&#9670;&#160;</a></span>bflb_pka_movdat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_movdat </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gad27030396cc35ac41d967305e6952cbe" name="gad27030396cc35ac41d967305e6952cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad27030396cc35ac41d967305e6952cbe">&#9670;&#160;</a></span>bflb_pka_mrem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_mrem </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga2740a0aa7456a22d633ed754a6f932e5" name="ga2740a0aa7456a22d633ed754a6f932e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2740a0aa7456a22d633ed754a6f932e5">&#9670;&#160;</a></span>bflb_pka_msqr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_msqr </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga71bd897bf993cd631f6e9459b645a049" name="ga71bd897bf993cd631f6e9459b645a049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga71bd897bf993cd631f6e9459b645a049">&#9670;&#160;</a></span>bflb_pka_msub()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_msub </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s1_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s2_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gabc202dec7d9e65876c823dcfd22a1bbe" name="gabc202dec7d9e65876c823dcfd22a1bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabc202dec7d9e65876c823dcfd22a1bbe">&#9670;&#160;</a></span>bflb_pka_nlir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_nlir </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga34a71b9d9f563f7887d1a44c50c390ae" name="ga34a71b9d9f563f7887d1a44c50c390ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga34a71b9d9f563f7887d1a44c50c390ae">&#9670;&#160;</a></span>bflb_pka_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_read </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga8caf53b54530f55eb3a95c9053bd5c03" name="ga8caf53b54530f55eb3a95c9053bd5c03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8caf53b54530f55eb3a95c9053bd5c03">&#9670;&#160;</a></span>bflb_pka_regsize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_regsize </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>d0_regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga223f7f05b6a826805848332bf3729357" name="ga223f7f05b6a826805848332bf3729357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga223f7f05b6a826805848332bf3729357">&#9670;&#160;</a></span>bflb_pka_slir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_slir </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gabe8856db3740092de68aa5fec2b7ab90" name="gabe8856db3740092de68aa5fec2b7ab90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe8856db3740092de68aa5fec2b7ab90">&#9670;&#160;</a></span>bflb_pka_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bflb_pka_write </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structbflb__device__s.html">bflb_device_s</a> *&#160;</td>
+          <td class="paramname"><em>dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>regindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>regsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>lastop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

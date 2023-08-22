@@ -1,0 +1,21 @@
+digraph "DMA"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node1 [label="DMA",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node4 [label="dma source and destination\l address increment definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_m_a___a_d_d_r___i_n_c_r_e_m_e_n_t.html",tooltip=" "];
+  Node6 [label="dma burst increment\l count definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_m_a___b_u_r_s_t___c_o_u_n_t.html",tooltip=" "];
+  Node7 [label="dma feature control\l cmd definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_m_a___c_m_d.html",tooltip=" "];
+  Node5 [label="dma data width definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_m_a___d_a_t_a___w_i_d_t_h.html",tooltip=" "];
+  Node3 [label="dma transfer direction\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___d_m_a___d_i_r_e_c_t_i_o_n.html",tooltip=" "];
+  Node2 [label="LHAL",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___l_h_a_l.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+}

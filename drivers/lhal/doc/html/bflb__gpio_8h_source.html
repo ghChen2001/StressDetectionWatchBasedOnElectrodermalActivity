@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_gpio.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__gpio_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_gpio.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__gpio_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_GPIO_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_GPIO_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga176efbf43a259b7bb0a85a47401505be">   34</a></span><span class="preprocessor">#define GPIO_PIN_0      0</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga6c35af4e75c3cb57bb650feaa7a136b5">   35</a></span><span class="preprocessor">#define GPIO_PIN_1      1</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga6eee38b797a7268f04357dfa2759efd2">   36</a></span><span class="preprocessor">#define GPIO_PIN_2      2</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gadcaf899c018a0dde572b5af783565c62">   37</a></span><span class="preprocessor">#define GPIO_PIN_3      3</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gab3871e35868deecd260e586ad70d4b83">   38</a></span><span class="preprocessor">#define GPIO_PIN_4      4</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga01cc9ed93f6fd12fd3403362779aaa18">   39</a></span><span class="preprocessor">#define GPIO_PIN_5      5</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga9089f18f20ec88ee38ce6f27389e6d7e">   40</a></span><span class="preprocessor">#define GPIO_PIN_6      6</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga482cb86c2f036e630661a41e8986bcfe">   41</a></span><span class="preprocessor">#define GPIO_PIN_7      7</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gaf5eb6a42a4428e236bd4fd08ade71e7a">   42</a></span><span class="preprocessor">#define GPIO_PIN_8      8</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga4c503cb4a0dc0d18261080051d9c2daf">   43</a></span><span class="preprocessor">#define GPIO_PIN_9      9</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gac102c0123cb8bcadc5b590cd940b9e20">   44</a></span><span class="preprocessor">#define GPIO_PIN_10     10</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga79f6797ea82c1fb25cd6c0e14e44d312">   45</a></span><span class="preprocessor">#define GPIO_PIN_11     11</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga95f9ce5911fa8b209defb969db93ced3">   46</a></span><span class="preprocessor">#define GPIO_PIN_12     12</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga173023dced8f9692ade0f1176558ef70">   47</a></span><span class="preprocessor">#define GPIO_PIN_13     13</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga315b4dc1a0c1f9021b3d3a8fe9ccc0c3">   48</a></span><span class="preprocessor">#define GPIO_PIN_14     14</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga77be5756e80bcdf18e1aa39b35d1d640">   49</a></span><span class="preprocessor">#define GPIO_PIN_15     15</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga6059075460c9a283c4805b2b1e34199b">   50</a></span><span class="preprocessor">#define GPIO_PIN_16     16</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga0253f5c347241be3bdb31825ddda40a7">   51</a></span><span class="preprocessor">#define GPIO_PIN_17     17</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga9406c7af5b104ff543a08de61d2bf051">   52</a></span><span class="preprocessor">#define GPIO_PIN_18     18</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga3d42a5ed56a120e84918db52be3e6dae">   53</a></span><span class="preprocessor">#define GPIO_PIN_19     19</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga9c2eed9e9c39248e29ee2e02fc576738">   54</a></span><span class="preprocessor">#define GPIO_PIN_20     20</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gaa138dd67fa48a243ab038a126b60b9da">   55</a></span><span class="preprocessor">#define GPIO_PIN_21     21</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gab114147e5be6df651cddd00dfccc15f2">   56</a></span><span class="preprocessor">#define GPIO_PIN_22     22</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga610255b9324e4a6449d9cbd981e186f3">   57</a></span><span class="preprocessor">#define GPIO_PIN_23     23</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gaa1286ea42503d8b36937c1b67772dca0">   58</a></span><span class="preprocessor">#define GPIO_PIN_24     24</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga278814e42c2372b2761f12fed4fc7ae9">   59</a></span><span class="preprocessor">#define GPIO_PIN_25     25</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga8d60b41f98623f48b09c21efcfd4b062">   60</a></span><span class="preprocessor">#define GPIO_PIN_26     26</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga589c68468159274940826f4b96110036">   61</a></span><span class="preprocessor">#define GPIO_PIN_27     27</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga5c82a46bab8529598fe891e5665ab8aa">   62</a></span><span class="preprocessor">#define GPIO_PIN_28     28</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga8211583d57909a4b3028fb2c7e56c1b3">   63</a></span><span class="preprocessor">#define GPIO_PIN_29     29</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gabb43ea367a50184a947522b0deca020d">   64</a></span><span class="preprocessor">#define GPIO_PIN_30     30</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga3b6899cd30f401c592ec49a76e5f57ad">   65</a></span><span class="preprocessor">#define GPIO_PIN_31     31</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga064093002049ff2c270efb09092825cb">   66</a></span><span class="preprocessor">#define GPIO_PIN_32     32</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gaeec06958e30547707d903d20fba210ab">   67</a></span><span class="preprocessor">#define GPIO_PIN_33     33</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gafa974fcf920b9c0c920f0cc9ba6ba2d1">   68</a></span><span class="preprocessor">#define GPIO_PIN_34     34</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga6243fc23edf39bde009dd6612e6b37bd">   69</a></span><span class="preprocessor">#define GPIO_PIN_35     35</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gac39e5c5084494fe2d85d7dd41a78bf78">   70</a></span><span class="preprocessor">#define GPIO_PIN_36     36</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga316a607c25753dbab5ff6ee7564d2c01">   71</a></span><span class="preprocessor">#define GPIO_PIN_37     37</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga1d3d3d99e7e596a60a142493f908e398">   72</a></span><span class="preprocessor">#define GPIO_PIN_38     38</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga643803085003f682c3ad6b041e3799b5">   73</a></span><span class="preprocessor">#define GPIO_PIN_39     39</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga231967f9790d254fbc947b9fd59f92a4">   74</a></span><span class="preprocessor">#define GPIO_PIN_40     40</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#gadbb71391ab3fb05d05fe2b492734be80">   75</a></span><span class="preprocessor">#define GPIO_PIN_41     41</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga7fbd55199c4dd0133f3426f2061f59b0">   76</a></span><span class="preprocessor">#define GPIO_PIN_42     42</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga58405aa17bdedaaecd07c7a5866e7299">   77</a></span><span class="preprocessor">#define GPIO_PIN_43     43</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga4819054bf64f9bc46cb459da4999eeb8">   78</a></span><span class="preprocessor">#define GPIO_PIN_44     44</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="group___g_p_i_o___p_i_n.html#ga6ccf046c438547523c96c3048fc64198">   79</a></span><span class="preprocessor">#define GPIO_PIN_45     45</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">/* cfgset list */</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga1060b1db7540e7897b8bde83d4e9672e">   85</a></span><span class="preprocessor">#define GPIO_FUNC_SHIFT (0) </span><span class="comment">/* Bits 0-4: GPIO function */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga1a58add76522e59dae1283d0a93be0e9">   86</a></span><span class="preprocessor">#define GPIO_FUNC_MASK  (0x1f &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#if defined(BL602)</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#define GPIO_FUNC_SDIO (1 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#define GPIO_FUNC_SPI0 (4 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">#define GPIO_FUNC_I2C0 (6 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#define GPIO_FUNC_PWM0 (8 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#define GPIO_FUNC_JTAG (14 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#elif defined(BL702)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#define GPIO_FUNC_CLK_OUT  (0 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#define GPIO_FUNC_I2S      (3 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#define GPIO_FUNC_SPI0     (4 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#define GPIO_FUNC_I2C0     (6 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#define GPIO_FUNC_PWM0     (8 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#define GPIO_FUNC_CAM      (9 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#define GPIO_FUNC_JTAG     (14 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#define GPIO_FUNC_EMAC     (19 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#define GPIO_FUNC_CAM_MCLK (23 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#elif defined(BL702L)</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#define GPIO_FUNC_SPI0    (4 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#define GPIO_FUNC_I2C0    (6 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="preprocessor">#define GPIO_FUNC_PWM0    (8 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#define GPIO_FUNC_KEYSCAN (13 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="preprocessor">#define GPIO_FUNC_JTAG    (14 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">#elif defined(BL616)</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">#define GPIO_FUNC_SDH       (0 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#define GPIO_FUNC_SPI0      (1 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="preprocessor">#define GPIO_FUNC_I2S       (3 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">#define GPIO_FUNC_PDM       (4 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="preprocessor">#define GPIO_FUNC_I2C0      (5 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="preprocessor">#define GPIO_FUNC_I2C1      (6 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#define GPIO_FUNC_EMAC      (8 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#define GPIO_FUNC_CAM       (9 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#define GPIO_FUNC_SDU       (12 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#define GPIO_FUNC_PWM0      (16 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#define GPIO_FUNC_DBI_B     (22 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">#define GPIO_FUNC_DBI_C     (23 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#define GPIO_FUNC_DBI_QSPI  (24 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">#define GPIO_FUNC_AUDAC_PWM (25 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#define GPIO_FUNC_JTAG      (26 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#define GPIO_FUNC_CLKOUT    (31 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">#elif defined(BL606P) || defined(BL808)</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">#define GPIO_FUNC_SDH     (0 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#define GPIO_FUNC_SPI0    (1 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">#define GPIO_FUNC_I2S     (3 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">#define GPIO_FUNC_PDM     (4 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="preprocessor">#define GPIO_FUNC_I2C0    (5 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">#define GPIO_FUNC_I2C1    (6 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">#define GPIO_FUNC_EMAC    (8 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">#define GPIO_FUNC_CAM     (9 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">#define GPIO_FUNC_SDU     (12 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="preprocessor">#define GPIO_FUNC_PWM0    (16 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="preprocessor">#define GPIO_FUNC_PWM1    (17 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="preprocessor">#define GPIO_FUNC_SPI1    (18 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="preprocessor">#define GPIO_FUNC_I2C2    (19 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">#define GPIO_FUNC_I2C3    (20 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="preprocessor">#define GPIO_FUNC_I2C3    (20 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">#define GPIO_FUNC_DBI_B   (22 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">#define GPIO_FUNC_DBI_C   (23 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="preprocessor">#define GPIO_FUNC_JTAG_LP (25 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="preprocessor">#define GPIO_FUNC_JTAG_M0 (26 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="preprocessor">#define GPIO_FUNC_JTAG_D0 (27 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="preprocessor">#define GPIO_FUNC_CLKOUT  (31 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="preprocessor">#elif defined(BL628)</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="preprocessor">#define GPIO_FUNC_SDH    (0 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="preprocessor">#define GPIO_FUNC_SPI0   (1 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="preprocessor">#define GPIO_FUNC_I2S    (3 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="preprocessor">#define GPIO_FUNC_PDM    (4 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#define GPIO_FUNC_I2C0   (5 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="preprocessor">#define GPIO_FUNC_I2C1   (6 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="preprocessor">#define GPIO_FUNC_UART   (7 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="preprocessor">#define GPIO_FUNC_EMAC   (8 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="preprocessor">#define GPIO_FUNC_CAM    (9 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">#define GPIO_FUNC_SDU    (12 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="preprocessor">#define GPIO_FUNC_PWM0   (16 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="preprocessor">#define GPIO_FUNC_DBI_B  (22 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="preprocessor">#define GPIO_FUNC_DBI_C  (23 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="preprocessor">#define GPIO_FUNC_CLKOUT (31 &lt;&lt; GPIO_FUNC_SHIFT)</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga8a34769f8ff8c76f7bcbe39788048d44">  165</a></span><span class="preprocessor">#define GPIO_MODE_SHIFT                      (5) </span><span class="comment">/* Bits 5-6: Port Mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga60078f74d184e10418a0e1d074d6dd43">  166</a></span><span class="preprocessor">#define GPIO_MODE_MASK                       (3 &lt;&lt; GPIO_MODE_SHIFT)</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga7be6a0cc9aa65da1d4ee5751b4085853">  167</a></span><span class="preprocessor">#define GPIO_INPUT                           (0 &lt;&lt; GPIO_MODE_SHIFT) </span><span class="comment">/* Input Enable */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga0db9fe8a278e6ab7c5c6f14fe58e5eb1">  168</a></span><span class="preprocessor">#define GPIO_OUTPUT                          (1 &lt;&lt; GPIO_MODE_SHIFT) </span><span class="comment">/* Output Enable */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga2e0f16f4e9972b0e1e914d64f87cd6f6">  169</a></span><span class="preprocessor">#define GPIO_ANALOG                          (2 &lt;&lt; GPIO_MODE_SHIFT) </span><span class="comment">/* Analog Enable */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga93b05986e204be4a7f8d52bfc1b1bd01">  170</a></span><span class="preprocessor">#define GPIO_ALTERNATE                       (3 &lt;&lt; GPIO_MODE_SHIFT) </span><span class="comment">/* Alternate Enable */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga7c0b27b8050aeeeacceb0443bfa798e4">  172</a></span><span class="preprocessor">#define GPIO_PUPD_SHIFT                      (7) </span><span class="comment">/* Bits 7-8: Pull-up/down */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga8ca9d068fb34ae1e9095f0f7a69e6819">  173</a></span><span class="preprocessor">#define GPIO_PUPD_MASK                       (3 &lt;&lt; GPIO_PUPD_SHIFT)</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga6fad128e3332409968b8866c439257ed">  174</a></span><span class="preprocessor">#define GPIO_FLOAT                           (0 &lt;&lt; GPIO_PUPD_SHIFT) </span><span class="comment">/* No pull-up, pull-down */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gae689bc8f5c42d6df7bd54a8dd372e072">  175</a></span><span class="preprocessor">#define GPIO_PULLUP                          (1 &lt;&lt; GPIO_PUPD_SHIFT) </span><span class="comment">/* Pull-up */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga75d958d0410c36da7f27d1f4f5c36c14">  176</a></span><span class="preprocessor">#define GPIO_PULLDOWN                        (2 &lt;&lt; GPIO_PUPD_SHIFT) </span><span class="comment">/* Pull-down */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gab16c6f0794cabd260604fa91ee873cb6">  178</a></span><span class="preprocessor">#define GPIO_SMT_SHIFT                       (9) </span><span class="comment">/* Bits 9: SMT Enable */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gaa9db5d468e59f87bf6e160ee86762658">  179</a></span><span class="preprocessor">#define GPIO_SMT_MASK                        (1 &lt;&lt; GPIO_SMT_SHIFT)</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga2209604969178e37f19745cf3396345c">  180</a></span><span class="preprocessor">#define GPIO_SMT_DIS                         (0 &lt;&lt; GPIO_SMT_SHIFT)</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gae0e99ce5ddb875ac689d8cb5464e3fa1">  181</a></span><span class="preprocessor">#define GPIO_SMT_EN                          (1 &lt;&lt; GPIO_SMT_SHIFT)</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga6303be03d81e485aeb5e7b91ee154d01">  183</a></span><span class="preprocessor">#define GPIO_DRV_SHIFT                       (10) </span><span class="comment">/* Bits 10-11: Drive */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gac2c006905c7b129ea49e4a3def5c404a">  184</a></span><span class="preprocessor">#define GPIO_DRV_MASK                        (3 &lt;&lt; GPIO_DRV_SHIFT)</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gaa14b0a35338da58bffed6350351c0a4f">  185</a></span><span class="preprocessor">#define GPIO_DRV_0                           (0 &lt;&lt; GPIO_DRV_SHIFT)</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gafa8d49b1a5c517f00bd5a6f54ce75c7e">  186</a></span><span class="preprocessor">#define GPIO_DRV_1                           (1 &lt;&lt; GPIO_DRV_SHIFT)</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga541829fc941aba32111be35264185a18">  187</a></span><span class="preprocessor">#define GPIO_DRV_2                           (2 &lt;&lt; GPIO_DRV_SHIFT)</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gad5c15a02c2427f90779da93d43ebd045">  188</a></span><span class="preprocessor">#define GPIO_DRV_3                           (3 &lt;&lt; GPIO_DRV_SHIFT)</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#gae29304a7c135af23bf13158c664ab896">  193</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_SYNC_FALLING_EDGE 0</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#ga61b8f787b5ee005de3ff3c6e72057918">  194</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_SYNC_RISING_EDGE  1</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#ga46d96320dcae2030addc518b4b71968a">  195</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_SYNC_LOW_LEVEL    2</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#gaf761c554ad872855b394ca8daf8d6936">  196</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_SYNC_HIGH_LEVEL   3</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="preprocessor">#if defined(BL602) || defined(BL702)</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_ASYNC_FALLING_EDGE 4</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_ASYNC_RISING_EDGE  5</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_ASYNC_LOW_LEVEL    6</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_ASYNC_HIGH_LEVEL   7</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#gaf109b5e27cd68c070d705c3e8b893f44">  203</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_SYNC_FALLING_RISING_EDGE 4</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#gaf61e7a6aded25ee0d52cbaed9c21339b">  204</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_ASYNC_FALLING_EDGE       8</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#gad22d28107ea743bb6cb1a396e834a95d">  205</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_ASYNC_RISING_EDGE        9</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#gaa50344859dd3c481d88d449708bc1607">  206</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_ASYNC_LOW_LEVEL          10</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="group___g_p_i_o___i_n_t___t_r_i_g___m_o_d_e.html#ga60b60a30cea70d437dc547955d59c1fb">  207</a></span><span class="preprocessor">#define GPIO_INT_TRIG_MODE_ASYNC_HIGH_LEVEL         11</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html#ga8159fcf809a987bd5aacaa7ff0f5ca48">  216</a></span><span class="preprocessor">#define GPIO_UART_FUNC_UART0_RTS 0</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html#ga333fed38fdb7197525db4bda77d558e8">  217</a></span><span class="preprocessor">#define GPIO_UART_FUNC_UART0_CTS 1</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html#ga20edcff3ce7c585b27435a90877d6366">  218</a></span><span class="preprocessor">#define GPIO_UART_FUNC_UART0_TX  2</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html#gaa89db5dd469f2d71b80b81dee99644ff">  219</a></span><span class="preprocessor">#define GPIO_UART_FUNC_UART0_RX  3</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html#ga615261d9fbb3d89258d99bec663e0d68">  220</a></span><span class="preprocessor">#define GPIO_UART_FUNC_UART1_RTS 4</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html#ga56fa3412afb506f40c83b991346414c9">  221</a></span><span class="preprocessor">#define GPIO_UART_FUNC_UART1_CTS 5</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno"><a class="line" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html#ga48f71d6a8980241d419124a10edb0867">  222</a></span><span class="preprocessor">#define GPIO_UART_FUNC_UART1_TX  6</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="group___g_p_i_o___u_a_r_t___f_u_n_c.html#ga5f66d579aeb3052b3a3308c4a487a3a1">  223</a></span><span class="preprocessor">#define GPIO_UART_FUNC_UART1_RX  7</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="preprocessor">#if defined(BL808) || defined(BL606P)</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="preprocessor">#define GPIO_UART_FUNC_UART2_RTS 8</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="preprocessor">#define GPIO_UART_FUNC_UART2_CTS 9</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="preprocessor">#define GPIO_UART_FUNC_UART2_TX  10</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="preprocessor">#define GPIO_UART_FUNC_UART2_RX  11</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="group___g_p_i_o___c_m_d.html#gae2bec012b26db2a7549f63a3623e2b5f">  237</a></span><span class="preprocessor">#define GPIO_CMD_GET_GPIO_FUN (0x01)</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gacc9eb1afacf4438799130b1eaa3caf0d">  253</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#gacc9eb1afacf4438799130b1eaa3caf0d">bflb_gpio_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin, uint32_t cfgset);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga4201e013ff263d31fbb964400fa5965c">  261</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#ga4201e013ff263d31fbb964400fa5965c">bflb_gpio_deinit</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gae6b2f72f8e72e21b1e040f3db538f5fe">  269</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#gae6b2f72f8e72e21b1e040f3db538f5fe">bflb_gpio_set</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga1fc8afcc5a9846e55e1c1a541084bcbf">  277</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#ga1fc8afcc5a9846e55e1c1a541084bcbf">bflb_gpio_reset</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga51893aa9d07fcf6c3673bd910b06f917">  286</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="group___g_p_i_o.html#ga51893aa9d07fcf6c3673bd910b06f917">bflb_gpio_read</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga100d7d2818d2958219189fba23c92429">  294</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#ga100d7d2818d2958219189fba23c92429">bflb_gpio_pin0_31_write</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t val);</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga8a32386932e1ec18e97db0720f4721f2">  302</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#ga8a32386932e1ec18e97db0720f4721f2">bflb_gpio_pin32_63_write</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t val);</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga1ce402e64e2fa5efdf7bed782deb375c">  310</a></span>uint32_t <a class="code hl_function" href="group___g_p_i_o.html#ga1ce402e64e2fa5efdf7bed782deb375c">bflb_gpio_pin0_31_read</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#gac77cabea1b357ba8d61f2cb6b90604b9">  318</a></span>uint32_t <a class="code hl_function" href="group___g_p_i_o.html#gac77cabea1b357ba8d61f2cb6b90604b9">bflb_gpio_pin32_63_read</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga84583de93be66b0f626d9a5ff733949f">  327</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#ga84583de93be66b0f626d9a5ff733949f">bflb_gpio_int_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin, uint8_t trig_mode);</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga89c407476a5367e76de991014cb7b4e2">  336</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#ga89c407476a5367e76de991014cb7b4e2">bflb_gpio_int_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga8b384ec3955a791e9f6ca2db79ab53b7">  345</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="group___g_p_i_o.html#ga8b384ec3955a791e9f6ca2db79ab53b7">bflb_gpio_get_intstatus</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin);</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga4c937bc6f35d25eb21c41640858deabe">  353</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#ga4c937bc6f35d25eb21c41640858deabe">bflb_gpio_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga92270da8095103a7ceb6a49b80a4b938">  362</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___g_p_i_o.html#ga92270da8095103a7ceb6a49b80a4b938">bflb_gpio_uart_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t pin, uint8_t uart_func);</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno"><a class="line" href="group___g_p_i_o.html#ga04d78fe971e41bd7cd6bd47f88122d1a">  373</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___g_p_i_o.html#ga04d78fe971e41bd7cd6bd47f88122d1a">bflb_gpio_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>}</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga04d78fe971e41bd7cd6bd47f88122d1a"><div class="ttname"><a href="group___g_p_i_o.html#ga04d78fe971e41bd7cd6bd47f88122d1a">bflb_gpio_feature_control</a></div><div class="ttdeci">int bflb_gpio_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div><div class="ttdoc">Control gpio feature.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga100d7d2818d2958219189fba23c92429"><div class="ttname"><a href="group___g_p_i_o.html#ga100d7d2818d2958219189fba23c92429">bflb_gpio_pin0_31_write</a></div><div class="ttdeci">void bflb_gpio_pin0_31_write(struct bflb_device_s *dev, uint32_t val)</div><div class="ttdoc">Write gpio pin 0~31.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga1ce402e64e2fa5efdf7bed782deb375c"><div class="ttname"><a href="group___g_p_i_o.html#ga1ce402e64e2fa5efdf7bed782deb375c">bflb_gpio_pin0_31_read</a></div><div class="ttdeci">uint32_t bflb_gpio_pin0_31_read(struct bflb_device_s *dev)</div><div class="ttdoc">Read level from gpio pin 0~31.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga1fc8afcc5a9846e55e1c1a541084bcbf"><div class="ttname"><a href="group___g_p_i_o.html#ga1fc8afcc5a9846e55e1c1a541084bcbf">bflb_gpio_reset</a></div><div class="ttdeci">void bflb_gpio_reset(struct bflb_device_s *dev, uint8_t pin)</div><div class="ttdoc">Write gpio pin with low level.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga4201e013ff263d31fbb964400fa5965c"><div class="ttname"><a href="group___g_p_i_o.html#ga4201e013ff263d31fbb964400fa5965c">bflb_gpio_deinit</a></div><div class="ttdeci">void bflb_gpio_deinit(struct bflb_device_s *dev, uint8_t pin)</div><div class="ttdoc">Deinitialize gpio pin with input float.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga4c937bc6f35d25eb21c41640858deabe"><div class="ttname"><a href="group___g_p_i_o.html#ga4c937bc6f35d25eb21c41640858deabe">bflb_gpio_int_clear</a></div><div class="ttdeci">void bflb_gpio_int_clear(struct bflb_device_s *dev, uint8_t pin)</div><div class="ttdoc">Clear gpio pin interrupt status.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga51893aa9d07fcf6c3673bd910b06f917"><div class="ttname"><a href="group___g_p_i_o.html#ga51893aa9d07fcf6c3673bd910b06f917">bflb_gpio_read</a></div><div class="ttdeci">bool bflb_gpio_read(struct bflb_device_s *dev, uint8_t pin)</div><div class="ttdoc">Read level from gpio pin.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga84583de93be66b0f626d9a5ff733949f"><div class="ttname"><a href="group___g_p_i_o.html#ga84583de93be66b0f626d9a5ff733949f">bflb_gpio_int_init</a></div><div class="ttdeci">void bflb_gpio_int_init(struct bflb_device_s *dev, uint8_t pin, uint8_t trig_mode)</div><div class="ttdoc">Config gpio pin interrupt.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga89c407476a5367e76de991014cb7b4e2"><div class="ttname"><a href="group___g_p_i_o.html#ga89c407476a5367e76de991014cb7b4e2">bflb_gpio_int_mask</a></div><div class="ttdeci">void bflb_gpio_int_mask(struct bflb_device_s *dev, uint8_t pin, bool mask)</div><div class="ttdoc">Enable or disable gpio pin interrupt.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga8a32386932e1ec18e97db0720f4721f2"><div class="ttname"><a href="group___g_p_i_o.html#ga8a32386932e1ec18e97db0720f4721f2">bflb_gpio_pin32_63_write</a></div><div class="ttdeci">void bflb_gpio_pin32_63_write(struct bflb_device_s *dev, uint32_t val)</div><div class="ttdoc">Write gpio pin 32~63.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga8b384ec3955a791e9f6ca2db79ab53b7"><div class="ttname"><a href="group___g_p_i_o.html#ga8b384ec3955a791e9f6ca2db79ab53b7">bflb_gpio_get_intstatus</a></div><div class="ttdeci">bool bflb_gpio_get_intstatus(struct bflb_device_s *dev, uint8_t pin)</div><div class="ttdoc">Get gpio pin interrupt status.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_ga92270da8095103a7ceb6a49b80a4b938"><div class="ttname"><a href="group___g_p_i_o.html#ga92270da8095103a7ceb6a49b80a4b938">bflb_gpio_uart_init</a></div><div class="ttdeci">void bflb_gpio_uart_init(struct bflb_device_s *dev, uint8_t pin, uint8_t uart_func)</div><div class="ttdoc">Config gpio pin with uart function.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_gac77cabea1b357ba8d61f2cb6b90604b9"><div class="ttname"><a href="group___g_p_i_o.html#gac77cabea1b357ba8d61f2cb6b90604b9">bflb_gpio_pin32_63_read</a></div><div class="ttdeci">uint32_t bflb_gpio_pin32_63_read(struct bflb_device_s *dev)</div><div class="ttdoc">Read level from gpio pin 32~63.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_gacc9eb1afacf4438799130b1eaa3caf0d"><div class="ttname"><a href="group___g_p_i_o.html#gacc9eb1afacf4438799130b1eaa3caf0d">bflb_gpio_init</a></div><div class="ttdeci">void bflb_gpio_init(struct bflb_device_s *dev, uint8_t pin, uint32_t cfgset)</div><div class="ttdoc">Initialize gpio pin.</div></div>
+<div class="ttc" id="agroup___g_p_i_o_html_gae6b2f72f8e72e21b1e040f3db538f5fe"><div class="ttname"><a href="group___g_p_i_o.html#gae6b2f72f8e72e21b1e040f3db538f5fe">bflb_gpio_set</a></div><div class="ttdeci">void bflb_gpio_set(struct bflb_device_s *dev, uint8_t pin)</div><div class="ttdoc">Write gpio pin with high level.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__gpio_8h.html">bflb_gpio.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

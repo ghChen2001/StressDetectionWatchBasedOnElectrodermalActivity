@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_wdg.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__wdg_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_wdg.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__wdg_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_WDG_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_WDG_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#if !defined(BL702L)</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="group___w_d_g.html#gab645a73891682e2ce2047f0d00b72fe8">   15</a></span><span class="preprocessor">#define WDG_CLKSRC_BCLK 0</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="group___w_d_g.html#ga06712da98afe900184da649ad82fd788">   17</a></span><span class="preprocessor">#define WDG_CLKSRC_32K  1</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___w_d_g.html#ga736f06177817d06e0bd93e2852c44b02">   18</a></span><span class="preprocessor">#define WDG_CLKSRC_1K   2</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="group___w_d_g.html#ga4e0009cd8611eff0e4208df082c4dc9e">   19</a></span><span class="preprocessor">#define WDG_CLKSRC_XTAL 3</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#if !defined(BL702) &amp;&amp; !defined(BL602)</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="group___w_d_g.html#gac33b349857e7aab0e3703b7a0e21bd35">   21</a></span><span class="preprocessor">#define WDG_CLKSRC_GPIO 4</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="group___w_d_g.html#ga0ef73bf4626535d3e1237483da209ea8">   23</a></span><span class="preprocessor">#define WDG_CLKSRC_NO   5</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___w_d_g___m_o_d_e.html#ga6dac8fcfc6898f333ff2b7e32ae7bd45">   28</a></span><span class="preprocessor">#define WDG_MODE_INTERRUPT 0</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group___w_d_g___m_o_d_e.html#ga6e0ffd6624f3f3432deba4ddf5c85bf5">   29</a></span><span class="preprocessor">#define WDG_MODE_RESET     1</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structbflb__wdg__config__s.html">   42</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__wdg__config__s.html">bflb_wdg_config_s</a> {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structbflb__wdg__config__s.html#a6003e1827ee8f3f5d490821912fcf974">   43</a></span>    uint8_t <a class="code hl_variable" href="structbflb__wdg__config__s.html#a6003e1827ee8f3f5d490821912fcf974">clock_source</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structbflb__wdg__config__s.html#a0ac87e81313703c15648a29b2de96e9b">   44</a></span>    uint8_t <a class="code hl_variable" href="structbflb__wdg__config__s.html#a0ac87e81313703c15648a29b2de96e9b">clock_div</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structbflb__wdg__config__s.html#a871f7422e54f13eecd9ac30956defebe">   45</a></span>    uint16_t <a class="code hl_variable" href="structbflb__wdg__config__s.html#a871f7422e54f13eecd9ac30956defebe">comp_val</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structbflb__wdg__config__s.html#a37e90f5e3bd99fac2021fb3a326607d4">   46</a></span>    uint8_t <a class="code hl_variable" href="structbflb__wdg__config__s.html#a37e90f5e3bd99fac2021fb3a326607d4">mode</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group___w_d_g.html#gaa55605b57960f390096a5a5082191937">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___w_d_g.html#gaa55605b57960f390096a5a5082191937">bflb_wdg_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__wdg__config__s.html">bflb_wdg_config_s</a> *config);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="group___w_d_g.html#gad619e39cd5bd471c71ea032f87cd9dc7">   66</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___w_d_g.html#gad619e39cd5bd471c71ea032f87cd9dc7">bflb_wdg_start</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group___w_d_g.html#ga61128e4ebd8041e37fbf15f68a99c596">   73</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___w_d_g.html#ga61128e4ebd8041e37fbf15f68a99c596">bflb_wdg_stop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="group___w_d_g.html#ga8562e4f96cf33968741d588c17966332">   81</a></span>uint16_t <a class="code hl_function" href="group___w_d_g.html#ga8562e4f96cf33968741d588c17966332">bflb_wdg_get_countervalue</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="group___w_d_g.html#gaa1ae335ca1aaab7d1f2fbfd6d06f0f06">   89</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___w_d_g.html#gaa1ae335ca1aaab7d1f2fbfd6d06f0f06">bflb_wdg_set_countervalue</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint16_t value);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="group___w_d_g.html#gaa20c1acd147cdca897fe00501fd20021">   96</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___w_d_g.html#gaa20c1acd147cdca897fe00501fd20021">bflb_wdg_reset_countervalue</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="group___w_d_g.html#ga7d866dacfa25f277697d179e05ad21b0">  103</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___w_d_g.html#ga7d866dacfa25f277697d179e05ad21b0">bflb_wdg_compint_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___w_d_g_html_ga61128e4ebd8041e37fbf15f68a99c596"><div class="ttname"><a href="group___w_d_g.html#ga61128e4ebd8041e37fbf15f68a99c596">bflb_wdg_stop</a></div><div class="ttdeci">void bflb_wdg_stop(struct bflb_device_s *dev)</div><div class="ttdoc">Stop watchdog.</div></div>
+<div class="ttc" id="agroup___w_d_g_html_ga7d866dacfa25f277697d179e05ad21b0"><div class="ttname"><a href="group___w_d_g.html#ga7d866dacfa25f277697d179e05ad21b0">bflb_wdg_compint_clear</a></div><div class="ttdeci">void bflb_wdg_compint_clear(struct bflb_device_s *dev)</div><div class="ttdoc">Clear watchdog compare interrupt status.</div></div>
+<div class="ttc" id="agroup___w_d_g_html_ga8562e4f96cf33968741d588c17966332"><div class="ttname"><a href="group___w_d_g.html#ga8562e4f96cf33968741d588c17966332">bflb_wdg_get_countervalue</a></div><div class="ttdeci">uint16_t bflb_wdg_get_countervalue(struct bflb_device_s *dev)</div><div class="ttdoc">Get watchdog counter value.</div></div>
+<div class="ttc" id="agroup___w_d_g_html_gaa1ae335ca1aaab7d1f2fbfd6d06f0f06"><div class="ttname"><a href="group___w_d_g.html#gaa1ae335ca1aaab7d1f2fbfd6d06f0f06">bflb_wdg_set_countervalue</a></div><div class="ttdeci">void bflb_wdg_set_countervalue(struct bflb_device_s *dev, uint16_t value)</div><div class="ttdoc">Set watchdog counter value.</div></div>
+<div class="ttc" id="agroup___w_d_g_html_gaa20c1acd147cdca897fe00501fd20021"><div class="ttname"><a href="group___w_d_g.html#gaa20c1acd147cdca897fe00501fd20021">bflb_wdg_reset_countervalue</a></div><div class="ttdeci">void bflb_wdg_reset_countervalue(struct bflb_device_s *dev)</div><div class="ttdoc">Reset watchdog counter value.</div></div>
+<div class="ttc" id="agroup___w_d_g_html_gaa55605b57960f390096a5a5082191937"><div class="ttname"><a href="group___w_d_g.html#gaa55605b57960f390096a5a5082191937">bflb_wdg_init</a></div><div class="ttdeci">void bflb_wdg_init(struct bflb_device_s *dev, const struct bflb_wdg_config_s *config)</div><div class="ttdoc">Initialize watchdog.</div></div>
+<div class="ttc" id="agroup___w_d_g_html_gad619e39cd5bd471c71ea032f87cd9dc7"><div class="ttname"><a href="group___w_d_g.html#gad619e39cd5bd471c71ea032f87cd9dc7">bflb_wdg_start</a></div><div class="ttdeci">void bflb_wdg_start(struct bflb_device_s *dev)</div><div class="ttdoc">Start watchdog.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__wdg__config__s_html"><div class="ttname"><a href="structbflb__wdg__config__s.html">bflb_wdg_config_s</a></div><div class="ttdoc">WDG configuration structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__wdg_8h_source.html#l00042">bflb_wdg.h:42</a></div></div>
+<div class="ttc" id="astructbflb__wdg__config__s_html_a0ac87e81313703c15648a29b2de96e9b"><div class="ttname"><a href="structbflb__wdg__config__s.html#a0ac87e81313703c15648a29b2de96e9b">bflb_wdg_config_s::clock_div</a></div><div class="ttdeci">uint8_t clock_div</div><div class="ttdef"><b>Definition:</b> <a href="bflb__wdg_8h_source.html#l00044">bflb_wdg.h:44</a></div></div>
+<div class="ttc" id="astructbflb__wdg__config__s_html_a37e90f5e3bd99fac2021fb3a326607d4"><div class="ttname"><a href="structbflb__wdg__config__s.html#a37e90f5e3bd99fac2021fb3a326607d4">bflb_wdg_config_s::mode</a></div><div class="ttdeci">uint8_t mode</div><div class="ttdef"><b>Definition:</b> <a href="bflb__wdg_8h_source.html#l00046">bflb_wdg.h:46</a></div></div>
+<div class="ttc" id="astructbflb__wdg__config__s_html_a6003e1827ee8f3f5d490821912fcf974"><div class="ttname"><a href="structbflb__wdg__config__s.html#a6003e1827ee8f3f5d490821912fcf974">bflb_wdg_config_s::clock_source</a></div><div class="ttdeci">uint8_t clock_source</div><div class="ttdef"><b>Definition:</b> <a href="bflb__wdg_8h_source.html#l00043">bflb_wdg.h:43</a></div></div>
+<div class="ttc" id="astructbflb__wdg__config__s_html_a871f7422e54f13eecd9ac30956defebe"><div class="ttname"><a href="structbflb__wdg__config__s.html#a871f7422e54f13eecd9ac30956defebe">bflb_wdg_config_s::comp_val</a></div><div class="ttdeci">uint16_t comp_val</div><div class="ttdef"><b>Definition:</b> <a href="bflb__wdg_8h_source.html#l00045">bflb_wdg.h:45</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__wdg_8h.html">bflb_wdg.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

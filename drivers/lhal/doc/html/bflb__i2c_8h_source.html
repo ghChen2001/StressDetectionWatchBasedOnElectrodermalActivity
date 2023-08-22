@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_i2c.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__i2c_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_i2c.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__i2c_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_I2C_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_I2C_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/* Bit definitions for the flags field in struct bflb_i2c_msg_s</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * START/STOP Rules:</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * 1. The lower half I2C driver will always issue the START condition at the</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *    beginning of a message unless I2C_M_NOSTART flag is set in the</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> *    message.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * 2. The lower half I2C driver will always issue the STOP condition at the</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *    end of the messages unless:</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> *    a. The I2C_M_NOSTOP flag is set in the message, OR</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> *    b. The following message has the I2C_M_NOSTART flag set (meaning</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> *       that following message is simply a continuation of the transfer).</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * A proper I2C repeated start would then have I2C_M_NOSTOP set on msg[n]</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * and I2C_M_NOSTART *not* set on msg[n+1].  See the following table:</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> *   msg[n].flags  msg[n+1].flags Behavior</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> *   ------------ --------------- -----------------------------------------</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> *   0            0                Two normal, separate messages with STOP</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> *                                 on msg[n] then START on msg[n+1]</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> *   0*           I2C_M_NOSTART    Continuation of the same transfer (must</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> *                                 be the same direction).  See NOTE below.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> *   NO_STOP      0                No STOP on msg[n]; repeated START on</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> *                                 msg[n+1].</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * * NOTE: NO_STOP is implied in this case and may or not be explicitly</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> *   included in the msg[n] flags</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga628b15712aa9462e6e292d1bb4f79479">   45</a></span><span class="preprocessor">#define I2C_M_READ    0x0001 </span><span class="comment">/* Read data, from slave to master */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="group___i2_c.html#gabe53ff15e0717ccbd1d4c656c09ee53a">   46</a></span><span class="preprocessor">#define I2C_M_TEN     0x0002 </span><span class="comment">/* Ten bit address */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga5770018b4190e45284f6f555f1b2dbea">   47</a></span><span class="preprocessor">#define I2C_M_DMA     0x0004 </span><span class="comment">/* Enable dma mode */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga7693e822915d4a60d97ed4c94cf713ae">   48</a></span><span class="preprocessor">#define I2C_M_NOSTOP  0x0040 </span><span class="comment">/* Message should not end with a STOP */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga7a467d37a113d97496f0fa69c6c15650">   49</a></span><span class="preprocessor">#define I2C_M_NOSTART 0x0080 </span><span class="comment">/* Message should not begin with a START */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_s_t_s.html#ga2f302d99481ff228cd42d24d22a7d1c5">   54</a></span><span class="preprocessor">#define I2C_INTSTS_END     (1 &lt;&lt; 0) </span><span class="comment">/* Transfer end interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_s_t_s.html#ga3c2cc1deeaa401db07adea62eb213cbe">   55</a></span><span class="preprocessor">#define I2C_INTSTS_TX_FIFO (1 &lt;&lt; 1) </span><span class="comment">/* TX FIFO ready interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_s_t_s.html#ga1fd0105073a4dd465acbabb05e4ca215">   56</a></span><span class="preprocessor">#define I2C_INTSTS_RX_FIFO (1 &lt;&lt; 2) </span><span class="comment">/* RX FIFO ready interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_s_t_s.html#ga4aa4cf416d24d465c08101a7a3705910">   57</a></span><span class="preprocessor">#define I2C_INTSTS_NACK    (1 &lt;&lt; 3) </span><span class="comment">/* NACK interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_s_t_s.html#ga9c45c348b49420f684f199d69b07c219">   58</a></span><span class="preprocessor">#define I2C_INTSTS_ARB     (1 &lt;&lt; 4) </span><span class="comment">/* Arbitration lost interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_s_t_s.html#ga36d65a88f2b4e16b14d710f46e8fbf22">   59</a></span><span class="preprocessor">#define I2C_INTSTS_FER     (1 &lt;&lt; 5) </span><span class="comment">/* TX/RX FIFO error interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_c_l_r.html#ga70bc501393383168436711c2e29b0849">   67</a></span><span class="preprocessor">#define I2C_INTCLR_END  (1 &lt;&lt; 0) </span><span class="comment">/* Transfer end interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_c_l_r.html#gab5efb7a3e5498d75f9bd681c512a515b">   68</a></span><span class="preprocessor">#define I2C_INTCLR_NACK (1 &lt;&lt; 3) </span><span class="comment">/* NACK interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_c_l_r.html#ga8fed65507d45b6e8d76019b7a2e5458c">   69</a></span><span class="preprocessor">#define I2C_INTCLR_ARB  (1 &lt;&lt; 4) </span><span class="comment">/* Arbitration lost interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_e_n.html#ga975c26a4f3578dd044ed38b4e3470039">   77</a></span><span class="preprocessor">#define I2C_INTEN_END     (1 &lt;&lt; 0) </span><span class="comment">/* Transfer end interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_e_n.html#gab18fce768a5b9e58c1966bcecf199c66">   78</a></span><span class="preprocessor">#define I2C_INTEN_TX_FIFO (1 &lt;&lt; 1) </span><span class="comment">/* TX FIFO ready interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_e_n.html#ga0b74d4edddb761a11f17f4af9b1b3706">   79</a></span><span class="preprocessor">#define I2C_INTEN_RX_FIFO (1 &lt;&lt; 2) </span><span class="comment">/* RX FIFO ready interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_e_n.html#ga60201b64a5791a2be7a58bde2455c6ac">   80</a></span><span class="preprocessor">#define I2C_INTEN_NACK    (1 &lt;&lt; 3) </span><span class="comment">/* NACK interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_e_n.html#gaa69586570c1857939fb7ad64c5db8038">   81</a></span><span class="preprocessor">#define I2C_INTEN_ARB     (1 &lt;&lt; 4) </span><span class="comment">/* Arbitration lost interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="group___i2_c___i_n_t_e_n.html#ga0fcab60a26f07cefae17280c71891318">   82</a></span><span class="preprocessor">#define I2C_INTEN_FER     (1 &lt;&lt; 5) </span><span class="comment">/* TX/RX FIFO error interrupt */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="structbflb__i2c__msg__s.html">   95</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbflb__i2c__msg__s.html">bflb_i2c_msg_s</a> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structbflb__i2c__msg__s.html#a41a6aad09727eb120338c35535a652a6">   96</a></span>    uint16_t <a class="code hl_variable" href="structbflb__i2c__msg__s.html#a41a6aad09727eb120338c35535a652a6">addr</a>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="structbflb__i2c__msg__s.html#a1e87af3c18a2fd36c61faf89949bdc3f">   97</a></span>    uint16_t <a class="code hl_variable" href="structbflb__i2c__msg__s.html#a1e87af3c18a2fd36c61faf89949bdc3f">flags</a>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="structbflb__i2c__msg__s.html#a56ed84df35de10bdb65e72b184309497">   98</a></span>    uint8_t *<a class="code hl_variable" href="structbflb__i2c__msg__s.html#a56ed84df35de10bdb65e72b184309497">buffer</a>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="structbflb__i2c__msg__s.html#a1892eba2086d12ac2b09005aeb09ea3b">   99</a></span>    uint16_t <a class="code hl_variable" href="structbflb__i2c__msg__s.html#a1892eba2086d12ac2b09005aeb09ea3b">length</a>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>};</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga07ee2b824dde586f5596befbd9640162">  112</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_c.html#ga07ee2b824dde586f5596befbd9640162">bflb_i2c_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t frequency);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga9cd4a46d9de706a1e60b33e09b68cefd">  119</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_c.html#ga9cd4a46d9de706a1e60b33e09b68cefd">bflb_i2c_deinit</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga355a12ad37e4b1cbfb9dde5f77dcff79">  127</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_c.html#ga355a12ad37e4b1cbfb9dde5f77dcff79">bflb_i2c_link_txdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="group___i2_c.html#gaf0b0b72728adb0184ab8730351198a4d">  135</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_c.html#gaf0b0b72728adb0184ab8730351198a4d">bflb_i2c_link_rxdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga2bca4f4ea239f8962ac4bdea8f99e0fd">  145</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___i2_c.html#ga2bca4f4ea239f8962ac4bdea8f99e0fd">bflb_i2c_transfer</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__i2c__msg__s.html">bflb_i2c_msg_s</a> *msgs, <span class="keywordtype">int</span> count);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga6b06cc0ad74f151c3c4c74b8c9d14259">  154</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_c.html#ga6b06cc0ad74f151c3c4c74b8c9d14259">bflb_i2c_int_mask</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_type, <span class="keywordtype">bool</span> mask);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga64f8628e8deffa78775b0ee499973176">  162</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___i2_c.html#ga64f8628e8deffa78775b0ee499973176">bflb_i2c_int_clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint32_t int_clear);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="group___i2_c.html#ga81a47107497c32b09c4e63a690a21739">  170</a></span>uint32_t <a class="code hl_function" href="group___i2_c.html#ga81a47107497c32b09c4e63a690a21739">bflb_i2c_get_intstatus</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="group___i2_c.html#gac115ded9f0c76af3e5ae62d6fa3f934f">  180</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="group___i2_c.html#gac115ded9f0c76af3e5ae62d6fa3f934f">bflb_i2c_feature_control</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">int</span> cmd, <span class="keywordtype">size_t</span> arg);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>}</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___i2_c_html_ga07ee2b824dde586f5596befbd9640162"><div class="ttname"><a href="group___i2_c.html#ga07ee2b824dde586f5596befbd9640162">bflb_i2c_init</a></div><div class="ttdeci">void bflb_i2c_init(struct bflb_device_s *dev, uint32_t frequency)</div><div class="ttdoc">Initialize i2c.</div></div>
+<div class="ttc" id="agroup___i2_c_html_ga2bca4f4ea239f8962ac4bdea8f99e0fd"><div class="ttname"><a href="group___i2_c.html#ga2bca4f4ea239f8962ac4bdea8f99e0fd">bflb_i2c_transfer</a></div><div class="ttdeci">int bflb_i2c_transfer(struct bflb_device_s *dev, struct bflb_i2c_msg_s *msgs, int count)</div><div class="ttdoc">Start transferring i2c message.</div></div>
+<div class="ttc" id="agroup___i2_c_html_ga355a12ad37e4b1cbfb9dde5f77dcff79"><div class="ttname"><a href="group___i2_c.html#ga355a12ad37e4b1cbfb9dde5f77dcff79">bflb_i2c_link_txdma</a></div><div class="ttdeci">void bflb_i2c_link_txdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable i2c tx dma.</div></div>
+<div class="ttc" id="agroup___i2_c_html_ga64f8628e8deffa78775b0ee499973176"><div class="ttname"><a href="group___i2_c.html#ga64f8628e8deffa78775b0ee499973176">bflb_i2c_int_clear</a></div><div class="ttdeci">void bflb_i2c_int_clear(struct bflb_device_s *dev, uint32_t int_clear)</div><div class="ttdoc">Clear i2c interrupt status.</div></div>
+<div class="ttc" id="agroup___i2_c_html_ga6b06cc0ad74f151c3c4c74b8c9d14259"><div class="ttname"><a href="group___i2_c.html#ga6b06cc0ad74f151c3c4c74b8c9d14259">bflb_i2c_int_mask</a></div><div class="ttdeci">void bflb_i2c_int_mask(struct bflb_device_s *dev, uint32_t int_type, bool mask)</div><div class="ttdoc">Enable or disable i2c interrupt.</div></div>
+<div class="ttc" id="agroup___i2_c_html_ga81a47107497c32b09c4e63a690a21739"><div class="ttname"><a href="group___i2_c.html#ga81a47107497c32b09c4e63a690a21739">bflb_i2c_get_intstatus</a></div><div class="ttdeci">uint32_t bflb_i2c_get_intstatus(struct bflb_device_s *dev)</div><div class="ttdoc">Get i2c interrupt status.</div></div>
+<div class="ttc" id="agroup___i2_c_html_ga9cd4a46d9de706a1e60b33e09b68cefd"><div class="ttname"><a href="group___i2_c.html#ga9cd4a46d9de706a1e60b33e09b68cefd">bflb_i2c_deinit</a></div><div class="ttdeci">void bflb_i2c_deinit(struct bflb_device_s *dev)</div><div class="ttdoc">Deinitialize i2c.</div></div>
+<div class="ttc" id="agroup___i2_c_html_gac115ded9f0c76af3e5ae62d6fa3f934f"><div class="ttname"><a href="group___i2_c.html#gac115ded9f0c76af3e5ae62d6fa3f934f">bflb_i2c_feature_control</a></div><div class="ttdeci">int bflb_i2c_feature_control(struct bflb_device_s *dev, int cmd, size_t arg)</div><div class="ttdoc">Control i2c feature.</div></div>
+<div class="ttc" id="agroup___i2_c_html_gaf0b0b72728adb0184ab8730351198a4d"><div class="ttname"><a href="group___i2_c.html#gaf0b0b72728adb0184ab8730351198a4d">bflb_i2c_link_rxdma</a></div><div class="ttdeci">void bflb_i2c_link_rxdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable i2c rx dma.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+<div class="ttc" id="astructbflb__i2c__msg__s_html"><div class="ttname"><a href="structbflb__i2c__msg__s.html">bflb_i2c_msg_s</a></div><div class="ttdoc">I2C message structure</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2c_8h_source.html#l00095">bflb_i2c.h:95</a></div></div>
+<div class="ttc" id="astructbflb__i2c__msg__s_html_a1892eba2086d12ac2b09005aeb09ea3b"><div class="ttname"><a href="structbflb__i2c__msg__s.html#a1892eba2086d12ac2b09005aeb09ea3b">bflb_i2c_msg_s::length</a></div><div class="ttdeci">uint16_t length</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2c_8h_source.html#l00099">bflb_i2c.h:99</a></div></div>
+<div class="ttc" id="astructbflb__i2c__msg__s_html_a1e87af3c18a2fd36c61faf89949bdc3f"><div class="ttname"><a href="structbflb__i2c__msg__s.html#a1e87af3c18a2fd36c61faf89949bdc3f">bflb_i2c_msg_s::flags</a></div><div class="ttdeci">uint16_t flags</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2c_8h_source.html#l00097">bflb_i2c.h:97</a></div></div>
+<div class="ttc" id="astructbflb__i2c__msg__s_html_a41a6aad09727eb120338c35535a652a6"><div class="ttname"><a href="structbflb__i2c__msg__s.html#a41a6aad09727eb120338c35535a652a6">bflb_i2c_msg_s::addr</a></div><div class="ttdeci">uint16_t addr</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2c_8h_source.html#l00096">bflb_i2c.h:96</a></div></div>
+<div class="ttc" id="astructbflb__i2c__msg__s_html_a56ed84df35de10bdb65e72b184309497"><div class="ttname"><a href="structbflb__i2c__msg__s.html#a56ed84df35de10bdb65e72b184309497">bflb_i2c_msg_s::buffer</a></div><div class="ttdeci">uint8_t * buffer</div><div class="ttdef"><b>Definition:</b> <a href="bflb__i2c_8h_source.html#l00098">bflb_i2c.h:98</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__i2c_8h.html">bflb_i2c.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

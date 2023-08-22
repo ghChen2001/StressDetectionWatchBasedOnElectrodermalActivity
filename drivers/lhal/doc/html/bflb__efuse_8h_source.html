@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_efuse.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__efuse_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_efuse.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__efuse_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_EFUSE_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_EFUSE_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#a4e364c332bfe33cb718e7ea32209eeb5">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__efuse_8h.html#a4e364c332bfe33cb718e7ea32209eeb5">bflb_efuse_get_chipid</a>(uint8_t chipid[8]);</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#a58e1b492f8b11b430d90e09a2cb867d8">   12</a></span>uint8_t <a class="code hl_function" href="bflb__efuse_8h.html#a58e1b492f8b11b430d90e09a2cb867d8">bflb_efuse_is_mac_address_slot_empty</a>(uint8_t slot, uint8_t reload);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#a9a2f2f99dbb2abdfafc88c9eb68d81d7">   13</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="bflb__efuse_8h.html#a9a2f2f99dbb2abdfafc88c9eb68d81d7">bflb_efuse_write_mac_address_opt</a>(uint8_t slot, uint8_t mac[6], uint8_t program);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#a16c70bea8e3a818a3191472dbfc11b15">   14</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="bflb__efuse_8h.html#a16c70bea8e3a818a3191472dbfc11b15">bflb_efuse_read_mac_address_opt</a>(uint8_t slot, uint8_t mac[6], uint8_t reload);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#a9685a91982e3f24d236a58012979f9f1">   16</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="bflb__efuse_8h.html#a9685a91982e3f24d236a58012979f9f1">bflb_efuse_get_adc_trim</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#adf2b6bc34161c733eb17787fb1543d8e">   17</a></span>uint32_t <a class="code hl_function" href="bflb__efuse_8h.html#adf2b6bc34161c733eb17787fb1543d8e">bflb_efuse_get_adc_tsen_trim</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#ab86465b12e9bf7279e6d20244f7aa751">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__efuse_8h.html#ab86465b12e9bf7279e6d20244f7aa751">bflb_efuse_read_secure_boot</a>(uint8_t *sign, uint8_t *aes);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#a6bcd088ae08c554f1fc99231d82e96fe">   20</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__efuse_8h.html#a6bcd088ae08c554f1fc99231d82e96fe">bflb_efuse_write_aes_key</a>(uint8_t index, uint8_t *data, uint32_t len);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#ad754caf37a6c35a2e49ed767c49ba3e0">   21</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__efuse_8h.html#ad754caf37a6c35a2e49ed767c49ba3e0">bflb_efuse_read_aes_key</a>(uint8_t index, uint8_t *data, uint32_t len);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#a18986fb42d2f72f975f95bd4bf9fac55">   23</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__efuse_8h.html#a18986fb42d2f72f975f95bd4bf9fac55">bflb_efuse_write_sw_usage</a>(uint32_t index, uint32_t usage, uint8_t program);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="bflb__efuse_8h.html#af260b0a05491f1e8e3281a2df3ac0c2c">   24</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="bflb__efuse_8h.html#af260b0a05491f1e8e3281a2df3ac0c2c">bflb_efuse_read_sw_usage</a>(uint32_t index, uint32_t *usage);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="abflb__efuse_8h_html_a16c70bea8e3a818a3191472dbfc11b15"><div class="ttname"><a href="bflb__efuse_8h.html#a16c70bea8e3a818a3191472dbfc11b15">bflb_efuse_read_mac_address_opt</a></div><div class="ttdeci">int bflb_efuse_read_mac_address_opt(uint8_t slot, uint8_t mac[6], uint8_t reload)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_a18986fb42d2f72f975f95bd4bf9fac55"><div class="ttname"><a href="bflb__efuse_8h.html#a18986fb42d2f72f975f95bd4bf9fac55">bflb_efuse_write_sw_usage</a></div><div class="ttdeci">void bflb_efuse_write_sw_usage(uint32_t index, uint32_t usage, uint8_t program)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_a4e364c332bfe33cb718e7ea32209eeb5"><div class="ttname"><a href="bflb__efuse_8h.html#a4e364c332bfe33cb718e7ea32209eeb5">bflb_efuse_get_chipid</a></div><div class="ttdeci">void bflb_efuse_get_chipid(uint8_t chipid[8])</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_a58e1b492f8b11b430d90e09a2cb867d8"><div class="ttname"><a href="bflb__efuse_8h.html#a58e1b492f8b11b430d90e09a2cb867d8">bflb_efuse_is_mac_address_slot_empty</a></div><div class="ttdeci">uint8_t bflb_efuse_is_mac_address_slot_empty(uint8_t slot, uint8_t reload)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_a6bcd088ae08c554f1fc99231d82e96fe"><div class="ttname"><a href="bflb__efuse_8h.html#a6bcd088ae08c554f1fc99231d82e96fe">bflb_efuse_write_aes_key</a></div><div class="ttdeci">void bflb_efuse_write_aes_key(uint8_t index, uint8_t *data, uint32_t len)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_a9685a91982e3f24d236a58012979f9f1"><div class="ttname"><a href="bflb__efuse_8h.html#a9685a91982e3f24d236a58012979f9f1">bflb_efuse_get_adc_trim</a></div><div class="ttdeci">float bflb_efuse_get_adc_trim(void)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_a9a2f2f99dbb2abdfafc88c9eb68d81d7"><div class="ttname"><a href="bflb__efuse_8h.html#a9a2f2f99dbb2abdfafc88c9eb68d81d7">bflb_efuse_write_mac_address_opt</a></div><div class="ttdeci">int bflb_efuse_write_mac_address_opt(uint8_t slot, uint8_t mac[6], uint8_t program)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_ab86465b12e9bf7279e6d20244f7aa751"><div class="ttname"><a href="bflb__efuse_8h.html#ab86465b12e9bf7279e6d20244f7aa751">bflb_efuse_read_secure_boot</a></div><div class="ttdeci">void bflb_efuse_read_secure_boot(uint8_t *sign, uint8_t *aes)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_ad754caf37a6c35a2e49ed767c49ba3e0"><div class="ttname"><a href="bflb__efuse_8h.html#ad754caf37a6c35a2e49ed767c49ba3e0">bflb_efuse_read_aes_key</a></div><div class="ttdeci">void bflb_efuse_read_aes_key(uint8_t index, uint8_t *data, uint32_t len)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_adf2b6bc34161c733eb17787fb1543d8e"><div class="ttname"><a href="bflb__efuse_8h.html#adf2b6bc34161c733eb17787fb1543d8e">bflb_efuse_get_adc_tsen_trim</a></div><div class="ttdeci">uint32_t bflb_efuse_get_adc_tsen_trim(void)</div></div>
+<div class="ttc" id="abflb__efuse_8h_html_af260b0a05491f1e8e3281a2df3ac0c2c"><div class="ttname"><a href="bflb__efuse_8h.html#af260b0a05491f1e8e3281a2df3ac0c2c">bflb_efuse_read_sw_usage</a></div><div class="ttdeci">void bflb_efuse_read_sw_usage(uint32_t index, uint32_t *usage)</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__efuse_8h.html">bflb_efuse.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

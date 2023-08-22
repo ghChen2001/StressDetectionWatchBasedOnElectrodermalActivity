@@ -1,0 +1,21 @@
+digraph "PWM_V1"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir=LR;
+  Node2 [label="LHAL",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___l_h_a_l.html",tooltip=" "];
+  Node3 [label="pwm channel definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___p_w_m___c_h_a_n_n_e_l.html",tooltip=" "];
+  Node6 [label="pwm feature control\l cmd definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___p_w_m___c_m_d.html",tooltip=" "];
+  Node5 [label="pwm interrupt clear\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___p_w_m___i_n_t_c_l_r.html",tooltip=" "];
+  Node4 [label="pwm interrupt status\l definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___p_w_m___i_n_t_s_t_s.html",tooltip=" "];
+  Node7 [label="pwm stop mode definition",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___p_w_m___s_t_o_p___m_o_d_e.html",tooltip=" "];
+  Node1 [label="PWM_V1",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+}

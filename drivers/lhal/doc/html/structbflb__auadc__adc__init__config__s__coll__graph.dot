@@ -1,0 +1,8 @@
+digraph "bflb_auadc_adc_init_config_s"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [shape=record,label="{bflb_auadc_adc_init\l_config_s\n|+ auadc_analog_en\l+ adc_mode\l+ adc_pga_mode\l+ adc_pga_posi_ch\l+ adc_pga_nega_ch\l+ adc_pga_gain\l+ adc_measure_rate\l|}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="auadc adc analog initialization configuration structure"];
+}

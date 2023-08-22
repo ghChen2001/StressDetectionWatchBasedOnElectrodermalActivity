@@ -1,0 +1,1102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_list.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__list_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">结构体</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#typedef-members">类型定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">bflb_list.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;string.h&quot;</code><br />
+<code>#include &quot;stdint.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+bflb_list.h 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__list_8h__incl.png" border="0" usemap="#ainclude_2bflb__list_8h" alt=""/></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+此图展示该文件直接或间接的被哪些文件引用了:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__list_8h__dep__incl.png" border="0" usemap="#ainclude_2bflb__list_8hdep" alt=""/></div>
+</div>
+</div>
+<p><a href="bflb__list_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+结构体</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbflb__dlist__node.html">bflb_dlist_node</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a864d61ba1cfcfbea517e882101f91558"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a864d61ba1cfcfbea517e882101f91558">bflb_container_of</a>(ptr,  type,  member)&#160;&#160;&#160;    ((type *)((char *)(ptr) - (unsigned long)(&amp;((type *)0)-&gt;member)))</td></tr>
+<tr class="separator:a864d61ba1cfcfbea517e882101f91558"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9690941071e09cac8f3def3f1d3b1a1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#ac9690941071e09cac8f3def3f1d3b1a1">DLIST_OBJECT_INIT</a>(object)</td></tr>
+<tr class="memdesc:ac9690941071e09cac8f3def3f1d3b1a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize a dlist object  <br /></td></tr>
+<tr class="separator:ac9690941071e09cac8f3def3f1d3b1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f892eaea80b7263b731c5557b1ae7a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a7f892eaea80b7263b731c5557b1ae7a4">DLIST_DEFINE</a>(list)&#160;&#160;&#160;    <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> list = { &amp;(list), &amp;(list) }</td></tr>
+<tr class="memdesc:a7f892eaea80b7263b731c5557b1ae7a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize a dlist object  <br /></td></tr>
+<tr class="separator:a7f892eaea80b7263b731c5557b1ae7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8454d50623a19d1622cc5d9efcdd444c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>(node,  type,  member)&#160;&#160;&#160;    <a class="el" href="bflb__list_8h.html#a864d61ba1cfcfbea517e882101f91558">bflb_container_of</a>(node, type, member)</td></tr>
+<tr class="memdesc:a8454d50623a19d1622cc5d9efcdd444c"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the struct for this entry  <br /></td></tr>
+<tr class="separator:a8454d50623a19d1622cc5d9efcdd444c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63cbb128a444635e7b1c00675a63553f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a63cbb128a444635e7b1c00675a63553f">bflb_dlist_first_entry</a>(ptr,  type,  member)&#160;&#160;&#160;    <a class="el" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>((ptr)-&gt;next, type, member)</td></tr>
+<tr class="separator:a63cbb128a444635e7b1c00675a63553f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1381bf3ca9d16a01308cb77690287430"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a1381bf3ca9d16a01308cb77690287430">bflb_dlist_first_entry_or_null</a>(ptr,  type,  member)&#160;&#160;&#160;    (<a class="el" href="bflb__list_8h.html#ad3fa3c36dec535336357b1ab7f88bbbc">bflb_dlist_isempty</a>(ptr) ? NULL : <a class="el" href="bflb__list_8h.html#a63cbb128a444635e7b1c00675a63553f">bflb_dlist_first_entry</a>(ptr, type, member))</td></tr>
+<tr class="separator:a1381bf3ca9d16a01308cb77690287430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9af112c58041b9176b1520f75be3eef8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a9af112c58041b9176b1520f75be3eef8">bflb_dlist_for_each</a>(pos,  head)&#160;&#160;&#160;    for (pos = (head)-&gt;next; pos != (head); pos = pos-&gt;next)</td></tr>
+<tr class="separator:a9af112c58041b9176b1520f75be3eef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296c3cf4a4f7c1ce1801a297ddc30411"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a296c3cf4a4f7c1ce1801a297ddc30411">bflb_dlist_for_each_prev</a>(pos,  head)&#160;&#160;&#160;    for (pos = (head)-&gt;prev; pos != (head); pos = pos-&gt;prev)</td></tr>
+<tr class="separator:a296c3cf4a4f7c1ce1801a297ddc30411"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3fd417b0259d7dd72bf2592ddbc6510"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#ae3fd417b0259d7dd72bf2592ddbc6510">bflb_dlist_for_each_safe</a>(pos,  n,  head)</td></tr>
+<tr class="separator:ae3fd417b0259d7dd72bf2592ddbc6510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a813b01640ea0c683cfd231336e4d5dc3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a813b01640ea0c683cfd231336e4d5dc3">bflb_dlist_for_each_prev_safe</a>(pos,  n,  head)</td></tr>
+<tr class="separator:a813b01640ea0c683cfd231336e4d5dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dd2daa3549ad01e2b18b309381b0e60"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a5dd2daa3549ad01e2b18b309381b0e60">bflb_dlist_for_each_entry</a>(pos,  head,  member)</td></tr>
+<tr class="separator:a5dd2daa3549ad01e2b18b309381b0e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae165c7860d0a9ac4b9c229cb19220b45"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#ae165c7860d0a9ac4b9c229cb19220b45">bflb_dlist_for_each_entry_reverse</a>(pos,  head,  member)</td></tr>
+<tr class="separator:ae165c7860d0a9ac4b9c229cb19220b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbc3fa075b88304bf982fea13ad1fd9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#aacbc3fa075b88304bf982fea13ad1fd9">bflb_dlist_for_each_entry_safe</a>(pos,  n,  head,  member)</td></tr>
+<tr class="separator:aacbc3fa075b88304bf982fea13ad1fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e6ca37912e25e5f5913df69c349ee50"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a5e6ca37912e25e5f5913df69c349ee50">bflb_dlist_for_each_entry_safe_reverse</a>(pos,  n,  head,  member)</td></tr>
+<tr class="separator:a5e6ca37912e25e5f5913df69c349ee50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:a64369b69382a2867f3ae4e97048b7115"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structbflb__dlist__node.html">bflb_dlist_node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a></td></tr>
+<tr class="separator:a64369b69382a2867f3ae4e97048b7115"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a266beb5be7d1838c6809c82405c249b6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a266beb5be7d1838c6809c82405c249b6">bflb_dlist_init</a> (<a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *l)</td></tr>
+<tr class="memdesc:a266beb5be7d1838c6809c82405c249b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize a list  <br /></td></tr>
+<tr class="separator:a266beb5be7d1838c6809c82405c249b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1a0b65e0d0188ffebd5f01acbb1269"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#afb1a0b65e0d0188ffebd5f01acbb1269">bflb_dlist_insert_after</a> (<a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *l, <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *n)</td></tr>
+<tr class="memdesc:afb1a0b65e0d0188ffebd5f01acbb1269"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert a node after a list  <br /></td></tr>
+<tr class="separator:afb1a0b65e0d0188ffebd5f01acbb1269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac543ec0f965ef8f6671326791ab16c4b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#ac543ec0f965ef8f6671326791ab16c4b">bflb_dlist_insert_before</a> (<a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *l, <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *n)</td></tr>
+<tr class="memdesc:ac543ec0f965ef8f6671326791ab16c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert a node before a list  <br /></td></tr>
+<tr class="separator:ac543ec0f965ef8f6671326791ab16c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeae07f15659b7cae8de68059d4e51728"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#aeae07f15659b7cae8de68059d4e51728">bflb_dlist_remove</a> (<a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *n)</td></tr>
+<tr class="memdesc:aeae07f15659b7cae8de68059d4e51728"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove node from list.  <br /></td></tr>
+<tr class="separator:aeae07f15659b7cae8de68059d4e51728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af16594cec22f734cfec404430c19eea6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#af16594cec22f734cfec404430c19eea6">bflb_dlist_move_head</a> (<a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *l, <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *n)</td></tr>
+<tr class="memdesc:af16594cec22f734cfec404430c19eea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">move node from list.  <br /></td></tr>
+<tr class="separator:af16594cec22f734cfec404430c19eea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a007ea203719ccb6b9c16ab626807c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#af1a007ea203719ccb6b9c16ab626807c">bflb_dlist_move_tail</a> (<a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *l, <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *n)</td></tr>
+<tr class="memdesc:af1a007ea203719ccb6b9c16ab626807c"><td class="mdescLeft">&#160;</td><td class="mdescRight">move node from list.  <br /></td></tr>
+<tr class="separator:af1a007ea203719ccb6b9c16ab626807c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3fa3c36dec535336357b1ab7f88bbbc"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#ad3fa3c36dec535336357b1ab7f88bbbc">bflb_dlist_isempty</a> (const <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *l)</td></tr>
+<tr class="memdesc:ad3fa3c36dec535336357b1ab7f88bbbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests whether a list is empty  <br /></td></tr>
+<tr class="separator:ad3fa3c36dec535336357b1ab7f88bbbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af2f8f17abbbe7ac2474553883e172d"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bflb__list_8h.html#a4af2f8f17abbbe7ac2474553883e172d">bflb_dlist_len</a> (const <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *l)</td></tr>
+<tr class="memdesc:a4af2f8f17abbbe7ac2474553883e172d"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the list length  <br /></td></tr>
+<tr class="separator:a4af2f8f17abbbe7ac2474553883e172d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>Copyright (c) 2021 Bouffalolab team</p>
+<p>Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 中定义.</p>
+</div><h2 class="groupheader">宏定义说明</h2>
+<a id="a864d61ba1cfcfbea517e882101f91558" name="a864d61ba1cfcfbea517e882101f91558"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a864d61ba1cfcfbea517e882101f91558">&#9670;&#160;</a></span>bflb_container_of</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_container_of</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ptr, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    ((type *)((char *)(ptr) - (unsigned long)(&amp;((type *)0)-&gt;member)))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>container_of - return the member address of ptr, if the type of ptr is the struct type. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00036">36</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8454d50623a19d1622cc5d9efcdd444c" name="a8454d50623a19d1622cc5d9efcdd444c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8454d50623a19d1622cc5d9efcdd444c">&#9670;&#160;</a></span>bflb_dlist_entry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_entry</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">node, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="bflb__list_8h.html#a864d61ba1cfcfbea517e882101f91558">bflb_container_of</a>(node, type, member)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the struct for this entry </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>the entry point </td></tr>
+    <tr><td class="paramname">type</td><td>the type of structure </td></tr>
+    <tr><td class="paramname">member</td><td>the name of list in structure </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00165">165</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a63cbb128a444635e7b1c00675a63553f" name="a63cbb128a444635e7b1c00675a63553f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63cbb128a444635e7b1c00675a63553f">&#9670;&#160;</a></span>bflb_dlist_first_entry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_first_entry</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ptr, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>((ptr)-&gt;next, type, member)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>dlist_first_entry - get the first element from a list @ptr: the list head to take the element from. @type: the type of the struct this is embedded in. @member: the name of the list_struct within the struct.</p>
+<p>Note, that list is expected to be not empty. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00176">176</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1381bf3ca9d16a01308cb77690287430" name="a1381bf3ca9d16a01308cb77690287430"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1381bf3ca9d16a01308cb77690287430">&#9670;&#160;</a></span>bflb_dlist_first_entry_or_null</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_first_entry_or_null</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ptr, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    (<a class="el" href="bflb__list_8h.html#ad3fa3c36dec535336357b1ab7f88bbbc">bflb_dlist_isempty</a>(ptr) ? NULL : <a class="el" href="bflb__list_8h.html#a63cbb128a444635e7b1c00675a63553f">bflb_dlist_first_entry</a>(ptr, type, member))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>dlist_first_entry_or_null - get the first element from a list @ptr: the list head to take the element from. @type: the type of the struct this is embedded in. @member: the name of the list_struct within the struct.</p>
+<p>Note, that list is expected to be not empty. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00186">186</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9af112c58041b9176b1520f75be3eef8" name="a9af112c58041b9176b1520f75be3eef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9af112c58041b9176b1520f75be3eef8">&#9670;&#160;</a></span>bflb_dlist_for_each</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_for_each</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pos, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    for (pos = (head)-&gt;next; pos != (head); pos = pos-&gt;next)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>dlist_for_each - iterate over a list @pos: the dlist_t * to use as a loop cursor. @head: the head for your list. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00194">194</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5dd2daa3549ad01e2b18b309381b0e60" name="a5dd2daa3549ad01e2b18b309381b0e60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dd2daa3549ad01e2b18b309381b0e60">&#9670;&#160;</a></span>bflb_dlist_for_each_entry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_for_each_entry</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pos, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">    <span class="keywordflow">for</span> (pos = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>((head)-&gt;next, typeof(*pos), member); \</div>
+<div class="line">         &amp;pos-&gt;member != (head);                                \</div>
+<div class="line">         pos = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>(pos-&gt;member.next, typeof(*pos), member))</div>
+<div class="ttc" id="abflb__list_8h_html_a8454d50623a19d1622cc5d9efcdd444c"><div class="ttname"><a href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a></div><div class="ttdeci">#define bflb_dlist_entry(node, type, member)</div><div class="ttdoc">get the struct for this entry</div><div class="ttdef"><b>Definition:</b> <a href="bflb__list_8h_source.html#l00165">bflb_list.h:165</a></div></div>
+</div><!-- fragment --><p>dlist_for_each_entry - iterate over list of given type @pos: the type * to use as a loop cursor. @head: the head for your list. @member: the name of the list_struct within the struct. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00224">224</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae165c7860d0a9ac4b9c229cb19220b45" name="ae165c7860d0a9ac4b9c229cb19220b45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae165c7860d0a9ac4b9c229cb19220b45">&#9670;&#160;</a></span>bflb_dlist_for_each_entry_reverse</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_for_each_entry_reverse</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pos, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">    <span class="keywordflow">for</span> (pos = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>((head)-&gt;prev, typeof(*pos), member); \</div>
+<div class="line">         &amp;pos-&gt;member != (head);                                \</div>
+<div class="line">         pos = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>(pos-&gt;member.prev, typeof(*pos), member))</div>
+</div><!-- fragment --><p>dlist_for_each_entry_reverse - iterate over list of given type @pos: the type * to use as a loop cursor. @head: the head for your list. @member: the name of the list_struct within the struct. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00235">235</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aacbc3fa075b88304bf982fea13ad1fd9" name="aacbc3fa075b88304bf982fea13ad1fd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacbc3fa075b88304bf982fea13ad1fd9">&#9670;&#160;</a></span>bflb_dlist_for_each_entry_safe</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_for_each_entry_safe</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pos, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">n, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">    <span class="keywordflow">for</span> (pos = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>((head)-&gt;next, typeof(*pos), member),  \</div>
+<div class="line">        n = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>(pos-&gt;member.next, typeof(*pos), member); \</div>
+<div class="line">         &amp;pos-&gt;member != (head);                                 \</div>
+<div class="line">         pos = n, n = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>(n-&gt;member.next, typeof(*n), member))</div>
+</div><!-- fragment --><p>dlist_for_each_entry_safe - iterate over list of given type safe against removal of list entry @pos: the type * to use as a loop cursor. <br  />
+: another type * to use as temporary storage @head: the head for your list. @member: the name of the list_struct within the struct. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00247">247</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5e6ca37912e25e5f5913df69c349ee50" name="a5e6ca37912e25e5f5913df69c349ee50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e6ca37912e25e5f5913df69c349ee50">&#9670;&#160;</a></span>bflb_dlist_for_each_entry_safe_reverse</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_for_each_entry_safe_reverse</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pos, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">n, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">    <span class="keywordflow">for</span> (pos = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>((head)-&gt;prev, typeof(*pos), field),   \</div>
+<div class="line">        n = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>(pos-&gt;member.prev, typeof(*pos), member); \</div>
+<div class="line">         &amp;pos-&gt;member != (head);                                 \</div>
+<div class="line">         pos = n, n = <a class="code hl_define" href="bflb__list_8h.html#a8454d50623a19d1622cc5d9efcdd444c">bflb_dlist_entry</a>(pos-&gt;member.prev, typeof(*pos), member))</div>
+</div><!-- fragment --><p>dlist_for_each_entry_safe - iterate over list of given type safe against removal of list entry @pos: the type * to use as a loop cursor. <br  />
+: another type * to use as temporary storage @head: the head for your list. @member: the name of the list_struct within the struct. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00260">260</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a296c3cf4a4f7c1ce1801a297ddc30411" name="a296c3cf4a4f7c1ce1801a297ddc30411"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296c3cf4a4f7c1ce1801a297ddc30411">&#9670;&#160;</a></span>bflb_dlist_for_each_prev</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_for_each_prev</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pos, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    for (pos = (head)-&gt;prev; pos != (head); pos = pos-&gt;prev)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>dlist_for_each_prev - iterate over a list @pos: the dlist_t * to use as a loop cursor. @head: the head for your list. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00202">202</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a813b01640ea0c683cfd231336e4d5dc3" name="a813b01640ea0c683cfd231336e4d5dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a813b01640ea0c683cfd231336e4d5dc3">&#9670;&#160;</a></span>bflb_dlist_for_each_prev_safe</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_for_each_prev_safe</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pos, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">n, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">    <span class="keywordflow">for</span> (pos = (head)-&gt;prev, n = pos-&gt;prev; pos != (head); \</div>
+<div class="line">         pos = n, n = pos-&gt;prev)</div>
+</div><!-- fragment -->
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00215">215</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae3fd417b0259d7dd72bf2592ddbc6510" name="ae3fd417b0259d7dd72bf2592ddbc6510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3fd417b0259d7dd72bf2592ddbc6510">&#9670;&#160;</a></span>bflb_dlist_for_each_safe</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define bflb_dlist_for_each_safe</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">pos, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">n, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">    <span class="keywordflow">for</span> (pos = (head)-&gt;next, n = pos-&gt;next; pos != (head); \</div>
+<div class="line">         pos = n, n = pos-&gt;next)</div>
+</div><!-- fragment --><p>dlist_for_each_safe - iterate over a list safe against removal of list entry @pos: the dlist_t * to use as a loop cursor. <br  />
+: another dlist_t * to use as temporary storage @head: the head for your list. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00211">211</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7f892eaea80b7263b731c5557b1ae7a4" name="a7f892eaea80b7263b731c5557b1ae7a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f892eaea80b7263b731c5557b1ae7a4">&#9670;&#160;</a></span>DLIST_DEFINE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DLIST_DEFINE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">list</td><td>)</td>
+          <td>&#160;&#160;&#160;    <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> list = { &amp;(list), &amp;(list) }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>initialize a dlist object </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00156">156</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac9690941071e09cac8f3def3f1d3b1a1" name="ac9690941071e09cac8f3def3f1d3b1a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9690941071e09cac8f3def3f1d3b1a1">&#9670;&#160;</a></span>DLIST_OBJECT_INIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DLIST_OBJECT_INIT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">object</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">    {                             \</div>
+<div class="line">        &amp;(object), &amp;(<span class="keywordtype">object</span>)      \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p>initialize a dlist object </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00149">149</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类型定义说明</h2>
+<a id="a64369b69382a2867f3ae4e97048b7115" name="a64369b69382a2867f3ae4e97048b7115"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64369b69382a2867f3ae4e97048b7115">&#9670;&#160;</a></span>bflb_dlist_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structbflb__dlist__node.html">bflb_dlist_node</a> <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Type for lists. </p>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00046">46</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a266beb5be7d1838c6809c82405c249b6" name="a266beb5be7d1838c6809c82405c249b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a266beb5be7d1838c6809c82405c249b6">&#9670;&#160;</a></span>bflb_dlist_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void bflb_dlist_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>initialize a list </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>list to be initialized </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00053">53</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afb1a0b65e0d0188ffebd5f01acbb1269" name="afb1a0b65e0d0188ffebd5f01acbb1269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb1a0b65e0d0188ffebd5f01acbb1269">&#9670;&#160;</a></span>bflb_dlist_insert_after()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void bflb_dlist_insert_after </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>insert a node after a list </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>list to insert it </td></tr>
+    <tr><td class="paramname">n</td><td>new node to be inserted </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00064">64</a> 行定义.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__list_8h_afb1a0b65e0d0188ffebd5f01acbb1269_icgraph.png" border="0" usemap="#abflb__list_8h_afb1a0b65e0d0188ffebd5f01acbb1269_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="ac543ec0f965ef8f6671326791ab16c4b" name="ac543ec0f965ef8f6671326791ab16c4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac543ec0f965ef8f6671326791ab16c4b">&#9670;&#160;</a></span>bflb_dlist_insert_before()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void bflb_dlist_insert_before </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>insert a node before a list </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>new node to be inserted </td></tr>
+    <tr><td class="paramname">l</td><td>list to insert it </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00079">79</a> 行定义.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__list_8h_ac543ec0f965ef8f6671326791ab16c4b_icgraph.png" border="0" usemap="#abflb__list_8h_ac543ec0f965ef8f6671326791ab16c4b_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="ad3fa3c36dec535336357b1ab7f88bbbc" name="ad3fa3c36dec535336357b1ab7f88bbbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3fa3c36dec535336357b1ab7f88bbbc">&#9670;&#160;</a></span>bflb_dlist_isempty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int bflb_dlist_isempty </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>tests whether a list is empty </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>the list to test. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00124">124</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4af2f8f17abbbe7ac2474553883e172d" name="a4af2f8f17abbbe7ac2474553883e172d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af2f8f17abbbe7ac2474553883e172d">&#9670;&#160;</a></span>bflb_dlist_len()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static unsigned int bflb_dlist_len </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>get the list length </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>the list to get. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00133">133</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af16594cec22f734cfec404430c19eea6" name="af16594cec22f734cfec404430c19eea6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af16594cec22f734cfec404430c19eea6">&#9670;&#160;</a></span>bflb_dlist_move_head()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void bflb_dlist_move_head </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>move node from list. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>the node to remove from the list. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00104">104</a> 行定义.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__list_8h_af16594cec22f734cfec404430c19eea6_cgraph.png" border="0" usemap="#abflb__list_8h_af16594cec22f734cfec404430c19eea6_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="af1a007ea203719ccb6b9c16ab626807c" name="af1a007ea203719ccb6b9c16ab626807c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1a007ea203719ccb6b9c16ab626807c">&#9670;&#160;</a></span>bflb_dlist_move_tail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void bflb_dlist_move_tail </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>move node from list. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>the node to remove from the list. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00114">114</a> 行定义.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__list_8h_af1a007ea203719ccb6b9c16ab626807c_cgraph.png" border="0" usemap="#abflb__list_8h_af1a007ea203719ccb6b9c16ab626807c_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="aeae07f15659b7cae8de68059d4e51728" name="aeae07f15659b7cae8de68059d4e51728"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeae07f15659b7cae8de68059d4e51728">&#9670;&#160;</a></span>bflb_dlist_remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void bflb_dlist_remove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="bflb__list_8h.html#a64369b69382a2867f3ae4e97048b7115">bflb_dlist_t</a> *&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>remove node from list. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>the node to remove from the list. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bflb__list_8h_source.html">bflb_list.h</a> 第 <a class="el" href="bflb__list_8h_source.html#l00092">92</a> 行定义.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="bflb__list_8h_aeae07f15659b7cae8de68059d4e51728_icgraph.png" border="0" usemap="#abflb__list_8h_aeae07f15659b7cae8de68059d4e51728_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__list_8h.html">bflb_list.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

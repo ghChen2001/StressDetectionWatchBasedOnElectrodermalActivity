@@ -1,0 +1,38 @@
+var group___c_a_m =
+[
+    [ "CAMERA input format definition", "group___c_a_m___i_n_p_u_t___f_o_r_m_a_t.html", "group___c_a_m___i_n_p_u_t___f_o_r_m_a_t" ],
+    [ "CAMERA output format definition", "group___c_a_m___o_u_t_p_u_t___f_o_r_m_a_t.html", "group___c_a_m___o_u_t_p_u_t___f_o_r_m_a_t" ],
+    [ "CAMERA interrupt status definition", "group___c_a_m___i_n_t_s_t_s.html", "group___c_a_m___i_n_t_s_t_s" ],
+    [ "CAMERA interrupt mask definition", "group___c_a_m___i_n_t_m_a_s_k.html", "group___c_a_m___i_n_t_m_a_s_k" ],
+    [ "CAMERA interrupt clear definition", "group___c_a_m___i_n_t_c_l_r.html", "group___c_a_m___i_n_t_c_l_r" ],
+    [ "CAMERA hsync/vsync polarity active level definition", "group___c_a_m___p_o_l_a_r_i_t_y.html", "group___c_a_m___p_o_l_a_r_i_t_y" ],
+    [ "CAMERA input source definition", "group___c_a_m___i_n_p_u_t___s_o_u_r_c_e.html", "group___c_a_m___i_n_p_u_t___s_o_u_r_c_e" ],
+    [ "CAMERA burst length definition", "group___c_a_m___b_u_r_s_t.html", "group___c_a_m___b_u_r_s_t" ],
+    [ "CAMERA feature control cmd definition", "group___c_a_m___c_m_d.html", "group___c_a_m___c_m_d" ],
+    [ "bflb_cam_config_s", "structbflb__cam__config__s.html", [
+      [ "h_blank", "structbflb__cam__config__s.html#aefcbb2713b2bb30f5ac165c47d9fd021", null ],
+      [ "input_format", "structbflb__cam__config__s.html#ad17d2e0c77e524e1f41c45884ef2c6de", null ],
+      [ "input_source", "structbflb__cam__config__s.html#ab020466af3d41754ca4191ba665841e1", null ],
+      [ "output_bufaddr", "structbflb__cam__config__s.html#a17e87177c1a6e00aa1e4b8f2621fbe49", null ],
+      [ "output_bufsize", "structbflb__cam__config__s.html#ae35ec765229e4ee7a8d044e24785ac9d", null ],
+      [ "output_format", "structbflb__cam__config__s.html#aa3861edfad05d8dc360c017a5c6fb33b", null ],
+      [ "pixel_clock", "structbflb__cam__config__s.html#a5f1f18c2fa0826e3bf13db4d82975b90", null ],
+      [ "resolution_x", "structbflb__cam__config__s.html#a21271c519ee5f1064ee5f1a2bdb29881", null ],
+      [ "resolution_y", "structbflb__cam__config__s.html#ab40cbf55c2b7b06872cfaa03c35bf20d", null ],
+      [ "with_mjpeg", "structbflb__cam__config__s.html#adcffa5f42cc703b58e818304e94a64db", null ]
+    ] ],
+    [ "bflb_cam_crop_hsync", "group___c_a_m.html#gadc35060e88ab98ee48fb618607a14412", null ],
+    [ "bflb_cam_crop_vsync", "group___c_a_m.html#gac9853bde4dc44c656288ca2726071a63", null ],
+    [ "bflb_cam_feature_control", "group___c_a_m.html#ga93c4a42a6ea079680af658ba5cf77623", null ],
+    [ "bflb_cam_filter_frame_period", "group___c_a_m.html#gacba5447a7ccf375615230f27737f85b9", null ],
+    [ "bflb_cam_get_frame_count", "group___c_a_m.html#ga3703f2b9d23adba0df219f374bee304f", null ],
+    [ "bflb_cam_get_frame_info", "group___c_a_m.html#gaf459713d088bc2f6da829ee7c9ca2787", null ],
+    [ "bflb_cam_get_intstatus", "group___c_a_m.html#gae88ecd5bdcd4bc8fa767f8af086e9651", null ],
+    [ "bflb_cam_init", "group___c_a_m.html#gab2f3c332ad12067f1e3b9d3023fe3067", null ],
+    [ "bflb_cam_int_clear", "group___c_a_m.html#ga62505e53ea3382aedeb64c89d791570a", null ],
+    [ "bflb_cam_int_mask", "group___c_a_m.html#ga5987cda3c90a01e7f16019781188d55c", null ],
+    [ "bflb_cam_pop_one_frame", "group___c_a_m.html#gac50cc2de26e2c1da5656a5cbbeaf88e5", null ],
+    [ "bflb_cam_start", "group___c_a_m.html#ga7b61f71251a12c2cca1090dfa20fcfa3", null ],
+    [ "bflb_cam_stop", "group___c_a_m.html#gaab383e643e93135f9a9a0421443a428e", null ],
+    [ "bflb_cam_swap_input_yu_order", "group___c_a_m.html#ga5675d345da54861d4798561d2e39c9d1", null ]
+];

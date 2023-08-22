@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LHAL Driver: include/bflb_dac.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">LHAL Driver<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">LHAL Drivers for bouffalolab Series MicroController</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('bflb__dac_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bflb_dac.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bflb__dac_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _BFLB_DAC_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _BFLB_DAC_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="bflb__core_8h.html">bflb_core.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="group___d_a_c___c_l_k___d_i_v.html#gab8b7d7e8036f79abed3ed55119970c45">   17</a></span><span class="preprocessor">#define DAC_CLK_DIV_16 0</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="group___d_a_c___c_l_k___d_i_v.html#gafdbae10160ebcc0629d408c16df78a25">   18</a></span><span class="preprocessor">#define DAC_CLK_DIV_32 1</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="group___d_a_c___c_l_k___d_i_v.html#gaa391088def081a42c62ece133e7bb067">   19</a></span><span class="preprocessor">#define DAC_CLK_DIV_64 3</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="group___d_a_c___c_l_k___d_i_v.html#ga187d6ccf34b8e7e78127573a8bd0e85e">   20</a></span><span class="preprocessor">#define DAC_CLK_DIV_1  4</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___d_a_c___c_h_a_n_n_e_l.html#ga5bdce760d76b7797faa3d512ccb1b35e">   28</a></span><span class="preprocessor">#define DAC_CHANNEL_A (1 &lt;&lt; 0)</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group___d_a_c___c_h_a_n_n_e_l.html#gaa020bdd087f2d626d9a93456908f54e4">   29</a></span><span class="preprocessor">#define DAC_CHANNEL_B (1 &lt;&lt; 1)</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___d_a_c.html#ga8631cc190e717e4e05b9a82e95077336">   44</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___d_a_c.html#ga8631cc190e717e4e05b9a82e95077336">bflb_dac_init</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t clk_div);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="group___d_a_c.html#gacba5349ac816337c65c8a6307d183521">   51</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___d_a_c.html#gacba5349ac816337c65c8a6307d183521">bflb_dac_deinit</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="group___d_a_c.html#gac5b0b34fc30b85fd57bbf23a8d11d6c6">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___d_a_c.html#gac5b0b34fc30b85fd57bbf23a8d11d6c6">bflb_dac_link_txdma</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, <span class="keywordtype">bool</span> enable);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="group___d_a_c.html#ga0367032357fa6ba9f2def96a451dec26">   67</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___d_a_c.html#ga0367032357fa6ba9f2def96a451dec26">bflb_dac_channel_enable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="group___d_a_c.html#gab46015da73b90823e4446f25240ac167">   75</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___d_a_c.html#gab46015da73b90823e4446f25240ac167">bflb_dac_channel_disable</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="group___d_a_c.html#gaa3de974328559709a9ce344ff1fd627d">   84</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group___d_a_c.html#gaa3de974328559709a9ce344ff1fd627d">bflb_dac_set_value</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structbflb__device__s.html">bflb_device_s</a> *dev, uint8_t ch, uint16_t value);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abflb__core_8h_html"><div class="ttname"><a href="bflb__core_8h.html">bflb_core.h</a></div></div>
+<div class="ttc" id="agroup___d_a_c_html_ga0367032357fa6ba9f2def96a451dec26"><div class="ttname"><a href="group___d_a_c.html#ga0367032357fa6ba9f2def96a451dec26">bflb_dac_channel_enable</a></div><div class="ttdeci">void bflb_dac_channel_enable(struct bflb_device_s *dev, uint8_t ch)</div><div class="ttdoc">Enable dac channel.</div></div>
+<div class="ttc" id="agroup___d_a_c_html_ga8631cc190e717e4e05b9a82e95077336"><div class="ttname"><a href="group___d_a_c.html#ga8631cc190e717e4e05b9a82e95077336">bflb_dac_init</a></div><div class="ttdeci">void bflb_dac_init(struct bflb_device_s *dev, uint8_t clk_div)</div><div class="ttdoc">Initialize dac frequence.</div></div>
+<div class="ttc" id="agroup___d_a_c_html_gaa3de974328559709a9ce344ff1fd627d"><div class="ttname"><a href="group___d_a_c.html#gaa3de974328559709a9ce344ff1fd627d">bflb_dac_set_value</a></div><div class="ttdeci">void bflb_dac_set_value(struct bflb_device_s *dev, uint8_t ch, uint16_t value)</div><div class="ttdoc">Set dac output value</div></div>
+<div class="ttc" id="agroup___d_a_c_html_gab46015da73b90823e4446f25240ac167"><div class="ttname"><a href="group___d_a_c.html#gab46015da73b90823e4446f25240ac167">bflb_dac_channel_disable</a></div><div class="ttdeci">void bflb_dac_channel_disable(struct bflb_device_s *dev, uint8_t ch)</div><div class="ttdoc">Disable dac channel.</div></div>
+<div class="ttc" id="agroup___d_a_c_html_gac5b0b34fc30b85fd57bbf23a8d11d6c6"><div class="ttname"><a href="group___d_a_c.html#gac5b0b34fc30b85fd57bbf23a8d11d6c6">bflb_dac_link_txdma</a></div><div class="ttdeci">void bflb_dac_link_txdma(struct bflb_device_s *dev, bool enable)</div><div class="ttdoc">Enable dac tx dma.</div></div>
+<div class="ttc" id="agroup___d_a_c_html_gacba5349ac816337c65c8a6307d183521"><div class="ttname"><a href="group___d_a_c.html#gacba5349ac816337c65c8a6307d183521">bflb_dac_deinit</a></div><div class="ttdeci">void bflb_dac_deinit(struct bflb_device_s *dev)</div><div class="ttdoc">Deinitialize dac.</div></div>
+<div class="ttc" id="astructbflb__device__s_html"><div class="ttname"><a href="structbflb__device__s.html">bflb_device_s</a></div><div class="ttdef"><b>Definition:</b> <a href="bflb__core_8h_source.html#l00091">bflb_core.h:91</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="bflb__dac_8h.html">bflb_dac.h</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>
