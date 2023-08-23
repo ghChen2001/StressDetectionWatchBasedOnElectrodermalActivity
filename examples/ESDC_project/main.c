@@ -1585,60 +1585,62 @@ static void CLOCK_task(void *pvParameters)
     uint8_t rtc_date = 0;
     uint8_t rtc_week = 7;
     uint16_t rtc_year = 0;
-    bflb_timestamp_t info;
+    // bflb_timestamp_t info;
+    struct tm *info;
+    
 
     printf("CLOCK task start \r\n");
     while (1) {
         // printf("time:%lld\r\n", BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc)));
         rtc_sec = BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc)) + time_base + GMTp8;
-        // info = localtime(&rtc_sec);
-        bflb_timestamp_utc2time(rtc_sec, &info);
+        info = localtime(&rtc_sec);
+        // bflb_timestamp_utc2time(rtc_sec, &info);
         // printf("%s\r\n", asctime(info));
 
-        if (info.sec != rtc_sec0) {
-            rtc_sec0 = info.sec;
+        if (info->tm_sec != rtc_sec0) {
+            rtc_sec0 = info->tm_sec;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateSecLabel(info.sec);
+            ui_UpdateSecLabel(info->tm_sec);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info.min != rtc_min) {
-            rtc_min = info.min;
+        if (info->tm_min != rtc_min) {
+            rtc_min = info->tm_min;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateMinLabel(rtc_min);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info.hour != rtc_hour) {
-            rtc_hour = info.hour;
+        if (info->tm_hour != rtc_hour) {
+            rtc_hour = info->tm_hour;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateHourLabel(rtc_hour);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info.mday != rtc_date) {
-            rtc_date = info.mday;
+        if (info->tm_mday != rtc_date) {
+            rtc_date = info->tm_mday;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateDateLabel(rtc_date);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info.mon != rtc_mon) {
-            rtc_mon = info.mon;
+        if (info->tm_mon != rtc_mon) {
+            rtc_mon = info->tm_mon;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateMonLabel(rtc_mon + 1);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info.year != rtc_year) {
-            rtc_year = info.year;
+        if (info->tm_year != rtc_year) {
+            rtc_year = info->tm_year;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateYearLabel(rtc_year + 1900);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info.wday != rtc_week) {
-            rtc_week = info.wday;
+        if (info->tm_wday != rtc_week) {
+            rtc_week = info->tm_wday;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateWeekLabel(rtc_week);
             xSemaphoreGive(xMutex_lvgl);
@@ -1676,7 +1678,8 @@ static void WIFI_task(void *pvParameters)
                 memset(weatherCityName, 0, 10);
                 memset(weatherText, 0, 10);
                 memset(weatherTemp, 0, 10);
-                weather_get("ip", weatherCityName, weatherText, &weatherCode, weatherTemp);
+                weather_get("nanjing", weatherCityName, weatherText, &weatherCode, weatherTemp);
+                // weather_get("ip", weatherCityName, weatherText, &weatherCode, weatherTemp);
                 xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
                 ui_updateWeather(weatherCityName, weatherText, weatherCode, weatherTemp);
                 xSemaphoreGive(xMutex_lvgl);
