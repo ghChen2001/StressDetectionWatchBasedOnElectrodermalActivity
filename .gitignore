@@ -14,7 +14,7 @@ chiptest
 **/__pycache__
 **/build
 *.pyc
-*.xlsx
+# *.xlsx
 *.xlsm
 *.vsdx
 *.xls
