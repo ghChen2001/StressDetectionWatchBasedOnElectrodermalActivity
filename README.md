@@ -2,7 +2,12 @@
 
 # Introduction
 Wearable smart? watch for stress classification on BL618. 
+Project directory: ./examples/ESDC_project/
 
 # Project Architecture
 
 ![Project Architecture](fig1.svg)
+
+# Show
+
+![Show1](show1.jpg)
