@@ -8,7 +8,7 @@ Project directory: ./examples/ESDC_project/
 
 ![Project Architecture](fig1.svg)
 
-# Show
+# Images
 ![Show0](show0.jpg)
 ![Show1](show1.jpg)
 ![Show2](show2.jpg)
