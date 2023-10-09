@@ -527,6 +527,7 @@ static void peripheral_init(void)
     //     .src_width = DMA_DATA_WIDTH_8BIT,
     //     .dst_width = DMA_DATA_WIDTH_8BIT,
     // };
+    
     /* Now do not use DMA */
     bflb_spi_init(spi0, &spi_cfg);
     // bflb_spi_txint_mask(spi0, false);
@@ -722,7 +723,7 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
         phase = AD5940_ComplexPhase(&res) * 180 / MATH_PI;
         S = 1000000 / mag;
         printf("Rtia:%.3f; Real:%.3f; Image:%.3f; Mag:%.3f; Conductance: %.3f uS; Phase:%.3f \r\n", RtiaMag, res.Real, res.Image, mag, S, phase);
-        printf("{Conductance}%d, %.3f\r\n", EDAcnt, S);
+        printf("Conductance=%.3f\r\n", S);
         // eda_transfer_cnt++;
         if (isnanf(S) || (S > 100.0f)) {
             EDAcnt = 0;
