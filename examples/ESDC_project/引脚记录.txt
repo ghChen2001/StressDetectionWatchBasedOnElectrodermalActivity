@@ -33,6 +33,3 @@ GPIO31			        AFE4404_RST
 GPIO32	    LED		    
 GPIO33	    KEY		
 GPIO34			
-
-调试记录：
-I2C时序出错

@@ -16,13 +16,9 @@ ENTRY(__start)
 
 StackSize    = 0x1000; /*  4KB */
 HeapMinSize  = 0x1000; /*  4KB */
-psram_heap_min_size = 0x1000;
-nocache_max_size = 20K;
+psram_min_size = 0x1000;
+
 __EM_SIZE = DEFINED(btble_controller_init) ? 32K : 0K;
-wifi_ram_max_size = DEFINED(wifi_main) ? (160K -  __EM_SIZE): 32K;
-
-remain_wifi_ram = 160K - wifi_ram_max_size - __EM_SIZE;
-
 __RFTLV_SIZE_OFFSET = 1K;
 __RFTLV_SIZE_HOLE = 2K;
 __RFTLV_HEAD1_H = (0x46524C42); /* BLRF */
@@ -30,14 +26,14 @@ __RFTLV_HEAD1_L = (0x41524150); /* PAPA */
 
 MEMORY
 {
-    fw_header_memory  (rx)  : ORIGIN = 0xA0000000 - 0x1000, LENGTH = 4K
-    xip_memory  (rx)  : ORIGIN = 0xA0000000, LENGTH = 4M
-    ram_psram  (wxa)   : ORIGIN = 0xA8000000, LENGTH = 4M
-    itcm_memory (rx)  : ORIGIN = 0x62FC0000, LENGTH = 12K
-    dtcm_memory (rx)  : ORIGIN = 0x62FC3000, LENGTH = 4K
-    nocache_ram_memory (!rx) : ORIGIN = 0x22FC4000, LENGTH = nocache_max_size
-    ram_memory  (!rx) : ORIGIN = 0x62FC4000 + nocache_max_size, LENGTH = 320K - 12K - 4K - nocache_max_size + remain_wifi_ram
-    ram_wifi  (wxa)   : ORIGIN = 0x23038000 - wifi_ram_max_size - __EM_SIZE, LENGTH = wifi_ram_max_size
+    fw_header_memory  (rx)  : ORIGIN = 0x62FC0000 - (256+16), LENGTH = 256+16
+    code_memory  (rx)  : ORIGIN = 0x62FC0000, LENGTH = 200K
+    psram  (wxa)   : ORIGIN = 0xA8000000, LENGTH = 4M
+    itcm_memory (rx)  : ORIGIN = 0x62FF2000, LENGTH = 0K
+    dtcm_memory (rx)  : ORIGIN = 0x62FF2000, LENGTH = 4K
+    nocache_ram_memory (!rx) : ORIGIN = 0x22FF3000, LENGTH = 60K
+    ram_memory  (!rx) : ORIGIN = 0x63002000, LENGTH = 320K-200K-4K-60K
+    ram_wifi  (wxa)   : ORIGIN = 0x23010000, LENGTH = 160K - __EM_SIZE
 }
 
 SECTIONS
@@ -48,6 +44,8 @@ SECTIONS
     .fw_header :
     {
         KEEP(*(.fw_header))
+        LONG(ORIGIN(code_memory))
+        LONG(0x48474553)
     } > fw_header_memory
 
     .init :
@@ -55,16 +53,16 @@ SECTIONS
         KEEP (*(SORT_NONE(.init)))
         KEEP (*(SORT_NONE(.vector)))
 
-    } > xip_memory
+    } > code_memory
 
     .rftlv.tool :
     {
-        . = ORIGIN(xip_memory) + __RFTLV_SIZE_OFFSET;
+        . = ORIGIN(code_memory) + __RFTLV_SIZE_OFFSET;
         PROVIDE( _ld_symbol_rftlv_address = . );
         LONG(__RFTLV_HEAD1_H);
         LONG(__RFTLV_HEAD1_L);
-        . = ORIGIN(xip_memory) + __RFTLV_SIZE_OFFSET + __RFTLV_SIZE_HOLE;
-    } > xip_memory
+        . = ORIGIN(code_memory) + __RFTLV_SIZE_OFFSET + __RFTLV_SIZE_HOLE;
+    } > code_memory
 
     .text :
     {
@@ -92,46 +90,12 @@ SECTIONS
         . = ALIGN(4);
         __usbh_class_info_end__ = .;
 
-        /*put .rodata**/
-        *(EXCLUDE_FILE( *bl616_glb*.o* \
-                        *bl616_pds*.o* \
-                        *bl616_common*.o* \
-                        *bl616_sf_cfg*.o* \
-                        *bl616_sf_ctrl*.o* \
-                        *bl616_sflash*.o* \
-                        *bl616_xip_sflash*.o* \
-                        *bl616_ef_ctrl*.o* \
-                        *bl616_romapi_patch*.o* ).rodata*)
-
         *(.srodata)
         *(.srodata.*)
 
-        /* _dump_sections for bflb_coredump.c*/
-        . = ALIGN(4);
-        PROVIDE( _dump_sections = ABSOLUTE(.));
-        LONG(ORIGIN(itcm_memory));
-        LONG(LENGTH(itcm_memory));
-        LONG(ORIGIN(dtcm_memory));
-        LONG(LENGTH(dtcm_memory));
-        LONG(ORIGIN(ram_memory));
-        LONG(LENGTH(ram_memory));
-        LONG(ORIGIN(nocache_ram_memory));
-        LONG(LENGTH(nocache_ram_memory));
-        LONG(ORIGIN(ram_wifi));
-        LONG(LENGTH(ram_wifi));
-        /*
-        LONG(ORIGIN(ram_psram));
-        LONG(LENGTH(ram_psram));
-         */
-        LONG(0x28010000); /* bt memory */
-        LONG(__EM_SIZE);
-        LONG(0xffffffff);
-        LONG(0xffffffff);
-        /* _dump_sections for bl_coredump.c*/
-
         . = ALIGN(4);
         __text_code_end__ = .;
-    } > xip_memory
+    } > code_memory
 
     . = ALIGN(4);
     __itcm_load_addr = .;
@@ -140,22 +104,6 @@ SECTIONS
     {
         . = ALIGN(4);
         __tcm_code_start__ = .;
-
-        *(.tcm_code.*)
-        *(.tcm_const.*)
-        *(.sclock_rlt_code.*)
-        *(.sclock_rlt_const.*)
-
-        *bl616_glb*.o*(.rodata*)
-        *bl616_pds*.o*(.rodata*)
-        *bl616_common*.o*(.rodata*)
-        *bl616_sf_cfg*.o*(.rodata*)
-        *bl616_sf_ctrl*.o*(.rodata*)
-        *bl616_sflash*.o*(.rodata*)
-        *bl616_xip_sflash*.o*(.rodata*)
-        *bl616_ef_ctrl*.o*(.rodata*)
-        *bl616_romapi_patch*.o*(.rodata*)
-
         . = ALIGN(4);
         __tcm_code_end__ = .;
     } > itcm_memory
@@ -189,8 +137,6 @@ SECTIONS
      * size of stack_dummy section */
     __StackTop = ORIGIN(dtcm_memory) + LENGTH(dtcm_memory);
     PROVIDE( __freertos_irq_stack_top = __StackTop);
-    PROVIDE( _sp_main = __StackTop);
-    PROVIDE( _sp_base = __StackTop - StackSize);
     __StackLimit = __StackTop - SIZEOF(.stack_dummy);
 
     /* Check if data + heap + stack exceeds RAM limit */
@@ -236,22 +182,8 @@ SECTIONS
         __ram_data_end__ = .;
     } > ram_memory
 
-
-    __psram_load_addr = (__ram_load_addr + SIZEOF (RAM_DATA));
-
-    .psram_data_region : AT (__psram_load_addr)
-    {
-        . = ALIGN(4);
-        __psram_data_start__ = .;
-
-        KEEP(*(.psram_data*))
-
-        . = ALIGN(4);
-        __psram_data_end__ = .;
-    } > ram_psram
-
-    __etext_final = (__psram_load_addr + SIZEOF (.psram_data_region));
-    ASSERT(__etext_final <= ORIGIN(xip_memory) + LENGTH(xip_memory), "code memory overflow")
+    __etext_final = (__ram_load_addr + SIZEOF (RAM_DATA));
+    ASSERT(__etext_final <= ORIGIN(code_memory) + LENGTH(code_memory), "code memory overflow")
 
     .bss (NOLOAD) :
     {
@@ -294,6 +226,8 @@ SECTIONS
         . = ALIGN(4);
         __HeapBase = .;
 
+        /*__end__ = .;*/
+        /*end = __end__;*/
         KEEP(*(.heap*))
 
         . = ALIGN(4);
@@ -303,17 +237,20 @@ SECTIONS
     __HeapLimit = ORIGIN(ram_memory) + LENGTH(ram_memory);
     ASSERT(__HeapLimit - __HeapBase >= HeapMinSize, "heap region overflow")
 
-    .psram_noinit_data (NOLOAD):
+    .psmram_data (NOLOAD):
     {
         . = ALIGN(4);
-        __psram_noinit_data_start__ = .;
+        __psram_data_start__ = .;
 
+        /*__end__ = .;*/
+        /*end = __end__;*/
+        KEEP(*(.psram_data*))
         KEEP(*(.psram_noinit*))
         KEEP(*(.img_buf*))
 
         . = ALIGN(4);
-        __psram_noinit_data_end__ = .;
-    } > ram_psram
+        __psram_data_end__ = .;
+    } > psram
 
     .psram_heap (NOLOAD):
     {
@@ -322,10 +259,10 @@ SECTIONS
         KEEP(*(.psram_heap*))
         . = ALIGN(4);
         __psram_heap_end = .;
-    } > ram_psram
+    } > psram
 
-    __psram_limit = ORIGIN(ram_psram) + LENGTH(ram_psram);
-    ASSERT(__psram_limit - __psram_heap_base >= psram_heap_min_size, "psram heap region overflow")
+    __psram_limit = ORIGIN(psram) + LENGTH(psram);
+    ASSERT(__psram_limit - __psram_heap_base >= psram_min_size, "psram heap region overflow")
  
     .wifibss (NOLOAD) :
     {
@@ -351,6 +288,6 @@ SECTIONS
     PROVIDE( _heap_wifi_start = . );
     PROVIDE( _heap_wifi_size = ORIGIN(ram_wifi) + LENGTH(ram_wifi) - _heap_wifi_start );
     PROVIDE(__LD_CONFIG_EM_SEL = __EM_SIZE);
-    ASSERT((wifi_ram_max_size + __EM_SIZE) <= 160K,"wifi ram overflow")
+
 }
 

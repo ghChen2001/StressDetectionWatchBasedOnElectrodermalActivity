@@ -724,6 +724,7 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
         S = 1000000 / mag;
         printf("Rtia:%.3f; Real:%.3f; Image:%.3f; Mag:%.3f; Conductance: %.3f uS; Phase:%.3f \r\n", RtiaMag, res.Real, res.Image, mag, S, phase);
         printf("Conductance=%.3f\r\n", S);
+        printf("Phase=%.3f\r\n", phase);
         // eda_transfer_cnt++;
         if (isnanf(S) || (S > 100.0f)) {
             EDAcnt = 0;
