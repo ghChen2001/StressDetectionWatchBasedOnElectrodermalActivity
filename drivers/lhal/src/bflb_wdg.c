@@ -35,6 +35,12 @@ void bflb_wdg_init(struct bflb_device_s *dev, const struct bflb_wdg_config_s *co
 
     putreg16(0xBABA, reg_base + TIMER_WFAR_OFFSET);
     putreg16(0xEB10, reg_base + TIMER_WSAR_OFFSET);
+    regval = getreg32(reg_base + TIMER_WCR_OFFSET);
+    regval |= TIMER_WCR;
+    putreg32(regval, reg_base + TIMER_WCR_OFFSET);
+    
+    putreg16(0xBABA, reg_base + TIMER_WFAR_OFFSET);
+    putreg16(0xEB10, reg_base + TIMER_WSAR_OFFSET);
     putreg16(config->comp_val, reg_base + TIMER_WMR_OFFSET);
 }
 

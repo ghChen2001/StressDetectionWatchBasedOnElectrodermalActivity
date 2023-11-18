@@ -37,7 +37,7 @@
 #include "bl616_hbn.h"
 #include "bflb_acomp.h"
 #include "bl616_glb.h"
-#include "bl616_xip_sflash.h"
+#include "bflb_xip_sflash.h"
 
 /** @addtogroup  BL616_Peripheral_Driver
  *  @{
@@ -157,23 +157,23 @@ void ATTR_TCM_SECTION HBN_Mode_Enter(HBN_APP_CFG_Type *cfg)
  * @return None
  *
 *******************************************************************************/
-void ATTR_TCM_SECTION HBN_Power_Down_Flash(SPI_Flash_Cfg_Type *flashCfg)
+void ATTR_TCM_SECTION HBN_Power_Down_Flash(spi_flash_cfg_type *flashCfg)
 {
-    SPI_Flash_Cfg_Type bhFlashCfg;
+    spi_flash_cfg_type bhFlashCfg;
 
     if (flashCfg == NULL) {
-        L1C_DCache_Invalid_By_Addr(BL616_FLASH_XIP_BASE + 8 + 4, sizeof(SPI_Flash_Cfg_Type));
-        XIP_SFlash_Read_Via_Cache_Need_Lock(BL616_FLASH_XIP_BASE + 8 + 4, (uint8_t *)(&bhFlashCfg), sizeof(SPI_Flash_Cfg_Type));
-        L1C_DCache_Invalid_By_Addr(BL616_FLASH_XIP_BASE + 8 + 4, sizeof(SPI_Flash_Cfg_Type));
+        L1C_DCache_Invalid_By_Addr(BL616_FLASH_XIP_BASE + 8 + 4, sizeof(spi_flash_cfg_type));
+        bflb_xip_sflash_read_via_cache_need_lock(BL616_FLASH_XIP_BASE + 8 + 4, (uint8_t *)(&bhFlashCfg), sizeof(spi_flash_cfg_type), 0, SF_CTRL_FLASH_BANK0);
+        L1C_DCache_Invalid_By_Addr(BL616_FLASH_XIP_BASE + 8 + 4, sizeof(spi_flash_cfg_type));
 
-        SF_Ctrl_Set_Owner(SF_CTRL_OWNER_SAHB);
-        SFlash_Reset_Continue_Read(&bhFlashCfg);
+        bflb_sf_ctrl_set_owner(SF_CTRL_OWNER_SAHB);
+        bflb_sflash_reset_continue_read(&bhFlashCfg);
     } else {
-        SF_Ctrl_Set_Owner(SF_CTRL_OWNER_SAHB);
-        SFlash_Reset_Continue_Read(flashCfg);
+        bflb_sf_ctrl_set_owner(SF_CTRL_OWNER_SAHB);
+        bflb_sflash_reset_continue_read(flashCfg);
     }
 
-    SFlash_Powerdown();
+    bflb_sflash_powerdown();
 }
 
 /****************************************************************************/ /**
@@ -181,13 +181,29 @@ void ATTR_TCM_SECTION HBN_Power_Down_Flash(SPI_Flash_Cfg_Type *flashCfg)
  *
  * @param  aGPIOIeCfg: AON GPIO input enable config. Bit(s) of Wakeup GPIO(s) must not be set to
  *                     0(s),say when use GPIO7 as wake up pin,aGPIOIeCfg should be 0x01.
- * @param  ldoLevel: LDO volatge level
- * @param  hbnLevel: HBN work level
+ * @param  ldoLevel: LDO volatge level, this parameter can be one of the following values:
+ *           @arg HBN_LDO_LEVEL_0P70V
+ *           @arg HBN_LDO_LEVEL_0P75V
+ *           @arg HBN_LDO_LEVEL_0P80V
+ *           @arg HBN_LDO_LEVEL_0P85V
+ *           @arg HBN_LDO_LEVEL_0P90V
+ *           @arg HBN_LDO_LEVEL_0P95V
+ *           @arg HBN_LDO_LEVEL_1P00V
+ *           @arg HBN_LDO_LEVEL_1P05V
+ *           @arg HBN_LDO_LEVEL_1P10V
+ *           @arg HBN_LDO_LEVEL_1P15V
+ *           @arg HBN_LDO_LEVEL_1P20V
+ *           @arg HBN_LDO_LEVEL_1P25V
+ *           @arg HBN_LDO_LEVEL_1P30V
+ *           @arg HBN_LDO_LEVEL_1P35V
+ * @param  hbnLevel: HBN work level, this parameter can be one of the following values:
+ *           @arg HBN_LEVEL_0
+ *           @arg HBN_LEVEL_1
  *
  * @return None
  *
 *******************************************************************************/
-void ATTR_TCM_SECTION HBN_Enable(uint32_t aGPIOIeCfg, HBN_LDO_LEVEL_Type ldoLevel, HBN_LEVEL_Type hbnLevel, uint8_t dcdcPuSeq)
+void ATTR_TCM_SECTION HBN_Enable(uint32_t aGPIOIeCfg, uint8_t ldoLevel, uint8_t hbnLevel, uint8_t dcdcPuSeq)
 {
 #ifndef BOOTROM
     uint32_t tmpVal;
@@ -292,12 +308,14 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Reset(void)
 /****************************************************************************/ /**
  * @brief  Select GPADC clk source
  *
- * @param  clkSel: GPADC clock type selection
+ * @param  clkSel: GPADC clock type selection, this parameter can be one of the following values:
+ *           @arg HBN_GPADC_CLK_32M
+ *           @arg HBN_GPADC_CLK_F32K
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_GPADC_CLK_Sel(HBN_GPADC_CLK_Type clkSel)
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_GPADC_CLK_Sel(uint8_t clkSel)
 {
     uint32_t tmpVal;
 
@@ -392,12 +410,14 @@ BL_Err_Type HBN_PIR_INT_Config(HBN_PIR_INT_CFG_Type *pirIntCfg)
 /****************************************************************************/ /**
  * @brief  Select HBN PIR low pass filter
  *
- * @param  lpf: HBN PIR low pass filter selection
+ * @param  lpf: HBN PIR low pass filter selection, this parameter can be one of the following values:
+ *           @arg HBN_PIR_LPF_DIV1
+ *           @arg HBN_PIR_LPF_DIV2
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_PIR_LPF_Sel(HBN_PIR_LPF_Type lpf)
+BL_Err_Type HBN_PIR_LPF_Sel(uint8_t lpf)
 {
 #ifndef BOOTROM
     uint32_t tmpVal;
@@ -414,12 +434,15 @@ BL_Err_Type HBN_PIR_LPF_Sel(HBN_PIR_LPF_Type lpf)
 /****************************************************************************/ /**
  * @brief  Select HBN PIR high pass filter
  *
- * @param  hpf: HBN PIR high pass filter selection
+ * @param  hpf: HBN PIR high pass filter selection, this parameter can be one of the following values:
+ *           @arg HBN_PIR_HPF_METHOD0
+ *           @arg HBN_PIR_HPF_METHOD1
+ *           @arg HBN_PIR_HPF_METHOD2
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_PIR_HPF_Sel(HBN_PIR_HPF_Type hpf)
+BL_Err_Type HBN_PIR_HPF_Sel(uint8_t hpf)
 {
 #ifndef BOOTROM
     uint32_t tmpVal;
@@ -528,13 +551,23 @@ BL_Sts_Type HBN_Get_BOD_OUT_State(void)
  * @brief  set HBN bod config
  *
  * @param  enable: ENABLE or DISABLE, if enable, Power up Brown Out Reset
- * @param  threshold: bod threshold
- * @param  mode: bod work mode with por
+ * @param  threshold: bod threshold, this parameter can be one of the following values:
+ *           @arg HBN_BOD_THRES_2P05V
+ *           @arg HBN_BOD_THRES_2P10V
+ *           @arg HBN_BOD_THRES_2P15V
+ *           @arg HBN_BOD_THRES_2P20V
+ *           @arg HBN_BOD_THRES_2P25V
+ *           @arg HBN_BOD_THRES_2P30V
+ *           @arg HBN_BOD_THRES_2P35V
+ *           @arg HBN_BOD_THRES_2P40V
+ * @param  mode: bod work mode with por, this parameter can be one of the following values:
+ *           @arg HBN_BOD_MODE_POR_INDEPENDENT
+ *           @arg HBN_BOD_MODE_POR_RELEVANT
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Set_BOD_Config(uint8_t enable, HBN_BOD_THRES_Type threshold, HBN_BOD_MODE_Type mode)
+BL_Err_Type HBN_Set_BOD_Config(uint8_t enable, uint8_t threshold, uint8_t mode)
 {
 #ifndef BOOTROM
     uint32_t tmpVal;
@@ -566,11 +599,11 @@ BL_Err_Type HBN_Set_BOD_Config(uint8_t enable, HBN_BOD_THRES_Type threshold, HBN
  * [0] : watch dog reset
  *
 *******************************************************************************/
-void HBN_Get_Reset_Event(uint8_t* event)
+void HBN_Get_Reset_Event(uint8_t *event)
 {
     uint32_t tmpVal;
     tmpVal = BL_RD_REG(HBN_BASE, HBN_GLB);
-    *event = BL_GET_REG_BITS_VAL(tmpVal,HBN_RESET_EVENT);
+    *event = BL_GET_REG_BITS_VAL(tmpVal, HBN_RESET_EVENT);
 }
 /****************************************************************************/ /**
  * @brief  HBN clear reset event
@@ -580,19 +613,33 @@ void HBN_Clr_Reset_Event(void)
 {
     uint32_t tmpVal;
     tmpVal = BL_RD_REG(HBN_BASE, HBN_GLB);
-    tmpVal |= (1<<13);
+    tmpVal |= (1 << 13);
     BL_WR_REG(HBN_BASE, HBN_GLB, tmpVal);
 }
 
 /****************************************************************************/ /**
  * @brief  HBN set ldo11aon voltage out
  *
- * @param  ldoLevel: LDO volatge level
+ * @param  ldoLevel: LDO volatge level, this parameter can be one of the following values:
+ *           @arg HBN_LDO_LEVEL_0P70V
+ *           @arg HBN_LDO_LEVEL_0P75V
+ *           @arg HBN_LDO_LEVEL_0P80V
+ *           @arg HBN_LDO_LEVEL_0P85V
+ *           @arg HBN_LDO_LEVEL_0P90V
+ *           @arg HBN_LDO_LEVEL_0P95V
+ *           @arg HBN_LDO_LEVEL_1P00V
+ *           @arg HBN_LDO_LEVEL_1P05V
+ *           @arg HBN_LDO_LEVEL_1P10V
+ *           @arg HBN_LDO_LEVEL_1P15V
+ *           @arg HBN_LDO_LEVEL_1P20V
+ *           @arg HBN_LDO_LEVEL_1P25V
+ *           @arg HBN_LDO_LEVEL_1P30V
+ *           @arg HBN_LDO_LEVEL_1P35V
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Aon_Vout(HBN_LDO_LEVEL_Type ldoLevel)
+BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Aon_Vout(uint8_t ldoLevel)
 {
     uint32_t tmpVal;
 
@@ -609,12 +656,26 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Aon_Vout(HBN_LDO_LEVEL_Type ldoLevel)
  * @brief  HBN set ldo11rt voltage out
  *
  *
- * @param  ldoLevel: LDO volatge level
+ * @param  ldoLevel: LDO volatge level, this parameter can be one of the following values:
+ *           @arg HBN_LDO_LEVEL_0P70V
+ *           @arg HBN_LDO_LEVEL_0P75V
+ *           @arg HBN_LDO_LEVEL_0P80V
+ *           @arg HBN_LDO_LEVEL_0P85V
+ *           @arg HBN_LDO_LEVEL_0P90V
+ *           @arg HBN_LDO_LEVEL_0P95V
+ *           @arg HBN_LDO_LEVEL_1P00V
+ *           @arg HBN_LDO_LEVEL_1P05V
+ *           @arg HBN_LDO_LEVEL_1P10V
+ *           @arg HBN_LDO_LEVEL_1P15V
+ *           @arg HBN_LDO_LEVEL_1P20V
+ *           @arg HBN_LDO_LEVEL_1P25V
+ *           @arg HBN_LDO_LEVEL_1P30V
+ *           @arg HBN_LDO_LEVEL_1P35V
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Rt_Vout(HBN_LDO_LEVEL_Type ldoLevel)
+BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Rt_Vout(uint8_t ldoLevel)
 {
     uint32_t tmpVal;
 
@@ -630,12 +691,26 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Rt_Vout(HBN_LDO_LEVEL_Type ldoLevel)
 /****************************************************************************/ /**
  * @brief  HBN set ldo11soc voltage out
  *
- * @param  ldoLevel: LDO volatge level
+ * @param  ldoLevel: LDO volatge level, this parameter can be one of the following values:
+ *           @arg HBN_LDO_LEVEL_0P70V
+ *           @arg HBN_LDO_LEVEL_0P75V
+ *           @arg HBN_LDO_LEVEL_0P80V
+ *           @arg HBN_LDO_LEVEL_0P85V
+ *           @arg HBN_LDO_LEVEL_0P90V
+ *           @arg HBN_LDO_LEVEL_0P95V
+ *           @arg HBN_LDO_LEVEL_1P00V
+ *           @arg HBN_LDO_LEVEL_1P05V
+ *           @arg HBN_LDO_LEVEL_1P10V
+ *           @arg HBN_LDO_LEVEL_1P15V
+ *           @arg HBN_LDO_LEVEL_1P20V
+ *           @arg HBN_LDO_LEVEL_1P25V
+ *           @arg HBN_LDO_LEVEL_1P30V
+ *           @arg HBN_LDO_LEVEL_1P35V
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Soc_Vout(HBN_LDO_LEVEL_Type ldoLevel)
+BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Soc_Vout(uint8_t ldoLevel)
 {
     uint32_t tmpVal;
 
@@ -651,12 +726,26 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_Soc_Vout(HBN_LDO_LEVEL_Type ldoLevel)
 /****************************************************************************/ /**
  * @brief  HBN set ldo11 all voltage out
  *
- * @param  ldoLevel: LDO volatge level
+ * @param  ldoLevel: LDO volatge level, this parameter can be one of the following values:
+ *           @arg HBN_LDO_LEVEL_0P70V
+ *           @arg HBN_LDO_LEVEL_0P75V
+ *           @arg HBN_LDO_LEVEL_0P80V
+ *           @arg HBN_LDO_LEVEL_0P85V
+ *           @arg HBN_LDO_LEVEL_0P90V
+ *           @arg HBN_LDO_LEVEL_0P95V
+ *           @arg HBN_LDO_LEVEL_1P00V
+ *           @arg HBN_LDO_LEVEL_1P05V
+ *           @arg HBN_LDO_LEVEL_1P10V
+ *           @arg HBN_LDO_LEVEL_1P15V
+ *           @arg HBN_LDO_LEVEL_1P20V
+ *           @arg HBN_LDO_LEVEL_1P25V
+ *           @arg HBN_LDO_LEVEL_1P30V
+ *           @arg HBN_LDO_LEVEL_1P35V
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_All_Vout(HBN_LDO_LEVEL_Type ldoLevel)
+BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_All_Vout(uint8_t ldoLevel)
 {
     uint32_t tmpVal;
 
@@ -674,12 +763,15 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Set_Ldo11_All_Vout(HBN_LDO_LEVEL_Type ldoLevel)
 /****************************************************************************/ /**
  * @brief  HBN select 32K
  *
- * @param  clkType: HBN 32k clock type
+ * @param  clkType: HBN 32k clock type, this parameter can be one of the following values:
+ *           @arg HBN_32K_RC
+ *           @arg HBN_32K_XTAL
+ *           @arg HBN_32K_DIG
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_CLOCK_SECTION HBN_32K_Sel(HBN_32K_CLK_Type clkType)
+BL_Err_Type ATTR_CLOCK_SECTION HBN_32K_Sel(uint8_t clkType)
 {
     uint32_t tmpVal;
 
@@ -698,12 +790,15 @@ BL_Err_Type ATTR_CLOCK_SECTION HBN_32K_Sel(HBN_32K_CLK_Type clkType)
 /****************************************************************************/ /**
  * @brief  Select uart clock source
  *
- * @param  clkSel: uart clock type selection
+ * @param  clkSel: uart clock type selection, this parameter can be one of the following values:
+ *           @arg HBN_UART_CLK_MCU_BCLK
+ *           @arg HBN_UART_CLK_MUXPLL_160M
+ *           @arg HBN_UART_CLK_XCLK
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Set_UART_CLK_Sel(HBN_UART_CLK_Type clkSel)
+BL_Err_Type HBN_Set_UART_CLK_Sel(uint8_t clkSel)
 {
     uint32_t tmpVal;
 
@@ -732,25 +827,27 @@ BL_Err_Type HBN_Set_UART_CLK_Sel(HBN_UART_CLK_Type clkSel)
  * @return xclk clock type selection
  *
 *******************************************************************************/
-HBN_MCU_XCLK_Type ATTR_CLOCK_SECTION HBN_Get_MCU_XCLK_Sel(void)
+uint8_t ATTR_CLOCK_SECTION HBN_Get_MCU_XCLK_Sel(void)
 {
     uint32_t tmpVal;
 
     tmpVal = BL_RD_REG(HBN_BASE, HBN_GLB);
     tmpVal = BL_GET_REG_BITS_VAL(tmpVal, HBN_ROOT_CLK_SEL);
 
-    return (HBN_MCU_XCLK_Type)(tmpVal & 0x1);
+    return (uint8_t)(tmpVal & 0x1);
 }
 
 /****************************************************************************/ /**
  * @brief  Select xclk clock source
  *
- * @param  xclk: xclk clock type selection
+ * @param  xclk: xclk clock type selection, this parameter can be one of the following values:
+ *           @arg HBN_MCU_XCLK_RC32M
+ *           @arg HBN_MCU_XCLK_XTAL
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_MCU_XCLK_Sel(HBN_MCU_XCLK_Type xclk)
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_MCU_XCLK_Sel(uint8_t xclk)
 {
     uint32_t tmpVal;
     uint32_t tmpVal2;
@@ -781,10 +878,12 @@ BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_MCU_XCLK_Sel(HBN_MCU_XCLK_Type xclk)
  *
  * @param  None
  *
- * @return root clock selection
+ * @return root clock selection, this return value can be one of the following values:
+ *           @arg HBN_MCU_ROOT_CLK_XCLK
+ *           @arg HBN_MCU_ROOT_CLK_PLL
  *
 *******************************************************************************/
-HBN_MCU_ROOT_CLK_Type ATTR_CLOCK_SECTION HBN_Get_MCU_Root_CLK_Sel(void)
+uint8_t ATTR_CLOCK_SECTION HBN_Get_MCU_Root_CLK_Sel(void)
 {
     uint32_t tmpVal = 0;
     uint32_t rootClkSel = 0;
@@ -802,12 +901,14 @@ HBN_MCU_ROOT_CLK_Type ATTR_CLOCK_SECTION HBN_Get_MCU_Root_CLK_Sel(void)
 /****************************************************************************/ /**
  * @brief  Select root clk source
  *
- * @param  rootClk: root clock type selection
+ * @param  rootClk: root clock type selection, this parameter can be one of the following values:
+ *           @arg HBN_MCU_ROOT_CLK_XCLK
+ *           @arg HBN_MCU_ROOT_CLK_PLL
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_MCU_Root_CLK_Sel(HBN_MCU_ROOT_CLK_Type rootClk)
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_MCU_Root_CLK_Sel(uint8_t rootClk)
 {
     uint32_t tmpVal;
     uint32_t tmpVal2;
@@ -875,6 +976,63 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Set_HRAM_Ret(void)
 }
 
 /****************************************************************************/ /**
+ * @brief  Set xtal32k_capbank
+ *
+ * @param  value
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_Xtal_32K_Capbank(uint8_t value)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(HBN_BASE, HBN_XTAL32K);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_XTAL32K_CAPBANK, value);
+    BL_WR_REG(HBN_BASE, HBN_XTAL32K, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  Set xtal32k's inverter amplify strength
+ *
+ * @param  value
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_Xtal_32K_Inverter_Amplify_Strength(uint8_t value)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(HBN_BASE, HBN_XTAL32K);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_XTAL32K_INV_STRE, value);
+    BL_WR_REG(HBN_BASE, HBN_XTAL32K, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  Set xtal32k_regulator
+ *
+ * @param  level
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_Xtal_32K_Regulator(uint8_t level)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(HBN_BASE, HBN_XTAL32K);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_XTAL32K_REG, level);
+    BL_WR_REG(HBN_BASE, HBN_XTAL32K, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
  * @brief  Power on XTAL 32K
  *
  * @param  None
@@ -890,6 +1048,7 @@ BL_Err_Type ATTR_CLOCK_SECTION HBN_Power_On_Xtal_32K(void)
     tmpVal = BL_RD_REG(HBN_BASE, HBN_XTAL32K);
 
     tmpVal = BL_CLR_REG_BIT(tmpVal, HBN_XTAL32K_HIZ_EN);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_XTAL32K_INV_STRE, 3);
     tmpVal = BL_SET_REG_BIT(tmpVal, HBN_PU_XTAL32K);
     tmpVal = BL_SET_REG_BIT(tmpVal, HBN_PU_XTAL32K_BUF);
     BL_WR_REG(HBN_BASE, HBN_XTAL32K, tmpVal);
@@ -972,14 +1131,16 @@ BL_Err_Type ATTR_CLOCK_SECTION HBN_Power_Off_RC32K(void)
 *******************************************************************************/
 BL_Err_Type ATTR_CLOCK_SECTION HBN_Trim_Ldo33VoutTrim(void)
 {
-    Efuse_Ana_Ldo33VoutTrim_Type trim;
+    bflb_ef_ctrl_com_trim_t trim;
     int32_t tmpVal = 0;
+    struct bflb_device_s *ef_ctrl;
 
-    EF_Ctrl_Read_Ldo33VoutTrim_Trim(&trim);
-    if (trim.ldo33VoutTrimAonEn) {
-        if (trim.ldo33VoutTrimAonParity == EF_Ctrl_Get_Trim_Parity(trim.ldo33VoutTrimAon, 4)) {
+    ef_ctrl = bflb_device_get_by_name("ef_ctrl");
+    bflb_ef_ctrl_read_common_trim(ef_ctrl, "ldo33_trim", &trim, 1);
+    if (trim.en) {
+        if (trim.parity == bflb_ef_ctrl_get_trim_parity(trim.value, 4)) {
             tmpVal = BL_RD_REG(HBN_BASE, HBN_VBAT_LDO);
-            tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_LDO33_VOUT_TRIM_AON, trim.ldo33VoutTrimAon);
+            tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_LDO33_VOUT_TRIM_AON, trim.value);
             BL_WR_REG(HBN_BASE, HBN_VBAT_LDO, tmpVal);
             arch_delay_us(2);
             return SUCCESS;
@@ -999,14 +1160,16 @@ BL_Err_Type ATTR_CLOCK_SECTION HBN_Trim_Ldo33VoutTrim(void)
 *******************************************************************************/
 BL_Err_Type ATTR_CLOCK_SECTION HBN_Trim_RC32K(void)
 {
-    Efuse_Ana_RC32K_Trim_Type trim;
+    bflb_ef_ctrl_com_trim_t trim;
     int32_t tmpVal = 0;
+    struct bflb_device_s *ef_ctrl;
 
-    EF_Ctrl_Read_RC32K_Trim(&trim);
-    if (trim.rc32kCodeFrExtEn) {
-        if (trim.rc32kCodeFrExtParity == EF_Ctrl_Get_Trim_Parity(trim.rc32kCodeFrExt, 10)) {
+    ef_ctrl = bflb_device_get_by_name("ef_ctrl");
+    bflb_ef_ctrl_read_common_trim(ef_ctrl, "rc32k", &trim, 1);
+    if (trim.en) {
+        if (trim.parity == bflb_ef_ctrl_get_trim_parity(trim.value, 10)) {
             tmpVal = BL_RD_REG(HBN_BASE, HBN_RC32K_CTRL0);
-            tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_RC32K_CODE_FR_EXT, trim.rc32kCodeFrExt);
+            tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_RC32K_CODE_FR_EXT, trim.value);
             tmpVal = BL_SET_REG_BIT(tmpVal, HBN_RC32K_EXT_CODE_EN);
             BL_WR_REG(HBN_BASE, HBN_RC32K_CTRL0, tmpVal);
             arch_delay_us(2);
@@ -1530,7 +1693,9 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Enable_RTC_Counter(void)
 /****************************************************************************/ /**
  * @brief  HBN set RTC timer configuration
  *
- * @param  delay: RTC interrupt delay 32 clocks
+ * @param  delay: RTC interrupt delay 32 clocks, this parameter can be one of the following values:
+ *           @arg HBN_RTC_INT_DELAY_32T
+ *           @arg HBN_RTC_INT_DELAY_0T
  * @param  compValLow: RTC interrupt commpare value low 32 bits
  * @param  compValHigh: RTC interrupt commpare value high 32 bits
  * @param  compMode: RTC interrupt commpare
@@ -1539,7 +1704,7 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Enable_RTC_Counter(void)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_Set_RTC_Timer(HBN_RTC_INT_Delay_Type delay, uint32_t compValLow, uint32_t compValHigh, uint8_t compMode)
+BL_Err_Type ATTR_TCM_SECTION HBN_Set_RTC_Timer(uint8_t delay, uint32_t compValLow, uint32_t compValHigh, uint8_t compMode)
 {
     uint32_t tmpVal;
 
@@ -1653,12 +1818,21 @@ BL_Err_Type HBN_Clear_RTC_INT(void)
 /****************************************************************************/ /**
  * @brief  HBN enable GPIO interrupt
  *
- * @param  gpioIntTrigType: HBN GPIO interrupt trigger type
+ * @param  gpioIntTrigType: HBN GPIO interrupt trigger type, this parameter can be one of the following values:
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_FALLING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_RISING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_LOW_LEVEL
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_HIGH_LEVEL
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_RISING_FALLING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_ASYNC_FALLING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_ASYNC_RISING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_ASYNC_LOW_LEVEL
+ *           @arg HBN_GPIO_INT_TRIGGER_ASYNC_HIGH_LEVEL
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_GPIO_INT_Enable(HBN_GPIO_INT_Trigger_Type gpioIntTrigType)
+BL_Err_Type ATTR_TCM_SECTION HBN_GPIO_INT_Enable(uint8_t gpioIntTrigType)
 {
 #ifndef BOOTROM
     uint32_t tmpVal;
@@ -1696,16 +1870,26 @@ BL_Err_Type HBN_GPIO_INT_Disable(void)
 /****************************************************************************/ /**
  * @brief  HBN get interrupt status
  *
- * @param  irqType: HBN interrupt type
+ * @param  irqType: HBN interrupt type, this parameter can be one of the following values:
+ *           @arg HBN_INT_GPIO16
+ *           @arg HBN_INT_GPIO17
+ *           @arg HBN_INT_GPIO18
+ *           @arg HBN_INT_GPIO19
+ *           @arg HBN_INT_RTC
+ *           @arg HBN_INT_PIR
+ *           @arg HBN_INT_BOD
+ *           @arg HBN_INT_ACOMP0
+ *           @arg HBN_INT_ACOMP1
  *
  * @return SET or RESET
  *
 *******************************************************************************/
-BL_Sts_Type HBN_Get_INT_State(HBN_INT_Type irqType)
+BL_Sts_Type HBN_Get_INT_State(uint8_t irqType)
 {
     uint32_t tmpVal;
 
     /* Check the parameters */
+    CHECK_PARAM(IS_HBN_INT_TYPE(irqType));
 
     tmpVal = BL_RD_REG(HBN_BASE, HBN_IRQ_STAT);
 
@@ -1732,12 +1916,21 @@ uint8_t HBN_Get_Pin_Wakeup_Mode(void)
 /****************************************************************************/ /**
  * @brief  HBN clear interrupt status
  *
- * @param  irqType: HBN interrupt type
+ * @param  irqType: HBN interrupt type, this parameter can be one of the following values:
+ *           @arg HBN_INT_GPIO16
+ *           @arg HBN_INT_GPIO17
+ *           @arg HBN_INT_GPIO18
+ *           @arg HBN_INT_GPIO19
+ *           @arg HBN_INT_RTC
+ *           @arg HBN_INT_PIR
+ *           @arg HBN_INT_BOD
+ *           @arg HBN_INT_ACOMP0
+ *           @arg HBN_INT_ACOMP1
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Clear_IRQ(HBN_INT_Type irqType)
+BL_Err_Type HBN_Clear_IRQ(uint8_t irqType)
 {
     uint32_t tmpVal;
 
@@ -1820,7 +2013,11 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Ctrl(uint32_t aonPadCtl1, uint32_t aonP
  * @brief  HBN aon pad cfg configuration
  *
  * @param  aonPadHwCtrlEn: hw control aon pad enable
- * @param  aonGpio: aon pad number
+ * @param  aonGpio: aon pad number, this parameter can be one of the following values:
+ *           @arg HBN_AON_PAD_GPIO16
+ *           @arg HBN_AON_PAD_GPIO17
+ *           @arg HBN_AON_PAD_GPIO18
+ *           @arg HBN_AON_PAD_GPIO19
  * @param  aonPadCfg: aon pad configuration
  *
  * @return SUCCESS or ERROR
@@ -1828,7 +2025,7 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Ctrl(uint32_t aonPadCtl1, uint32_t aonP
  * @note   Pu and Pd not depend on IE. IE ,Pu and Pd depend on ctrlEn
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Cfg(uint8_t aonPadHwCtrlEn, HBN_AON_PAD_Type aonGpio, HBN_AON_PAD_CFG_Type *aonPadCfg)
+BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Cfg(uint8_t aonPadHwCtrlEn, uint8_t aonGpio, HBN_AON_PAD_CFG_Type *aonPadCfg)
 {
     uint32_t tmpVal0;
     uint32_t tmpVal1;
@@ -1894,16 +2091,22 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Cfg(uint8_t aonPadHwCtrlEn, HBN_AON_PAD
  * @brief  HBN Set AON_HW control aon pad or not
  *
  * @param  aonPadHwCtrlEn: hw control aon pad enable
- * @param  aonGpio: aon pad number
+ * @param  aonGpio: aon pad number, this parameter can be one of the following values:
+ *           @arg HBN_AON_PAD_GPIO16
+ *           @arg HBN_AON_PAD_GPIO17
+ *           @arg HBN_AON_PAD_GPIO18
+ *           @arg HBN_AON_PAD_GPIO19
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Cfg_Set(uint8_t aonPadHwCtrlEn, HBN_AON_PAD_Type aonGpio)
+BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Cfg_Set(uint8_t aonPadHwCtrlEn, uint8_t aonGpio)
 {
 #ifndef BOOTROM
     uint32_t tmpVal;
     uint32_t enAonCtrlGpio;
+
+    CHECK_PARAM(IS_HBN_AON_PAD_TYPE(aonGpio));
 
     /* hbn_pad_ctrl_0 */
     tmpVal = BL_RD_REG(HBN_BASE, HBN_PAD_CTRL_0);
@@ -1925,12 +2128,15 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Cfg_Set(uint8_t aonPadHwCtrlEn, HBN_AON
  * @brief  HBN enable ACOMP interrupt
  *
  * @param  acompId: HBN Acomp ID
- * @param  edge: HBN acomp interrupt edge type
+ * @param  edge: HBN acomp interrupt edge type, this parameter can be one of the following values:
+ *           @arg HBN_ACOMP_INT_EDGE_POSEDGE
+ *           @arg HBN_ACOMP_INT_EDGE_NEGEDGE
+ *           @arg HBN_ACOMP_INT_EDGE_POSEDGE_NEGEDGE
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Enable_AComp_IRQ(uint8_t acompId, HBN_ACOMP_INT_EDGE_Type edge)
+BL_Err_Type HBN_Enable_AComp_IRQ(uint8_t acompId, uint8_t edge)
 {
     uint32_t tmpVal;
     uint32_t tmpVal2;
@@ -1959,12 +2165,15 @@ BL_Err_Type HBN_Enable_AComp_IRQ(uint8_t acompId, HBN_ACOMP_INT_EDGE_Type edge)
  * @brief  HBN disable ACOMP interrupt
  *
  * @param  acompId: HBN Acomp ID
- * @param  edge: HBN acomp interrupt edge type
+ * @param  edge: HBN acomp interrupt edge type, this parameter can be one of the following values:
+ *           @arg HBN_ACOMP_INT_EDGE_POSEDGE
+ *           @arg HBN_ACOMP_INT_EDGE_NEGEDGE
+ *           @arg HBN_ACOMP_INT_EDGE_POSEDGE_NEGEDGE
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Disable_AComp_IRQ(uint8_t acompId, HBN_ACOMP_INT_EDGE_Type edge)
+BL_Err_Type HBN_Disable_AComp_IRQ(uint8_t acompId, uint8_t edge)
 {
     uint32_t tmpVal;
     uint32_t tmpVal2;
@@ -2029,18 +2238,23 @@ BL_Err_Type HBN_Disable_BOD_IRQ(void)
     return SUCCESS;
 }
 
-
 /****************************************************************************/ /**
  * @brief  HBN out0 install interrupt callback
  *
- * @param  intType: HBN out0 interrupt type
+ * @param  intType: HBN out0 interrupt type, this parameter can be one of the following values:
+ *           @arg HBN_OUT0_INT_GPIO16
+ *           @arg HBN_OUT0_INT_GPIO17
+ *           @arg HBN_OUT0_INT_GPIO18
+ *           @arg HBN_OUT0_INT_GPIO19
+ *           @arg HBN_OUT0_INT_RTC
+ *           @arg HBN_OUT0_INT_MAX
  * @param  cbFun: HBN out0 interrupt callback
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
 #ifndef BFLB_USE_HAL_DRIVER
-BL_Err_Type HBN_Out0_Callback_Install(HBN_OUT0_INT_Type intType, intCallback_Type *cbFun)
+BL_Err_Type HBN_Out0_Callback_Install(uint8_t intType, intCallback_Type *cbFun)
 {
     /* Check the parameters */
     CHECK_PARAM(IS_HBN_OUT0_INT_TYPE(intType));
@@ -2058,14 +2272,19 @@ BL_Err_Type HBN_Out0_Callback_Install(HBN_OUT0_INT_Type intType, intCallback_Typ
 /****************************************************************************/ /**
  * @brief  HBN out1 install interrupt callback
  *
- * @param  intType: HBN out1 interrupt type
+ * @param  intType: HBN out1 interrupt type, this parameter can be one of the following values:
+ *           @arg HBN_OUT1_INT_PIR
+ *           @arg HBN_OUT1_INT_BOD
+ *           @arg HBN_OUT1_INT_ACOMP0
+ *           @arg HBN_OUT1_INT_ACOMP1
+ *           @arg HBN_OUT1_INT_MAX
  * @param  cbFun: HBN out1 interrupt callback
  *
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
 #ifndef BFLB_USE_HAL_DRIVER
-BL_Err_Type HBN_Out1_Callback_Install(HBN_OUT1_INT_Type intType, intCallback_Type *cbFun)
+BL_Err_Type HBN_Out1_Callback_Install(uint8_t intType, intCallback_Type *cbFun)
 {
     /* Check the parameters */
     CHECK_PARAM(IS_HBN_OUT1_INT_TYPE(intType));
@@ -2084,8 +2303,16 @@ BL_Err_Type HBN_Out1_Callback_Install(HBN_OUT1_INT_Type intType, intCallback_Typ
  * @brief  HBN aon pad debbug pull config
  *
  * @param  puPdEn: Enable or disable aon pad pull down and pull up
- * @param  ieSmtEn: Enable or disable aon pad IE and SMT
- * @param  trigMode: trigger mode
+ * @param  trigMode: trigger mode, this parameter can be one of the following values:
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_FALLING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_RISING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_LOW_LEVEL
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_HIGH_LEVEL
+ *           @arg HBN_GPIO_INT_TRIGGER_SYNC_RISING_FALLING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_ASYNC_FALLING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_ASYNC_RISING_EDGE
+ *           @arg HBN_GPIO_INT_TRIGGER_ASYNC_LOW_LEVEL
+ *           @arg HBN_GPIO_INT_TRIGGER_ASYNC_HIGH_LEVEL
  * @param  maskVal: int mask
  * @param  dlyEn: Enable or disable aon pad wakeup delay function
  * @param  dlySec: aon pad wakeup delay sec 1 to 7
@@ -2093,7 +2320,7 @@ BL_Err_Type HBN_Out1_Callback_Install(HBN_OUT1_INT_Type intType, intCallback_Typ
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Aon_Pad_WakeUpCfg(BL_Fun_Type puPdEn, HBN_GPIO_INT_Trigger_Type trigMode, uint32_t maskVal, BL_Fun_Type dlyEn, uint8_t dlySec)
+BL_Err_Type HBN_Aon_Pad_WakeUpCfg(BL_Fun_Type puPdEn, uint8_t trigMode, uint32_t maskVal, BL_Fun_Type dlyEn, uint8_t dlySec)
 {
 #ifndef BOOTROM
     uint32_t tmpVal;
@@ -2163,10 +2390,10 @@ BL_Err_Type HBN_Set_BOD_Cfg(HBN_BOD_CFG_Type *cfg)
 #ifndef BFLB_USE_HAL_DRIVER
 void HBN_OUT0_IRQHandler(void)
 {
-    HBN_OUT0_INT_Type out0Int = HBN_OUT0_INT_GPIO16;
+    uint8_t out0Int = HBN_OUT0_INT_GPIO16;
 
     /* GPIO and RTC */
-    for (HBN_INT_Type gpioInt = HBN_INT_GPIO16; gpioInt <= HBN_INT_GPIO19; gpioInt++) {
+    for (uint8_t gpioInt = HBN_INT_GPIO16; gpioInt <= HBN_INT_GPIO19; gpioInt++) {
         if (SET == HBN_Get_INT_State(gpioInt)) {
             HBN_Clear_IRQ(gpioInt);
             switch (gpioInt) {

@@ -7,13 +7,11 @@
 struct bflb_device_s *gpio;
 struct bflb_device_s *uart0;
 
-void gpio_isr(int irq, void *arg)
+void gpio0_isr(uint8_t pin)
 {
-    static int i = 0;
-    bool intstatus = bflb_gpio_get_intstatus(gpio, GPIO_PIN_0);
-    if (intstatus) {
-        bflb_gpio_int_clear(gpio, GPIO_PIN_0);
-        printf("%d\r\n", i++);
+    static uint32_t i = 0;
+    if (pin == GPIO_PIN_0) {
+        printf("i:%d\r\n", i++);
     }
 }
 
@@ -32,8 +30,10 @@ int set_int_mode(int argc, char **argv)
         printf("Set gpio interrupt triggle mode to %d\r\n", atoi(argv[1]));
     }
 
+    bflb_irq_disable(gpio->irq_num);
+    bflb_gpio_init(gpio, GPIO_PIN_0, GPIO_INPUT | GPIO_PULLUP | GPIO_SMT_EN);
     bflb_gpio_int_init(gpio, GPIO_PIN_0, atoi(argv[1]));
-    bflb_gpio_int_mask(gpio, GPIO_PIN_0, false);
+    bflb_gpio_irq_attach(GPIO_PIN_0, gpio0_isr);
     bflb_irq_enable(gpio->irq_num);
 
     return 0;
@@ -48,14 +48,7 @@ int main(void)
     uart0 = bflb_device_get_by_name("uart0");
     printf("gpio interrupt\r\n");
 
-    bflb_gpio_int_init(gpio, GPIO_PIN_0, GPIO_INT_TRIG_MODE_SYNC_LOW_LEVEL);
-    bflb_gpio_int_mask(gpio, GPIO_PIN_0, false);
-    bflb_gpio_init(gpio, GPIO_PIN_1, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0);
-
     shell_init();
-
-    bflb_irq_attach(gpio->irq_num, gpio_isr, gpio);
-    bflb_irq_enable(gpio->irq_num);
 
     while (1) {
         while ((ch = bflb_uart_getchar(uart0)) != -1) {
@@ -63,4 +56,4 @@ int main(void)
         }
     }
 }
-    SHELL_CMD_EXPORT_ALIAS(set_int_mode, set_int_mode, shell set_int_triggle_mode.);
+SHELL_CMD_EXPORT_ALIAS(set_int_mode, set_int_mode, shell set_int_triggle_mode.);

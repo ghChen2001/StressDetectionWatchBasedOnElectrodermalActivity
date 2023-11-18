@@ -14,12 +14,13 @@
 /**
  * @brief Gpio pin definitions
  *
- * BL602  : GPIO0/1/2/7/8/14/15/20/21/22
- * BL604  : GPIO0 ~ GPIO5, GPIO7/8/11/12/14/16/17/20/21/22
- * BL606  : GPIO0 ~ GPIO22
+ * BL602  : GPIO0 ~ GPIO5, GPIO7/8/11/12/14/16/17/20/21/22
+ * BL604  : GPIO0 ~ GPIO22
  * BL702  : GPIO0/1/2/7/8/9/14/15/17/23/24/25/26/27/28
  * BL704  : GPIO0 ~ GPIO3, GPIO7 ~ GPIO11, GPIO14/15, GPIO17 ~ GPIO28,
  * BL706  : GPIO0 ~ GPIO31
+ * BL702L : GPIO0 ~ GPIO2, GPIO7 ~ GPIO11, GPIO14 ~ GPIO18, GPIO22 ~ GPIO28, GPIO30 ~ GPIO31
+ * BL704L:  GPIO0 ~ GPIO3, GPIO7 ~ GPIO31
  * BL606P : GPIO0 ~ GPIO5, GPIO11 ~ GPIO12, GPIO16 ~ GPIO21, GPIO24 ~ GPIO28, GPIO34 ~ GPIO41
  * BL616  : GPIO0 ~ GPIO3, GPIO10 ~ GPIO17, GPIO20 ~ GPIO22, GPIO27 ~ GPIO30
  * BL618  : GPIO0 ~ GPIO34
@@ -104,6 +105,7 @@
 #define GPIO_FUNC_SPI0    (4 << GPIO_FUNC_SHIFT)
 #define GPIO_FUNC_I2C0    (6 << GPIO_FUNC_SHIFT)
 #define GPIO_FUNC_PWM0    (8 << GPIO_FUNC_SHIFT)
+#define GPIO_FUNC_PWM1    (8 << GPIO_FUNC_SHIFT)
 #define GPIO_FUNC_KEYSCAN (13 << GPIO_FUNC_SHIFT)
 #define GPIO_FUNC_JTAG    (14 << GPIO_FUNC_SHIFT)
 #elif defined(BL616)
@@ -161,25 +163,25 @@
 #define GPIO_FUNC_CLKOUT (31 << GPIO_FUNC_SHIFT)
 #endif
 
-#define GPIO_MODE_SHIFT                      (5) /* Bits 5-6: Port Mode */
-#define GPIO_MODE_MASK                       (3 << GPIO_MODE_SHIFT)
-#define GPIO_INPUT                           (0 << GPIO_MODE_SHIFT) /* Input Enable */
-#define GPIO_OUTPUT                          (1 << GPIO_MODE_SHIFT) /* Output Enable */
-#define GPIO_ANALOG                          (2 << GPIO_MODE_SHIFT) /* Analog Enable */
-#define GPIO_ALTERNATE                       (3 << GPIO_MODE_SHIFT) /* Alternate Enable */
+#define GPIO_MODE_SHIFT                      (5) /* Bits 5-8: Port Mode */
+#define GPIO_MODE_MASK                       (0xf << GPIO_MODE_SHIFT)
+#define GPIO_INPUT                           (1 << 5) /* Input Enable */
+#define GPIO_OUTPUT                          (1 << 6) /* Output Enable */
+#define GPIO_ANALOG                          (1 << 7) /* Analog Enable */
+#define GPIO_ALTERNATE                       (1 << 8) /* Alternate Enable */
 
-#define GPIO_PUPD_SHIFT                      (7) /* Bits 7-8: Pull-up/down */
+#define GPIO_PUPD_SHIFT                      (9) /* Bits 9-10: Pull-up/down */
 #define GPIO_PUPD_MASK                       (3 << GPIO_PUPD_SHIFT)
 #define GPIO_FLOAT                           (0 << GPIO_PUPD_SHIFT) /* No pull-up, pull-down */
 #define GPIO_PULLUP                          (1 << GPIO_PUPD_SHIFT) /* Pull-up */
 #define GPIO_PULLDOWN                        (2 << GPIO_PUPD_SHIFT) /* Pull-down */
 
-#define GPIO_SMT_SHIFT                       (9) /* Bits 9: SMT Enable */
+#define GPIO_SMT_SHIFT                       (11) /* Bits 11: SMT Enable */
 #define GPIO_SMT_MASK                        (1 << GPIO_SMT_SHIFT)
 #define GPIO_SMT_DIS                         (0 << GPIO_SMT_SHIFT)
 #define GPIO_SMT_EN                          (1 << GPIO_SMT_SHIFT)
 
-#define GPIO_DRV_SHIFT                       (10) /* Bits 10-11: Drive */
+#define GPIO_DRV_SHIFT                       (12) /* Bits 12-13: Drive */
 #define GPIO_DRV_MASK                        (3 << GPIO_DRV_SHIFT)
 #define GPIO_DRV_0                           (0 << GPIO_DRV_SHIFT)
 #define GPIO_DRV_1                           (1 << GPIO_DRV_SHIFT)
@@ -370,6 +372,10 @@ void bflb_gpio_uart_init(struct bflb_device_s *dev, uint8_t pin, uint8_t uart_fu
  */
 
 int bflb_gpio_feature_control(struct bflb_device_s *dev, int cmd, size_t arg);
+
+void bflb_gpio_irq_attach(uint8_t pin, void (*callback)(uint8_t pin));
+
+void bflb_gpio_irq_detach(uint8_t pin);
 
 #ifdef __cplusplus
 }

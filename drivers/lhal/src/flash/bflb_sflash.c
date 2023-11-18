@@ -35,11 +35,6 @@
   */
 #include "bflb_sf_ctrl.h"
 #include "bflb_sflash.h"
-//#include "bl628_l1c.h"
-
-/** @addtogroup  BL628_Peripheral_Driver
- *  @{
- */
 
 /** @addtogroup  SFLASH
  *  @{
@@ -1138,7 +1133,7 @@ void ATTR_TCM_SECTION bflb_sflash_set_burst_wrap(spi_flash_cfg_type *flash_cfg)
     dummy_clks = flash_cfg->burst_wrap_cmd_dmy_clk;
     cmd = flash_cfg->burst_wrap_cmd;
     wrap_data = flash_cfg->burst_wrap_data;
-    arch_memcpy4((uint32_t *)flash_ctrl_buf, &wrap_data, 4);
+    arch_memcpy4((uint32_t *)flash_ctrl_buf, &wrap_data, 1);
     flash_cmd.cmd_buf[0] = (cmd << 24);
     flash_cmd.rw_flag = SF_CTRL_WRITE;
     flash_cmd.dummy_clks = dummy_clks;
@@ -1174,7 +1169,7 @@ void ATTR_TCM_SECTION bflb_sflash_disable_burst_wrap(spi_flash_cfg_type *flash_c
     dummy_clks = flash_cfg->de_burst_wrap_cmd_dmy_clk;
     cmd = flash_cfg->de_burst_wrap_cmd;
     wrap_data = flash_cfg->de_burst_wrap_data;
-    arch_memcpy4((uint32_t *)flash_ctrl_buf, &wrap_data, 4);
+    arch_memcpy4((uint32_t *)flash_ctrl_buf, &wrap_data, 1);
     flash_cmd.cmd_buf[0] = (cmd << 24);
     flash_cmd.rw_flag = SF_CTRL_WRITE;
     flash_cmd.dummy_clks = dummy_clks;
@@ -2179,5 +2174,3 @@ int ATTR_TCM_SECTION bflb_sflash_program(spi_flash_cfg_type *flash_cfg, uint8_t 
 /*@} end of group SFLASH_Public_Functions */
 
 /*@} end of group SFLASH */
-
-/*@} end of group BL628_Peripheral_Driver */

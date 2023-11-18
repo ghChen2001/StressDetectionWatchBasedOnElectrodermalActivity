@@ -83,6 +83,8 @@ static uint8_t dma_tc_flag0 = 0;
 
 ATTR_NOCACHE_NOINIT_RAM_SECTION uint32_t raw_data[TEST_ADC_CHANNELS * TEST_COUNT];
 
+struct bflb_dma_channel_lli_pool_s lli[1]; /* max trasnfer size 4064 * 1 */
+
 void dma0_ch0_isr(void *arg)
 {
     dma_tc_flag0++;
@@ -102,7 +104,7 @@ int main(void)
     struct bflb_adc_config_s cfg;
     cfg.clk_div = ADC_CLK_DIV_32;
     cfg.scan_conv_mode = true;
-    cfg.continuous_conv_mode = true;
+    cfg.continuous_conv_mode = true; /* do not support single mode */
     cfg.differential_mode = false;
     cfg.resolution = ADC_RESOLUTION_16B;
     cfg.vref = ADC_VREF_3P2V;
@@ -128,9 +130,9 @@ int main(void)
 
     bflb_dma_channel_irq_attach(dma0_ch0, dma0_ch0_isr, NULL);
 
-    struct bflb_dma_channel_lli_pool_s lli[1]; /* max trasnfer size 4064 * 1 */
     struct bflb_dma_channel_lli_transfer_s transfers[1];
 
+    dma_tc_flag0 = 0;
     memset(raw_data, 0, sizeof(raw_data));
 
     transfers[0].src_addr = (uint32_t)DMA_ADDR_ADC_RDR;
@@ -155,6 +157,8 @@ int main(void)
         printf("pos chan %d,%d mv \r\n", result[j].pos_chan, result[j].millivolt);
     }
 
+    bflb_adc_deinit(adc);
+    
     while (1) {
     }
 }

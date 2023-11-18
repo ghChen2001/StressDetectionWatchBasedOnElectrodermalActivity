@@ -1710,9 +1710,9 @@ int ATTR_TCM_SECTION bflb_xip_sflash_getuniqueid_need_lock(spi_flash_cfg_type *p
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_WIFI_PLL(GLB_XTAL_Type xtalType, const GLB_WA_PLL_Cfg_Type *pllCfgList)
+BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_WIFI_PLL(uint8_t xtalType, const GLB_WA_PLL_Cfg_Type *pllCfgList)
 {
-    GLB_PLL_REF_CLK_Type refClk;
+    uint8_t refClk;
 
     if (xtalType == GLB_XTAL_RC32M) {
         refClk = GLB_PLL_REFCLK_RC32M;
@@ -1736,9 +1736,9 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_WIFI_PLL(GLB_XTAL_Type xtalType, const
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL(GLB_XTAL_Type xtalType, const GLB_WA_PLL_Cfg_Type *pllCfgList)
+BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL(uint8_t xtalType, const GLB_WA_PLL_Cfg_Type *pllCfgList)
 {
-    GLB_PLL_REF_CLK_Type refClk;
+    uint8_t refClk;
 
     if (xtalType == GLB_XTAL_RC32M) {
         refClk = GLB_PLL_REFCLK_RC32M;
@@ -1769,7 +1769,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_384M(void)
     /* we take 384M for CPU use,so set LDO to 1.2V*/
     HBN_Set_Ldo11_All_Vout(HBN_LDO_LEVEL_1P20V);
     HBN_Get_Xtal_Type(&xtalType);
-    return GLB_Config_AUDIO_PLL((GLB_XTAL_Type)xtalType, audioPllCfg_384M);
+    return GLB_Config_AUDIO_PLL((uint8_t)xtalType, audioPllCfg_384M);
 }
 
 /****************************************************************************/ /**
@@ -1786,7 +1786,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_400M(void)
     uint8_t xtalType = GLB_XTAL_NONE;
 
     HBN_Get_Xtal_Type(&xtalType);
-    return GLB_Config_AUDIO_PLL((GLB_XTAL_Type)xtalType, audioPllCfg_400M);
+    return GLB_Config_AUDIO_PLL((uint8_t)xtalType, audioPllCfg_400M);
 }
 
 /****************************************************************************/ /**
@@ -1803,7 +1803,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_451P58M(void)
     uint8_t xtalType = GLB_XTAL_NONE;
 
     HBN_Get_Xtal_Type(&xtalType);
-    return GLB_Config_AUDIO_PLL((GLB_XTAL_Type)xtalType, audioPllCfg_451P58M);
+    return GLB_Config_AUDIO_PLL((uint8_t)xtalType, audioPllCfg_451P58M);
 }
 
 /****************************************************************************/ /**
@@ -1820,7 +1820,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_491P52M(void)
     uint8_t xtalType = GLB_XTAL_NONE;
 
     HBN_Get_Xtal_Type(&xtalType);
-    return GLB_Config_AUDIO_PLL((GLB_XTAL_Type)xtalType, audioPllCfg_491P52M);
+    return GLB_Config_AUDIO_PLL((uint8_t)xtalType, audioPllCfg_491P52M);
 }
 
 /****************************************************************************/ /**
@@ -1831,7 +1831,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_491P52M(void)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_Chip_Clock_Out0_Sel(GLB_CHIP_CLK_OUT_0_Type clkOutType)
+BL_Err_Type GLB_Set_Chip_Clock_Out0_Sel(uint8_t clkOutType)
 {
     uint32_t tmpVal;
 
@@ -1852,7 +1852,7 @@ BL_Err_Type GLB_Set_Chip_Clock_Out0_Sel(GLB_CHIP_CLK_OUT_0_Type clkOutType)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_Chip_Clock_Out1_Sel(GLB_CHIP_CLK_OUT_1_Type clkOutType)
+BL_Err_Type GLB_Set_Chip_Clock_Out1_Sel(uint8_t clkOutType)
 {
     uint32_t tmpVal;
 
@@ -1873,7 +1873,7 @@ BL_Err_Type GLB_Set_Chip_Clock_Out1_Sel(GLB_CHIP_CLK_OUT_1_Type clkOutType)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_Chip_Clock_Out2_Sel(GLB_CHIP_CLK_OUT_2_Type clkOutType)
+BL_Err_Type GLB_Set_Chip_Clock_Out2_Sel(uint8_t clkOutType)
 {
     uint32_t tmpVal;
 
@@ -1894,7 +1894,7 @@ BL_Err_Type GLB_Set_Chip_Clock_Out2_Sel(GLB_CHIP_CLK_OUT_2_Type clkOutType)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_Chip_Clock_Out3_Sel(GLB_CHIP_CLK_OUT_3_Type clkOutType)
+BL_Err_Type GLB_Set_Chip_Clock_Out3_Sel(uint8_t clkOutType)
 {
     uint32_t tmpVal;
 
@@ -1940,6 +1940,23 @@ uint32_t ATTR_TCM_SECTION GLB_Get_Flash_Id_Value(void)
     }
 
     return 0x00000000;
+}
+
+/****************************************************************************/ /**
+ * @brief  power down LDO18IO vout
+ *
+ * @param  None
+ *
+ * @return None
+ *
+*******************************************************************************/
+void ATTR_TCM_SECTION GLB_Power_Down_Ldo18ioVout(void)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(GLB_BASE, GLB_LDO18IO);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, GLB_PU_LDO18IO);
+    BL_WR_REG(GLB_BASE, GLB_LDO18IO, tmpVal);
 }
 
 /****************************************************************************/ /**
@@ -2146,7 +2163,7 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Get_Xtal_Value(uint32_t *xtalVal)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Enable_AComp_IRQ(uint8_t acompId, HBN_ACOMP_INT_EDGE_Type edge)
+BL_Err_Type HBN_Enable_AComp_IRQ(uint8_t acompId, uint8_t edge)
 {
     uint32_t tmpVal;
     uint32_t tmpVal2;
@@ -2180,7 +2197,7 @@ BL_Err_Type HBN_Enable_AComp_IRQ(uint8_t acompId, HBN_ACOMP_INT_EDGE_Type edge)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Disable_AComp_IRQ(uint8_t acompId, HBN_ACOMP_INT_EDGE_Type edge)
+BL_Err_Type HBN_Disable_AComp_IRQ(uint8_t acompId, uint8_t edge)
 {
     uint32_t tmpVal;
     uint32_t tmpVal2;
@@ -2215,7 +2232,7 @@ BL_Err_Type HBN_Disable_AComp_IRQ(uint8_t acompId, HBN_ACOMP_INT_EDGE_Type edge)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_ADC_CLK(uint8_t enable, GLB_ADC_CLK_Type clkSel, uint8_t div)
+BL_Err_Type GLB_Set_ADC_CLK(uint8_t enable, uint8_t clkSel, uint8_t div)
 {
     uint32_t tmpVal;
 
@@ -2253,7 +2270,7 @@ BL_Err_Type GLB_Set_ADC_CLK(uint8_t enable, GLB_ADC_CLK_Type clkSel, uint8_t div
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_IR_CLK(uint8_t enable, GLB_IR_CLK_SRC_Type clkSel, uint8_t div)
+BL_Err_Type GLB_Set_IR_CLK(uint8_t enable, uint8_t clkSel, uint8_t div)
 {
     uint32_t tmpVal = 0;
 
@@ -2291,7 +2308,7 @@ BL_Err_Type GLB_Set_IR_CLK(uint8_t enable, GLB_IR_CLK_SRC_Type clkSel, uint8_t d
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_I2C_CLK(uint8_t enable, GLB_I2C_CLK_Type clkSel, uint8_t div)
+BL_Err_Type GLB_Set_I2C_CLK(uint8_t enable, uint8_t clkSel, uint8_t div)
 {
     uint32_t tmpVal = 0;
 
@@ -2327,7 +2344,7 @@ BL_Err_Type GLB_Set_I2C_CLK(uint8_t enable, GLB_I2C_CLK_Type clkSel, uint8_t div
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_SPI_CLK(uint8_t enable, GLB_SPI_CLK_Type clkSel, uint8_t div)
+BL_Err_Type GLB_Set_SPI_CLK(uint8_t enable, uint8_t clkSel, uint8_t div)
 {
     uint32_t tmpVal = 0;
 
@@ -2364,7 +2381,7 @@ BL_Err_Type GLB_Set_SPI_CLK(uint8_t enable, GLB_SPI_CLK_Type clkSel, uint8_t div
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_DBI_CLK(uint8_t enable, GLB_DBI_CLK_Type clkSel, uint8_t div)
+BL_Err_Type GLB_Set_DBI_CLK(uint8_t enable, uint8_t clkSel, uint8_t div)
 {
     uint32_t tmpVal = 0;
 
@@ -2493,7 +2510,7 @@ BL_Err_Type GLB_Set_Audio_SOLO_CLK(uint8_t enable, uint8_t div)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_CAM_CLK(uint8_t enable, GLB_CAM_CLK_Type clkSel, uint8_t div)
+BL_Err_Type GLB_Set_CAM_CLK(uint8_t enable, uint8_t clkSel, uint8_t div)
 {
     uint32_t tmpVal = 0;
 
@@ -2530,7 +2547,7 @@ BL_Err_Type GLB_Set_CAM_CLK(uint8_t enable, GLB_CAM_CLK_Type clkSel, uint8_t div
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_SDH_CLK(uint8_t enable, GLB_SDH_CLK_Type clkSel, uint8_t div)
+BL_Err_Type GLB_Set_SDH_CLK(uint8_t enable, uint8_t clkSel, uint8_t div)
 {
     uint32_t tmpVal = 0;
 
@@ -2567,7 +2584,7 @@ BL_Err_Type GLB_Set_SDH_CLK(uint8_t enable, GLB_SDH_CLK_Type clkSel, uint8_t div
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_Set_PSRAMB_CLK_Sel(uint8_t enable, GLB_PSRAMB_PLL_Type clkSel, uint8_t div)
+BL_Err_Type GLB_Set_PSRAMB_CLK_Sel(uint8_t enable, uint8_t clkSel, uint8_t div)
 {
     uint32_t tmpVal = 0;
 
@@ -2677,7 +2694,7 @@ void ATTR_TCM_SECTION HBN_Power_Down_Flash(spi_flash_cfg_type *flashCfg)
  * @return None
  *
 *******************************************************************************/
-void ATTR_TCM_SECTION HBN_Enable(uint32_t aGPIOIeCfg, HBN_LDO_LEVEL_Type ldoLevel, HBN_LEVEL_Type hbnLevel, uint8_t dcdcPuSeq)
+void ATTR_TCM_SECTION HBN_Enable(uint32_t aGPIOIeCfg, uint8_t ldoLevel, uint8_t hbnLevel, uint8_t dcdcPuSeq)
 {
     uint32_t tmpVal;
 
@@ -2835,7 +2852,7 @@ BL_Err_Type HBN_PIR_INT_Config(HBN_PIR_INT_CFG_Type *pirIntCfg)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_PIR_LPF_Sel(HBN_PIR_LPF_Type lpf)
+BL_Err_Type HBN_PIR_LPF_Sel(uint8_t lpf)
 {
     uint32_t tmpVal;
 
@@ -2856,7 +2873,7 @@ BL_Err_Type HBN_PIR_LPF_Sel(HBN_PIR_LPF_Type lpf)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_PIR_HPF_Sel(HBN_PIR_HPF_Type hpf)
+BL_Err_Type HBN_PIR_HPF_Sel(uint8_t hpf)
 {
     uint32_t tmpVal;
 
@@ -2921,7 +2938,7 @@ BL_Err_Type HBN_Set_PIR_Interval(uint16_t interval)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Set_BOD_Config(uint8_t enable, HBN_BOD_THRES_Type threshold, HBN_BOD_MODE_Type mode)
+BL_Err_Type HBN_Set_BOD_Config(uint8_t enable, uint8_t threshold, uint8_t mode)
 {
     uint32_t tmpVal;
 
@@ -2989,7 +3006,7 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Set_Gpio_Keep(uint8_t gpioKeep)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_GPIO_INT_Enable(HBN_GPIO_INT_Trigger_Type gpioIntTrigType)
+BL_Err_Type ATTR_TCM_SECTION HBN_GPIO_INT_Enable(uint8_t gpioIntTrigType)
 {
     uint32_t tmpVal;
 
@@ -3048,7 +3065,7 @@ BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Ctrl(uint32_t aonPadCtl1, uint32_t aonP
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Cfg_Set(uint8_t aonPadHwCtrlEn, HBN_AON_PAD_Type aonGpio)
+BL_Err_Type ATTR_TCM_SECTION HBN_Aon_Pad_Cfg_Set(uint8_t aonPadHwCtrlEn, uint8_t aonGpio)
 {
     uint32_t tmpVal;
     uint32_t enAonCtrlGpio;
@@ -3120,7 +3137,7 @@ BL_Err_Type HBN_Disable_BOD_IRQ(void)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type HBN_Aon_Pad_WakeUpCfg(BL_Fun_Type puPdEn, HBN_GPIO_INT_Trigger_Type trigMode, uint32_t maskVal, BL_Fun_Type dlyEn, uint8_t dlySec)
+BL_Err_Type HBN_Aon_Pad_WakeUpCfg(BL_Fun_Type puPdEn, uint8_t trigMode, uint32_t maskVal, BL_Fun_Type dlyEn, uint8_t dlySec)
 {
     uint32_t tmpVal;
 
@@ -3341,7 +3358,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Fast_Power_On_WIFIPLL(const GLB_WA_PLL_Cfg_Ty
 BL_Err_Type ATTR_CLOCK_SECTION GLB_Fast_Power_On_XTAL_40M_And_WIFIPLL(void)
 {
     uint32_t tmpVal;
-    volatile GLB_PLL_REF_CLK_Type refClk;
+    volatile uint8_t refClk;
 
     refClk = GLB_PLL_REFCLK_XTAL;
 
@@ -3410,7 +3427,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Fast_Set_MCU_System_CLK_Div(uint8_t mcuClkDiv
     return SUCCESS;
 }
 
-BL_Err_Type ATTR_CLOCK_SECTION GLB_Fast_Set_MCU_System_CLK(GLB_MCU_SYS_CLK_Type clkFreq)
+BL_Err_Type ATTR_CLOCK_SECTION GLB_Fast_Set_MCU_System_CLK(uint8_t clkFreq)
 {
     uint32_t tmpVal;
 
@@ -3628,7 +3645,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_240M(void)
     uint8_t xtalType=GLB_XTAL_NONE;
 
     HBN_Get_Xtal_Type(&xtalType);
-    return GLB_Config_AUDIO_PLL((GLB_XTAL_Type)xtalType,audioPllCfg_240M);
+    return GLB_Config_AUDIO_PLL((uint8_t)xtalType,audioPllCfg_240M);
 }
 
 /****************************************************************************/ /**
@@ -3645,7 +3662,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_245P76M(void)
     uint8_t xtalType=GLB_XTAL_NONE;
 
     HBN_Get_Xtal_Type(&xtalType);
-    return GLB_Config_AUDIO_PLL((GLB_XTAL_Type)xtalType,audioPllCfg_245P76M);
+    return GLB_Config_AUDIO_PLL((uint8_t)xtalType,audioPllCfg_245P76M);
 }
 
 /****************************************************************************/ /**
@@ -3658,7 +3675,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_245P76M(void)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_CLOCK_SECTION GLB_Simple_Set_MCU_System_CLK(GLB_MCU_SYS_CLK_Type clkFreq, uint8_t mcuClkDiv, uint8_t mcuPBclkDiv)
+BL_Err_Type ATTR_CLOCK_SECTION GLB_Simple_Set_MCU_System_CLK(uint8_t clkFreq, uint8_t mcuClkDiv, uint8_t mcuPBclkDiv)
 {
     uint32_t tmpVal;
     uint32_t timeout;
@@ -3775,7 +3792,7 @@ BL_Err_Type PDS_Power_Off_WB(void)
     tmpVal = BL_SET_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_WB_ISO_EN);
     BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
 
-    tmpVal = BL_SET_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_NP_PWR_OFF);
+    tmpVal = BL_SET_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_WB_PWR_OFF);
     BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
 
     return SUCCESS;
@@ -3794,7 +3811,7 @@ BL_Err_Type PDS_Power_On_WB(void)
     uint32_t tmpVal = 0;
 
     tmpVal = BL_RD_REG(PDS_BASE, PDS_CTL2);
-    tmpVal = BL_CLR_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_NP_PWR_OFF);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_WB_PWR_OFF);
     BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
 
     tmpVal = BL_CLR_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_WB_ISO_EN);
@@ -3848,7 +3865,7 @@ void HBN_Clr_Reset_Event(void)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_CLOCK_SECTION GLB_Set_Slave_Grp_0_CLK(GLB_SLAVE_GRP_0_Type slave, uint8_t enable, GLB_SLAVE_GRP_0_CLK_SEL_Type clkSel, uint32_t div)
+BL_Err_Type ATTR_CLOCK_SECTION GLB_Set_Slave_Grp_0_CLK(uint8_t slave, uint8_t enable, GLB_SLAVE_GRP_0_CLK_SEL_Type clkSel, uint32_t div)
 {
     uint32_t tmpVal;
     uint32_t regAddr = GLB_BASE + glb_slave_grp_0_table[slave].clkOffSetAddr;
@@ -3898,7 +3915,7 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Set_Slave_Grp_0_CLK(GLB_SLAVE_GRP_0_Type slav
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_GPIO_Clr(GLB_GPIO_Type gpioPin)
+BL_Err_Type GLB_GPIO_Clr(uint8_t gpioPin)
 {
     if (gpioPin < GLB_GPIO_PIN_32) {
         BL_WR_WORD(GLB_BASE + GLB_GPIO_CFG140_OFFSET, 1 << gpioPin);
@@ -3917,7 +3934,7 @@ BL_Err_Type GLB_GPIO_Clr(GLB_GPIO_Type gpioPin)
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type GLB_GPIO_Set(GLB_GPIO_Type gpioPin)
+BL_Err_Type GLB_GPIO_Set(uint8_t gpioPin)
 {
     if (gpioPin < GLB_GPIO_PIN_32) {
         BL_WR_WORD(GLB_BASE + GLB_GPIO_CFG138_OFFSET, 1 << gpioPin);
@@ -4030,7 +4047,7 @@ BL_Err_Type ATTR_TCM_SECTION L1C_ICache_Invalid_By_Addr(uintptr_t addr, uint32_t
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Err_Type ATTR_TCM_SECTION PDS_Set_GPIO_Pad_IntMask(GLB_GPIO_Type pad, BL_Mask_Type intMask)
+BL_Err_Type ATTR_TCM_SECTION PDS_Set_GPIO_Pad_IntMask(uint8_t pad, BL_Mask_Type intMask)
 {
     uint32_t tmpVal = 0;
     uint32_t pos = 0;
@@ -4066,7 +4083,7 @@ BL_Err_Type ATTR_TCM_SECTION PDS_Set_GPIO_Pad_IntMask(GLB_GPIO_Type pad, BL_Mask
  * @return SUCCESS or ERROR
  *
 *******************************************************************************/
-BL_Sts_Type ATTR_TCM_SECTION PDS_Get_GPIO_Pad_IntStatus(GLB_GPIO_Type pad)
+BL_Sts_Type ATTR_TCM_SECTION PDS_Get_GPIO_Pad_IntStatus(uint8_t pad)
 {
     uint32_t pos = 0;
 
@@ -4110,4 +4127,311 @@ BL_Err_Type GLB_BMX_TO_Init(BMX_TO_Cfg_Type *BmxCfg)
     return SUCCESS;
 }
 
+/****************************************************************************/ /**
+ * @brief  Set xtal32k_capbank
+ *
+ * @param  value
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_Xtal_32K_Capbank(uint8_t value)
+{
+    uint32_t tmpVal = 0;
 
+    tmpVal = BL_RD_REG(HBN_BASE, HBN_XTAL32K);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_XTAL32K_CAPBANK, value);
+    BL_WR_REG(HBN_BASE, HBN_XTAL32K, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  Set xtal32k's inverter amplify strength
+ *
+ * @param  value
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_Xtal_32K_Inverter_Amplify_Strength(uint8_t value)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(HBN_BASE, HBN_XTAL32K);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_XTAL32K_INV_STRE, value);
+    BL_WR_REG(HBN_BASE, HBN_XTAL32K, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  Set xtal32k_regulator
+ *
+ * @param  level
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Set_Xtal_32K_Regulator(uint8_t level)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(HBN_BASE, HBN_XTAL32K);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_XTAL32K_REG, level);
+    BL_WR_REG(HBN_BASE, HBN_XTAL32K, tmpVal);
+
+    return SUCCESS;
+}
+
+
+/****************************************************************************/ /**
+ * @brief  Power on XTAL 32K
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ * @note can't use GPIO16&17 after calling this function
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_CLOCK_SECTION HBN_Power_On_Xtal_32K(void)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(HBN_BASE, HBN_XTAL32K);
+
+    tmpVal = BL_CLR_REG_BIT(tmpVal, HBN_XTAL32K_HIZ_EN);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, HBN_XTAL32K_INV_STRE, 3);
+    tmpVal = BL_SET_REG_BIT(tmpVal, HBN_PU_XTAL32K);
+    tmpVal = BL_SET_REG_BIT(tmpVal, HBN_PU_XTAL32K_BUF);
+    BL_WR_REG(HBN_BASE, HBN_XTAL32K, tmpVal);
+
+    /* Delay >1s */
+    arch_delay_us(1100);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  LDO15_RF Output Float
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_Output_Float_LDO15_RF(void)
+{
+    uint32_t tmpVal=0;
+
+    /* ldo15rf pulldown select by aon */
+    tmpVal = BL_RD_REG(AON_BASE, AON_RF_TOP_AON);
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_LDO15RF_PULLDOWN_SEL_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    /* ldo15rf float output */
+    tmpVal = BL_RD_REG(AON_BASE, AON_RF_TOP_AON);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, AON_LDO15RF_PULLDOWN_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief   LDO15_RF Pulldown Output to Groud
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_Output_Pulldown_LDO15_RF(void)
+{
+    uint32_t tmpVal=0;
+
+    /* ldo15rf pulldown select by aon */
+    tmpVal = BL_RD_REG(AON_BASE, AON_RF_TOP_AON);
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_LDO15RF_PULLDOWN_SEL_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    /* ldo15rf pulldown output to ground */
+    tmpVal = BL_RD_REG(AON_BASE, AON_RF_TOP_AON);
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_LDO15RF_PULLDOWN_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  LDO15_RF Output Pulldown Controlled by PD Signal
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_Output_LDO15_RF_Ctrl_by_Pd(void)
+{
+    uint32_t tmpVal=0;
+
+    /* output ldo15rf pulldown select by pd signal */
+    tmpVal = BL_RD_REG(AON_BASE, AON_RF_TOP_AON);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, AON_LDO15RF_PULLDOWN_SEL_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  power on mic bias
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_Power_On_MicBias(void)
+{
+    uint32_t tmpVal = 0;
+
+    /* power on sfreg */
+    tmpVal = BL_RD_REG(AON_BASE, AON_GPADC_REG_CMD);
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_GPADC_MICBIAS_EN);
+    BL_WR_REG(AON_BASE, AON_GPADC_REG_CMD, tmpVal);
+
+    arch_delay_us(10);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  power off mic bias
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_Power_Off_MicBias(void)
+{
+    uint32_t tmpVal = 0;
+
+    /* power off sfreg */
+    tmpVal = BL_RD_REG(AON_BASE, AON_GPADC_REG_CMD);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, AON_GPADC_MICBIAS_EN);
+    BL_WR_REG(AON_BASE, AON_GPADC_REG_CMD, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  Power off the power can be shut down in PDS0
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_LowPower_Enter_PDS0(void)
+{
+    uint32_t tmpVal = 0;
+
+    /* power off sfreg */
+    tmpVal = BL_RD_REG(AON_BASE, AON_MISC);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, AON_SW_WB_EN_AON);
+    BL_WR_REG(AON_BASE, AON_MISC, tmpVal);
+
+    tmpVal = BL_RD_REG(AON_BASE, AON_RF_TOP_AON);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, AON_PU_SFREG_AON);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, AON_PU_LDO15RF_AON);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, AON_PU_MBG_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    /* gating Clock */
+    tmpVal = BL_RD_REG(GLB_BASE, GLB_CGEN_CFG0);
+    tmpVal = tmpVal & (~(1 << 6));
+    tmpVal = tmpVal & (~(1 << 7));
+    BL_WR_REG(GLB_BASE, GLB_CGEN_CFG0, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  Power on the power powered down in PDS0
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_LowPower_Exit_PDS0(void)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(AON_BASE, AON_RF_TOP_AON);
+
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_PU_MBG_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    arch_delay_us(20);
+
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_PU_LDO15RF_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    arch_delay_us(60);
+
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_PU_SFREG_AON);
+    BL_WR_REG(AON_BASE, AON_RF_TOP_AON, tmpVal);
+
+    arch_delay_us(20);
+
+    /* power on wb */
+    tmpVal = BL_RD_REG(AON_BASE, AON_MISC);
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_SW_WB_EN_AON);
+    BL_WR_REG(AON_BASE, AON_MISC, tmpVal);
+
+    /* ungating Clock */
+    tmpVal = BL_RD_REG(GLB_BASE, GLB_CGEN_CFG0);
+    tmpVal = tmpVal | ((1 << 6));
+    tmpVal = tmpVal | ((1 << 7));
+    BL_WR_REG(GLB_BASE, GLB_CGEN_CFG0, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  DCDC18 Pulldown Output to Groud
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_Output_Pulldown_DCDC18(void)
+{
+    uint32_t tmpVal=0;
+
+    tmpVal = BL_RD_REG(AON_BASE, AON_DCDC_TOP_1);
+    tmpVal = BL_SET_REG_BIT(tmpVal, AON_DCDC_PULLDOWN_AON );
+    BL_WR_REG(AON_BASE, AON_DCDC_TOP_1, tmpVal);
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  DCDC18 Output Float
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type ATTR_TCM_SECTION AON_Output_Float_DCDC18(void)
+{
+    uint32_t tmpVal=0;
+
+    tmpVal = BL_RD_REG(AON_BASE, AON_DCDC_TOP_1);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, AON_DCDC_PULLDOWN_AON );
+    BL_WR_REG(AON_BASE, AON_DCDC_TOP_1, tmpVal);
+
+    return SUCCESS;
+}
