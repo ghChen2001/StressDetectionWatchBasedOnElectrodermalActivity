@@ -40,7 +40,7 @@ extern "C" {
 #include <stdint.h>
 
 /* FreeRTOS+POSIX includes. */
-#include "FreeRTOS_POSIX/time.h"
+#include "FreeRTOS_POSIX/ptime.h"
 
 /**
  * @brief Calculates the length of pcString, up to xMaxLength.

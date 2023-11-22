@@ -36,7 +36,7 @@
 #include "FreeRTOS_POSIX/errno.h"
 #include "FreeRTOS_POSIX/pthread.h"
 #include "FreeRTOS_POSIX/signal.h"
-#include "FreeRTOS_POSIX/time.h"
+#include "FreeRTOS_POSIX/ptime.h"
 #include "FreeRTOS_POSIX/utils.h"
 
 /* FreeRTOS timer include. */

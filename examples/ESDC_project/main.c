@@ -91,6 +91,8 @@
 #include <lwip/apps/sntp.h>
 #include "bflb_timestamp.h"
 
+#include "time.h"
+
 #define DBG_TAG "MAIN"
 #include "log.h"
 
@@ -224,6 +226,7 @@ int output_class = -1;
 /* END Algo*/
 
 long long time_base = 0;
+bool timeCorrected = false;
 
 // static const uint8_t m_length = BUFFERLEN;                           /**< Transfer length. */
 // static ATTR_NOCACHE_NOINIT_RAM_SECTION uint8_t tx_buffer[BUFFERLEN]; /**< TX buffer. */
@@ -409,12 +412,6 @@ void wifi_event_handler(uint32_t code)
             LOG_I("[APP] [EVT] %s, CODE_WIFI_ON_CONNECTED\r\n", __func__);
             wifi_connected = true;
 
-            sntp_setoperatingmode(SNTP_OPMODE_POLL);
-            sntp_init();
-            sntp_setservername(0, "pool.ntp.org");
-            sntp_setservername(1, "ntp1.aliyun.com");
-            sntp_setservername(2, "158.69.48.97");
-
             void mm_sec_keydump();
             mm_sec_keydump();
         } break;
@@ -424,7 +421,6 @@ void wifi_event_handler(uint32_t code)
         case CODE_WIFI_ON_DISCONNECT: {
             LOG_I("[APP] [EVT] %s, CODE_WIFI_ON_DISCONNECT\r\n", __func__);
             wifi_connected = false;
-            sntp_stop();
         } break;
         case CODE_WIFI_ON_AP_STARTED: {
             LOG_I("[APP] [EVT] %s, CODE_WIFI_ON_AP_STARTED\r\n", __func__);
@@ -1646,6 +1642,21 @@ static void CLOCK_task(void *pvParameters)
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateWeekLabel(rtc_week);
             xSemaphoreGive(xMutex_lvgl);
+        }
+
+        if (wifi_connected && !timeCorrected)
+        {
+            sntp_setoperatingmode(SNTP_OPMODE_POLL);
+            sntp_init();
+            sntp_setservername(0, "pool.ntp.org");
+            sntp_setservername(1, "ntp1.aliyun.com");
+            sntp_setservername(2, "158.69.48.97");
+            timeCorrected = true;
+        }
+        if (!wifi_connected && timeCorrected)
+        {
+            sntp_stop();
+            timeCorrected = false;
         }
 
         vTaskDelay(250);

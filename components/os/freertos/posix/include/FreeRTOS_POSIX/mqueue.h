@@ -38,7 +38,7 @@ extern "C" {
 #endif
 
 /* FreeRTOS+POSIX includes. */
-#include "FreeRTOS_POSIX/time.h"
+#include "FreeRTOS_POSIX/ptime.h"
 
 /**
  * @brief Message queue descriptor.
