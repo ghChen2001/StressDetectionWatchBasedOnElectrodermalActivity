@@ -698,6 +698,7 @@ void AD5940EDAStructInit(void)
     //pCfg->NumOfData = -1;						/* Never stop until you stop it manually by AppBIACtrl() function */
     pCfg->RcalVal = 10000.0;
     pCfg->DftNum = DFTNUM_16;
+
 }
 
 /* print EDA result to uart */
