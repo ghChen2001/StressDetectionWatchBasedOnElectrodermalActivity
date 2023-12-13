@@ -34,6 +34,7 @@ target_sources(app PRIVATE lcd/mipi_dbi/ili9486_dbi.c)
 target_sources(app PRIVATE lcd/mipi_dbi/ili9341_dbi.c)
 target_sources(app PRIVATE lcd/mipi_dbi/nt35510_dbi.c)
 target_sources(app PRIVATE lcd/mipi_dbi/st7796_dbi.c)
+target_sources(app PRIVATE lcd/mipi_dbi/rm69090_dbi.c)
 
 target_sources(app PRIVATE lcd/spi/bl_spi_hard_4.c)
 target_sources(app PRIVATE lcd/spi/ili9341_spi.c)

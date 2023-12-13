@@ -208,7 +208,7 @@ int lcd_dbi_transmit_cmd_pixel_async(uint8_t cmd, uint32_t *pixel, size_t pixel_
 
     /* get data size */
     data_size = bflb_dbi_feature_control(dbi_hd, DBI_CMD_GET_SIZE_OF_PIXEL_CNT, pixel_num);
-    printf("%d\r\n", data_size);
+    // printf("%d\r\n", data_size);
 
     /* dma transfers cfg */
     dma_tx_transfers[0].src_addr = (uint32_t)pixel;

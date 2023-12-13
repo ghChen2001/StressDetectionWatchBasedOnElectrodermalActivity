@@ -22,6 +22,7 @@
 /* touch interface pin config */
 #define TOUCH_I2C_SCL_PIN   GPIO_PIN_30
 #define TOUCH_I2C_SDA_PIN   GPIO_PIN_31
+#define TOUCH_RESET         GPIO_PIN_3
 
 /* now do not support */
 #if 0

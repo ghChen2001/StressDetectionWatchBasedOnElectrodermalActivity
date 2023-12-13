@@ -38,6 +38,7 @@
 #include "bflb_i2c.h"
 #include "bflb_l1c.h"
 #include "bflb_rtc.h"
+#include "bflb_uart.h"
 
 /* LVGL */
 #include "lv_conf.h"
@@ -58,11 +59,8 @@
 // #include "cvxEDA/cvxEDA_types.h"
 // #include "cvxEDA/rt_nonfinite.h"
 
-#include "lis2dh12_reg.h"
-#include "embedded_pedometer/count_steps.h"
-// #include "M601.h"
-// #include "M117/m117_drv.h"
-#include "TMP117/tmp117_drv.h"
+#include "lsm6dso_reg.h"
+#include "MLX90632/mlx90632.h"
 
 #include "afe4404/AFE4404.h"
 #include "afe4404/Calibration_AFE4404.h"
@@ -85,8 +83,6 @@
 #include "my_findpeaks_types.h"
 #include "rt_nonfinite.h"
 
-// #include "MAX30101/max30101_algo.h"
-// #include "MAX30101/max30101_drv.h"
 // Time
 #include <lwip/apps/sntp.h>
 #include "bflb_timestamp.h"
@@ -107,6 +103,8 @@
 #define GMTp8              8 * 60 * 60
 #define GMTm7              -7 * 60 * 60
 
+#define LSM6DSO_BOOT_TIME  10
+
 void *__dso_handle = NULL;
 
 static TaskHandle_t EDA_handle;
@@ -120,6 +118,7 @@ static TaskHandle_t WIFI_handle;
 static TaskHandle_t Algo_handle;
 static TaskHandle_t wifi_fw_task;
 static TaskHandle_t BLE_handle;
+static TaskHandle_t GPS_handle;
 static wifi_conf_t conf = {
     .country_code = "CN",
 };
@@ -127,6 +126,7 @@ static bool wifi_connected = false;
 static uint8_t wifiInitDone = 0;
 
 static struct bflb_device_s *uart0;
+static struct bflb_device_s *uart1;
 struct bflb_device_s *gpio;
 struct bflb_device_s *spi0;        // For AD5940
 static struct bflb_device_s *i2c0; // For LIS2DH12, TMP117, AFE4404
@@ -149,14 +149,14 @@ fImpCar_Type EDABase = {
 };
 uint32_t err_code_ad5940;
 
-// LIS2DH12
-static uint8_t whoamI;
-static bl616_ctx_t dev_ctx;
+// LSM6DSO
+static uint8_t whoamI, rst;
+static stmdev_ctx_t dev_ctx;
 static int16_t data_raw_acceleration[3];
 static float acceleration_mg[3];
-static float acceWindow[300] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(32)));
-static uint16_t acceWindowPtr = 0;
 static uint32_t stepCnt = 0;
+static int16_t data_raw_angular_rate[3];
+static float angular_rate_mdps[3];
 
 /* AFE4404 */
 uint8_t afe4404_adcrdy = 0;
@@ -242,15 +242,15 @@ volatile bool spi0_tc = false; /**< Flag used to indicate that SPI instance comp
 // extern void shell_init_with_task(struct bflb_device_s *shell);
 
 /* Private Function Defination */
-/*Function Definations For LIS2DH12 */
-static int32_t lis2dh12_platform_write(void *handle, uint8_t reg, const uint8_t *bufp,
-                                       uint16_t len);
-static int32_t lis2dh12_platform_read(void *handle, uint8_t reg, uint8_t *bufp,
+/*Function Definations For lsm6dso */
+static int32_t lsm6dso_platform_write(void *handle, uint8_t reg, const uint8_t *bufp,
                                       uint16_t len);
+static int32_t lsm6dso_platform_read(void *handle, uint8_t reg, uint8_t *bufp,
+                                     uint16_t len);
 // static void tx_com(uint8_t *tx_buffer, uint16_t len);
-// static void platform_delay(uint32_t ms);
+static void lsm6dso_platform_delay(uint32_t ms);
 // static void platform_init(void);
-/*END Function Definations For LIS2DH12 */
+/*END Function Definations For lsm6dso */
 
 /* lvgl log cb */
 void lv_log_print_g_cb(const char *buf)
@@ -523,7 +523,7 @@ static void peripheral_init(void)
     //     .src_width = DMA_DATA_WIDTH_8BIT,
     //     .dst_width = DMA_DATA_WIDTH_8BIT,
     // };
-    
+
     /* Now do not use DMA */
     bflb_spi_init(spi0, &spi_cfg);
     // bflb_spi_txint_mask(spi0, false);
@@ -582,6 +582,23 @@ static void peripheral_init(void)
     /* Enable IRQ */
     // bflb_irq_set_priority(gpio->irq_num, 1, 0);
     bflb_irq_enable(gpio->irq_num);
+
+    // /* UART0 INIT*/
+    // bflb_gpio_uart_init(gpio, GPIO_PIN_33, GPIO_UART_FUNC_UART1_TX);
+    // bflb_gpio_uart_init(gpio, GPIO_PIN_34, GPIO_UART_FUNC_UART1_RX);
+
+    // struct bflb_uart_config_s cfg;
+    // cfg.baudrate = 9600;
+    // cfg.data_bits = UART_DATA_BITS_8;
+    // cfg.stop_bits = UART_STOP_BITS_1;
+    // cfg.parity = UART_PARITY_NONE;
+    // cfg.flow_ctrl = 0;
+    // cfg.tx_fifo_threshold = 7;
+    // cfg.rx_fifo_threshold = 7;
+
+    // uart1 = bflb_device_get_by_name("uart1");
+
+    // bflb_uart_init(uart1, &cfg);
 }
 
 /* Initialize AD5940 basic blocks like clock */
@@ -732,6 +749,16 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
     return 0;
 }
 
+uint8_t BL618_UART1_TRANSMIT(uint8_t *data, uint32_t len)
+{
+    return bflb_uart_put(uart1, data, len);
+}
+
+uint8_t BL618_UART1_RECEIVE(uint8_t *data, uint32_t len)
+{
+    return bflb_uart_get(uart1, data, len);
+}
+
 uint8_t BL618_I2C_TRANSMIT(struct bflb_i2c_msg_s *msg, uint16_t msglen)
 {
     xSemaphoreTake(xMutex,
@@ -751,11 +778,10 @@ uint8_t BL618_I2C_TRANSMIT(struct bflb_i2c_msg_s *msg, uint16_t msglen)
  * @param  len       number of consecutive register to write
  *
  */
-static int32_t lis2dh12_platform_write(void *handle, uint8_t reg, const uint8_t *bufp,
-                                       uint16_t len)
+static int32_t lsm6dso_platform_write(void *handle, uint8_t reg, const uint8_t *bufp,
+                                      uint16_t len)
 {
     /* Write */
-    reg |= 0x80;
     struct bflb_i2c_msg_s msgs[1];
     uint8_t subaddr[1 + len];
 
@@ -764,7 +790,7 @@ static int32_t lis2dh12_platform_write(void *handle, uint8_t reg, const uint8_t 
         subaddr[i + 1] = bufp[i];
     }
 
-    msgs[0].addr = 0x30 >> 1;
+    msgs[0].addr = LSM6DSO_I2C_ADD_L >> 1;
     msgs[0].flags = I2C_M_NOSTART;
     msgs[0].buffer = subaddr;
     msgs[0].length = len + 1;
@@ -781,20 +807,19 @@ static int32_t lis2dh12_platform_write(void *handle, uint8_t reg, const uint8_t 
  * @param  len       number of consecutive register to read
  *
  */
-static int32_t lis2dh12_platform_read(void *handle, uint8_t reg, uint8_t *bufp,
-                                      uint16_t len)
+static int32_t lsm6dso_platform_read(void *handle, uint8_t reg, uint8_t *bufp,
+                                     uint16_t len)
 {
     /* Read */
-    reg |= 0x80;
     struct bflb_i2c_msg_s msgs[2];
     uint8_t subaddr[1] = { reg };
 
-    msgs[0].addr = 0x30 >> 1;
-    msgs[0].flags = I2C_M_NOSTART;
+    msgs[0].addr = LSM6DSO_I2C_ADD_L >> 1;
+    msgs[0].flags = I2C_M_NOSTOP;
     msgs[0].buffer = subaddr;
     msgs[0].length = 1;
 
-    msgs[1].addr = 0x30 >> 1;
+    msgs[1].addr = LSM6DSO_I2C_ADD_L >> 1;
     msgs[1].flags = I2C_M_READ;
     msgs[1].buffer = bufp;
     msgs[1].length = len;
@@ -802,36 +827,147 @@ static int32_t lis2dh12_platform_read(void *handle, uint8_t reg, uint8_t *bufp,
     return BL618_I2C_TRANSMIT(msgs, 2);
 }
 
-int8_t tmp117_i2c_write(uint8_t *txbuf, uint16_t len)
+/*
+ * @brief  platform specific delay (platform dependent)
+ *
+ * @param  ms        delay in ms
+ *
+ */
+static void platform_delay(uint32_t ms)
+{
+    vTaskDelay(ms);
+}
+
+int32_t mlx90632_i2c_read(int16_t register_address, uint16_t *value)
+{
+    struct bflb_i2c_msg_s msgs[2];
+    uint8_t data[2] = { 0 };
+    uint32_t ret = 0;
+    uint8_t subaddr[2] = {
+        (register_address & 0xFF00) >> 8,
+        register_address & 0x00FF,
+    };
+
+    msgs[0].addr = MLX_CHIP_ADDRESS;
+    msgs[0].flags = I2C_M_NOSTOP;
+    msgs[0].buffer = subaddr;
+    msgs[0].length = 2;
+
+    msgs[1].addr = MLX_CHIP_ADDRESS;
+    msgs[1].flags = I2C_M_READ;
+    msgs[1].buffer = data;
+    msgs[1].length = 2;
+
+    ret = BL618_I2C_TRANSMIT(msgs, 2);
+    data[0] = data[0] & 0xFF;
+    data[1] = data[1] & 0xFF;
+    *value = data[1] | (data[0] << 8);
+    // printf("READ %X\r\n", *value);
+    return ret;
+}
+
+int32_t mlx90632_i2c_read32(int16_t register_address, uint32_t *value)
+{
+    struct bflb_i2c_msg_s msgs[2];
+    uint8_t data[4] = { 0 };
+    uint8_t subaddr[2] = {
+        (register_address & 0xFF00) >> 8,
+        register_address & 0x00FF,
+    };
+    int32_t ret = 0;
+
+    msgs[0].addr = MLX_CHIP_ADDRESS;
+    msgs[0].flags = I2C_M_NOSTOP;
+    msgs[0].buffer = subaddr;
+    msgs[0].length = 2;
+
+    msgs[1].addr = MLX_CHIP_ADDRESS;
+    msgs[1].flags = I2C_M_READ;
+    msgs[1].buffer = data;
+    msgs[1].length = 4;
+
+    ret = BL618_I2C_TRANSMIT(msgs, 2);
+
+    *value = data[2] << 24 | data[3] << 16 | data[0] << 8 | data[1];
+    return ret;
+}
+
+int32_t mlx90632_i2c_write(int16_t register_address, uint16_t value)
 {
     struct bflb_i2c_msg_s msgs[1];
+    uint8_t subaddr[4] = {
+        (register_address & 0xFF00) >> 8,
+        register_address & 0x00FF,
+        (value & 0xFF00) >> 8,
+        value & 0x00FF,
+    };
 
-    msgs[0].addr = TMP117_DeviceID1;
-    msgs[0].flags = I2C_M_NOSTART;
-    msgs[0].buffer = txbuf;
-    msgs[0].length = len;
+    msgs[0].addr = MLX_CHIP_ADDRESS;
+    msgs[0].flags = 0;
+    msgs[0].buffer = subaddr;
+    msgs[0].length = 4;
 
     return BL618_I2C_TRANSMIT(msgs, 1);
 }
 
-int8_t tmp117_i2c_read(uint8_t addr, uint8_t *rxbuf, uint16_t len)
+/* Implementation of reading all calibration parameters for calucation of Ta and To */
+static int mlx90632_read_eeprom(int32_t *PR, int32_t *PG, int32_t *PO, int32_t *PT, int32_t *Ea, int32_t *Eb, int32_t *Fa, int32_t *Fb, int32_t *Ga, int16_t *Gb, int16_t *Ha, int16_t *Hb, int16_t *Ka)
 {
-    struct bflb_i2c_msg_s msgs[2];
-    uint8_t subaddr[1] = { addr };
+    int32_t ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_P_R, (uint32_t *)PR);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_P_G, (uint32_t *)PG);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_P_O, (uint32_t *)PO);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_P_T, (uint32_t *)PT);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_Ea, (uint32_t *)Ea);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_Eb, (uint32_t *)Eb);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_Fa, (uint32_t *)Fa);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_Fb, (uint32_t *)Fb);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read32(MLX90632_EE_Ga, (uint32_t *)Ga);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read(MLX90632_EE_Gb, (uint16_t *)Gb);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read(MLX90632_EE_Ha, (uint16_t *)Ha);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read(MLX90632_EE_Hb, (uint16_t *)Hb);
+    if (ret < 0)
+        return ret;
+    ret = mlx90632_i2c_read(MLX90632_EE_Ka, (uint16_t *)Ka);
+    if (ret < 0)
+        return ret;
 
-    msgs[0].addr = TMP117_DeviceID1;
-    msgs[0].flags = I2C_M_NOSTART;
-    msgs[0].buffer = subaddr;
-    msgs[0].length = 1;
+    printf("R %d, G %d, T %d, O %d, Ea %d, Eb %d, Fa %d, Fb %d, Ga %d, Gb %d, Ka %d, Ha %d, Hb %d\n", *PR, *PG, *PT, *PO, *Ea, *Eb, *Fa, *Fb, *Ga, *Gb, *Ka, *Ha, *Hb);
 
-    msgs[1].addr = TMP117_DeviceID1;
-    msgs[1].flags = I2C_M_READ;
-    msgs[1].buffer = rxbuf;
-    msgs[1].length = len;
-
-    return BL618_I2C_TRANSMIT(msgs, 2);
+    return 0;
 }
 
+void MLX_usleep(int min_range, int max_range)
+{
+    bflb_mtimer_delay_us(min_range);
+}
+
+void MLX_msleep(int msecs)
+{
+    vTaskDelay(msecs);
+}
 /**********************************************************************************************************/
 /*	        AFE4404_Trigger_HWReset         				                                              */
 /**********************************************************************************************************/
@@ -1250,90 +1386,106 @@ static void ACCE_task(void *pvParameters)
 {
     printf("ACCE task enter \r\n");
     vTaskDelay(10);
+    lsm6dso_emb_sens_t emb_sens;
+    uint8_t reg;
 
-    /* LIS2DH12 INIT*/
-    /* Initialize mems driver interface */
-    dev_ctx.write_reg = lis2dh12_platform_write;
-    dev_ctx.read_reg = lis2dh12_platform_read;
+    /* Uncomment to configure INT 1 */
+    //lsm6dso_pin_int1_route_t int1_route;
+    /* Uncomment to configure INT 2 */
+    //lsm6dso_pin_int2_route_t int2_route;
+    /* Initialize driver interface */
+    dev_ctx.write_reg = lsm6dso_platform_write;
+    dev_ctx.read_reg = lsm6dso_platform_read;
     /* Wait sensor boot time */
-    vTaskDelay(50);
+    platform_delay(LSM6DSO_BOOT_TIME);
     /* Check device ID */
-    lis2dh12_device_id_get(&dev_ctx, &whoamI);
-    printf("LIS2DH12 Device ID: 0x%x\r\n", whoamI);
-    /* Set FIFO watermark to FIFO_WATERMARK */
-    lis2dh12_fifo_watermark_set(&dev_ctx, ACC_FIFO_WATERMARK - 1);
-    /* Set FIFO mode to Stream mode (aka Continuous Mode) */
-    lis2dh12_fifo_mode_set(&dev_ctx, LIS2DH12_DYNAMIC_STREAM_MODE);
-    /* Enable FIFO */
-    lis2dh12_fifo_set(&dev_ctx, PROPERTY_ENABLE);
-    /* Enable Block Data Update. */
-    lis2dh12_block_data_update_set(&dev_ctx, PROPERTY_ENABLE);
-    /* Set Output Data Rate to 1Hz. */
-    lis2dh12_data_rate_set(&dev_ctx, LIS2DH12_ODR_25Hz);
-    /* Set full scale to 2g. */
-    lis2dh12_full_scale_set(&dev_ctx, LIS2DH12_4g);
-    /* Set device in continuous mode with 8 bit resol. */
-    lis2dh12_operating_mode_set(&dev_ctx, LIS2DH12_LP_8bit);
-    /* END LIS2DH12 INIT*/
+    lsm6dso_device_id_get(&dev_ctx, &whoamI);
 
-    printf("ACCE task start \r\n");
-    printf("begin to loop %s\r\n", __func__);
+    if (whoamI != LSM6DSO_ID) {
+        printf("LSM6DSO ADDRESS ERROR\n");
+        while (1)
+            ;
+    }
 
-    uint32_t number = 0;
-    static uint8_t dummy;
-    int32_t ret_code;
-    acceWindowPtr = 0;
-    stepCnt = 0;
+    /* Restore default configuration */
+    lsm6dso_reset_set(&dev_ctx, PROPERTY_ENABLE);
+
+    do {
+        lsm6dso_reset_get(&dev_ctx, &rst);
+    } while (rst);
+
+    /* Disable I3C interface */
+    lsm6dso_i3c_disable_set(&dev_ctx, LSM6DSO_I3C_DISABLE);
+    /* Set XL full scale */
+    lsm6dso_xl_full_scale_set(&dev_ctx, LSM6DSO_2g);
+    lsm6dso_gy_full_scale_set(&dev_ctx, LSM6DSO_2000dps);
+    /* Enable Block Data Update */
+    lsm6dso_block_data_update_set(&dev_ctx, PROPERTY_ENABLE);
+    /* Enable latched interrupt notification. */
+    //lsm6dso_int_notification_set(&dev_ctx, LSM6DSO_ALL_INT_LATCHED);
+    /* Enable drdy 75 μs pulse: uncomment if interrupt must be pulsed. */
+    //lsm6dso_data_ready_mode_set(&dev_ctx, LSM6DSO_DRDY_PULSED);
+    /*
+   * Uncomment to configure INT 1
+   * Remember that INT1 pin is used by sensor to switch in I3C mode
+   */
+    //lsm6dso_pin_int1_route_get(&dev_ctx, &int1_route);
+    //int1_route.reg.emb_func_int1.int1_step_detector = PROPERTY_ENABLE;
+    //lsm6dso_pin_int1_route_set(&dev_ctx, &int1_route);
+    /* Uncomment to configure INT 2 */
+    //lsm6dso_pin_int2_route_get(&dev_ctx, &int2_route);
+    //int2_route.reg.emb_func_int2.int2_step_detector = PROPERTY_ENABLE;
+    //lsm6dso_pin_int2_route_set(&dev_ctx, &int2_route);
+    /* Enable xl sensor */
+    lsm6dso_xl_data_rate_set(&dev_ctx, LSM6DSO_XL_ODR_26Hz);
+    lsm6dso_gy_data_rate_set(&dev_ctx, LSM6DSO_GY_ODR_26Hz);
+
+    lsm6dso_xl_hp_path_on_out_set(&dev_ctx, LSM6DSO_LP_ODR_DIV_100);
+    lsm6dso_xl_filter_lp2_set(&dev_ctx, PROPERTY_ENABLE);
+    /* Reset steps of pedometer */
+    lsm6dso_steps_reset(&dev_ctx);
+    /* Enable pedometer */
+    lsm6dso_pedo_sens_set(&dev_ctx, LSM6DSO_FALSE_STEP_REJ_ADV_MODE);
+    emb_sens.step = PROPERTY_ENABLE;
+    emb_sens.step_adv = PROPERTY_ENABLE;
+    lsm6dso_embedded_sens_set(&dev_ctx, &emb_sens);
 
     while (1) {
-        /* Check if FIFO level over threshold */
-        ret_code = lis2dh12_fifo_fth_flag_get(&dev_ctx, &dummy);
-        // printf("dummy: %d , ret code: %d\r\n", dummy, ret_code);
-        // printf("d %d", dummy);
+        /* Read output only if new xl value is available */
+        lsm6dso_xl_flag_data_ready_get(&dev_ctx, &reg);
 
-        if (dummy) {
-            number++;
-
-            /* Read number of sample in FIFO */
-            lis2dh12_fifo_data_level_get(&dev_ctx, &dummy);
-
-            while (dummy > 0) {
-                /* Read XL samples */
-                lis2dh12_acceleration_raw_get(&dev_ctx, data_raw_acceleration);
-                acceleration_mg[0] =
-                    lis2dh12_from_fs2_hr_to_mg(data_raw_acceleration[0]);
-                acceleration_mg[1] =
-                    lis2dh12_from_fs2_hr_to_mg(data_raw_acceleration[1]);
-                acceleration_mg[2] =
-                    lis2dh12_from_fs2_hr_to_mg(data_raw_acceleration[2]);
-                // printf("%d - Acceleration [mg]:%4.2f\t%4.2f\t%4.2f\r\n",
-                //        ACC_FIFO_WATERMARK - dummy,
-                //        acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
-
-                acceWindow[acceWindowPtr] = acceleration_mg[0];
-                acceWindow[acceWindowPtr + 1] = acceleration_mg[1];
-                acceWindow[acceWindowPtr + 2] = acceleration_mg[2];
-                acceWindowPtr += 3;
-
-                xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-                ui_UpdateAccelerationChart(acceleration_mg[0] * 0.016, acceleration_mg[1] * 0.016, acceleration_mg[2] * 0.016);
-                xSemaphoreGive(xMutex_lvgl);
-
-                dummy--;
-            }
-            if (acceWindowPtr >= 300) {
-                printf("ACCE Step Begin\r\n");
-                stepCnt += count_steps(acceWindow);
-                acceWindowPtr = 0;
-                // printf("ACCE NUMBER: %d\r\n", stepCnt);
-                xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-                ui_UpdateStepLabel(stepCnt);
-                xSemaphoreGive(xMutex_lvgl);
-            }
+        if (reg) {
+            /* Read acceleration field data */
+            memset(data_raw_acceleration, 0x00, 3 * sizeof(int16_t));
+            lsm6dso_acceleration_raw_get(&dev_ctx, data_raw_acceleration);
+            acceleration_mg[0] =
+                lsm6dso_from_fs2_to_mg(data_raw_acceleration[0]);
+            acceleration_mg[1] =
+                lsm6dso_from_fs2_to_mg(data_raw_acceleration[1]);
+            acceleration_mg[2] =
+                lsm6dso_from_fs2_to_mg(data_raw_acceleration[2]);
+            printf("Acceleration [mg]:%4.2f\t%4.2f\t%4.2f\r\n", acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
         }
 
-        // printf("ACCE\r\n");
-        vTaskDelay(20);
+        lsm6dso_gy_flag_data_ready_get(&dev_ctx, &reg);
+
+        if (reg) {
+            /* Read angular rate field data */
+            memset(data_raw_angular_rate, 0x00, 3 * sizeof(int16_t));
+            lsm6dso_angular_rate_raw_get(&dev_ctx, data_raw_angular_rate);
+            angular_rate_mdps[0] =
+                lsm6dso_from_fs2000_to_mdps(data_raw_angular_rate[0]);
+            angular_rate_mdps[1] =
+                lsm6dso_from_fs2000_to_mdps(data_raw_angular_rate[1]);
+            angular_rate_mdps[2] =
+                lsm6dso_from_fs2000_to_mdps(data_raw_angular_rate[2]);
+            printf("Angular rate [mdps]:%4.2f\t%4.2f\t%4.2f\r\n", angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
+        }
+
+        /* Read steps */
+        // lsm6dso_number_of_steps_get(&dev_ctx, &stepCnt);
+        // printf("Step Count: %d\n", stepCnt);
+        vTaskDelay(1);
     }
 
     vTaskDelete(NULL);
@@ -1345,41 +1497,49 @@ static void TEMP_task(void *pvParameters)
     vTaskDelay(10);
     printf("TEMP task start \r\n");
     printf("begin to loop %s\r\n", __func__);
+    double pre_ambient, pre_object, ambient, object;
+    int ret_code = 0;
 
-    uint32_t number = 0;
-    tmp117_Initialization();
-    uint16_t chipid;
-    tmp117_get_chipid(&chipid);
-    printf("TMP117 CHIPID: 0x%x", chipid);
-    tmp117_StartConv();
+    /* Check the internal version and prepare a clean start */
+    ret_code = mlx90632_init();
+    printf("mlx90632_init %d\n", ret_code);
 
+    /* Definition of MLX90632 calibration parameters */
+    int16_t ambient_new_raw;
+    int16_t ambient_old_raw;
+    int16_t object_new_raw;
+    int16_t object_old_raw;
+    int32_t PR = 0x00587f5b;
+    int32_t PG = 0x04a10289;
+    int32_t PT = 0xfff966f8;
+    int32_t PO = 0x00001e0f;
+    int32_t Ea = 4859535;
+    int32_t Eb = 5686508;
+    int32_t Fa = 53855361;
+    int32_t Fb = 42874149;
+    int32_t Ga = -14556410;
+    int16_t Ha = 16384;
+    int16_t Hb = 0;
+    int16_t Gb = 9728;
+    int16_t Ka = 10752;
+
+    /* Read EEPROM calibration parameters */
+    ret_code = mlx90632_read_eeprom(&PR, &PG, &PO, &PT, &Ea, &Eb, &Fa, &Fb, &Ga, &Gb, &Ha, &Hb, &Ka);
+    printf("ret: %d\n", ret_code);
     while (1) {
-        // printf("tmp117 data ready %d\r\n", tmp117_DataReady());
-        if (tmp117_DataReady()) {
-            tmp117_get_tempurature(&Tempurature);
-            // printf("Tempurature: %.3f, Number: %d\r\n", Tempurature, number);
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateTempuratureChart(Tempurature);
-            ui_UpdateTempLabel(Tempurature);
-            xSemaphoreGive(xMutex_lvgl);
-            TEMPwindow[tw_pointer] = Tempurature;
-            tw_pointer++;
-            if (tw_pointer >= 120) {
-                for (int i = 0; i < 119; i++) {
-                    TEMPwindow[i] = TEMPwindow[i + 1];
-                }
-                tw_pointer--;
-            }
-            // if (wifi_connected && !(number % 8)) {
-            //     // printf("1");
-            //     onenet_transfer(Tempurature);
-            // }
-            tmp117_StartConv();
-            // tmp117_StartConv();
-            number++;
-        }
-        // printf("TEMP\r\n");
-        vTaskDelay(200); // 4Hz TMP117单次采样的时间为125ms （8点平均）
+        /* Get raw data from MLX90632 */
+        mlx90632_read_temp_raw(&ambient_new_raw, &ambient_old_raw, &object_new_raw, &object_old_raw);
+        /* Pre-calculations for ambient and object temperature calculation */
+        pre_ambient = mlx90632_preprocess_temp_ambient(ambient_new_raw, ambient_old_raw, Gb);
+        printf("AMB %f\n", pre_ambient);
+        pre_object = mlx90632_preprocess_temp_object(object_new_raw, object_old_raw, ambient_new_raw, ambient_old_raw, Ka);
+        /* Set emissivity = 1 */
+        mlx90632_set_emissivity(1.0);
+        /* Calculate ambient and object temperature */
+        ambient = mlx90632_calc_temp_ambient(ambient_new_raw, ambient_old_raw, PT, PR, PG, PO, Gb);
+        object = mlx90632_calc_temp_object(pre_object, pre_ambient, Ea, Eb, Ga, Fa, Fb, Ha, Hb);
+        printf("Tempurature=%f, %f\n", ambient, object);
+        vTaskDelay(200);
     }
 
     vTaskDelete(NULL);
@@ -1552,19 +1712,19 @@ static void LVGL_task(void *pvParameters)
     lv_log_register_print_cb(lv_log_print_g_cb);
     lv_init();
     lv_port_disp_init();
-    lv_port_indev_init();
+    // lv_port_indev_init();
 
     ui_init();
 
     while (1) {
-        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-        if (wifi_connected) {
-            ui_setWifiImg(1);
-        } else {
-            ui_setWifiImg(0);
-        }
+        // xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+        // if (wifi_connected) {
+        //     ui_setWifiImg(1);
+        // } else {
+        //     ui_setWifiImg(0);
+        // }
         lv_task_handler();
-        xSemaphoreGive(xMutex_lvgl);
+        // xSemaphoreGive(xMutex_lvgl);
         vTaskDelay(2);
     }
     vTaskDelete(NULL);
@@ -1585,7 +1745,6 @@ static void CLOCK_task(void *pvParameters)
     uint16_t rtc_year = 0;
     // bflb_timestamp_t info;
     struct tm *info;
-    
 
     printf("CLOCK task start \r\n");
     while (1) {
@@ -1644,8 +1803,7 @@ static void CLOCK_task(void *pvParameters)
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (wifi_connected && !timeCorrected)
-        {
+        if (wifi_connected && !timeCorrected) {
             sntp_setoperatingmode(SNTP_OPMODE_POLL);
             sntp_init();
             sntp_setservername(0, "pool.ntp.org");
@@ -1653,8 +1811,7 @@ static void CLOCK_task(void *pvParameters)
             sntp_setservername(2, "158.69.48.97");
             timeCorrected = true;
         }
-        if (!wifi_connected && timeCorrected)
-        {
+        if (!wifi_connected && timeCorrected) {
             sntp_stop();
             timeCorrected = false;
         }
@@ -2016,6 +2173,20 @@ static void BLE_task(void *pvParameters)
     vTaskDelete(NULL);
 }
 
+static void GPS_task(void *pvParameters)
+{
+    char *coldStart = "$PGKC030,3,1*2E\r\n";
+    char* recv_data[256];
+    BL618_UART1_TRANSMIT(coldStart, sizeof(coldStart));
+    while (1)
+    {
+        BL618_UART1_RECEIVE(recv_data, 1);
+        printf(recv_data);
+        vTaskDelay(100);
+    }
+    vTaskDelete(NULL);
+}
+
 int main(void)
 {
     board_init();
@@ -2070,14 +2241,16 @@ int main(void)
     /* Peripheral Init (spi0, i2c0)*/
     peripheral_init();
 
-    /* TMP117 INIT */
-    // m117_soft_reset();
-    // bflb_mtimer_delay_ms(500);
-    // m117_wakeup();
-    // m117_config();
-    /* END TMP117 INIT */
+    printf("peripheral_init\n");
 
-    xMutex = xSemaphoreCreateMutex();
+        /* TMP117 INIT */
+        // m117_soft_reset();
+        // bflb_mtimer_delay_ms(500);
+        // m117_wakeup();
+        // m117_config();
+        /* END TMP117 INIT */
+
+        xMutex = xSemaphoreCreateMutex();
     xSemaphoreGive(xMutex);
 
     xMutex_printf = xSemaphoreCreateMutex();
@@ -2098,15 +2271,16 @@ int main(void)
         }
     }
 
-    xTaskCreate(EDA_task, (char *)"EDA_task", 1024, NULL, configMAX_PRIORITIES - 4, &EDA_handle);
-    xTaskCreate(Algo_task, (char *)"Algo_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &Algo_handle);
-    xTaskCreate(ACCE_task, (char *)"ACCE_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &ACCE_handle);
-    xTaskCreate(TEMP_task, (char *)"TEMP_task", 512, NULL, configMAX_PRIORITIES - 4, &TEMP_handle);
-    xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
+    // xTaskCreate(EDA_task, (char *)"EDA_task", 1024, NULL, configMAX_PRIORITIES - 4, &EDA_handle);
+    // xTaskCreate(Algo_task, (char *)"Algo_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &Algo_handle);
+    // xTaskCreate(ACCE_task, (char *)"ACCE_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &ACCE_handle);
+    // xTaskCreate(TEMP_task, (char *)"TEMP_task", 1024, NULL, configMAX_PRIORITIES - 4, &TEMP_handle);
+    // xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
     xTaskCreate(LVGL_task, (char *)"LVGL_task", 4 * 1024, NULL, configMAX_PRIORITIES - 3, &LVGL_handle);
     xTaskCreate(CLOCK_task, (char *)"Clock_task", 512, NULL, configMAX_PRIORITIES - 4, &CLOCK_handle);
     xTaskCreate(WIFI_task, (char *)"Wifi_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &WIFI_handle);
-    xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
+    // xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
+    // xTaskCreate(GPS_task, (char *)"Gps_task", 1024, NULL, configMAX_PRIORITIES - 4, &GPS_handle);
 
     vTaskStartScheduler();
     while (1) {

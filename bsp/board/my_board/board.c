@@ -99,7 +99,7 @@ static void psram_winbond_default_init(void)
     PSRAM_Ctrl_Cfg_Type default_psram_ctrl_cfg = {
         .vendor = PSRAM_CTRL_VENDOR_WINBOND,
         .ioMode = PSRAM_CTRL_X8_MODE,
-        .size = PSRAM_SIZE_4MB,
+        .size = PSRAM_SIZE_8MB,
         .dqs_delay = 0xfff0,
     };
 
@@ -287,8 +287,10 @@ void board_uartx_gpio_init()
 
     bflb_gpio_uart_init(gpio, GPIO_PIN_23, GPIO_UART_FUNC_UART1_TX);
     bflb_gpio_uart_init(gpio, GPIO_PIN_24, GPIO_UART_FUNC_UART1_RX);
-    bflb_gpio_uart_init(gpio, GPIO_PIN_25, GPIO_UART_FUNC_UART1_CTS);
-    bflb_gpio_uart_init(gpio, GPIO_PIN_26, GPIO_UART_FUNC_UART1_RTS);
+    // bflb_gpio_uart_init(gpio, GPIO_PIN_25, GPIO_UART_FUNC_UART1_CTS);
+    // bflb_gpio_uart_init(gpio, GPIO_PIN_26, GPIO_UART_FUNC_UART1_RTS);
+    bflb_gpio_uart_init(gpio, GPIO_PIN_33, GPIO_UART_FUNC_UART0_TX);
+    bflb_gpio_uart_init(gpio, GPIO_PIN_34, GPIO_UART_FUNC_UART0_RX);
 }
 
 void board_i2c0_gpio_init()

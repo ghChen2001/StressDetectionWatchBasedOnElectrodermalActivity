@@ -22,6 +22,7 @@
 #define RGB_TRIPLE_BUFF_MODE 1
 #endif
 
+#define LVGL_BUFFER_SIZE LCD_W *LCD_H / 4
 /**********************
  *      TYPEDEFS
  **********************/
@@ -32,6 +33,9 @@
 
 static void disp_init(void);
 static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p);
+#ifdef LCD_DBI_RM69090
+void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area);
+#endif
 
 /**********************
  *  STATIC VARIABLES
@@ -40,11 +44,11 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
 /* MCU LCD Common interface */
 
-// static lv_color_t draw_buf_1[LCD_W * LCD_H /6] __attribute__((aligned(64))); /* A buffer */
-// static lv_color_t draw_buf_2[LCD_W * LCD_H/6] __attribute__((aligned(64))); /* An other buffer */
+// static lv_color_t draw_buf_1[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* A buffer */
+// static lv_color_t draw_buf_2[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* An other buffer */
 #if defined(CONFIG_PSRAM)
-static lv_color_t draw_buf_1[LCD_W * LCD_H / 4] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(64)));
-static lv_color_t draw_buf_2[LCD_W * LCD_H / 4] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(64)));
+static lv_color_t draw_buf_1[LVGL_BUFFER_SIZE] ATTR_PSRAM_SECTION __attribute__((aligned(64)));
+static lv_color_t draw_buf_2[LVGL_BUFFER_SIZE] ATTR_PSRAM_SECTION __attribute__((aligned(64)));
 #else
 #error "No config psram!"
 #endif
@@ -115,6 +119,7 @@ void lv_port_disp_init(void)
      * Initialize your display
      * -----------------------*/
     disp_init();
+    printf("INIT\r\n");
 
     /*-----------------------------
      * Create a buffer for drawing
@@ -143,7 +148,7 @@ void lv_port_disp_init(void)
 /* MCU LCD Common interface */
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
 
-    lv_disp_draw_buf_init((lv_disp_draw_buf_t *)&draw_buf_dsc, draw_buf_1, draw_buf_2, LCD_W * LCD_H / 4); /*Initialize the display buffer*/
+    lv_disp_draw_buf_init((lv_disp_draw_buf_t *)&draw_buf_dsc, draw_buf_1, draw_buf_2, LVGL_BUFFER_SIZE); /*Initialize the display buffer*/
 
 /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
@@ -167,9 +172,9 @@ void lv_port_disp_init(void)
 /* MCU LCD Common interface */
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
     disp_drv_dsc.sw_rotate = 0;
-    disp_drv_dsc.direct_mode = 0;
-    disp_drv_dsc.full_refresh = 0;
-    disp_drv_dsc.screen_transp = 0;
+    // disp_drv_dsc.direct_mode = 0;
+    // disp_drv_dsc.full_refresh = 0;
+    // disp_drv_dsc.screen_transp = 0;
 
 /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
@@ -183,6 +188,10 @@ void lv_port_disp_init(void)
 
     /*Used to copy the buffer's content to the display*/
     disp_drv_dsc.flush_cb = disp_flush;
+
+#ifdef LCD_DBI_RM69090
+    disp_drv_dsc.rounder_cb = rm69090_rounder;
+#endif
 
     /*Set a display buffer*/
     disp_drv_dsc.draw_buf = (lv_disp_draw_buf_t *)&draw_buf_dsc;
@@ -237,8 +246,12 @@ void disp_init(void)
 {
     lcd_init();
     lcd_async_callback_register(flush_async_callback);
-
-    lcd_clear(LCD_COLOR_RGB(0x00, 0X00, 0X00));
+    // while(1){
+        lcd_clear(LCD_COLOR_RGB(0x0F, 0xF0, 0Xa0));
+        bflb_mtimer_delay_ms(500);
+        lcd_clear(LCD_COLOR_RGB(0xF0, 0x0F, 0XB0));
+        bflb_mtimer_delay_ms(500);
+    // }
 }
 
 /* RGB LCD Common interface,  */
@@ -276,7 +289,30 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
     p_disp_drv_cb = disp_drv;
     // printf("Flush\r\n");
     lcd_draw_picture_nonblocking(area->x1, area->y1, area->x2, area->y2, (lcd_color_t *)color_p);
+    // printf("x1 %d, x2 %d, y1 %d, y2 %d\r\n", area->x1, area->x2, area->y1, area->y2);
 }
+
+#ifdef LCD_DBI_RM69090
+void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area)
+{
+    /* Update the areas as needed. */
+    /* The S[9:0] and E[9:0]-S[9:0]+1 must can be divisible by 2. */
+
+    if (area->x1 % 2 != 0) {
+        area->x1 -= 1;
+    }
+    if (area->y1 % 2 != 0) {
+        area->y1 -= 1;
+    }
+
+    if ((area->x2 - area->x1 + 1) % 2 != 0) {
+        area->x2 += 1;
+    }
+    if ((area->y2 - area->y1 + 1) % 2 != 0) {
+        area->y2 += 1;
+    }
+}
+#endif
 
 /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)

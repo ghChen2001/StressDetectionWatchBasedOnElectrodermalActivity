@@ -113,21 +113,22 @@ int main(void)
     lv_demo_benchmark();
     // lv_demo_stress();
 
-    lv_task_handler();
+    lv_obj_t *icon = lv_img_create(lv_scr_act());
+    /*From variable*/
+    LV_IMG_DECLARE(img_lvgl_logo);
+    lv_img_set_src(icon, &img_lvgl_logo);
+    // lv_obj_set_align(icon, LV_ALIGN_CENTER);
+    lv_obj_set_x(icon, 100);
+    lv_obj_set_y(icon, 100);
 
-    
+    lv_task_handler();
 
     printf("lvgl success\r\n");
 
     while (1) {
         lv_task_handler();
-        // lv_obj_t *icon = lv_img_create(lv_scr_act());
-        // /*From variable*/
-        // LV_IMG_DECLARE(img_lvgl_logo);
-        // lv_img_set_src(icon, &img_lvgl_logo);
-        // lv_obj_align(icon, LV_ALIGN_CENTER, 50, 50);
-
-        // // lv_obj_set_size(icon, 80, 40);
+        
+        // lv_obj_set_size(icon, 80, 40);
         bflb_mtimer_delay_ms(4);
     }
 
