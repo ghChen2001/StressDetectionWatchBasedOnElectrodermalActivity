@@ -18,8 +18,8 @@
 #define HOST_NAME                        "183.230.40.33"
 #define ONENET_HTTP_POST_MAX_LEN         512
 #define ONENET_HTTP_POST_CONTENT_MAX_LEN 512
-#define DEV_ID                           "1125539271"
-#define API_KEY                          "wokPkV4gfOTvejG6UsfROOwzTyQ=" 
+#define DEV_ID                           "1089267244"
+#define API_KEY                          "wokPkV4gfOTvejG6UsfROOwzTyQ="
 #define XINZHI_KEY                       "SdTJiZMBU6zuimx2a"
 #define XINZHI_IP                        "116.62.81.138"
 
@@ -30,6 +30,7 @@ uint32_t recv_buf[512] = { 0 };
 
 uint64_t total_cnt = 0;
 int sock_client = -1;
+struct timeval timeout;
 
 void onenet_close()
 {
@@ -67,6 +68,10 @@ void onenet_transfer(float temp, uint32_t hr, int ML_output)
     memset(&(remote_addr.sin_zero), 0, sizeof(remote_addr.sin_zero));
 
     printf("Host:%s, Server ip Address : %s:%s\r\n", HOST_NAME, addr, port);
+
+    timeout.tv_sec = 1;
+    timeout.tv_usec = 0;
+    lwip_setsockopt(sock_client, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
 
     if (connect(sock_client, (struct sockaddr *)&remote_addr, sizeof(struct sockaddr)) != 0) {
         printf("Http client connect server falied!\r\n");
@@ -136,13 +141,16 @@ void onenet_transfer(float temp, uint32_t hr, int ML_output)
     strcat(post_buf, "\r\n");
     printf("%s\r\n", post_buf);
     write(sock_client, post_buf, sizeof(post_buf));
-    while (1) {
-        total_cnt = recv(sock_client, (uint8_t *)recv_buf, sizeof(recv_buf), 0);
-        if (total_cnt <= 0)
-            break;
+    total_cnt = recv(sock_client, (uint8_t *)recv_buf, sizeof(recv_buf), 0);
+    if (total_cnt > 0)
         printf("%s\r\n", (uint8_t *)recv_buf);
-        vTaskDelay(1);
-    }
+    // while (1) {
+    //     total_cnt = recv(sock_client, (uint8_t *)recv_buf, sizeof(recv_buf), 0);
+    //     if (total_cnt <= 0)
+    //         break;
+    //     printf("%s\r\n", (uint8_t *)recv_buf);
+    //     vTaskDelay(1);
+    // }
     // vTaskDelay(100);
     closesocket(sock_client);
 }
@@ -221,7 +229,7 @@ void onenet_transfer_GSR(float *gsr, uint16_t len)
         printf("%s\r\n", (uint8_t *)recv_buf);
         vTaskDelay(1);
     }
-    // vTaskDelay(100);
+    vTaskDelay(100);
     closesocket(sock_client);
 }
 

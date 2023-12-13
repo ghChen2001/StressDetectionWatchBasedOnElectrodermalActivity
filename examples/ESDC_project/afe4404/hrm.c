@@ -232,7 +232,7 @@ unsigned long findMin(unsigned long *X)
 void updateInterWindow(int *interArrayWindow)
 {
     timer_30s -= interArrayWindow[0] * 2;
-    printf("interArrayWindow[0]: %d\r\n", interArrayWindow[0]);
+    // printf("interArrayWindow[0]: %d\r\n", interArrayWindow[0]);
     if (iA_pointer > 0) {
         for (int i = 0; i < iA_pointer - 1; i++) {
             interArrayWindow[i] = interArrayWindow[i + 1];
@@ -240,5 +240,5 @@ void updateInterWindow(int *interArrayWindow)
         iA_pointer--;
     }
 
-    printf("iA_pointer: %d\r\n", iA_pointer);
+    // printf("iA_pointer: %d\r\n", iA_pointer);
 }

@@ -718,7 +718,7 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
         mag = AD5940_ComplexMag(&res);
         phase = AD5940_ComplexPhase(&res) * 180 / MATH_PI;
         S = 1000000 / mag;
-        printf("Rtia:%.3f; Real:%.3f; Image:%.3f; Mag:%.3f; Conductance: %.3f uS; Phase:%.3f \r\n", RtiaMag, res.Real, res.Image, mag, S, phase);
+        // printf("Rtia:%.3f; Real:%.3f; Image:%.3f; Mag:%.3f; Conductance: %.3f uS; Phase:%.3f \r\n", RtiaMag, res.Real, res.Image, mag, S, phase);
         printf("Conductance=%.3f\r\n", S);
         printf("Phase=%.3f\r\n", phase);
         // eda_transfer_cnt++;
@@ -1181,7 +1181,7 @@ static void EDA_task(void *pvParameters)
 
             // taskENTER_CRITICAL();
             err_code_ad5940 = AppEDAISR(AppBuff, &temp); /* Deal with it and provide a buffer to store data we got */
-            printf("AppEDAISR:%d\r\n", err_code_ad5940);
+            // printf("AppEDAISR:%d\r\n", err_code_ad5940);
             // taskEXIT_CRITICAL();
             EDAShowResult(AppBuff, temp); /* Show the results to UART */
             if (EDAcnt >= 30 * 4) {
@@ -1217,9 +1217,9 @@ static void EDA_task(void *pvParameters)
                 csi_fir_f32(&S_EDA, EDAwindow_o, EDAwindow_f, 120);
                 xSemaphoreGive(xMutex_DSP);
 
-                for (i = 0; i < 120; i++) {
-                    printf("{FilteredConductance}%.3f\r\n", EDAwindow_f[i]);
-                }
+                // for (i = 0; i < 120; i++) {
+                //     printf("{FilteredConductance}%.3f\r\n", EDAwindow_f[i]);
+                // }
 
                 // sparsEDA(EDAwindow, 8, 320, epsilon, 40, dMin, thMin, SCR, SCL, MSE);
                 // EDAcnt = 10 * 8;
@@ -1322,7 +1322,7 @@ static void ACCE_task(void *pvParameters)
                 dummy--;
             }
             if (acceWindowPtr >= 300) {
-                printf("ACCE Step Begin\r\n");
+                // printf("ACCE Step Begin\r\n");
                 stepCnt += count_steps(acceWindow);
                 acceWindowPtr = 0;
                 // printf("ACCE NUMBER: %d\r\n", stepCnt);
@@ -1687,7 +1687,7 @@ static void WIFI_task(void *pvParameters)
             //     onenet_transfer_GSR(EDAwindow_transfer_filtered, 240);
             // }
 
-            if (weatherCounter >= 6) {
+            if (weatherCounter >= 100) {
                 memset(weatherCityName, 0, 10);
                 memset(weatherText, 0, 10);
                 memset(weatherTemp, 0, 10);
@@ -1698,7 +1698,7 @@ static void WIFI_task(void *pvParameters)
                 xSemaphoreGive(xMutex_lvgl);
                 weatherCounter = 0;
             }
-            vTaskDelay(10000);
+            vTaskDelay(1500);
             weatherCounter++;
         }
     }
@@ -1843,7 +1843,7 @@ static void Algo_task(void *pvParameters)
             // csi_mean_f32(EDAwindow_f, 120, &EDA_mean);
             // csi_std_f32(EDAwindow_f, 120, &EDA_std);
             // csi_std_f32(EDAwindow_f, 120, &EDA_min);
-            printf("EDA_min %.3f\r\n", EDA_min);
+            // printf("EDA_min %.3f\r\n", EDA_min);
 
             my_findpeaks(EDAwindow_f, distance_tmp, 120, z);
             EDA_peakHeightAvg = 0.0f;
@@ -1874,7 +1874,7 @@ static void Algo_task(void *pvParameters)
             }
             EDA_peakHeightStd = sqrtf(EDA_peakHeightStd / EDA_peakNum);
             // emxDestroyArray_real32_T(z);
-            printf("EDA_max %.3f\r\n", EDA_peakHeightMax);
+            // printf("EDA_max %.3f\r\n", EDA_peakHeightMax);
 
             temp_min = (uint16_t)floorf(EDA_min * 1000);
             temp_max = (uint16_t)ceilf(EDA_peakHeightMax * 1000);
@@ -1905,7 +1905,7 @@ static void Algo_task(void *pvParameters)
             HRM_std = sqrtf(HRM_std / iA_pointer);
 
             xSemaphoreGive(xMutex_interArrayWindow);
-            printf("interArrayWindow\r\n");
+            // printf("interArrayWindow\r\n");
 
             // csi_max_f32(interArrayWindow, iA_pointer, &HRM_max, &index);
             // csi_min_f32(interArrayWindow, iA_pointer, &HRM_min, &index);
@@ -1929,7 +1929,7 @@ static void Algo_task(void *pvParameters)
             }
             TEMP_avg /= 120;
 
-            printf("TEMPwindow\r\n");
+            // printf("TEMPwindow\r\n");
 
             input_data[0] = (EDA_mean - 1.9635107565854033f) / 2.653874198543756f;
             input_data[1] = (EDA_std - 0.04519523431581202f) / 0.0796896165882909f;
@@ -1946,7 +1946,7 @@ static void Algo_task(void *pvParameters)
             input_data[12] = (TEMP_avg - 33.80643054277829f) / 0.017385464484055594f;
             input_data[13] = (TEMP_max - 33.80643054277829f) / 0.017385464484055594f;
             input_data[14] = (TEMP_min - 33.80643054277829f) / 0.017385464484055594f;
-            printf("Feature Done\r\n");
+            // printf("Feature Done\r\n");
 
             tm_mat_t in_float;
             in_float.dims = 1;
@@ -1992,7 +1992,7 @@ static void Algo_task(void *pvParameters)
             ui_UpdateTemp(TEMP_avg);
             xSemaphoreGive(xMutex_lvgl);
 
-            printf("EdaChartUpdate\r\n");
+            // printf("EdaChartUpdate\r\n");
         }
         vTaskDelay(250);
     }
@@ -2105,8 +2105,8 @@ int main(void)
     xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
     xTaskCreate(LVGL_task, (char *)"LVGL_task", 4 * 1024, NULL, configMAX_PRIORITIES - 3, &LVGL_handle);
     xTaskCreate(CLOCK_task, (char *)"Clock_task", 512, NULL, configMAX_PRIORITIES - 4, &CLOCK_handle);
-    xTaskCreate(WIFI_task, (char *)"Wifi_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &WIFI_handle);
-    xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
+    // xTaskCreate(WIFI_task, (char *)"Wifi_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &WIFI_handle);
+    // xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
 
     vTaskStartScheduler();
     while (1) {

@@ -162,10 +162,10 @@ static void lowpassfilt(float *mag_sqrt, float *lpf)
     xSemaphoreTake(xMutex_DSP, portMAX_DELAY);
     csi_fir_f32(&S, mag_sqrt, lpf, NUM_TUPLES);
     xSemaphoreGive(xMutex_DSP);
-    for (int i = 0; i < NUM_TUPLES; i++) {
-        printf("filtered acc=%.3f, ", lpf[i]);
-    }
-    printf("\r\n");
+    // for (int i = 0; i < NUM_TUPLES; i++) {
+    //     printf("filtered acc=%.3f, ", lpf[i]);
+    // }
+    // printf("\r\n");
 }
 
 //algorithm interface
@@ -176,32 +176,32 @@ uint8_t count_steps(float *data)
     //then temp_mag = sqrt(temp_mag)
     uint16_t i;
     float temp_mag;
-    printf("sqrtf\r\n");
+    // printf("sqrtf\r\n");
     for (i = 0; i < NUM_TUPLES; i++) {
         temp_mag = (data[i * 3 + 0] * data[i * 3 + 0] + data[i * 3 + 1] * data[i * 3 + 1] + data[i * 3 + 2] * data[i * 3 + 2]);
         mag_sqrt[i] = sqrtf(temp_mag);
-        printf("mag_sqrt=%.3f, ", mag_sqrt[i]);
+        // printf("mag_sqrt=%.3f, ", mag_sqrt[i]);
     }
-    printf("\r\n");
+    // printf("\r\n");
 
     //apply low pass filter to mag_sqrt, result is stored in lpf
     lowpassfilt(mag_sqrt, lpf);
-    printf("lowpassfilt\r\n");
+    // printf("lowpassfilt\r\n");
 
     //remove mean from lpf, store result in lpf
     remove_mean(lpf);
-    printf("remove_mean\r\n");
+    // printf("remove_mean\r\n");
 
     //do the autocorrelation on the lpf buffer, store the result in autocorr_buff
     autocorr(lpf, autocorr_buff);
-    printf("autocorr\r\n");
+    // printf("autocorr\r\n");
 
     uint8_t peak_ind = 0;
     for (int i = 0; i < NUM_AUTOCORR_LAGS; i++) {
         autocorr_buff2[i] = autocorr_buff[100 + i];
-        printf("autocorr_buff=%.3f, ", autocorr_buff2[i]);
+        // printf("autocorr_buff=%.3f, ", autocorr_buff2[i]);
     }
-    printf("\r\n");
+    // printf("\r\n");
 
     float max = -1e9;
     // max frequency = 2Hz, min frequency = 0.5Hz
@@ -212,7 +212,7 @@ uint8_t count_steps(float *data)
         }
     }
 
-    printf("peak ind: %i\n", peak_ind);
+    // printf("peak ind: %i\n", peak_ind);
 
     uint8_t num_steps = 0;
     
