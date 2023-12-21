@@ -1712,7 +1712,7 @@ static void LVGL_task(void *pvParameters)
     lv_log_register_print_cb(lv_log_print_g_cb);
     lv_init();
     lv_port_disp_init();
-    // lv_port_indev_init();
+    lv_port_indev_init();
 
     ui_init();
 

@@ -555,7 +555,9 @@
 
 #endif
 
+#ifdef LCD_DISP_QSPI_GC9B71
 #define LCD_ENABLE_PIN  GPIO_PIN_30
+#endif
 
 /* clang-format on */
 

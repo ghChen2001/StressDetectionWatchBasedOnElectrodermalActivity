@@ -89,6 +89,15 @@
 #define LCD_COLOR_DEPTH              RM69090_DBI_COLOR_DEPTH
 #define _LCD_FUNC_DEFINE(_func, ...) rm69090_dbi_##_func(__VA_ARGS__)
 
+#elif defined LCD_DBI_ICNA3311
+
+#include "mipi_dbi/icna3311_dbi.h"
+#define LCD_INTERFACE_TYPE           LCD_INTERFACE_DBI
+#define LCD_W                        ICNA3311_DBI_W
+#define LCD_H                        ICNA3311_DBI_H
+#define LCD_COLOR_DEPTH              ICNA3311_DBI_COLOR_DEPTH
+#define _LCD_FUNC_DEFINE(_func, ...) icna3311_dbi_##_func(__VA_ARGS__)
+
 #elif defined LCD_DISP_QSPI_GC9C01
 
 #include "disp_qspi/gc9c01_disp_qspi.h"
