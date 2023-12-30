@@ -68,6 +68,13 @@ typedef struct
 #define TOUCH_MAX_POINT                TMA525_I2C_MAX_POINT
 #define _TOUCH_FUNC_DEFINE(_func, ...) tma525_i2c_##_func(__VA_ARGS__)
 
+#elif defined TOUCH_I2C_CHSC5816
+
+#include "chsc5816_i2c.h"
+#define TOUCH_INTERFACE_TYPE           TOUCH_INTERFACE_I2C
+#define TOUCH_MAX_POINT                CHSC5816_I2C_MAX_POINT
+#define _TOUCH_FUNC_DEFINE(_func, ...) chsc5816_i2c_##_func(__VA_ARGS__)
+
 #elif
 #error "Please select a touch type"
 #endif

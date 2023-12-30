@@ -73,7 +73,7 @@ const icna3311_dbi_init_cmd_t icna3311_dbi_init_cmds[] = {
     { 0x31, "\x00\x11\x01\x7F", 4 }, // Partial Area Vertical
     { 0xC4, "\x83", 1 },             // SPI Mode Enable
     { 0x3A, "\xD5", 1 },             // Data Format 16 bit
-    // { 0x3A, "\xF7", 1 }, // Data Format 32 bit
+    { 0x3A, "\xF7", 1 }, // Data Format 32 bit
     { 0x12, NULL, 0 },   // Partial Display Mode On
     // { 0x13, NULL, 0 },   // Normal Display Mode On
     { 0x11, NULL, 0 },   // Sleep Out

@@ -84,9 +84,9 @@ static void _codec_input_task(void *arg)
         msp_task_exit(0);
     }
     
-    /* micbias set high if need */
-    msp_gpio_output_config(24, 1);
-    msp_gpio_output_set(1);
+    // /* micbias set high if need */
+    // msp_gpio_output_config(24, 1);
+    // msp_gpio_output_set(1);
     
     g_dma_hdl_in = msp_zalloc_check(sizeof(xcodec_dma_ch_t)); 
     //g_dma_hdl_in->ctrl_id = DMA_NUM;
@@ -102,7 +102,7 @@ static void _codec_input_task(void *arg)
     
     input_config.sample_rate  = INPUT_SAMPLE_RATE;
     input_config.bit_width    = INPUT_SAMPLE_BITS;
-    input_config.mode         = XCODEC_INPUT_DIFFERENCE;
+    input_config.mode         = XCODEC_INPUT_SINGLE_ENDED;
     input_config.buffer       = g_input_buffer;
     input_config.buffer_size  = INPUT_BUFFER_SIZE;
     input_config.period = INPUT_PERIOD_SIZE;
@@ -133,7 +133,8 @@ static void _codec_input_task(void *arg)
         }
         g_input_size += size;
     }
-    
+    printf("g_input_size %d\r\n", g_input_size);
+
     xcodec_input_stop(&g_codec_input_ch);
     xcodec_input_link_dma(&g_codec_input_ch, NULL);
     xcodec_input_detach_callback(&g_codec_input_ch);
@@ -145,6 +146,10 @@ static void _codec_input_task(void *arg)
     bflb_flash_write(0x270000, g_read_buffer, READ_BUFFER_SIZE);
 #endif
     printf("g_read_buffer:%p, size:%d\r\n", g_read_buffer, READ_BUFFER_SIZE);
+    for(int i = 0; i < 64; i++){
+        printf("%d ", ((uint16_t *)g_read_buffer)[i]);
+    }
+    printf("\r\n");
     msp_free(g_dma_hdl_in);
     msp_free(g_input_buffer);
     msp_free(g_read_buffer); 

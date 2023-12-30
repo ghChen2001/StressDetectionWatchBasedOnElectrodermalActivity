@@ -472,6 +472,9 @@ void GPIO_Interrupt(int irq, void *arg)
 
 static void peripheral_init(void)
 {
+    /* TOUCH_RESET */
+    bflb_gpio_init(gpio, GPIO_PIN_30, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0);
+    bflb_gpio_reset(gpio, GPIO_PIN_30);
     /* spi0 Init */
     // For AD5940/5941
 
@@ -1717,14 +1720,14 @@ static void LVGL_task(void *pvParameters)
     ui_init();
 
     while (1) {
-        // xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-        // if (wifi_connected) {
-        //     ui_setWifiImg(1);
-        // } else {
-        //     ui_setWifiImg(0);
-        // }
+        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+        if (wifi_connected) {
+            ui_setWifiImg(1);
+        } else {
+            ui_setWifiImg(0);
+        }
         lv_task_handler();
-        // xSemaphoreGive(xMutex_lvgl);
+        xSemaphoreGive(xMutex_lvgl);
         vTaskDelay(2);
     }
     vTaskDelete(NULL);
@@ -2250,7 +2253,7 @@ int main(void)
         // m117_config();
         /* END TMP117 INIT */
 
-        xMutex = xSemaphoreCreateMutex();
+    xMutex = xSemaphoreCreateMutex();
     xSemaphoreGive(xMutex);
 
     xMutex_printf = xSemaphoreCreateMutex();

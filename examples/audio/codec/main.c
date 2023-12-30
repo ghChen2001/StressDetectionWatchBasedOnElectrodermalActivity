@@ -93,7 +93,7 @@ int wifi_start_firmware_task(void)
 
     GLB_Set_EM_Sel(GLB_WRAM160KB_EM0KB);
 
-    if (0 != rfparam_init(NULL, NULL, NULL)) {
+    if (0 != rfparam_init(0, NULL, 0)) {
         LOG_I("PHY RF init failed!\r\n");
         return 0;
     }

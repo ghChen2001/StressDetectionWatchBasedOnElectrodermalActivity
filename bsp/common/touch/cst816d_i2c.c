@@ -6,7 +6,7 @@
 
 #include "touch.h"
 
-// #ifdef TOUCH_I2C_CST816D
+#ifdef TOUCH_I2C_CST816D
 #include "bflb_mtimer.h"
 #include "bflb_gpio.h"
 #include "bflb_i2c.h"
@@ -171,4 +171,4 @@ int cst816d_i2c_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max
     return 0;
 }
 
-// #endif
+#endif

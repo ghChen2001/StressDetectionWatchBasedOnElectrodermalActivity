@@ -97,14 +97,14 @@ void auadc_gpio_init(void)
     //bflb_gpio_init(gpio, GPIO_PIN_23, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
 
     /* auadc ch4 */
-    //bflb_gpio_init(gpio, GPIO_PIN_27, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
+    bflb_gpio_init(gpio, GPIO_PIN_27, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
     /* auadc ch5 */
-    //bflb_gpio_init(gpio, GPIO_PIN_28, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
+    bflb_gpio_init(gpio, GPIO_PIN_28, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
 
-    /* auadc ch6 */
-    bflb_gpio_init(gpio, GPIO_PIN_29, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
-    /* auadc ch7 */
-    bflb_gpio_init(gpio, GPIO_PIN_30, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
+    // /* auadc ch6 */
+    // bflb_gpio_init(gpio, GPIO_PIN_29, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
+    // /* auadc ch7 */
+    // bflb_gpio_init(gpio, GPIO_PIN_30, GPIO_ANALOG | GPIO_FLOAT | GPIO_SMT_EN | GPIO_DRV_2);
 }
 
 int main(void)

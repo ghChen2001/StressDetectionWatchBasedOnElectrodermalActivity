@@ -22,7 +22,7 @@ uint32_t g_pa_delay_2 = 90;     /* this is time set according to the pa manual *
 #else
 /* codec pin config */
 /* if use single mode. pin set as 255 */
-#define INPUT_NEGATIVE_PIN      (28)
+#define INPUT_NEGATIVE_PIN      (255)
 #define INPUT_POSITIVE_PIN      (27)
 #endif
 

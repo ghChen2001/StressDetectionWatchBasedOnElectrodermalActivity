@@ -62,6 +62,7 @@ target_sources(app PRIVATE touch/ft6x36_i2c.c)
 target_sources(app PRIVATE touch/gt911_i2c.c)
 target_sources(app PRIVATE touch/cst816d_i2c.c)
 target_sources(app PRIVATE touch/tma525_i2c.c)
+target_sources(app PRIVATE touch/chsc5816_i2c.c)
 sdk_add_include_directories(touch)
 endif()
 

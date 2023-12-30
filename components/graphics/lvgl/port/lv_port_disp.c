@@ -33,9 +33,7 @@
 
 static void disp_init(void);
 static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p);
-#ifdef LCD_DBI_RM69090
 void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area);
-#endif
 
 /**********************
  *  STATIC VARIABLES
@@ -189,9 +187,7 @@ void lv_port_disp_init(void)
     /*Used to copy the buffer's content to the display*/
     disp_drv_dsc.flush_cb = disp_flush;
 
-#ifdef LCD_DBI_RM69090
     disp_drv_dsc.rounder_cb = rm69090_rounder;
-#endif
 
     /*Set a display buffer*/
     disp_drv_dsc.draw_buf = (lv_disp_draw_buf_t *)&draw_buf_dsc;
@@ -246,12 +242,12 @@ void disp_init(void)
 {
     lcd_init();
     lcd_async_callback_register(flush_async_callback);
-    // while(1){
-        lcd_clear(LCD_COLOR_RGB(0x0F, 0xF0, 0Xa0));
-        bflb_mtimer_delay_ms(500);
-        lcd_clear(LCD_COLOR_RGB(0xF0, 0x0F, 0XB0));
-        bflb_mtimer_delay_ms(500);
-    // }
+    // // while(1){
+    // lcd_clear(LCD_COLOR_RGB(0x0F, 0xF0, 0Xa0));
+    // bflb_mtimer_delay_ms(500);
+    // lcd_clear(LCD_COLOR_RGB(0xF0, 0x0F, 0XB0));
+    // bflb_mtimer_delay_ms(500);
+    // // }
 }
 
 /* RGB LCD Common interface,  */
@@ -292,7 +288,6 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
     // printf("x1 %d, x2 %d, y1 %d, y2 %d\r\n", area->x1, area->x2, area->y1, area->y2);
 }
 
-#ifdef LCD_DBI_RM69090
 void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area)
 {
     /* Update the areas as needed. */
@@ -312,7 +307,6 @@ void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area)
         area->y2 += 1;
     }
 }
-#endif
 
 /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)

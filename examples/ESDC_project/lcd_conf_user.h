@@ -24,8 +24,9 @@
 */
 /* #define LCD_SPI_ST7796 */
 
-// #define LCD_DISP_QSPI_GC9B71
-#define LCD_DBI_RM69090
+#define LCD_DISP_QSPI_GC9B71
+// #define LCD_DBI_RM69090
+// #define LCD_DBI_ICNA3311
 
 /* dbi ili9488 config */
 #if defined LCD_DBI_ILI9488
@@ -62,7 +63,7 @@
     */
    #define ILI9488_DBI_COLOR_REVERSAL 0
 
-/* dbi ili9488 config */
+/* dbi rm69090 config */
 #elif defined LCD_DBI_RM69090
 
     /* Selecting interface type, more configuration of peripherals comes later
@@ -97,10 +98,43 @@
     */
    #define RM69090_DBI_COLOR_REVERSAL 0
 
-#endif
+/* dbi ili9488 config */
+#elif defined LCD_DBI_ICNA3311
+
+    /* Selecting interface type, more configuration of peripherals comes later
+        1: DBI peripheral, supported functions: typeC-3wire, typeC-4wire, typeB-x8(8080); (support chips: bl616, bl606p, bl808),
+        2: PEC simulation, supported functions: typeB-x8; (support chips: bl616),
+    */
+    #define LCD_DBI_INTERFACE_TYPE 1
+
+    /* enable the lcd reset function
+        0: Does not care about lcd hard reset
+        1: use gpio to reset the lcd
+    */
+    #define LCD_RESET_EN 1
+
+    /* Selecting pixel format
+        1: rgb565 (16-bit, output rgb565)
+        2: nrgb8888 (32-bit, output rgb888)
+    */
+    #define ICNA3311_DBI_PIXEL_FORMAT 2
+
+    /* ICNA3311 LCD width and height */
+    #define ICNA3311_DBI_W 368
+    #define ICNA3311_DBI_H 448
+
+    /* The offset of the area can be displayed */
+    #define ICNA3311_DBI_OFFSET_X 16
+    #define ICNA3311_DBI_OFFSET_Y 0
+
+    /* Color reversal, Some screens are required
+        0: disable
+        1: enable
+    */
+   #define ICNA3311_DBI_COLOR_REVERSAL 0
 
 /* dpi gc9503v config */
-#if defined LCD_DPI_GC9503V
+#elif defined LCD_DPI_GC9503V
 
     /* Selecting DPI working mode
         1: DPI peripheral (support: bl808)
@@ -447,13 +481,13 @@
         3: DBI TypeB x8 mode (8080)
         4: DBI QSPI mode (Not the mipi standard. Extra support for QSPI mode)
     */
-    #define LCD_DBI_WORK_MODE 1
+    #define LCD_DBI_WORK_MODE 4
 
     /* dma used by DBI */
     #define LCD_DBI_DMA_NAME "dma0_ch3"
 
     /* The maximum amount of data to be transferred affects the number of LLI memory pools */
-    #define DBI_DBI_DATA_SIZE_MAX (320 * 360)
+    #define DBI_DBI_DATA_SIZE_MAX (320 * 386)
 
     /* pin cfg */
     #if(LCD_DBI_WORK_MODE == 1)
