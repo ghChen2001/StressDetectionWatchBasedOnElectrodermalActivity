@@ -227,6 +227,8 @@ sdk_library_add_sources_ifdef(CONFIG_BT_HRS_SERVER src/services/hrs.c)
 
 sdk_library_add_sources_ifdef(CONFIG_BT_MYSVC_SERVER src/services/mysvc.c)
 
+sdk_library_add_sources_ifdef(CONFIG_BT_PLOTEDA_SERVER src/services/ploteda.c)
+
 # ifeq ($(CONFIG_BT_SCPS_SERVER),1)
 # ble_stack_srcs   += src/services/scps.c
 # endif

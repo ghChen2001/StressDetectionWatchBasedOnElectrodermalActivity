@@ -20,6 +20,7 @@
 // #include "hrs.h"
 // #include "bas.h"
 #include "mysvc.h"
+#include "ploteda.h"
 
 /* WIFI */
 #include <lwip/tcpip.h>
@@ -238,6 +239,8 @@ bool timeCorrected = false;
 // struct bflb_dma_channel_lli_transfer_s rx_transfers[1];
 
 volatile bool spi0_tc = false; /**< Flag used to indicate that SPI instance completed the transfer. */
+
+bool isPlotedaInit = false;
 
 // extern void shell_init_with_task(struct bflb_device_s *shell);
 
@@ -711,6 +714,8 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
     float mag, phase;
     fImpCar_Type res;
     AppEDACtrl(EDACTRL_GETRTIAMAG, &RtiaMag);
+    static float dataBuf[16] = {0};
+    uint32_t *ptr = &S;
 
     /*Process data*/
     for (int i = 0; i < DataCount; i++) {
@@ -720,8 +725,9 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
         phase = AD5940_ComplexPhase(&res) * 180 / MATH_PI;
         S = 1000000 / mag;
         // printf("Rtia:%.3f; Real:%.3f; Image:%.3f; Mag:%.3f; Conductance: %.3f uS; Phase:%.3f \r\n", RtiaMag, res.Real, res.Image, mag, S, phase);
-        printf("Conductance=%.3f\r\n", S);
-        printf("Phase=%.3f\r\n", phase);
+        printf("{Conductance}%.8f\r\n", S);
+        printf("{Conductance_hex}%08x\r\n", *ptr);
+        printf("{Phase}%.3f\r\n", phase);
         // eda_transfer_cnt++;
         if (isnanf(S) || (S > 100.0f)) {
             EDAcnt = 0;
@@ -729,6 +735,11 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
             EDAwindow_o[EDAcnt] = S;
             EDAcnt++;
         }
+        dataBuf[i] = S;
+    }
+
+    if(isPlotedaInit){
+        bt_gatt_ploteda_update(dataBuf, DataCount);
     }
     return 0;
 }
@@ -1667,7 +1678,7 @@ static void CLOCK_task(void *pvParameters)
 
 static void WIFI_task(void *pvParameters)
 {
-    uint8_t weatherCounter = 6;
+    uint8_t weatherCounter = 100;
     char weatherCityName[10] = { 0 };
     char weatherText[10] = { 0 };
     uint8_t weatherCode = 100;
@@ -1682,7 +1693,7 @@ static void WIFI_task(void *pvParameters)
             wifi_mgmr_sta_quickconnect("cgh1", "asdfghjk", 2400, 5000);
             vTaskDelay(10000);
         } else {
-            onenet_transfer(Tempurature, hr_onenet, output_class);
+            onenet_transfer(Tempurature, hr_onenet, output_class, stepCnt);
             // if(eda_transfer_flag){
             //     eda_transfer_flag = 0;
             //     onenet_transfer_GSR(EDAwindow_transfer_filtered, 240);
@@ -2006,6 +2017,8 @@ static void BLE_task(void *pvParameters)
     // hrs_init();
     // bas_init();
     mysvc_init();
+    ploteda_init();
+    isPlotedaInit = true;
 
     while (1) {
         // bt_gatt_bas_set_battery_level(5);
@@ -2106,8 +2119,8 @@ int main(void)
     xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
     xTaskCreate(LVGL_task, (char *)"LVGL_task", 4 * 1024, NULL, configMAX_PRIORITIES - 3, &LVGL_handle);
     xTaskCreate(CLOCK_task, (char *)"Clock_task", 512, NULL, configMAX_PRIORITIES - 4, &CLOCK_handle);
-    // xTaskCreate(WIFI_task, (char *)"Wifi_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &WIFI_handle);
-    // xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
+    xTaskCreate(WIFI_task, (char *)"Wifi_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &WIFI_handle);
+    xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
 
     vTaskStartScheduler();
     while (1) {

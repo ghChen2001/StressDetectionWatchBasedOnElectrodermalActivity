@@ -140,6 +140,10 @@ ifeq ($(CONFIG_BT_MYSVC_SERVER),1)
 ble_stack_srcs   += src/services/mysvc.c
 endif
 
+ifeq ($(CONFIG_BT_PLOTEDA_SERVER),1)
+ble_stack_srcs   += src/services/ploteda.c
+endif
+
 ifeq ($(CONFIG_BT_SCPS_SERVER),1)
 ble_stack_srcs   += src/services/scps.c
 endif

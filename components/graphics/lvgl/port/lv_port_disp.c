@@ -32,6 +32,7 @@
 
 static void disp_init(void);
 static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p);
+void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area);
 
 /**********************
  *  STATIC VARIABLES
@@ -184,6 +185,8 @@ void lv_port_disp_init(void)
     /*Used to copy the buffer's content to the display*/
     disp_drv_dsc.flush_cb = disp_flush;
 
+    disp_drv_dsc.rounder_cb = rm69090_rounder;
+
     /*Set a display buffer*/
     disp_drv_dsc.draw_buf = (lv_disp_draw_buf_t *)&draw_buf_dsc;
 
@@ -276,6 +279,26 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
     p_disp_drv_cb = disp_drv;
     // printf("Flush\r\n");
     lcd_draw_picture_nonblocking(area->x1, area->y1, area->x2, area->y2, (lcd_color_t *)color_p);
+}
+
+void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area)
+{
+    /* Update the areas as needed. */
+    /* The S[9:0] and E[9:0]-S[9:0]+1 must can be divisible by 2. */
+
+    if (area->x1 % 2 != 0) {
+        area->x1 -= 1;
+    }
+    if (area->y1 % 2 != 0) {
+        area->y1 -= 1;
+    }
+
+    if ((area->x2 - area->x1 + 1) % 2 != 0) {
+        area->x2 += 1;
+    }
+    if ((area->y2 - area->y1 + 1) % 2 != 0) {
+        area->y2 += 1;
+    }
 }
 
 /* RGB LCD Common interface,  */

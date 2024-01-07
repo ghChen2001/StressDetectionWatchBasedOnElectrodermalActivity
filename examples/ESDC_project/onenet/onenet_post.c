@@ -47,7 +47,7 @@ void onenet_close()
     "\t hostname: hostname or dest server ip\r\n" \
     "\t port: dest server listen port, defualt port:80\r\n"
 
-void onenet_transfer(float temp, uint32_t hr, int ML_output)
+void onenet_transfer(float temp, uint32_t hr, int ML_output, uint32_t stepCnt)
 {
     char *host_name;
     char *addr;
@@ -93,30 +93,34 @@ void onenet_transfer(float temp, uint32_t hr, int ML_output)
         sprintf(post_content, "{\"datastreams\":["
                               "{\"id\":\"body_tempurature\",\"datapoints\":[{\"value\":%.1f}]},"
                               "{\"id\":\"heart_rate\",\"datapoints\":[{\"value\":%d}]},"
-                              "{\"id\":\"Mental\",\"datapoints\":[{\"value\":\"Neutral\"}]}"
+                              "{\"id\":\"Mental\",\"datapoints\":[{\"value\":\"Neutral\"}]},"
+                              "{\"id\":\"step\",\"datapoints\":[{\"value\":\"%d\"}]}"
                               "]}",
-                temp, hr);
+                temp, hr, stepCnt);
     } else if (ML_output == 1) {
         sprintf(post_content, "{\"datastreams\":["
                               "{\"id\":\"body_tempurature\",\"datapoints\":[{\"value\":%.1f}]},"
                               "{\"id\":\"heart_rate\",\"datapoints\":[{\"value\":%d}]},"
-                              "{\"id\":\"Mental\",\"datapoints\":[{\"value\":\"Stress\"}]}"
+                              "{\"id\":\"Mental\",\"datapoints\":[{\"value\":\"Stress\"}]},"
+                              "{\"id\":\"step\",\"datapoints\":[{\"value\":\"%d\"}]}"
                               "]}",
-                temp, hr);
+                temp, hr, stepCnt);
     } else if (ML_output == 2) {
         sprintf(post_content, "{\"datastreams\":["
                               "{\"id\":\"body_tempurature\",\"datapoints\":[{\"value\":%.1f}]},"
                               "{\"id\":\"heart_rate\",\"datapoints\":[{\"value\":%d}]},"
-                              "{\"id\":\"Mental\",\"datapoints\":[{\"value\":\"Amusement\"}]}"
+                              "{\"id\":\"Mental\",\"datapoints\":[{\"value\":\"Amusement\"}]},"
+                              "{\"id\":\"step\",\"datapoints\":[{\"value\":\"%d\"}]}"
                               "]}",
-                temp, hr);
+                temp, hr, stepCnt);
     } else {
         sprintf(post_content, "{\"datastreams\":["
                               "{\"id\":\"body_tempurature\",\"datapoints\":[{\"value\":%.1f}]},"
                               "{\"id\":\"heart_rate\",\"datapoints\":[{\"value\":%d}]},"
-                              "{\"id\":\"Mental\",\"datapoints\":[{\"value\":\"---\"}]}"
+                              "{\"id\":\"Mental\",\"datapoints\":[{\"value\":\"---\"}]},"
+                              "{\"id\":\"step\",\"datapoints\":[{\"value\":\"%d\"}]}"
                               "]}",
-                temp, hr);
+                temp, hr, stepCnt);
     }
 
     // sprintf(post_content, "{\"datastreams\":["
