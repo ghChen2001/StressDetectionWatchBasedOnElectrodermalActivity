@@ -60,7 +60,7 @@ int bt_gatt_ploteda_update(float *edaData, uint16_t len)
     }
 
     *((uint16_t *)data) = len;
-    printf("%s, %04x\n", __func__, *((uint16_t *)data));
+    // printf("%s, %04x\n", __func__, *((uint16_t *)data));
     // ((uint16_t *)data)[1] = 0x0000;
 
     for (uint16_t i = 1; i < len + 1; i++) {

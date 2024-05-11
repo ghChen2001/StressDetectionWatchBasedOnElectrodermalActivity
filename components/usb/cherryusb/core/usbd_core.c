@@ -1150,10 +1150,10 @@ void usbd_event_ep_out_complete_handler(uint8_t ep, uint32_t nbytes)
     if (g_usbd_core.rx_msg[ep & 0x7f].cb) {
         g_usbd_core.rx_msg[ep & 0x7f].cb(ep, nbytes);
     }
-#else
-    g_usbd_core.rx_msg[ep & 0x7f].nbytes = nbytes;
-    usb_osal_mq_send(usbd_rx_mq, (uintptr_t)&g_usbd_core.rx_msg[ep & 0x7f]);
-#endif
+// #else
+//     g_usbd_core.rx_msg[ep & 0x7f].nbytes = nbytes;
+//     usb_osal_mq_send(usbd_rx_mq, (uintptr_t)&g_usbd_core.rx_msg[ep & 0x7f]);
+// #endif
 }
 
 #ifdef CONFIG_USBDEV_TX_THREAD

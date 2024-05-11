@@ -954,19 +954,19 @@ __WEAK void USBD_IRQHandler(int irq, void *arg)
 
     printf("USBD_IRQHandler\r\n");
 
-    glb_intstatus = getreg32(BLFB_USB_BASE + USB_GLB_ISR_OFFSET);
+    glb_intstatus = getreg32(BFLB_USB_BASE + USB_GLB_ISR_OFFSET);
 
     if (glb_intstatus & USB_DEV_INT) {
         // xSemaphoreGiveFromISR(xSem_usb, &xHigherPriorityTaskWoken);
         printf("USB_DEV_INT\r\n");
-        dev_intstatus = getreg32(BLFB_USB_BASE + USB_DEV_IGR_OFFSET);
+        dev_intstatus = getreg32(BFLB_USB_BASE + USB_DEV_IGR_OFFSET);
         if (dev_intstatus & USB_INT_G0) {
             printf("USB_INT_G0\r\n");
             subgroup_intstatus = bflb_usb_get_source_group_intstatus(0);
 
             if (subgroup_intstatus & USB_CX_SETUP_INT) {
                 bflb_usb_vdma_start_read(USB_FIFO_CXF, g_setup_buffer, 8);
-                while (getreg32(BLFB_USB_BASE + USB_VDMA_CXFPS1_OFFSET) & USB_VDMA_START_CXF) {
+                while (getreg32(BFLB_USB_BASE + USB_VDMA_CXFPS1_OFFSET) & USB_VDMA_START_CXF) {
                 }
 
                 bflb_usb_source_group_int_clear(3, USB_VDMA_CMPLT_CXF);
@@ -1024,14 +1024,14 @@ __WEAK void USBD_IRQHandler(int irq, void *arg)
                 bflb_usb_reset_fifo(USB_FIFO_F3);
                 bflb_usb_reset_fifo(USB_FIFO_CXF);
 
-                regval = getreg32(BLFB_USB_BASE + USB_DEV_SMT_OFFSET);
+                regval = getreg32(BFLB_USB_BASE + USB_DEV_SMT_OFFSET);
                 regval &= ~USB_SOFMT_MASK;
 #ifdef CONFIG_USB_HS
                 regval |= USB_SOF_TIMER_MASK_AFTER_RESET_HS;
 #else
                 regval |= USB_SOF_TIMER_MASK_AFTER_RESET_FS;
 #endif
-                putreg32(regval, BLFB_USB_BASE + USB_DEV_SMT_OFFSET);
+                putreg32(regval, BFLB_USB_BASE + USB_DEV_SMT_OFFSET);
 
                 memset(&g_bl_udc, 0, sizeof(g_bl_udc));
 

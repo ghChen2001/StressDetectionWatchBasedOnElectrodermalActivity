@@ -86,10 +86,10 @@
 #include "usbd_msc.h"
 
 #include "csi_math.h"
-#include "tinymaix.h"
-#include "model/esdc_model.h"
-#include "model/esdc_model_bin.h"
-#include "Algorithm/CControl/Headers/Functions.h"
+// #include "tinymaix.h"
+// #include "model/esdc_model.h"
+// #include "model/esdc_model_bin.h"
+// #include "Algorithm/CControl/Headers/Functions.h"
 
 // Findpeaks
 #include "rtwtypes.h"
@@ -1440,67 +1440,67 @@ void AFE4404_Disable_Read(void)
 // return bflb_gpio_read(gpio, M601_IN);
 // }
 
-static tm_err_t layer_cb(tm_mdl_t *mdl, tml_head_t *lh)
-{ //dump middle result
-    int h = lh->out_dims[1];
-    int w = lh->out_dims[2];
-    int ch = lh->out_dims[3];
-    mtype_t *output = TML_GET_OUTPUT(mdl, lh);
-    return TM_OK;
-    TM_PRINTF("Layer %d callback ========\n", mdl->layer_i);
-#if 1
-    for (int y = 0; y < h; y++) {
-        TM_PRINTF("[");
-        for (int x = 0; x < w; x++) {
-            TM_PRINTF("[");
-            for (int c = 0; c < ch; c++) {
-#if TM_MDL_TYPE == TM_MDL_FP32
-                TM_PRINTF("%.3f,", output[(y * w + x) * ch + c]);
-#else
-                TM_PRINTF("%.3f,", TML_DEQUANT(lh, output[(y * w + x) * ch + c]));
-#endif
-            }
-            TM_PRINTF("],");
-        }
-        TM_PRINTF("],\n");
-    }
-    TM_PRINTF("\n");
-#endif
-    return TM_OK;
-}
+// static tm_err_t layer_cb(tm_mdl_t *mdl, tml_head_t *lh)
+// { //dump middle result
+//     int h = lh->out_dims[1];
+//     int w = lh->out_dims[2];
+//     int ch = lh->out_dims[3];
+//     mtype_t *output = TML_GET_OUTPUT(mdl, lh);
+//     return TM_OK;
+//     TM_PRINTF("Layer %d callback ========\n", mdl->layer_i);
+// #if 1
+//     for (int y = 0; y < h; y++) {
+//         TM_PRINTF("[");
+//         for (int x = 0; x < w; x++) {
+//             TM_PRINTF("[");
+//             for (int c = 0; c < ch; c++) {
+// #if TM_MDL_TYPE == TM_MDL_FP32
+//                 TM_PRINTF("%.3f,", output[(y * w + x) * ch + c]);
+// #else
+//                 TM_PRINTF("%.3f,", TML_DEQUANT(lh, output[(y * w + x) * ch + c]));
+// #endif
+//             }
+//             TM_PRINTF("],");
+//         }
+//         TM_PRINTF("],\n");
+//     }
+//     TM_PRINTF("\n");
+// #endif
+//     return TM_OK;
+// }
 
-static void parse_output(tm_mat_t *outs, uint8_t dim)
-{
-    tm_mat_t out = outs[0];
-    float *data = out.dataf;
-    float maxp = 0;
-    float sump = 0;
-    int maxi = -1;
-    for (int i = 0; i < dim; i++) {
-        // printf("%d: %.3f\n", i, data[i]);
-        sump += data[i];
-        if (data[i] > maxp) {
-            maxi = i;
-            maxp = data[i];
-        }
-    }
-    for (int i = 0; i < dim; i++) {
-        printf("%d: %.3f\n", i, data[i] / sump);
-    }
-    if (dim == 2) {
-        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-        ui_UpdateMentalLabel(maxi, data[maxi] / sump);
-        ui_UpdateMdl2(data[0] / sump, data[1] / sump);
-        xSemaphoreGive(xMutex_lvgl);
-        output_class = maxi;
-    } else if (dim == 3) {
-        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-        ui_UpdateMdl1(data[0] / sump, data[1] / sump, data[2] / sump);
-        xSemaphoreGive(xMutex_lvgl);
-    }
-    TM_PRINTF("### Predict output is: Number %d, prob %.3f\n", maxi, maxp / sump);
-    return;
-}
+// static void parse_output(tm_mat_t *outs, uint8_t dim)
+// {
+//     tm_mat_t out = outs[0];
+//     float *data = out.dataf;
+//     float maxp = 0;
+//     float sump = 0;
+//     int maxi = -1;
+//     for (int i = 0; i < dim; i++) {
+//         // printf("%d: %.3f\n", i, data[i]);
+//         sump += data[i];
+//         if (data[i] > maxp) {
+//             maxi = i;
+//             maxp = data[i];
+//         }
+//     }
+//     for (int i = 0; i < dim; i++) {
+//         printf("%d: %.3f\n", i, data[i] / sump);
+//     }
+//     if (dim == 2) {
+//         xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+//         ui_UpdateMentalLabel(maxi, data[maxi] / sump);
+//         ui_UpdateMdl2(data[0] / sump, data[1] / sump);
+//         xSemaphoreGive(xMutex_lvgl);
+//         output_class = maxi;
+//     } else if (dim == 3) {
+//         xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+//         ui_UpdateMdl1(data[0] / sump, data[1] / sump, data[2] / sump);
+//         xSemaphoreGive(xMutex_lvgl);
+//     }
+//     TM_PRINTF("### Predict output is: Number %d, prob %.3f\n", maxi, maxp / sump);
+//     return;
+// }
 
 void sntp_set_time(uint32_t sntp_time) // call back configured at "sntp_opts.h"
 {
@@ -2720,13 +2720,13 @@ static void Algo_task(void *pvParameters)
     //     }
     //     vTaskDelay(250);
     // }
-
-    board_init();
+    
     setup();
     printf("model load successfully!!\r\n");
 
     while (1) {
-        loop();
+        // loop();
+        vTaskDelay(1);
     }
     
     vTaskDelete(NULL);
@@ -3664,7 +3664,7 @@ int main(void)
     // msc_ram_init();
 
     // xTaskCreate(EDA_task, (char *)"EDA_task", 1024, NULL, configMAX_PRIORITIES - 4, &EDA_handle);
-    // xTaskCreate(Algo_task, (char *)"Algo_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &Algo_handle);
+    xTaskCreate(Algo_task, (char *)"Algo_task", 4 * 1024, NULL, configMAX_PRIORITIES - 5, &Algo_handle);
     // xTaskCreate(ACCE_task, (char *)"ACCE_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &ACCE_handle);
     // xTaskCreate(TEMP_task, (char *)"TEMP_task", 1024, NULL, configMAX_PRIORITIES - 4, &TEMP_handle);
     // xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
