@@ -42,10 +42,10 @@ extern "C" {
 
 
 /*Gesture threshold in pixels*/
-#define LV_INDEV_DEF_GESTURE_LIMIT        50
+#define LV_INDEV_DEF_GESTURE_LIMIT        25
 
 /*Gesture min velocity at release before swipe (pixels)*/
-#define LV_INDEV_DEF_GESTURE_MIN_VELOCITY 3
+#define LV_INDEV_DEF_GESTURE_MIN_VELOCITY 1
 
 
 /**********************

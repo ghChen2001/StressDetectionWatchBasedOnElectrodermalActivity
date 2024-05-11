@@ -51,6 +51,11 @@ int lcd_init(void)
     /* gpio init */
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_init(gpio, LCD_RESET_PIN, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_2);
+#ifdef LCD_DISP_QSPI_SH8501A
+    bflb_gpio_init(gpio, OLED_ENABLE_PIN, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_2);
+    bflb_gpio_set(gpio, OLED_ENABLE_PIN);
+    bflb_mtimer_delay_ms(50);
+#endif
 
 #if defined LCD_DISP_QSPI_GC9B71
     bflb_gpio_init(gpio, LCD_ENABLE_PIN, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_2);

@@ -13,6 +13,7 @@ sdk_add_compile_definitions(-DCONFIG_CHERRYUSB)
 
 if(CONFIG_CHERRYUSB_DEVICE)
 sdk_library_add_sources(core/usbd_core.c)
+sdk_library_add_sources(osal/usb_osal_freertos.c)
 
 if((NOT ("${CHIP}" STREQUAL "bl702")))
 sdk_add_compile_definitions(-DCONFIG_USB_ALIGN_SIZE=32)

@@ -14,6 +14,31 @@ extern "C" {
 
 #include "ui_helpers.h"
 #include "ui_events.h"
+
+// SCREEN: ui_Settings
+void ui_Settings_screen_init(void);
+void ui_event_Settings(lv_event_t *e);
+extern lv_obj_t *ui_Settings;
+extern lv_obj_t *ui_SettingsLabel;
+extern lv_obj_t *ui_Switch_HR;
+extern lv_obj_t *ui_Switch_HR_Label;
+extern lv_obj_t *ui_Switch_EDA;
+extern lv_obj_t *ui_Switch_EDA_Label;
+extern lv_obj_t *ui_Switch_TEMP;
+extern lv_obj_t *ui_Switch_TEMP_Label;
+extern lv_obj_t *ui_Switch_ACC;
+extern lv_obj_t *ui_Switch_ACC_Label;
+extern lv_obj_t *ui_Switch_LOG;
+extern lv_obj_t *ui_Switch_MSC_Label;
+extern lv_obj_t *ui_Switch_MSC;
+extern lv_obj_t *ui_Slider_Brightness;
+extern lv_obj_t *ui_Button_Back;
+extern lv_obj_t *ui_Label_Brightness;
+extern lv_obj_t *ui_Switch_BLE_Label;
+extern lv_obj_t *ui_Switch_BLE;
+extern lv_obj_t *ui_Switch_WIFI_Label;
+extern lv_obj_t *ui_Switch_WIFI;
+
 // SCREEN: ui_Home
 void ui_Home_screen_init(void);
 void ui_event_Home(lv_event_t *e);
@@ -26,6 +51,7 @@ extern lv_obj_t *ui_Mon;
 extern lv_obj_t *ui_Second;
 extern lv_obj_t *ui_Label2;
 extern lv_obj_t *ui_AD5940;
+extern lv_obj_t *ui_AD5940_WarmUp;
 extern lv_obj_t *ui_psb;
 extern lv_obj_t *ui_ArcHr;
 extern lv_obj_t *ui_ArcStep;
@@ -35,6 +61,7 @@ extern lv_obj_t *ui_LabelHR;
 extern lv_obj_t *ui_LabelTemp;
 extern lv_obj_t *ui_LabelNumTemp;
 extern lv_obj_t *ui_LabeHR;
+extern lv_obj_t *ui_ImageTouchLock;
 extern lv_obj_t *ui_ImageWifi;
 extern lv_obj_t *ui_ImageWifiOff;
 extern lv_obj_t *ui_ImageBle;
@@ -50,6 +77,7 @@ extern lv_obj_t *ui_ImageStress;
 extern lv_obj_t *ui_ImageNeutral;
 extern lv_obj_t *ui_ImageLocation;
 extern lv_obj_t *ui_LabelCity;
+extern lv_obj_t *ui_LabelBat;
 
 // SCREEN: ui_Sensor
 void ui_Sensor_screen_init(void);
@@ -140,6 +168,7 @@ LV_FONT_DECLARE(ui_font_TempFont);
 // LV_FONT_DECLARE(ui_font_TempNumberFont);
 LV_FONT_DECLARE(ui_font_Title);
 LV_FONT_DECLARE(ui_font_YearFont);
+LV_FONT_DECLARE(ui_font_lock);
 
 void ui_init(void);
 

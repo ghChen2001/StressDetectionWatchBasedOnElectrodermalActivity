@@ -28,6 +28,7 @@
 
 void fatfs_sdh_driver_register(void);
 void fatfs_usbh_driver_register(void);
+void fatfs_nand_driver_register(void);
 
 #endif
 

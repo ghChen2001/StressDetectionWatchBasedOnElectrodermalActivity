@@ -9,33 +9,32 @@
 #define PPGSCALE     10000
 lv_chart_series_t *ui_ChartPPG_series_1;
 static lv_coord_t ui_ChartPPG_series_1_array[PPGARRAYSIZE] = { 0 };   // 窗口共4秒，提前降采样到20Hz
-static unsigned long ChartPPG_series_1_array_O[PPGARRAYSIZE] = { 0 }; // 窗口共4秒，提前降采样到20Hz
+static int32_t ChartPPG_series_1_array_O[PPGARRAYSIZE] = { 0 }; // 窗口共4秒，提前降采样到20Hz
 static uint8_t array1Pointer = 0;
-static unsigned long greenMax = -1e12;
-static unsigned long greenMin = 1e12;
-static unsigned long greenAvg = 0;
+static int32_t greenMax = -1e12;
+static int32_t greenMin = 1e12;
+static int32_t greenAvg = 0;
 
 void ui_HearteRate_screen_init(void)
 {
     ui_HearteRate = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_HearteRate, LV_OBJ_FLAG_SCROLLABLE); /// Flags
-    // lv_obj_set_style_bg_img_src(ui_HearteRate, &ui_img_189584499, LV_PART_MAIN | LV_STATE_DEFAULT);
-    // lv_obj_set_style_bg_img_opa(ui_HearteRate, 120, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HearteRate, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_LabelHearteRate = lv_label_create(ui_HearteRate);
     lv_obj_set_width(ui_LabelHearteRate, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelHearteRate, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelHearteRate, -3);
-    lv_obj_set_y(ui_LabelHearteRate, -178);
+    lv_obj_set_x(ui_LabelHearteRate, -2);
+    lv_obj_set_y(ui_LabelHearteRate, -136);
     lv_obj_set_align(ui_LabelHearteRate, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LabelHearteRate, "Sensor Panel 3 PPG");
     lv_obj_set_style_text_font(ui_LabelHearteRate, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_ChartPPG = lv_chart_create(ui_HearteRate);
-    lv_obj_set_width(ui_ChartPPG, 262);
-    lv_obj_set_height(ui_ChartPPG, 135);
-    lv_obj_set_x(ui_ChartPPG, 11);
-    lv_obj_set_y(ui_ChartPPG, -72);
+    lv_obj_set_width(ui_ChartPPG, 196);
+    lv_obj_set_height(ui_ChartPPG, 104);
+    lv_obj_set_x(ui_ChartPPG, 8);
+    lv_obj_set_y(ui_ChartPPG, -55);
     lv_obj_set_align(ui_ChartPPG, LV_ALIGN_CENTER);
     lv_chart_set_type(ui_ChartPPG, LV_CHART_TYPE_LINE);
     lv_chart_set_point_count(ui_ChartPPG, PPGARRAYSIZE);
@@ -52,13 +51,13 @@ void ui_HearteRate_screen_init(void)
     // printf("ui_ChartPPG_series_1 0x%x\r\n", ui_ChartPPG_series_1);
     lv_chart_set_ext_y_array(ui_ChartPPG, ui_ChartPPG_series_1, ui_ChartPPG_series_1_array);
     // lv_chart_set_update_mode(ui_ChartPPG, LV_CHART_UPDATE_MODE_SHIFT);
-    lv_obj_set_style_width(ui_ChartPPG, 1, LV_PART_INDICATOR);
-    lv_obj_set_style_height(ui_ChartPPG, 1, LV_PART_INDICATOR);
+    lv_obj_set_style_width(ui_ChartPPG, 0, LV_PART_INDICATOR);
+    lv_obj_set_style_height(ui_ChartPPG, 0, LV_PART_INDICATOR);
 
     lv_obj_add_event_cb(ui_HearteRate, ui_event_HearteRate, LV_EVENT_ALL, NULL);
 }
 
-void ui_UpdatePPGChart(signed long green, signed long red, signed long ired)
+void ui_UpdatePPGChart(int32_t green, int32_t red, int32_t ired)
 {
     uint16_t greenValue = 0;
     if (array1Pointer < PPGARRAYSIZE) {

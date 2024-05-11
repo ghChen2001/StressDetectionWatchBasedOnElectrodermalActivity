@@ -226,6 +226,11 @@ sdk_library_add_sources_ifdef(CONFIG_BT_BAS_SERVER src/services/bas.c)
 sdk_library_add_sources_ifdef(CONFIG_BT_HRS_SERVER src/services/hrs.c)
 
 sdk_library_add_sources_ifdef(CONFIG_BT_MYSVC_SERVER src/services/mysvc.c)
+sdk_library_add_sources_ifdef(CONFIG_BT_PLOTEDA_SERVER src/services/ploteda.c)
+sdk_library_add_sources_ifdef(CONFIG_BT_PLOTBVP_SERVER src/services/plotbvp.c)
+sdk_library_add_sources_ifdef(CONFIG_BT_PLOTACC_SERVER src/services/plotacc.c)
+sdk_library_add_sources_ifdef(CONFIG_BT_PLOTTEMP_SERVER src/services/plottemp.c)
+sdk_library_add_sources_ifdef(CONFIG_BT_CTS_SERVER src/services/cts.c)
 
 # ifeq ($(CONFIG_BT_SCPS_SERVER),1)
 # ble_stack_srcs   += src/services/scps.c

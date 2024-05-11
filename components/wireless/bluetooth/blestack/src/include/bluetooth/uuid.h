@@ -153,6 +153,22 @@ struct bt_uuid_128 {
  *  @brief My Service
  */
 #define BT_UUID_MYSVC                     BT_UUID_DECLARE_16(0x18FF)
+/** @def BT_UUID_PLOTEDA
+ *  @brief Plot Eda Service
+ */
+#define BT_UUID_PLOTEDA                   BT_UUID_DECLARE_16(0x18FE)
+/** @def BT_UUID_PLOTBVP
+ *  @brief Plot Bvp Service
+ */
+#define BT_UUID_PLOTBVP                   BT_UUID_DECLARE_16(0x18FD)
+/** @def BT_UUID_PLOTACC
+ *  @brief Plot Acc Service
+ */
+#define BT_UUID_PLOTACC                   BT_UUID_DECLARE_16(0x18FC)
+/** @def BT_UUID_PLOTTEMP
+ *  @brief Plot Temp Service
+ */
+#define BT_UUID_PLOTTEMP                  BT_UUID_DECLARE_16(0x18FB)
 /** @def BT_UUID_HRS
  *  @brief Heart Rate Service
  */
@@ -332,6 +348,22 @@ struct bt_uuid_128 {
  *  @brief BT_UUID_MYSVC_DATA
  */
 #define BT_UUID_MYSVC_DATA                BT_UUID_DECLARE_16(0x2aff)
+/** @def BT_UUID_PLOTEDA_DATA
+ *  @brief BT_UUID_PLOTEDA_DATA
+ */
+#define BT_UUID_PLOTEDA_DATA              BT_UUID_DECLARE_16(0x2afe)
+/** @def BT_UUID_PLOTBVP_DATA
+ *  @brief BT_UUID_PLOTBVP_DATA
+ */
+#define BT_UUID_PLOTBVP_DATA              BT_UUID_DECLARE_16(0x2afd)
+/** @def BT_UUID_PLOTACC_DATA
+ *  @brief BT_UUID_PLOTACC_DATA
+ */
+#define BT_UUID_PLOTACC_DATA              BT_UUID_DECLARE_16(0x2afc)
+/** @def BT_UUID_PLOTTEMP_DATA
+ *  @brief BT_UUID_PLOTTEMP_DATA
+ */
+#define BT_UUID_PLOTTEMP_DATA             BT_UUID_DECLARE_16(0x2afb)
 /** @def BT_UUID_HRS_MEASUREMENT
  *  @brief HRS Characteristic Measurement Interval
  */

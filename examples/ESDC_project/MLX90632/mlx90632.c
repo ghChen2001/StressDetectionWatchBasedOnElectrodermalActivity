@@ -68,7 +68,8 @@ int mlx90632_start_measurement(void)
          * atm 10ms - 11ms
          */
         // usleep(10000, 11000);
-        MLX_usleep(10000, 11000);
+        // MLX_usleep(10000, 11000);
+        MLX_msleep(50);
     }
 
     if (tries < 0) {
@@ -76,7 +77,7 @@ int mlx90632_start_measurement(void)
         return -ETIMEDOUT;
     }
 
-    printf("tries %d, reg_status %4x\n", tries, reg_status);
+    // printf("tries %d, reg_status %4x\n", tries, reg_status);
     return (reg_status & MLX90632_STAT_CYCLE_POS) >> 2;
 }
 
@@ -96,7 +97,7 @@ int mlx90632_start_measurement(void)
  */
 STATIC int32_t mlx90632_channel_new_select(int32_t ret, uint8_t *channel_new, uint8_t *channel_old)
 {
-    printf("CYCLE %d\n", ret);
+    // printf("CYCLE %d\n", ret);
     switch (ret) {
         case 1:
             *channel_new = 1;
@@ -136,13 +137,13 @@ STATIC int32_t mlx90632_read_temp_ambient_raw(int16_t *ambient_new_raw, int16_t 
     if (ret < 0)
         return ret;
     *ambient_new_raw = (int16_t)read_tmp;
-    printf("RAM_6 new %d\n", *ambient_new_raw);
+    // printf("RAM_6 new %d\n", *ambient_new_raw);
 
     ret = mlx90632_i2c_read(MLX90632_RAM_3(2), &read_tmp);
     if (ret < 0)
         return ret;
     *ambient_old_raw = (int16_t)read_tmp;
-    printf("RAM_9 old %d\n", *ambient_old_raw);
+    // printf("RAM_9 old %d\n", *ambient_old_raw);
 
     return ret;
 }
@@ -178,27 +179,27 @@ STATIC int32_t mlx90632_read_temp_object_raw(int32_t start_measurement_ret,
         return ret;
 
     read = (int16_t)read_tmp;
-    printf("RAM8/5 %d\n", read);
+    // printf("RAM8/5 %d\n", read);
 
     ret = mlx90632_i2c_read(MLX90632_RAM_1(channel), &read_tmp);
     if (ret < 0)
         return ret;
     *object_new_raw = (read + (int16_t)read_tmp) / 2;
-    printf("RAM8/5 %d\n", (int16_t)read_tmp);
-    printf("S = %d\n", *object_new_raw);
+    // printf("RAM8/5 %d\n", (int16_t)read_tmp);
+    // printf("S = %d\n", *object_new_raw);
 
     ret = mlx90632_i2c_read(MLX90632_RAM_2(channel_old), &read_tmp);
     if (ret < 0)
         return ret;
     read = (int16_t)read_tmp;
-    printf("RAM8/5 old %d\n", read);
+    // printf("RAM8/5 old %d\n", read);
 
     ret = mlx90632_i2c_read(MLX90632_RAM_1(channel_old), &read_tmp);
     if (ret < 0)
         return ret;
     *object_old_raw = (read + (int16_t)read_tmp) / 2;
-    printf("RAM8/5 old %d\n", (int16_t)read_tmp);
-    printf("S old = %d\n", *object_new_raw);
+    // printf("RAM8/5 old %d\n", (int16_t)read_tmp);
+    // printf("S old = %d\n", *object_new_raw);
 
     return ret;
 }
@@ -210,7 +211,7 @@ int32_t mlx90632_read_temp_raw(int16_t *ambient_new_raw, int16_t *ambient_old_ra
 
     // trigger and wait for measurement to complete
     start_measurement_ret = mlx90632_start_measurement();
-    printf("start_measurement_ret %d\n", start_measurement_ret);
+    // printf("start_measurement_ret %d\n", start_measurement_ret);
     if (start_measurement_ret < 0) {
         printf("ERROR\n");
         return start_measurement_ret;
@@ -254,10 +255,10 @@ double mlx90632_preprocess_temp_ambient(int16_t ambient_new_raw, int16_t ambient
     double VR_Ta, kGb;
 
     kGb = ((double)Gb) / 1024.0;
-    printf("KGb %f\n", kGb);
+    // printf("KGb %f\n", kGb);
 
     VR_Ta = ambient_old_raw + kGb * (ambient_new_raw / (MLX90632_REF_3));
-    printf("VR_Ta %f\n", VR_Ta);
+    // printf("VR_Ta %f\n", VR_Ta);
     return ((ambient_new_raw / (MLX90632_REF_3)) / VR_Ta) * 524288.0;
 }
 
@@ -286,7 +287,7 @@ double mlx90632_calc_temp_ambient(int16_t ambient_new_raw, int16_t ambient_old_r
     Bblock = (Bsub / (double)P_G) * (double)1048576.0;
     Cblock = (double)P_O / (double)256.0;
 
-    printf("P_O %f, term2 %f, term3 %f\n", Cblock, Bblock, Ablock);
+    // printf("P_O %f, term2 %f, term3 %f\n", Cblock, Bblock, Ablock);
 
     return Bblock + Ablock + Cblock;
 }

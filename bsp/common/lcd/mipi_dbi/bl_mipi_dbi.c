@@ -132,8 +132,10 @@ int lcd_dbi_init(lcd_dbi_init_t *dbi_parra)
     /* dbi Ex QSPI */
     dbi_cfg.dbi_mode = DBI_MODE_EX_QSPI;
     uint32_t dbi_gpio_func = GPIO_FUNC_DBI_QSPI;
+    // uint8_t dbi_gpio_list[] = { LCD_DBI_QSPI_PIN_CLK, LCD_DBI_QSPI_PIN_CS,
+    //                             LCD_DBI_QSPI_PIN_DAT0, LCD_DBI_QSPI_PIN_DAT1, LCD_DBI_QSPI_PIN_DAT2, LCD_DBI_QSPI_PIN_DAT3 };
     uint8_t dbi_gpio_list[] = { LCD_DBI_QSPI_PIN_CLK, LCD_DBI_QSPI_PIN_CS,
-                                LCD_DBI_QSPI_PIN_DAT0, LCD_DBI_QSPI_PIN_DAT1, LCD_DBI_QSPI_PIN_DAT2, LCD_DBI_QSPI_PIN_DAT3 };
+                                LCD_DBI_QSPI_PIN_DAT0};
 #endif
 
     if (dbi_parra->pixel_format == LCD_DBI_LCD_PIXEL_FORMAT_RGB565) {

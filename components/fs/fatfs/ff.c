@@ -6665,7 +6665,11 @@ FRESULT f_mkfs(
         if (disk_read(pdrv, buf, 0, 1) != RES_OK)
             LEAVE_MKFS(FR_DISK_ERR); /* Load MBR */
         if (ld_word(buf + BS_55AA) != 0xAA55)
-            LEAVE_MKFS(FR_MKFS_ABORTED); /* Check if MBR is valid */
+        {
+            printf("ld_word(buf + BS_55AA) != 0xAA55\r\n");
+            LEAVE_MKFS(FR_MKFS_ABORTED); /* Check if MBR is valid */    
+        }
+            
 #if FF_LBA64
         if (buf[MBR_Table + PTE_System] == 0xEE) { /* GPT protective MBR? */
             DWORD n_ent, ofs;
@@ -6697,14 +6701,18 @@ FRESULT f_mkfs(
 #endif
         { /* Get the partition location from MBR partition table */
             pte = buf + (MBR_Table + (ipart - 1) * SZ_PTE);
-            if (ipart > 4 || pte[PTE_System] == 0)
+            if (ipart > 4 || pte[PTE_System] == 0){
+                printf("No partition?\r\n");
                 LEAVE_MKFS(FR_MKFS_ABORTED);     /* No partition? */
+            }
+                
             b_vol = ld_dword(pte + PTE_StLba);   /* Get volume start sector */
             sz_vol = ld_dword(pte + PTE_SizLba); /* Get volume size */
         }
     } else { /* The volume is associated with a physical drive */
         if (disk_ioctl(pdrv, GET_SECTOR_COUNT, &sz_vol) != RES_OK)
             LEAVE_MKFS(FR_DISK_ERR);
+        printf("sz_vol %d\r\n", sz_vol);
         if (!(fsopt & FM_SFD)) { /* To be partitioned? */
                                  /* Create a single-partition on the drive in this function */
 #if FF_LBA64
@@ -6722,8 +6730,11 @@ FRESULT f_mkfs(
             }
         }
     }
-    if (sz_vol < 128)
+    if (sz_vol < 128){
+        printf("volume size is >=128s, sz_vol %d\r\n", sz_vol);
         LEAVE_MKFS(FR_MKFS_ABORTED); /* Check if volume size is >=128s */
+    }
+        
 
     /* Now start to create an FAT volume at b_vol and sz_vol */
 
@@ -6978,8 +6989,11 @@ FRESULT f_mkfs(
                 sz_fat = (n_clst * 4 + 8 + ss - 1) / ss; /* FAT size [sector] */
                 sz_rsv = 32;                             /* Number of reserved sectors */
                 sz_dir = 0;                              /* No static directory */
-                if (n_clst <= MAX_FAT16 || n_clst > MAX_FAT32)
+                if (n_clst <= MAX_FAT16 || n_clst > MAX_FAT32){
+                    printf("n_clst <= MAX_FAT16 || n_clst > MAX_FAT32, n_clst %d\r\n", n_clst);
                     LEAVE_MKFS(FR_MKFS_ABORTED);
+                }
+                    
             } else {                            /* FAT volume */
                 if (pau == 0) {                 /* au auto-selection */
                     n = (DWORD)sz_vol / 0x1000; /* Volume size in unit of 4KS */
@@ -7014,14 +7028,20 @@ FRESULT f_mkfs(
                 sz_fat += n / n_fat;
             }
 
+            printf("Adjust n_clst %d\r\n", n_clst);
             /* Determine number of clusters and final check of validity of the FAT sub-type */
             if (sz_vol < b_data + pau * 16 - b_vol)
+            {
+                printf("Too small volume?\r\n");
                 LEAVE_MKFS(FR_MKFS_ABORTED); /* Too small volume? */
+            }
+                
             n_clst = ((DWORD)sz_vol - sz_rsv - sz_fat * n_fat - sz_dir) / pau;
             if (fsty == FS_FAT32) {
                 if (n_clst <= MAX_FAT16) { /* Too few clusters for FAT32? */
                     if (sz_au == 0 && (sz_au = pau / 2) != 0)
                         continue; /* Adjust cluster size and retry */
+                    printf("Too few clusters for FAT32?\r\n");
                     LEAVE_MKFS(FR_MKFS_ABORTED);
                 }
             }
@@ -7037,17 +7057,22 @@ FRESULT f_mkfs(
                     }
                     if (sz_au == 0 && (sz_au = pau * 2) <= 128)
                         continue; /* Adjust cluster size and retry */
+                    printf("Too many clusters for FAT16\r\n");
                     LEAVE_MKFS(FR_MKFS_ABORTED);
                 }
                 if (n_clst <= MAX_FAT12) { /* Too few clusters for FAT16 */
                     if (sz_au == 0 && (sz_au = pau * 2) <= 128)
                         continue; /* Adjust cluster size and retry */
+                    printf("Too few clusters for FAT16\r\n");
                     LEAVE_MKFS(FR_MKFS_ABORTED);
                 }
             }
             if (fsty == FS_FAT12 && n_clst > MAX_FAT12)
+            {
+                printf("Too many clusters for FAT12");
                 LEAVE_MKFS(FR_MKFS_ABORTED); /* Too many clusters for FAT12 */
-
+            }
+                
             /* Ok, it is the valid cluster configuration */
             break;
         } while (1);
@@ -7057,6 +7082,8 @@ FRESULT f_mkfs(
         lba[1] = b_vol + sz_vol - 1; /* Inform storage device that the volume area may be erased */
         disk_ioctl(pdrv, CTRL_TRIM, lba);
 #endif
+
+        printf("Create FAT VBR\r\n");
         /* Create FAT VBR */
         memset(buf, 0, ss);
         memcpy(buf + BS_JmpBoot, "\xEB\xFE\x90"
@@ -7113,6 +7140,7 @@ FRESULT f_mkfs(
             disk_write(pdrv, buf, b_vol + 1, 1); /* Write original FSINFO (VBR + 1) */
         }
 
+        printf("Initialize FAT area\r\n");
         /* Initialize FAT area */
         memset(buf, 0, sz_buf * ss);
         sect = b_fat;                 /* FAT start sector */
@@ -7132,6 +7160,7 @@ FRESULT f_mkfs(
                 memset(buf, 0, ss); /* Rest of FAT all are cleared */
                 sect += n;
                 nsect -= n;
+                // printf("nsect %d", nsect);
             } while (nsect);
         }
 

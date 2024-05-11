@@ -20,14 +20,13 @@ void ui_Sensor_screen_init(void)
 {
     ui_Sensor = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Sensor, LV_OBJ_FLAG_SCROLLABLE); /// Flags
-    // lv_obj_set_style_bg_img_src(ui_Sensor, &ui_img_189584499, LV_PART_MAIN | LV_STATE_DEFAULT);
-    // lv_obj_set_style_bg_img_opa(ui_Sensor, 160, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Sensor, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_LabelSensor = lv_label_create(ui_Sensor);
     lv_obj_set_width(ui_LabelSensor, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelSensor, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelSensor, -3);
-    lv_obj_set_y(ui_LabelSensor, -178);
+    lv_obj_set_x(ui_LabelSensor, -2);
+    lv_obj_set_y(ui_LabelSensor, -136);
     lv_obj_set_align(ui_LabelSensor, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LabelSensor, "Sensor Panel 1");
     lv_obj_set_style_text_font(ui_LabelSensor, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -35,29 +34,29 @@ void ui_Sensor_screen_init(void)
     ui_LabelNumTemp = lv_label_create(ui_Sensor);
     lv_obj_set_width(ui_LabelNumTemp, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelNumTemp, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelNumTemp, 85);
-    lv_obj_set_y(ui_LabelNumTemp, -144);
+    lv_obj_set_x(ui_LabelNumTemp, 64);
+    lv_obj_set_y(ui_LabelNumTemp, -110);
     lv_obj_set_align(ui_LabelNumTemp, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_LabelNumTemp, "23.5℃");
+    lv_label_set_text(ui_LabelNumTemp, "--℃");
     lv_obj_set_style_text_font(ui_LabelNumTemp, &ui_font_TempFont, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SensorTempurature = lv_label_create(ui_Sensor);
     lv_obj_set_width(ui_SensorTempurature, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_SensorTempurature, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_SensorTempurature, -98);
-    lv_obj_set_y(ui_SensorTempurature, -144);
+    lv_obj_set_x(ui_SensorTempurature, -60);
+    lv_obj_set_y(ui_SensorTempurature, -110);
     lv_obj_set_align(ui_SensorTempurature, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SensorTempurature, "Tempurature");
+    lv_label_set_text(ui_SensorTempurature, "Temperature");
 
     ui_ChartTempurature = lv_chart_create(ui_Sensor);
-    lv_obj_set_width(ui_ChartTempurature, 262);
-    lv_obj_set_height(ui_ChartTempurature, 112);
-    lv_obj_set_x(ui_ChartTempurature, 11);
-    lv_obj_set_y(ui_ChartTempurature, -72);
+    lv_obj_set_width(ui_ChartTempurature, 196);
+    lv_obj_set_height(ui_ChartTempurature, 86);
+    lv_obj_set_x(ui_ChartTempurature, 8);
+    lv_obj_set_y(ui_ChartTempurature, -55);
     lv_obj_set_align(ui_ChartTempurature, LV_ALIGN_CENTER);
     lv_chart_set_type(ui_ChartTempurature, LV_CHART_TYPE_LINE);
     lv_chart_set_point_count(ui_ChartTempurature, 30);
-    lv_chart_set_range(ui_ChartTempurature, LV_CHART_AXIS_PRIMARY_Y, 20, 45);
+    lv_chart_set_range(ui_ChartTempurature, LV_CHART_AXIS_PRIMARY_Y, 25, 45);
     lv_chart_set_range(ui_ChartTempurature, LV_CHART_AXIS_SECONDARY_Y, 0, 0);
     lv_chart_set_div_line_count(ui_ChartTempurature, 10, 30);
     lv_chart_set_axis_tick(ui_ChartTempurature, LV_CHART_AXIS_PRIMARY_X, 8, 3, 5, 5, true, 50);
@@ -75,23 +74,23 @@ void ui_Sensor_screen_init(void)
     ui_SensorAcceleration_ = lv_label_create(ui_Sensor);
     lv_obj_set_width(ui_SensorAcceleration_, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_SensorAcceleration_, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_SensorAcceleration_, -98);
-    lv_obj_set_y(ui_SensorAcceleration_, 28);
+    lv_obj_set_x(ui_SensorAcceleration_, -60);
+    lv_obj_set_y(ui_SensorAcceleration_, 21);
     lv_obj_set_align(ui_SensorAcceleration_, LV_ALIGN_CENTER);
     lv_label_set_text(ui_SensorAcceleration_, "Acceleration ");
 
     ui_ChartAcceleration = lv_chart_create(ui_Sensor);
-    lv_obj_set_width(ui_ChartAcceleration, 267);
-    lv_obj_set_height(ui_ChartAcceleration, 107);
-    lv_obj_set_x(ui_ChartAcceleration, 9);
-    lv_obj_set_y(ui_ChartAcceleration, 101);
+    lv_obj_set_width(ui_ChartAcceleration, 200);
+    lv_obj_set_height(ui_ChartAcceleration, 95);
+    lv_obj_set_x(ui_ChartAcceleration, 7);
+    lv_obj_set_y(ui_ChartAcceleration, 77);
     lv_obj_set_align(ui_ChartAcceleration, LV_ALIGN_CENTER);
     lv_chart_set_type(ui_ChartAcceleration, LV_CHART_TYPE_LINE);
-    lv_chart_set_point_count(ui_ChartAcceleration, 30);
-    lv_chart_set_range(ui_ChartAcceleration, LV_CHART_AXIS_PRIMARY_Y, -20, 20);
+    lv_chart_set_point_count(ui_ChartAcceleration, 26 * 2);
+    lv_chart_set_range(ui_ChartAcceleration, LV_CHART_AXIS_PRIMARY_Y, -1500, 1500);
     lv_chart_set_range(ui_ChartAcceleration, LV_CHART_AXIS_SECONDARY_Y, 0, 0);
     lv_chart_set_div_line_count(ui_ChartAcceleration, 10, 30);
-    lv_chart_set_axis_tick(ui_ChartAcceleration, LV_CHART_AXIS_PRIMARY_X, 10, 5, 5, 5, true, 50);
+    // lv_chart_set_axis_tick(ui_ChartAcceleration, LV_CHART_AXIS_PRIMARY_X, 10, 5, 5, 5, true, 50);
     lv_chart_set_axis_tick(ui_ChartAcceleration, LV_CHART_AXIS_PRIMARY_Y, 10, 5, 5, 2, true, 50);
     lv_chart_set_axis_tick(ui_ChartAcceleration, LV_CHART_AXIS_SECONDARY_Y, 0, 0, 0, 0, false, 25);
     ui_ChartAcceleration_series_1 = lv_chart_add_series(ui_ChartAcceleration, lv_color_hex(0xF4F65D),
@@ -108,14 +107,14 @@ void ui_Sensor_screen_init(void)
     // lv_chart_set_ext_y_array(ui_ChartAcceleration, ui_ChartAcceleration_series_3, ui_ChartAcceleration_series_3_array);
 
     lv_chart_set_update_mode(ui_ChartAcceleration, LV_CHART_UPDATE_MODE_SHIFT);
-    lv_obj_set_style_width(ui_ChartAcceleration, 1, LV_PART_INDICATOR);
-    lv_obj_set_style_height(ui_ChartAcceleration, 1, LV_PART_INDICATOR);
+    lv_obj_set_style_width(ui_ChartAcceleration, 0, LV_PART_INDICATOR);
+    lv_obj_set_style_height(ui_ChartAcceleration, 0, LV_PART_INDICATOR);
 
     ui_LabelAcceX = lv_label_create(ui_Sensor);
     lv_obj_set_width(ui_LabelAcceX, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelAcceX, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelAcceX, 90);
-    lv_obj_set_y(ui_LabelAcceX, 30);
+    lv_obj_set_x(ui_LabelAcceX, 67);
+    lv_obj_set_y(ui_LabelAcceX, 23);
     lv_obj_set_align(ui_LabelAcceX, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LabelAcceX, "X");
     lv_obj_set_style_text_color(ui_LabelAcceX, lv_color_hex(0xF4F65D), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -125,8 +124,8 @@ void ui_Sensor_screen_init(void)
     ui_LabelAcceY = lv_label_create(ui_Sensor);
     lv_obj_set_width(ui_LabelAcceY, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelAcceY, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelAcceY, 105);
-    lv_obj_set_y(ui_LabelAcceY, 30);
+    lv_obj_set_x(ui_LabelAcceY, 78);
+    lv_obj_set_y(ui_LabelAcceY, 23);
     lv_obj_set_align(ui_LabelAcceY, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LabelAcceY, "Y");
     lv_obj_set_style_text_color(ui_LabelAcceY, lv_color_hex(0x3F64F0), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -136,8 +135,8 @@ void ui_Sensor_screen_init(void)
     ui_LabelAcceZ = lv_label_create(ui_Sensor);
     lv_obj_set_width(ui_LabelAcceZ, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelAcceZ, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelAcceZ, 120);
-    lv_obj_set_y(ui_LabelAcceZ, 30);
+    lv_obj_set_x(ui_LabelAcceZ, 90);
+    lv_obj_set_y(ui_LabelAcceZ, 23);
     lv_obj_set_align(ui_LabelAcceZ, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LabelAcceZ, "Z");
     lv_obj_set_style_text_color(ui_LabelAcceZ, lv_color_hex(0x1ABB28), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -146,11 +145,11 @@ void ui_Sensor_screen_init(void)
 
     lv_obj_add_event_cb(ui_Sensor, ui_event_Sensor, LV_EVENT_ALL, NULL);
 
-    ui_UpdateTempuratureChart(36);
+    // ui_UpdateTempuratureChart(36);
     ui_UpdateAccelerationChart(-13, 10, 0.2);
 }
 
-void ui_UpdateTempuratureChart(int16_t temp)
+void ui_UpdateTemperatureChart(float temp)
 {
     // printf("ui_ChartTempurature 0x%x\r\n", ui_ChartTempurature);
     // printf("ui_ChartTempurature_series_1 0x%x\r\n", ui_ChartTempurature_series_1);
@@ -165,9 +164,19 @@ void ui_UpdateTempLabel(float temp)
     lv_label_set_text(ui_LabelNumTemp, strtemp);
 }
 
-void ui_UpdateAccelerationChart(int16_t ax, int16_t ay, int16_t az)
+void ui_UpdateAccelerationChart(float ax, float ay, float az)
 {
     lv_chart_set_next_value(ui_ChartAcceleration, ui_ChartAcceleration_series_1, ax);
     lv_chart_set_next_value(ui_ChartAcceleration, ui_ChartAcceleration_series_2, ay);
     lv_chart_set_next_value(ui_ChartAcceleration, ui_ChartAcceleration_series_3, az);
+}
+
+void ui_onAccelerationChartClicked(lv_event_t *e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t *target = lv_event_get_target(e);
+
+    printf("ui_onAccelerationChartClicked: %d\r\n", lv_slider_get_value(target));
+
+    lv_port_disp_set_brightness((uint16_t)lv_slider_get_value(target));
 }

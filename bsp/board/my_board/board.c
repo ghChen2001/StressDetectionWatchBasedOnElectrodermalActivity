@@ -207,6 +207,28 @@ static void console_init()
     bflb_uart_set_console(uart0);
 }
 
+static void uart_tx_init()
+{
+    struct bflb_device_s *gpio;
+
+    gpio = bflb_device_get_by_name("gpio");
+    bflb_gpio_uart_init(gpio, GPIO_PIN_21, GPIO_UART_FUNC_UART0_TX);
+
+    struct bflb_uart_config_s cfg;
+    cfg.baudrate = 2000000;
+    cfg.data_bits = UART_DATA_BITS_8;
+    cfg.stop_bits = UART_STOP_BITS_1;
+    cfg.parity = UART_PARITY_NONE;
+    cfg.flow_ctrl = 0;
+    cfg.tx_fifo_threshold = 7;
+    cfg.rx_fifo_threshold = 7;
+
+    uart0 = bflb_device_get_by_name("uart0");
+
+    bflb_uart_init(uart0, &cfg);
+    bflb_uart_set_console(uart0);
+}
+
 void board_init(void)
 {
     int ret = -1;
@@ -221,7 +243,8 @@ void board_init(void)
     peripheral_clock_init();
     bflb_irq_initialize();
 
-    console_init();
+    // console_init();
+    uart_tx_init();
 
 #ifdef CONFIG_PSRAM
 #ifndef CONFIG_PSRAM_COPY_CODE
@@ -285,12 +308,12 @@ void board_uartx_gpio_init()
 
     gpio = bflb_device_get_by_name("gpio");
 
-    bflb_gpio_uart_init(gpio, GPIO_PIN_23, GPIO_UART_FUNC_UART1_TX);
-    bflb_gpio_uart_init(gpio, GPIO_PIN_24, GPIO_UART_FUNC_UART1_RX);
+    // bflb_gpio_uart_init(gpio, GPIO_PIN_23, GPIO_UART_FUNC_UART1_TX);
+    // bflb_gpio_uart_init(gpio, GPIO_PIN_24, GPIO_UART_FUNC_UART1_RX);
     // bflb_gpio_uart_init(gpio, GPIO_PIN_25, GPIO_UART_FUNC_UART1_CTS);
     // bflb_gpio_uart_init(gpio, GPIO_PIN_26, GPIO_UART_FUNC_UART1_RTS);
-    bflb_gpio_uart_init(gpio, GPIO_PIN_33, GPIO_UART_FUNC_UART0_TX);
-    bflb_gpio_uart_init(gpio, GPIO_PIN_34, GPIO_UART_FUNC_UART0_RX);
+    // bflb_gpio_uart_init(gpio, GPIO_PIN_33, GPIO_UART_FUNC_UART0_TX);
+    // bflb_gpio_uart_init(gpio, GPIO_PIN_34, GPIO_UART_FUNC_UART0_RX);
 }
 
 void board_i2c0_gpio_init()

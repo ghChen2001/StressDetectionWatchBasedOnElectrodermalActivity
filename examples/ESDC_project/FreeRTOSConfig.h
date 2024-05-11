@@ -51,18 +51,19 @@
 #endif
 #define configSUPPORT_STATIC_ALLOCATION         1
 #define configUSE_PREEMPTION                    1
+#define configUSE_TIME_SLICING                  1
 #define configUSE_IDLE_HOOK                     0
 #define configUSE_TICK_HOOK                     0
 #define configCPU_CLOCK_HZ                      ((uint32_t)(1 * 1000 * 1000))
 #define configTICK_RATE_HZ                      ((TickType_t)1000)
 #define configMAX_PRIORITIES                    (32)
 #define configMINIMAL_STACK_SIZE                ((unsigned short)128) /* Only needs to be this high as some demo tasks also use this constant.  In production only the idle task would use this. */
-#define configTOTAL_HEAP_SIZE                   ((size_t)32 * 1024)
+#define configTOTAL_HEAP_SIZE                   ((size_t)512 * 1024)
 #define configMAX_TASK_NAME_LEN                 (16)
 #define configUSE_TRACE_FACILITY                1
 #define configUSE_STATS_FORMATTING_FUNCTIONS    1
 #define configUSE_16_BIT_TICKS                  0
-#define configIDLE_SHOULD_YIELD                 0
+#define configIDLE_SHOULD_YIELD                 1
 #define configUSE_MUTEXES                       1
 #define configQUEUE_REGISTRY_SIZE               8
 #define configCHECK_FOR_STACK_OVERFLOW          2
@@ -86,7 +87,7 @@
 #define configTIMER_TASK_STACK_DEPTH            (1024)
 /* Task priorities.  Allow these to be overridden. */
 #ifndef uartPRIMARY_PRIORITY
-#define uartPRIMARY_PRIORITY (configMAX_PRIORITIES - 3)
+#define uartPRIMARY_PRIORITY (configMAX_PRIORITIES - 2)
 #endif
 /* Set the following definitions to 1 to include the API function, or zero
 to exclude the API function. */
@@ -95,6 +96,7 @@ to exclude the API function. */
 #define INCLUDE_vTaskDelete              1
 #define INCLUDE_vTaskCleanUpResources    1
 #define INCLUDE_vTaskSuspend             1
+#define INCLUDE_xTaskResumeFromISR       1
 #define INCLUDE_vTaskDelayUntil          1
 #define INCLUDE_vTaskDelay               1
 #define INCLUDE_eTaskGetState            1

@@ -3,6 +3,7 @@
 #include "semphr.h"
 #include "task.h"
 #include "board.h"
+#include "mem.h"
 
 #include "bluetooth.h"
 #include "conn.h"
@@ -14,12 +15,21 @@
 #endif
 #include "hci_driver.h"
 #include "bl616_glb.h"
-#include "ble_tp_svc.h"
+// #include "ble_tp_svc.h"
 #include "rfparam_adapter.h"
 #include "hci_core.h"
 // #include "hrs.h"
 // #include "bas.h"
+#include "gatt.h"
 #include "mysvc.h"
+#include "plotbvp.h"
+#include "ploteda.h"
+#include "plotacc.h"
+#include "plottemp.h"
+#include "cts.h"
+
+#include "bflb_mtd.h"
+#include "easyflash.h"
 
 /* WIFI */
 #include <lwip/tcpip.h>
@@ -39,6 +49,8 @@
 #include "bflb_l1c.h"
 #include "bflb_rtc.h"
 #include "bflb_uart.h"
+
+#include "main_functions.h"
 
 /* LVGL */
 #include "lv_conf.h"
@@ -67,6 +79,12 @@
 #include "afe4404/hrm.h"
 #include "afe4404/AFE4404_PORT.h"
 
+#include "NAND_SPI.h"
+#include "fatfs_diskio_register.h"
+#include "ff.h"
+#include "usbd_core.h"
+#include "usbd_msc.h"
+
 #include "csi_math.h"
 #include "tinymaix.h"
 #include "model/esdc_model.h"
@@ -89,6 +107,16 @@
 
 #include "time.h"
 
+#include "bflb_pwm_v2.h"
+#include "bflb_clock.h"
+
+#include "INS5699S/ins5699s.h"
+#include "max17048.h"
+
+#include "touch_conf_user.h"
+
+#include "main_head.h"
+
 #define DBG_TAG "MAIN"
 #include "log.h"
 
@@ -100,25 +128,26 @@
 #define WIFI_STACK_SIZE    (1536)
 #define TASK_PRIORITY_FW   configMAX_PRIORITIES - 2
 
-#define GMTp8              8 * 60 * 60
-#define GMTm7              -7 * 60 * 60
-
 #define LSM6DSO_BOOT_TIME  10
 
 void *__dso_handle = NULL;
 
-static TaskHandle_t EDA_handle;
-static TaskHandle_t ACCE_handle;
-static TaskHandle_t TEMP_handle;
-static TaskHandle_t HR_handle;
-static TaskHandle_t LVGL_handle;
+static TaskHandle_t EDA_handle = NULL;
+static TaskHandle_t ACCE_handle = NULL;
+static TaskHandle_t TEMP_handle = NULL;
+static TaskHandle_t HR_handle = NULL;
+static TaskHandle_t LVGL_handle = NULL;
 // static TaskHandle_t WIRELESS_handle;
-static TaskHandle_t CLOCK_handle;
-static TaskHandle_t WIFI_handle;
-static TaskHandle_t Algo_handle;
-static TaskHandle_t wifi_fw_task;
-static TaskHandle_t BLE_handle;
-static TaskHandle_t GPS_handle;
+static TaskHandle_t CLOCK_handle = NULL;
+static TaskHandle_t WIFI_handle = NULL;
+static TaskHandle_t Algo_handle = NULL;
+static TaskHandle_t wifi_fw_task = NULL;
+static TaskHandle_t BLE_handle = NULL;
+static TaskHandle_t GPS_handle = NULL;
+static TaskHandle_t MOTOR_handle = NULL;
+static TaskHandle_t BAT_handle = NULL;
+static TaskHandle_t FILE_handle = NULL;
+static TaskHandle_t BLE_trans_handle = NULL;
 static wifi_conf_t conf = {
     .country_code = "CN",
 };
@@ -128,26 +157,34 @@ static uint8_t wifiInitDone = 0;
 static struct bflb_device_s *uart0;
 static struct bflb_device_s *uart1;
 struct bflb_device_s *gpio;
-struct bflb_device_s *spi0;        // For AD5940
-static struct bflb_device_s *i2c0; // For LIS2DH12, TMP117, AFE4404
+struct bflb_device_s *spi0; // For AD5940
+struct bflb_device_s *i2c0; // For LIS2DH12, TMP117, AFE4404
 struct bflb_device_s *rtc;
+struct bflb_device_s *pwm;
+struct bflb_device_s *i2c1 = NULL;
 // struct bflb_device_s *dma0_ch0;
 // struct bflb_device_s *dma0_ch1;
 
 // AD5940
 uint8_t ucInterrupted;
+bool AD5940WarmUp = false;
 float LFOSCFreq; /* Measured LFOSC frequency */
 uint32_t ResistorForBaseline = 0;
 uint32_t AppBuff[APPBUFF_SIZE];
 // fImpCar_Type EDABase = {
-//     .Real = 17637.3361f,
-//     .Image = -111117.5284f,
-// };
+//     .Real = 0.0f,
+//     .Image = -0.0f,
+// }; // Zero
+// fImpCar_Type EDABase = {
+//     .Real = 103808.81f,
+//     .Image = -120586.1855f,
+// }; // device 1
 fImpCar_Type EDABase = {
-    .Real = 53718.496f,
-    .Image = -88349.547f,
-};
-uint32_t err_code_ad5940;
+    .Real = 106158.5718f,
+    .Image = -117342.1136f,
+}; // device 2
+int err_code_ad5940;
+static bool isAD5940Init = false;
 
 // LSM6DSO
 static uint8_t whoamI, rst;
@@ -163,7 +200,7 @@ uint8_t afe4404_adcrdy = 0;
 // HRM algo
 extern unsigned char HeartRate;
 uint8_t offsetDACcalibFlag = 0;
-signed long AFE44xx_SPO2_Data_buf[6] = { 0 };
+int32_t AFE44xx_SPO2_Data_buf[6] = { 0 };
 volatile uint8_t bCDCDataReceived_event = 0; //Indicates data has been received without an open rcv operation
 uint8_t CALIBRATION_ENABLED = 0;
 uint32_t hr_transfer = 0;
@@ -202,13 +239,56 @@ extern unsigned long AFE44xx_Current_Register_Settings[5];
 /* MAX30101 */
 /* END MAX30101 */
 static float Tempurature = 0;
+static float TempuratureAmbient = 0;
 
 /* freeRTOS */
-SemaphoreHandle_t xMutex;
+SemaphoreHandle_t xMutex_IIC0;
+SemaphoreHandle_t xMutex_IIC1;
+SemaphoreHandle_t xMutex_SPI;
 SemaphoreHandle_t xMutex_printf;
 SemaphoreHandle_t xMutex_lvgl;
 SemaphoreHandle_t xMutex_interArrayWindow; // For BVP window update in HR task
 SemaphoreHandle_t xMutex_DSP;
+SemaphoreHandle_t xMutex_BLE;
+SemaphoreHandle_t xMutex_RTC;
+/* binary */
+SemaphoreHandle_t xSem_HR = NULL;
+SemaphoreHandle_t xSem_EDA = NULL;
+// SemaphoreHandle_t xSem_usb = NULL;
+SemaphoreHandle_t xSem_MOTOR = NULL;
+SemaphoreHandle_t xSem_EDAEN = NULL;
+SemaphoreHandle_t xSem_BVPEN = NULL;
+SemaphoreHandle_t xSem_ACCEN = NULL;
+SemaphoreHandle_t xSem_TEMPEN = NULL;
+SemaphoreHandle_t xSem_BLEDISCONN = NULL;
+SemaphoreHandle_t xSem_BTNINT = NULL;
+// SemaphoreHandle_t xSem_UpdateHRLabel = NULL;
+// SemaphoreHandle_t xSem_UpdatePPGChart = NULL;
+/* Queues */
+QueueHandle_t Queue_HRBLE;
+QueueHandle_t Queue_AccBLE_XL;
+QueueHandle_t Queue_AccBLE_GY;
+QueueHandle_t Queue_TempBLE;
+// Fifo for file system.
+QueueHandle_t Queue_EdaConFile;
+QueueHandle_t Queue_EdaPhaFile;
+QueueHandle_t Queue_EdaRealFile;
+QueueHandle_t Queue_EdaImageFile;
+QueueHandle_t Queue_BvpFile;
+QueueHandle_t Queue_TempFile_To;
+QueueHandle_t Queue_TempPlot_To;
+QueueHandle_t Queue_TempFile_Ta;
+QueueHandle_t Queue_AccFile_XL_X;
+QueueHandle_t Queue_AccFile_GY_X;
+QueueHandle_t Queue_AccFile_XL_Y;
+QueueHandle_t Queue_AccFile_GY_Y;
+QueueHandle_t Queue_AccFile_XL_Z;
+QueueHandle_t Queue_AccFile_GY_Z;
+QueueHandle_t Queue_AccPlot_XL_X;
+QueueHandle_t Queue_AccPlot_XL_Y;
+QueueHandle_t Queue_AccPlot_XL_Z;
+QueueHandle_t Queue_HRLabelUpdate;
+QueueHandle_t Queue_PPGChartUpdate;
 /* END freeRTOS */
 
 /* Algo */
@@ -239,7 +319,32 @@ bool timeCorrected = false;
 
 volatile bool spi0_tc = false; /**< Flag used to indicate that SPI instance completed the transfer. */
 
+uint8_t CHG_Interrupted = 0;
+bool isBleConnected = false;
+bool isPlotedaInit = false;
+bool isPlotBvpInit = false;
+bool isPlotTempInit = false;
+bool isPlotAccInit = false;
+struct bt_conn *my_conn;
+struct bt_gatt_exchange_params exchg_mtu;
+int tx_mtu_size = 20;
 // extern void shell_init_with_task(struct bflb_device_s *shell);
+
+FATFS fs;
+__attribute((aligned(64))) static uint32_t workbuf[4096];
+
+MKFS_PARM fs_para = {
+    .fmt = FM_FAT32,     /* Format option (FM_FAT, FM_FAT32, FM_EXFAT and FM_SFD) */
+    .n_fat = 1,          /* Number of FATs */
+    .align = 0,          /* Data area alignment (sector) */
+    .n_root = 1,         /* Number of root directory entries */
+    .au_size = 512 * 32, /* Cluster size (byte) */
+};
+
+FIL f_eda;
+FIL f_temp;
+FIL f_acc;
+FIL f_bvp;
 
 /* Private Function Defination */
 /*Function Definations For lsm6dso */
@@ -278,16 +383,56 @@ static int btblecontroller_em_config(void)
     return 0;
 }
 
+static void ble_tp_tx_mtu_size(struct bt_conn *conn, u8_t err,
+                               struct bt_gatt_exchange_params *params)
+{
+    if (!err) {
+        tx_mtu_size = bt_gatt_get_mtu(conn);
+        printf("ble tp echange mtu size success, mtu size: %d", tx_mtu_size);
+    } else {
+        printf("ble tp echange mtu size failure, err: %d", err);
+    }
+}
+
 static void ble_connected(struct bt_conn *conn, u8_t err)
 {
     if (err || conn->type != BT_CONN_TYPE_LE) {
         return;
     }
+    int ret = -1;
+    int tx_octets = 0x00fb;
+    int tx_time = 0x0848;
+
     printf("%s", __func__);
 
+    xQueueReset(Queue_HRBLE);
+    xQueueReset(Queue_AccBLE_GY);
+    xQueueReset(Queue_AccBLE_XL);
+    xQueueReset(Queue_TempBLE);
+
+    isBleConnected = true;
     xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
     ui_setBleImg(1);
     xSemaphoreGive(xMutex_lvgl);
+
+    //set data length after connected.
+    ret = bt_le_set_data_len(conn, tx_octets, tx_time);
+    if (!ret) {
+        printf("ble tp set data length success.");
+    } else {
+        printf("ble tp set data length failure, err: %d\n", ret);
+    }
+
+    //exchange mtu size after connected.
+    exchg_mtu.func = ble_tp_tx_mtu_size;
+    ret = bt_gatt_exchange_mtu(conn, &exchg_mtu);
+    if (!ret) {
+        printf("ble tp exchange mtu size pending.");
+    } else {
+        printf("ble tp exchange mtu size failure, err: %d", ret);
+    }
+
+    my_conn = conn;
 }
 
 static void ble_disconnected(struct bt_conn *conn, u8_t reason)
@@ -299,14 +444,27 @@ static void ble_disconnected(struct bt_conn *conn, u8_t reason)
     }
 
     printf("%s", __func__);
+    isBleConnected = false;
     xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
     ui_setBleImg(0);
     xSemaphoreGive(xMutex_lvgl);
 
-    // enable adv
-    ret = set_adv_enable(true);
-    if (ret) {
-        printf("Restart adv fail. \r\n");
+    if (xSemaphoreTake(xSem_BLEDISCONN, 0) == pdTRUE) {
+        bt_le_adv_stop();
+
+        ret = bt_disable();
+
+        if (ret == 0) {
+            printf("bt_disable\r\n");
+        } else {
+            printf("bt_disable Error. %d\r\n", ret);
+        }
+    } else {
+        // enable adv
+        ret = set_adv_enable(true);
+        if (ret) {
+            printf("Restart adv fail. \r\n");
+        }
     }
 }
 
@@ -350,10 +508,12 @@ void bt_enable_cb(int err)
                bt_addr.a.val[5], bt_addr.a.val[4], bt_addr.a.val[3], bt_addr.a.val[2], bt_addr.a.val[1], bt_addr.a.val[0]);
 
         bt_conn_cb_register(&ble_conn_callbacks);
-        ble_tp_init();
+        // ble_tp_init();
 
         // start advertising
         ble_start_adv();
+    } else {
+        printf("bt_enable error: %d\r\n", err);
     }
 }
 
@@ -370,16 +530,16 @@ int wifi_start_firmware_task(void)
     GLB_PER_Clock_UnGate(GLB_AHB_CLOCK_IP_WIFI_PHY | GLB_AHB_CLOCK_IP_WIFI_MAC_PHY | GLB_AHB_CLOCK_IP_WIFI_PLATFORM);
     GLB_AHB_MCU_Software_Reset(GLB_AHB_MCU_SW_WIFI);
 
-    /* set ble controller EM Size */
+    // /* set ble controller EM Size */
 
-    GLB_Set_EM_Sel(GLB_WRAM160KB_EM0KB);
+    // GLB_Set_EM_Sel(GLB_WRAM160KB_EM0KB);
 
-    if (0 != rfparam_init(0, NULL, 0)) {
-        LOG_I("PHY RF init failed!\r\n");
-        return 0;
-    }
+    // if (0 != rfparam_init(0, NULL, 0)) {
+    //     LOG_I("PHY RF init failed!\r\n");
+    //     return 0;
+    // }
 
-    LOG_I("PHY RF init success!\r\n");
+    // LOG_I("PHY RF init success!\r\n");
 
     /* Enable wifi irq */
 
@@ -389,6 +549,41 @@ int wifi_start_firmware_task(void)
     bflb_irq_enable(WIFI_IRQn);
 
     xTaskCreate(wifi_main, (char *)"fw", WIFI_STACK_SIZE, NULL, TASK_PRIORITY_FW, &wifi_fw_task);
+
+    return 0;
+}
+
+int wifi_stop_firmware_task(void)
+{
+    // LOG_I("Stoping wifi ...\r\n");
+
+    /* disable wifi clock */
+
+    // GLB_PER_Clock_Gate(GLB_AHB_CLOCK_IP_WIFI_PHY | GLB_AHB_CLOCK_IP_WIFI_MAC_PHY | GLB_AHB_CLOCK_IP_WIFI_PLATFORM);
+    // GLB_AHB_MCU_Software_Reset(GLB_AHB_MCU_SW_WIFI);
+
+    // /* set ble controller EM Size */
+
+    // GLB_Set_EM_Sel(GLB_WRAM160KB_EM0KB);
+
+    // if (0 != rfparam_init(0, NULL, 0)) {
+    //     LOG_I("PHY RF init failed!\r\n");
+    //     return 0;
+    // }
+
+    // LOG_I("PHY RF init success!\r\n");
+
+    /* Enable wifi irq */
+
+    // extern void interrupt0_handler(void);
+    // bflb_irq_attach(WIFI_IRQn, (irq_callback)interrupt0_handler, NULL);
+    // bflb_irq_set_priority(WIFI_IRQn, 7, 0);
+    // bflb_irq_disable(WIFI_IRQn);
+
+    // if (wifi_fw_task != NULL) {
+    //     vTaskDelete(wifi_fw_task);
+    // }
+    // xTaskCreate(wifi_main, (char *)"fw", WIFI_STACK_SIZE, NULL, TASK_PRIORITY_FW, &wifi_fw_task);
 
     return 0;
 }
@@ -446,7 +641,7 @@ void spi_isr(int irq, void *arg)
     // printf("tc done1\r\n");
     if (intstatus & SPI_INTSTS_TC) {
         bflb_spi_int_clear(spi0, SPI_INTCLR_TC);
-        spi0_tc = true;
+        // spi0_tc = true;
         // printf("tc done\r\n");
     } else if (intstatus & SPI_INTSTS_TX_FIFO) {
         // printf("tx fifo\r\n");
@@ -458,43 +653,67 @@ void spi_isr(int irq, void *arg)
 /* MCU related external line interrupt service routine */
 void GPIO_Interrupt(int irq, void *arg)
 {
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    // vTaskSuspend(FILE_handle);
+    // printf("GPIO INT\r\n");
     if (bflb_gpio_get_intstatus(gpio, AFE_ADC_DRDY)) {
-        afe4404_adcrdy = 1;
+        // afe4404_adcrdy = 1;
         bflb_gpio_int_clear(gpio, AFE_ADC_DRDY);
+        xSemaphoreGiveFromISR(xSem_HR, &xHigherPriorityTaskWoken);
     }
 
+    xHigherPriorityTaskWoken = pdFALSE;
     if (bflb_gpio_get_intstatus(gpio, KEY0)) {
-        ucInterrupted = 1;
+        // ucInterrupted = 1;
         // printf("AD5940 INT: %d\r\n", AD5940_GetMCUIntFlag());
         bflb_gpio_int_clear(gpio, KEY0);
+        xSemaphoreGiveFromISR(xSem_EDA, &xHigherPriorityTaskWoken);
     }
+
+    if (bflb_gpio_get_intstatus(gpio, GPIO_PIN_33)) {
+        if (bflb_gpio_read(gpio, GPIO_PIN_33)) { // 1:2 Not Charging
+            CHG_Interrupted = 2;
+        } else { // 0:1 Charging
+            CHG_Interrupted = 1;
+        }
+
+        // printf("CHG_Interrupted: %d\r\n", CHG_Interrupted);
+        bflb_gpio_int_clear(gpio, GPIO_PIN_33);
+    }
+
+    if (bflb_gpio_get_intstatus(gpio, GPIO_PIN_2)) {
+        printf("BTN_Interrupted.\r\n");
+        bflb_gpio_int_clear(gpio, GPIO_PIN_2);
+        xSemaphoreGiveFromISR(xSem_BTNINT, &xHigherPriorityTaskWoken);
+    }
+
+    // xTaskResumeFromISR(FILE_handle);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
-static void peripheral_init(void)
+static void spi0_init(void)
 {
-    /* TOUCH_RESET */
-    bflb_gpio_init(gpio, GPIO_PIN_30, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0);
-    bflb_gpio_reset(gpio, GPIO_PIN_30);
-    /* spi0 Init */
-    // For AD5940/5941
+    /* spi0 Init New */
+    // For AD5941 & NAND
 
     /* spi clk */
-    bflb_gpio_init(gpio, GPIO_PIN_25, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+    bflb_gpio_init(gpio, GPIO_PIN_25, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
     /* spi miso */
-    bflb_gpio_init(gpio, GPIO_PIN_18, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+    bflb_gpio_init(gpio, GPIO_PIN_18, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
     /* spi mosi */
-    bflb_gpio_init(gpio, GPIO_PIN_19, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
-    /* CS controlled by software */
+    bflb_gpio_init(gpio, GPIO_PIN_19, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
+
+    //CS pin For AD5941
+    bflb_gpio_init(gpio, AD5940_CS_PIN, GPIO_OUTPUT | GPIO_PULLUP | GPIO_DRV_3);
+    bflb_gpio_set(gpio, AD5940_CS_PIN);
+    //CS Pin For NAND
+    bflb_gpio_init(gpio, GPIO_PIN_22, GPIO_OUTPUT | GPIO_PULLUP | GPIO_DRV_3);
+    bflb_gpio_set(gpio, GPIO_PIN_22);
 
     /* Set the SPI parameters */
-    struct bflb_spi_config_s spi_cfg = {
-#if (SPI_CASE_SELECT == SPI_MASTER_CASE)
-        .freq = 16 * 1000 * 1000,
+    struct bflb_spi_config_s spi_cfg_0 = {
+        .freq = 200 * 1000, // 200kHz
         .role = SPI_ROLE_MASTER,
-#else
-        .freq = 32 * 1000 * 1000,
-        .role = SPI_ROLE_SLAVE,
-#endif
         .mode = SPI_MODE0,
         .data_width = SPI_DATA_WIDTH_8BIT,
         .bit_order = SPI_BIT_MSB,
@@ -503,50 +722,81 @@ static void peripheral_init(void)
         .rx_fifo_threshold = 0,
     };
 
-    // struct bflb_dma_channel_config_s tx_config = {
-    //     .direction = DMA_MEMORY_TO_PERIPH,
-    //     .src_req = DMA_REQUEST_NONE,
-    //     .dst_req = DMA_REQUEST_SPI0_TX,
-    //     .src_addr_inc = DMA_ADDR_INCREMENT_ENABLE,
-    //     .dst_addr_inc = DMA_ADDR_INCREMENT_DISABLE,
-    //     .src_burst_count = DMA_BURST_INCR1,
-    //     .dst_burst_count = DMA_BURST_INCR1,
-    //     .src_width = DMA_DATA_WIDTH_8BIT,
-    //     .dst_width = DMA_DATA_WIDTH_8BIT,
-    // };
+    bflb_spi_init(spi0, &spi_cfg_0);
 
-    // struct bflb_dma_channel_config_s rx_config = {
-    //     .direction = DMA_PERIPH_TO_MEMORY,
-    //     .src_req = DMA_REQUEST_SPI0_RX,
-    //     .dst_req = DMA_REQUEST_NONE,
-    //     .src_addr_inc = DMA_ADDR_INCREMENT_DISABLE,
-    //     .dst_addr_inc = DMA_ADDR_INCREMENT_ENABLE,
-    //     .src_burst_count = DMA_BURST_INCR1,
-    //     .dst_burst_count = DMA_BURST_INCR1,
-    //     .src_width = DMA_DATA_WIDTH_8BIT,
-    //     .dst_width = DMA_DATA_WIDTH_8BIT,
-    // };
+    NAND_DeviceInit();
 
-    /* Now do not use DMA */
-    bflb_spi_init(spi0, &spi_cfg);
-    // bflb_spi_txint_mask(spi0, false);
-    // bflb_spi_rxint_mask(spi0, false);
-    bflb_spi_tcint_mask(spi0, false);              // Disable Interrupt
-    bflb_irq_attach(spi0->irq_num, spi_isr, NULL); // IRQ
-    bflb_irq_enable(spi0->irq_num);
-    // bflb_spi_feature_control(spi0, SPI_CMD_SET_CS_INTERVAL, 0);
+    // spi_cfg_0.freq = 14 * 1000 * 1000; // 12MHz
+    // bflb_spi_deinit(spi0);
+    // bflb_spi_init(spi0, &spi_cfg_0);
 
-    /* AD5941 Pin Init */
-    //Interrupt Key
-    bflb_gpio_init(gpio, KEY0, GPIO_INPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_INT_TRIG_MODE_ASYNC_FALLING_EDGE);
-    bflb_gpio_int_mask(gpio, KEY0, false);
-    //RST pin
-    bflb_gpio_init(gpio, AD5940_RST_PIN, GPIO_OUTPUT);
-    //Soft CS pin
-    bflb_gpio_init(gpio, AD5940_CS_PIN, GPIO_OUTPUT);
+    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 14 * 1000 * 1000);
 
-    AD5940_CsSet();
-    AD5940_RstSet();
+    NAND_GetInfo();
+}
+
+static void peripheral_init(void)
+{
+    //     /* spi0 Init */
+    //     // For AD5940/5941
+
+    //     /* spi clk */
+    //     bflb_gpio_init(gpio, GPIO_PIN_25, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+    //     /* spi miso */
+    //     bflb_gpio_init(gpio, GPIO_PIN_18, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+    //     /* spi mosi */
+    //     bflb_gpio_init(gpio, GPIO_PIN_19, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+    //     /* CS controlled by software */
+
+    //     /* Set the SPI parameters */
+    //     struct bflb_spi_config_s spi_cfg = {
+    // #if (SPI_CASE_SELECT == SPI_MASTER_CASE)
+    //         .freq = 12 * 1000 * 1000,
+    //         .role = SPI_ROLE_MASTER,
+    // #else
+    //         .freq = 32 * 1000 * 1000,
+    //         .role = SPI_ROLE_SLAVE,
+    // #endif
+    //         .mode = SPI_MODE0,
+    //         .data_width = SPI_DATA_WIDTH_8BIT,
+    //         .bit_order = SPI_BIT_MSB,
+    //         .byte_order = SPI_BYTE_LSB,
+    //         .tx_fifo_threshold = 0,
+    //         .rx_fifo_threshold = 0,
+    //     };
+
+    //     // struct bflb_dma_channel_config_s tx_config = {
+    //     //     .direction = DMA_MEMORY_TO_PERIPH,
+    //     //     .src_req = DMA_REQUEST_NONE,
+    //     //     .dst_req = DMA_REQUEST_SPI0_TX,
+    //     //     .src_addr_inc = DMA_ADDR_INCREMENT_ENABLE,
+    //     //     .dst_addr_inc = DMA_ADDR_INCREMENT_DISABLE,
+    //     //     .src_burst_count = DMA_BURST_INCR1,
+    //     //     .dst_burst_count = DMA_BURST_INCR1,
+    //     //     .src_width = DMA_DATA_WIDTH_8BIT,
+    //     //     .dst_width = DMA_DATA_WIDTH_8BIT,
+    //     // };
+
+    //     // struct bflb_dma_channel_config_s rx_config = {
+    //     //     .direction = DMA_PERIPH_TO_MEMORY,
+    //     //     .src_req = DMA_REQUEST_SPI0_RX,
+    //     //     .dst_req = DMA_REQUEST_NONE,
+    //     //     .src_addr_inc = DMA_ADDR_INCREMENT_DISABLE,
+    //     //     .dst_addr_inc = DMA_ADDR_INCREMENT_ENABLE,
+    //     //     .src_burst_count = DMA_BURST_INCR1,
+    //     //     .dst_burst_count = DMA_BURST_INCR1,
+    //     //     .src_width = DMA_DATA_WIDTH_8BIT,
+    //     //     .dst_width = DMA_DATA_WIDTH_8BIT,
+    //     // };
+
+    //     /* Now do not use DMA */
+    //     bflb_spi_init(spi0, &spi_cfg);
+    //     // bflb_spi_txint_mask(spi0, false);
+    //     // bflb_spi_rxint_mask(spi0, false);
+    //     bflb_spi_tcint_mask(spi0, false);              // Disable Interrupt
+    //     bflb_irq_attach(spi0->irq_num, spi_isr, NULL); // IRQ
+    //     bflb_irq_enable(spi0->irq_num);
+    //     // bflb_spi_feature_control(spi0, SPI_CMD_SET_CS_INTERVAL, 0);
 
     // bflb_spi_link_txdma(spi0, true);
     // bflb_spi_link_rxdma(spi0, true);
@@ -560,14 +810,29 @@ static void peripheral_init(void)
     // bflb_dma_channel_irq_attach(dma0_ch0, dma0_ch0_isr, NULL);
     // bflb_dma_channel_irq_attach(dma0_ch1, dma0_ch1_isr, NULL);
 
-    /* END spi0 Init */
+    //     /* END spi0 Init */
+
+    spi0_init();
+
+    /* AD5941 Pin Init */
+    //Interrupt Key
+    bflb_gpio_init(gpio, KEY0, GPIO_INPUT);
+    bflb_gpio_int_init(gpio, KEY0, GPIO_INT_TRIG_MODE_SYNC_FALLING_EDGE);
+    bflb_gpio_int_mask(gpio, KEY0, false);
+    //RST pin
+    bflb_gpio_init(gpio, AD5940_RST_PIN, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
+    bflb_gpio_set(gpio, AD5940_RST_PIN);
+
+    /* MAX17048 Pin Init */
+    bflb_gpio_init(gpio, GPIO_PIN_34, GPIO_INPUT | GPIO_PULLUP);
+    // bflb_gpio_int_mask(gpio, GPIO_PIN_34, false);
 
     /* i2c0 Init */
     // For LIS2DH12, M117, AFE4404
     /* I2C0_SDA */
-    bflb_gpio_init(gpio, GPIO_PIN_27, GPIO_FUNC_I2C0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0);
+    bflb_gpio_init(gpio, GPIO_PIN_27, GPIO_FUNC_I2C0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
     /* I2C0_SCL */
-    bflb_gpio_init(gpio, GPIO_PIN_26, GPIO_FUNC_I2C0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0);
+    bflb_gpio_init(gpio, GPIO_PIN_26, GPIO_FUNC_I2C0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
     bflb_i2c_init(i2c0, 400000);
     /* END i2c0 init*/
 
@@ -575,33 +840,57 @@ static void peripheral_init(void)
     bflb_irq_attach(gpio->irq_num, GPIO_Interrupt, gpio);
 
     /* AFE4404 Pin Init */
-    bflb_gpio_init(gpio, AFE_ADC_DRDY, GPIO_INPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_INT_TRIG_MODE_ASYNC_RISING_EDGE);
+    bflb_gpio_init(gpio, AFE_ADC_DRDY, GPIO_INPUT | GPIO_PULLUP | GPIO_SMT_EN);
+    bflb_gpio_int_init(gpio, AFE_ADC_DRDY, GPIO_INT_TRIG_MODE_ASYNC_RISING_EDGE);
     bflb_gpio_int_mask(gpio, AFE_ADC_DRDY, true); // Now Disable Pin 28 Interrupt For AFE4404
 
     // RST
-    bflb_gpio_init(gpio, AFE_RESETZ, GPIO_OUTPUT | GPIO_FLOAT | GPIO_SMT_EN);
+    bflb_gpio_init(gpio, AFE_RESETZ, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
     bflb_gpio_set(gpio, AFE_RESETZ);
 
     /* Enable IRQ */
-    // bflb_irq_set_priority(gpio->irq_num, 1, 0);
+    bflb_irq_set_priority(gpio->irq_num, 8, 0);
     bflb_irq_enable(gpio->irq_num);
 
-    // /* UART0 INIT*/
-    // bflb_gpio_uart_init(gpio, GPIO_PIN_33, GPIO_UART_FUNC_UART1_TX);
-    // bflb_gpio_uart_init(gpio, GPIO_PIN_34, GPIO_UART_FUNC_UART1_RX);
+    /* MOTOR PWM INIT */
+    bflb_gpio_init(gpio, GPIO_PIN_14, GPIO_FUNC_PWM0 | GPIO_ALTERNATE | GPIO_PULLDOWN | GPIO_SMT_EN | GPIO_DRV_3);
+    bflb_gpio_reset(gpio, GPIO_PIN_14);
 
-    // struct bflb_uart_config_s cfg;
-    // cfg.baudrate = 9600;
-    // cfg.data_bits = UART_DATA_BITS_8;
-    // cfg.stop_bits = UART_STOP_BITS_1;
-    // cfg.parity = UART_PARITY_NONE;
-    // cfg.flow_ctrl = 0;
-    // cfg.tx_fifo_threshold = 7;
-    // cfg.rx_fifo_threshold = 7;
+    /* period = .XCLK / .clk_div / .period = 40MHz( 32MHZ for bl702l) / 40( 32 for bl702l) / 1000 = 1KHz */
+    struct bflb_pwm_v2_config_s cfg = {
+        .clk_source = BFLB_SYSTEM_PBCLK,
+#if defined(BL702L)
+        .clk_div = 32,
+#else
+        .clk_div = 40,
+#endif
+        .period = 100,
+    };
+    bflb_pwm_v2_init(pwm, &cfg);
 
-    // uart1 = bflb_device_get_by_name("uart1");
+    /* I2C1 INIT (TOUCH, RTC, FUEL) */
+    /* I2C0_SCL */
+    bflb_gpio_init(gpio, TOUCH_I2C_SCL_PIN, GPIO_FUNC_I2C1 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
+    /* I2C0_SDA */
+    bflb_gpio_init(gpio, TOUCH_I2C_SDA_PIN, GPIO_FUNC_I2C1 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
+    /* TOUCH_RESET */
+    bflb_gpio_init(gpio, TOUCH_RESET, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
 
-    // bflb_uart_init(uart1, &cfg);
+    bflb_i2c_init(i2c1, 400000);
+
+    /* GPIO33 CHG */
+    bflb_gpio_init(gpio, GPIO_PIN_33, GPIO_INPUT);
+    bflb_gpio_int_init(gpio, GPIO_PIN_33, GPIO_INT_TRIG_MODE_SYNC_FALLING_RISING_EDGE);
+    bflb_gpio_int_mask(gpio, GPIO_PIN_33, false);
+
+    /* GPIO13 MOROT_EN */
+    bflb_gpio_init(gpio, GPIO_PIN_13, GPIO_OUTPUT | GPIO_PULLDOWN | GPIO_DRV_3);
+    bflb_gpio_reset(gpio, GPIO_PIN_13);
+
+    /* GPIO2 BTN */
+    bflb_gpio_init(gpio, GPIO_PIN_2, GPIO_INPUT | GPIO_SMT_EN);
+    bflb_gpio_int_init(gpio, GPIO_PIN_2, GPIO_INT_TRIG_MODE_SYNC_FALLING_EDGE);
+    bflb_gpio_int_mask(gpio, GPIO_PIN_2, false);
 }
 
 /* Initialize AD5940 basic blocks like clock */
@@ -651,9 +940,10 @@ static int32_t AD5940PlatformCfg(void)
     AD5940_INTCCfg(AFEINTC_0, AFEINTSRC_DATAFIFOTHRESH, bTRUE); /* Interrupt Controller 0 will control GP0 to generate interrupt to MCU */
     AD5940_INTCClrFlag(AFEINTSRC_ALLINT);
     /* Step4: Reconfigure GPIO */
-    gpio_cfg.FuncSet = GP6_SYNC | GP5_SYNC | GP4_SYNC | GP2_EXTCLK | GP1_SYNC | GP0_INT;
-    gpio_cfg.InputEnSet = AGPIO_Pin0;
-    gpio_cfg.OutputEnSet = AGPIO_Pin0 | AGPIO_Pin1 | AGPIO_Pin4 | AGPIO_Pin5 | AGPIO_Pin6;
+    // gpio_cfg.FuncSet = GP6_SYNC | GP5_SYNC | GP4_SYNC | GP2_EXTCLK | GP1_SYNC | GP0_INT;
+    gpio_cfg.FuncSet = GP0_INT;
+    gpio_cfg.InputEnSet = 0;
+    gpio_cfg.OutputEnSet = AGPIO_Pin0;
     gpio_cfg.OutVal = 0;
     gpio_cfg.PullEnSet = 0;
     AD5940_AGPIOCfg(&gpio_cfg);
@@ -661,7 +951,7 @@ static int32_t AD5940PlatformCfg(void)
     AD5940_SleepKeyCtrlS(SLPKEY_UNLOCK); /* Enable AFE to enter sleep mode. */
 
     /* Measure LFOSC frequency */
-    LfoscMeasure.CalDuration = 1000.0; /* 1000ms used for calibration. */
+    LfoscMeasure.CalDuration = 2000.0; /* 1000ms used for calibration. */
     LfoscMeasure.CalSeqAddr = 0;
     LfoscMeasure.SystemClkFreq = 16000000.0f; /* 16MHz in this firmware. */
     AD5940_LFOSCMeasure(&LfoscMeasure, &LFOSCFreq);
@@ -672,7 +962,7 @@ static int32_t AD5940PlatformCfg(void)
 
 void AD5940_ReadWriteNBytes(unsigned char *pSendBuffer, unsigned char *pRecvBuff, unsigned long length)
 {
-    spi0_tc = false;
+    // spi0_tc = false;
     // printf("Enter AD5940_ReadWriteNBytes");
 
     // tx_transfers[0].src_addr = (uint32_t)tx_buffer;
@@ -690,13 +980,8 @@ void AD5940_ReadWriteNBytes(unsigned char *pSendBuffer, unsigned char *pRecvBuff
     // printf("bflb_dma_channel_start(dma0_ch0)");
     // bflb_dma_channel_start(dma0_ch1);
     // printf("bflb_dma_channel_start");
-
-    taskENTER_CRITICAL();
-    // xSemaphoreTake(xMutex,
-    //                portMAX_DELAY);
+    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 14 * 1000 * 1000);
     bflb_spi_poll_exchange(spi0, pSendBuffer, pRecvBuff, length);
-    // xSemaphoreGive(xMutex);
-    taskEXIT_CRITICAL();
 }
 
 void AD5940EDAStructInit(void)
@@ -716,8 +1001,9 @@ void AD5940EDAStructInit(void)
     pCfg->FifoThresh = 8;      /* The minimum threshold value is 4, and should always be 4*N, where N is 1,2,3... */
     pCfg->bParaChanged = bTRUE;
     //pCfg->NumOfData = -1;						/* Never stop until you stop it manually by AppBIACtrl() function */
-    pCfg->RcalVal = 10000.0;
+    pCfg->RcalVal = 20000.0;
     pCfg->DftNum = DFTNUM_16;
+    // pCfg->ReDoRtiaCal = bTRUE;
 }
 
 /* print EDA result to uart */
@@ -730,44 +1016,49 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
     float mag, phase;
     fImpCar_Type res;
     AppEDACtrl(EDACTRL_GETRTIAMAG, &RtiaMag);
+    static float dataBuf[16] = { 0 };
+    uint32_t *ptr = &S;
 
     /*Process data*/
     for (int i = 0; i < DataCount; i++) {
         res = pImp[i];
         res.Real += ResistorForBaseline; /* Show the real result of impedance under test(between F+/S+) */
+        // printf("{res}%.4f, %.4f\r\n", res.Real, res.Image);
         mag = AD5940_ComplexMag(&res);
         phase = AD5940_ComplexPhase(&res) * 180 / MATH_PI;
         S = 1000000 / mag;
-        printf("Rtia:%.3f; Real:%.3f; Image:%.3f; Mag:%.3f; Conductance: %.3f uS; Phase:%.3f \r\n", RtiaMag, res.Real, res.Image, mag, S, phase);
-        printf("Conductance=%.3f\r\n", S);
-        printf("Phase=%.3f\r\n", phase);
+        // printf("Rtia:%.3f; Real:%.3f; Image:%.3f; Mag:%.3f; Conductance: %.3f uS; Phase:%.3f \r\n", RtiaMag, res.Real, res.Image, mag, S, phase);
+        // printf("{Conductance}%.8f\r\n", S);
+        // printf("{Conductance_hex}%08x\r\n", *ptr);
+        // printf("{Phase}%.3f\r\n", phase);
         // eda_transfer_cnt++;
-        if (isnanf(S) || (S > 100.0f)) {
-            EDAcnt = 0;
-        } else {
-            EDAwindow_o[EDAcnt] = S;
-            EDAcnt++;
-        }
+        // if (isnanf(S) || (S > 100.0f)) {
+        //     EDAcnt = 0;
+        // } else {
+        //     EDAwindow_o[EDAcnt] = S;
+        //     EDAcnt++;
+        // }
+        dataBuf[i] = S;
+        xQueueSend(Queue_EdaConFile, &S, portMAX_DELAY);
+        xQueueSend(Queue_EdaPhaFile, &phase, portMAX_DELAY);
+        xQueueSend(Queue_EdaRealFile, &res.Real, portMAX_DELAY);
+        xQueueSend(Queue_EdaImageFile, &res.Image, portMAX_DELAY);
+    }
+
+    if (isPlotedaInit && isBleConnected) {
+        xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
+        bt_gatt_ploteda_update(dataBuf, DataCount);
+        xSemaphoreGive(xMutex_BLE);
     }
     return 0;
 }
 
-uint8_t BL618_UART1_TRANSMIT(uint8_t *data, uint32_t len)
-{
-    return bflb_uart_put(uart1, data, len);
-}
-
-uint8_t BL618_UART1_RECEIVE(uint8_t *data, uint32_t len)
-{
-    return bflb_uart_get(uart1, data, len);
-}
-
 uint8_t BL618_I2C_TRANSMIT(struct bflb_i2c_msg_s *msg, uint16_t msglen)
 {
-    xSemaphoreTake(xMutex,
+    xSemaphoreTake(xMutex_IIC0,
                    portMAX_DELAY);
     uint8_t ret_code = bflb_i2c_transfer(i2c0, msg, msglen);
-    xSemaphoreGive(xMutex);
+    xSemaphoreGive(xMutex_IIC0);
 
     return ret_code;
 }
@@ -891,7 +1182,7 @@ int32_t mlx90632_i2c_read32(int16_t register_address, uint32_t *value)
 
     ret = BL618_I2C_TRANSMIT(msgs, 2);
 
-    *value = data[2] << 24 | data[3] << 16 | data[0] << 8 | data[1];
+    *value = (uint32_t)data[2] << 24 | (uint32_t)data[3] << 16 | (uint32_t)data[0] << 8 | (uint32_t)data[1];
     return ret;
 }
 
@@ -957,14 +1248,14 @@ static int mlx90632_read_eeprom(int32_t *PR, int32_t *PG, int32_t *PO, int32_t *
     if (ret < 0)
         return ret;
 
-    printf("R %d, G %d, T %d, O %d, Ea %d, Eb %d, Fa %d, Fb %d, Ga %d, Gb %d, Ka %d, Ha %d, Hb %d\n", *PR, *PG, *PT, *PO, *Ea, *Eb, *Fa, *Fb, *Ga, *Gb, *Ka, *Ha, *Hb);
+    // printf("R %d, G %d, T %d, O %d, Ea %d, Eb %d, Fa %d, Fb %d, Ga %d, Gb %d, Ka %d, Ha %d, Hb %d\n", *PR, *PG, *PT, *PO, *Ea, *Eb, *Fa, *Fb, *Ga, *Gb, *Ka, *Ha, *Hb);
 
     return 0;
 }
 
 void MLX_usleep(int min_range, int max_range)
 {
-    bflb_mtimer_delay_us(min_range);
+    vTaskDelay(min_range / 1000);
 }
 
 void MLX_msleep(int msecs)
@@ -977,9 +1268,9 @@ void MLX_msleep(int msecs)
 void AFE4404_Trigger_HWReset(void)
 {
     bflb_gpio_reset(gpio, AFE_RESETZ);
-    bflb_mtimer_delay_us(40); // ~30us delay
+    vTaskDelay(1); // ~30us delay
     bflb_gpio_set(gpio, AFE_RESETZ);
-    bflb_mtimer_delay_ms(10); // ~10ms delay with 16MHz clock
+    vTaskDelay(10); // ~10ms delay with 16MHz clock
 }
 
 /**********************************************************************************************************/
@@ -988,7 +1279,7 @@ void AFE4404_Trigger_HWReset(void)
 void AFE4404_Enable_HWPDN(void)
 {
     bflb_gpio_reset(gpio, AFE_RESETZ);
-    bflb_mtimer_delay_ms(10); // ~10ms delay with 16MHz clock
+    vTaskDelay(10); // ~10ms delay with 16MHz clock
 }
 
 /**********************************************************************************************************/
@@ -997,7 +1288,7 @@ void AFE4404_Enable_HWPDN(void)
 void AFE4404_Disable_HWPDN(void)
 {
     bflb_gpio_set(gpio, AFE_RESETZ);
-    bflb_mtimer_delay_ms(10); // ~10ms delay with 16MHz clock
+    vTaskDelay(10); // ~10ms delay with 16MHz clock
 }
 
 /**********************************************************************************************************/
@@ -1043,10 +1334,10 @@ void AFE4404_Reg_Write(unsigned char reg_address, unsigned long data)
 /**********************************************************************************************************/
 /* AFE4404_Reg_Read           					  			  											  */
 /**********************************************************************************************************/
-signed long AFE4404_Reg_Read(unsigned char Reg_address)
+int32_t AFE4404_Reg_Read(unsigned char Reg_address)
 {
     unsigned char configData[3];
-    signed long retVal;
+    int32_t retVal;
     //    I2C_read(AFE4404_I2C_DEFAULT_ADDRESS, Reg_address, configData, 3);
 
     struct bflb_i2c_msg_s msgs[2];
@@ -1211,87 +1502,45 @@ static void parse_output(tm_mat_t *outs, uint8_t dim)
     return;
 }
 
-void sntp_set_time(uint32_t sntp_time)
+void sntp_set_time(uint32_t sntp_time) // call back configured at "sntp_opts.h"
 {
-    bflb_rtc_disable(rtc);
-    time_base = (long long)sntp_time;
-    bflb_rtc_set_time(rtc, BFLB_RTC_SEC2TIME(1));
+    struct bflb_tm time;
+    // bflb_rtc_disable(rtc);
+    // time_base = (long long)sntp_time;
+    // bflb_rtc_set_time(rtc, BFLB_RTC_SEC2TIME(0));
     printf("TIME SET\r\n");
+    xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
+    time = bflb_rtc_set_utc_time_sec(sntp_time);
+    ins5699_set_time(&time);
+    xSemaphoreGive(xMutex_RTC);
 }
 
 static void EDA_task(void *pvParameters)
 {
+    // vTaskDelay(2000);
     uint32_t temp;
-    // float epsilon = 1;
-    // float dMin = 1.25 * 8;
-    // float thMin = 0.025;
-    // float SCL[320] = { 0 };
-    // float SCR[320] = { 0 };
-    // float MSE[320] = { 0 };
-    uint8_t first_loop = 1;
-    csi_fir_instance_f32 S_EDA;
-    uint16_t numTaps = 31;
     uint16_t i;
-    float32_t coef_fir[33] = {
-        -0.035227631774027,
-        -0.011403290059329,
-        -0.011278657115407,
-        -0.009526620943612,
-        -0.005938073254900,
-        -3.522182366573807e-04,
-        0.007169927421241,
-        0.016457560822460,
-        0.027192182443781,
-        0.038888032983133,
-        0.050978558586626,
-        0.062780427590412,
-        0.073636288745708,
-        0.082865718623332,
-        0.089924801523552,
-        0.094338035120237,
-        0.095851561929052,
-        0.094338035120237,
-        0.089924801523552,
-        0.082865718623332,
-        0.073636288745708,
-        0.062780427590412,
-        0.050978558586626,
-        0.038888032983133,
-        0.027192182443781,
-        0.016457560822460,
-        0.007169927421241,
-        -3.522182366573807e-04,
-        -0.005938073254900,
-        -0.009526620943612,
-        -0.011278657115407,
-        -0.011403290059329,
-        -0.035227631774027,
-    };
-    float32_t state_fir[33 + 120 - 1];
+
     printf("EDA task enter \r\n");
-    // csi_fir_decimate_init_f32(&S_EDA, 33, 2, coef_fir, state_fir, 240); // NumTaps = 33; BolckSize = 40;
-    csi_fir_init_f32(&S_EDA, 33, coef_fir, state_fir, 120); // NumTaps = 33; BolckSize = 40;
     printf("EDA task start \r\n");
 
+    // if (!isAD5940Init) {
     /* AD5940 INIT */
     AD5940_HWReset();
-    vTaskDelay(1000);
+    vTaskDelay(100);
     printf("AD5940_HWReset\r\n");
 
-    // taskENTER_CRITICAL();
     AD5940_Initialize();
-    // taskEXIT_CRITICAL();
-    vTaskDelay(10);
+    vTaskDelay(100);
     // int32_t i = AD5940_ReadReg(REG_AFECON_CHIPID);
     // printf("CHIPID read:0x%04x.\r\n", i);
     printf("AD5940_Initialize\r\n");
     AD5940PlatformCfg();
-    vTaskDelay(10);
+    vTaskDelay(100);
     printf("AD5940PlatformCfg\r\n");
     AD5940EDAStructInit();
-    vTaskDelay(10);
-    ResistorForBaseline = 50400;
-    /* END AD5940 INIT */
+    vTaskDelay(100);
+    ResistorForBaseline = 100000;
 
     xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
     lv_obj_clear_flag(ui_AD5940, LV_OBJ_FLAG_HIDDEN);
@@ -1300,10 +1549,46 @@ static void EDA_task(void *pvParameters)
     xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
     lv_obj_add_flag(ui_AD5940, LV_OBJ_FLAG_HIDDEN);
     xSemaphoreGive(xMutex_lvgl);
+    vTaskDelay(500);
     printf("AppEDAInit:%d\r\n", err_code_ad5940);
 
-    err_code_ad5940 = AppEDACtrl(APPCTRL_START, 0); /* Control BIA(EDA) measurement to start. Second parameter has no meaning with this command. */
-    printf("APPCTRL_START:%d\r\n", err_code_ad5940);
+    if (AD5940WarmUp == false) {
+        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+        lv_obj_clear_flag(ui_AD5940_WarmUp, LV_OBJ_FLAG_HIDDEN);
+        xSemaphoreGive(xMutex_lvgl);
+        err_code_ad5940 = AppEDACtrl(APPCTRL_START, 0); /* Control BIA(EDA) measurement to start. Second parameter has no meaning with this command. */
+        AppEDACtrl(EDACTRL_MEASVOLT, 0);
+        printf("APPCTRL_START(WarmUp):%d\r\n", err_code_ad5940);
+        // vTaskDelay(500);
+        i = 0;
+        while (1) {
+            if (xSemaphoreTake(xSem_EDA, portMAX_DELAY) == pdTRUE) {
+                AD5940_ClrMCUIntFlag(); /* Clear this flag */
+
+                temp = APPBUFF_SIZE;
+
+                err_code_ad5940 = -1;
+                err_code_ad5940 = AppEDAISR(AppBuff, &temp); /* Deal with it and provide a buffer to store data we got */
+                printf("%d AppEDAISR(WarmUp):%d\r\n", i, err_code_ad5940);
+
+                // EDAShowResult(AppBuff, temp); /* Show the results to UART */
+                i++;
+            }
+            if (i == 10) {
+                break;
+            }
+            AppEDACtrl(EDACTRL_MEASVOLT, 0);
+        }
+        AppEDACtrl(APPCTRL_STOPNOW, 0);
+        err_code_ad5940 = AppEDACtrl(APPCTRL_START, 0); /* Control BIA(EDA) measurement to start. Second parameter has no meaning with this command. */
+        AD5940WarmUp = true;
+
+        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+        lv_obj_add_flag(ui_AD5940_WarmUp, LV_OBJ_FLAG_HIDDEN);
+        xSemaphoreGive(xMutex_lvgl);
+    } else {
+        err_code_ad5940 = AppEDACtrl(APPCTRL_START, 0); /* Control BIA(EDA) measurement to start. Second parameter has no meaning with this command. */
+    }
 
     err_code_ad5940 = AppEDACtrl(EDACTRL_SETBASE, &EDABase);
     printf("EDACTRL_SETBASE:%d\r\n", err_code_ad5940);
@@ -1311,103 +1596,95 @@ static void EDA_task(void *pvParameters)
     printf("EDA Started, begin to loop %s\r\n", __func__);
 
     while (1) {
-        // printf("Enter EDA_task while\r\n");
-        /* Check if interrupt flag which will be set when interrupt occurred. */
-        if (AD5940_GetMCUIntFlag()) {
+        if (xSemaphoreTake(xSem_EDA, portMAX_DELAY) == pdTRUE) {
             AD5940_ClrMCUIntFlag(); /* Clear this flag */
 
             temp = APPBUFF_SIZE;
 
-            // taskENTER_CRITICAL();
+            err_code_ad5940 = -1;
             err_code_ad5940 = AppEDAISR(AppBuff, &temp); /* Deal with it and provide a buffer to store data we got */
-            printf("AppEDAISR:%d\r\n", err_code_ad5940);
-            // taskEXIT_CRITICAL();
+            // printf("AppEDAISR:%d\r\n", err_code_ad5940);
+
             EDAShowResult(AppBuff, temp); /* Show the results to UART */
-            if (EDAcnt >= 30 * 4) {
-                // if (first_loop) {
-                //     for (i = 0; i < 2; i++) {
-                //         csi_fir_f32(&S_EDA, EDAwindow + (i * 40), EDAwindow + (i * 40), 40);
-                //     }
-                // }
-                // for (i = 2; i < 8; i++) {
-                //     csi_fir_f32(&S_EDA, EDAwindow + (i * 40), EDAwindow + (i * 40), 40);
-                // }
-                // // for (i=0;i<320;i++){c
-                // //     EDAwindow[i] = EDAwindow[i+16];
-                // // }
-                // if (first_loop) {
-                //     for (i = 0; i < 80; i++) {
-                //         printf("{FilteredConductance}%.3f\r\n", EDAwindow[i]);
-                //     }
-                //     first_loop = 0;
-                // }
-                // for (i = 80; i < 320; i++) {
-                //     printf("{FilteredConductance}%.3f\r\n", EDAwindow[i]);
-                // }
-
-                // for (i = 0; i < 2; i++) {
-                //     csi_fir_f32(&S_EDA, EDAwindow_o + (i * 40), EDAwindow_f + (i * 40), 40);
-                // }
-
-                // for (i = 0; i < 120; i++) {
-                //     EDAwindow_f[i] = EDAwindow_o[i];
-                // }
-                xSemaphoreTake(xMutex_DSP, portMAX_DELAY);
-                csi_fir_f32(&S_EDA, EDAwindow_o, EDAwindow_f, 120);
-                xSemaphoreGive(xMutex_DSP);
-
-                for (i = 0; i < 120; i++) {
-                    printf("{FilteredConductance}%.3f\r\n", EDAwindow_f[i]);
-                }
-
-                // sparsEDA(EDAwindow, 8, 320, epsilon, 40, dMin, thMin, SCR, SCL, MSE);
-                // EDAcnt = 10 * 8;
-                EDAcnt = 0;
-                // scr_transfer_pointer = 0;
-                // for (i = 0; i < 30 * 8; i++) {
-                //     printf("{SCR}%.3f\r\n", SCR[i]);
-                //     // if (SCR[i] != 0.0) {
-                //     //     SCR_nonezero[scr_transfer_pointer] = SCR[i];
-                //     //     SCR_nonezero_timepoint[scr_transfer_pointer] =
-                //     // }
-                // }
-                eda_ready_flag = 1;
-                // for (i = 0; i < 10 * 8; i++) {
-                //     EDAwindow[i] = EDAwindow[30 * 8 + i];
-                // }
-                // printf("\r\n");
-            }
-            // printf("EDA NUMBER:%d\r\n", number);
         }
-        vTaskDelay(1);
+        // vTaskDelay(100);
     }
 
     vTaskDelete(NULL);
 }
 
+void EDA_task_pre_delete()
+{
+    printf("EDA_task_pre_delete\r\n");
+
+    AppEDACtrl(APPCTRL_SHUTDOWN, 0);
+
+    bflb_gpio_int_mask(gpio, KEY0, true);
+    bflb_gpio_int_clear(gpio, KEY0);
+
+    while (uxSemaphoreGetCount(xMutex_SPI) == 0) {
+        vTaskDelay(1);
+        printf("while (uxSemaphoreGetCount\r\n");
+    }
+    printf("xMutex_SPI == 1");
+
+    // while (uxQueueMessagesWaiting(Queue_EdaConFile) >= 4) {
+    //     vTaskDelay(1);
+    // }
+    // while (uxQueueMessagesWaiting(Queue_EdaPhaFile) >= 4) {
+    //     vTaskDelay(1);
+    // }
+
+    if (EDA_handle != NULL) {
+        vTaskDelete(EDA_handle);
+        printf("EDA task delete\r\n");
+    }
+
+    // AD5940_HWReset();
+    AD5940_CsSet();
+    // xSemaphoreGive(xMutex_SPI);
+    EDA_handle = NULL;
+}
+
+void EDA_task_create()
+{
+    AD5940_HWReset();
+    AD5940_SoftRst();
+    bflb_gpio_int_mask(gpio, KEY0, false);
+    bflb_gpio_int_clear(gpio, KEY0);
+
+    xSemaphoreGive(xSem_EDAEN);
+    if (EDA_handle == NULL) {
+        xTaskCreate(EDA_task, (char *)"EDA_task", 1024, NULL, configMAX_PRIORITIES - 4, &EDA_handle);
+        printf("EDA task create\r\n");
+    }
+}
+
 static void ACCE_task(void *pvParameters)
 {
     printf("ACCE task enter \r\n");
-    vTaskDelay(10);
+    vTaskDelay(1000);
     lsm6dso_emb_sens_t emb_sens;
     uint8_t reg;
+    uint8_t stepCounter = 0;
 
-    /* Uncomment to configure INT 1 */
-    //lsm6dso_pin_int1_route_t int1_route;
-    /* Uncomment to configure INT 2 */
-    //lsm6dso_pin_int2_route_t int2_route;
-    /* Initialize driver interface */
-    dev_ctx.write_reg = lsm6dso_platform_write;
-    dev_ctx.read_reg = lsm6dso_platform_read;
+    // /* Uncomment to configure INT 1 */
+    // //lsm6dso_pin_int1_route_t int1_route;
+    // /* Uncomment to configure INT 2 */
+    // //lsm6dso_pin_int2_route_t int2_route;
+    // /* Initialize driver interface */
+    // dev_ctx.write_reg = lsm6dso_platform_write;
+    // dev_ctx.read_reg = lsm6dso_platform_read;
     /* Wait sensor boot time */
     platform_delay(LSM6DSO_BOOT_TIME);
     /* Check device ID */
     lsm6dso_device_id_get(&dev_ctx, &whoamI);
 
     if (whoamI != LSM6DSO_ID) {
-        printf("LSM6DSO ADDRESS ERROR\n");
-        while (1)
-            ;
+        printf("LSM6DSO ADDRESS ERROR %04x\n", whoamI);
+        while (1) {
+            vTaskDelay(1);
+        }
     }
 
     /* Restore default configuration */
@@ -1420,8 +1697,8 @@ static void ACCE_task(void *pvParameters)
     /* Disable I3C interface */
     lsm6dso_i3c_disable_set(&dev_ctx, LSM6DSO_I3C_DISABLE);
     /* Set XL full scale */
-    lsm6dso_xl_full_scale_set(&dev_ctx, LSM6DSO_2g);
-    lsm6dso_gy_full_scale_set(&dev_ctx, LSM6DSO_2000dps);
+    lsm6dso_xl_full_scale_set(&dev_ctx, LSM6DSO_4g);
+    lsm6dso_gy_full_scale_set(&dev_ctx, LSM6DSO_1000dps);
     /* Enable Block Data Update */
     lsm6dso_block_data_update_set(&dev_ctx, PROPERTY_ENABLE);
     /* Enable latched interrupt notification. */
@@ -1462,12 +1739,27 @@ static void ACCE_task(void *pvParameters)
             memset(data_raw_acceleration, 0x00, 3 * sizeof(int16_t));
             lsm6dso_acceleration_raw_get(&dev_ctx, data_raw_acceleration);
             acceleration_mg[0] =
-                lsm6dso_from_fs2_to_mg(data_raw_acceleration[0]);
+                lsm6dso_from_fs4_to_mg(data_raw_acceleration[0]);
             acceleration_mg[1] =
-                lsm6dso_from_fs2_to_mg(data_raw_acceleration[1]);
+                lsm6dso_from_fs4_to_mg(data_raw_acceleration[1]);
             acceleration_mg[2] =
-                lsm6dso_from_fs2_to_mg(data_raw_acceleration[2]);
-            printf("Acceleration [mg]:%4.2f\t%4.2f\t%4.2f\r\n", acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
+                lsm6dso_from_fs4_to_mg(data_raw_acceleration[2]);
+            // printf("Acceleration [mg]:%4.2f\t%4.2f\t%4.2f\r\n", acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
+            // xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+            // ui_UpdateAccelerationChart(acceleration_mg[0] * 0.016, acceleration_mg[1] * 0.016, acceleration_mg[2] * 0.016);
+            // xSemaphoreGive(xMutex_lvgl);
+            if (isBleConnected && isPlotAccInit) {
+                xQueueSend(Queue_AccBLE_XL, acceleration_mg, portMAX_DELAY);
+                xQueueSend(Queue_AccBLE_XL, acceleration_mg + 1, portMAX_DELAY);
+                xQueueSend(Queue_AccBLE_XL, acceleration_mg + 2, portMAX_DELAY);
+            }
+            xQueueSend(Queue_AccFile_XL_X, acceleration_mg, portMAX_DELAY);
+            xQueueSend(Queue_AccFile_XL_Y, acceleration_mg + 1, portMAX_DELAY);
+            xQueueSend(Queue_AccFile_XL_Z, acceleration_mg + 2, portMAX_DELAY);
+
+            xQueueSend(Queue_AccPlot_XL_X, acceleration_mg, 0);
+            xQueueSend(Queue_AccPlot_XL_Y, acceleration_mg + 1, 0);
+            xQueueSend(Queue_AccPlot_XL_Z, acceleration_mg + 2, 0);
         }
 
         lsm6dso_gy_flag_data_ready_get(&dev_ctx, &reg);
@@ -1477,27 +1769,66 @@ static void ACCE_task(void *pvParameters)
             memset(data_raw_angular_rate, 0x00, 3 * sizeof(int16_t));
             lsm6dso_angular_rate_raw_get(&dev_ctx, data_raw_angular_rate);
             angular_rate_mdps[0] =
-                lsm6dso_from_fs2000_to_mdps(data_raw_angular_rate[0]);
+                lsm6dso_from_fs1000_to_mdps(data_raw_angular_rate[0]);
             angular_rate_mdps[1] =
-                lsm6dso_from_fs2000_to_mdps(data_raw_angular_rate[1]);
+                lsm6dso_from_fs1000_to_mdps(data_raw_angular_rate[1]);
             angular_rate_mdps[2] =
-                lsm6dso_from_fs2000_to_mdps(data_raw_angular_rate[2]);
-            printf("Angular rate [mdps]:%4.2f\t%4.2f\t%4.2f\r\n", angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
+                lsm6dso_from_fs1000_to_mdps(data_raw_angular_rate[2]);
+            // printf("Angular rate [mdps]:%4.2f\t%4.2f\t%4.2f\r\n", angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
+            if (isBleConnected && isPlotAccInit) {
+                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps, portMAX_DELAY);
+                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps + 1, portMAX_DELAY);
+                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps + 2, portMAX_DELAY);
+            }
+            xQueueSend(Queue_AccFile_GY_X, angular_rate_mdps, portMAX_DELAY);
+            xQueueSend(Queue_AccFile_GY_Y, angular_rate_mdps + 1, portMAX_DELAY);
+            xQueueSend(Queue_AccFile_GY_Z, angular_rate_mdps + 2, portMAX_DELAY);
         }
 
         /* Read steps */
-        // lsm6dso_number_of_steps_get(&dev_ctx, &stepCnt);
+        if (stepCounter >= 200) {
+            lsm6dso_number_of_steps_get(&dev_ctx, &stepCnt);
+            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+            ui_UpdateStepLabel(stepCnt);
+            xSemaphoreGive(xMutex_lvgl);
+            stepCounter = 0;
+        }
+        stepCounter++;
         // printf("Step Count: %d\n", stepCnt);
-        vTaskDelay(1);
+        vTaskDelay(5);
     }
 
     vTaskDelete(NULL);
 }
 
+void ACCE_task_pre_delete()
+{
+    while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
+        vTaskDelay(1);
+    }
+    printf("xMutex_IIC0 == 1");
+
+    if (ACCE_handle != NULL) {
+        vTaskDelete(ACCE_handle);
+        printf("ACC task delete\r\n");
+    }
+    lsm6dso_reset_set(&dev_ctx, PROPERTY_ENABLE);
+    ACCE_handle = NULL;
+}
+
+void ACCE_task_create()
+{
+    xSemaphoreGive(xSem_ACCEN);
+    if (ACCE_handle == NULL) {
+        xTaskCreate(ACCE_task, (char *)"ACCE_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &ACCE_handle);
+        printf("ACC task create\r\n");
+    }
+}
+
 static void TEMP_task(void *pvParameters)
 {
     printf("TEMP task enter \r\n");
-    vTaskDelay(10);
+    vTaskDelay(1000);
     printf("TEMP task start \r\n");
     printf("begin to loop %s\r\n", __func__);
     double pre_ambient, pre_object, ambient, object;
@@ -1506,6 +1837,9 @@ static void TEMP_task(void *pvParameters)
     /* Check the internal version and prepare a clean start */
     ret_code = mlx90632_init();
     printf("mlx90632_init %d\n", ret_code);
+
+    // ret_code = mlx90632_set_meas_type(MLX90632_MTYP_EXTENDED);
+    // printf("MLX90632_MTYP_EXTENDED %d\r\n", ret_code);
 
     /* Definition of MLX90632 calibration parameters */
     int16_t ambient_new_raw;
@@ -1527,38 +1861,122 @@ static void TEMP_task(void *pvParameters)
     int16_t Ka = 10752;
 
     /* Read EEPROM calibration parameters */
+    ret_code = mlx90632_set_meas_type(MLX90632_MTYP_MEDICAL_BURST);
     ret_code = mlx90632_read_eeprom(&PR, &PG, &PO, &PT, &Ea, &Eb, &Fa, &Fb, &Ga, &Gb, &Ha, &Hb, &Ka);
-    printf("ret: %d\n", ret_code);
+
+    mlx90632_set_emissivity(0.96);
+
+    if (mlx90632_get_meas_type() != MLX90632_MTYP_MEDICAL)
+        ret_code = mlx90632_set_meas_type(MLX90632_MTYP_MEDICAL);
+
+    // printf("ret: %d\n", ret_code);
     while (1) {
+        // mlx90632_set_meas_type(MLX90632_MTYP_MEDICAL);
         /* Get raw data from MLX90632 */
         mlx90632_read_temp_raw(&ambient_new_raw, &ambient_old_raw, &object_new_raw, &object_old_raw);
         /* Pre-calculations for ambient and object temperature calculation */
         pre_ambient = mlx90632_preprocess_temp_ambient(ambient_new_raw, ambient_old_raw, Gb);
-        printf("AMB %f\n", pre_ambient);
+        // printf("AMB %f\n", pre_ambient);
         pre_object = mlx90632_preprocess_temp_object(object_new_raw, object_old_raw, ambient_new_raw, ambient_old_raw, Ka);
-        /* Set emissivity = 1 */
-        mlx90632_set_emissivity(1.0);
+        // /* Set emissivity = 1 */
+        // mlx90632_set_emissivity(0.45);
         /* Calculate ambient and object temperature */
         ambient = mlx90632_calc_temp_ambient(ambient_new_raw, ambient_old_raw, PT, PR, PG, PO, Gb);
         object = mlx90632_calc_temp_object(pre_object, pre_ambient, Ea, Eb, Ga, Fa, Fb, Ha, Hb);
-        printf("Tempurature=%f, %f\n", ambient, object);
-        vTaskDelay(200);
+        // mlx90632_set_meas_type(MLX90632_MTYP_EXTENDED);
+
+        // mlx90632_read_temp_raw_extended(&ambient_new_raw, &ambient_old_raw, &object_new_raw);
+        // ambient = mlx90632_calc_temp_ambient_extended(ambient_new_raw, ambient_old_raw,
+        //                                               PT, PR, PG, PO, Gb);
+        // /* Get preprocessed temperatures needed for object temperature calculation */
+        // pre_ambient = mlx90632_preprocess_temp_ambient_extended(ambient_new_raw,
+        //                                                         ambient_old_raw, Gb);
+        // pre_object = mlx90632_preprocess_temp_object_extended(object_new_raw, ambient_new_raw,
+        //                                                       ambient_old_raw, Ka);
+
+        // mlx90632_set_emissivity(1.0);
+        // /* Calculate object temperature assuming the reflected temperature equals ambient*/
+        // object = mlx90632_calc_temp_object_extended(pre_object, pre_ambient, ambient, Ea, Eb, Ga, Fa, Fb, Ha, Hb);
+
+        // /* Set MLX90632 in extended burst mode */
+        // ret_code = mlx90632_set_meas_type(MLX90632_MTYP_EXTENDED_BURST);
+
+        // /* Now we read current ambient and object temperature */
+        // ret_code = mlx90632_read_temp_raw_extended_burst(&ambient_new_raw, &ambient_old_raw, &object_new_raw);
+
+        // /* Now start calculations (no more i2c accesses) */
+        // /* Calculate ambient temperature */
+        // ambient = mlx90632_calc_temp_ambient_extended(ambient_new_raw, ambient_old_raw,
+        //                                               PT, PR, PG, PO, Gb);
+
+        // /* Get preprocessed temperatures needed for object temperature calculation */
+        // pre_ambient = mlx90632_preprocess_temp_ambient_extended(ambient_new_raw,
+        //                                                         ambient_old_raw, Gb);
+        // pre_object = mlx90632_preprocess_temp_object_extended(object_new_raw, ambient_new_raw,
+        //                                                       ambient_old_raw, Ka);
+
+        // mlx90632_set_emissivity(1.5);
+        // /* Calculate object temperature assuming the reflected temperature equals ambient*/
+        // object = mlx90632_calc_temp_object_extended(pre_object, pre_ambient, ambient, Ea, Eb, Ga, Fa, Fb, Ha, Hb);
+
+        Tempurature = (float)object;
+        TempuratureAmbient = (float)ambient;
+        if (isBleConnected && isPlotTempInit) {
+            xQueueSend(Queue_TempBLE, &Tempurature, portMAX_DELAY);
+        }
+        xQueueSend(Queue_TempFile_Ta, &TempuratureAmbient, portMAX_DELAY);
+        xQueueSend(Queue_TempFile_To, &Tempurature, portMAX_DELAY);
+        xQueueSend(Queue_TempPlot_To, &Tempurature, portMAX_DELAY);
+
+        // printf("Tempurature=%f (ambient), %f (object)\r\n", ambient, object);
+        // vTaskDelay(5);
     }
 
     vTaskDelete(NULL);
 }
 
+void TEMP_task_pre_delete()
+{
+    while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
+        vTaskDelay(1);
+    }
+    printf("xMutex_IIC0 == 1\r\n");
+
+    // while (uxQueueMessagesWaiting(Queue_TempFile_To) >= 1) {
+    //     vTaskDelay(1);
+    // }
+    // while (uxQueueMessagesWaiting(Queue_TempFile_Ta) >= 1) {
+    //     vTaskDelay(1);
+    // }
+
+    if (TEMP_handle != NULL) {
+        vTaskDelete(TEMP_handle);
+        printf("TEMP task delete\r\n");
+    }
+
+    TEMP_handle = NULL;
+}
+
+void TEMP_task_create()
+{
+    xSemaphoreGive(xSem_TEMPEN);
+    if (TEMP_handle == NULL) {
+        xTaskCreate(TEMP_task, (char *)"TEMP_task", 1024, NULL, configMAX_PRIORITIES - 4, &TEMP_handle);
+        printf("TEMP task create\r\n");
+    }
+}
+
 static void HR_task(void *pvParameters)
 {
     printf("HR task enter \r\n");
-    vTaskDelay(10);
+    vTaskDelay(1000);
     printf("HR task start \r\n");
     printf("begin to loop %s\r\n", __func__);
 
     uint32_t NUMBER = 0;
     uint8_t uiUpdateCntHr = 0;
 
-    /* AFE4404 INIT */
+    // /* AFE4404 INIT */
     initStatHRM();
     // AFE4404_RESETZ_Init(); // Included in AFE4404_PinInit
     AFE4404_Trigger_HWReset();
@@ -1581,7 +1999,7 @@ static void HR_task(void *pvParameters)
     while (1) {
         if (offsetDACcalibFlag == 0) {
             // printf("1\r\n");
-            if (afe4404_adcrdy) {
+            if (xSemaphoreTake(xSem_HR, portMAX_DELAY) == pdTRUE) {
                 // printf("2\r\n");
                 afe4404_adcrdy = 0;
                 offsetDACcalibFlag = OFFSET_DAC_Code_Est(AFE4404_Reg_Read(45));
@@ -1591,7 +2009,8 @@ static void HR_task(void *pvParameters)
             }
         } else {
             offsetDACcalibFlag = 1;
-            if (afe4404_adcrdy) { // 读取数据
+            // if (afe4404_adcrdy) { // 读取数据
+            if (xSemaphoreTake(xSem_HR, portMAX_DELAY) == pdTRUE) {
                 afe4404_adcrdy = 0;
                 AFE44xx_SPO2_Data_buf[0] = AFE4404_Reg_Read(42); //read LED2 Data
                 AFE44xx_SPO2_Data_buf[1] = AFE4404_Reg_Read(43); //read LED3 data
@@ -1605,11 +2024,11 @@ static void HR_task(void *pvParameters)
                 if (CALIBRATION_ENABLED == 1) { // 如果开启校准，进入校准过程
                     if (Calibration == 1) {     // 如果校准没有结束
                         if (LED_Sel == 2)
-                            CalibrateAFE4404(AFE44xx_SPO2_Data_buf[0], AFE44xx_SPO2_Data_buf[3]);
+                            CalibrateAFE4404((long)AFE44xx_SPO2_Data_buf[0], (long)AFE44xx_SPO2_Data_buf[3]);
                         else if (LED_Sel == 3)
-                            CalibrateAFE4404(AFE44xx_SPO2_Data_buf[1], AFE44xx_SPO2_Data_buf[3]);
+                            CalibrateAFE4404((long)AFE44xx_SPO2_Data_buf[1], (long)AFE44xx_SPO2_Data_buf[3]);
                         else // Default LED_Sel = 1
-                            CalibrateAFE4404(AFE44xx_SPO2_Data_buf[2], AFE44xx_SPO2_Data_buf[3]);
+                            CalibrateAFE4404((long)AFE44xx_SPO2_Data_buf[2], (long)AFE44xx_SPO2_Data_buf[3]);
                     }
 
                     prfcount++;
@@ -1635,9 +2054,14 @@ static void HR_task(void *pvParameters)
 
         if (sendDataFlag) {
             // printf("Start Send Data\r\n");
-            xSemaphoreTake(xMutex_interArrayWindow, portMAX_DELAY);
-            statHRMAlgo(AFE44xx_SPO2_Data_buf[5]);
+            xSemaphoreTake(xMutex_interArrayWindow, 0);
+            statHRMAlgo((long)AFE44xx_SPO2_Data_buf[5]);
             xSemaphoreGive(xMutex_interArrayWindow);
+
+            if (isPlotBvpInit && isBleConnected) {
+                xQueueSend(Queue_HRBLE, AFE44xx_SPO2_Data_buf + 5, 0);
+            }
+            xQueueSend(Queue_BvpFile, AFE44xx_SPO2_Data_buf + 5, 0);
             // Overwrite LED2-AMB2 with Heart rate
             hr_transfer += HeartRate;
 
@@ -1655,16 +2079,18 @@ static void HR_task(void *pvParameters)
             if (NUMBER >= 200) {
                 hr_transfer /= 200;
                 hr_onenet = hr_transfer;
-                xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-                ui_UpdateHRLabel(hr_transfer);
-                xSemaphoreGive(xMutex_lvgl);
+                // xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+                // ui_UpdateHRLabel(hr_transfer);
+                // xSemaphoreGive(xMutex_lvgl);
+                xQueueSend(Queue_HRLabelUpdate, &hr_transfer, 0);
                 NUMBER = 0;
                 hr_transfer = 0;
             }
             if (uiUpdateCntHr >= 5) {
-                xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-                ui_UpdatePPGChart(AFE44xx_SPO2_Data_buf[5], 0, 0);
-                xSemaphoreGive(xMutex_lvgl);
+                // xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+                // ui_UpdatePPGChart(AFE44xx_SPO2_Data_buf[5], 0, 0);
+                // xSemaphoreGive(xMutex_lvgl);
+                xQueueSend(Queue_PPGChartUpdate, AFE44xx_SPO2_Data_buf + 5, 0);
                 uiUpdateCntHr = 0;
             }
             NUMBER++;
@@ -1698,29 +2124,160 @@ static void HR_task(void *pvParameters)
             AFE44xx_SPO2_Data_buf[4] = 0;
             AFE44xx_SPO2_Data_buf[5] = 0;
         }
-        vTaskDelay(1);
+        // vTaskDelay(5);
     }
 
     vTaskDelete(NULL);
 }
 
+void HR_task_pre_delete()
+{
+    bflb_gpio_int_mask(gpio, AFE_ADC_DRDY, true);
+    bflb_gpio_int_clear(gpio, AFE_ADC_DRDY);
+
+    // printf("AFE_ADC_DRDY\r\n");
+
+    while (uxSemaphoreGetCount(xSem_HR) == 1) {
+        vTaskDelay(1);
+        printf("uxSemaphoreGetCount(xSem_HR) == 1\r\n");
+    }
+    printf("xSem_HR == 0\r\n");
+
+    while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
+        vTaskDelay(1);
+    }
+    printf("HR xMutex_IIC0 == 1\r\n");
+
+    if (HR_handle != NULL) {
+        vTaskDelete(HR_handle);
+        printf("HR task delete\r\n");
+    }
+
+    AFE4404_Trigger_HWReset();
+
+    HR_handle = NULL;
+}
+
+void HR_task_create()
+{
+    bflb_gpio_int_mask(gpio, AFE_ADC_DRDY, false);
+    bflb_gpio_int_clear(gpio, AFE_ADC_DRDY);
+
+    xSemaphoreGive(xSem_BVPEN);
+
+    if (HR_handle == NULL) {
+        xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
+        printf("HR task create\r\n");
+    }
+}
+
+static void BLE_trans_task(void *pvParameters)
+{
+    int32_t data[20] = { 0 };
+    uint8_t cnt = 0;
+
+    while (1) {
+        // Send BVP
+        if (uxQueueMessagesWaiting(Queue_HRBLE) >= 20) {
+            cnt = 0;
+            while (xQueueReceive(Queue_HRBLE, data + (cnt++), portMAX_DELAY) == pdTRUE) {
+                if (cnt == 20) {
+                    break;
+                }
+            }
+            xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
+            bt_gatt_plotbvp_update(data);
+            xSemaphoreGive(xMutex_BLE);
+        }
+        // Send Acc
+        if ((uxQueueMessagesWaiting(Queue_AccBLE_GY) >= 6) && (uxQueueMessagesWaiting(Queue_AccBLE_XL) >= 6)) {
+            cnt = 0;
+            while (xQueueReceive(Queue_AccBLE_XL, data + (cnt++), portMAX_DELAY) == pdTRUE) {
+                if (cnt == 6) {
+                    break;
+                }
+            }
+            while (xQueueReceive(Queue_AccBLE_GY, data + (cnt++), portMAX_DELAY) == pdTRUE) {
+                if (cnt == 12) {
+                    break;
+                }
+            }
+            xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
+            bt_gatt_plotacc_update(data);
+            xSemaphoreGive(xMutex_BLE);
+        }
+        // Send Temp
+        if (uxQueueMessagesWaiting(Queue_TempBLE) >= 1) {
+            xQueueReceive(Queue_TempBLE, data, portMAX_DELAY);
+            xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
+            bt_gatt_plottemp_update(data);
+            xSemaphoreGive(xMutex_BLE);
+        }
+
+        vTaskDelay(1);
+    }
+    vTaskDelete(NULL);
+}
+
 static void LVGL_task(void *pvParameters)
 {
+    uint32_t hrLabel = 0;
+    int32_t ppgSignal = 0;
+    uint16_t ppgNum = 0;
+    float AccX = 0;
+    float AccY = 0;
+    float AccZ = 0;
+    float Temp = 0;
+    static bool isTouchLocked = false;
+
     printf("LVGL task enter \r\n");
-    vTaskDelay(10);
+    vTaskDelay(1);
     printf("LVGL task start \r\n");
     printf("begin to loop %s\r\n", __func__);
 
-    /* lvgl init */
-    lv_log_register_print_cb(lv_log_print_g_cb);
-    lv_init();
-    lv_port_disp_init();
-    lv_port_indev_init();
-
-    ui_init();
-
+    // lv_task_handler();
     while (1) {
         xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+        if (uxQueueMessagesWaiting(Queue_HRLabelUpdate) > 0) {
+            xQueueReceive(Queue_HRLabelUpdate, &hrLabel, 0);
+            ui_UpdateHRLabel((uint16_t)hrLabel);
+            xQueueReset(Queue_HRLabelUpdate);
+        }
+
+        if (xSemaphoreTake(xSem_BTNINT, 0) == pdTRUE) {
+            if (isTouchLocked == false) {
+                isTouchLocked = true;
+                ui_back2home();
+                touchpad_remove();
+            } else {
+                isTouchLocked = false;
+                touchpad_restore();
+            }
+            // printf("xSem_BTNINT %d\r\n", isTouchLocked);
+            ui_UpdateTouchLock(isTouchLocked);
+        }
+
+        if ((uxQueueMessagesWaiting(Queue_AccPlot_XL_X) >= 4) && (uxQueueMessagesWaiting(Queue_AccPlot_XL_Y) >= 4) && (uxQueueMessagesWaiting(Queue_AccPlot_XL_Z) >= 4)) {
+            for (int8_t i = 0; i < 4; i++) {
+                xQueueReceive(Queue_AccPlot_XL_X, &AccX, portMAX_DELAY);
+                xQueueReceive(Queue_AccPlot_XL_Y, &AccY, portMAX_DELAY);
+                xQueueReceive(Queue_AccPlot_XL_Z, &AccZ, portMAX_DELAY);
+                ui_UpdateAccelerationChart(AccX, AccY, AccZ);
+            }
+        }
+
+        if(uxQueueMessagesWaiting(Queue_TempPlot_To) > 0){
+            xQueueReceive(Queue_TempPlot_To, &Temp, portMAX_DELAY);
+            ui_UpdateTemperatureChart(Temp);
+            ui_UpdateTempLabel(Temp);
+        }
+
+        ppgNum = 2;
+        while (ppgNum) {
+            xQueueReceive(Queue_PPGChartUpdate, &ppgSignal, 0);
+            ui_UpdatePPGChart(ppgSignal, 0, 0);
+            ppgNum--;
+        }
         if (wifi_connected) {
             ui_setWifiImg(1);
         } else {
@@ -1728,7 +2285,7 @@ static void LVGL_task(void *pvParameters)
         }
         lv_task_handler();
         xSemaphoreGive(xMutex_lvgl);
-        vTaskDelay(2);
+        vTaskDelay(20);
     }
     vTaskDelete(NULL);
 }
@@ -1737,7 +2294,7 @@ static void CLOCK_task(void *pvParameters)
 {
     printf("CLOCK task enter \r\n");
     vTaskDelay(10);
-    bflb_rtc_set_time(rtc, BFLB_RTC_SEC2TIME(1));
+    bflb_rtc_set_time(rtc, BFLB_RTC_SEC2TIME(0));
     long long rtc_sec = 0;
     uint8_t rtc_sec0 = 0;
     uint8_t rtc_min = 0;
@@ -1746,66 +2303,72 @@ static void CLOCK_task(void *pvParameters)
     uint8_t rtc_date = 0;
     uint8_t rtc_week = 7;
     uint16_t rtc_year = 0;
-    // bflb_timestamp_t info;
-    struct tm *info;
+    struct bflb_tm time;
+    int reset = 0;
 
     printf("CLOCK task start \r\n");
-    while (1) {
-        // printf("time:%lld\r\n", BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc)));
-        rtc_sec = BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc)) + time_base + GMTp8;
-        info = localtime(&rtc_sec);
-        // bflb_timestamp_utc2time(rtc_sec, &info);
-        // printf("%s\r\n", asctime(info));
 
-        if (info->tm_sec != rtc_sec0) {
-            rtc_sec0 = info->tm_sec;
+    ins5699_init_client(&reset);
+
+    ins5699_get_time(&time);      // get time from rtc ins5699.
+    bflb_rtc_set_utc_time(&time); // set time into on-chip rtc.
+
+    while (1) {
+        xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
+        bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+        xSemaphoreGive(xMutex_RTC);
+
+        // update label.
+        if (time.tm_sec != rtc_sec0) {
+            rtc_sec0 = time.tm_sec;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateSecLabel(info->tm_sec);
+            ui_UpdateSecLabel(time.tm_sec);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_min != rtc_min) {
-            rtc_min = info->tm_min;
+        if (time.tm_min != rtc_min) {
+            rtc_min = time.tm_min;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateMinLabel(rtc_min);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_hour != rtc_hour) {
-            rtc_hour = info->tm_hour;
+        if (time.tm_hour != rtc_hour) {
+            rtc_hour = time.tm_hour;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateHourLabel(rtc_hour);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_mday != rtc_date) {
-            rtc_date = info->tm_mday;
+        if (time.tm_mday != rtc_date) {
+            rtc_date = time.tm_mday;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateDateLabel(rtc_date);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_mon != rtc_mon) {
-            rtc_mon = info->tm_mon;
+        if (time.tm_mon != rtc_mon) {
+            rtc_mon = time.tm_mon;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateMonLabel(rtc_mon + 1);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_year != rtc_year) {
-            rtc_year = info->tm_year;
+        if (time.tm_year != rtc_year) {
+            rtc_year = time.tm_year;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateYearLabel(rtc_year + 1900);
             xSemaphoreGive(xMutex_lvgl);
         }
 
-        if (info->tm_wday != rtc_week) {
-            rtc_week = info->tm_wday;
+        if (time.tm_wday != rtc_week) {
+            rtc_week = time.tm_wday;
             xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
             ui_UpdateWeekLabel(rtc_week);
             xSemaphoreGive(xMutex_lvgl);
         }
 
+        // sntp set time.
         if (wifi_connected && !timeCorrected) {
             sntp_setoperatingmode(SNTP_OPMODE_POLL);
             sntp_init();
@@ -1833,19 +2396,20 @@ static void WIFI_task(void *pvParameters)
     char weatherTemp[10] = { 0 };
 
     printf("WIFI task start \r\n");
+    vTaskDelay(20000);
 
     wifi_mgmr_sta_quickconnect("cgh1", "asdfghjk", 2400, 5000);
 
     while (1) {
         if (!wifi_connected) {
-            wifi_mgmr_sta_quickconnect("cgh1", "asdfghjk", 2400, 5000);
-            vTaskDelay(10000);
+            wifi_mgmr_sta_quickconnect("cgh1", "asdfghjk", 2400, 5000); // Non-blocking.
+            vTaskDelay(20000);
         } else {
-            onenet_transfer(Tempurature, hr_onenet, output_class);
-            // if(eda_transfer_flag){
-            //     eda_transfer_flag = 0;
-            //     onenet_transfer_GSR(EDAwindow_transfer_filtered, 240);
-            // }
+            // onenet_transfer(Tempurature, hr_onenet, output_class);
+            // // if(eda_transfer_flag){
+            // //     eda_transfer_flag = 0;
+            // //     onenet_transfer_GSR(EDAwindow_transfer_filtered, 240);
+            // // }
 
             if (weatherCounter >= 6) {
                 memset(weatherCityName, 0, 10);
@@ -1871,323 +2435,1073 @@ static void Algo_task(void *pvParameters)
     vTaskDelay(20);
 
     printf("Algo task start \r\n");
-    vTaskDelay(5000);
-    // float e[120];
-    // float p[120];
-    // float r[120];
-    // float t[120];
-    // float obj;
-    // float EDA_STD = 0;
+    // vTaskDelay(5000);
+    // // float e[120];
+    // // float p[120];
+    // // float r[120];
+    // // float t[120];
+    // // float obj;
+    // // float EDA_STD = 0;
+    // // float EDA_mean = 0;
+    // // f_sparse l;
+    // // g_sparse d;
+
+    // /* EDA Feature */
     // float EDA_mean = 0;
-    // f_sparse l;
-    // g_sparse d;
+    // float EDA_std = 0;
+    // float EDA_min = 0;
 
-    /* EDA Feature */
-    float EDA_mean = 0;
-    float EDA_std = 0;
-    float EDA_min = 0;
+    // emxArray_real32_T *z;
 
-    emxArray_real32_T *z;
+    // float distance_tmp = 4.0f * 4;
+    // int EDA_peakNum = 0;
+    // float EDA_peakHeightAvg = 0.0f;
+    // float EDA_peakHeightMin = 1e6;
+    // float EDA_peakHeightMax = 1e-6;
+    // float EDA_peakHeightStd = 0.0f;
+    // float temp = 0;
 
-    float distance_tmp = 4.0f * 4;
-    int EDA_peakNum = 0;
-    float EDA_peakHeightAvg = 0.0f;
-    float EDA_peakHeightMin = 1e6;
-    float EDA_peakHeightMax = 1e-6;
-    float EDA_peakHeightStd = 0.0f;
-    float temp = 0;
+    // /* HR Feature */
+    // float HRM_max = 0;
+    // float HRM_min = 0;
+    // float HRM_std = 0;
+    // float HRM_mean = 0;
+    // uint index = 0;
 
-    /* HR Feature */
-    float HRM_max = 0;
-    float HRM_min = 0;
-    float HRM_std = 0;
-    float HRM_mean = 0;
-    uint index = 0;
+    // /* TEMP Feature */
+    // float TEMP_max = 0;
+    // float TEMP_min = 0;
+    // float TEMP_avg = 0;
 
-    /* TEMP Feature */
-    float TEMP_max = 0;
-    float TEMP_min = 0;
-    float TEMP_avg = 0;
+    // float input_data[15] = { 1.6, 1.0, 1.0, 1.0, 1.0,
+    //                          1.7, 1.9, 1.2, 1.0, 1.0,
+    //                          1.1, 0.5, 1.0, 1.0, 1.0 };
 
-    float input_data[15] = { 1.6, 1.0, 1.0, 1.0, 1.0,
-                             1.7, 1.9, 1.2, 1.0, 1.0,
-                             1.1, 0.5, 1.0, 1.0, 1.0 };
+    // // float input_data[15] = { EDA_mean, EDA_std, EDA_min, EDA_peakNum, EDA_peakHeightAvg,
+    // //                          EDA_peakHeightMin, EDA_peakHeightMax, EDA_peakHeightStd, HRM_max, HRM_min,
+    // //                          HRM_std, HeartRate, TEMP_avg, TEMP_max, TEMP_min };
 
-    // float input_data[15] = { EDA_mean, EDA_std, EDA_min, EDA_peakNum, EDA_peakHeightAvg,
-    //                          EDA_peakHeightMin, EDA_peakHeightMax, EDA_peakHeightStd, HRM_max, HRM_min,
-    //                          HRM_std, HeartRate, TEMP_avg, TEMP_max, TEMP_min };
-
-    TM_DBGT_INIT();
-    TM_PRINTF("tinymaix start\n");
-    tm_mdl_t mdl;
-    tm_err_t res;
-    tm_mdl_t mdl_bin;
+    // TM_DBGT_INIT();
+    // TM_PRINTF("tinymaix start\n");
+    // tm_mdl_t mdl;
+    // tm_err_t res;
+    // tm_mdl_t mdl_bin;
+    // // tm_mat_t in = { 1, 1, 1, 15, { NULL } };
+    // tm_mat_t outs[1];
+    // tm_mat_t outs_bin[1];
     // tm_mat_t in = { 1, 1, 1, 15, { NULL } };
-    tm_mat_t outs[1];
-    tm_mat_t outs_bin[1];
-    tm_mat_t in = { 1, 1, 1, 15, { NULL } };
-    tm_mat_t in_bin = { 1, 1, 1, 13, { NULL } };
+    // tm_mat_t in_bin = { 1, 1, 1, 13, { NULL } };
 
-    tm_stat((tm_mdlbin_t *)mdl_data);
-    tm_stat((tm_mdlbin_t *)mdl_data_bin);
+    // tm_stat((tm_mdlbin_t *)mdl_data);
+    // tm_stat((tm_mdlbin_t *)mdl_data_bin);
 
-    res = tm_load(&mdl, mdl_data, NULL, layer_cb, &in);
-    if (res != TM_OK) {
-        TM_PRINTF("tm model load err %d\n", res);
-    }
-    res = tm_load(&mdl_bin, mdl_data_bin, NULL, layer_cb, &in_bin);
-    if (res != TM_OK) {
-        TM_PRINTF("tm bin model load err %d\n", res);
-    }
+    // res = tm_load(&mdl, mdl_data, NULL, layer_cb, &in);
+    // if (res != TM_OK) {
+    //     TM_PRINTF("tm model load err %d\n", res);
+    // }
+    // res = tm_load(&mdl_bin, mdl_data_bin, NULL, layer_cb, &in_bin);
+    // if (res != TM_OK) {
+    //     TM_PRINTF("tm bin model load err %d\n", res);
+    // }
 
-    emxInitArray_real32_T(&z, 1);
-    uint16_t temp_min = 0;
-    uint16_t temp_max = 0;
+    // emxInitArray_real32_T(&z, 1);
+    // uint16_t temp_min = 0;
+    // uint16_t temp_max = 0;
+    // while (1) {
+    //     if (eda_ready_flag) {
+    //         //     // float b_dv[120];
+    //         //     emxInit_sparse(&l);
+    //         //     emxInit_sparse1(&d);
+    //         //     printf("Enter cvxEDA\r\n");
+    //         //     /* Initialize function 'cvxEDA' input arguments. */
+    //         //     /* Initialize function input argument 'y'. */
+    //         //     /* Call the entry-point 'cvxEDA'. */
+    //         //     EDA_STD = 0;
+    //         //     EDA_mean = 0;
+    //         //     for (int i = 0; i < 120; i++) {
+    //         //         EDA_mean += EDAwindow_f[i];
+    //         //     }
+    //         //     EDA_mean = EDA_mean / 120;
+    //         //     printf("EDA_mean %.3f\r\n", EDA_mean);
+    //         //     for (int i = 0; i < 120; i++) {
+    //         //         EDA_STD += (EDAwindow_f[i] - EDA_mean) * (EDAwindow_f[i] - EDA_mean);
+    //         //     }
+    //         //     EDA_STD = sqrtf(EDA_STD/120);
+    //         //     printf("EDA_STD %.3f\r\n", EDA_STD);
+    //         //     for (int i = 0; i < 120; i++) {
+    //         //         printf("{EDAwindow_f_o} %.3f\r\n", EDAwindow_f[i]);
+    //         //         EDAwindow_f[i] = (EDAwindow_f[i] - EDA_mean) / EDA_STD;
+    //         //         printf("{EDAwindow_f} %.3f\r\n", EDAwindow_f[i]);
+    //         //     }
+    //         //     cvxEDA(EDAwindow_f, 0.25, r, p, t, &l, &d, e, &obj);
+    //         //     emxDestroy_sparse1(d);
+    //         //     emxDestroy_sparse(l);
+    //         //     for (int i = 0; i < 120; i++) {
+    //         //         printf("{cvxEDA_p} %.3f\r\n", p[i]);
+    //         //     }
+    //         //     for (int i = 0; i < 120; i++) {
+    //         //         printf("{cvxEDA_r} %.3f\r\n", r[i]);
+    //         //     }
+    //         //     for (int i = 0; i < 120; i++) {
+    //         //         printf("{cvxEDA_t} %.3f\r\n", t[i]);
+    //         //     }
+    //         //     printf("Exit cvxEDA\r\n");
+    //         //     // cvxEDA_terminate();
+    //         //     eda_ready_flag = 0;
+
+    //         EDA_min = 1e6;
+    //         EDA_mean = 0;
+    //         for (uint8_t i = 0; i < 120; i++) {
+    //             if (EDAwindow_f[i] < EDA_min) {
+    //                 EDA_min = EDAwindow_f[i];
+    //             }
+    //             EDA_mean += EDAwindow_f[i];
+    //         }
+    //         EDA_mean /= 120;
+    //         EDA_std = 0;
+    //         for (uint8_t i = 0; i < 120; i++) {
+    //             EDA_std += (EDAwindow_f[i] - EDA_mean) * (EDAwindow_f[i] - EDA_mean);
+    //         }
+    //         EDA_std = sqrtf(EDA_std / 120);
+
+    //         // csi_mean_f32(EDAwindow_f, 120, &EDA_mean);
+    //         // csi_std_f32(EDAwindow_f, 120, &EDA_std);
+    //         // csi_std_f32(EDAwindow_f, 120, &EDA_min);
+    //         printf("EDA_min %.3f\r\n", EDA_min);
+
+    //         my_findpeaks(EDAwindow_f, distance_tmp, 120, z);
+    //         EDA_peakHeightAvg = 0.0f;
+    //         EDA_peakHeightMin = 1e6;
+    //         EDA_peakHeightMax = 1e-6;
+    //         EDA_peakHeightStd = 0.0f;
+    //         temp = 0;
+
+    //         for (uint8_t i = 0; i < 120; i++) {
+    //             temp = z->data[i];
+    //             if (temp > 1e-3) {
+    //                 EDA_peakNum++;
+    //                 EDA_peakHeightAvg += temp;
+    //                 if (temp > EDA_peakHeightMax) {
+    //                     EDA_peakHeightMax = temp;
+    //                 }
+    //                 if (temp < EDA_peakHeightMin) {
+    //                     EDA_peakHeightMin = temp;
+    //                 }
+    //             }
+    //         }
+    //         EDA_peakHeightAvg /= EDA_peakNum;
+    //         for (uint8_t i = 0; i < 120; i++) {
+    //             temp = z->data[i];
+    //             if (temp > 1e-3) {
+    //                 EDA_peakHeightStd += (temp - EDA_peakHeightAvg) * (temp - EDA_peakHeightAvg);
+    //             }
+    //         }
+    //         EDA_peakHeightStd = sqrtf(EDA_peakHeightStd / EDA_peakNum);
+    //         // emxDestroyArray_real32_T(z);
+    //         printf("EDA_max %.3f\r\n", EDA_peakHeightMax);
+
+    //         temp_min = (uint16_t)floorf(EDA_min * 1000);
+    //         temp_max = (uint16_t)ceilf(EDA_peakHeightMax * 1000);
+    //         // printf("(uint16_t)ceilf(EDA_peakHeightMax * 100) %d\r\n", (uint16_t)ceilf(EDA_peakHeightMax * 1000));
+    //         // printf("(uint16_t)floorf(EDA_min * 100) %d\r\n", (uint16_t)floorf(EDA_min * 1000));
+
+    //         HRM_min = 1e6;
+    //         HRM_max = 1e-6;
+    //         HRM_std = 0.0f;
+    //         HRM_mean = 0;
+
+    //         xSemaphoreTake(xMutex_interArrayWindow, portMAX_DELAY);
+
+    //         for (uint8_t i = 0; i < iA_pointer; i++) {
+    //             if ((float)interArrayWindow[i] < HRM_min) {
+    //                 HRM_min = (float)interArrayWindow[i];
+    //             }
+    //             if ((float)interArrayWindow[i] > HRM_max) {
+    //                 HRM_max = (float)interArrayWindow[i];
+    //             }
+    //             HRM_mean += (float)interArrayWindow[i];
+    //         }
+    //         HRM_mean /= iA_pointer;
+
+    //         for (uint8_t i = 0; i < iA_pointer; i++) {
+    //             HRM_std += ((float)interArrayWindow[i] - HRM_mean) * ((float)interArrayWindow[i] - HRM_mean);
+    //         }
+    //         HRM_std = sqrtf(HRM_std / iA_pointer);
+
+    //         xSemaphoreGive(xMutex_interArrayWindow);
+    //         printf("interArrayWindow\r\n");
+
+    //         // csi_max_f32(interArrayWindow, iA_pointer, &HRM_max, &index);
+    //         // csi_min_f32(interArrayWindow, iA_pointer, &HRM_min, &index);
+    //         // csi_std_f32(interArrayWindow, iA_pointer, &HRM_std);
+
+    //         // csi_max_f32(TEMPwindow, 120, &TEMP_max, &index);
+    //         // csi_min_f32(TEMPwindow, 120, &TEMP_min, &index);
+    //         // csi_mean_f32(TEMPwindow, 120, &TEMP_avg);
+
+    //         TEMP_min = 1e6;
+    //         TEMP_max = 1e-6;
+    //         TEMP_avg = 0;
+    //         for (uint8_t i = 0; i < 120; i++) {
+    //             if (TEMPwindow[i] < TEMP_min) {
+    //                 TEMP_min = TEMPwindow[i];
+    //             }
+    //             if (TEMPwindow[i] > TEMP_max) {
+    //                 TEMP_max = TEMPwindow[i];
+    //             }
+    //             TEMP_avg += TEMPwindow[i];
+    //         }
+    //         TEMP_avg /= 120;
+
+    //         printf("TEMPwindow\r\n");
+
+    //         input_data[0] = (EDA_mean - 1.9635107565854033f) / 2.653874198543756f;
+    //         input_data[1] = (EDA_std - 0.04519523431581202f) / 0.0796896165882909f;
+    //         input_data[2] = (EDA_min - 1.868224049678013f) / 2.51363460423691f;
+    //         input_data[3] = (EDA_peakNum - 4.0f) / 1.5f;
+    //         input_data[4] = (EDA_peakHeightAvg - 1.9726016026110904f) / 2.6678769175713786f;
+    //         input_data[5] = (EDA_peakHeightMin - 1.9058191315547377f) / 2.5812927451430987f;
+    //         input_data[6] = (EDA_peakHeightMax - 2.060425913523459f) / 2.7624762331501787f;
+    //         input_data[7] = (EDA_peakHeightStd - 0.04304164967248956f) / 0.07752566272303067f;
+    //         input_data[8] = (HRM_max - 88.47838086476541f / 64 * 100) / 20.74675891492638f / 64 * 100;
+    //         input_data[9] = (HRM_min - 23.879484820607175f / 64 * 100) / 6.484658316275455f / 64 * 100;
+    //         input_data[10] = (HRM_std - 14.116718579677409f) / 4.923849396461889f;
+    //         input_data[11] = (HeartRate - 81.20699172033119f) / 12.742457294618461f;
+    //         input_data[12] = (TEMP_avg - 33.80643054277829f) / 0.017385464484055594f;
+    //         input_data[13] = (TEMP_max - 33.80643054277829f) / 0.017385464484055594f;
+    //         input_data[14] = (TEMP_min - 33.80643054277829f) / 0.017385464484055594f;
+    //         printf("Feature Done\r\n");
+
+    //         tm_mat_t in_float;
+    //         in_float.dims = 1;
+    //         in_float.h = 1;
+    //         in_float.w = 1;
+    //         in_float.c = 15;
+    //         in_float.dataf = input_data;
+    //         tm_mat_t in_float_bin;
+    //         in_float_bin.dims = 1;
+    //         in_float_bin.h = 1;
+    //         in_float_bin.w = 1;
+    //         in_float_bin.c = 15;
+    //         in_float_bin.dataf = input_data;
+
+    //         res = tm_preprocess(&mdl, TMPP_FP2INT, &in_float, &in);
+    //         res = tm_preprocess(&mdl_bin, TMPP_FP2INT, &in_float_bin, &in_bin);
+
+    //         TM_DBGT_START();
+    //         res = tm_run(&mdl_bin, &in_bin, outs_bin);
+    //         TM_DBGT("tm_run_bin");
+    //         if (res == TM_OK)
+    //             parse_output(outs_bin, 2);
+    //         else
+    //             TM_PRINTF("tm bin run error: %d\n", res);
+
+    //         TM_DBGT_START();
+    //         res = tm_run(&mdl, &in, outs);
+    //         TM_DBGT("tm_run");
+    //         if (res == TM_OK)
+    //             parse_output(outs, 3);
+    //         else
+    //             TM_PRINTF("tm run error: %d\n", res);
+
+    //         eda_ready_flag = 0;
+
+    //         xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+    //         ui_UpdateEDAChartRange(temp_max, temp_min);
+    //         ui_UpdateEDAChart(EDAwindow_f, 120);
+    //         ui_UpdateEda1(EDA_min, EDA_mean, EDA_std);
+    //         ui_UpdateEda2(EDA_peakNum, EDA_peakHeightAvg);
+    //         ui_UpdateEda3(EDA_peakHeightMin, EDA_peakHeightMax, EDA_peakHeightStd);
+    //         ui_UpdateBvp(HRM_min, HRM_max, HRM_mean, HeartRate);
+    //         ui_UpdateTemp(TEMP_avg);
+    //         xSemaphoreGive(xMutex_lvgl);
+
+    //         printf("EdaChartUpdate\r\n");
+    //     }
+    //     vTaskDelay(250);
+    // }
+
+    board_init();
+    setup();
+    printf("model load successfully!!\r\n");
+
     while (1) {
-        if (eda_ready_flag) {
-            //     // float b_dv[120];
-            //     emxInit_sparse(&l);
-            //     emxInit_sparse1(&d);
-            //     printf("Enter cvxEDA\r\n");
-            //     /* Initialize function 'cvxEDA' input arguments. */
-            //     /* Initialize function input argument 'y'. */
-            //     /* Call the entry-point 'cvxEDA'. */
-            //     EDA_STD = 0;
-            //     EDA_mean = 0;
-            //     for (int i = 0; i < 120; i++) {
-            //         EDA_mean += EDAwindow_f[i];
-            //     }
-            //     EDA_mean = EDA_mean / 120;
-            //     printf("EDA_mean %.3f\r\n", EDA_mean);
-            //     for (int i = 0; i < 120; i++) {
-            //         EDA_STD += (EDAwindow_f[i] - EDA_mean) * (EDAwindow_f[i] - EDA_mean);
-            //     }
-            //     EDA_STD = sqrtf(EDA_STD/120);
-            //     printf("EDA_STD %.3f\r\n", EDA_STD);
-            //     for (int i = 0; i < 120; i++) {
-            //         printf("{EDAwindow_f_o} %.3f\r\n", EDAwindow_f[i]);
-            //         EDAwindow_f[i] = (EDAwindow_f[i] - EDA_mean) / EDA_STD;
-            //         printf("{EDAwindow_f} %.3f\r\n", EDAwindow_f[i]);
-            //     }
-            //     cvxEDA(EDAwindow_f, 0.25, r, p, t, &l, &d, e, &obj);
-            //     emxDestroy_sparse1(d);
-            //     emxDestroy_sparse(l);
-            //     for (int i = 0; i < 120; i++) {
-            //         printf("{cvxEDA_p} %.3f\r\n", p[i]);
-            //     }
-            //     for (int i = 0; i < 120; i++) {
-            //         printf("{cvxEDA_r} %.3f\r\n", r[i]);
-            //     }
-            //     for (int i = 0; i < 120; i++) {
-            //         printf("{cvxEDA_t} %.3f\r\n", t[i]);
-            //     }
-            //     printf("Exit cvxEDA\r\n");
-            //     // cvxEDA_terminate();
-            //     eda_ready_flag = 0;
+        loop();
+    }
+    
+    vTaskDelete(NULL);
+}
 
-            EDA_min = 1e6;
-            EDA_mean = 0;
-            for (uint8_t i = 0; i < 120; i++) {
-                if (EDAwindow_f[i] < EDA_min) {
-                    EDA_min = EDAwindow_f[i];
-                }
-                EDA_mean += EDAwindow_f[i];
-            }
-            EDA_mean /= 120;
-            EDA_std = 0;
-            for (uint8_t i = 0; i < 120; i++) {
-                EDA_std += (EDAwindow_f[i] - EDA_mean) * (EDAwindow_f[i] - EDA_mean);
-            }
-            EDA_std = sqrtf(EDA_std / 120);
+static void BLE_task(void *pvParameters)
+{
+    // char tempArray[5] = { 0 };
+    // // hrs_init();
+    // // bas_init();
+    // mysvc_init();
 
-            // csi_mean_f32(EDAwindow_f, 120, &EDA_mean);
-            // csi_std_f32(EDAwindow_f, 120, &EDA_std);
-            // csi_std_f32(EDAwindow_f, 120, &EDA_min);
-            printf("EDA_min %.3f\r\n", EDA_min);
+    // while (1) {
+    //     // bt_gatt_bas_set_battery_level(5);
+    //     // bt_hrs_notify(HeartRate);
+    //     sprintf(tempArray, "%.1f", Tempurature);
+    //     bt_gatt_mysvc_update(hr_onenet, stepCnt, tempArray, output_class);
+    //     vTaskDelay(250);
+    // }
+    // vTaskDelete(NULL);
+    char tempArray[5] = { 0 };
+    // hrs_init();
+    // bas_init();
+    cts_init();
+    mysvc_init();
+    ploteda_init();
+    plotbvp_init();
+    plotacc_init();
+    plottemp_init();
+    isPlotedaInit = true;
+    isPlotBvpInit = true;
+    isPlotTempInit = true;
+    isPlotAccInit = true;
 
-            my_findpeaks(EDAwindow_f, distance_tmp, 120, z);
-            EDA_peakHeightAvg = 0.0f;
-            EDA_peakHeightMin = 1e6;
-            EDA_peakHeightMax = 1e-6;
-            EDA_peakHeightStd = 0.0f;
-            temp = 0;
-
-            for (uint8_t i = 0; i < 120; i++) {
-                temp = z->data[i];
-                if (temp > 1e-3) {
-                    EDA_peakNum++;
-                    EDA_peakHeightAvg += temp;
-                    if (temp > EDA_peakHeightMax) {
-                        EDA_peakHeightMax = temp;
-                    }
-                    if (temp < EDA_peakHeightMin) {
-                        EDA_peakHeightMin = temp;
-                    }
-                }
-            }
-            EDA_peakHeightAvg /= EDA_peakNum;
-            for (uint8_t i = 0; i < 120; i++) {
-                temp = z->data[i];
-                if (temp > 1e-3) {
-                    EDA_peakHeightStd += (temp - EDA_peakHeightAvg) * (temp - EDA_peakHeightAvg);
-                }
-            }
-            EDA_peakHeightStd = sqrtf(EDA_peakHeightStd / EDA_peakNum);
-            // emxDestroyArray_real32_T(z);
-            printf("EDA_max %.3f\r\n", EDA_peakHeightMax);
-
-            temp_min = (uint16_t)floorf(EDA_min * 1000);
-            temp_max = (uint16_t)ceilf(EDA_peakHeightMax * 1000);
-            // printf("(uint16_t)ceilf(EDA_peakHeightMax * 100) %d\r\n", (uint16_t)ceilf(EDA_peakHeightMax * 1000));
-            // printf("(uint16_t)floorf(EDA_min * 100) %d\r\n", (uint16_t)floorf(EDA_min * 1000));
-
-            HRM_min = 1e6;
-            HRM_max = 1e-6;
-            HRM_std = 0.0f;
-            HRM_mean = 0;
-
-            xSemaphoreTake(xMutex_interArrayWindow, portMAX_DELAY);
-
-            for (uint8_t i = 0; i < iA_pointer; i++) {
-                if ((float)interArrayWindow[i] < HRM_min) {
-                    HRM_min = (float)interArrayWindow[i];
-                }
-                if ((float)interArrayWindow[i] > HRM_max) {
-                    HRM_max = (float)interArrayWindow[i];
-                }
-                HRM_mean += (float)interArrayWindow[i];
-            }
-            HRM_mean /= iA_pointer;
-
-            for (uint8_t i = 0; i < iA_pointer; i++) {
-                HRM_std += ((float)interArrayWindow[i] - HRM_mean) * ((float)interArrayWindow[i] - HRM_mean);
-            }
-            HRM_std = sqrtf(HRM_std / iA_pointer);
-
-            xSemaphoreGive(xMutex_interArrayWindow);
-            printf("interArrayWindow\r\n");
-
-            // csi_max_f32(interArrayWindow, iA_pointer, &HRM_max, &index);
-            // csi_min_f32(interArrayWindow, iA_pointer, &HRM_min, &index);
-            // csi_std_f32(interArrayWindow, iA_pointer, &HRM_std);
-
-            // csi_max_f32(TEMPwindow, 120, &TEMP_max, &index);
-            // csi_min_f32(TEMPwindow, 120, &TEMP_min, &index);
-            // csi_mean_f32(TEMPwindow, 120, &TEMP_avg);
-
-            TEMP_min = 1e6;
-            TEMP_max = 1e-6;
-            TEMP_avg = 0;
-            for (uint8_t i = 0; i < 120; i++) {
-                if (TEMPwindow[i] < TEMP_min) {
-                    TEMP_min = TEMPwindow[i];
-                }
-                if (TEMPwindow[i] > TEMP_max) {
-                    TEMP_max = TEMPwindow[i];
-                }
-                TEMP_avg += TEMPwindow[i];
-            }
-            TEMP_avg /= 120;
-
-            printf("TEMPwindow\r\n");
-
-            input_data[0] = (EDA_mean - 1.9635107565854033f) / 2.653874198543756f;
-            input_data[1] = (EDA_std - 0.04519523431581202f) / 0.0796896165882909f;
-            input_data[2] = (EDA_min - 1.868224049678013f) / 2.51363460423691f;
-            input_data[3] = (EDA_peakNum - 4.0f) / 1.5f;
-            input_data[4] = (EDA_peakHeightAvg - 1.9726016026110904f) / 2.6678769175713786f;
-            input_data[5] = (EDA_peakHeightMin - 1.9058191315547377f) / 2.5812927451430987f;
-            input_data[6] = (EDA_peakHeightMax - 2.060425913523459f) / 2.7624762331501787f;
-            input_data[7] = (EDA_peakHeightStd - 0.04304164967248956f) / 0.07752566272303067f;
-            input_data[8] = (HRM_max - 88.47838086476541f / 64 * 100) / 20.74675891492638f / 64 * 100;
-            input_data[9] = (HRM_min - 23.879484820607175f / 64 * 100) / 6.484658316275455f / 64 * 100;
-            input_data[10] = (HRM_std - 14.116718579677409f) / 4.923849396461889f;
-            input_data[11] = (HeartRate - 81.20699172033119f) / 12.742457294618461f;
-            input_data[12] = (TEMP_avg - 33.80643054277829f) / 0.017385464484055594f;
-            input_data[13] = (TEMP_max - 33.80643054277829f) / 0.017385464484055594f;
-            input_data[14] = (TEMP_min - 33.80643054277829f) / 0.017385464484055594f;
-            printf("Feature Done\r\n");
-
-            tm_mat_t in_float;
-            in_float.dims = 1;
-            in_float.h = 1;
-            in_float.w = 1;
-            in_float.c = 15;
-            in_float.dataf = input_data;
-            tm_mat_t in_float_bin;
-            in_float_bin.dims = 1;
-            in_float_bin.h = 1;
-            in_float_bin.w = 1;
-            in_float_bin.c = 15;
-            in_float_bin.dataf = input_data;
-
-            res = tm_preprocess(&mdl, TMPP_FP2INT, &in_float, &in);
-            res = tm_preprocess(&mdl_bin, TMPP_FP2INT, &in_float_bin, &in_bin);
-
-            TM_DBGT_START();
-            res = tm_run(&mdl_bin, &in_bin, outs_bin);
-            TM_DBGT("tm_run_bin");
-            if (res == TM_OK)
-                parse_output(outs_bin, 2);
-            else
-                TM_PRINTF("tm bin run error: %d\n", res);
-
-            TM_DBGT_START();
-            res = tm_run(&mdl, &in, outs);
-            TM_DBGT("tm_run");
-            if (res == TM_OK)
-                parse_output(outs, 3);
-            else
-                TM_PRINTF("tm run error: %d\n", res);
-
-            eda_ready_flag = 0;
-
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateEDAChartRange(temp_max, temp_min);
-            ui_UpdateEDAChart(EDAwindow_f, 120);
-            ui_UpdateEda1(EDA_min, EDA_mean, EDA_std);
-            ui_UpdateEda2(EDA_peakNum, EDA_peakHeightAvg);
-            ui_UpdateEda3(EDA_peakHeightMin, EDA_peakHeightMax, EDA_peakHeightStd);
-            ui_UpdateBvp(HRM_min, HRM_max, HRM_mean, HeartRate);
-            ui_UpdateTemp(TEMP_avg);
-            xSemaphoreGive(xMutex_lvgl);
-
-            printf("EdaChartUpdate\r\n");
+    while (1) {
+        // bt_gatt_bas_set_battery_level(5);
+        // bt_hrs_notify(HeartRate);
+        if (isBleConnected) {
+            sprintf(tempArray, "%.1f", Tempurature);
+            xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
+            bt_gatt_mysvc_update(hr_onenet, stepCnt, tempArray, output_class);
+            xSemaphoreGive(xMutex_BLE);
         }
         vTaskDelay(250);
     }
     vTaskDelete(NULL);
 }
 
-static void BLE_task(void *pvParameters)
+static void MOTOR_task(void *pvParameters)
 {
-    char tempArray[5] = { 0 };
-    // hrs_init();
-    // bas_init();
-    mysvc_init();
+    bflb_pwm_v2_channel_set_threshold(pwm, PWM_CH2, 10, 90); /* duty = (90-10)/100 = 80% */
+    bflb_pwm_v2_channel_positive_start(pwm, PWM_CH2);
+
+    // while (1) {
+    // if (xSemaphoreTake(xSem_MOTOR, portMAX_DELAY) == pdTRUE) {
+    bflb_pwm_v2_start(pwm);
+    bflb_gpio_set(gpio, GPIO_PIN_13);
+
+    vTaskDelay(250);
+    bflb_gpio_reset(gpio, GPIO_PIN_13);
+    bflb_pwm_v2_stop(pwm);
+    // }
+    // }
+    vTaskDelete(NULL);
+}
+
+static void BAT_task(void *pvParameters)
+{
+    printf("BAT TASK\r\n");
+    vTaskDelay(20);
+    printf("MAX17048 VERSION: %04x\r\n", max17048_get_version());
+
+    xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+    ui_updateBat((uint8_t)max17048_get_SOC());
+    xSemaphoreGive(xMutex_lvgl);
+    if (bflb_gpio_read(gpio, GPIO_PIN_33)) { // 1:2 Not Charging
+        CHG_Interrupted = 2;
+    } else { // 0:1 Charging
+        CHG_Interrupted = 1;
+    }
 
     while (1) {
-        // bt_gatt_bas_set_battery_level(5);
-        // bt_hrs_notify(HeartRate);
-        sprintf(tempArray, "%.1f", Tempurature);
-        bt_gatt_mysvc_update(hr_onenet, stepCnt, tempArray, output_class);
+        if (CHG_Interrupted) {
+            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+            ui_updateBatColor(CHG_Interrupted, (uint8_t)max17048_get_SOC());
+            xSemaphoreGive(xMutex_lvgl);
+            CHG_Interrupted = 0;
+        }
+
+        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
+        ui_updateBat((uint8_t)max17048_get_SOC());
+        xSemaphoreGive(xMutex_lvgl);
+        // printf("CHG %d\r\n", bflb_gpio_read(gpio, GPIO_PIN_33));
+
         vTaskDelay(250);
     }
     vTaskDelete(NULL);
 }
 
-static void GPS_task(void *pvParameters)
+#define SDU_DATA_CHECK 0
+
+char test_data[] =
+    "I've been reading books of old \r\n\
+    The legends and the myths \r\n\
+    Achilles and his gold \r\n\
+    Hercules and his gifts \r\n\
+    Spiderman's control \r\n\
+    And Batman with his fists\r\n\
+    And clearly I don't see myself upon that list\r\n\
+    But she said, where'd you wanna go?\r\n\
+    How much you wanna risk?\r\n\
+    I'm not looking for somebody\r\n\
+    With some superhuman gifts\r\n\
+    Some superhero\r\n\
+    Some fairytale bliss\r\n\
+    Just something I can turn to\r\n\
+    Somebody I can kiss\r\n\
+    I want something just like this\r\n\r\n";
+
+__attribute((aligned(64))) BYTE RW_Buffer[4 * 1024] = { 0 };
+#if SDU_DATA_CHECK
+__attribute((aligned(64))) BYTE Check_Buffer[sizeof(RW_Buffer)] = { 0 };
+#endif
+
+void fatfs_write_read_test()
 {
-    char *coldStart = "$PGKC030,3,1*2E\r\n";
-    char* recv_data[256];
-    BL618_UART1_TRANSMIT(coldStart, sizeof(coldStart));
-    while (1)
-    {
-        BL618_UART1_RECEIVE(recv_data, 1);
-        printf(recv_data);
-        vTaskDelay(100);
+    FRESULT ret;
+    FIL fnew;
+    UINT fnum;
+
+    vTaskDelay(10);
+
+    uint32_t time_node, i, j;
+
+    /* full test data to buff */
+    for (uint32_t cnt = 0; cnt < (sizeof(RW_Buffer) / sizeof(test_data)); cnt++) {
+        memcpy(&RW_Buffer[cnt * sizeof(test_data)], test_data, sizeof(test_data));
+#if SDU_DATA_CHECK
+        memcpy(&Check_Buffer[cnt * sizeof(test_data)], test_data, sizeof(test_data));
+#endif
     }
+
+    /* write test */
+    LOG_RI("\r\n");
+    LOG_I("******************** be about to write test... **********************\r\n");
+    ret = f_open(&fnew, "/sd2/test_file.txt", FA_CREATE_ALWAYS | FA_WRITE);
+    if (ret == FR_OK) {
+        time_node = (uint32_t)bflb_mtimer_get_time_ms();
+        /*write into file*/
+        // ret = f_write(&fnew, RW_Buffer, 1024, &fnum);
+        for (i = 0; i < 1024; i++) {
+            ret = f_write(&fnew, RW_Buffer, sizeof(RW_Buffer), &fnum);
+            if (ret) {
+                break;
+            }
+        }
+
+        /* close file */
+        ret |= f_close(&fnew);
+        /* get time */
+        time_node = (uint32_t)bflb_mtimer_get_time_ms() - time_node;
+
+        if (ret == FR_OK) {
+            LOG_I("Write Test Succeed! \r\n");
+            LOG_I("Single data size:%d Byte, Write the number:%d, Total size:%d KB\r\n", sizeof(RW_Buffer), i, sizeof(RW_Buffer) * i >> 10);
+            LOG_I("Time:%dms, Write Speed:%d KB/s \r\n", time_node, ((sizeof(RW_Buffer) * i) >> 10) * 1000 / time_node);
+        } else {
+            LOG_F("Fail to write files(%d) num:%d\n", ret, i);
+            return;
+        }
+    } else {
+        LOG_F("Fail to open or create files: %d.\r\n", ret);
+        return;
+    }
+
+    /* read test */
+    LOG_RI("\r\n");
+    LOG_I("******************** be about to read test... **********************\r\n");
+    ret = f_open(&fnew, "/sd2/test_file.txt", FA_OPEN_EXISTING | FA_READ);
+    if (ret == FR_OK) {
+        time_node = (uint32_t)bflb_mtimer_get_time_ms();
+
+        // ret = f_read(&fnew, RW_Buffer, 1024, &fnum);
+        for (i = 0; i < 1024; i++) {
+            ret = f_read(&fnew, RW_Buffer, sizeof(RW_Buffer), &fnum);
+            if (ret) {
+                break;
+            }
+        }
+        /* close file */
+        ret |= f_close(&fnew);
+        /* get time */
+        time_node = (uint32_t)bflb_mtimer_get_time_ms() - time_node;
+
+        if (ret == FR_OK) {
+            LOG_I("Read Test Succeed! \r\n");
+            LOG_I("Single data size:%dByte, Read the number:%d, Total size:%d KB\r\n", sizeof(RW_Buffer), i, sizeof(RW_Buffer) * i >> 10);
+            LOG_I("Time:%dms, Read Speed:%d KB/s \r\n", time_node, ((sizeof(RW_Buffer) * i) >> 10) * 1000 / time_node);
+        } else {
+            LOG_F("Fail to read file: (%d), num:%d\n", ret, i);
+            return;
+        }
+    } else {
+        LOG_F("Fail to open files.\r\n");
+        return;
+    }
+
+    /* check data */
+#if SDU_DATA_CHECK
+    LOG_RI("\r\n");
+    LOG_I("******************** be about to check test... **********************\r\n");
+    ret = f_open(&fnew, "/sd2/test_file.txt", FA_OPEN_EXISTING | FA_READ);
+    if (ret == FR_OK) {
+        // ret = f_read(&fnew, RW_Buffer, 1024, &fnum);
+        for (i = 0; i < 1024; i++) {
+            memset(RW_Buffer, 0x55, sizeof(RW_Buffer));
+            ret = f_read(&fnew, RW_Buffer, sizeof(RW_Buffer), &fnum);
+            if (ret) {
+                break;
+            }
+            for (j = 0; j < sizeof(RW_Buffer); j++) {
+                if (RW_Buffer[j] != Check_Buffer[j]) {
+                    LOG_I(" RW_Buffer: %c, Check_Buffer %c\r\n", RW_Buffer[j], Check_Buffer[j]);
+                    LOG_I("Data Error!  Num:%d/1024, Byte:%d/%d\r\n", i, j, sizeof(RW_Buffer));
+                    break;
+                }
+            }
+            if (j < sizeof(RW_Buffer)) {
+                break;
+            }
+        }
+        /* close file */
+        ret |= f_close(&fnew);
+
+        if (ret == FR_OK) {
+            if (i < 1024 || j < sizeof(RW_Buffer)) {
+                LOG_I("Check Test Error! \r\n");
+                LOG_I("Data Error!  Num:%d/1024, Byte:%d/%d", i, j, sizeof(RW_Buffer));
+            } else {
+                LOG_I("Check Test Succeed! \r\n");
+                LOG_I("All Data Is Good! \r\n");
+            }
+
+        } else {
+            LOG_F("Fail to read file: (%d), num:%d\n", ret, i);
+            return;
+        }
+    } else {
+        LOG_F("Fail to open files.\r\n");
+        return;
+    }
+#endif
+}
+
+extern void msc_ram_init(void);
+
+void usbd_event_handler(uint8_t event)
+{
+    printf("USBD_EVENT %d\r\n", event);
+    switch (event) {
+        case USBD_EVENT_RESET:
+            // if (HR_handle != NULL) {
+            //     vTaskDelete(HR_handle);
+            // }
+            break;
+        case USBD_EVENT_CONNECTED:
+            break;
+        case USBD_EVENT_DISCONNECTED:
+            break;
+        case USBD_EVENT_RESUME:
+            break;
+        case USBD_EVENT_SUSPEND:
+            break;
+        case USBD_EVENT_CONFIGURED:
+            break;
+        case USBD_EVENT_SET_REMOTE_WAKEUP:
+            break;
+        case USBD_EVENT_CLR_REMOTE_WAKEUP:
+            break;
+
+        default:
+            break;
+    }
+}
+
+static void FILE_task(void *pvParameters)
+{
+    printf("FILE TASK\r\n");
+    struct bflb_tm time;
+
+    vTaskDelay(10);
+    uint8_t sendbuf[2048] = { 0 };
+    uint8_t readbuf[2048] = { 0 };
+    // sendbuf[0] = 11;
+    // sendbuf[1] = 129;
+    // sendbuf[2] = 130;
+    // sendbuf[511] = 120;
+    // sendbuf[512] = 121;
+    // sendbuf[1020] = 128;
+    // sendbuf[1024] = 127;
+    // sendbuf[2047] = 13;
+
+    // while (NAND_WriteMultiBlocks(sendbuf, 0, 512, 4) == 1)
+    //     ;
+    // while (NAND_WriteMultiBlocks(sendbuf, 4, 512, 4) == 1)
+    //     ;
+    // while (NAND_WriteMultiBlocks(sendbuf, 8, 512, 4) == 1)
+    //     ;
+    // while (NAND_WriteMultiBlocks(sendbuf, 12, 512, 4) == 1)
+    //     ;
+    // while (NAND_WriteMultiBlocks(sendbuf, 16, 512, 4) == 1)
+    //     ;
+    // while (NAND_WriteMultiBlocks(sendbuf, 32, 512, 4) == 1)
+    //     ;
+    // while (NAND_WriteMultiBlocks(sendbuf, 63, 512, 4) == 1)
+    //     ;
+    // // printf("NAND_Write\r\n");
+    // while (NAND_ReadMultiBlocks(readbuf, 0, 512, 4) == 1)
+    //     ;
+
+    // for (uint8_t i = 0; i < 64; i++) {
+    //     printf("Read %d\r\n", readbuf[i]);
+    // }
+    // printf("Read end1020 %d\r\n", readbuf[1020]);
+    // printf("Read end1024 %d\r\n", readbuf[1024]);
+    // printf("Read end2047 %d\r\n", readbuf[2047]);
+    // printf("Read end511 %d\r\n", readbuf[511]);
+    // printf("Read end512 %d\r\n", readbuf[512]);
+    // while (NAND_WriteMultiBlocks(sendbuf, 95, 512, 32) == 1)
+    //     ;
+    // while (NAND_WriteMultiBlocks(sendbuf, 95, 512, 1) == 1)
+    //     ;
+
+    // printf("TEST END\r\n");
+
+    // INIT
+    FRESULT ret;
+    UINT fnum;
+    uint32_t edaFileCnt = 0;
+    uint32_t tempFileCnt = 0;
+    uint32_t bvpFileCnt = 0;
+    uint32_t accFileCnt = 0;
+    float edaBuffer[4] = { 0 };
+    float edaPhaBuffer[4] = { 0 };
+    float edaRealBuffer[4] = { 0 };
+    float edaImageBuffer[4] = { 0 };
+    int32_t bvpBuffer[25] = { 0 };
+    float accXLxBuffer[26] = { 0 };
+    float accXLyBuffer[26] = { 0 };
+    float accXLzBuffer[26] = { 0 };
+    float accGYxBuffer[26] = { 0 };
+    float accGYyBuffer[26] = { 0 };
+    float accGYzBuffer[26] = { 0 };
+    float tempToBuffer = { 0 };
+    float tempTaBuffer = { 0 };
+    char FileNameEda[128] = { 0 };
+    char FileNameTemp[128] = { 0 };
+    char FileNameBvp[128] = { 0 };
+    char FileNameAcc[128] = { 0 };
+    char tempBuffer[1024] = { 0 };
+
+    fatfs_nand_driver_register();
+
+    ret = f_mount(&fs, "/sd2", 1);
+    // fs.fs_type = FS_FAT16;
+    // ret = FR_NO_FILESYSTEM;
+
+    if (ret == FR_NO_FILESYSTEM) {
+        LOG_W("No filesystem yet, try to be formatted...\r\n");
+
+        ret = f_mkfs("/sd2", &fs_para, workbuf, sizeof(workbuf));
+
+        if (ret != FR_OK) {
+            LOG_F("fail to make filesystem %d\r\n", ret);
+            _CALL_ERROR();
+        }
+
+        if (ret == FR_OK) {
+            LOG_I("done with formatting.\r\n");
+            LOG_I("first start to unmount.\r\n");
+            ret = f_mount(NULL, "/sd2", 1);
+            LOG_I("then start to remount.\r\n");
+            ret = f_mount(&fs, "/sd2", 1);
+        }
+    } else if (ret != FR_OK) {
+        LOG_F("fail to mount filesystem,error= %d\r\n", ret);
+        LOG_F("SD card might fail to initialise.\r\n");
+        _CALL_ERROR();
+    } else {
+        LOG_D("Succeed to mount filesystem\r\n");
+    }
+
+    if (ret == FR_OK) {
+        LOG_I("FileSystem cluster size:%d-sectors (%d-Byte)\r\n", fs.csize, fs.csize * 512);
+    }
+
+    printf("Start to create file.\r\n");
+    xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
+    bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+    xSemaphoreGive(xMutex_RTC);
+    printf("Get time\r\n");
+
+    // // Create file name with time.
+    // memset(FileNameEda, 0, 128 * sizeof(char));
+    // strcat(FileNameEda, "/sd2/eda_");
+    // sprintf(FileNameEda + strlen(FileNameEda), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+    // strcat(FileNameEda, ".csv");
+    // ret = f_open(&f_eda, FileNameEda, FA_OPEN_APPEND | FA_WRITE);
+    // sprintf(RW_Buffer, "Eda Num, Real(Ohm), Image(Ohm), Conductance(uS), Phase(°)\r\n");
+    // f_write(&f_eda, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+    // f_close(&f_eda);
+
+    // memset(FileNameTemp, 0, 128 * sizeof(char));
+    // strcat(FileNameTemp, "/sd2/temp_");
+    // sprintf(FileNameTemp + strlen(FileNameTemp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+    // strcat(FileNameTemp, ".csv");
+    // ret = f_open(&f_temp, FileNameTemp, FA_OPEN_APPEND | FA_WRITE);
+    // sprintf(RW_Buffer, "Temp Num, Object(℃), Ambient(℃)\r\n");
+    // f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+    // f_close(&f_temp);
+
+    // memset(FileNameBvp, 0, 128 * sizeof(char));
+    // strcat(FileNameBvp, "/sd2/bvp_");
+    // sprintf(FileNameBvp + strlen(FileNameBvp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+    // strcat(FileNameBvp, ".csv");
+    // ret = f_open(&f_bvp, FileNameBvp, FA_OPEN_APPEND | FA_WRITE);
+    // sprintf(RW_Buffer, "Bvp Num, Bvp\r\n");
+    // f_write(&f_bvp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+    // f_close(&f_bvp);
+
+    // memset(FileNameAcc, 0, 128 * sizeof(char));
+    // strcat(FileNameAcc, "/sd2/acc_");
+    // sprintf(FileNameAcc + strlen(FileNameAcc), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+    // strcat(FileNameAcc, ".csv");
+    // ret = f_open(&f_acc, FileNameAcc, FA_OPEN_APPEND | FA_WRITE);
+    // sprintf(RW_Buffer, "Acc Num, Acceleration1(mg), Acceleration2(mg), Acceleration3(mg), Angular Rate1(mdps), Angular Rate2(mdps), Angular Rate3(mdps)\r\n");
+    // f_write(&f_acc, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+    // f_close(&f_acc);
+
+    printf("FileNameEda %s\r\n", FileNameEda);
+
+    while (1) {
+        if (xSemaphoreTake(xSem_EDAEN, 0) == pdTRUE) {
+            xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
+            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+            xSemaphoreGive(xMutex_RTC);
+
+            memset(FileNameEda, 0, 128 * sizeof(char));
+            strcat(FileNameEda, "/sd2/eda_");
+            sprintf(FileNameEda + strlen(FileNameEda), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+            strcat(FileNameEda, ".csv");
+            ret = f_open(&f_eda, FileNameEda, FA_OPEN_APPEND | FA_WRITE);
+            sprintf(RW_Buffer, "Eda Num, Real(Ohm), Image(Ohm), Conductance(uS), Phase(°)\r\n");
+            f_write(&f_eda, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            f_close(&f_eda);
+        }
+        if (xSemaphoreTake(xSem_TEMPEN, 0) == pdTRUE) {
+            xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
+            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+            xSemaphoreGive(xMutex_RTC);
+
+            memset(FileNameTemp, 0, 128 * sizeof(char));
+            strcat(FileNameTemp, "/sd2/temp_");
+            sprintf(FileNameTemp + strlen(FileNameTemp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+            strcat(FileNameTemp, ".csv");
+            ret = f_open(&f_temp, FileNameTemp, FA_OPEN_APPEND | FA_WRITE);
+            sprintf(RW_Buffer, "Temp Num, Object(℃), Ambient(℃)\r\n");
+            f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            f_close(&f_temp);
+        }
+        if (xSemaphoreTake(xSem_BVPEN, 0) == pdTRUE) {
+            xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
+            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+            xSemaphoreGive(xMutex_RTC);
+
+            memset(FileNameBvp, 0, 128 * sizeof(char));
+            strcat(FileNameBvp, "/sd2/bvp_");
+            sprintf(FileNameBvp + strlen(FileNameBvp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+            strcat(FileNameBvp, ".csv");
+            ret = f_open(&f_bvp, FileNameBvp, FA_OPEN_APPEND | FA_WRITE);
+            sprintf(RW_Buffer, "Bvp Num, Bvp\r\n");
+            f_write(&f_bvp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            f_close(&f_bvp);
+        }
+        if (xSemaphoreTake(xSem_ACCEN, 0) == pdTRUE) {
+            xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
+            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+            xSemaphoreGive(xMutex_RTC);
+
+            memset(FileNameAcc, 0, 128 * sizeof(char));
+            strcat(FileNameAcc, "/sd2/acc_");
+            sprintf(FileNameAcc + strlen(FileNameAcc), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+            strcat(FileNameAcc, ".csv");
+            ret = f_open(&f_acc, FileNameAcc, FA_OPEN_APPEND | FA_WRITE);
+            sprintf(RW_Buffer, "Acc Num, Acceleration1(mg), Acceleration2(mg), Acceleration3(mg), Angular Rate1(mdps), Angular Rate2(mdps), Angular Rate3(mdps)\r\n");
+            f_write(&f_acc, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            f_close(&f_acc);
+        }
+        if ((uxQueueMessagesWaiting(Queue_EdaConFile) >= 4) && (uxQueueMessagesWaiting(Queue_EdaPhaFile) >= 4) && (uxQueueMessagesWaiting(Queue_EdaRealFile) >= 4) && (uxQueueMessagesWaiting(Queue_EdaImageFile) >= 4)) {
+            ret = f_open(&f_eda, FileNameEda, FA_OPEN_APPEND | FA_WRITE);
+            if (ret) {
+                printf("f_open failed ret: %d\r\n", ret);
+                continue;
+            }
+
+            xQueueReceive(Queue_EdaConFile, edaBuffer, portMAX_DELAY);
+            xQueueReceive(Queue_EdaConFile, edaBuffer + 1, portMAX_DELAY);
+            xQueueReceive(Queue_EdaConFile, edaBuffer + 2, portMAX_DELAY);
+            xQueueReceive(Queue_EdaConFile, edaBuffer + 3, portMAX_DELAY);
+
+            xQueueReceive(Queue_EdaPhaFile, edaPhaBuffer, portMAX_DELAY);
+            xQueueReceive(Queue_EdaPhaFile, edaPhaBuffer + 1, portMAX_DELAY);
+            xQueueReceive(Queue_EdaPhaFile, edaPhaBuffer + 2, portMAX_DELAY);
+            xQueueReceive(Queue_EdaPhaFile, edaPhaBuffer + 3, portMAX_DELAY);
+
+            xQueueReceive(Queue_EdaRealFile, edaRealBuffer, portMAX_DELAY);
+            xQueueReceive(Queue_EdaRealFile, edaRealBuffer + 1, portMAX_DELAY);
+            xQueueReceive(Queue_EdaRealFile, edaRealBuffer + 2, portMAX_DELAY);
+            xQueueReceive(Queue_EdaRealFile, edaRealBuffer + 3, portMAX_DELAY);
+
+            xQueueReceive(Queue_EdaImageFile, edaImageBuffer, portMAX_DELAY);
+            xQueueReceive(Queue_EdaImageFile, edaImageBuffer + 1, portMAX_DELAY);
+            xQueueReceive(Queue_EdaImageFile, edaImageBuffer + 2, portMAX_DELAY);
+            xQueueReceive(Queue_EdaImageFile, edaImageBuffer + 3, portMAX_DELAY);
+
+            sprintf(RW_Buffer, "%d, %.4f, %.4f, %.8f, %.4f\r\n%d, %.4f, %.4f, %.8f, %.4f\r\n%d, %.4f, %.4f, %.8f, %.4f\r\n%d, %.4f, %.4f, %.8f, %.4f\r\n",
+                    edaFileCnt++, edaRealBuffer[0], edaImageBuffer[0], edaBuffer[0], edaPhaBuffer[0],
+                    edaFileCnt++, edaRealBuffer[1], edaImageBuffer[1], edaBuffer[1], edaPhaBuffer[1],
+                    edaFileCnt++, edaRealBuffer[2], edaImageBuffer[2], edaBuffer[2], edaPhaBuffer[2],
+                    edaFileCnt++, edaRealBuffer[3], edaImageBuffer[3], edaBuffer[3], edaPhaBuffer[3]);
+
+            ret = f_write(&f_eda, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            // printf("f_write ret %d, fnum %d\r\n", ret, fnum);
+            f_close(&f_eda);
+        }
+
+        if ((uxQueueMessagesWaiting(Queue_TempFile_To) >= 1) && (uxQueueMessagesWaiting(Queue_TempFile_Ta) >= 1)) {
+            ret = f_open(&f_temp, FileNameTemp, FA_OPEN_APPEND | FA_WRITE);
+            if (ret) {
+                printf("f_open failed ret: %d\r\n", ret);
+                continue;
+            }
+
+            xQueueReceive(Queue_TempFile_To, &tempToBuffer, portMAX_DELAY);
+            xQueueReceive(Queue_TempFile_Ta, &tempTaBuffer, portMAX_DELAY);
+
+            sprintf(RW_Buffer, "%d, %.3f, %.3f\r\n", tempFileCnt++, tempToBuffer, tempTaBuffer);
+
+            ret = f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            f_close(&f_temp);
+        }
+
+        // printf("uxQueueMessagesWaiting(Queue_BvpFile) %d\r\n", uxQueueMessagesWaiting(Queue_BvpFile));
+        if ((uxQueueMessagesWaiting(Queue_BvpFile) >= 25)) {
+            ret = f_open(&f_bvp, FileNameBvp, FA_OPEN_APPEND | FA_WRITE);
+            if (ret) {
+                printf("f_open failed ret: %d\r\n", ret);
+                continue;
+            }
+            uint16_t bufferPtr = 0;
+
+            memset(RW_Buffer, 0x00, sizeof(RW_Buffer));
+            for (int16_t i = 0; i < 25; i++) {
+                xQueueReceive(Queue_BvpFile, bvpBuffer + i, portMAX_DELAY);
+                sprintf(tempBuffer, "%d, %d\r\n", bvpFileCnt++, bvpBuffer[i]);
+                strcat(RW_Buffer, tempBuffer);
+            }
+
+            f_write(&f_bvp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+
+            // ret = f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            f_close(&f_bvp);
+        }
+        // printf("uxQueueMessagesWaiting(Queue_AccFile_GY_Z) %d\r\n", uxQueueMessagesWaiting(Queue_AccFile_GY_Z));
+        // printf("uxQueueMessagesWaiting(Queue_AccFile_XL_Z) %d\r\n", uxQueueMessagesWaiting(Queue_AccFile_XL_Z));
+
+        if ((uxQueueMessagesWaiting(Queue_AccFile_GY_Z) >= 26) && (uxQueueMessagesWaiting(Queue_AccFile_XL_Z) >= 26)) {
+            ret = f_open(&f_acc, FileNameAcc, FA_OPEN_APPEND | FA_WRITE);
+            if (ret) {
+                printf("f_open failed ret: %d\r\n", ret);
+                continue;
+            }
+
+            memset(RW_Buffer, 0x00, sizeof(RW_Buffer));
+            for (int16_t i = 0; i < 26; i++) {
+                xQueueReceive(Queue_AccFile_XL_X, accXLxBuffer + i, portMAX_DELAY);
+                xQueueReceive(Queue_AccFile_XL_Y, accXLyBuffer + i, portMAX_DELAY);
+                xQueueReceive(Queue_AccFile_XL_Z, accXLzBuffer + i, portMAX_DELAY);
+                xQueueReceive(Queue_AccFile_GY_X, accGYxBuffer + i, portMAX_DELAY);
+                xQueueReceive(Queue_AccFile_GY_Y, accGYyBuffer + i, portMAX_DELAY);
+                xQueueReceive(Queue_AccFile_GY_Z, accGYzBuffer + i, portMAX_DELAY);
+                sprintf(tempBuffer, "%d, %.4f, %.4f, %.4f, %.4f, %.4F, %.4f\r\n", accFileCnt++, accXLxBuffer[i], accXLyBuffer[i], accXLzBuffer[i], accGYxBuffer[i], accGYyBuffer[i], accGYzBuffer[i]);
+
+                strcat(RW_Buffer, tempBuffer);
+            }
+
+            f_write(&f_acc, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            // printf("AccWrite\r\n");
+            // ret = f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            f_close(&f_acc);
+        }
+
+        // printf("Write Cycle End\r\n");
+        vTaskDelay(1);
+    }
+
+    // fatfs_write_read_test();
+    // FIL fnew;
+    // UINT fnum;
+    // uint32_t num = 32;
+    // ret = f_open(&fnew, "/sd2/single.txt", FA_OPEN_EXISTING | FA_READ);
+    // ret = f_read(&fnew, readbuf, num, &fnum);
+    // char charbuf[32] = { 0 };
+    // printf(readbuf);
+
+    // ret = f_mount(NULL, "/sd2", 1);
+
+    // msc_ram_init();
+    // while (1) {
+    //     if (usbd_msc_set_popup()) {
+    //         vTaskDelay(100);
+    //         usbd_deinitialize();
+    //     }
+    //     vTaskDelay(100);
+    // }
+
+    // while (1) {
+    //     vTaskDelay(1000);
+    // }
     vTaskDelete(NULL);
+}
+
+DWORD get_fattime()
+{
+    struct bflb_tm time;
+    uint32_t ret = 0;
+    xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
+    bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+    xSemaphoreGive(xMutex_RTC);
+
+    ret |= ((time.tm_year - 80) & 0x7F) << 25;
+    ret |= ((time.tm_mon + 1) & 0x0F) << 21;
+    ret |= ((time.tm_mday) & 0x1F) << 16;
+    ret |= ((time.tm_hour) & 0x1F) << 11;
+    ret |= ((time.tm_min) & 0x3F) << 5;
+    ret |= ((time.tm_sec) & 0x1F);
+
+    return (DWORD)ret;
+}
+
+void fatfs2msc()
+{
+    FRESULT ret;
+    // Wait for write finish.
+    while (uxQueueMessagesWaiting(Queue_EdaConFile) >= 4) {
+        printf("Queue_EdaConFile %d\r\n", uxQueueMessagesWaiting(Queue_EdaConFile));
+        vTaskDelay(1);
+    }
+    while (uxQueueMessagesWaiting(Queue_EdaPhaFile) >= 4) {
+        printf("Queue_EdaPhaFile %d\r\n", uxQueueMessagesWaiting(Queue_EdaPhaFile));
+        vTaskDelay(1);
+    }
+    while (uxQueueMessagesWaiting(Queue_TempFile_To) >= 1) {
+        printf("Queue_TempFile_To %d\r\n", uxQueueMessagesWaiting(Queue_TempFile_To));
+        vTaskDelay(1);
+    }
+    while (uxQueueMessagesWaiting(Queue_TempFile_Ta) >= 1) {
+        printf("Queue_TempFile_Ta %d\r\n", uxQueueMessagesWaiting(Queue_TempFile_Ta));
+        vTaskDelay(1);
+    }
+    while (uxQueueMessagesWaiting(Queue_BvpFile) >= 25) {
+        printf("Queue_BvpFile %d\r\n", uxQueueMessagesWaiting(Queue_BvpFile));
+        vTaskDelay(1);
+    }
+    while (uxQueueMessagesWaiting(Queue_AccFile_XL_Z) >= 26) {
+        printf("Queue_AccFile_XL_Z %d\r\n", uxQueueMessagesWaiting(Queue_AccFile_XL_Z));
+        vTaskDelay(1);
+    }
+    while (uxQueueMessagesWaiting(Queue_AccFile_GY_Z) >= 26) {
+        printf("Queue_AccFile_GY_Z %d\r\n", uxQueueMessagesWaiting(Queue_AccFile_GY_Z));
+        vTaskDelay(1);
+    }
+
+    while (f_eda.obj.fs != 0) {
+        vTaskDelay(1);
+    }
+    while (f_temp.obj.fs != 0) {
+        vTaskDelay(1);
+    }
+
+    if (FILE_handle != NULL) {
+        vTaskDelete(FILE_handle);
+        printf("File task delete\r\n");
+        ret = f_mount(NULL, "/sd2", 1);
+        printf("f_mount ret %d\r\n", ret);
+    }
+    FILE_handle = NULL;
+
+    msc_ram_init();
+}
+
+void msc2fatfs()
+{
+    usbd_deinitialize();
+
+    vTaskDelay(10);
+
+    if (FILE_handle == NULL) {
+        xTaskCreate(FILE_task, (char *)"File_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &FILE_handle);
+        printf("File task create\r\n");
+    }
+}
+
+void ble_on()
+{
+    int32_t err_code = -99;
+    if (isBleConnected == false) {
+        btble_controller_init(configMAX_PRIORITIES - 1);
+
+        hci_driver_init();
+
+        err_code = bt_enable(bt_enable_cb);
+    }
+
+    if (err_code != 0) {
+        printf("bt_enable error: %d\r\n", err_code);
+    } else {
+        printf("bt_enable\r\n");
+    }
+}
+
+void ble_off()
+{
+    int32_t err_code = -99;
+
+    if (isBleConnected == true) {
+        err_code = bt_conn_disconnect(my_conn, BT_HCI_ERR_REMOTE_USER_TERM_CONN);
+        if (err_code == 0) {
+            printf("bt_conn_disconnect\r\n");
+        } else {
+            printf("bt_conn_disconnect Error. %d\r\n", err_code);
+        }
+        xSemaphoreGive(xSem_BLEDISCONN);
+    } else {
+        bt_le_adv_stop();
+
+        err_code = bt_disable();
+
+        if (err_code == 0) {
+            printf("bt_disable\r\n");
+        } else {
+            printf("bt_disable Error. %d\r\n", err_code);
+        }
+    }
+
+    // isPlotedaInit = false;
+    // isPlotBvpInit = false;
+    // isPlotTempInit = false;
+    // isPlotAccInit = false;
+}
+
+void wifi_on()
+{
+    // int32_t err_code = -99;
+
+    // wifi_start_firmware_task();
+}
+
+void wifi_off()
+{
+    // if (wifi_connected){
+    //     wifi_sta_disconnect();
+    // }
+
+    // wifi_stop_firmware_task();
 }
 
 int main(void)
@@ -2201,23 +3515,29 @@ int main(void)
     i2c0 = bflb_device_get_by_name("i2c0");
     gpio = bflb_device_get_by_name("gpio");
     rtc = bflb_device_get_by_name("rtc");
+    i2c1 = bflb_device_get_by_name("i2c1");
+    pwm = bflb_device_get_by_name("pwm_v2_0");
 
     configASSERT((configMAX_PRIORITIES > 4));
 
-    /* Shell init */
+    /* Shell init */ // No Shell.
     // shell_init_with_task(uart0);
     // printf("shell_init_with_task\r\n");
 
-    tcpip_init(NULL, NULL);
-    printf("tcpip_init\r\n");
-    if (1) {
-        wifi_start_firmware_task();
-        printf("wifi_start\r\n");
+    bflb_mtd_init();
+    /* ble stack need easyflash kv */
+    easyflash_init();
+
+    if (0 != rfparam_init(0, NULL, 0)) {
+        LOG_I("PHY RF init failed!\r\n");
+        return 0;
     }
 
-    /* set ble controller EM Size */
-    btblecontroller_em_config();
-    printf("btblecontroller_em_config\r\n");
+    LOG_I("PHY RF init success!\r\n");
+
+    // /* set ble controller EM Size */
+    // btblecontroller_em_config();
+    // printf("btblecontroller_em_config\r\n");
 
     // /* Init rf */
     // if (0 != rfparam_init(0, NULL, 0)) {
@@ -2235,10 +3555,15 @@ int main(void)
     // Initialize BLE Host stack
     hci_driver_init();
     printf("hci_driver_init\r\n");
-
     if (1) {
         bt_enable(bt_enable_cb);
         printf("bt_enable\r\n");
+    }
+    if (1) {
+        tcpip_init(NULL, NULL);
+        printf("tcpip_init\r\n");
+        wifi_start_firmware_task();
+        printf("wifi_start\r\n");
     }
 
     /* Peripheral Init (spi0, i2c0)*/
@@ -2246,15 +3571,23 @@ int main(void)
 
     printf("peripheral_init\n");
 
-        /* TMP117 INIT */
-        // m117_soft_reset();
-        // bflb_mtimer_delay_ms(500);
-        // m117_wakeup();
-        // m117_config();
-        /* END TMP117 INIT */
+    /* LSM6DSO INIT */
+    /* Uncomment to configure INT 1 */
+    //lsm6dso_pin_int1_route_t int1_route;
+    /* Uncomment to configure INT 2 */
+    //lsm6dso_pin_int2_route_t int2_route;
+    /* Initialize driver interface */
+    dev_ctx.write_reg = lsm6dso_platform_write;
+    dev_ctx.read_reg = lsm6dso_platform_read;
 
-    xMutex = xSemaphoreCreateMutex();
-    xSemaphoreGive(xMutex);
+    xMutex_IIC0 = xSemaphoreCreateMutex();
+    xSemaphoreGive(xMutex_IIC0);
+
+    xMutex_IIC1 = xSemaphoreCreateMutex();
+    xSemaphoreGive(xMutex_IIC1);
+
+    xMutex_SPI = xSemaphoreCreateMutex();
+    xSemaphoreGive(xMutex_SPI);
 
     xMutex_printf = xSemaphoreCreateMutex();
     xSemaphoreGive(xMutex_printf);
@@ -2268,22 +3601,81 @@ int main(void)
     xMutex_DSP = xSemaphoreCreateMutex();
     xSemaphoreGive(xMutex_DSP);
 
-    if (xMutex == NULL | xMutex_printf == NULL | xMutex_lvgl == NULL | xMutex_interArrayWindow == NULL | xMutex_DSP == NULL) {
+    xMutex_BLE = xSemaphoreCreateMutex();
+    xSemaphoreGive(xMutex_BLE);
+
+    xMutex_RTC = xSemaphoreCreateMutex();
+
+    xSem_HR = xSemaphoreCreateBinary();
+    // xSemaphoreTake(xSem_HR, (TickType_t)1);
+
+    xSem_EDA = xSemaphoreCreateBinary();
+    // xSemaphoreTake(xSem_EDA, (TickType_t)1);
+
+    xSem_EDAEN = xSemaphoreCreateBinary();
+    xSem_ACCEN = xSemaphoreCreateBinary();
+    xSem_BVPEN = xSemaphoreCreateBinary();
+    xSem_TEMPEN = xSemaphoreCreateBinary();
+    xSem_BLEDISCONN = xSemaphoreCreateBinary();
+    xSemaphoreTake(xSem_BLEDISCONN, 0);
+    xSem_BTNINT = xSemaphoreCreateBinary();
+    xSemaphoreTake(xSem_BTNINT, 0);
+
+    // xSem_usb = xSemaphoreCreateBinary();
+    Queue_HRBLE = xQueueCreate(200, sizeof(int32_t));
+    Queue_AccBLE_GY = xQueueCreate(52, sizeof(float));
+    Queue_AccBLE_XL = xQueueCreate(52, sizeof(float));
+    Queue_TempBLE = xQueueCreate(8, sizeof(float));
+    Queue_TempPlot_To = xQueueCreate(8, sizeof(float));
+    Queue_EdaConFile = xQueueCreate(16, sizeof(float));
+    Queue_EdaPhaFile = xQueueCreate(16, sizeof(float));
+    Queue_EdaRealFile = xQueueCreate(16, sizeof(float));
+    Queue_EdaImageFile = xQueueCreate(16, sizeof(float));
+    Queue_TempFile_Ta = xQueueCreate(8, sizeof(float));
+    Queue_TempFile_To = xQueueCreate(8, sizeof(float));
+    Queue_AccFile_GY_X = xQueueCreate(256, sizeof(float));
+    Queue_AccFile_GY_Y = xQueueCreate(256, sizeof(float));
+    Queue_AccFile_GY_Z = xQueueCreate(256, sizeof(float));
+    Queue_AccFile_XL_X = xQueueCreate(256, sizeof(float));
+    Queue_AccFile_XL_Y = xQueueCreate(256, sizeof(float));
+    Queue_AccFile_XL_Z = xQueueCreate(256, sizeof(float));
+    Queue_AccPlot_XL_X = xQueueCreate(256, sizeof(float));
+    Queue_AccPlot_XL_Y = xQueueCreate(256, sizeof(float));
+    Queue_AccPlot_XL_Z = xQueueCreate(256, sizeof(float));
+    Queue_BvpFile = xQueueCreate(400, sizeof(int32_t));
+    Queue_PPGChartUpdate = xQueueCreate(100, sizeof(int32_t));
+    Queue_HRLabelUpdate = xQueueCreate(10, sizeof(uint32_t));
+
+    xSem_MOTOR = xSemaphoreCreateBinary();
+
+    if (xMutex_IIC0 == NULL | xMutex_IIC1 == NULL | xMutex_SPI == NULL | xMutex_printf == NULL | xMutex_lvgl == NULL | xMutex_interArrayWindow == NULL | xMutex_DSP == NULL | xMutex_BLE == NULL) {
         printf("Create sem fail\r\n");
         while (1) {
         }
     }
+
+    /* lvgl init */
+    lv_log_register_print_cb(lv_log_print_g_cb);
+    lv_init();
+    lv_port_disp_init();
+    lv_port_indev_init();
+    ui_init();
+
+    // msc_ram_init();
 
     // xTaskCreate(EDA_task, (char *)"EDA_task", 1024, NULL, configMAX_PRIORITIES - 4, &EDA_handle);
     // xTaskCreate(Algo_task, (char *)"Algo_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &Algo_handle);
     // xTaskCreate(ACCE_task, (char *)"ACCE_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &ACCE_handle);
     // xTaskCreate(TEMP_task, (char *)"TEMP_task", 1024, NULL, configMAX_PRIORITIES - 4, &TEMP_handle);
     // xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
-    xTaskCreate(LVGL_task, (char *)"LVGL_task", 4 * 1024, NULL, configMAX_PRIORITIES - 3, &LVGL_handle);
-    xTaskCreate(CLOCK_task, (char *)"Clock_task", 512, NULL, configMAX_PRIORITIES - 4, &CLOCK_handle);
-    xTaskCreate(WIFI_task, (char *)"Wifi_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &WIFI_handle);
-    // xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
-    // xTaskCreate(GPS_task, (char *)"Gps_task", 1024, NULL, configMAX_PRIORITIES - 4, &GPS_handle);
+    xTaskCreate(LVGL_task, (char *)"LVGL_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &LVGL_handle);
+    xTaskCreate(CLOCK_task, (char *)"Clock_task", 1024, NULL, configMAX_PRIORITIES - 4, &CLOCK_handle);
+    // xTaskCreate(WIFI_task, (char *)"Wifi_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &WIFI_handle);
+    xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
+    xTaskCreate(BLE_trans_task, (char *)"Ble_trans_task", 1024, NULL, configMAX_PRIORITIES - 5, &BLE_trans_handle);
+    xTaskCreate(MOTOR_task, (char *)"Motor_task", 1024, NULL, configMAX_PRIORITIES - 5, &MOTOR_handle);
+    xTaskCreate(BAT_task, (char *)"Bat_task", 1024, NULL, configMAX_PRIORITIES - 4, &BAT_handle);
+    xTaskCreate(FILE_task, (char *)"File_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &FILE_handle);
 
     vTaskStartScheduler();
     while (1) {

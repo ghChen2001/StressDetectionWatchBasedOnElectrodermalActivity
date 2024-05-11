@@ -1,6 +1,7 @@
 SET(SOURCES screens/ui_Home.c
     screens/ui_Sensor.c
     screens/ui_Debug.c
+    screens/ui_Settings.c
     # screens/ui_HearteRate.c
     ui.c
     ui_helpers.c
@@ -15,6 +16,7 @@ SET(SOURCES screens/ui_Home.c
     fonts/ui_font_TempFont.c
     fonts/ui_font_TempNumberFont.c
     fonts/ui_font_Title.c
-    fonts/ui_font_YearFont.c)
+    fonts/ui_font_YearFont.c
+    fonts/ui_font_lock.c)
 
 add_library(ui ${SOURCES})

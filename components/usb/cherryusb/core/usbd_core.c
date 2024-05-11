@@ -9,10 +9,19 @@
 #if defined(CONFIG_USBDEV_TX_THREAD) || defined(CONFIG_USBDEV_RX_THREAD)
 #include "usb_osal.h"
 #endif
+#include <FreeRTOS.h>
+#include "semphr.h"
+#include "board.h"
+#include "bflb_spi.h"
+#include "bflb_core.h"
+
+static TaskHandle_t MSC_deamon;
+// SemaphoreHandle_t xSem_usb;
+SemaphoreHandle_t xSem_usb = NULL;
 
 /* general descriptor field offsets */
-#define DESC_bLength         0 /** Length offset */
-#define DESC_bDescriptorType 1 /** Descriptor type offset */
+#define DESC_bLength                  0 /** Length offset */
+#define DESC_bDescriptorType          1 /** Descriptor type offset */
 
 /* config descriptor field offsets */
 #define CONF_DESC_wTotalLength        2 /** Total length offset */
@@ -20,11 +29,11 @@
 #define CONF_DESC_bmAttributes        7 /** configuration characteristics */
 
 /* interface descriptor field offsets */
-#define INTF_DESC_bInterfaceNumber  2 /** Interface number offset */
-#define INTF_DESC_bAlternateSetting 3 /** Alternate setting offset */
+#define INTF_DESC_bInterfaceNumber    2 /** Interface number offset */
+#define INTF_DESC_bAlternateSetting   3 /** Alternate setting offset */
 
-#define USB_EP_OUT_NUM 8
-#define USB_EP_IN_NUM  8
+#define USB_EP_OUT_NUM                8
+#define USB_EP_IN_NUM                 8
 
 struct usbd_tx_rx_msg {
     uint8_t ep;
@@ -1170,6 +1179,7 @@ static void usbdev_tx_thread(void *argument)
 
     while (1) {
         ret = usb_osal_mq_recv(usbd_tx_mq, (uintptr_t *)&msg, 0xffffffff);
+        printf("TX RET %d\r\n", ret);
         if (ret < 0) {
             continue;
         }
@@ -1177,6 +1187,9 @@ static void usbdev_tx_thread(void *argument)
         if (msg->cb) {
             msg->cb(msg->ep, msg->nbytes);
         }
+
+        // printf("TX RET %d\r\n", ret);
+        // vTaskDelay(1);
     }
 }
 #endif
@@ -1189,6 +1202,7 @@ static void usbdev_rx_thread(void *argument)
 
     while (1) {
         ret = usb_osal_mq_recv(usbd_rx_mq, (uintptr_t *)&msg, 0xffffffff);
+        printf("RX RET %d\r\n", ret);
         if (ret < 0) {
             continue;
         }
@@ -1196,9 +1210,41 @@ static void usbdev_rx_thread(void *argument)
         if (msg->cb) {
             msg->cb(msg->ep, msg->nbytes);
         }
+
+        // vTaskDelay(1);
     }
 }
 #endif
+
+void USBD_IRQHandler(int irq, void *arg)
+{
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+    // printf("USBD_IRQHandler\r\n");
+
+    xSemaphoreGiveFromISR(xSem_usb, &xHigherPriorityTaskWoken);
+    bflb_irq_disable(37);
+
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    // printf("USBD_IRQHandler EXIT\r\n");
+}
+
+static void usbdev_deamon_thread(void *argument)
+{
+    struct usbd_tx_rx_msg *msg;
+    int ret;
+
+    printf("usbdev_deamon_thread\r\n");
+
+    while (1) {
+        // printf("xSemaphore Wait\r\n");
+        if (xSemaphoreTake(xSem_usb, portMAX_DELAY) == pdTRUE) {
+            // printf("xSemaphoreTake(xSem_usb\r\n");
+            USBD_IRQ_THREAD();
+            bflb_irq_enable(37);
+        }
+    }
+}
 
 #ifdef CONFIG_USBDEV_ADVANCE_DESC
 void usbd_desc_register(struct usb_descriptor *desc)
@@ -1271,7 +1317,7 @@ bool usb_device_is_configured(void)
 int usbd_initialize(void)
 {
 #ifdef CONFIG_USBDEV_TX_THREAD
-    usbd_tx_mq = usb_osal_mq_create(16);
+    usbd_tx_mq = usb_osal_mq_create(256);
     if (usbd_tx_mq == NULL) {
         return -1;
     }
@@ -1281,7 +1327,7 @@ int usbd_initialize(void)
     }
 #endif
 #ifdef CONFIG_USBDEV_RX_THREAD
-    usbd_rx_mq = usb_osal_mq_create(16);
+    usbd_rx_mq = usb_osal_mq_create(256);
     if (usbd_rx_mq == NULL) {
         return -1;
     }
@@ -1290,12 +1336,19 @@ int usbd_initialize(void)
         return -1;
     }
 #endif
+    xSem_usb = xSemaphoreCreateBinary();
+    xTaskCreate(usbdev_deamon_thread, (char *)"usbdev_task", 1024 * 5, NULL, configMAX_PRIORITIES - 4, &MSC_deamon);
+
     return usb_dc_init();
 }
 
 int usbd_deinitialize(void)
 {
     g_usbd_core.intf_offset = 0;
+    if(MSC_deamon != NULL){
+        vTaskDelete(MSC_deamon);
+    }
+    MSC_deamon = NULL;
     usb_dc_deinit();
 #if defined(CONFIG_USBDEV_TX_THREAD) || defined(CONFIG_USBDEV_RX_THREAD)
 #endif

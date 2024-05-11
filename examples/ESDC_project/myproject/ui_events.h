@@ -14,8 +14,8 @@ extern "C" {
 } /*extern "C"*/
 #endif
 
-void ui_UpdateTempuratureChart(int16_t temp);
-void ui_UpdateAccelerationChart(int16_t ax, int16_t ay, int16_t az);
+void ui_UpdateTemperatureChart(float temp);
+void ui_UpdateAccelerationChart(float ax, float ay, float az);
 void ui_UpdateHRLabel(int16_t hr);
 void ui_UpdateTempLabel(float temp);
 void ui_UpdateSecLabel(uint8_t sec);
@@ -40,5 +40,8 @@ void ui_UpdateMdl2(float out1, float out2);
 void ui_updateWeather(char *cityName, char *weatherText, uint8_t weatherCode, char *weatherTemp);
 void ui_UpdateStepLabel(int16_t step);
 void ui_UpdatePPGChart(signed long green, signed long red, signed long ired);
+void ui_updateBat(uint8_t batValue);
+void ui_updateBatColor(uint8_t batColor, uint8_t batValue);
+void ui_UpdateTouchLock(bool isTouchLocked);
 
 #endif

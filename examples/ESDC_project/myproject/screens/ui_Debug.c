@@ -14,14 +14,13 @@ void ui_Debug_screen_init(void)
 {
     ui_Debug = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_Debug, LV_OBJ_FLAG_SCROLLABLE); /// Flags
-    // lv_obj_set_style_bg_img_src(ui_Debug, &ui_img_189584499, LV_PART_MAIN | LV_STATE_DEFAULT);
-    // lv_obj_set_style_bg_img_opa(ui_Debug, 120, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_Debug, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_LabelDebug = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_LabelDebug, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelDebug, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelDebug, -3);
-    lv_obj_set_y(ui_LabelDebug, -178);
+    lv_obj_set_x(ui_LabelDebug, -2);
+    lv_obj_set_y(ui_LabelDebug, -136);
     lv_obj_set_align(ui_LabelDebug, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LabelDebug, "Sensor Panel 2");
     lv_obj_set_style_text_font(ui_LabelDebug, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -29,16 +28,16 @@ void ui_Debug_screen_init(void)
     ui_SensorEDA = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_SensorEDA, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_SensorEDA, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_SensorEDA, -98);
-    lv_obj_set_y(ui_SensorEDA, -144);
+    lv_obj_set_x(ui_SensorEDA, -73);
+    lv_obj_set_y(ui_SensorEDA, -110);
     lv_obj_set_align(ui_SensorEDA, LV_ALIGN_CENTER);
     lv_label_set_text(ui_SensorEDA, "EDA");
 
     ui_ChartEDA = lv_chart_create(ui_Debug);
-    lv_obj_set_width(ui_ChartEDA, 262);
-    lv_obj_set_height(ui_ChartEDA, 112);
-    lv_obj_set_x(ui_ChartEDA, 11);
-    lv_obj_set_y(ui_ChartEDA, -72);
+    lv_obj_set_width(ui_ChartEDA, 196);
+    lv_obj_set_height(ui_ChartEDA, 86);
+    lv_obj_set_x(ui_ChartEDA, 8);
+    lv_obj_set_y(ui_ChartEDA, -55);
     lv_obj_set_align(ui_ChartEDA, LV_ALIGN_CENTER);
     lv_chart_set_type(ui_ChartEDA, LV_CHART_TYPE_LINE);
     lv_chart_set_point_count(ui_ChartEDA, 120);
@@ -60,8 +59,8 @@ void ui_Debug_screen_init(void)
     ui_LabelEda1 = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_LabelEda1, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LabelEda1, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_x(ui_LabelEda1, 25);
-    lv_obj_set_y(ui_LabelEda1, 20);
+    lv_obj_set_x(ui_LabelEda1, 18);
+    lv_obj_set_y(ui_LabelEda1, 15);
     lv_obj_set_align(ui_LabelEda1, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LabelEda1, "EDA Min: Avg: Std:");
     // lv_obj_set_style_text_font(ui_LabelEda1, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -69,8 +68,8 @@ void ui_Debug_screen_init(void)
     ui_LabelEda2 = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_LabelEda2, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelEda2, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelEda2, 25);
-    lv_obj_set_y(ui_LabelEda2, 40);
+    lv_obj_set_x(ui_LabelEda2, 18);
+    lv_obj_set_y(ui_LabelEda2, 30);
     lv_obj_set_align(ui_LabelEda2, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LabelEda2, "EDA Peak Num: Avg: ");
     // lv_obj_set_style_text_font(ui_LabelEda2, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -78,8 +77,8 @@ void ui_Debug_screen_init(void)
     ui_LabelEda3 = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_LabelEda3, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelEda3, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelEda3, 25);
-    lv_obj_set_y(ui_LabelEda3, 60);
+    lv_obj_set_x(ui_LabelEda3, 18);
+    lv_obj_set_y(ui_LabelEda3, 46);
     lv_obj_set_align(ui_LabelEda3, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LabelEda3, "EDA Peak Min: Max: Std:");
     // lv_obj_set_style_text_font(ui_LabelEda3, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -87,8 +86,8 @@ void ui_Debug_screen_init(void)
     ui_LabelBvp = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_LabelBvp, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_LabelBvp, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_x(ui_LabelBvp, 25);
-    lv_obj_set_y(ui_LabelBvp, 80);
+    lv_obj_set_x(ui_LabelBvp, 18);
+    lv_obj_set_y(ui_LabelBvp, 61);
     lv_obj_set_align(ui_LabelBvp, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LabelBvp, "HRP Min: Max: Avg: HR:");
     // lv_obj_set_style_text_font(ui_LabelBvp, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -96,8 +95,8 @@ void ui_Debug_screen_init(void)
     ui_LabelTemp = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_LabelTemp, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelTemp, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelTemp, 25);
-    lv_obj_set_y(ui_LabelTemp, 100);
+    lv_obj_set_x(ui_LabelTemp, 18);
+    lv_obj_set_y(ui_LabelTemp, 77);
     lv_obj_set_align(ui_LabelTemp, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LabelTemp, "Temp Avg:");
     // lv_obj_set_style_text_font(ui_LabelTemp, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -105,8 +104,8 @@ void ui_Debug_screen_init(void)
     ui_LabelMdl1 = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_LabelMdl1, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelMdl1, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelMdl1, 25);
-    lv_obj_set_y(ui_LabelMdl1, 120);
+    lv_obj_set_x(ui_LabelMdl1, 18);
+    lv_obj_set_y(ui_LabelMdl1, 92);
     lv_obj_set_align(ui_LabelMdl1, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LabelMdl1, "Mdl 1 0: 1: 2:");
     // lv_obj_set_style_text_font(ui_LabelMdl1, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -114,8 +113,8 @@ void ui_Debug_screen_init(void)
     ui_LabelMdl2 = lv_label_create(ui_Debug);
     lv_obj_set_width(ui_LabelMdl2, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_height(ui_LabelMdl2, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelMdl2, 25);
-    lv_obj_set_y(ui_LabelMdl2, 140);
+    lv_obj_set_x(ui_LabelMdl2, 18);
+    lv_obj_set_y(ui_LabelMdl2, 107);
     lv_obj_set_align(ui_LabelMdl2, LV_ALIGN_LEFT_MID);
     lv_label_set_text(ui_LabelMdl2, "Mdl 2 0: 1:");
     // lv_obj_set_style_text_font(ui_LabelMdl2, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);

@@ -9,14 +9,14 @@
 #include "bflb_core.h"
 #include "touch.h"
 
-#define CST816D_I2C_SLAVE_ADDR                     0x2A >> 1
+#define CST816D_I2C_SLAVE_ADDR                     0x15
 
 /* Maximum border values of the touchscreen pad that the chip can handle */
-#define CST816D_MAX_WIDTH                          ((uint16_t)320)
-#define CST816D_MAX_HEIGHT                         ((uint16_t)386)
+#define CST816D_MAX_WIDTH                          ((uint16_t)240)
+#define CST816D_MAX_HEIGHT                         ((uint16_t)296)
 
 /* Max detectable simultaneous touch points */
-#define CST816D_I2C_MAX_POINT                      1
+#define CST816D_I2C_MAX_POINT                      2
 
 /* Register of the current mode */
 #define CST816D_DEV_MODE_REG                        0xFA
@@ -57,5 +57,7 @@
 int cst816d_i2c_init(touch_coord_t *max_value);
 int cst816d_i2c_get_gesture_id();
 int cst816d_i2c_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max_num);
+int cst816d_i2c_sleep();
+int cst816d_i2c_wakeup();
 
 #endif /* __CST816D_H */

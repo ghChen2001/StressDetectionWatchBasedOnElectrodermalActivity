@@ -116,6 +116,16 @@
 #define LCD_COLOR_DEPTH              GC9B71_DISP_QSPI_COLOR_DEPTH
 #define _LCD_FUNC_DEFINE(_func, ...) gc9b71_qspi_##_func(__VA_ARGS__)
 
+#elif defined LCD_DISP_QSPI_SH8501A
+
+#include "disp_qspi/sh8501a_disp_qspi.h"
+#define LCD_INTERFACE_TYPE           LCD_INTERFACE_DBI
+#define LCD_W                        SH8501A_DISP_QSPI_W
+#define LCD_H                        SH8501A_DISP_QSPI_H
+#define LCD_COLOR_DEPTH              SH8501A_DISP_QSPI_COLOR_DEPTH
+#define _LCD_FUNC_DEFINE(_func, ...) sh8501a_qspi_##_func(__VA_ARGS__)
+void sh8501a_qspi_set_brightness(uint8_t brightness);
+
 #elif defined LCD_DPI_ILI9488
 
 #include "mipi_dpi/ili9488_dpi.h"

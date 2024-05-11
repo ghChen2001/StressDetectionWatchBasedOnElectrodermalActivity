@@ -24,7 +24,8 @@
 */
 /* #define LCD_SPI_ST7796 */
 
-#define LCD_DISP_QSPI_GC9B71
+// #define LCD_DISP_QSPI_GC9B71
+#define LCD_DISP_QSPI_SH8501A
 // #define LCD_DBI_RM69090
 // #define LCD_DBI_ICNA3311
 
@@ -421,6 +422,40 @@
     */
    #define GC9B71_QSPI_COLOR_REVERSAL 0
 
+   /* qspi sh8501a config */
+#elif defined LCD_DISP_QSPI_SH8501A
+
+        /* Selecting interface type, more configuration of peripherals comes later
+        1: DBI peripheral, supported functions: typeC-3wire, typeC-4wire, typeB-x8(8080); (support chips: bl616, bl606p, bl808),
+    */
+    #define LCD_DBI_INTERFACE_TYPE 1
+
+    /* enable the lcd reset function
+        0: Does not care about lcd hard reset
+        1: use gpio to reset the lcd
+    */
+    #define LCD_RESET_EN 1
+
+    /* Selecting pixel format
+        1: rgb565 (16-bit, output rgb565)
+        2: nrgb8888 (32-bit, output rgb888)
+    */
+    #define SH8501A_QSPI_PIXEL_FORMAT 1
+
+    /* SH8501A LCD width and height */
+    #define SH8501A_DISP_QSPI_W 240
+    #define SH8501A_DISP_QSPI_H 296
+
+    /* The offset of the area can be displayed */
+    #define SH8501A_QSPI_OFFSET_X 0
+    #define SH8501A_QSPI_OFFSET_Y 0
+
+    /* Color reversal, Some screens are required
+        0: disable
+        1: enable
+    */
+   #define SH8501A_QSPI_COLOR_REVERSAL 0
+
 #endif
 
 
@@ -487,7 +522,7 @@
     #define LCD_DBI_DMA_NAME "dma0_ch3"
 
     /* The maximum amount of data to be transferred affects the number of LLI memory pools */
-    #define DBI_DBI_DATA_SIZE_MAX (320 * 386)
+    #define DBI_DBI_DATA_SIZE_MAX (240 * 296)
 
     /* pin cfg */
     #if(LCD_DBI_WORK_MODE == 1)
@@ -521,9 +556,9 @@
         #define LCD_DBI_QSPI_PIN_CS    GPIO_PIN_11
 
         #define LCD_DBI_QSPI_PIN_DAT0  GPIO_PIN_12
-        #define LCD_DBI_QSPI_PIN_DAT1  GPIO_PIN_13
-        #define LCD_DBI_QSPI_PIN_DAT2  GPIO_PIN_14
-        #define LCD_DBI_QSPI_PIN_DAT3  GPIO_PIN_15
+        // #define LCD_DBI_QSPI_PIN_DAT1  GPIO_PIN_13
+        // #define LCD_DBI_QSPI_PIN_DAT2  GPIO_PIN_14
+        // #define LCD_DBI_QSPI_PIN_DAT3  GPIO_PIN_15
 
     #endif
 
@@ -585,12 +620,17 @@
 #define LCD_RESET_HOLD_MS   50
 
 /* lcd recovery time after reset end (ms) */
-#define LCD_RESET_DELAY   20
+#define LCD_RESET_DELAY   60
 
 #endif
 
 #ifdef LCD_DISP_QSPI_GC9B71
 #define LCD_ENABLE_PIN  GPIO_PIN_30
+#endif
+
+
+#ifdef LCD_DISP_QSPI_SH8501A
+#define OLED_ENABLE_PIN  GPIO_PIN_32
 #endif
 
 /* clang-format on */

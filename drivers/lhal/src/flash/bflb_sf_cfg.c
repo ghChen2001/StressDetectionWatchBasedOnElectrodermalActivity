@@ -374,6 +374,7 @@ static const ATTR_TCM_CONST_SECTION spi_flash_cfg_type flash_cfg_winb_80ew_16fw_
 };
 
 static const ATTR_TCM_CONST_SECTION spi_flash_cfg_type flash_cfg_winb_128jw_128jv = {
+    // For WINBOND W25Q64JV
     .reset_c_read_cmd = 0xff,
     .reset_c_read_cmd_size = 3,
     .mid = 0xef,
@@ -381,6 +382,7 @@ static const ATTR_TCM_CONST_SECTION spi_flash_cfg_type flash_cfg_winb_128jw_128j
     .de_burst_wrap_cmd = 0x77,
     .de_burst_wrap_cmd_dmy_clk = 0x3,
     .de_burst_wrap_data_mode = SF_CTRL_DATA_4_LINES,
+    // .de_burst_wrap_data_mode = SF_CTRL_ADDR_2_LINES,
     .de_burst_wrap_data = 0xF0,
 
     /*reg*/
@@ -412,6 +414,7 @@ static const ATTR_TCM_CONST_SECTION spi_flash_cfg_type flash_cfg_winb_128jw_128j
     .burst_wrap_cmd = 0x77,
     .burst_wrap_cmd_dmy_clk = 0x3,
     .burst_wrap_data_mode = SF_CTRL_DATA_4_LINES,
+    // .burst_wrap_data_mode = SF_CTRL_DATA_2_LINES,
     .burst_wrap_data = 0x40,
     /*erase*/
     .chip_erase_cmd = 0xc7,
@@ -424,6 +427,7 @@ static const ATTR_TCM_CONST_SECTION spi_flash_cfg_type flash_cfg_winb_128jw_128j
     .qpp_addr_mode = SF_CTRL_ADDR_1_LINE,
 
     .io_mode = SF_CTRL_QIO_MODE,
+    // .io_mode = SF_CTRL_DIO_MODE,
     .clk_delay = 1,
     .clk_invert = 0x3f,
 
@@ -2945,8 +2949,11 @@ int ATTR_TCM_SECTION bflb_sf_cfg_deinit_ext_flash_gpio(uint8_t ext_flash_pin)
     }
 
     for (i = 0; i < sizeof(gpio_pins); i++) {
-        bflb_gpio_init(gpio, gpio_pins[i], GPIO_INPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+        bflb_gpio_deinit(gpio, gpio_pins[i]);
     }
+    // for (i = 0; i < 4; i++) {
+    //     bflb_gpio_init(gpio, gpio_pins[i], GPIO_INPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+    // }
 
     return 0;
 }
@@ -2977,7 +2984,7 @@ int ATTR_TCM_SECTION bflb_sf_cfg_get_flash_cfg_need_lock(uint32_t flash_id, spi_
     uint32_t crc = 0, *p_crc;
     uint32_t xip_offset = 0;
 
-    if (flash_id == 0) {
+    if (flash_id == 0) { // For internal Flash. 
         xip_offset = bflb_sf_ctrl_get_flash_image_offset(group, bank);
         bflb_sf_ctrl_set_flash_image_offset(0, group, bank);
         bflb_xip_sflash_read_via_cache_need_lock(8 + BFLB_FLASH_XIP_BASE, buf, sizeof(spi_flash_cfg_type) + 8, group, bank);
@@ -2992,12 +2999,12 @@ int ATTR_TCM_SECTION bflb_sf_cfg_get_flash_cfg_need_lock(uint32_t flash_id, spi_
                 return 0;
             }
         }
-    } else {
+    } else { // External Flash. 
         for (i = 0; i < sizeof(flash_infos) / sizeof(flash_infos[0]); i++) {
             if (flash_infos[i].jedec_id == flash_id) {
                 arch_memcpy_fast(p_flash_cfg, flash_infos[i].cfg, sizeof(spi_flash_cfg_type));
                 return 0;
-            }
+            } // Find Flash in the configurations above. 
         }
     }
 

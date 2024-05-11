@@ -134,7 +134,9 @@ DRESULT disk_write(
     }
 
     if (pDiskioDriver[pdrv].disk_write) {
+        // printf("sector %d, count %d\r\n", sector, count);
         result = pDiskioDriver[pdrv].disk_write(buff, sector, count);
+        // printf("result %d\r\n", result);
     }
 
     /* translate the reslut code here */
@@ -159,6 +161,7 @@ DRESULT disk_ioctl(
     void *buff /* Buffer to send/receive control data */
 )
 {
+    // printf("pdrv %d", pdrv);
     DSTATUS stat = STA_NOINIT;
     int result = 0;
 

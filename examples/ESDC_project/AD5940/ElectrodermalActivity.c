@@ -47,7 +47,7 @@ AppEDACfg_Type AppEDACfg =
   .LfoscClkFreq = 32000.0,
   .AdcClkFreq = 16000000.0,
   .FifoThresh = 4,
-  .EDAODR = 1.0, /* 20.0 Hz*/
+  .EDAODR = 4.0, /* 20.0 Hz*/
   .NumOfData = -1,
   .VoltCalPoints = 8,
   .RcalVal = 10000.0, /* 10kOhm */
@@ -70,7 +70,7 @@ AppEDACfg_Type AppEDACfg =
 
   /* private varaibles */
   .SeqPatchInfo ={
-    .BuffLen = 4096,
+    .BuffLen = 32,
     .pSeqCmd = NULL,
   },
   .ImpEDABase = {0,0},
@@ -223,7 +223,7 @@ static AD5940Err AppEDASeqCfgGen(void)
   
   AD5940_SEQGenCtrl(bTRUE);
   /* Sequence starts here */
-  // AD5940_SEQGpioCtrlS(AGPIO_Pin6/*|AGPIO_Pin5*/|AGPIO_Pin1);
+  AD5940_SEQGpioCtrlS(AGPIO_Pin6/*|AGPIO_Pin5*/|AGPIO_Pin1);
   AD5940_StructInit(&aferef_cfg, sizeof(aferef_cfg));
   AD5940_REFCfgS(&aferef_cfg);  /* Turn off all references, we only enable it when we need it. */
   
@@ -242,8 +242,8 @@ static AD5940Err AppEDASeqCfgGen(void)
   sw_cfg.Dswitch = SWD_OPEN;  /* Open all switch D */
   sw_cfg.Pswitch = SWP_AIN2|SWP_SE0;
   sw_cfg.Nswitch = SWN_OPEN;
-  // sw_cfg.Tswitch = SWT_AIN0|SWT_AFE3LOAD;
-  sw_cfg.Tswitch = SWT_OPEN;
+  sw_cfg.Tswitch = SWT_AIN0|SWT_AFE3LOAD;
+  // sw_cfg.Tswitch = SWT_OPEN;
   AD5940_SWMatrixCfgS(&sw_cfg);
 
   AD5940_StructInit(&dsp_cfg, sizeof(dsp_cfg));
@@ -257,7 +257,7 @@ static AD5940Err AppEDASeqCfgGen(void)
   dsp_cfg.ADCFilterCfg.ADCSinc3Osr = ADCSINC3OSR_5;
   dsp_cfg.ADCFilterCfg.BpNotch = bTRUE;
   dsp_cfg.ADCFilterCfg.BpSinc3 = bFALSE;
-  dsp_cfg.ADCFilterCfg.Sinc2NotchEnable = bTRUE;
+  dsp_cfg.ADCFilterCfg.Sinc2NotchEnable = bFALSE;
   dsp_cfg.DftCfg.DftNum = AppEDACfg.DftNum;
   dsp_cfg.DftCfg.DftSrc = DFTSRC_AVG; /* Use averaged SINC3 data */
   // dsp_cfg.StatCfg.StatEnable = bTRUE;
@@ -636,10 +636,10 @@ static AD5940Err AppEDARegModify(int32_t * const pData, uint32_t *pDataCount)
     sw_cfg.Dswitch = SWD_OPEN;  /* Open all switch D */
     sw_cfg.Pswitch = SWP_AIN2|SWP_SE0;
     sw_cfg.Nswitch = SWN_OPEN;
-    // sw_cfg.Tswitch = SWT_AIN0|SWT_AFE3LOAD;    /* This switch is for ECG. */
-    sw_cfg.Tswitch = SWT_OPEN;
+    sw_cfg.Tswitch = SWT_AIN0|SWT_AFE3LOAD;    /* This switch is for ECG. */
+    // sw_cfg.Tswitch = SWT_OPEN;
     AD5940_SWMatrixCfgS(&sw_cfg);
-    AD5940_ADCMuxCfgS(ADCMUXP_AIN4, ADCMUXN_VREF1P1);
+    // AD5940_ADCMuxCfgS(ADCMUXP_AIN4, ADCMUXN_VREF1P1);
     /* Apply patch for current measurement */
     //AppEDACfg.SeqPatchInfo.bMeasureVolt = bFALSE;
     AppEDACfg.SeqPatchInfo.Type = PATCHTYPE_CURR;
@@ -679,11 +679,11 @@ static AD5940Err AppEDARegModify(int32_t * const pData, uint32_t *pDataCount)
     sw_cfg.Dswitch = SWD_OPEN; /* Open all switch D */
     sw_cfg.Pswitch = SWP_OPEN;
     sw_cfg.Nswitch = SWN_OPEN;
-    // sw_cfg.Tswitch = SWT_AIN0|SWT_AFE3LOAD;    /* This switch is for ECG. */
+    sw_cfg.Tswitch = SWT_AIN0|SWT_AFE3LOAD;    /* This switch is for ECG. */
     // sw_cfg.Tswitch = SWT_AFE3LOAD;  /* This switch is for ECG. */
-    sw_cfg.Tswitch = SWT_OPEN;
+    // sw_cfg.Tswitch = SWT_OPEN;
     AD5940_SWMatrixCfgS(&sw_cfg);
-    AD5940_ADCMuxCfgS(ADCMUXP_AIN4, ADCMUXN_VREF1P1);
+    // AD5940_ADCMuxCfgS(ADCMUXP_AIN4, ADCMUXN_VREF1P1);
 
     /* Need change some registers in order to measure current */
     AD5940_SEQCtrlS(bFALSE);                  /* Stop it for now. */
@@ -875,7 +875,7 @@ AD5940Err AppEDAISR(void *pBuff, uint32_t *pCount)
   *pCount = 0;
   if(AppEDACfg.EDAInited == bFALSE)
     return AD5940ERR_APPERROR;
-  if(AD5940_WakeUp(20) > 20)  /* Wakeup AFE by read register, read 20 times at most */
+  if(AD5940_WakeUp(40) > 40)  /* Wakeup AFE by read register, read 20 times at most */
     return -98;  /* Wakeup Failed */
   AD5940_SleepKeyCtrlS(SLPKEY_LOCK);  /* Don't enter hibernate */
 

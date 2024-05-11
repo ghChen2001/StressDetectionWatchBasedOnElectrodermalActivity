@@ -5805,6 +5805,7 @@ static int bt_init(void)
 #if defined(BFLB_BLE)
     err = bl_onchiphci_interface_init();
     if (err) {
+		printf("error bl_onchiphci_interface_init, %d\r\n", err);
 		return err;
 	}
 #if defined(BFLB_HOST_ASSISTANT)
@@ -5814,12 +5815,14 @@ static int bt_init(void)
 
 	err = host_hci_init();
 	if (err) {
-		return err;
+        printf("error host_hci_init, %d\r\n", err);
+        return err;
 	}
 	if (IS_ENABLED(CONFIG_BT_CONN)) {
 		err = bt_conn_init();
 		if (err) {
-			return err;
+            printf("error bt_conn_init, %d\r\n", err);
+            return err;
 		}
 	}
 

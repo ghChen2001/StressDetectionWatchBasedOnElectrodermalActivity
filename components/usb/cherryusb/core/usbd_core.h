@@ -93,6 +93,8 @@ int usbd_deinitialize(void);
 
 void usbd_event_handler(uint8_t event);
 
+void USBD_IRQ_THREAD(void);
+
 #ifdef __cplusplus
 }
 #endif

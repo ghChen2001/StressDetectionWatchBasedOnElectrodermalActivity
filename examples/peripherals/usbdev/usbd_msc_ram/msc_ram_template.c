@@ -133,6 +133,7 @@ void usbd_msc_get_cap(uint8_t lun, uint32_t *block_num, uint16_t *block_size)
 
 int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
 {
+    printf("READ, sector %d, length %d\r\n", sector, length);
     if (SD_OK == SDH_ReadMultiBlocks(buffer, sector, gSDCardInfo.blockSize, length / gSDCardInfo.blockSize)) {
         return 0;
     } else {
@@ -145,6 +146,7 @@ int usbd_msc_sector_write(uint32_t sector, uint8_t *buffer, uint32_t length)
     status_t ret;
 
 _retry:
+    printf("WRITE, sector %d, length %d\r\n", sector, length);
     ret = SDH_WriteMultiBlocks((uint8_t *)buffer, sector, gSDCardInfo.blockSize, length / gSDCardInfo.blockSize);
 
     if (Status_Success == ret) {

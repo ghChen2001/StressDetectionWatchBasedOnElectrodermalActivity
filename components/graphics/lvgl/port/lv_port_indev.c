@@ -101,12 +101,12 @@ void lv_port_indev_init(void)
     indev_drv.read_cb = touchpad_read;
     indev_touchpad = lv_indev_drv_register(&indev_drv);
 
-#if 0
-    lv_obj_t *touchpad_cursor = lv_img_create(lv_scr_act());
-    lv_img_set_src(touchpad_cursor, LV_SYMBOL_EDIT);
-    lv_obj_clear_flag(touchpad_cursor, LV_OBJ_FLAG_CLICKABLE);
-    lv_indev_set_cursor(indev_touchpad, touchpad_cursor);
-#endif
+    // #if 1
+    //     lv_obj_t *touchpad_cursor = lv_img_create(lv_scr_act());
+    //     lv_img_set_src(touchpad_cursor, LV_SYMBOL_EDIT);
+    //     lv_obj_clear_flag(touchpad_cursor, LV_OBJ_FLAG_CLICKABLE);
+    //     lv_indev_set_cursor(indev_touchpad, touchpad_cursor);
+    // #endif
 
     /*------------------
      * Mouse
@@ -229,6 +229,24 @@ static void touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
     /*Set the last pressed coordinates*/
     data->point.x = last_x;
     data->point.y = last_y;
+}
+
+void touchpad_remove()
+{
+    lv_indev_delete(indev_touchpad);
+
+    cst816d_i2c_sleep();
+}
+
+void touchpad_restore()
+{
+    cst816d_i2c_wakeup();
+    static lv_indev_drv_t indev_drv;
+    /*Register a touchpad input device*/
+    lv_indev_drv_init(&indev_drv);
+    indev_drv.type = LV_INDEV_TYPE_POINTER;
+    indev_drv.read_cb = touchpad_read;
+    indev_touchpad = lv_indev_drv_register(&indev_drv);
 }
 
 /*Return true is the touchpad is pressed*/

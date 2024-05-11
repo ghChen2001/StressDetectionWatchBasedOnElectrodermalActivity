@@ -3,6 +3,8 @@
 #include "bflb_mtimer.h"
 #include "board.h"
 
+#define SDH_DEBUG 1
+
 extern void msc_ram_init(void);
 
 int main(void)

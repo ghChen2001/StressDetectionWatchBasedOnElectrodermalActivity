@@ -29,7 +29,7 @@
 #define lcd_dbi_transmit_cmd_pixel_fill_async lcd_dbi_transmit_cmd_pixel_fill_async
 
 lcd_dbi_init_t dbi_para = {
-    .clock_freq = 40 * 1000 * 1000,
+    .clock_freq = 240 * 1000 * 1000,
 #if (GC9B71_QSPI_PIXEL_FORMAT == 1)
     .pixel_format = LCD_DBI_LCD_PIXEL_FORMAT_RGB565,
 #elif (GC9B71_QSPI_PIXEL_FORMAT == 2)
@@ -96,61 +96,61 @@ const gc9b71_qspi_init_cmd_t gc9b71_qspi_init_cmds[] = {
 
     { 0xfe, NULL, 0 },
     { 0xef, NULL, 0 },
-    { 0x80, "\x11", 1 },
-    { 0x81, "\x70", 1 },
-    { 0x82, "\x09", 1 },
-    { 0x83, "\x03", 1 },
-    { 0x84, "\x62", 1 },
-    { 0x89, "\x18", 1 },
-    { 0x8a, "\x40", 1 },
-    { 0x8b, "\x0a", 1 },
-    { 0x3a, "\x05", 1 },
-    { 0x36, "\x40", 1 },
-    { 0xec, "\x07", 1 },
-    { 0x74, "\x01\x80\x00\x00\x00\x00", 6 },
-    { 0x98, "\x3e", 1 },
-    { 0x99, "\x3e", 1 },
-    { 0xa1, "\x01\x04", 2 },
-    { 0xa2, "\x01\x04", 2 },
-    { 0xcb, "\x02", 1 },
-    { 0x7c, "\xb6\x24", 2 },
-    { 0xac, "\x74", 1 },
-    { 0xf6, "\x80", 1 },
-    { 0xb5, "\x09\x09", 2 },
-    { 0xeb, "\x01\x81", 2 },
-    { 0x60, "\x38\x06\x13\x56", 4 },
-    { 0x63, "\x38\x08\x13\x56", 4 },
-    { 0x61, "\x3b\x1b\x58\x38", 4 },
-    { 0x62, "\x3b\x1b\x58\x38", 4 },
-    { 0x64, "\x38\x0a\x73\x16\x13\x56", 6},
-    { 0x66, "\x38\x0b\x73\x17\x13\x56", 6},
-    { 0x68, "\x00\x0b\x22\x0b\x22\x1c\x1c", 7},
-    { 0x69, "\x00\x0b\x26\x0b\x26\x1c\x1c", 7},
-    { 0x6a, "\x15\x00", 2},
-    { 0x6e, "\x08\x02\x1a\x00\x12\x12\x11\x11\x14\x14\x13\x13\x04\x19\x1e\x1d\x1d\x1e\x19\x04\x0b\x0b\x0c\x0c\x09\x09\x0a\x0a\x00\x1a\x01\x07", 32},
-    { 0x6c, "\xcc\x0c\xcc\x84\xcc\x04\x50", 7},
-    { 0x7d, "\x72", 1},
-    { 0x70, "\x02\x03\x09\x07\x09\x03\x09\x07\x09\x03", 10},
-    { 0x90, "\x06\x06\x05\x06", 4},
-    { 0x93, "\x45\xff\x00", 3},
-    { 0xc3, "\x15", 1},
-    { 0xc4, "\x36", 1},
-    { 0xc9, "\x3d", 1},
-    { 0xf0, "\x47\x07\x0a\x0a\x00\x29", 6},
-    { 0xf2, "\x47\x07\x0a\x0a\x00\x29", 6},
-    { 0xf1, "\x42\x91\x10\x2d\x2f\x6f", 6},
-    { 0xf3, "\x42\x91\x10\x2d\x2f\x6f", 6},
-    { 0xf9, "\x30", 1},
-    { 0xbe, "\x11", 1},
-    { 0xfb, "\x00\x00", 2},
+    { 0x80, "\x11", 1 },                                                                                                                              // Unknown command
+    { 0x81, "\x70", 1 },                                                                                                                              // Unknown command
+    { 0x82, "\x09", 1 },                                                                                                                              // Unknown command
+    { 0x83, "\x03", 1 },                                                                                                                              // Unknown command
+    { 0x84, "\x62", 1 },                                                                                                                              // Unknown command
+    { 0x89, "\x18", 1 },                                                                                                                              // Unknown command
+    { 0x8a, "\x40", 1 },                                                                                                                              // Unknown command
+    { 0x8b, "\x0a", 1 },                                                                                                                              // Unknown command
+    { 0x3a, "\x65", 1 },                                                                                                                              // Pixel Format Set
+    { 0x36, "\x40", 1 },                                                                                                                              // Memory Access Control
+    { 0xec, "\x00", 1 },                                                                                                                              // Iversion
+    { 0x74, "\x01\x80\x00\x00\x00\x00", 6 },                                                                                                          // Unknown command
+    { 0x98, "\x3e", 1 },                                                                                                                              // Unknown command
+    { 0x99, "\x3e", 1 },                                                                                                                              // Unknown command
+    { 0xa1, "\x01\x04", 2 },                                                                                                                          // Unknown command
+    { 0xa2, "\x01\x04", 2 },                                                                                                                          // Unknown command
+    { 0xcb, "\x02", 1 },                                                                                                                              // Unknown command
+    { 0x7c, "\xb6\x24", 2 },                                                                                                                          // Unknown command
+    { 0xac, "\x74", 1 },                                                                                                                              // Unknown command
+    { 0xf6, "\x80", 1 },                                                                                                                              // Unknown command
+    { 0xb5, "\x09\x09", 2 },                                                                                                                          // Unknown command
+    { 0xeb, "\x01\x81", 2 },                                                                                                                          // Unknown command
+    { 0x60, "\x38\x06\x13\x56", 4 },                                                                                                                  // Unknown command
+    { 0x63, "\x38\x08\x13\x56", 4 },                                                                                                                  // Unknown command
+    { 0x61, "\x3b\x1b\x58\x38", 4 },                                                                                                                  // Unknown command
+    { 0x62, "\x3b\x1b\x58\x38", 4 },                                                                                                                  // Unknown command
+    { 0x64, "\x38\x0a\x73\x16\x13\x56", 6 },                                                                                                          // Unknown command
+    { 0x66, "\x38\x0b\x73\x17\x13\x56", 6 },                                                                                                          // Unknown command
+    { 0x68, "\x00\x0b\x22\x0b\x22\x1c\x1c", 7 },                                                                                                      // Unknown command
+    { 0x69, "\x00\x0b\x26\x0b\x26\x1c\x1c", 7 },                                                                                                      // Unknown command
+    { 0x6a, "\x15\x00", 2 },                                                                                                                          // Unknown command
+    { 0x6e, "\x08\x02\x1a\x00\x12\x12\x11\x11\x14\x14\x13\x13\x04\x19\x1e\x1d\x1d\x1e\x19\x04\x0b\x0b\x0c\x0c\x09\x09\x0a\x0a\x00\x1a\x01\x07", 32 }, // Unknown command
+    { 0x6c, "\xcc\x0c\xcc\x84\xcc\x04\x50", 7 },                                                                                                      // Unknown command
+    { 0x7d, "\x72", 1 },                                                                                                                              // Unknown command
+    { 0x70, "\x02\x03\x09\x07\x09\x03\x09\x07\x09\x03", 10 },                                                                                         // Unknown command
+    { 0x90, "\x06\x06\x05\x06", 4 },                                                                                                                  // Unknown command
+    { 0x93, "\x45\xff\x00", 3 },                                                                                                                      // Unknown command
+    { 0xc3, "\x15", 1 },                                                                                                                              // Unknown command
+    { 0xc4, "\x36", 1 },                                                                                                                              // Unknown command
+    { 0xc9, "\x3d", 1 },                                                                                                                              // Unknown command
+    { 0xf0, "\x47\x07\x0a\x0a\x00\x29", 6 },                                                                                                          // Set Gamma 0
+    { 0xf2, "\x47\x07\x0a\x0a\x00\x29", 6 },                                                                                                          // Set Gamma 2
+    { 0xf1, "\x42\x91\x10\x2d\x2f\x6f", 6 },                                                                                                          // Set Gamma 1
+    { 0xf3, "\x42\x91\x10\x2d\x2f\x6f", 6 },                                                                                                          // Set Gamma 3
+    { 0xf9, "\x30", 1 },                                                                                                                              // Unknown command
+    { 0xbe, "\x11", 1 },                                                                                                                              // Unknown command
+    { 0xfb, "\x00\x00", 2 },                                                                                                                          // Unknown command
     // { 0xb1, "\x08", 1},     // SPI_2dat
-    { 0x11, NULL, 0},
-    { 0xFF, NULL, 120},
-    { 0x29, NULL, 0},
-    { 0xFF, NULL, 120},
-    { 0x2c, "\x00\x00\x00\x00", 4},
-    { 0x2c, "\x00\x00\x00\x00", 4},
-    { 0xFF, NULL, 120},
+    { 0x11, NULL, 0 },   // Sleep Mode Out
+    { 0xFF, NULL, 120 }, // Delay
+    { 0x29, NULL, 0 },   // Display On
+    { 0xFF, NULL, 120 }, // Delay
+    // { 0x2c, "\x00\x00\x00\x00", 4 },
+    // { 0x2c, "\x00\x00\x00\x00", 4 },
+    // { 0xFF, NULL, 120 },
 };
 
 /**

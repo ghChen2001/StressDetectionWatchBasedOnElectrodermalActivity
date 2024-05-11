@@ -48,6 +48,7 @@ target_sources(app PRIVATE lcd/spi/st7789v_spi.c)
 # target_sources(app PRIVATE lcd/mipi_dpi/gc9503v_dpi.c)
 
 target_sources(app PRIVATE lcd/disp_qspi/gc9b71_disp_qspi.c)
+target_sources(app PRIVATE lcd/disp_qspi/sh8501a_disp_qspi.c)
 # target_sources(app PRIVATE lcd/mipi_dpi/bl_mipi_dpi_sim.c)
 # target_sources(app PRIVATE lcd/mipi_dpi/standard_dpi.c)
 # target_sources(app PRIVATE lcd/mipi_dpi/ili9488_dpi.c)

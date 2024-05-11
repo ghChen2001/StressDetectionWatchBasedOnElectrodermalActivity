@@ -43,6 +43,8 @@ extern lv_indev_t *indev_keypad;
 //extern lv_indev_t * indev_button;
 
 void lv_port_indev_init(void);
+void touchpad_remove();
+void touchpad_restore();
 
 /**********************
  *      MACROS

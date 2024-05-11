@@ -287,13 +287,13 @@ const GLB_WA_PLL_CFG_BASIC_Type ATTR_CLOCK_CONST_SECTION audioPll245P76BasicCfg_
     .clkpllSdmBypass = 0,    /*!< pll_sdm_bypass */
 };
 const GLB_WA_PLL_Cfg_Type ATTR_CLOCK_CONST_SECTION audioPllCfg_245P76M[GLB_XTAL_MAX] = {
-    { NULL, 0x0, 8 },                                       /*!< XTAL is None */
-    { &audioPll245P76BasicCfg_24M, 0xA3D7, 8 },             /*!< XTAL is 24M */
-    { &audioPll245P76BasicCfg_32M_38P4M_40M, 0xF5C2, 8 },   /*!< XTAL is 32M */
-    { &audioPll245P76BasicCfg_32M_38P4M_40M, 0xCCCC, 8 },   /*!< XTAL is 38.4M */
-    { &audioPll245P76BasicCfg_32M_38P4M_40M, 0xC49B, 8 },   /*!< XTAL is 40M */
-    { &audioPll245P76BasicCfg_26M, 0x973C, 8 },             /*!< XTAL is 26M */
-    { &audioPll245P76BasicCfg_32M_38P4M_40M, 0xF5C2, 8 },   /*!< XTAL is RC32M */
+    { NULL, 0x0, 8 },                                     /*!< XTAL is None */
+    { &audioPll245P76BasicCfg_24M, 0xA3D7, 8 },           /*!< XTAL is 24M */
+    { &audioPll245P76BasicCfg_32M_38P4M_40M, 0xF5C2, 8 }, /*!< XTAL is 32M */
+    { &audioPll245P76BasicCfg_32M_38P4M_40M, 0xCCCC, 8 }, /*!< XTAL is 38.4M */
+    { &audioPll245P76BasicCfg_32M_38P4M_40M, 0xC49B, 8 }, /*!< XTAL is 40M */
+    { &audioPll245P76BasicCfg_26M, 0x973C, 8 },           /*!< XTAL is 26M */
+    { &audioPll245P76BasicCfg_32M_38P4M_40M, 0xF5C2, 8 }, /*!< XTAL is RC32M */
 };
 
 const GLB_WA_PLL_CFG_BASIC_Type ATTR_CLOCK_CONST_SECTION audioPll240BasicCfg_24M_26M = {
@@ -327,13 +327,13 @@ const GLB_WA_PLL_CFG_BASIC_Type ATTR_CLOCK_CONST_SECTION audioPll240BasicCfg_32M
     .clkpllSdmBypass = 0,    /*!< pll_sdm_bypass */
 };
 const GLB_WA_PLL_Cfg_Type ATTR_CLOCK_CONST_SECTION audioPllCfg_240M[GLB_XTAL_MAX] = {
-    { NULL, 0x0, 8 },                                   /*!< XTAL is None */
-    { &audioPll240BasicCfg_24M_26M, 0xA000, 8 },        /*!< XTAL is 24M */
-    { &audioPll240BasicCfg_32M_38P4M_40M, 0xF000, 8 },  /*!< XTAL is 32M */
-    { &audioPll240BasicCfg_32M_38P4M_40M, 0xC800, 8 },  /*!< XTAL is 38.4M */
-    { &audioPll240BasicCfg_32M_38P4M_40M, 0xC000, 8 },  /*!< XTAL is 40M */
-    { &audioPll240BasicCfg_24M_26M, 0x93B1, 8 },        /*!< XTAL is 26M */
-    { &audioPll240BasicCfg_32M_38P4M_40M, 0xF000, 8 },  /*!< XTAL is RC32M */
+    { NULL, 0x0, 8 },                                  /*!< XTAL is None */
+    { &audioPll240BasicCfg_24M_26M, 0xA000, 8 },       /*!< XTAL is 24M */
+    { &audioPll240BasicCfg_32M_38P4M_40M, 0xF000, 8 }, /*!< XTAL is 32M */
+    { &audioPll240BasicCfg_32M_38P4M_40M, 0xC800, 8 }, /*!< XTAL is 38.4M */
+    { &audioPll240BasicCfg_32M_38P4M_40M, 0xC000, 8 }, /*!< XTAL is 40M */
+    { &audioPll240BasicCfg_24M_26M, 0x93B1, 8 },       /*!< XTAL is 26M */
+    { &audioPll240BasicCfg_32M_38P4M_40M, 0xF000, 8 }, /*!< XTAL is RC32M */
 };
 
 const GLB_SLAVE_GRP_0_TBL_Type ATTR_CLOCK_CONST_SECTION glb_slave_grp_0_table[GLB_SLAVE_GRP_0_MAX] = {
@@ -4094,10 +4094,10 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL(uint8_t xtalType, const GLB_
 BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_240M(void)
 {
     /* GLB_XTAL_Type */
-    uint8_t xtalType=GLB_XTAL_NONE;
+    uint8_t xtalType = GLB_XTAL_NONE;
 
     HBN_Get_Xtal_Type(&xtalType);
-    return GLB_Config_AUDIO_PLL((uint8_t)xtalType,audioPllCfg_240M);
+    return GLB_Config_AUDIO_PLL((uint8_t)xtalType, audioPllCfg_240M);
 }
 
 /****************************************************************************/ /**
@@ -4111,10 +4111,10 @@ BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_240M(void)
 BL_Err_Type ATTR_CLOCK_SECTION GLB_Config_AUDIO_PLL_To_245P76M(void)
 {
     /* GLB_XTAL_Type */
-    uint8_t xtalType=GLB_XTAL_NONE;
+    uint8_t xtalType = GLB_XTAL_NONE;
 
     HBN_Get_Xtal_Type(&xtalType);
-    return GLB_Config_AUDIO_PLL((uint8_t)xtalType,audioPllCfg_245P76M);
+    return GLB_Config_AUDIO_PLL((uint8_t)xtalType, audioPllCfg_245P76M);
 }
 
 /****************************************************************************/ /**

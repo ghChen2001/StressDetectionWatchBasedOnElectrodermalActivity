@@ -2,37 +2,41 @@
 #include "usbd_core.h"
 #include "usbh_core.h"
 #include "hardware/usb_v2_reg.h"
+#include <FreeRTOS.h>
+#include "semphr.h"
 
 #ifndef CONFIG_USB_EHCI_HCOR_RESERVED_DISABLE
 #error "usb host must enable CONFIG_USB_EHCI_HCOR_RESERVED_DISABLE"
 #endif
 
+// extern SemaphoreHandle_t xSem_usb;
+
 /* select only one mode */
 // #define CONFIG_USB_PINGPONG_ENABLE
 // #define CONFIG_USB_TRIPLE_ENABLE
 
-#define BLFB_USB_BASE ((uint32_t)0x20072000)
-#define BFLB_PDS_BASE ((uint32_t)0x2000e000)
+#define BLFB_USB_BASE                     ((uint32_t)0x20072000)
+#define BFLB_PDS_BASE                     ((uint32_t)0x2000e000)
 
-#define PDS_USB_CTL_OFFSET      (0x500) /* usb_ctl */
-#define PDS_USB_PHY_CTRL_OFFSET (0x504) /* usb_phy_ctrl */
+#define PDS_USB_CTL_OFFSET                (0x500) /* usb_ctl */
+#define PDS_USB_PHY_CTRL_OFFSET           (0x504) /* usb_phy_ctrl */
 
 /* 0x500 : usb_ctl */
-#define PDS_REG_USB_SW_RST_N   (1 << 0U)
-#define PDS_REG_USB_EXT_SUSP_N (1 << 1U)
-#define PDS_REG_USB_WAKEUP     (1 << 2U)
-#define PDS_REG_USB_L1_WAKEUP  (1 << 3U)
-#define PDS_REG_USB_DRVBUS_POL (1 << 4U)
-#define PDS_REG_USB_IDDIG      (1 << 5U)
+#define PDS_REG_USB_SW_RST_N              (1 << 0U)
+#define PDS_REG_USB_EXT_SUSP_N            (1 << 1U)
+#define PDS_REG_USB_WAKEUP                (1 << 2U)
+#define PDS_REG_USB_L1_WAKEUP             (1 << 3U)
+#define PDS_REG_USB_DRVBUS_POL            (1 << 4U)
+#define PDS_REG_USB_IDDIG                 (1 << 5U)
 
 /* 0x504 : usb_phy_ctrl */
-#define PDS_REG_USB_PHY_PONRST       (1 << 0U)
-#define PDS_REG_USB_PHY_OSCOUTEN     (1 << 1U)
-#define PDS_REG_USB_PHY_XTLSEL_SHIFT (2U)
-#define PDS_REG_USB_PHY_XTLSEL_MASK  (0x3 << PDS_REG_USB_PHY_XTLSEL_SHIFT)
-#define PDS_REG_USB_PHY_OUTCLKSEL    (1 << 4U)
-#define PDS_REG_USB_PHY_PLLALIV      (1 << 5U)
-#define PDS_REG_PU_USB20_PSW         (1 << 6U)
+#define PDS_REG_USB_PHY_PONRST            (1 << 0U)
+#define PDS_REG_USB_PHY_OSCOUTEN          (1 << 1U)
+#define PDS_REG_USB_PHY_XTLSEL_SHIFT      (2U)
+#define PDS_REG_USB_PHY_XTLSEL_MASK       (0x3 << PDS_REG_USB_PHY_XTLSEL_SHIFT)
+#define PDS_REG_USB_PHY_OUTCLKSEL         (1 << 4U)
+#define PDS_REG_USB_PHY_PLLALIV           (1 << 5U)
+#define PDS_REG_PU_USB20_PSW              (1 << 6U)
 
 #define USB_SOF_TIMER_MASK_AFTER_RESET_HS (0x44C)
 #define USB_SOF_TIMER_MASK_AFTER_RESET_FS (0x2710)
@@ -140,18 +144,18 @@ uint8_t usbh_get_port_speed(const uint8_t port)
     return USB_SPEED_HIGH;
 }
 
-#define USB_FIFO_F0  0
-#define USB_FIFO_F1  1
-#define USB_FIFO_F2  2
-#define USB_FIFO_F3  3
-#define USB_FIFO_CXF 0xff
+#define USB_FIFO_F0             0
+#define USB_FIFO_F1             1
+#define USB_FIFO_F2             2
+#define USB_FIFO_F3             3
+#define USB_FIFO_CXF            0xff
 
-#define USB_FIFO_DIR_OUT 0
-#define USB_FIFO_DIR_IN  1
-#define USB_FIFO_DIR_BID 2
+#define USB_FIFO_DIR_OUT        0
+#define USB_FIFO_DIR_IN         1
+#define USB_FIFO_DIR_BID        2
 
-#define USB_VDMA_DIR_FIFO2MEM 0
-#define USB_VDMA_DIR_MEM2FIFO 1
+#define USB_VDMA_DIR_FIFO2MEM   0
+#define USB_VDMA_DIR_MEM2FIFO   1
 
 #define USB_NUM_BIDIR_ENDPOINTS 5
 
@@ -939,19 +943,25 @@ int usbd_ep_start_read(const uint8_t ep, uint8_t *data, uint32_t data_len)
     return 0;
 }
 
-void USBD_IRQHandler(int irq, void *arg)
+__WEAK void USBD_IRQHandler(int irq, void *arg)
 {
     uint32_t glb_intstatus;
     uint32_t dev_intstatus;
     uint32_t subgroup_intstatus;
     uint32_t regval;
     uint8_t ep_idx;
+    // BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+    printf("USBD_IRQHandler\r\n");
 
     glb_intstatus = getreg32(BLFB_USB_BASE + USB_GLB_ISR_OFFSET);
 
     if (glb_intstatus & USB_DEV_INT) {
+        // xSemaphoreGiveFromISR(xSem_usb, &xHigherPriorityTaskWoken);
+        printf("USB_DEV_INT\r\n");
         dev_intstatus = getreg32(BLFB_USB_BASE + USB_DEV_IGR_OFFSET);
         if (dev_intstatus & USB_INT_G0) {
+            printf("USB_INT_G0\r\n");
             subgroup_intstatus = bflb_usb_get_source_group_intstatus(0);
 
             if (subgroup_intstatus & USB_CX_SETUP_INT) {
@@ -992,6 +1002,7 @@ void USBD_IRQHandler(int irq, void *arg)
                     }
                 }
                 bflb_usb_source_group_int_clear(2, USB_TX0BYTE_INT);
+                printf("USB_TX0BYTE_INT\r\n");
             }
             if (subgroup_intstatus & USB_RX0BYTE_INT) {
                 for (uint8_t i = 1; i < 5; i++) {
@@ -1002,6 +1013,7 @@ void USBD_IRQHandler(int irq, void *arg)
                 }
 
                 bflb_usb_source_group_int_clear(2, USB_RX0BYTE_INT);
+                printf("USB_RX0BYTE_INT\r\n");
             }
             if (subgroup_intstatus & USBRST_INT) {
                 bflb_usb_source_group_int_clear(2, USBRST_INT);
@@ -1058,10 +1070,147 @@ void USBD_IRQHandler(int irq, void *arg)
                     }
                 }
             }
+            printf("USB_INT_G3\r\n");
         }
         if (dev_intstatus & USB_INT_G4) {
+            printf("USB_INT_G4\r\n");
         }
     }
+    // portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    printf("USBD_IRQHandler EXIT\r\n");
+}
+
+void USBD_IRQ_THREAD()
+{
+    uint32_t glb_intstatus;
+    uint32_t dev_intstatus;
+    uint32_t subgroup_intstatus;
+    uint32_t regval;
+    uint8_t ep_idx;
+
+    // printf("USBD_IRQ_THREAD\r\n");
+
+    glb_intstatus = getreg32(BLFB_USB_BASE + USB_GLB_ISR_OFFSET);
+
+    if (glb_intstatus & USB_DEV_INT) {
+        // printf("USB_DEV_INT\r\n");
+        dev_intstatus = getreg32(BLFB_USB_BASE + USB_DEV_IGR_OFFSET);
+        if (dev_intstatus & USB_INT_G0) {
+            subgroup_intstatus = bflb_usb_get_source_group_intstatus(0);
+
+            if (subgroup_intstatus & USB_CX_SETUP_INT) {
+                bflb_usb_vdma_start_read(USB_FIFO_CXF, g_setup_buffer, 8);
+                while (getreg32(BLFB_USB_BASE + USB_VDMA_CXFPS1_OFFSET) & USB_VDMA_START_CXF) {
+                }
+
+                bflb_usb_source_group_int_clear(3, USB_VDMA_CMPLT_CXF);
+
+                usbd_event_ep0_setup_complete_handler(g_setup_buffer);
+            }
+        }
+        if (dev_intstatus & USB_INT_G1) {
+        }
+        if (dev_intstatus & USB_INT_G2) {
+            subgroup_intstatus = bflb_usb_get_source_group_intstatus(2);
+
+            if (subgroup_intstatus & USB_SUSP_INT) {
+                bflb_usb_source_group_int_clear(2, USB_SUSP_INT);
+
+                bflb_usb_reset_fifo(USB_FIFO_F0);
+                bflb_usb_reset_fifo(USB_FIFO_F1);
+                bflb_usb_reset_fifo(USB_FIFO_F2);
+                bflb_usb_reset_fifo(USB_FIFO_F3);
+                bflb_usb_reset_fifo(USB_FIFO_CXF);
+
+                usbd_event_suspend_handler();
+            }
+            if (subgroup_intstatus & USB_RESM_INT) {
+                bflb_usb_source_group_int_clear(2, USB_RESM_INT);
+                usbd_event_resume_handler();
+            }
+            if (subgroup_intstatus & USB_TX0BYTE_INT) {
+                for (uint8_t i = 1; i < 5; i++) {
+                    if (bflb_usb_get_tx_zlp_intstatus() & (1 << (i - 1))) {
+                        bflb_usb_clear_tx_zlp_intstatus(i);
+                        usbd_event_ep_in_complete_handler(i | 0x80, 0);
+                    }
+                }
+                bflb_usb_source_group_int_clear(2, USB_TX0BYTE_INT);
+                // printf("USB_TX0BYTE_INT\r\n");
+            }
+            if (subgroup_intstatus & USB_RX0BYTE_INT) {
+                for (uint8_t i = 1; i < 5; i++) {
+                    if (bflb_usb_get_rx_zlp_intstatus() & (1 << (i - 1))) {
+                        bflb_usb_clear_rx_zlp_intstatus(i);
+                        usbd_event_ep_out_complete_handler(i, 0);
+                    }
+                }
+
+                bflb_usb_source_group_int_clear(2, USB_RX0BYTE_INT);
+                // printf("USB_RX0BYTE_INT\r\n");
+            }
+            if (subgroup_intstatus & USBRST_INT) {
+                bflb_usb_source_group_int_clear(2, USBRST_INT);
+
+                bflb_usb_reset_fifo(USB_FIFO_F0);
+                bflb_usb_reset_fifo(USB_FIFO_F1);
+                bflb_usb_reset_fifo(USB_FIFO_F2);
+                bflb_usb_reset_fifo(USB_FIFO_F3);
+                bflb_usb_reset_fifo(USB_FIFO_CXF);
+
+                regval = getreg32(BLFB_USB_BASE + USB_DEV_SMT_OFFSET);
+                regval &= ~USB_SOFMT_MASK;
+#ifdef CONFIG_USB_HS
+                regval |= USB_SOF_TIMER_MASK_AFTER_RESET_HS;
+#else
+                regval |= USB_SOF_TIMER_MASK_AFTER_RESET_FS;
+#endif
+                putreg32(regval, BLFB_USB_BASE + USB_DEV_SMT_OFFSET);
+
+                memset(&g_bl_udc, 0, sizeof(g_bl_udc));
+
+                usbd_event_reset_handler();
+            }
+        }
+        if (dev_intstatus & USB_INT_G3) {
+            subgroup_intstatus = bflb_usb_get_source_group_intstatus(3);
+            bflb_usb_source_group_int_clear(3, subgroup_intstatus);
+            if (subgroup_intstatus & USB_VDMA_CMPLT_CXF) {
+                if (g_bl_udc.in_ep[0].ep_active) {
+                    g_bl_udc.in_ep[0].ep_active = false;
+                    g_bl_udc.in_ep[0].actual_xfer_len = g_bl_udc.in_ep[0].xfer_len - bflb_usb_vdma_get_remain_size(USB_FIFO_CXF);
+                    if (g_bl_udc.in_ep[0].actual_xfer_len < g_bl_udc.in_ep[0].ep_mps) {
+                        bflb_usb_control_transfer_done();
+                    }
+                    usbd_event_ep_in_complete_handler(0x80, g_bl_udc.in_ep[0].actual_xfer_len);
+                } else {
+                    g_bl_udc.out_ep[0].ep_active = false;
+                    g_bl_udc.out_ep[0].actual_xfer_len = g_bl_udc.out_ep[0].xfer_len - bflb_usb_vdma_get_remain_size(USB_FIFO_CXF);
+                    usbd_event_ep_out_complete_handler(0x00, g_bl_udc.out_ep[0].actual_xfer_len);
+                }
+            }
+
+            for (uint8_t i = 0; i < 4; i++) {
+                if (subgroup_intstatus & (1 << (i + 1))) {
+                    ep_idx = bflb_usb_get_fifo_ep(i);
+                    if (g_bl_udc.in_ep[ep_idx].ep_active) {
+                        g_bl_udc.in_ep[ep_idx].ep_active = 0;
+                        g_bl_udc.in_ep[ep_idx].actual_xfer_len = g_bl_udc.in_ep[ep_idx].xfer_len - bflb_usb_vdma_get_remain_size(i);
+                        usbd_event_ep_in_complete_handler(ep_idx | 0x80, g_bl_udc.in_ep[ep_idx].actual_xfer_len);
+                    } else if (g_bl_udc.out_ep[ep_idx].ep_active) {
+                        g_bl_udc.out_ep[ep_idx].ep_active = 0;
+                        g_bl_udc.out_ep[ep_idx].actual_xfer_len = g_bl_udc.out_ep[ep_idx].xfer_len - bflb_usb_vdma_get_remain_size(i);
+                        usbd_event_ep_out_complete_handler(ep_idx & 0x7f, g_bl_udc.out_ep[ep_idx].actual_xfer_len);
+                    }
+                }
+            }
+            // printf("USB_INT_G3\r\n");
+        }
+        if (dev_intstatus & USB_INT_G4) {
+            // printf("USB_INT_G4\r\n");
+        }
+    }
+    // printf("USBD_IRQ_THREAD EXIT\r\n");
 }
 
 #ifdef CONFIG_USBDEV_TEST_MODE

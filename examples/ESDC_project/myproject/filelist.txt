@@ -16,3 +16,4 @@ fonts/ui_font_TempFont.c
 fonts/ui_font_TempNumberFont.c
 fonts/ui_font_Title.c
 fonts/ui_font_YearFont.c
+fonts/ui_font_lock.c

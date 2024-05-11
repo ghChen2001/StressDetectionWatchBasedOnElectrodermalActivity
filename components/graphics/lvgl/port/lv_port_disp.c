@@ -22,7 +22,7 @@
 #define RGB_TRIPLE_BUFF_MODE 1
 #endif
 
-#define LVGL_BUFFER_SIZE LCD_W *LCD_H / 4
+#define LVGL_BUFFER_SIZE LCD_W * LCD_H / 2
 /**********************
  *      TYPEDEFS
  **********************/
@@ -34,6 +34,7 @@
 static void disp_init(void);
 static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p);
 void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area);
+void sh8501a_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area);
 
 /**********************
  *  STATIC VARIABLES
@@ -45,8 +46,8 @@ void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area);
 // static lv_color_t draw_buf_1[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* A buffer */
 // static lv_color_t draw_buf_2[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* An other buffer */
 #if defined(CONFIG_PSRAM)
-static lv_color_t draw_buf_1[LVGL_BUFFER_SIZE] ATTR_PSRAM_SECTION __attribute__((aligned(64)));
-static lv_color_t draw_buf_2[LVGL_BUFFER_SIZE] ATTR_PSRAM_SECTION __attribute__((aligned(64)));
+static lv_color_t draw_buf_1[LVGL_BUFFER_SIZE] ATTR_PSRAM_SECTION;
+static lv_color_t draw_buf_2[LVGL_BUFFER_SIZE] ATTR_PSRAM_SECTION;
 #else
 #error "No config psram!"
 #endif
@@ -187,7 +188,12 @@ void lv_port_disp_init(void)
     /*Used to copy the buffer's content to the display*/
     disp_drv_dsc.flush_cb = disp_flush;
 
+#ifdef LCD_DBI_RM69090
     disp_drv_dsc.rounder_cb = rm69090_rounder;
+#endif
+#ifdef LCD_DISP_QSPI_SH8501A
+    disp_drv_dsc.rounder_cb = sh8501a_rounder;
+#endif
 
     /*Set a display buffer*/
     disp_drv_dsc.draw_buf = (lv_disp_draw_buf_t *)&draw_buf_dsc;
@@ -242,12 +248,12 @@ void disp_init(void)
 {
     lcd_init();
     lcd_async_callback_register(flush_async_callback);
-    // // while(1){
-    // lcd_clear(LCD_COLOR_RGB(0x0F, 0xF0, 0Xa0));
-    // bflb_mtimer_delay_ms(500);
-    // lcd_clear(LCD_COLOR_RGB(0xF0, 0x0F, 0XB0));
-    // bflb_mtimer_delay_ms(500);
-    // // }
+    // while(1){
+    //     lcd_clear(LCD_COLOR_RGB(0x0F, 0xF0, 0Xa0));
+    //     bflb_mtimer_delay_ms(500);
+    //     lcd_clear(LCD_COLOR_RGB(0xF0, 0x0F, 0XB0));
+    //     bflb_mtimer_delay_ms(500);
+    // }
 }
 
 /* RGB LCD Common interface,  */
@@ -291,7 +297,7 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
 void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area)
 {
     /* Update the areas as needed. */
-    /* The S[9:0] and E[9:0]-S[9:0]+1 must can be divisible by 2. */
+    /* RM609090: The S[9:0] and E[9:0]-S[9:0]+1 must can be divisible by 2. */
 
     if (area->x1 % 2 != 0) {
         area->x1 -= 1;
@@ -306,6 +312,37 @@ void rm69090_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area)
     if ((area->y2 - area->y1 + 1) % 2 != 0) {
         area->y2 += 1;
     }
+}
+
+void sh8501a_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area)
+{
+    /* Update the areas as needed. */
+    /* SH8501A: The S[15:0] and E[15:0]-S[15:0]+1 must can be divisible by 4. */
+
+    if (area->x1 <= 3) {
+        area->x1 = 0;
+    } else if (area->x1 % 4) {
+        area->x1 -= area->x1 % 4;
+    }
+
+    // if (area->y1 <= 3) {
+    //     area->y1 = 0;
+    // } else if (area->y1 % 4) {
+    //     area->y1 -= area->y1 % 4;
+    // }
+    if ((area->x2 - area->x1 + 1) % 4 != 0) {
+        area->x2 += 4 - (area->x2 - area->x1 + 1) % 4;
+    }
+    // if ((area->y2 - area->y1 + 1) % 2 != 0) {
+    //     area->y2 += 1;
+    // }
+}
+
+void lv_port_disp_set_brightness(uint8_t brightness)
+{
+#ifdef LCD_DISP_QSPI_SH8501A
+    sh8501a_qspi_set_brightness(brightness);
+#endif
 }
 
 /* RGB LCD Common interface,  */

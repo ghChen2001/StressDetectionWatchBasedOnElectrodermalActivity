@@ -33,6 +33,8 @@ extern lv_disp_drv_t disp_drv;
 
 void lv_port_disp_init(void);
 
+void lv_port_disp_set_brightness(uint8_t brightness);
+
 /**********************
  *      MACROS
  **********************/

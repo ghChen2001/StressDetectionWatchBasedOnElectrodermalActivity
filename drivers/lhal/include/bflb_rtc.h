@@ -67,6 +67,15 @@ void bflb_rtc_set_utc_time(const struct bflb_tm *time);
  */
 void bflb_rtc_get_utc_time(struct bflb_tm *time);
 
+/**
+ * @brief Get current local time.
+ *
+ * @param [out] time tm handle
+ */
+void bflb_rtc_get_local_time(struct bflb_tm *time, int8_t time_zone_gmt);
+
+struct bflb_tm bflb_rtc_set_utc_time_sec(const uint32_t time_sec);
+
 #ifdef __cplusplus
 }
 #endif

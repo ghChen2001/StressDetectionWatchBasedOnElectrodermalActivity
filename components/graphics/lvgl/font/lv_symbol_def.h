@@ -277,6 +277,10 @@ extern "C" {
 #define LV_SYMBOL_DUMMY           "\xEF\xA3\xBF"
 #endif
 
+#if !defined MY_SYMBOL_HOMELOCK
+#define MY_SYMBOL_HOMELOCK "\xEF\x80\xA3" /*62313, 0xF023*/
+#endif
+
 /*
  * The following list is generated using
  * cat src/font/lv_symbol_def.h | sed -E -n 's/^#define\s+LV_(SYMBOL_\w+).*".*$/    _LV_STR_\1,/p'

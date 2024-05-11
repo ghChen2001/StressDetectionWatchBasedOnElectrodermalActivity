@@ -12,39 +12,43 @@
 #include "bflb_i2c.h"
 #include "cst816d_i2c.h"
 
-static struct bflb_device_s *touch_cst816d_i2c = NULL;
+#include <FreeRTOS.h>
+#include "semphr.h"
+
+extern struct bflb_device_s *i2c1;
+extern SemaphoreHandle_t xMutex_IIC1;
 int count = 0;
 
-static void cst816d_i2c_gpio_init(void)
-{
-    struct bflb_device_s *cst816d_i2c_gpio = NULL;
-    cst816d_i2c_gpio = bflb_device_get_by_name("gpio");
+// static void cst816d_i2c_gpio_init(void)
+// {
+//     struct bflb_device_s *cst816d_i2c_gpio = NULL;
+//     cst816d_i2c_gpio = bflb_device_get_by_name("gpio");
 
-    /* I2C0_SCL */
-    bflb_gpio_init(cst816d_i2c_gpio, TOUCH_I2C_SCL_PIN, GPIO_FUNC_I2C1 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_2);
-    /* I2C0_SDA */
-    bflb_gpio_init(cst816d_i2c_gpio, TOUCH_I2C_SDA_PIN, GPIO_FUNC_I2C1 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_2);
-    /* TOUCH_RESET */
-    bflb_gpio_init(cst816d_i2c_gpio, TOUCH_RESET, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0);
-}
+//     /* I2C0_SCL */
+//     bflb_gpio_init(cst816d_i2c_gpio, TOUCH_I2C_SCL_PIN, GPIO_FUNC_I2C1 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_2);
+//     /* I2C0_SDA */
+//     bflb_gpio_init(cst816d_i2c_gpio, TOUCH_I2C_SDA_PIN, GPIO_FUNC_I2C1 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_2);
+//     /* TOUCH_RESET */
+//     bflb_gpio_init(cst816d_i2c_gpio, TOUCH_RESET, GPIO_OUTPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0);
+// }
 
-static int cst816d_i2c_peripheral_init(void)
-{
-    touch_cst816d_i2c = bflb_device_get_by_name("i2c1");
+// static int cst816d_i2c_peripheral_init(void)
+// {
+//     touch_cst816d_i2c = bflb_device_get_by_name("i2c1");
 
-    if (touch_cst816d_i2c) {
-        // printf("ft6x36 i2c gpio init\r\n");
-        /* init i2c gpio */
-        cst816d_i2c_gpio_init();
-        /* init i2c 200k */
-        bflb_i2c_init(touch_cst816d_i2c, 400000);
-    } else {
-        printf("i2c device get fail\r\n");
-        return -1;
-    }
+//     if (touch_cst816d_i2c) {
+//         // printf("ft6x36 i2c gpio init\r\n");
+//         /* init i2c gpio */
+//         cst816d_i2c_gpio_init();
+//         /* init i2c 200k */
+//         bflb_i2c_init(touch_cst816d_i2c, 400000);
+//     } else {
+//         printf("i2c device get fail\r\n");
+//         return -1;
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
 static int cst816d_i2c_read_byte(uint8_t register_addr, uint8_t *data_buf, uint16_t len)
 {
@@ -58,7 +62,11 @@ static int cst816d_i2c_read_byte(uint8_t register_addr, uint8_t *data_buf, uint1
     msg[1].flags = I2C_M_READ;
     msg[1].buffer = data_buf;
     msg[1].length = len;
-    bflb_i2c_transfer(touch_cst816d_i2c, msg, 2);
+
+    xSemaphoreTake(xMutex_IIC1,
+                   portMAX_DELAY);
+    bflb_i2c_transfer(i2c1, msg, 2);
+    xSemaphoreGive(xMutex_IIC1);
 
     return 0;
 }
@@ -68,7 +76,7 @@ static int cst816d_i2c_write_byte(uint8_t register_addr, uint8_t *data_buf, uint
     static struct bflb_i2c_msg_s msg[2];
 
     msg[0].addr = CST816D_I2C_SLAVE_ADDR;
-    msg[0].flags = I2C_M_NOSTOP;
+    msg[0].flags = I2C_M_NOSTART;
     msg[0].buffer = &register_addr;
     msg[0].length = 1;
 
@@ -77,7 +85,11 @@ static int cst816d_i2c_write_byte(uint8_t register_addr, uint8_t *data_buf, uint
     msg[1].buffer = data_buf;
     msg[1].length = len;
 
-    bflb_i2c_transfer(touch_cst816d_i2c, msg, 2);
+    xSemaphoreTake(xMutex_IIC1,
+                   portMAX_DELAY);
+
+    bflb_i2c_transfer(i2c1, msg, 2);
+    xSemaphoreGive(xMutex_IIC1);
     return 0;
 }
 
@@ -99,7 +111,7 @@ int cst816d_i2c_init(touch_coord_t *max_value)
     uint8_t data_buf;
     printf("cst816d i2c init\r\n");
 
-    cst816d_i2c_peripheral_init();
+    // cst816d_i2c_peripheral_init();
 
     bflb_gpio_reset(cst816d_i2c_gpio, TOUCH_RESET);
     bflb_mtimer_delay_ms(10);
@@ -112,6 +124,9 @@ int cst816d_i2c_init(touch_coord_t *max_value)
     /* forbidden get into lowpower mode */ //寄存器值设置有问题，待查，目前使用默认参数；已解决：发送0xFF
     data_buf = CST816D_DEV_LOWPOWER_DIS;
     cst816d_i2c_write_byte(CST816D_DEV_LOWPOWER_REG, &data_buf, 1);
+    /* Set Report Rate */
+    data_buf = 0x02;
+    cst816d_i2c_write_byte(0xEE, &data_buf, 1);
 
     if (cst816d_i2c_read_byte(CST816D_DEV_ID_REG, &data_buf, 1)) {
         return -1;
@@ -149,8 +164,8 @@ int cst816d_i2c_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max
     }
 
     /* no touch or err */
-    if (data_buf[0] == 0x00 || data_buf[0] >= 0x02) {
-        if (data_buf[0] >= 0x02) {
+    if (data_buf[0] == 0x00 || data_buf[0] > 0x02) {
+        if (data_buf[0] > 0x02) {
             // Error
             printf("Value Error %d %d\r\n", data_buf[0], count);
             return -2;
@@ -169,6 +184,23 @@ int cst816d_i2c_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max
     // printf("x: %d, y: %d\r\n", touch_coord[0].coord_x, touch_coord[0].coord_y);
 
     return 0;
+}
+
+int cst816d_i2c_sleep()
+{
+    uint8_t data_buf = 0x03;
+
+    cst816d_i2c_write_byte(0xE5, &data_buf, 1);
+}
+
+int cst816d_i2c_wakeup()
+{
+    struct bflb_device_s *cst816d_i2c_gpio = NULL;
+    cst816d_i2c_gpio = bflb_device_get_by_name("gpio");
+    bflb_gpio_reset(cst816d_i2c_gpio, TOUCH_RESET);
+    vTaskDelay(10);
+    bflb_gpio_set(cst816d_i2c_gpio, TOUCH_RESET);
+    vTaskDelay(50);
 }
 
 #endif

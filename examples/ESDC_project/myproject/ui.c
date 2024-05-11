@@ -8,6 +8,30 @@
 
 ///////////////////// VARIABLES ////////////////////
 
+// SCREEN: ui_Settings
+void ui_Settings_screen_init(void);
+void ui_event_Settings(lv_event_t *e);
+lv_obj_t *ui_Settings;
+lv_obj_t *ui_SettingsLabel;
+lv_obj_t *ui_Switch_HR;
+lv_obj_t *ui_Switch_HR_Label;
+lv_obj_t *ui_Switch_EDA;
+lv_obj_t *ui_Switch_EDA_Label;
+lv_obj_t *ui_Switch_TEMP;
+lv_obj_t *ui_Switch_TEMP_Label;
+lv_obj_t *ui_Switch_ACC;
+lv_obj_t *ui_Switch_ACC_Label;
+lv_obj_t *ui_Switch_LOG;
+lv_obj_t *ui_Switch_MSC_Label;
+lv_obj_t *ui_Switch_MSC;
+lv_obj_t *ui_Slider_Brightness;
+lv_obj_t *ui_Button_Back;
+lv_obj_t *ui_Label_Brightness;
+lv_obj_t *ui_Switch_BLE_Label;
+lv_obj_t *ui_Switch_BLE;
+lv_obj_t *ui_Switch_WIFI_Label;
+lv_obj_t *ui_Switch_WIFI;
+
 // SCREEN: ui_Home
 void ui_Home_screen_init(void);
 void ui_event_Home(lv_event_t *e);
@@ -20,6 +44,7 @@ lv_obj_t *ui_Mon;
 lv_obj_t *ui_Second;
 lv_obj_t *ui_Label2;
 lv_obj_t *ui_AD5940;
+lv_obj_t *ui_AD5940_WarmUp;
 lv_obj_t *ui_psb;
 lv_obj_t *ui_ArcHr;
 lv_obj_t *ui_ArcStep;
@@ -29,6 +54,7 @@ lv_obj_t *ui_LabelHR;
 lv_obj_t *ui_LabelTemp;
 lv_obj_t *ui_LabelNumTemp;
 lv_obj_t *ui_LabeHR;
+lv_obj_t *ui_ImageTouchLock;
 lv_obj_t *ui_ImageWifi;
 lv_obj_t *ui_ImageWifiOff;
 lv_obj_t *ui_ImageBle;
@@ -44,6 +70,7 @@ lv_obj_t *ui_ImageStress;
 lv_obj_t *ui_ImageNeutral;
 lv_obj_t *ui_ImageLocation;
 lv_obj_t *ui_LabelCity;
+lv_obj_t *ui_LabelBat;
 
 // SCREEN: ui_Sensor
 void ui_Sensor_screen_init(void);
@@ -104,6 +131,10 @@ void ui_event_Home(lv_event_t *e)
         lv_indev_wait_release(lv_indev_get_act());
         _ui_screen_change(ui_HearteRate, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 250, 0);
     }
+    if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM) {
+        lv_indev_wait_release(lv_indev_get_act());
+        _ui_screen_change(ui_Settings, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 250, 0);
+    }
 }
 void ui_event_Sensor(lv_event_t *e)
 {
@@ -145,6 +176,20 @@ void ui_event_HearteRate(lv_event_t *e)
     }
 }
 
+void ui_event_Settings(lv_event_t *e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t *target = lv_event_get_target(e);
+    if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP) {
+        lv_indev_wait_release(lv_indev_get_act());
+        _ui_screen_change(ui_Home, LV_SCR_LOAD_ANIM_MOVE_TOP, 250, 0);
+    }
+    if (event_code == LV_EVENT_CLICKED) {
+        lv_indev_wait_release(lv_indev_get_act());
+        _ui_screen_change(ui_Home, LV_SCR_LOAD_ANIM_MOVE_TOP, 250, 0);
+    }
+}
+
 ///////////////////// SCREENS ////////////////////
 
 void ui_init(void)
@@ -157,6 +202,7 @@ void ui_init(void)
     ui_Sensor_screen_init();
     ui_Debug_screen_init();
     ui_HearteRate_screen_init();
+    ui_Settings_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Home);
 }

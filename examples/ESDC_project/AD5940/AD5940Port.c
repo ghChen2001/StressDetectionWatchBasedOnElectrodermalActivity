@@ -7,17 +7,19 @@
 #include "bflb_mtimer.h"
 #include "bflb_dma.h"
 #include "bflb_core.h"
+#include <FreeRTOS.h>
+#include "semphr.h"
+#include "task.h"
 
-extern struct bflb_device_s *spi0;                  /**< SPI instance. */
+extern struct bflb_device_s *spi0; /**< SPI instance. */
 extern struct bflb_device_s *gpio;
-extern bool spi0_tc;  /**< Flag used to indicate that SPI instance completed the transfer. */
+extern bool spi0_tc; /**< Flag used to indicate that SPI instance completed the transfer. */
 // extern struct bflb_device_s *dma0_ch0;
 // extern struct bflb_device_s *dma0_ch1;
 
 #define SPI_MASTER_CASE 0
 #define SPI_SLAVE_CASE  1
 #define SPI_CASE_SELECT SPI_MASTER_CASE
-
 
 extern uint8_t ucInterrupted;
 
@@ -68,44 +70,49 @@ extern uint8_t ucInterrupted;
 
 void AD5940_CsClr(void)
 {
-  // gpio = bflb_device_get_by_name("gpio");
-  bflb_gpio_reset(gpio, AD5940_CS_PIN);
+    // gpio = bflb_device_get_by_name("gpio");
+    bflb_gpio_reset(gpio, AD5940_CS_PIN);
 }
 
 void AD5940_CsSet(void)
 {
-  // gpio = bflb_device_get_by_name("gpio");
-  bflb_gpio_set(gpio, AD5940_CS_PIN);
-  //NRF_LOG_INFO("AD5940_CsSet1");
+    // gpio = bflb_device_get_by_name("gpio");
+    bflb_gpio_set(gpio, AD5940_CS_PIN);
+    //NRF_LOG_INFO("AD5940_CsSet1");
 }
 
 void AD5940_RstSet(void)
 {
-  // gpio = bflb_device_get_by_name("gpio");
-  bflb_gpio_set(gpio, AD5940_RST_PIN);
+    // gpio = bflb_device_get_by_name("gpio");
+    bflb_gpio_set(gpio, AD5940_RST_PIN);
 }
 
 void AD5940_RstClr(void)
 {
-  // gpio = bflb_device_get_by_name("gpio");
-  bflb_gpio_reset(gpio, AD5940_RST_PIN);
+    // gpio = bflb_device_get_by_name("gpio");
+    bflb_gpio_reset(gpio, AD5940_RST_PIN);
 }
 
 void AD5940_Delay10us(uint32_t time)
 {
-  time=time*10;
-  bflb_mtimer_delay_us(time);
+    time = time * 10;
+    // bflb_mtimer_delay_us(time);
+    if (time <= 1000) {
+        vTaskDelay(1);
+    } else {
+        vTaskDelay(time / 1000);
+    }
 }
 
 uint32_t AD5940_GetMCUIntFlag(void)
 {
-	return ucInterrupted;
+    return ucInterrupted;
 }
 
 uint32_t AD5940_ClrMCUIntFlag(void)
 {
-	ucInterrupted = 0;
-	return 1;
+    ucInterrupted = 0;
+    return 1;
 }
 
 // void spi_isr(int irq, void *arg)
@@ -156,10 +163,10 @@ uint32_t AD5940_ClrMCUIntFlag(void)
 //     //     tx_buffer[i] = 0;
 //     //     rx_buffer[i] = 0;
 //     // }
-	
+
 //     AD5940_CsSet();
 //     AD5940_RstSet();
-  
+
 // /* Set the SPI parameters */
 //     struct bflb_spi_config_s spi_cfg = {
 //   #if (SPI_CASE_SELECT == SPI_MASTER_CASE)

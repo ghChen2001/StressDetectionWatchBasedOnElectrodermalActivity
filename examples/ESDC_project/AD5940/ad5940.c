@@ -13,6 +13,8 @@
 **/
 #include "ad5940.h"
 #include "board.h"
+#include <FreeRTOS.h>
+#include "semphr.h"
 /*! \mainpage AD5940 Library Introduction
  * 
  * ![AD5940 EVAL Board](https://www.analog.com/-/media/analog/en/evaluation-board-images/images/eval-ad5940elcztop-web.gif?h=500&thn=1&hash=1F38F7CC1002894616F74D316365C0A2631C432B "ADI logo") 
@@ -51,6 +53,7 @@
  *
  */
 
+extern SemaphoreHandle_t xMutex_SPI;
 /* Remove below variables after AD594x is released. */
 static BoolFlag bIsS2silicon = bFALSE;
 
@@ -759,7 +762,7 @@ fImpCar_Type AD5940_ComplexMulInt(iImpCar_Type *a, iImpCar_Type *b)
 **/
 float AD5940_ComplexMag(fImpCar_Type *a)
 {
-  return sqrt(a->Real*a->Real + a->Image*a->Image);
+  return sqrtf(a->Real*a->Real + a->Image*a->Image);
 }
 
 /**
@@ -769,7 +772,7 @@ float AD5940_ComplexMag(fImpCar_Type *a)
 **/
 float AD5940_ComplexPhase(fImpCar_Type *a)
 {
-  return atan2(a->Image, a->Real);
+  return atan2f(a->Image, a->Real);
 }
 
 /**
@@ -995,11 +998,20 @@ static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
 {  
   // printf("Enter AD5940_SPIWriteReg");
   /* Set register address */
+  // printf("5940 W WAIT MUTEX\r\n");
+  xSemaphoreTake(xMutex_SPI,
+                 portMAX_DELAY);
+  // printf("5940 W TAKE MUTEX\r\n");
+  // bflb_mtimer_delay_us(10);
   AD5940_CsClr();
 	AD5940_ReadWrite24B((SPICMD_SETADDR<<16) | RegAddr);
   AD5940_CsSet();
+  // xSemaphoreGive(xMutex_SPI);
+
   AD5940_Delay10us(20);
   /* Add delay here to meet the SPI timing. */
+  // xSemaphoreTake(xMutex_SPI,
+  //                portMAX_DELAY);
   AD5940_CsClr();
   //AD5940_ReadWrite8B(SPICMD_WRITEREG);
   if(((RegAddr>=0x1000)&&(RegAddr<=0x3014)))
@@ -1009,6 +1021,9 @@ static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
 	{//AD5940_ReadWrite16B(RegData);
 	  AD5940_ReadWrite24B(SPICMD_WRITEREG<<16 | RegData);}
   AD5940_CsSet();
+  // bflb_mtimer_delay_us(10);
+  // printf("5940 W GIVE MUTEX\r\n");
+  xSemaphoreGive(xMutex_SPI);
 }
 //static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
 //{  
@@ -1035,26 +1050,32 @@ static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
 {  
   uint32_t Data = 0;
   /* Set register address that we want to read */
+  // printf("5940 R WAIT MUTEX\r\n");
+  xSemaphoreTake(xMutex_SPI,
+                 portMAX_DELAY);
+  // printf("5940 R TAKE MUTEX\r\n");
+  // bflb_mtimer_delay_us(10);
   AD5940_CsClr();
   // AD5940_ReadWrite8B(SPICMD_SETADDR);
   // AD5940_ReadWrite16B(RegAddr);
-	
 	AD5940_ReadWrite24B((SPICMD_SETADDR<<16) | RegAddr);
-	
   AD5940_CsSet();
-	AD5940_Delay10us(20);
+  // xSemaphoreGive(xMutex_SPI);
+
+  AD5940_Delay10us(20);
+  // xSemaphoreTake(xMutex_SPI,
+  //                portMAX_DELAY);
   /* Read it */
   AD5940_CsClr();
   //AD5940_ReadWrite8B(SPICMD_READREG);
   //AD5940_ReadWrite8B(0);  //Dummy read
-	//AD5940_ReadWrite16B(SPICMD_READREG<<8);
+  //AD5940_ReadWrite16B(SPICMD_READREG<<8);
   /* The real data is coming */
-  if((RegAddr>=0x1000)&&(RegAddr<=0x3014))
-	{ //Data = AD5940_ReadWrite32B(0);
-		 //NRF_LOG_INFO("32");
-	   Data = AD5940_ReadWrite48B(SPICMD_READREG<<40);		 
-		 Data = Data & 0xffffffff;
-		 //NRF_LOG_INFO("SPI32Data = %x",Data);
+  if ((RegAddr >= 0x1000) && (RegAddr <= 0x3014)) { //Data = AD5940_ReadWrite32B(0);
+                                                    //NRF_LOG_INFO("32");
+      Data = AD5940_ReadWrite48B(SPICMD_READREG << 40);
+      Data = Data & 0xffffffff;
+      //NRF_LOG_INFO("SPI32Data = %x",Data);
 	}
   else
 	{ //Data = AD5940_ReadWrite16B(0);
@@ -1068,6 +1089,9 @@ static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
 	//AD5940_ReadWrite56B((SPICMD_SETADDR<<48) | (RegAddr<<40) | (SPICMD_READREG<<32) );
 	
   AD5940_CsSet();
+  // bflb_mtimer_delay_us(10);
+  // printf("5940 R GIVE MUTEX\r\n");
+  xSemaphoreGive(xMutex_SPI);
   return Data;
 }
 //static uint32_t AD5940_SPIReadReg(uint16_t RegAddr)
@@ -1100,44 +1124,56 @@ void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
 {
   /* Use function AD5940_SPIReadReg to read REG_AFE_DATAFIFORD is also one method. */
    uint32_t i;
-   
-  if(uiReadCount < 3)
-  {
-      /* This method is more efficient when readcount < 3 */
-      //uint32_t i;
-      AD5940_CsClr();
-//      AD5940_ReadWrite8B(SPICMD_SETADDR);
-//      AD5940_ReadWrite16B(REG_AFE_DATAFIFORD);
-		AD5940_ReadWrite24B(SPICMD_SETADDR<<16 | REG_AFE_DATAFIFORD);
-      AD5940_CsSet();
-		  //AD5940_Delay10us(20);
-      for(i=0;i<uiReadCount;i++)
-      {
-         AD5940_CsClr();
-//         AD5940_ReadWrite8B(SPICMD_READREG);
-//         AD5940_ReadWrite8B(0);//Write Host status/Don't care
-//         pBuffer[i] = AD5940_ReadWrite32B(0);
-			pBuffer[i] = AD5940_ReadWrite48B(SPICMD_READREG<<40);
-         AD5940_CsSet();
-      }
+
+  //  taskENTER_CRITICAL();
+  // printf("5940 FIFO WAIT MUTEX\r\n");
+   xSemaphoreTake(xMutex_SPI,
+                  portMAX_DELAY);
+  //  printf("5940 FIFO TAKE MUTEX\r\n");
+   //  bflb_mtimer_delay_us(10);
+   //  printf("AD5940 FIFORD\r\n");
+
+   if (uiReadCount < 3) {
+       /* This method is more efficient when readcount < 3 */
+       //uint32_t i;
+       AD5940_CsClr();
+       //      AD5940_ReadWrite8B(SPICMD_SETADDR);
+       //      AD5940_ReadWrite16B(REG_AFE_DATAFIFORD);
+       AD5940_ReadWrite24B(SPICMD_SETADDR << 16 | REG_AFE_DATAFIFORD);
+       AD5940_CsSet();
+       //AD5940_Delay10us(20);
+       for (i = 0; i < uiReadCount; i++) {
+           AD5940_CsClr();
+           //         AD5940_ReadWrite8B(SPICMD_READREG);
+           //         AD5940_ReadWrite8B(0);//Write Host status/Don't care
+           //         pBuffer[i] = AD5940_ReadWrite32B(0);
+           pBuffer[i] = AD5940_ReadWrite48B(SPICMD_READREG << 40);
+           AD5940_CsSet();
+       }
   }
   else
   {
-     AD5940_CsClr();
-     AD5940_ReadWrite8B(SPICMD_READFIFO);
-     /* 6 dummy write before valid data read back */
-     for(i=0;i<6;i++)
-        AD5940_ReadWrite8B(0);
-     /* Continuously read DATAFIFORD register with offset 0 */
-     for(i=0;i<uiReadCount-2;i++)
-     {
-        pBuffer[i] = AD5940_ReadWrite32B(0); /*Offset is 0, so we always read DATAFIFORD register */
+      AD5940_CsClr();
+      AD5940_ReadWrite8B(SPICMD_READFIFO);
+      /* 6 dummy write before valid data read back */
+      for (i = 0; i < 6; i++)
+          AD5940_ReadWrite8B(0);
+      /* Continuously read DATAFIFORD register with offset 0 */
+      for (i = 0; i < uiReadCount - 2; i++) {
+          pBuffer[i] = AD5940_ReadWrite32B(0); /*Offset is 0, so we always read DATAFIFORD register */
      }
      /* Read back last two FIFO data with none-zero offset*/
      pBuffer[i++] = AD5940_ReadWrite32B(0x44444444);
      pBuffer[i] = AD5940_ReadWrite32B(0x44444444);
      AD5940_CsSet();
+     
   }
+  // vTaskDelay(10);
+  // printf("AD5940 FIFORD END\r\n");
+  // bflb_mtimer_delay_us(10);
+  // taskEXIT_CRITICAL();
+  // printf("5940 FIFO GIVE MUTEX\r\n");
+  xSemaphoreGive(xMutex_SPI);
 }
 //void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)   
 //{
@@ -3174,7 +3210,7 @@ void AD5940_HWReset(void)
 {
 // #ifndef CHIPSEL_M355
   AD5940_RstClr();
-  AD5940_Delay10us(1000); /* Delay some time */
+  AD5940_Delay10us(5000); /* Delay some time */
   AD5940_RstSet();
   AD5940_Delay10us(1000); /* AD5940 need some time to exit reset status. 200us looks good. */
 // #else
