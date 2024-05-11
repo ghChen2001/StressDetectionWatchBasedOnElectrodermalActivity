@@ -77,15 +77,6 @@ USB_NOCACHE_RAM_SECTION struct usbd_core_priv {
     struct usbd_tx_rx_msg rx_msg[USB_EP_OUT_NUM];
 } g_usbd_core;
 
-#if defined(CONFIG_USBDEV_TX_THREAD)
-usb_osal_mq_t usbd_tx_mq;
-usb_osal_thread_t usbd_tx_thread;
-#endif
-#if defined(CONFIG_USBDEV_RX_THREAD)
-usb_osal_mq_t usbd_rx_mq;
-usb_osal_thread_t usbd_rx_thread;
-#endif
-
 static void usbd_class_event_notify_handler(uint8_t event, void *arg);
 
 static void usbd_print_setup(struct usb_setup_packet *setup)
@@ -1149,19 +1140,13 @@ void usbd_event_ep0_out_complete_handler(uint8_t ep, uint32_t nbytes)
 
 void usbd_event_ep_in_complete_handler(uint8_t ep, uint32_t nbytes)
 {
-#ifndef CONFIG_USBDEV_TX_THREAD
     if (g_usbd_core.tx_msg[ep & 0x7f].cb) {
         g_usbd_core.tx_msg[ep & 0x7f].cb(ep, nbytes);
     }
-#else
-    g_usbd_core.tx_msg[ep & 0x7f].nbytes = nbytes;
-    usb_osal_mq_send(usbd_tx_mq, (uintptr_t)&g_usbd_core.tx_msg[ep & 0x7f]);
-#endif
 }
 
 void usbd_event_ep_out_complete_handler(uint8_t ep, uint32_t nbytes)
 {
-#ifndef CONFIG_USBDEV_RX_THREAD
     if (g_usbd_core.rx_msg[ep & 0x7f].cb) {
         g_usbd_core.rx_msg[ep & 0x7f].cb(ep, nbytes);
     }
@@ -1350,8 +1335,6 @@ int usbd_deinitialize(void)
     }
     MSC_deamon = NULL;
     usb_dc_deinit();
-#if defined(CONFIG_USBDEV_TX_THREAD) || defined(CONFIG_USBDEV_RX_THREAD)
-#endif
     return 0;
 }
 
