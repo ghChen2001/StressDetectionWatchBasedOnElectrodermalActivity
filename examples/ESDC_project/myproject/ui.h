@@ -22,6 +22,8 @@ extern lv_obj_t *ui_Settings;
 extern lv_obj_t *ui_SettingsLabel;
 extern lv_obj_t *ui_Switch_HR;
 extern lv_obj_t *ui_Switch_HR_Label;
+extern lv_obj_t *ui_Switch_TF;
+extern lv_obj_t *ui_Switch_TF_Label;
 extern lv_obj_t *ui_Switch_EDA;
 extern lv_obj_t *ui_Switch_EDA_Label;
 extern lv_obj_t *ui_Switch_TEMP;

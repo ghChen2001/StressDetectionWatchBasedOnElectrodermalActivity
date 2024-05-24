@@ -9,6 +9,8 @@ void TEMP_task_pre_delete();
 void TEMP_task_create();
 void HR_task_pre_delete();
 void HR_task_create();
+void Algo_task_pre_delete();
+void Algo_task_create();
 void fatfs2msc();
 void msc2fatfs();
 void ble_on();

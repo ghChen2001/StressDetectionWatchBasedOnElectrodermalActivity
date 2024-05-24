@@ -13,7 +13,7 @@
 #include "bflb_irq.h"
 
 #define SINGLE_READ_LENGTH 1024
-#define SINGLE_WRITE_LENGTH 1024
+#define SINGLE_WRITE_LENGTH 1024 * 32
 
 int MMC_disk_status()
 {
@@ -39,30 +39,30 @@ int MMC_disk_initialize()
 int MMC_disk_read(BYTE *buff, LBA_t sector, UINT count)
 {
     uint8_t ret;
-    uint16_t rCnt = 0;
+    // uint16_t rCnt = 0;
 
 // _retry:
 //     ret = NAND_ReadMultiBlocks(buff, sector, nandCardInfo.blockSize, count);
 
     // printf("count %d\r\n", count);
-    while (count >= SINGLE_READ_LENGTH) {
+    // while (count >= SINGLE_READ_LENGTH) {
     _retry:
-        ret = NAND_ReadMultiBlocks((uint8_t *)buff + nandCardInfo.blockSize * SINGLE_READ_LENGTH * rCnt, sector + SINGLE_READ_LENGTH * rCnt, nandCardInfo.blockSize, SINGLE_READ_LENGTH);
+        ret = NAND_ReadMultiBlocks((uint8_t *)buff, sector, nandCardInfo.blockSize, count);
         if (1 == ret) {
             goto _retry;
         }
-        count -= SINGLE_READ_LENGTH;
-        rCnt++;
-        vTaskDelay(1);
-    }
-    if (count > 0) {
-    _retry_:
-        ret = NAND_ReadMultiBlocks((uint8_t *)buff + nandCardInfo.blockSize * SINGLE_READ_LENGTH * rCnt, sector + SINGLE_READ_LENGTH * rCnt, nandCardInfo.blockSize, count);
-        vTaskDelay(1);
-        if (1 == ret) {
-            goto _retry_;
-        }
-    }
+    //     count -= SINGLE_READ_LENGTH;
+    //     rCnt++;
+    //     vTaskDelay(1);
+    // }
+    // if (count > 0) {
+    // _retry_:
+    //     ret = NAND_ReadMultiBlocks((uint8_t *)buff + nandCardInfo.blockSize * SINGLE_READ_LENGTH * rCnt, sector + SINGLE_READ_LENGTH * rCnt, nandCardInfo.blockSize, count);
+    //     vTaskDelay(1);
+    //     if (1 == ret) {
+    //         goto _retry_;
+    //     }
+    // }
 
     if (0 == ret) {
         return 0;
@@ -74,27 +74,27 @@ int MMC_disk_read(BYTE *buff, LBA_t sector, UINT count)
 int MMC_disk_write(const BYTE *buff, LBA_t sector, UINT count)
 {
     uint8_t ret;
-    uint16_t wCnt = 0;
+    // uint16_t wCnt = 0;
 
     // printf("count %d\r\n", count);
-    while (count >= SINGLE_WRITE_LENGTH) {
+    // while (count >= SINGLE_WRITE_LENGTH) {
     _retry:
-        ret = NAND_WriteMultiBlocks((uint8_t *)buff + nandCardInfo.blockSize * SINGLE_WRITE_LENGTH * wCnt, sector + SINGLE_WRITE_LENGTH * wCnt, nandCardInfo.blockSize, SINGLE_WRITE_LENGTH);
+        ret = NAND_WriteMultiBlocks((uint8_t *)buff, sector, nandCardInfo.blockSize, count);
         if (1 == ret) {
             goto _retry;
         }
-        count -= SINGLE_WRITE_LENGTH;
-        wCnt++;
-        vTaskDelay(1);
-    }
-    if (count > 0) {
-    _retry_:
-        ret = NAND_WriteMultiBlocks((uint8_t *)buff + nandCardInfo.blockSize * SINGLE_WRITE_LENGTH * wCnt, sector + SINGLE_WRITE_LENGTH * wCnt, nandCardInfo.blockSize, count);
-        vTaskDelay(1);
-        if (1 == ret) {
-            goto _retry_;
-        }
-    }
+    //     count -= SINGLE_WRITE_LENGTH;
+    //     wCnt++;
+    //     vTaskDelay(1);
+    // }
+    // if (count > 0) {
+    // _retry_:
+    //     ret = NAND_WriteMultiBlocks((uint8_t *)buff + nandCardInfo.blockSize * SINGLE_WRITE_LENGTH * wCnt, sector + SINGLE_WRITE_LENGTH * wCnt, nandCardInfo.blockSize, count);
+    //     vTaskDelay(1);
+    //     if (1 == ret) {
+    //         goto _retry_;
+    //     }
+    // }
 
     if (0 == ret) {
         return 0;

@@ -36,9 +36,10 @@ static int max17048_readreg(uint8_t reg, uint8_t *data, uint8_t len)
     msgs[1].buffer = data;
     msgs[1].length = len;
 
-    xSemaphoreTake(xMutex_IIC1, portMAX_DELAY);
-    err = bflb_i2c_transfer(i2c1, msgs, 2);
-    xSemaphoreGive(xMutex_IIC1);
+    if (xSemaphoreTake(xMutex_IIC1, portMAX_DELAY) == pdTRUE) {
+        err = bflb_i2c_transfer(i2c1, msgs, 2);
+        xSemaphoreGive(xMutex_IIC1);
+    }
 
     return err;
 }
@@ -46,7 +47,7 @@ static int max17048_readreg(uint8_t reg, uint8_t *data, uint8_t len)
 static int max17048_writereg(uint8_t reg, uint8_t data1, uint8_t data2)
 {
     struct bflb_i2c_msg_s msgs[1];
-    int err = 0;
+    int err = -1;
     uint8_t subaddr[3] = { reg, data1, data2 };
 
     msgs[0].addr = MAX17048_ADDR;
@@ -54,9 +55,10 @@ static int max17048_writereg(uint8_t reg, uint8_t data1, uint8_t data2)
     msgs[0].buffer = subaddr;
     msgs[0].length = 3;
 
-    xSemaphoreTake(xMutex_IIC1, portMAX_DELAY);
-    err = bflb_i2c_transfer(i2c1, msgs, 1);
-    xSemaphoreGive(xMutex_IIC1);
+    if (xSemaphoreTake(xMutex_IIC1, portMAX_DELAY) == pdTRUE) {
+        err = bflb_i2c_transfer(i2c1, msgs, 1);
+        xSemaphoreGive(xMutex_IIC1);
+    }
 
     return err;
 }

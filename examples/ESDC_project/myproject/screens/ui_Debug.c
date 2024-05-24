@@ -31,7 +31,7 @@ void ui_Debug_screen_init(void)
     lv_obj_set_x(ui_SensorEDA, -73);
     lv_obj_set_y(ui_SensorEDA, -110);
     lv_obj_set_align(ui_SensorEDA, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SensorEDA, "EDA");
+    lv_label_set_text(ui_SensorEDA, "Arousal");
 
     ui_ChartEDA = lv_chart_create(ui_Debug);
     lv_obj_set_width(ui_ChartEDA, 196);
@@ -40,97 +40,105 @@ void ui_Debug_screen_init(void)
     lv_obj_set_y(ui_ChartEDA, -55);
     lv_obj_set_align(ui_ChartEDA, LV_ALIGN_CENTER);
     lv_chart_set_type(ui_ChartEDA, LV_CHART_TYPE_LINE);
-    lv_chart_set_point_count(ui_ChartEDA, 120);
-    lv_chart_set_range(ui_ChartEDA, LV_CHART_AXIS_PRIMARY_Y, 0, 2);
-    lv_chart_set_range(ui_ChartEDA, LV_CHART_AXIS_SECONDARY_Y, 0, 0);
+    lv_chart_set_point_count(ui_ChartEDA, 21);
+    lv_chart_set_range(ui_ChartEDA, LV_CHART_AXIS_PRIMARY_Y, 0, 1);
+    // lv_chart_set_range(ui_ChartEDA, LV_CHART_AXIS_SECONDARY_Y, 0, 0);
     lv_chart_set_div_line_count(ui_ChartEDA, 10, 30);
     lv_chart_set_axis_tick(ui_ChartEDA, LV_CHART_AXIS_PRIMARY_X, 8, 3, 5, 5, false, 50);
-    lv_chart_set_axis_tick(ui_ChartEDA, LV_CHART_AXIS_PRIMARY_Y, 8, 5, 5, 2, false, 50);
-    lv_chart_set_axis_tick(ui_ChartEDA, LV_CHART_AXIS_SECONDARY_Y, 0, 0, 0, 0, false, 25);
+    lv_chart_set_axis_tick(ui_ChartEDA, LV_CHART_AXIS_PRIMARY_Y, 5, 0, 2, 0, false, 50);
+    // lv_chart_set_axis_tick(ui_ChartEDA, LV_CHART_AXIS_SECONDARY_Y, 0, 0, 0, 0, false, 25);
     ui_ChartEDA_series_1 = lv_chart_add_series(ui_ChartEDA, lv_color_hex(0xFF1182),
                                                LV_CHART_AXIS_PRIMARY_Y);
     // printf("ui_ChartTempurature_series_1 0x%x\r\n", ui_ChartTempurature_series_1);
-    lv_chart_set_ext_y_array(ui_ChartEDA, ui_ChartEDA_series_1, ui_ChartEDA_series_1_array);
+    // lv_chart_set_ext_y_array(ui_ChartEDA, ui_ChartEDA_series_1, ui_ChartEDA_series_1_array);
     // printf("ui_ChartTempurature_series_1 0x%x\r\n", ui_ChartTempurature_series_1);
     lv_chart_set_update_mode(ui_ChartEDA, LV_CHART_UPDATE_MODE_SHIFT);
-    lv_obj_set_style_width(ui_ChartEDA, 1, LV_PART_INDICATOR);
-    lv_obj_set_style_height(ui_ChartEDA, 1, LV_PART_INDICATOR);
+    lv_obj_set_style_width(ui_ChartEDA, 3, LV_PART_INDICATOR);
+    lv_obj_set_style_height(ui_ChartEDA, 3, LV_PART_INDICATOR);
 
-    ui_LabelEda1 = lv_label_create(ui_Debug);
-    lv_obj_set_width(ui_LabelEda1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_LabelEda1, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_x(ui_LabelEda1, 18);
-    lv_obj_set_y(ui_LabelEda1, 15);
-    lv_obj_set_align(ui_LabelEda1, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LabelEda1, "EDA Min: Avg: Std:");
-    // lv_obj_set_style_text_font(ui_LabelEda1, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    // ui_LabelEda1 = lv_label_create(ui_Debug);
+    // lv_obj_set_width(ui_LabelEda1, LV_SIZE_CONTENT);   /// 1
+    // lv_obj_set_height(ui_LabelEda1, LV_SIZE_CONTENT);  /// 1
+    // lv_obj_set_x(ui_LabelEda1, 18);
+    // lv_obj_set_y(ui_LabelEda1, 15);
+    // lv_obj_set_align(ui_LabelEda1, LV_ALIGN_LEFT_MID);
+    // lv_label_set_text(ui_LabelEda1, "EDA Min: Avg: Std:");
+    // // lv_obj_set_style_text_font(ui_LabelEda1, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_LabelEda2 = lv_label_create(ui_Debug);
-    lv_obj_set_width(ui_LabelEda2, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_LabelEda2, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelEda2, 18);
-    lv_obj_set_y(ui_LabelEda2, 30);
-    lv_obj_set_align(ui_LabelEda2, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LabelEda2, "EDA Peak Num: Avg: ");
-    // lv_obj_set_style_text_font(ui_LabelEda2, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    // ui_LabelEda2 = lv_label_create(ui_Debug);
+    // lv_obj_set_width(ui_LabelEda2, LV_SIZE_CONTENT);  /// 1
+    // lv_obj_set_height(ui_LabelEda2, LV_SIZE_CONTENT); /// 1
+    // lv_obj_set_x(ui_LabelEda2, 18);
+    // lv_obj_set_y(ui_LabelEda2, 30);
+    // lv_obj_set_align(ui_LabelEda2, LV_ALIGN_LEFT_MID);
+    // lv_label_set_text(ui_LabelEda2, "EDA Peak Num: Avg: ");
+    // // lv_obj_set_style_text_font(ui_LabelEda2, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_LabelEda3 = lv_label_create(ui_Debug);
-    lv_obj_set_width(ui_LabelEda3, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_LabelEda3, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelEda3, 18);
-    lv_obj_set_y(ui_LabelEda3, 46);
-    lv_obj_set_align(ui_LabelEda3, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LabelEda3, "EDA Peak Min: Max: Std:");
-    // lv_obj_set_style_text_font(ui_LabelEda3, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    // ui_LabelEda3 = lv_label_create(ui_Debug);
+    // lv_obj_set_width(ui_LabelEda3, LV_SIZE_CONTENT);  /// 1
+    // lv_obj_set_height(ui_LabelEda3, LV_SIZE_CONTENT); /// 1
+    // lv_obj_set_x(ui_LabelEda3, 18);
+    // lv_obj_set_y(ui_LabelEda3, 46);
+    // lv_obj_set_align(ui_LabelEda3, LV_ALIGN_LEFT_MID);
+    // lv_label_set_text(ui_LabelEda3, "EDA Peak Min: Max: Std:");
+    // // lv_obj_set_style_text_font(ui_LabelEda3, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_LabelBvp = lv_label_create(ui_Debug);
-    lv_obj_set_width(ui_LabelBvp, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_LabelBvp, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_x(ui_LabelBvp, 18);
-    lv_obj_set_y(ui_LabelBvp, 61);
-    lv_obj_set_align(ui_LabelBvp, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LabelBvp, "HRP Min: Max: Avg: HR:");
-    // lv_obj_set_style_text_font(ui_LabelBvp, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    // ui_LabelBvp = lv_label_create(ui_Debug);
+    // lv_obj_set_width(ui_LabelBvp, LV_SIZE_CONTENT);   /// 1
+    // lv_obj_set_height(ui_LabelBvp, LV_SIZE_CONTENT);  /// 1
+    // lv_obj_set_x(ui_LabelBvp, 18);
+    // lv_obj_set_y(ui_LabelBvp, 61);
+    // lv_obj_set_align(ui_LabelBvp, LV_ALIGN_LEFT_MID);
+    // lv_label_set_text(ui_LabelBvp, "HRP Min: Max: Avg: HR:");
+    // // lv_obj_set_style_text_font(ui_LabelBvp, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_LabelTemp = lv_label_create(ui_Debug);
-    lv_obj_set_width(ui_LabelTemp, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_LabelTemp, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelTemp, 18);
-    lv_obj_set_y(ui_LabelTemp, 77);
-    lv_obj_set_align(ui_LabelTemp, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LabelTemp, "Temp Avg:");
-    // lv_obj_set_style_text_font(ui_LabelTemp, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    // ui_LabelTemp = lv_label_create(ui_Debug);
+    // lv_obj_set_width(ui_LabelTemp, LV_SIZE_CONTENT);  /// 1
+    // lv_obj_set_height(ui_LabelTemp, LV_SIZE_CONTENT); /// 1
+    // lv_obj_set_x(ui_LabelTemp, 18);
+    // lv_obj_set_y(ui_LabelTemp, 77);
+    // lv_obj_set_align(ui_LabelTemp, LV_ALIGN_LEFT_MID);
+    // lv_label_set_text(ui_LabelTemp, "Temp Avg:");
+    // // lv_obj_set_style_text_font(ui_LabelTemp, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_LabelMdl1 = lv_label_create(ui_Debug);
-    lv_obj_set_width(ui_LabelMdl1, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_LabelMdl1, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelMdl1, 18);
-    lv_obj_set_y(ui_LabelMdl1, 92);
-    lv_obj_set_align(ui_LabelMdl1, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LabelMdl1, "Mdl 1 0: 1: 2:");
-    // lv_obj_set_style_text_font(ui_LabelMdl1, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    // ui_LabelMdl1 = lv_label_create(ui_Debug);
+    // lv_obj_set_width(ui_LabelMdl1, LV_SIZE_CONTENT);  /// 1
+    // lv_obj_set_height(ui_LabelMdl1, LV_SIZE_CONTENT); /// 1
+    // lv_obj_set_x(ui_LabelMdl1, 18);
+    // lv_obj_set_y(ui_LabelMdl1, 92);
+    // lv_obj_set_align(ui_LabelMdl1, LV_ALIGN_LEFT_MID);
+    // lv_label_set_text(ui_LabelMdl1, "Mdl 1 0: 1: 2:");
+    // // lv_obj_set_style_text_font(ui_LabelMdl1, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_LabelMdl2 = lv_label_create(ui_Debug);
-    lv_obj_set_width(ui_LabelMdl2, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_LabelMdl2, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_LabelMdl2, 18);
-    lv_obj_set_y(ui_LabelMdl2, 107);
-    lv_obj_set_align(ui_LabelMdl2, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_LabelMdl2, "Mdl 2 0: 1:");
-    // lv_obj_set_style_text_font(ui_LabelMdl2, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+    // ui_LabelMdl2 = lv_label_create(ui_Debug);
+    // lv_obj_set_width(ui_LabelMdl2, LV_SIZE_CONTENT);  /// 1
+    // lv_obj_set_height(ui_LabelMdl2, LV_SIZE_CONTENT); /// 1
+    // lv_obj_set_x(ui_LabelMdl2, 18);
+    // lv_obj_set_y(ui_LabelMdl2, 107);
+    // lv_obj_set_align(ui_LabelMdl2, LV_ALIGN_LEFT_MID);
+    // lv_label_set_text(ui_LabelMdl2, "Mdl 2 0: 1:");
+    // // lv_obj_set_style_text_font(ui_LabelMdl2, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Debug, ui_event_Debug, LV_EVENT_ALL, NULL);
 }
 
 void ui_UpdateEDAChart(float *EDAwindow, uint8_t len)
 {
-    printf("Enter update\r\n");
-    if(len > 120){
+    // printf("Enter update\r\n");
+    if (len > 120) {
         return;
     }
     for (uint8_t i = 0; i < len; i++) {
         ui_ChartEDA_series_1_array[i] = (uint16_t)(EDAwindow[i] * 1000);
     }
+    lv_chart_refresh(ui_ChartEDA);
+}
+
+void ui_UpdateAlgoChart(uint8_t AlgoLabel)
+{
+    printf("Enter update\r\n");
+    lv_chart_set_next_value(ui_ChartEDA, ui_ChartEDA_series_1, AlgoLabel);
+
     lv_chart_refresh(ui_ChartEDA);
 }
 

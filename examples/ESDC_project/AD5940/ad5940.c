@@ -59,7 +59,7 @@ static BoolFlag bIsS2silicon = bFALSE;
 
 /* Declare of SPI functions used to read/write registers */
 #ifndef CHIPSEL_M355
- uint32_t AD5940_SPIReadReg(uint16_t RegAddr);
+uint32_t AD5940_SPIReadReg(uint16_t RegAddr);
 static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData);
 #else
 static uint32_t AD5940_D2DReadReg(uint16_t RegAddr);
@@ -80,7 +80,7 @@ static void AD5940_D2DWriteReg(uint16_t RegAddr, uint32_t RegData);
  *            @{
 */
 
-#define SEQUENCE_GENERATOR  /*!< Build sequence generator part in to lib. Comment this line to remove this feature  */
+#define SEQUENCE_GENERATOR /*!< Build sequence generator part in to lib. Comment this line to remove this feature  */
 
 #ifdef SEQUENCE_GENERATOR
 /**
@@ -88,24 +88,24 @@ static void AD5940_D2DWriteReg(uint16_t RegAddr, uint32_t RegData);
  * */
 typedef struct
 {
-  uint32_t RegAddr  :8;   /**< 8bit address is enough for sequencer */
-  uint32_t RegValue :24;  /**< Reg data is limited to 24bit by sequencer  */
-}SEQGenRegInfo_Type;
+    uint32_t RegAddr  : 8;  /**< 8bit address is enough for sequencer */
+    uint32_t RegValue : 24; /**< Reg data is limited to 24bit by sequencer  */
+} SEQGenRegInfo_Type;
 
 /**
  * Sequencer generator data base.
 */
 struct
 {
-  BoolFlag EngineStart;         /**< Flag to mark start of the generator */
-  uint32_t BufferSize;          /**< Total buffer size */
+    BoolFlag EngineStart; /**< Flag to mark start of the generator */
+    uint32_t BufferSize;  /**< Total buffer size */
 
-  uint32_t *pSeqBuff;           /**< The buffer for sequence generator(both sequences and RegInfo) */
-  uint32_t SeqLen;              /**< Generated sequence length till now */
-  SEQGenRegInfo_Type *pRegInfo; /**< Pointer to buffer where stores register info */
-  uint32_t RegCount;            /**< The count of register info available in buffer *pRegInfo. */
-  AD5940Err LastError;          /**< The last error message. */
-}SeqGenDB;  /* Data base of Seq Generator */
+    uint32_t *pSeqBuff;           /**< The buffer for sequence generator(both sequences and RegInfo) */
+    uint32_t SeqLen;              /**< Generated sequence length till now */
+    SEQGenRegInfo_Type *pRegInfo; /**< Pointer to buffer where stores register info */
+    uint32_t RegCount;            /**< The count of register info available in buffer *pRegInfo. */
+    AD5940Err LastError;          /**< The last error message. */
+} SeqGenDB;                       /* Data base of Seq Generator */
 
 /**
  * @brief Manually input a command to sequencer generator.
@@ -114,16 +114,14 @@ struct
 */
 void AD5940_SEQGenInsert(uint32_t CmdWord)
 {
-  uint32_t temp;
-  temp  = SeqGenDB.RegCount + SeqGenDB.SeqLen;
-  /* Generate Sequence command */
-  if(temp < SeqGenDB.BufferSize)
-  {
-    SeqGenDB.pSeqBuff[SeqGenDB.SeqLen] = CmdWord;
-    SeqGenDB.SeqLen ++;
-  }
-  else  /* There is no buffer */
-    SeqGenDB.LastError = AD5940ERR_BUFF;
+    uint32_t temp;
+    temp = SeqGenDB.RegCount + SeqGenDB.SeqLen;
+    /* Generate Sequence command */
+    if (temp < SeqGenDB.BufferSize) {
+        SeqGenDB.pSeqBuff[SeqGenDB.SeqLen] = CmdWord;
+        SeqGenDB.SeqLen++;
+    } else /* There is no buffer */
+        SeqGenDB.LastError = AD5940ERR_BUFF;
 }
 
 /**
@@ -134,18 +132,16 @@ void AD5940_SEQGenInsert(uint32_t CmdWord)
 */
 static AD5940Err AD5940_SEQGenSearchReg(uint32_t RegAddr, uint32_t *pIndex)
 {
-  uint32_t i;
+    uint32_t i;
 
-  RegAddr = (RegAddr>>2)&0xff;
-  for(i=0;i<SeqGenDB.RegCount;i++)
-  {
-    if(RegAddr == SeqGenDB.pRegInfo[i].RegAddr)
-    {
-      *pIndex = i;
-      return AD5940ERR_OK;
+    RegAddr = (RegAddr >> 2) & 0xff;
+    for (i = 0; i < SeqGenDB.RegCount; i++) {
+        if (RegAddr == SeqGenDB.pRegInfo[i].RegAddr) {
+            *pIndex = i;
+            return AD5940ERR_OK;
+        }
     }
-  }
-  return AD5940ERR_SEQREG;
+    return AD5940ERR_SEQREG;
 }
 
 /**
@@ -157,11 +153,11 @@ static AD5940Err AD5940_SEQGenSearchReg(uint32_t RegAddr, uint32_t *pIndex)
 static AD5940Err AD5940_SEQGenGetRegDefault(uint32_t RegAddr, uint32_t *pRegData)
 {
 #ifdef CHIPSEL_M355
-  *pRegData = AD5940_D2DReadReg(RegAddr);
+    *pRegData = AD5940_D2DReadReg(RegAddr);
 #else
-  *pRegData = AD5940_SPIReadReg(RegAddr);
+    *pRegData = AD5940_SPIReadReg(RegAddr);
 #endif
-  return AD5940ERR_OK;
+    return AD5940ERR_OK;
 }
 
 /**
@@ -172,20 +168,18 @@ static AD5940Err AD5940_SEQGenGetRegDefault(uint32_t RegAddr, uint32_t *pRegData
 */
 static void AD5940_SEQRegInfoInsert(uint16_t RegAddr, uint32_t RegData)
 {
-  uint32_t temp;
-  temp = SeqGenDB.RegCount + SeqGenDB.SeqLen;
-  
-  if(temp < SeqGenDB.BufferSize)
-  {
-    SeqGenDB.pRegInfo --; /* Move back */
-    SeqGenDB.pRegInfo[0].RegAddr = (RegAddr>>2)&0xff;
-    SeqGenDB.pRegInfo[0].RegValue = RegData&0x00ffffff;
-    SeqGenDB.RegCount ++;
-  }
-  else  /* There is no more buffer  */
-  {
-    SeqGenDB.LastError = AD5940ERR_BUFF;
-  }
+    uint32_t temp;
+    temp = SeqGenDB.RegCount + SeqGenDB.SeqLen;
+
+    if (temp < SeqGenDB.BufferSize) {
+        SeqGenDB.pRegInfo--; /* Move back */
+        SeqGenDB.pRegInfo[0].RegAddr = (RegAddr >> 2) & 0xff;
+        SeqGenDB.pRegInfo[0].RegValue = RegData & 0x00ffffff;
+        SeqGenDB.RegCount++;
+    } else /* There is no more buffer  */
+    {
+        SeqGenDB.LastError = AD5940ERR_BUFF;
+    }
 }
 
 /**
@@ -195,21 +189,18 @@ static void AD5940_SEQRegInfoInsert(uint16_t RegAddr, uint32_t RegData)
 */
 static uint32_t AD5940_SEQReadReg(uint16_t RegAddr)
 {
-  uint32_t RegIndex, RegData;
-  
-  if(AD5940_SEQGenSearchReg(RegAddr, &RegIndex) != AD5940ERR_OK)
-  {
-    /* There is no record in data-base, read the default value. */
-    AD5940_SEQGenGetRegDefault(RegAddr, &RegData);
-    AD5940_SEQRegInfoInsert(RegAddr, RegData);
-  }
-  else
-  {
-    /* return the current register value stored in data-base */
-    RegData = SeqGenDB.pRegInfo[RegIndex].RegValue;
-  }
+    uint32_t RegIndex, RegData;
 
-  return RegData;
+    if (AD5940_SEQGenSearchReg(RegAddr, &RegIndex) != AD5940ERR_OK) {
+        /* There is no record in data-base, read the default value. */
+        AD5940_SEQGenGetRegDefault(RegAddr, &RegData);
+        AD5940_SEQRegInfoInsert(RegAddr, RegData);
+    } else {
+        /* return the current register value stored in data-base */
+        RegData = SeqGenDB.pRegInfo[RegIndex].RegValue;
+    }
+
+    return RegData;
 }
 
 /**
@@ -221,27 +212,23 @@ static uint32_t AD5940_SEQReadReg(uint16_t RegAddr)
 */
 static void AD5940_SEQWriteReg(uint16_t RegAddr, uint32_t RegData)
 {
-  uint32_t RegIndex;
-  
-  if(RegAddr > 0x21ff)
-  {
-    SeqGenDB.LastError = AD5940ERR_ADDROR;  /* address out of range  */
-    return;
-  }
+    uint32_t RegIndex;
 
-  if(AD5940_SEQGenSearchReg(RegAddr, &RegIndex) == AD5940ERR_OK)
-  {
-    /* Store register value */
-    SeqGenDB.pRegInfo[RegIndex].RegValue = RegData;
-    /* Generate Sequence command */
-    AD5940_SEQGenInsert(SEQ_WR(RegAddr, RegData));
-  }
-  else
-  {
-    AD5940_SEQRegInfoInsert(RegAddr, RegData);
-    /* Generate Sequence command */
-    AD5940_SEQGenInsert(SEQ_WR(RegAddr, RegData));
-  }
+    if (RegAddr > 0x21ff) {
+        SeqGenDB.LastError = AD5940ERR_ADDROR; /* address out of range  */
+        return;
+    }
+
+    if (AD5940_SEQGenSearchReg(RegAddr, &RegIndex) == AD5940ERR_OK) {
+        /* Store register value */
+        SeqGenDB.pRegInfo[RegIndex].RegValue = RegData;
+        /* Generate Sequence command */
+        AD5940_SEQGenInsert(SEQ_WR(RegAddr, RegData));
+    } else {
+        AD5940_SEQRegInfoInsert(RegAddr, RegData);
+        /* Generate Sequence command */
+        AD5940_SEQGenInsert(SEQ_WR(RegAddr, RegData));
+    }
 }
 
 /**
@@ -259,15 +246,16 @@ static void AD5940_SEQWriteReg(uint16_t RegAddr, uint32_t RegData)
 */
 void AD5940_SEQGenInit(uint32_t *pBuffer, uint32_t BufferSize)
 {
-  if(BufferSize < 2) return;
-  SeqGenDB.BufferSize = BufferSize;
-  SeqGenDB.pSeqBuff = pBuffer;
-  SeqGenDB.pRegInfo = (SEQGenRegInfo_Type*)pBuffer + BufferSize - 1; /* Point to the last element in buffer */
-  SeqGenDB.SeqLen = 0;
+    if (BufferSize < 2)
+        return;
+    SeqGenDB.BufferSize = BufferSize;
+    SeqGenDB.pSeqBuff = pBuffer;
+    SeqGenDB.pRegInfo = (SEQGenRegInfo_Type *)pBuffer + BufferSize - 1; /* Point to the last element in buffer */
+    SeqGenDB.SeqLen = 0;
 
-  SeqGenDB.RegCount = 0;
-  SeqGenDB.LastError = AD5940ERR_OK;
-  SeqGenDB.EngineStart = bFALSE;
+    SeqGenDB.RegCount = 0;
+    SeqGenDB.LastError = AD5940ERR_OK;
+    SeqGenDB.EngineStart = bFALSE;
 }
 
 /**
@@ -278,17 +266,17 @@ void AD5940_SEQGenInit(uint32_t *pBuffer, uint32_t BufferSize)
 */
 AD5940Err AD5940_SEQGenFetchSeq(const uint32_t **ppSeqCmd, uint32_t *pSeqLen)
 {
-  AD5940Err lasterror;
+    AD5940Err lasterror;
 
-  if(ppSeqCmd)
-    *ppSeqCmd = SeqGenDB.pSeqBuff;  
-  if(pSeqLen)
-    *pSeqLen = SeqGenDB.SeqLen;
+    if (ppSeqCmd)
+        *ppSeqCmd = SeqGenDB.pSeqBuff;
+    if (pSeqLen)
+        *pSeqLen = SeqGenDB.SeqLen;
 
-  //SeqGenDB.SeqLen = 0;  /* Start a new sequence */
-  lasterror = SeqGenDB.LastError;
-  //SeqGenDB.LastError = AD5940ERR_OK;  /* Clear error message */
-  return lasterror;
+    //SeqGenDB.SeqLen = 0;  /* Start a new sequence */
+    lasterror = SeqGenDB.LastError;
+    //SeqGenDB.LastError = AD5940ERR_OK;  /* Clear error message */
+    return lasterror;
 }
 
 /**
@@ -299,16 +287,14 @@ AD5940Err AD5940_SEQGenFetchSeq(const uint32_t **ppSeqCmd, uint32_t *pSeqLen)
 */
 void AD5940_SEQGenCtrl(BoolFlag bFlag)
 {
-  if(bFlag == bFALSE) /* Disable sequence generator */
-  {
-    SeqGenDB.EngineStart = bFALSE;
-  }
-  else
-  {
-    SeqGenDB.SeqLen = 0;
-    SeqGenDB.LastError = AD5940ERR_OK;  /* Clear error message */
-    SeqGenDB.EngineStart = bTRUE;
-  }
+    if (bFlag == bFALSE) /* Disable sequence generator */
+    {
+        SeqGenDB.EngineStart = bFALSE;
+    } else {
+        SeqGenDB.SeqLen = 0;
+        SeqGenDB.LastError = AD5940ERR_OK; /* Clear error message */
+        SeqGenDB.EngineStart = bTRUE;
+    }
 }
 
 /**
@@ -317,31 +303,24 @@ void AD5940_SEQGenCtrl(BoolFlag bFlag)
 */
 uint32_t AD5940_SEQCycleTime(void)
 {
-  uint32_t i, Cycles, Cmd;  
-  Cycles = 0;
-  for(i=0;i<SeqGenDB.RegCount;i++)
-  {
-    Cmd = (SeqGenDB.pSeqBuff[i]  >> 30) & 0x3;
-    if (Cmd & 0x2)
-    {
-      /* A write command */
-      Cycles += 1;
-    }
-    else
-    {
-      if (Cmd & 0x1)
-      {
-        /* Timeout Command */    
-        Cycles += 1;
-      }
-      else
-        {
-          /* Wait command */
-          Cycles += SeqGenDB.pSeqBuff[i] & 0x3FFFFFFF;
+    uint32_t i, Cycles, Cmd;
+    Cycles = 0;
+    for (i = 0; i < SeqGenDB.RegCount; i++) {
+        Cmd = (SeqGenDB.pSeqBuff[i] >> 30) & 0x3;
+        if (Cmd & 0x2) {
+            /* A write command */
+            Cycles += 1;
+        } else {
+            if (Cmd & 0x1) {
+                /* Timeout Command */
+                Cycles += 1;
+            } else {
+                /* Wait command */
+                Cycles += SeqGenDB.pSeqBuff[i] & 0x3FFFFFFF;
+            }
         }
     }
-  } 
-  return Cycles;  
+    return Cycles;
 }
 #endif
 /**
@@ -353,15 +332,13 @@ uint32_t AD5940_SEQCycleTime(void)
 */
 static int32_t _is_value_in_table(uint8_t value, const uint8_t *table, uint8_t len, uint8_t *index)
 {
-  for(int i=0; i<len; i++)
-  {
-    if(value == table[i])
-    {
-      *index = i;
-      return bTRUE;
+    for (int i = 0; i < len; i++) {
+        if (value == table[i]) {
+            *index = i;
+            return bTRUE;
+        }
     }
-  }
-  return bFALSE;
+    return bFALSE;
 }
 
 /**
@@ -372,50 +349,42 @@ static int32_t _is_value_in_table(uint8_t value, const uint8_t *table, uint8_t l
 */
 BoolFlag AD5940_Notch50HzAvailable(ADCFilterCfg_Type *pFilterInfo, uint8_t *dl)
 {
-  if((pFilterInfo->ADCRate == ADCRATE_800KHZ && pFilterInfo->ADCSinc3Osr == ADCSINC3OSR_2)||\
-      (pFilterInfo->ADCRate == ADCRATE_1P6MHZ && pFilterInfo->ADCSinc3Osr != ADCSINC3OSR_2))
-  {
-    //this combination suits for filter:
-    //SINC3 OSR2, for 800kSPS
-    //and SINC3 OSR4 and OSR5 for 1.6MSPS,
-    const uint8_t available_sinc2_osr[] = {ADCSINC2OSR_533, ADCSINC2OSR_667,ADCSINC2OSR_800, ADCSINC2OSR_889, ADCSINC2OSR_1333};
-    const uint8_t dl_50Hz[] = {15,12,10,9,6};
-    uint8_t index;
-    if(_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index))
-    {
-      *dl = dl_50Hz[index];
-      return bTRUE;
+    if ((pFilterInfo->ADCRate == ADCRATE_800KHZ && pFilterInfo->ADCSinc3Osr == ADCSINC3OSR_2) ||
+        (pFilterInfo->ADCRate == ADCRATE_1P6MHZ && pFilterInfo->ADCSinc3Osr != ADCSINC3OSR_2)) {
+        //this combination suits for filter:
+        //SINC3 OSR2, for 800kSPS
+        //and SINC3 OSR4 and OSR5 for 1.6MSPS,
+        const uint8_t available_sinc2_osr[] = { ADCSINC2OSR_533, ADCSINC2OSR_667, ADCSINC2OSR_800, ADCSINC2OSR_889, ADCSINC2OSR_1333 };
+        const uint8_t dl_50Hz[] = { 15, 12, 10, 9, 6 };
+        uint8_t index;
+        if (_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index)) {
+            *dl = dl_50Hz[index];
+            return bTRUE;
+        }
+    } else if (pFilterInfo->ADCRate == ADCRATE_1P6MHZ && pFilterInfo->ADCSinc3Osr == ADCSINC3OSR_2) {
+        //this combination suits for filter:
+        //SINC3 OSR2 for 1.6MSPS
+        const uint8_t available_sinc2_osr[] = { ADCSINC2OSR_889, ADCSINC2OSR_1067, ADCSINC2OSR_1333 };
+        const uint8_t dl_50Hz[] = { 18, 15, 12 };
+        uint8_t index;
+        if (_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index)) {
+            *dl = dl_50Hz[index];
+            return bTRUE;
+        }
+    } else if (pFilterInfo->ADCRate == ADCRATE_800KHZ && pFilterInfo->ADCSinc3Osr != ADCSINC3OSR_2) {
+        //this combination suits for filter:
+        //SINC3 OSR4 and OSR5 for 800kSPS,
+        const uint8_t available_sinc2_osr[] = { ADCSINC2OSR_178, ADCSINC2OSR_267, ADCSINC2OSR_533, ADCSINC2OSR_640,
+                                                ADCSINC2OSR_800, ADCSINC2OSR_1067 };
+        const uint8_t dl_50Hz[] = { 18, 12, 6, 5, 4, 3 };
+        uint8_t index;
+        if (_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index)) {
+            *dl = dl_50Hz[index];
+            return bTRUE;
+        }
     }
-  }
-  else if(pFilterInfo->ADCRate == ADCRATE_1P6MHZ && pFilterInfo->ADCSinc3Osr == ADCSINC3OSR_2)
-  {
-    //this combination suits for filter:
-    //SINC3 OSR2 for 1.6MSPS
-    const uint8_t available_sinc2_osr[] = {ADCSINC2OSR_889, ADCSINC2OSR_1067, ADCSINC2OSR_1333};
-    const uint8_t dl_50Hz[] = {18,15,12};
-    uint8_t index;
-    if(_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index))
-    {
-      *dl = dl_50Hz[index];
-      return bTRUE;
-    }
-  }
-  else if(pFilterInfo->ADCRate == ADCRATE_800KHZ && pFilterInfo->ADCSinc3Osr != ADCSINC3OSR_2)
-  {
-    //this combination suits for filter:
-    //SINC3 OSR4 and OSR5 for 800kSPS,
-    const uint8_t available_sinc2_osr[] = {ADCSINC2OSR_178, ADCSINC2OSR_267, ADCSINC2OSR_533, ADCSINC2OSR_640,\
-                                    ADCSINC2OSR_800, ADCSINC2OSR_1067};
-    const uint8_t dl_50Hz[] = {18,12,6,5,4,3};
-    uint8_t index;
-    if(_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index))
-    {
-      *dl = dl_50Hz[index];
-      return bTRUE;
-    }
-  }
-  *dl = 0;
-  return bFALSE;
+    *dl = 0;
+    return bFALSE;
 }
 
 /**
@@ -426,50 +395,42 @@ BoolFlag AD5940_Notch50HzAvailable(ADCFilterCfg_Type *pFilterInfo, uint8_t *dl)
 */
 BoolFlag AD5940_Notch60HzAvailable(ADCFilterCfg_Type *pFilterInfo, uint8_t *dl)
 {
-  if((pFilterInfo->ADCRate == ADCRATE_800KHZ && pFilterInfo->ADCSinc3Osr == ADCSINC3OSR_2)||\
-      (pFilterInfo->ADCRate == ADCRATE_1P6MHZ && pFilterInfo->ADCSinc3Osr != ADCSINC3OSR_2))
-  {
-    //this combination suits for filter:
-    //SINC3 OSR2, for 800kSPS
-    //and SINC3 OSR4 and OSR5 for 1.6MSPS,
-    const uint8_t available_sinc2_osr[] = {ADCSINC2OSR_667, ADCSINC2OSR_1333};
-    const uint8_t dl_60Hz[] = {10,5};
-    uint8_t index;
-    if(_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index))
-    {
-      *dl = dl_60Hz[index];
-      return bTRUE;
+    if ((pFilterInfo->ADCRate == ADCRATE_800KHZ && pFilterInfo->ADCSinc3Osr == ADCSINC3OSR_2) ||
+        (pFilterInfo->ADCRate == ADCRATE_1P6MHZ && pFilterInfo->ADCSinc3Osr != ADCSINC3OSR_2)) {
+        //this combination suits for filter:
+        //SINC3 OSR2, for 800kSPS
+        //and SINC3 OSR4 and OSR5 for 1.6MSPS,
+        const uint8_t available_sinc2_osr[] = { ADCSINC2OSR_667, ADCSINC2OSR_1333 };
+        const uint8_t dl_60Hz[] = { 10, 5 };
+        uint8_t index;
+        if (_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index)) {
+            *dl = dl_60Hz[index];
+            return bTRUE;
+        }
+    } else if (pFilterInfo->ADCRate == ADCRATE_1P6MHZ && pFilterInfo->ADCSinc3Osr == ADCSINC3OSR_2) {
+        //this combination suits for filter:
+        //SINC3 OSR2 for 1.6MSPS
+        const uint8_t available_sinc2_osr[] = { ADCSINC2OSR_889, ADCSINC2OSR_1333 };
+        const uint8_t dl_60Hz[] = { 15, 10 };
+        uint8_t index;
+        if (_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index)) {
+            *dl = dl_60Hz[index];
+            return bTRUE;
+        }
+    } else if (pFilterInfo->ADCRate == ADCRATE_800KHZ && pFilterInfo->ADCSinc3Osr != ADCSINC3OSR_2) {
+        //this combination suits for filter:
+        //SINC3 OSR4 and OSR5 for 800kSPS,
+        const uint8_t available_sinc2_osr[] = { ADCSINC2OSR_178, ADCSINC2OSR_267, ADCSINC2OSR_533, ADCSINC2OSR_667,
+                                                ADCSINC2OSR_889, ADCSINC2OSR_1333 };
+        const uint8_t dl_60Hz[] = { 15, 10, 5, 4, 3, 2 };
+        uint8_t index;
+        if (_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index)) {
+            *dl = dl_60Hz[index];
+            return bTRUE;
+        }
     }
-  }
-  else if(pFilterInfo->ADCRate == ADCRATE_1P6MHZ && pFilterInfo->ADCSinc3Osr == ADCSINC3OSR_2)
-  {
-    //this combination suits for filter:
-    //SINC3 OSR2 for 1.6MSPS
-    const uint8_t available_sinc2_osr[] = {ADCSINC2OSR_889, ADCSINC2OSR_1333};
-    const uint8_t dl_60Hz[] = {15,10};
-    uint8_t index;
-    if(_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index))
-    {
-      *dl = dl_60Hz[index];
-      return bTRUE;
-    }
-  }
-  else if(pFilterInfo->ADCRate == ADCRATE_800KHZ && pFilterInfo->ADCSinc3Osr != ADCSINC3OSR_2)
-  {
-    //this combination suits for filter:
-    //SINC3 OSR4 and OSR5 for 800kSPS,
-    const uint8_t available_sinc2_osr[] = {ADCSINC2OSR_178, ADCSINC2OSR_267, ADCSINC2OSR_533, ADCSINC2OSR_667,\
-                                    ADCSINC2OSR_889, ADCSINC2OSR_1333};
-    const uint8_t dl_60Hz[] = {15,10,5,4,3,2};
-    uint8_t index;
-    if(_is_value_in_table(pFilterInfo->ADCSinc2Osr, available_sinc2_osr, sizeof(available_sinc2_osr), &index))
-    {
-      *dl = dl_60Hz[index];
-      return bTRUE;
-    }
-  }
-  *dl = 0;
-  return bFALSE;
+    *dl = 0;
+    return bFALSE;
 }
 
 /**
@@ -482,86 +443,88 @@ BoolFlag AD5940_Notch60HzAvailable(ADCFilterCfg_Type *pFilterInfo, uint8_t *dl)
 */
 void AD5940_ClksCalculate(ClksCalInfo_Type *pFilterInfo, uint32_t *pClocks)
 {
-  uint32_t temp = 0;
-  const uint32_t sinc2osr_table[] = {22,44,89,178,267,533,640,667,800,889,1067,1333,0};
-  const uint32_t sinc3osr_table[] = {5,4,2,0};
+    uint32_t temp = 0;
+    const uint32_t sinc2osr_table[] = { 22, 44, 89, 178, 267, 533, 640, 667, 800, 889, 1067, 1333, 0 };
+    const uint32_t sinc3osr_table[] = { 5, 4, 2, 0 };
 
-  *pClocks = 0;
-  if(pFilterInfo == NULL) return;
-  if(pClocks == NULL) return;
-  if(pFilterInfo->ADCSinc2Osr > ADCSINC2OSR_1333) return;
-  if(pFilterInfo->ADCSinc3Osr > 2)  return; /* 0: OSR5, 1:OSR4, 2:OSR2 */
-  if(pFilterInfo->ADCAvgNum > ADCAVGNUM_16) return; /* Average number index:0,1,2,3 */
-  switch(pFilterInfo->DataType)
-  {
-    case DATATYPE_ADCRAW:
-      temp = (uint32_t)(20*pFilterInfo->DataCount*pFilterInfo->RatioSys2AdcClk);
-      break;
-    case DATATYPE_SINC3:
-      temp = (uint32_t)(((pFilterInfo->DataCount+2)*sinc3osr_table[pFilterInfo->ADCSinc3Osr]+1)*20*pFilterInfo->RatioSys2AdcClk + 0.5f);
-      break;
-    case DATATYPE_SINC2: 
-      temp = (pFilterInfo->DataCount+1)*sinc2osr_table[pFilterInfo->ADCSinc2Osr] + 1;
-      pFilterInfo->DataType = DATATYPE_SINC3;
-      pFilterInfo->DataCount = temp;
-      AD5940_ClksCalculate(pFilterInfo, &temp);
-      pFilterInfo->DataType = DATATYPE_SINC2;
-      temp += 15;   /* Need extra 15 clocks for FIFO etc. Just to be safe. */
-      break;
-    case DATATYPE_NOTCH:
-    {
-      ADCFilterCfg_Type filter;
-      filter.ADCRate = pFilterInfo->ADCRate;
-      filter.ADCSinc3Osr = pFilterInfo->ADCSinc3Osr;
-      filter.ADCSinc2Osr = pFilterInfo->ADCSinc2Osr;
-      uint8_t dl=0, dl_50, dl_60;
-      if(AD5940_Notch50HzAvailable(&filter, &dl_50)){
-        dl += dl_50 - 1;
-      }
-      if(AD5940_Notch60HzAvailable(&filter, &dl_60)){
-        dl += dl_60 - 1;
-      }
-      pFilterInfo->DataType = DATATYPE_SINC2;
-      pFilterInfo->DataCount += dl; //DL is the extra data input needed for filter to output first data.
-      AD5940_ClksCalculate(pFilterInfo,&temp);
-      //restore the filter info.
-      pFilterInfo->DataType = DATATYPE_NOTCH;
-      pFilterInfo->DataCount -= dl;
-      break;
-    }
-    case DATATYPE_DFT:
-      switch(pFilterInfo->DftSrc)
-      {
-        case DFTSRC_ADCRAW:
-          pFilterInfo->DataType = DATATYPE_ADCRAW;
-          AD5940_ClksCalculate(pFilterInfo, &temp);
-          break;
-        case DFTSRC_SINC3:
-          pFilterInfo->DataType = DATATYPE_SINC3;
-          AD5940_ClksCalculate(pFilterInfo, &temp);
-          break;
-        case DFTSRC_SINC2NOTCH:
-          if(pFilterInfo->BpNotch)
+    *pClocks = 0;
+    if (pFilterInfo == NULL)
+        return;
+    if (pClocks == NULL)
+        return;
+    if (pFilterInfo->ADCSinc2Osr > ADCSINC2OSR_1333)
+        return;
+    if (pFilterInfo->ADCSinc3Osr > 2)
+        return; /* 0: OSR5, 1:OSR4, 2:OSR2 */
+    if (pFilterInfo->ADCAvgNum > ADCAVGNUM_16)
+        return; /* Average number index:0,1,2,3 */
+    switch (pFilterInfo->DataType) {
+        case DATATYPE_ADCRAW:
+            temp = (uint32_t)(20 * pFilterInfo->DataCount * pFilterInfo->RatioSys2AdcClk);
+            break;
+        case DATATYPE_SINC3:
+            temp = (uint32_t)(((pFilterInfo->DataCount + 2) * sinc3osr_table[pFilterInfo->ADCSinc3Osr] + 1) * 20 * pFilterInfo->RatioSys2AdcClk + 0.5f);
+            break;
+        case DATATYPE_SINC2:
+            temp = (pFilterInfo->DataCount + 1) * sinc2osr_table[pFilterInfo->ADCSinc2Osr] + 1;
+            pFilterInfo->DataType = DATATYPE_SINC3;
+            pFilterInfo->DataCount = temp;
+            AD5940_ClksCalculate(pFilterInfo, &temp);
             pFilterInfo->DataType = DATATYPE_SINC2;
-          else
+            temp += 15; /* Need extra 15 clocks for FIFO etc. Just to be safe. */
+            break;
+        case DATATYPE_NOTCH: {
+            ADCFilterCfg_Type filter;
+            filter.ADCRate = pFilterInfo->ADCRate;
+            filter.ADCSinc3Osr = pFilterInfo->ADCSinc3Osr;
+            filter.ADCSinc2Osr = pFilterInfo->ADCSinc2Osr;
+            uint8_t dl = 0, dl_50, dl_60;
+            if (AD5940_Notch50HzAvailable(&filter, &dl_50)) {
+                dl += dl_50 - 1;
+            }
+            if (AD5940_Notch60HzAvailable(&filter, &dl_60)) {
+                dl += dl_60 - 1;
+            }
+            pFilterInfo->DataType = DATATYPE_SINC2;
+            pFilterInfo->DataCount += dl; //DL is the extra data input needed for filter to output first data.
+            AD5940_ClksCalculate(pFilterInfo, &temp);
+            //restore the filter info.
             pFilterInfo->DataType = DATATYPE_NOTCH;
-          AD5940_ClksCalculate(pFilterInfo, &temp);
-          break;
-        case DFTSRC_AVG:
-          pFilterInfo->DataType = DATATYPE_SINC3;
-          pFilterInfo->DataCount *= 1L<<(pFilterInfo->ADCAvgNum+1); /* 0: average2, 1: average4, 2: average8, 3: average16 */
-          AD5940_ClksCalculate(pFilterInfo, &temp);
-          break;
+            pFilterInfo->DataCount -= dl;
+            break;
+        }
+        case DATATYPE_DFT:
+            switch (pFilterInfo->DftSrc) {
+                case DFTSRC_ADCRAW:
+                    pFilterInfo->DataType = DATATYPE_ADCRAW;
+                    AD5940_ClksCalculate(pFilterInfo, &temp);
+                    break;
+                case DFTSRC_SINC3:
+                    pFilterInfo->DataType = DATATYPE_SINC3;
+                    AD5940_ClksCalculate(pFilterInfo, &temp);
+                    break;
+                case DFTSRC_SINC2NOTCH:
+                    if (pFilterInfo->BpNotch)
+                        pFilterInfo->DataType = DATATYPE_SINC2;
+                    else
+                        pFilterInfo->DataType = DATATYPE_NOTCH;
+                    AD5940_ClksCalculate(pFilterInfo, &temp);
+                    break;
+                case DFTSRC_AVG:
+                    pFilterInfo->DataType = DATATYPE_SINC3;
+                    pFilterInfo->DataCount *= 1L << (pFilterInfo->ADCAvgNum + 1); /* 0: average2, 1: average4, 2: average8, 3: average16 */
+                    AD5940_ClksCalculate(pFilterInfo, &temp);
+                    break;
+                default:
+                    break;
+            }
+            pFilterInfo->DataType = DATATYPE_DFT;
+            temp += 25; /* add margin */
+            break;
         default:
-          break;
-      }
-      pFilterInfo->DataType = DATATYPE_DFT;
-      temp += 25; /* add margin */
-      break;
-    default:
-    break;
-  }
-  *pClocks = temp;
+            break;
+    }
+    *pClocks = temp;
 }
 
 /**
@@ -571,43 +534,38 @@ void AD5940_ClksCalculate(ClksCalInfo_Type *pFilterInfo, uint32_t *pClocks)
 */
 void AD5940_SweepNext(SoftSweepCfg_Type *pSweepCfg, float *pNextFreq)
 {
-   float frequency;
+    float frequency;
 
-   if(pSweepCfg->SweepLog)/* Log step */
-   {
-      if(pSweepCfg->SweepStart<pSweepCfg->SweepStop) /* Normal */
-      {
-         if(++pSweepCfg->SweepIndex == pSweepCfg->SweepPoints)
-            pSweepCfg->SweepIndex = 0;
-         frequency = pSweepCfg->SweepStart*pow(10,pSweepCfg->SweepIndex*log10(pSweepCfg->SweepStop/pSweepCfg->SweepStart)/(pSweepCfg->SweepPoints-1));
-      }
-      else
-      {
-         pSweepCfg->SweepIndex --;
-         if(pSweepCfg->SweepIndex >= pSweepCfg->SweepPoints)
-            pSweepCfg->SweepIndex = pSweepCfg->SweepPoints-1;
-         frequency = pSweepCfg->SweepStop*pow(10,pSweepCfg->SweepIndex*
-                                     (log10(pSweepCfg->SweepStart/pSweepCfg->SweepStop)/(pSweepCfg->SweepPoints-1)));
-      }
-   }
-   else/* Linear step */
-   {
-      if(pSweepCfg->SweepStart<pSweepCfg->SweepStop) /* Normal */
-      {
-         if(++pSweepCfg->SweepIndex == pSweepCfg->SweepPoints)
-            pSweepCfg->SweepIndex = 0;
-         frequency = pSweepCfg->SweepStart + pSweepCfg->SweepIndex*(double)(pSweepCfg->SweepStop-pSweepCfg->SweepStart)/(pSweepCfg->SweepPoints-1);
-      }
-      else
-      {
-         pSweepCfg->SweepIndex --;
-         if(pSweepCfg->SweepIndex >= pSweepCfg->SweepPoints)
-            pSweepCfg->SweepIndex = pSweepCfg->SweepPoints-1;
-         frequency = pSweepCfg->SweepStop + pSweepCfg->SweepIndex*(double)(pSweepCfg->SweepStart - pSweepCfg->SweepStop)/(pSweepCfg->SweepPoints-1);
-      }
-   }
-   
-   *pNextFreq = frequency;
+    if (pSweepCfg->SweepLog) /* Log step */
+    {
+        if (pSweepCfg->SweepStart < pSweepCfg->SweepStop) /* Normal */
+        {
+            if (++pSweepCfg->SweepIndex == pSweepCfg->SweepPoints)
+                pSweepCfg->SweepIndex = 0;
+            frequency = pSweepCfg->SweepStart * pow(10, pSweepCfg->SweepIndex * log10(pSweepCfg->SweepStop / pSweepCfg->SweepStart) / (pSweepCfg->SweepPoints - 1));
+        } else {
+            pSweepCfg->SweepIndex--;
+            if (pSweepCfg->SweepIndex >= pSweepCfg->SweepPoints)
+                pSweepCfg->SweepIndex = pSweepCfg->SweepPoints - 1;
+            frequency = pSweepCfg->SweepStop * pow(10, pSweepCfg->SweepIndex *
+                                                           (log10(pSweepCfg->SweepStart / pSweepCfg->SweepStop) / (pSweepCfg->SweepPoints - 1)));
+        }
+    } else /* Linear step */
+    {
+        if (pSweepCfg->SweepStart < pSweepCfg->SweepStop) /* Normal */
+        {
+            if (++pSweepCfg->SweepIndex == pSweepCfg->SweepPoints)
+                pSweepCfg->SweepIndex = 0;
+            frequency = pSweepCfg->SweepStart + pSweepCfg->SweepIndex * (double)(pSweepCfg->SweepStop - pSweepCfg->SweepStart) / (pSweepCfg->SweepPoints - 1);
+        } else {
+            pSweepCfg->SweepIndex--;
+            if (pSweepCfg->SweepIndex >= pSweepCfg->SweepPoints)
+                pSweepCfg->SweepIndex = pSweepCfg->SweepPoints - 1;
+            frequency = pSweepCfg->SweepStop + pSweepCfg->SweepIndex * (double)(pSweepCfg->SweepStart - pSweepCfg->SweepStop) / (pSweepCfg->SweepPoints - 1);
+        }
+    }
+
+    *pNextFreq = frequency;
 }
 
 /**
@@ -618,7 +576,7 @@ void AD5940_SweepNext(SoftSweepCfg_Type *pSweepCfg, float *pNextFreq)
 **/
 void AD5940_StructInit(void *pStruct, uint32_t StructSize)
 {
-  memset(pStruct, 0, StructSize);
+    memset(pStruct, 0, StructSize);
 }
 
 /**
@@ -630,30 +588,30 @@ void AD5940_StructInit(void *pStruct, uint32_t StructSize)
 **/
 float AD5940_ADCCode2Volt(uint32_t code, uint32_t ADCPga, float VRef1p82)
 {
-  float kFactor = 1.835/1.82;
-  float fVolt = 0.0;
-  float tmp = 0;
-  tmp = (int32_t)code - 32768;
-  switch(ADCPga)
-  {
-  case ADCPGA_1:
-    break;
-  case ADCPGA_1P5:
-    tmp /= 1.5f;
-    break;
-  case ADCPGA_2:
-    tmp /= 2.0f;
-    break;
-  case ADCPGA_4:
-    tmp /= 4.0f;
-    break;
-  case ADCPGA_9:
-    tmp /= 9.0f;
-    break;
-  default:break;
-  }
-  fVolt = tmp*VRef1p82/32768*kFactor;
-  return fVolt;
+    float kFactor = 1.835 / 1.82;
+    float fVolt = 0.0;
+    float tmp = 0;
+    tmp = (int32_t)code - 32768;
+    switch (ADCPga) {
+        case ADCPGA_1:
+            break;
+        case ADCPGA_1P5:
+            tmp /= 1.5f;
+            break;
+        case ADCPGA_2:
+            tmp /= 2.0f;
+            break;
+        case ADCPGA_4:
+            tmp /= 4.0f;
+            break;
+        case ADCPGA_9:
+            tmp /= 9.0f;
+            break;
+        default:
+            break;
+    }
+    fVolt = tmp * VRef1p82 / 32768 * kFactor;
+    return fVolt;
 }
 
 /**
@@ -664,14 +622,14 @@ float AD5940_ADCCode2Volt(uint32_t code, uint32_t ADCPga, float VRef1p82)
 **/
 fImpCar_Type AD5940_ComplexDivFloat(fImpCar_Type *a, fImpCar_Type *b)
 {
-  fImpCar_Type res;
-  float temp;
-  temp = b->Real*b->Real + b->Image*b->Image;
-  res.Real = a->Real*b->Real + a->Image*b->Image;
-  res.Real /= temp;
-  res.Image = a->Image*b->Real - a->Real*b->Image;
-  res.Image /= temp;
-  return res;
+    fImpCar_Type res;
+    float temp;
+    temp = b->Real * b->Real + b->Image * b->Image;
+    res.Real = a->Real * b->Real + a->Image * b->Image;
+    res.Real /= temp;
+    res.Image = a->Image * b->Real - a->Real * b->Image;
+    res.Image /= temp;
+    return res;
 }
 
 /**
@@ -682,12 +640,12 @@ fImpCar_Type AD5940_ComplexDivFloat(fImpCar_Type *a, fImpCar_Type *b)
 **/
 fImpCar_Type AD5940_ComplexMulFloat(fImpCar_Type *a, fImpCar_Type *b)
 {
-  fImpCar_Type res;
-  
-  res.Real = a->Real*b->Real - a->Image*b->Image;
-  res.Image = a->Image*b->Real + a->Real*b->Image;
+    fImpCar_Type res;
 
-  return res;
+    res.Real = a->Real * b->Real - a->Image * b->Image;
+    res.Image = a->Image * b->Real + a->Real * b->Image;
+
+    return res;
 }
 /**
  * @brief Do complex number addition.
@@ -697,12 +655,12 @@ fImpCar_Type AD5940_ComplexMulFloat(fImpCar_Type *a, fImpCar_Type *b)
 **/
 fImpCar_Type AD5940_ComplexAddFloat(fImpCar_Type *a, fImpCar_Type *b)
 {
-  fImpCar_Type res;
-  
-  res.Real = a->Real + b->Real;
-  res.Image = a->Image + b->Image;
+    fImpCar_Type res;
 
-  return res;
+    res.Real = a->Real + b->Real;
+    res.Image = a->Image + b->Image;
+
+    return res;
 }
 
 /**
@@ -713,12 +671,12 @@ fImpCar_Type AD5940_ComplexAddFloat(fImpCar_Type *a, fImpCar_Type *b)
 **/
 fImpCar_Type AD5940_ComplexSubFloat(fImpCar_Type *a, fImpCar_Type *b)
 {
-  fImpCar_Type res;
-  
-  res.Real = a->Real - b->Real;
-  res.Image = a->Image - b->Image;
+    fImpCar_Type res;
 
-  return res;
+    res.Real = a->Real - b->Real;
+    res.Image = a->Image - b->Image;
+
+    return res;
 }
 
 /**
@@ -729,14 +687,14 @@ fImpCar_Type AD5940_ComplexSubFloat(fImpCar_Type *a, fImpCar_Type *b)
 **/
 fImpCar_Type AD5940_ComplexDivInt(iImpCar_Type *a, iImpCar_Type *b)
 {
-  fImpCar_Type res;
-  float temp;
-  temp = (float)b->Real*b->Real + (float)b->Image*b->Image;
-  res.Real = (float)a->Real*b->Real + (float)a->Image*b->Image;
-  res.Real /= temp;
-  res.Image = (float)a->Image*b->Real - (float)a->Real*b->Image;
-  res.Image /= temp;
-  return res;
+    fImpCar_Type res;
+    float temp;
+    temp = (float)b->Real * b->Real + (float)b->Image * b->Image;
+    res.Real = (float)a->Real * b->Real + (float)a->Image * b->Image;
+    res.Real /= temp;
+    res.Image = (float)a->Image * b->Real - (float)a->Real * b->Image;
+    res.Image /= temp;
+    return res;
 }
 
 /**
@@ -747,12 +705,12 @@ fImpCar_Type AD5940_ComplexDivInt(iImpCar_Type *a, iImpCar_Type *b)
 **/
 fImpCar_Type AD5940_ComplexMulInt(iImpCar_Type *a, iImpCar_Type *b)
 {
-  fImpCar_Type res;
-  
-  res.Real = (float)a->Real*b->Real - (float)a->Image*b->Image;
-  res.Image = (float)a->Image*b->Real + (float)a->Real*b->Image;
+    fImpCar_Type res;
 
-  return res;
+    res.Real = (float)a->Real * b->Real - (float)a->Image * b->Image;
+    res.Image = (float)a->Image * b->Real + (float)a->Real * b->Image;
+
+    return res;
 }
 
 /**
@@ -762,7 +720,7 @@ fImpCar_Type AD5940_ComplexMulInt(iImpCar_Type *a, iImpCar_Type *b)
 **/
 float AD5940_ComplexMag(fImpCar_Type *a)
 {
-  return sqrtf(a->Real*a->Real + a->Image*a->Image);
+    return sqrtf(a->Real * a->Real + a->Image * a->Image);
 }
 
 /**
@@ -772,7 +730,7 @@ float AD5940_ComplexMag(fImpCar_Type *a)
 **/
 float AD5940_ComplexPhase(fImpCar_Type *a)
 {
-  return atan2f(a->Image, a->Real);
+    return atan2f(a->Image, a->Real);
 }
 
 /**
@@ -782,67 +740,62 @@ float AD5940_ComplexPhase(fImpCar_Type *a)
 **/
 FreqParams_Type AD5940_GetFreqParameters(float freq)
 {
-	const uint32_t dft_table[] = {4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384};
-	const uint32_t sinc2osr_table[] = {1, 22,44,89,178,267,533,640,667,800,889,1067,1333};
-  const uint32_t sinc3osr_table[] = {2, 4, 5};
-	float AdcRate = 800000;
-	uint32_t n1 = 0;	// Sample rate after ADC filters
-	uint32_t n2 = 0; // Sample rate after DFT block
-	uint32_t iCycle = 0;
-	FreqParams_Type freq_params;
-	/* High power mode */
-	if(freq >= 20000)
-	{
-		freq_params. DftSrc = DFTSRC_SINC3;
-		freq_params.ADCSinc2Osr = 0;
-		freq_params.ADCSinc3Osr = 2;
-		freq_params.DftNum = DFTNUM_8192;
-		freq_params.NumClks = 0;
-		freq_params.HighPwrMode = bTRUE;
-		return freq_params;		
-	}
-	
-	if(freq < 0.51)
-	{
-		freq_params. DftSrc = DFTSRC_SINC2NOTCH;
-		freq_params.ADCSinc2Osr = 6;
-		freq_params.ADCSinc3Osr = 1;
-		freq_params.DftNum = DFTNUM_8192;
-		freq_params.NumClks = 0;
-		freq_params.HighPwrMode = bTRUE;
-		return freq_params;		
-	}
-	
-	/* Start with SINC2 setting */
-	for(uint8_t i = 0; i<sizeof(sinc2osr_table) / sizeof(uint32_t); i++)
-	{
-		n1 = sinc2osr_table[i] * sinc3osr_table[1];
-		if(((AdcRate/n1) < freq * 10) && (freq<20e3))
-			continue;
-		
-		/* Try DFT number */
-		for(uint32_t j = 8; j<sizeof(dft_table) / sizeof(uint32_t); j++)
-		{
-			n2 = dft_table[j];
-			iCycle = (uint32_t)(n1 * n2 * freq)/AdcRate;
-			if(iCycle < 8)
-				continue;
-			freq_params. DftSrc = DFTSRC_SINC2NOTCH;
-			freq_params.ADCSinc2Osr = i-1;
-			freq_params.ADCSinc3Osr = 1;
-			freq_params.DftNum = j;
-			freq_params.NumClks = 0;
-			freq_params.HighPwrMode = bFALSE;
-			if(n1 == 4)
-			{
-				freq_params. DftSrc = DFTSRC_SINC3;
-				freq_params.ADCSinc2Osr = 0;
-			}
-			return freq_params;
-		}
-	}
-		
-	return freq_params;
+    const uint32_t dft_table[] = { 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384 };
+    const uint32_t sinc2osr_table[] = { 1, 22, 44, 89, 178, 267, 533, 640, 667, 800, 889, 1067, 1333 };
+    const uint32_t sinc3osr_table[] = { 2, 4, 5 };
+    float AdcRate = 800000;
+    uint32_t n1 = 0; // Sample rate after ADC filters
+    uint32_t n2 = 0; // Sample rate after DFT block
+    uint32_t iCycle = 0;
+    FreqParams_Type freq_params;
+    /* High power mode */
+    if (freq >= 20000) {
+        freq_params.DftSrc = DFTSRC_SINC3;
+        freq_params.ADCSinc2Osr = 0;
+        freq_params.ADCSinc3Osr = 2;
+        freq_params.DftNum = DFTNUM_8192;
+        freq_params.NumClks = 0;
+        freq_params.HighPwrMode = bTRUE;
+        return freq_params;
+    }
+
+    if (freq < 0.51) {
+        freq_params.DftSrc = DFTSRC_SINC2NOTCH;
+        freq_params.ADCSinc2Osr = 6;
+        freq_params.ADCSinc3Osr = 1;
+        freq_params.DftNum = DFTNUM_8192;
+        freq_params.NumClks = 0;
+        freq_params.HighPwrMode = bTRUE;
+        return freq_params;
+    }
+
+    /* Start with SINC2 setting */
+    for (uint8_t i = 0; i < sizeof(sinc2osr_table) / sizeof(uint32_t); i++) {
+        n1 = sinc2osr_table[i] * sinc3osr_table[1];
+        if (((AdcRate / n1) < freq * 10) && (freq < 20e3))
+            continue;
+
+        /* Try DFT number */
+        for (uint32_t j = 8; j < sizeof(dft_table) / sizeof(uint32_t); j++) {
+            n2 = dft_table[j];
+            iCycle = (uint32_t)(n1 * n2 * freq) / AdcRate;
+            if (iCycle < 8)
+                continue;
+            freq_params.DftSrc = DFTSRC_SINC2NOTCH;
+            freq_params.ADCSinc2Osr = i - 1;
+            freq_params.ADCSinc3Osr = 1;
+            freq_params.DftNum = j;
+            freq_params.NumClks = 0;
+            freq_params.HighPwrMode = bFALSE;
+            if (n1 == 4) {
+                freq_params.DftSrc = DFTSRC_SINC3;
+                freq_params.ADCSinc2Osr = 0;
+            }
+            return freq_params;
+        }
+    }
+
+    return freq_params;
 }
 
 /**
@@ -852,24 +805,24 @@ FreqParams_Type AD5940_GetFreqParameters(float freq)
 #ifdef CHIPSEL_M355
 static void AD5940_D2DWriteReg(uint16_t RegAddr, uint32_t RegData)
 {
-  if(((RegAddr>=0x1000)&&(RegAddr<=0x3014)))  /* 32bit register */
-    *(volatile uint32_t *)(RegAddr+0x400c0000) = RegData;
-  else                                        /* 16bit register */
-    *(volatile uint16_t *)(RegAddr+0x400c0000) = RegData;
+    if (((RegAddr >= 0x1000) && (RegAddr <= 0x3014))) /* 32bit register */
+        *(volatile uint32_t *)(RegAddr + 0x400c0000) = RegData;
+    else /* 16bit register */
+        *(volatile uint16_t *)(RegAddr + 0x400c0000) = RegData;
 }
 
 static uint32_t AD5940_D2DReadReg(uint16_t RegAddr)
 {
-  if(((RegAddr>=0x1000)&&(RegAddr<=0x3014)))  /* 32bit register */
-    return *(volatile uint32_t *)(RegAddr+0x400c0000);
-  else                                        /* 16bit register */
-    return *(volatile uint16_t *)(RegAddr+0x400c0000);
+    if (((RegAddr >= 0x1000) && (RegAddr <= 0x3014))) /* 32bit register */
+        return *(volatile uint32_t *)(RegAddr + 0x400c0000);
+    else /* 16bit register */
+        return *(volatile uint16_t *)(RegAddr + 0x400c0000);
 }
 
-void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)   
+void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
 {
-  while(uiReadCount--)
-    *pBuffer++ = *(volatile uint32_t *)(0x400c206C);
+    while (uiReadCount--)
+        *pBuffer++ = *(volatile uint32_t *)(0x400c206C);
 }
 #else
 /**
@@ -894,10 +847,10 @@ void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
 **/
 static unsigned char AD5940_ReadWrite8B(unsigned char data)
 {
-   uint8_t tx[1], rx[1];
-   tx[0] = data;
-   AD5940_ReadWriteNBytes(tx,rx,1);
-   return rx[0];
+    uint8_t tx[1], rx[1];
+    tx[0] = data;
+    AD5940_ReadWriteNBytes(tx, rx, 1);
+    return rx[0];
 }
 
 /**
@@ -907,67 +860,66 @@ static unsigned char AD5940_ReadWrite8B(unsigned char data)
 **/
 static uint16_t AD5940_ReadWrite16B(uint16_t data)
 {
-   uint8_t SendBuffer[2];
-   uint8_t RecvBuffer[2];
-   SendBuffer[0] = data>>8;
-   SendBuffer[1] = data&0xff;
-   AD5940_ReadWriteNBytes(SendBuffer,RecvBuffer,2);
-   return (((uint16_t)RecvBuffer[0])<<8)|RecvBuffer[1];
+    uint8_t SendBuffer[2];
+    uint8_t RecvBuffer[2];
+    SendBuffer[0] = data >> 8;
+    SendBuffer[1] = data & 0xff;
+    AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 2);
+    return (((uint16_t)RecvBuffer[0]) << 8) | RecvBuffer[1];
 }
-
 
 static uint32_t AD5940_ReadWrite24B(uint32_t data)
 {
-   uint8_t SendBuffer[3];
-   uint8_t RecvBuffer[3];
-  //  printf("Enter AD5940_ReadWrite24B");
-   SendBuffer[0] = (data>>16)&0xff;
-   SendBuffer[1] = (data>> 8)&0xff;
-   SendBuffer[2] = (data    )&0xff;
-   AD5940_ReadWriteNBytes(SendBuffer,RecvBuffer,3);
-   return (((uint32_t)RecvBuffer[0])<<16)|(((uint32_t)RecvBuffer[1])<<8)|RecvBuffer[2];
+    uint8_t SendBuffer[3];
+    uint8_t RecvBuffer[3];
+    //  printf("Enter AD5940_ReadWrite24B");
+    SendBuffer[0] = (data >> 16) & 0xff;
+    SendBuffer[1] = (data >> 8) & 0xff;
+    SendBuffer[2] = (data) & 0xff;
+    AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 3);
+    return (((uint32_t)RecvBuffer[0]) << 16) | (((uint32_t)RecvBuffer[1]) << 8) | RecvBuffer[2];
 }
 
 static uint64_t AD5940_ReadWrite40B(uint64_t data)
 {
-   uint8_t SendBuffer[5];
-   uint8_t RecvBuffer[5];
-	 SendBuffer[0] = (data>>32)&0xff;
-	 SendBuffer[1] = (data>>24)&0xff;
-   SendBuffer[2] = (data>>16)&0xff;
-   SendBuffer[3] = (data>> 8)&0xff;
-   SendBuffer[4] = (data    )&0xff;
-   AD5940_ReadWriteNBytes(SendBuffer,RecvBuffer,5);
-   return  (((uint64_t)RecvBuffer[0])<<32)|(((uint64_t)RecvBuffer[1])<<24)|(((uint64_t)RecvBuffer[2])<<16)|(((uint64_t)RecvBuffer[3])<<8)|RecvBuffer[4];
+    uint8_t SendBuffer[5];
+    uint8_t RecvBuffer[5];
+    SendBuffer[0] = (data >> 32) & 0xff;
+    SendBuffer[1] = (data >> 24) & 0xff;
+    SendBuffer[2] = (data >> 16) & 0xff;
+    SendBuffer[3] = (data >> 8) & 0xff;
+    SendBuffer[4] = (data) & 0xff;
+    AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 5);
+    return (((uint64_t)RecvBuffer[0]) << 32) | (((uint64_t)RecvBuffer[1]) << 24) | (((uint64_t)RecvBuffer[2]) << 16) | (((uint64_t)RecvBuffer[3]) << 8) | RecvBuffer[4];
 }
 
 static uint64_t AD5940_ReadWrite48B(uint64_t data)
 {
-   uint8_t SendBuffer[6];
-   uint8_t RecvBuffer[6];
-	 SendBuffer[0] = (data>>40)&0xff;
-	 SendBuffer[1] = (data>>32)&0xff;
-	 SendBuffer[2] = (data>>24)&0xff;
-   SendBuffer[3] = (data>>16)&0xff;
-   SendBuffer[4] = (data>> 8)&0xff;
-   SendBuffer[5] = (data    )&0xff;
-   AD5940_ReadWriteNBytes(SendBuffer,RecvBuffer,6);
-   return  (((uint64_t)RecvBuffer[0])<<40)|(((uint64_t)RecvBuffer[1])<<32)|(((uint64_t)RecvBuffer[2])<<24)|(((uint64_t)RecvBuffer[3])<<16)|(((uint64_t)RecvBuffer[4])<<8)|(RecvBuffer[5]);
+    uint8_t SendBuffer[6];
+    uint8_t RecvBuffer[6];
+    SendBuffer[0] = (data >> 40) & 0xff;
+    SendBuffer[1] = (data >> 32) & 0xff;
+    SendBuffer[2] = (data >> 24) & 0xff;
+    SendBuffer[3] = (data >> 16) & 0xff;
+    SendBuffer[4] = (data >> 8) & 0xff;
+    SendBuffer[5] = (data) & 0xff;
+    AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 6);
+    return (((uint64_t)RecvBuffer[0]) << 40) | (((uint64_t)RecvBuffer[1]) << 32) | (((uint64_t)RecvBuffer[2]) << 24) | (((uint64_t)RecvBuffer[3]) << 16) | (((uint64_t)RecvBuffer[4]) << 8) | (RecvBuffer[5]);
 }
 
 static uint64_t AD5940_ReadWrite56B(uint64_t data)
 {
-   uint8_t SendBuffer[7];
-   uint8_t RecvBuffer[7];
-	SendBuffer[0] = (data>>48)&0xff;
-	SendBuffer[1] = (data>>40)&0xff;
-	SendBuffer[2] = (data>>32)&0xff;
-	SendBuffer[3] = (data>>24)&0xff;
-   SendBuffer[4] = (data>>16)&0xff;
-   SendBuffer[5] = (data>> 8)&0xff;
-   SendBuffer[6] = (data    )&0xff;
-   AD5940_ReadWriteNBytes(SendBuffer,RecvBuffer,7);
-   return (((uint64_t)RecvBuffer[0])<<48)|(((uint64_t)RecvBuffer[1])<<40)|(((uint64_t)RecvBuffer[2])<<32)|(((uint64_t)RecvBuffer[3])<<16)|(((uint64_t)RecvBuffer[4])<<16)|(((uint64_t)RecvBuffer[5])<<8)|RecvBuffer[6];
+    uint8_t SendBuffer[7];
+    uint8_t RecvBuffer[7];
+    SendBuffer[0] = (data >> 48) & 0xff;
+    SendBuffer[1] = (data >> 40) & 0xff;
+    SendBuffer[2] = (data >> 32) & 0xff;
+    SendBuffer[3] = (data >> 24) & 0xff;
+    SendBuffer[4] = (data >> 16) & 0xff;
+    SendBuffer[5] = (data >> 8) & 0xff;
+    SendBuffer[6] = (data) & 0xff;
+    AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 7);
+    return (((uint64_t)RecvBuffer[0]) << 48) | (((uint64_t)RecvBuffer[1]) << 40) | (((uint64_t)RecvBuffer[2]) << 32) | (((uint64_t)RecvBuffer[3]) << 16) | (((uint64_t)RecvBuffer[4]) << 16) | (((uint64_t)RecvBuffer[5]) << 8) | RecvBuffer[6];
 }
 
 /**
@@ -977,15 +929,15 @@ static uint64_t AD5940_ReadWrite56B(uint64_t data)
 **/
 static uint32_t AD5940_ReadWrite32B(uint32_t data)
 {
-   uint8_t SendBuffer[4];
-   uint8_t RecvBuffer[4];
-  
-   SendBuffer[0] = (data>>24)&0xff;
-   SendBuffer[1] = (data>>16)&0xff;
-   SendBuffer[2] = (data>> 8)&0xff;
-   SendBuffer[3] = (data    )&0xff;
-   AD5940_ReadWriteNBytes(SendBuffer,RecvBuffer,4);
-   return (((uint32_t)RecvBuffer[0])<<24)|(((uint32_t)RecvBuffer[1])<<16)|(((uint32_t)RecvBuffer[2])<<8)|(RecvBuffer[3]);
+    uint8_t SendBuffer[4];
+    uint8_t RecvBuffer[4];
+
+    SendBuffer[0] = (data >> 24) & 0xff;
+    SendBuffer[1] = (data >> 16) & 0xff;
+    SendBuffer[2] = (data >> 8) & 0xff;
+    SendBuffer[3] = (data) & 0xff;
+    AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 4);
+    return (((uint32_t)RecvBuffer[0]) << 24) | (((uint32_t)RecvBuffer[1]) << 16) | (((uint32_t)RecvBuffer[2]) << 8) | (RecvBuffer[3]);
 }
 
 /**
@@ -995,38 +947,38 @@ static uint32_t AD5940_ReadWrite32B(uint32_t data)
  * @return Return None.
 **/
 static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
-{  
-  // printf("Enter AD5940_SPIWriteReg");
-  /* Set register address */
-  // printf("5940 W WAIT MUTEX\r\n");
-  xSemaphoreTake(xMutex_SPI,
-                 portMAX_DELAY);
-  // printf("5940 W TAKE MUTEX\r\n");
-  // bflb_mtimer_delay_us(10);
-  AD5940_CsClr();
-	AD5940_ReadWrite24B((SPICMD_SETADDR<<16) | RegAddr);
-  AD5940_CsSet();
-  // xSemaphoreGive(xMutex_SPI);
+{
+    // printf("Enter AD5940_SPIWriteReg");
+    /* Set register address */
+    // printf("5940 W WAIT MUTEX\r\n");
+    if (xSemaphoreTake(xMutex_SPI,
+                       portMAX_DELAY) == pdTRUE) {
+        // printf("5940 W TAKE MUTEX\r\n");
+        // bflb_mtimer_delay_us(10);
+        AD5940_CsClr();
+        AD5940_ReadWrite24B((SPICMD_SETADDR << 16) | RegAddr);
+        AD5940_CsSet();
+        // xSemaphoreGive(xMutex_SPI);
 
-  AD5940_Delay10us(20);
-  /* Add delay here to meet the SPI timing. */
-  // xSemaphoreTake(xMutex_SPI,
-  //                portMAX_DELAY);
-  AD5940_CsClr();
-  //AD5940_ReadWrite8B(SPICMD_WRITEREG);
-  if(((RegAddr>=0x1000)&&(RegAddr<=0x3014)))
-	{ //AD5940_ReadWrite32B(RegData);
-	  AD5940_ReadWrite40B(SPICMD_WRITEREG<<32 | RegData);}
-  else
-	{//AD5940_ReadWrite16B(RegData);
-	  AD5940_ReadWrite24B(SPICMD_WRITEREG<<16 | RegData);}
-  AD5940_CsSet();
-  // bflb_mtimer_delay_us(10);
-  // printf("5940 W GIVE MUTEX\r\n");
-  xSemaphoreGive(xMutex_SPI);
+        AD5940_Delay10us(20);
+        /* Add delay here to meet the SPI timing. */
+        // xSemaphoreTake(xMutex_SPI,
+        //                portMAX_DELAY);
+        AD5940_CsClr();
+        //AD5940_ReadWrite8B(SPICMD_WRITEREG);
+        if (((RegAddr >= 0x1000) && (RegAddr <= 0x3014))) { //AD5940_ReadWrite32B(RegData);
+            AD5940_ReadWrite40B(SPICMD_WRITEREG << 32 | RegData);
+        } else { //AD5940_ReadWrite16B(RegData);
+            AD5940_ReadWrite24B(SPICMD_WRITEREG << 16 | RegData);
+        }
+        AD5940_CsSet();
+        // bflb_mtimer_delay_us(10);
+        // printf("5940 W GIVE MUTEX\r\n");
+        xSemaphoreGive(xMutex_SPI);
+    }
 }
 //static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
-//{  
+//{
 //  /* Set register address */
 //  AD5940_CsClr();
 //  AD5940_ReadWrite8B(SPICMD_SETADDR);
@@ -1046,56 +998,54 @@ static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
  * @param RegAddr: The register address.
  * @return Return register data.
 **/
- uint32_t AD5940_SPIReadReg(uint16_t RegAddr)
-{  
-  uint32_t Data = 0;
-  /* Set register address that we want to read */
-  // printf("5940 R WAIT MUTEX\r\n");
-  xSemaphoreTake(xMutex_SPI,
-                 portMAX_DELAY);
-  // printf("5940 R TAKE MUTEX\r\n");
-  // bflb_mtimer_delay_us(10);
-  AD5940_CsClr();
-  // AD5940_ReadWrite8B(SPICMD_SETADDR);
-  // AD5940_ReadWrite16B(RegAddr);
-	AD5940_ReadWrite24B((SPICMD_SETADDR<<16) | RegAddr);
-  AD5940_CsSet();
-  // xSemaphoreGive(xMutex_SPI);
+uint32_t AD5940_SPIReadReg(uint16_t RegAddr)
+{
+    uint32_t Data = 0;
+    /* Set register address that we want to read */
+    // printf("5940 R WAIT MUTEX\r\n");
+    if (xSemaphoreTake(xMutex_SPI,
+                       portMAX_DELAY) == pdTRUE) {
+        // printf("5940 R TAKE MUTEX\r\n");
+        // bflb_mtimer_delay_us(10);
+        AD5940_CsClr();
+        // AD5940_ReadWrite8B(SPICMD_SETADDR);
+        // AD5940_ReadWrite16B(RegAddr);
+        AD5940_ReadWrite24B((SPICMD_SETADDR << 16) | RegAddr);
+        AD5940_CsSet();
+        // xSemaphoreGive(xMutex_SPI);
 
-  AD5940_Delay10us(20);
-  // xSemaphoreTake(xMutex_SPI,
-  //                portMAX_DELAY);
-  /* Read it */
-  AD5940_CsClr();
-  //AD5940_ReadWrite8B(SPICMD_READREG);
-  //AD5940_ReadWrite8B(0);  //Dummy read
-  //AD5940_ReadWrite16B(SPICMD_READREG<<8);
-  /* The real data is coming */
-  if ((RegAddr >= 0x1000) && (RegAddr <= 0x3014)) { //Data = AD5940_ReadWrite32B(0);
-                                                    //NRF_LOG_INFO("32");
-      Data = AD5940_ReadWrite48B(SPICMD_READREG << 40);
-      Data = Data & 0xffffffff;
-      //NRF_LOG_INFO("SPI32Data = %x",Data);
-	}
-  else
-	{ //Data = AD5940_ReadWrite16B(0);
-		 //NRF_LOG_INFO("16");
-	   Data = AD5940_ReadWrite32B(SPICMD_READREG<<24);
-	   Data = Data & 0xffff;
-		 //NRF_LOG_INFO("SPI16Data = %x",Data);
-	}
-	 
-	
-	//AD5940_ReadWrite56B((SPICMD_SETADDR<<48) | (RegAddr<<40) | (SPICMD_READREG<<32) );
-	
-  AD5940_CsSet();
-  // bflb_mtimer_delay_us(10);
-  // printf("5940 R GIVE MUTEX\r\n");
-  xSemaphoreGive(xMutex_SPI);
-  return Data;
+        AD5940_Delay10us(20);
+        // xSemaphoreTake(xMutex_SPI,
+        //                portMAX_DELAY);
+        /* Read it */
+        AD5940_CsClr();
+        //AD5940_ReadWrite8B(SPICMD_READREG);
+        //AD5940_ReadWrite8B(0);  //Dummy read
+        //AD5940_ReadWrite16B(SPICMD_READREG<<8);
+        /* The real data is coming */
+        if ((RegAddr >= 0x1000) && (RegAddr <= 0x3014)) { //Data = AD5940_ReadWrite32B(0);
+                                                          //NRF_LOG_INFO("32");
+            Data = AD5940_ReadWrite48B(SPICMD_READREG << 40);
+            Data = Data & 0xffffffff;
+            //NRF_LOG_INFO("SPI32Data = %x",Data);
+        } else { //Data = AD5940_ReadWrite16B(0);
+                 //NRF_LOG_INFO("16");
+            Data = AD5940_ReadWrite32B(SPICMD_READREG << 24);
+            Data = Data & 0xffff;
+            //NRF_LOG_INFO("SPI16Data = %x",Data);
+        }
+
+        //AD5940_ReadWrite56B((SPICMD_SETADDR<<48) | (RegAddr<<40) | (SPICMD_READREG<<32) );
+
+        AD5940_CsSet();
+        // bflb_mtimer_delay_us(10);
+        // printf("5940 R GIVE MUTEX\r\n");
+        xSemaphoreGive(xMutex_SPI);
+    }
+    return Data;
 }
 //static uint32_t AD5940_SPIReadReg(uint16_t RegAddr)
-//{  
+//{
 //  uint32_t Data = 0;
 //  /* Set register address that we want to read */
 //  AD5940_CsClr();
@@ -1120,66 +1070,64 @@ static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
   @param uiReadCount: How much data to be read.
   @return none.
 **/
-void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)   
+void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
 {
-  /* Use function AD5940_SPIReadReg to read REG_AFE_DATAFIFORD is also one method. */
-   uint32_t i;
+    /* Use function AD5940_SPIReadReg to read REG_AFE_DATAFIFORD is also one method. */
+    uint32_t i;
 
-  //  taskENTER_CRITICAL();
-  // printf("5940 FIFO WAIT MUTEX\r\n");
-   xSemaphoreTake(xMutex_SPI,
-                  portMAX_DELAY);
-  //  printf("5940 FIFO TAKE MUTEX\r\n");
-   //  bflb_mtimer_delay_us(10);
-   //  printf("AD5940 FIFORD\r\n");
+    //  taskENTER_CRITICAL();
+    // printf("5940 FIFO WAIT MUTEX\r\n");
+    if (xSemaphoreTake(xMutex_SPI,
+                       portMAX_DELAY) == pdTRUE) {
+        //  printf("5940 FIFO TAKE MUTEX\r\n");
+        //  bflb_mtimer_delay_us(10);
+        //  printf("AD5940 FIFORD\r\n");
 
-   if (uiReadCount < 3) {
-       /* This method is more efficient when readcount < 3 */
-       //uint32_t i;
-       AD5940_CsClr();
-       //      AD5940_ReadWrite8B(SPICMD_SETADDR);
-       //      AD5940_ReadWrite16B(REG_AFE_DATAFIFORD);
-       AD5940_ReadWrite24B(SPICMD_SETADDR << 16 | REG_AFE_DATAFIFORD);
-       AD5940_CsSet();
-       //AD5940_Delay10us(20);
-       for (i = 0; i < uiReadCount; i++) {
-           AD5940_CsClr();
-           //         AD5940_ReadWrite8B(SPICMD_READREG);
-           //         AD5940_ReadWrite8B(0);//Write Host status/Don't care
-           //         pBuffer[i] = AD5940_ReadWrite32B(0);
-           pBuffer[i] = AD5940_ReadWrite48B(SPICMD_READREG << 40);
-           AD5940_CsSet();
-       }
-  }
-  else
-  {
-      AD5940_CsClr();
-      AD5940_ReadWrite8B(SPICMD_READFIFO);
-      /* 6 dummy write before valid data read back */
-      for (i = 0; i < 6; i++)
-          AD5940_ReadWrite8B(0);
-      /* Continuously read DATAFIFORD register with offset 0 */
-      for (i = 0; i < uiReadCount - 2; i++) {
-          pBuffer[i] = AD5940_ReadWrite32B(0); /*Offset is 0, so we always read DATAFIFORD register */
-     }
-     /* Read back last two FIFO data with none-zero offset*/
-     pBuffer[i++] = AD5940_ReadWrite32B(0x44444444);
-     pBuffer[i] = AD5940_ReadWrite32B(0x44444444);
-     AD5940_CsSet();
-     
-  }
-  // vTaskDelay(10);
-  // printf("AD5940 FIFORD END\r\n");
-  // bflb_mtimer_delay_us(10);
-  // taskEXIT_CRITICAL();
-  // printf("5940 FIFO GIVE MUTEX\r\n");
-  xSemaphoreGive(xMutex_SPI);
+        if (uiReadCount < 3) {
+            /* This method is more efficient when readcount < 3 */
+            //uint32_t i;
+            AD5940_CsClr();
+            //      AD5940_ReadWrite8B(SPICMD_SETADDR);
+            //      AD5940_ReadWrite16B(REG_AFE_DATAFIFORD);
+            AD5940_ReadWrite24B(SPICMD_SETADDR << 16 | REG_AFE_DATAFIFORD);
+            AD5940_CsSet();
+            //AD5940_Delay10us(20);
+            for (i = 0; i < uiReadCount; i++) {
+                AD5940_CsClr();
+                //         AD5940_ReadWrite8B(SPICMD_READREG);
+                //         AD5940_ReadWrite8B(0);//Write Host status/Don't care
+                //         pBuffer[i] = AD5940_ReadWrite32B(0);
+                pBuffer[i] = AD5940_ReadWrite48B(SPICMD_READREG << 40);
+                AD5940_CsSet();
+            }
+        } else {
+            AD5940_CsClr();
+            AD5940_ReadWrite8B(SPICMD_READFIFO);
+            /* 6 dummy write before valid data read back */
+            for (i = 0; i < 6; i++)
+                AD5940_ReadWrite8B(0);
+            /* Continuously read DATAFIFORD register with offset 0 */
+            for (i = 0; i < uiReadCount - 2; i++) {
+                pBuffer[i] = AD5940_ReadWrite32B(0); /*Offset is 0, so we always read DATAFIFORD register */
+            }
+            /* Read back last two FIFO data with none-zero offset*/
+            pBuffer[i++] = AD5940_ReadWrite32B(0x44444444);
+            pBuffer[i] = AD5940_ReadWrite32B(0x44444444);
+            AD5940_CsSet();
+        }
+        // vTaskDelay(10);
+        // printf("AD5940 FIFORD END\r\n");
+        // bflb_mtimer_delay_us(10);
+        // taskEXIT_CRITICAL();
+        // printf("5940 FIFO GIVE MUTEX\r\n");
+        xSemaphoreGive(xMutex_SPI);
+    }
 }
-//void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)   
+//void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
 //{
 //  /* Use function AD5940_SPIReadReg to read REG_AFE_DATAFIFORD is also one method. */
 //   uint32_t i;
-//   
+//
 //   if(uiReadCount < 3)
 //   {
 //      /* This method is more efficient when readcount < 3 */
@@ -1200,7 +1148,7 @@ void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
 //   else if(uiReadCount==4)
 //		 {
 //			 AD5940_CsClr();
-//			 
+//
 //		 }
 //		 else
 //		 {
@@ -1236,12 +1184,12 @@ void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
 void AD5940_WriteReg(uint16_t RegAddr, uint32_t RegData)
 {
 #ifdef SEQUENCE_GENERATOR
-  if(SeqGenDB.EngineStart == bTRUE)
-    AD5940_SEQWriteReg(RegAddr, RegData);
-  else
+    if (SeqGenDB.EngineStart == bTRUE)
+        AD5940_SEQWriteReg(RegAddr, RegData);
+    else
 #endif
 #ifdef CHIPSEL_M355
-    AD5940_D2DWriteReg(RegAddr, RegData);
+        AD5940_D2DWriteReg(RegAddr, RegData);
 #else
     // printf("Enter AD5940_WriteReg");
     AD5940_SPIWriteReg(RegAddr, RegData);
@@ -1257,17 +1205,16 @@ void AD5940_WriteReg(uint16_t RegAddr, uint32_t RegData)
 uint32_t AD5940_ReadReg(uint16_t RegAddr)
 {
 #ifdef SEQUENCE_GENERATOR
-  if(SeqGenDB.EngineStart == bTRUE)
-    return AD5940_SEQReadReg(RegAddr);
-  else
+    if (SeqGenDB.EngineStart == bTRUE)
+        return AD5940_SEQReadReg(RegAddr);
+    else
 #endif
 #ifdef CHIPSEL_M355
-    return AD5940_D2DReadReg(RegAddr);
+        return AD5940_D2DReadReg(RegAddr);
 #else
     return AD5940_SPIReadReg(RegAddr);
 #endif
 }
-
 
 /**
  * @defgroup AFE_Control 
@@ -1288,73 +1235,71 @@ uint32_t AD5940_ReadReg(uint16_t RegAddr)
 **/
 void AD5940_Initialize(void)
 {
-  int i=0;
-  /* Write following registers with its data sequentially whenever there is a reset happened. */
-  const struct
-  {
-    uint16_t reg_addr;
-    uint32_t reg_data;
-  } RegTable[] = {
-      { 0x0908, 0x02c9 },
-      { 0x0c08, 0x206C },
-      { 0x21F0, 0x0010 },
+    int i = 0;
+    /* Write following registers with its data sequentially whenever there is a reset happened. */
+    const struct
+    {
+        uint16_t reg_addr;
+        uint32_t reg_data;
+    } RegTable[] = {
+        { 0x0908, 0x02c9 },
+        { 0x0c08, 0x206C },
+        { 0x21F0, 0x0010 },
 #ifndef CHIPSEL_M355
-      /* This is AD5940 */
-      { 0x0410, 0x02c9 },
-      { 0x0A28, 0x0009 },
+        /* This is AD5940 */
+        { 0x0410, 0x02c9 },
+        { 0x0A28, 0x0009 },
 #else
-      /* This is ADuCM355 */
-      { 0x0410, 0x001a },
-      { 0x0A28, 0x0008 },
+        /* This is ADuCM355 */
+        { 0x0410, 0x001a },
+        { 0x0A28, 0x0008 },
 #endif
-      { 0x238c, 0x0104 },
-      { 0x0a04, 0x4859 },
-      { 0x0a04, 0xF27B },
-      { 0x0a00, 0x8009 },
-      { 0x22F0, 0x0000 },
-      //
-      { 0x2230, 0xDE87A5AF },
-      { 0x2250, 0x103F },
-      { 0x22B0, 0x203C },
-      { 0x2230, 0xDE87A5A0 },
-  };
-  //initialize global variables
-  SeqGenDB.SeqLen = 0;
-  SeqGenDB.RegCount = 0;
-  SeqGenDB.LastError = AD5940ERR_OK;
-  SeqGenDB.EngineStart = bFALSE;
+        { 0x238c, 0x0104 },
+        { 0x0a04, 0x4859 },
+        { 0x0a04, 0xF27B },
+        { 0x0a00, 0x8009 },
+        { 0x22F0, 0x0000 },
+        //
+        { 0x2230, 0xDE87A5AF },
+        { 0x2250, 0x103F },
+        { 0x22B0, 0x203C },
+        { 0x2230, 0xDE87A5A0 },
+    };
+    //initialize global variables
+    SeqGenDB.SeqLen = 0;
+    SeqGenDB.RegCount = 0;
+    SeqGenDB.LastError = AD5940ERR_OK;
+    SeqGenDB.EngineStart = bFALSE;
 #ifndef CHIPSEL_M355
-  AD5940_CsSet(); /* Pull high CS in case it's low */
-  //NRF_LOG_INFO("AD5940_CsSet0");
+    AD5940_CsSet(); /* Pull high CS in case it's low */
+                    //NRF_LOG_INFO("AD5940_CsSet0");
 #endif
-// printf("Enter Init\r\n");
-  for(i=0; i<sizeof(RegTable)/sizeof(RegTable[0]); i++)
-	{
-    // printf("%d\r\n", i);
-    AD5940_WriteReg(RegTable[i].reg_addr, RegTable[i].reg_data);
-	}
-  i = AD5940_ReadReg(REG_AFECON_CHIPID);
-  // printf("READREG\r\n");
-  if(i == 0x5501)
-    bIsS2silicon = bTRUE;
-  else if(i == 0x5502)  /* S3 chip-id is 0x5502. The is no difference with S2. */
-    bIsS2silicon = bTRUE;
-  else if(i == 0x5500)
-    bIsS2silicon = bFALSE;
-// #ifdef ADI_DEBUG
-  else
-  {
-    printf("CHIPID read error:0x%04x. AD5940 is not present?\n", i);
-    // while(1);
-  }
+    // printf("Enter Init\r\n");
+    for (i = 0; i < sizeof(RegTable) / sizeof(RegTable[0]); i++) {
+        // printf("%d\r\n", i);
+        AD5940_WriteReg(RegTable[i].reg_addr, RegTable[i].reg_data);
+    }
+    i = AD5940_ReadReg(REG_AFECON_CHIPID);
+    // printf("READREG\r\n");
+    if (i == 0x5501)
+        bIsS2silicon = bTRUE;
+    else if (i == 0x5502) /* S3 chip-id is 0x5502. The is no difference with S2. */
+        bIsS2silicon = bTRUE;
+    else if (i == 0x5500)
+        bIsS2silicon = bFALSE;
+    // #ifdef ADI_DEBUG
+    else {
+        printf("CHIPID read error:0x%04x. AD5940 is not present?\n", i);
+        // while(1);
+    }
 #ifdef CHIPSEL_M355
-  printf("This ADuCM355!\n");
+    printf("This ADuCM355!\n");
 #else
-  printf("This AD594x!\n");
+    printf("This AD594x!\n");
 #endif
-  printf("Note: Current Silicon is %s\n", bIsS2silicon ? "S2" : "S1");
-  printf("AD5940LIB Version:v%d.%d.%d\n", AD5940LIB_VER_MAJOR, AD5940LIB_VER_MINOR, AD5940LIB_VER_PATCH);
-// #endif
+    printf("Note: Current Silicon is %s\n", bIsS2silicon ? "S2" : "S1");
+    printf("AD5940LIB Version:v%d.%d.%d\n", AD5940LIB_VER_MAJOR, AD5940LIB_VER_MINOR, AD5940LIB_VER_PATCH);
+    // #endif
 }
 
 /**
@@ -1369,38 +1314,33 @@ void AD5940_Initialize(void)
 */
 void AD5940_AFECtrlS(uint32_t AfeCtrlSet, BoolFlag State)
 {
-  /* Check parameters */
-  uint32_t tempreg;
-  tempreg = AD5940_ReadReg(REG_AFE_AFECON);
-  if (State == bTRUE) {
-    /* Clear bits to enable HPREF and ALDOLimit*/
-    if (AfeCtrlSet & AFECTRL_HPREFPWR) {
-        tempreg &= ~BITM_AFE_AFECON_HPREFDIS;
-        AfeCtrlSet &= ~AFECTRL_HPREFPWR;
+    /* Check parameters */
+    uint32_t tempreg;
+    tempreg = AD5940_ReadReg(REG_AFE_AFECON);
+    if (State == bTRUE) {
+        /* Clear bits to enable HPREF and ALDOLimit*/
+        if (AfeCtrlSet & AFECTRL_HPREFPWR) {
+            tempreg &= ~BITM_AFE_AFECON_HPREFDIS;
+            AfeCtrlSet &= ~AFECTRL_HPREFPWR;
+        }
+        if (AfeCtrlSet & AFECTRL_ALDOLIMIT) {
+            tempreg &= ~BITM_AFE_AFECON_ALDOILIMITEN;
+            AfeCtrlSet &= ~AFECTRL_ALDOLIMIT;
+        }
+        tempreg |= AfeCtrlSet;
+    } else {
+        /* Set bits to Disable HPREF and ALDOLimit*/
+        if (AfeCtrlSet & AFECTRL_HPREFPWR) {
+            tempreg |= BITM_AFE_AFECON_HPREFDIS;
+            AfeCtrlSet &= ~AFECTRL_HPREFPWR;
+        }
+        if (AfeCtrlSet & AFECTRL_ALDOLIMIT) {
+            tempreg |= BITM_AFE_AFECON_ALDOILIMITEN;
+            AfeCtrlSet &= ~AFECTRL_ALDOLIMIT;
+        }
+        tempreg &= ~AfeCtrlSet;
     }
-    if(AfeCtrlSet & AFECTRL_ALDOLIMIT)
-    {
-      tempreg &= ~BITM_AFE_AFECON_ALDOILIMITEN;
-      AfeCtrlSet &= ~AFECTRL_ALDOLIMIT;
-    }
-    tempreg |= AfeCtrlSet;
-  }
-  else
-  {
-    /* Set bits to Disable HPREF and ALDOLimit*/
-    if(AfeCtrlSet & AFECTRL_HPREFPWR)
-    {
-        tempreg |= BITM_AFE_AFECON_HPREFDIS;
-        AfeCtrlSet &= ~AFECTRL_HPREFPWR;
-    }
-    if(AfeCtrlSet & AFECTRL_ALDOLIMIT)
-    {
-      tempreg |= BITM_AFE_AFECON_ALDOILIMITEN;
-      AfeCtrlSet &= ~AFECTRL_ALDOLIMIT;
-    }
-    tempreg &= ~AfeCtrlSet;
-  }
-  AD5940_WriteReg(REG_AFE_AFECON, tempreg);
+    AD5940_WriteReg(REG_AFE_AFECON, tempreg);
 }
 /** When LP mode is enabled, some functions are under control of LPMODECON, rather than original registers.  */
 /** @warning LPMODE is key protected, this function only takes effect after AD5940_LPModeEnS(bTRUE) */
@@ -1415,52 +1355,48 @@ void AD5940_AFECtrlS(uint32_t AfeCtrlSet, BoolFlag State)
 */
 AD5940Err AD5940_LPModeCtrlS(uint32_t EnSet)
 {
-  /* Check parameters */
-  uint32_t tempreg;
-  uint32_t DisSet;    /* The blocks to be disabled */
-  DisSet = LPMODECTRL_ALL & (~EnSet);
-  tempreg = AD5940_ReadReg(REG_AFE_LPMODECON);
-  /* Enable selected set */
-  {
-    /* Clear bits to enable HFOSC, HPREF, ALDO */
-    if (EnSet & LPMODECTRL_HFOSCEN) {
-        tempreg &= ~BITM_AFE_LPMODECON_HFOSCPD;
-        EnSet &= ~LPMODECTRL_HFOSCEN;
-    }
-    if(EnSet & LPMODECTRL_HPREFPWR)
+    /* Check parameters */
+    uint32_t tempreg;
+    uint32_t DisSet; /* The blocks to be disabled */
+    DisSet = LPMODECTRL_ALL & (~EnSet);
+    tempreg = AD5940_ReadReg(REG_AFE_LPMODECON);
+    /* Enable selected set */
     {
-      tempreg &= ~BITM_AFE_LPMODECON_HPREFDIS;
-      EnSet &= ~LPMODECTRL_HPREFPWR;
+        /* Clear bits to enable HFOSC, HPREF, ALDO */
+        if (EnSet & LPMODECTRL_HFOSCEN) {
+            tempreg &= ~BITM_AFE_LPMODECON_HFOSCPD;
+            EnSet &= ~LPMODECTRL_HFOSCEN;
+        }
+        if (EnSet & LPMODECTRL_HPREFPWR) {
+            tempreg &= ~BITM_AFE_LPMODECON_HPREFDIS;
+            EnSet &= ~LPMODECTRL_HPREFPWR;
+        }
+        if (EnSet & LPMODECTRL_ALDOPWR) {
+            tempreg &= ~BITM_AFE_LPMODECON_ALDOEN;
+            EnSet &= ~LPMODECTRL_ALDOPWR;
+        }
+        tempreg |= EnSet; /* Set other bits to enable function */
     }
-    if(EnSet & LPMODECTRL_ALDOPWR)
+    /* Disable other blocks */
     {
-      tempreg &= ~BITM_AFE_LPMODECON_ALDOEN;
-      EnSet &= ~LPMODECTRL_ALDOPWR;
+        /* Set bits to disable HFOSC, HPREF, ALDO */
+        if (DisSet & LPMODECTRL_HFOSCEN) {
+            tempreg |= BITM_AFE_LPMODECON_HFOSCPD;
+            DisSet &= ~LPMODECTRL_HFOSCEN;
+        }
+        if (DisSet & LPMODECTRL_HPREFPWR) {
+            tempreg |= BITM_AFE_LPMODECON_HPREFDIS;
+            DisSet &= ~LPMODECTRL_HPREFPWR;
+        }
+        if (DisSet & LPMODECTRL_ALDOPWR) {
+            tempreg |= BITM_AFE_LPMODECON_ALDOEN;
+            DisSet &= ~LPMODECTRL_ALDOPWR;
+        }
+        tempreg &= ~DisSet; /* Clear other bits to disable function */
     }
-    tempreg |= EnSet; /* Set other bits to enable function */
-  }
-  /* Disable other blocks */
-  {
-    /* Set bits to disable HFOSC, HPREF, ALDO */
-    if (DisSet & LPMODECTRL_HFOSCEN) {
-        tempreg |= BITM_AFE_LPMODECON_HFOSCPD;
-        DisSet &= ~LPMODECTRL_HFOSCEN;
-    }
-    if(DisSet & LPMODECTRL_HPREFPWR)
-    {
-      tempreg |= BITM_AFE_LPMODECON_HPREFDIS;
-      DisSet &= ~LPMODECTRL_HPREFPWR;
-    }
-    if(DisSet & LPMODECTRL_ALDOPWR)
-    {
-      tempreg |= BITM_AFE_LPMODECON_ALDOEN;
-      DisSet &= ~LPMODECTRL_ALDOPWR;
-    }
-    tempreg &= ~DisSet; /* Clear other bits to disable function */
-  }
-  AD5940_WriteReg(REG_AFE_LPMODECON, tempreg);
+    AD5940_WriteReg(REG_AFE_LPMODECON, tempreg);
 
-  return AD5940ERR_OK;
+    return AD5940ERR_OK;
 }
 
 /**
@@ -1478,11 +1414,11 @@ AD5940Err AD5940_LPModeCtrlS(uint32_t EnSet)
 */
 void AD5940_AFEPwrBW(uint32_t AfePwr, uint32_t AfeBw)
 {
-  //check parameters
-  uint32_t tempreg;
-  tempreg = AfePwr;
-  tempreg |= AfeBw << BITP_AFE_PMBW_SYSBW;
-  AD5940_WriteReg(REG_AFE_PMBW, tempreg);
+    //check parameters
+    uint32_t tempreg;
+    tempreg = AfePwr;
+    tempreg |= AfeBw << BITP_AFE_PMBW_SYSBW;
+    AD5940_WriteReg(REG_AFE_PMBW, tempreg);
 }
 
 /**
@@ -1492,43 +1428,43 @@ void AD5940_AFEPwrBW(uint32_t AfePwr, uint32_t AfeBw)
 */
 void AD5940_REFCfgS(AFERefCfg_Type *pBufCfg)
 {
-  uint32_t tempreg;
-  
-  /* HP Reference(bandgap) */
-  tempreg = AD5940_ReadReg(REG_AFE_AFECON);
-  tempreg &= ~BITM_AFE_AFECON_HPREFDIS;
-  if(pBufCfg->HpBandgapEn == bFALSE)
-    tempreg |= BITM_AFE_AFECON_HPREFDIS;
-  AD5940_WriteReg(REG_AFE_AFECON, tempreg);
-  /* Reference buffer configure */
-  tempreg = AD5940_ReadReg(REG_AFE_BUFSENCON);
-  if(pBufCfg->Hp1V8BuffEn == bTRUE)
-    tempreg |= BITM_AFE_BUFSENCON_V1P8HPADCEN;
-  if(pBufCfg->Hp1V1BuffEn == bTRUE)
-    tempreg |= BITM_AFE_BUFSENCON_V1P1HPADCEN;
-  if(pBufCfg->Lp1V8BuffEn == bTRUE)
-    tempreg |= BITM_AFE_BUFSENCON_V1P8LPADCEN;
-  if(pBufCfg->Lp1V1BuffEn == bTRUE)
-    tempreg |= BITM_AFE_BUFSENCON_V1P1LPADCEN;
-  if(pBufCfg->Hp1V8ThemBuff == bTRUE)
-    tempreg |= BITM_AFE_BUFSENCON_V1P8THERMSTEN;
-  if(pBufCfg->Hp1V8Ilimit == bTRUE)
-    tempreg |= BITM_AFE_BUFSENCON_V1P8HPADCILIMITEN;
-  if(pBufCfg->Disc1V8Cap == bTRUE)
-    tempreg |= BITM_AFE_BUFSENCON_V1P8HPADCCHGDIS;
-  if(pBufCfg->Disc1V1Cap == bTRUE)
-    tempreg |= BITM_AFE_BUFSENCON_V1P1LPADCCHGDIS;
-  AD5940_WriteReg(REG_AFE_BUFSENCON, tempreg);
+    uint32_t tempreg;
 
-  /* LPREFBUFCON */
-  tempreg = 0;
-  if(pBufCfg->LpRefBufEn == bFALSE)
-    tempreg |= BITM_AFE_LPREFBUFCON_LPBUF2P5DIS;
-  if(pBufCfg->LpBandgapEn == bFALSE)
-    tempreg |= BITM_AFE_LPREFBUFCON_LPREFDIS;
-  if(pBufCfg->LpRefBoostEn == bTRUE)
-    tempreg |= BITM_AFE_LPREFBUFCON_BOOSTCURRENT;
-  AD5940_WriteReg(REG_AFE_LPREFBUFCON, tempreg);
+    /* HP Reference(bandgap) */
+    tempreg = AD5940_ReadReg(REG_AFE_AFECON);
+    tempreg &= ~BITM_AFE_AFECON_HPREFDIS;
+    if (pBufCfg->HpBandgapEn == bFALSE)
+        tempreg |= BITM_AFE_AFECON_HPREFDIS;
+    AD5940_WriteReg(REG_AFE_AFECON, tempreg);
+    /* Reference buffer configure */
+    tempreg = AD5940_ReadReg(REG_AFE_BUFSENCON);
+    if (pBufCfg->Hp1V8BuffEn == bTRUE)
+        tempreg |= BITM_AFE_BUFSENCON_V1P8HPADCEN;
+    if (pBufCfg->Hp1V1BuffEn == bTRUE)
+        tempreg |= BITM_AFE_BUFSENCON_V1P1HPADCEN;
+    if (pBufCfg->Lp1V8BuffEn == bTRUE)
+        tempreg |= BITM_AFE_BUFSENCON_V1P8LPADCEN;
+    if (pBufCfg->Lp1V1BuffEn == bTRUE)
+        tempreg |= BITM_AFE_BUFSENCON_V1P1LPADCEN;
+    if (pBufCfg->Hp1V8ThemBuff == bTRUE)
+        tempreg |= BITM_AFE_BUFSENCON_V1P8THERMSTEN;
+    if (pBufCfg->Hp1V8Ilimit == bTRUE)
+        tempreg |= BITM_AFE_BUFSENCON_V1P8HPADCILIMITEN;
+    if (pBufCfg->Disc1V8Cap == bTRUE)
+        tempreg |= BITM_AFE_BUFSENCON_V1P8HPADCCHGDIS;
+    if (pBufCfg->Disc1V1Cap == bTRUE)
+        tempreg |= BITM_AFE_BUFSENCON_V1P1LPADCCHGDIS;
+    AD5940_WriteReg(REG_AFE_BUFSENCON, tempreg);
+
+    /* LPREFBUFCON */
+    tempreg = 0;
+    if (pBufCfg->LpRefBufEn == bFALSE)
+        tempreg |= BITM_AFE_LPREFBUFCON_LPBUF2P5DIS;
+    if (pBufCfg->LpBandgapEn == bFALSE)
+        tempreg |= BITM_AFE_LPREFBUFCON_LPREFDIS;
+    if (pBufCfg->LpRefBoostEn == bTRUE)
+        tempreg |= BITM_AFE_LPREFBUFCON_BOOSTCURRENT;
+    AD5940_WriteReg(REG_AFE_LPREFBUFCON, tempreg);
 }
 /**
  * @} End of AFE_Control_Functions
@@ -1551,10 +1487,10 @@ void AD5940_REFCfgS(AFERefCfg_Type *pBufCfg)
 */
 void AD5940_HSLoopCfgS(HSLoopCfg_Type *pHsLoopCfg)
 {
-  AD5940_HSDacCfgS(&pHsLoopCfg->HsDacCfg);
-  AD5940_HSTIACfgS(&pHsLoopCfg->HsTiaCfg);
-  AD5940_SWMatrixCfgS(&pHsLoopCfg->SWMatCfg);
-  AD5940_WGCfgS(&pHsLoopCfg->WgCfg);
+    AD5940_HSDacCfgS(&pHsLoopCfg->HsDacCfg);
+    AD5940_HSTIACfgS(&pHsLoopCfg->HsTiaCfg);
+    AD5940_SWMatrixCfgS(&pHsLoopCfg->SWMatCfg);
+    AD5940_WGCfgS(&pHsLoopCfg->WgCfg);
 }
 
 /**
@@ -1564,11 +1500,11 @@ void AD5940_HSLoopCfgS(HSLoopCfg_Type *pHsLoopCfg)
 */
 void AD5940_SWMatrixCfgS(SWMatrixCfg_Type *pSwMatrix)
 {
-  AD5940_WriteReg(REG_AFE_DSWFULLCON, pSwMatrix->Dswitch);
-  AD5940_WriteReg(REG_AFE_PSWFULLCON, pSwMatrix->Pswitch);
-  AD5940_WriteReg(REG_AFE_NSWFULLCON, pSwMatrix->Nswitch);
-  AD5940_WriteReg(REG_AFE_TSWFULLCON, pSwMatrix->Tswitch);
-  AD5940_WriteReg(REG_AFE_SWCON, BITM_AFE_SWCON_SWSOURCESEL); /* Update switch configuration */
+    AD5940_WriteReg(REG_AFE_DSWFULLCON, pSwMatrix->Dswitch);
+    AD5940_WriteReg(REG_AFE_PSWFULLCON, pSwMatrix->Pswitch);
+    AD5940_WriteReg(REG_AFE_NSWFULLCON, pSwMatrix->Nswitch);
+    AD5940_WriteReg(REG_AFE_TSWFULLCON, pSwMatrix->Tswitch);
+    AD5940_WriteReg(REG_AFE_SWCON, BITM_AFE_SWCON_SWSOURCESEL); /* Update switch configuration */
 }
 
 /**
@@ -1578,48 +1514,44 @@ void AD5940_SWMatrixCfgS(SWMatrixCfg_Type *pSwMatrix)
 */
 void AD5940_HSDacCfgS(HSDACCfg_Type *pHsDacCfg)
 {
-  uint32_t tempreg;
-  //Check parameters
-  tempreg = 0;
-  if(pHsDacCfg->ExcitBufGain == EXCITBUFGAIN_0P25)
-    tempreg |= BITM_AFE_HSDACCON_INAMPGNMDE; /* Enable attenuator */
-  if(pHsDacCfg->HsDacGain == HSDACGAIN_0P2)
-    tempreg |= BITM_AFE_HSDACCON_ATTENEN; /* Enable attenuator */
-  tempreg |= (pHsDacCfg->HsDacUpdateRate&0xff)<<BITP_AFE_HSDACCON_RATE;
-  AD5940_WriteReg(REG_AFE_HSDACCON, tempreg);
+    uint32_t tempreg;
+    //Check parameters
+    tempreg = 0;
+    if (pHsDacCfg->ExcitBufGain == EXCITBUFGAIN_0P25)
+        tempreg |= BITM_AFE_HSDACCON_INAMPGNMDE; /* Enable attenuator */
+    if (pHsDacCfg->HsDacGain == HSDACGAIN_0P2)
+        tempreg |= BITM_AFE_HSDACCON_ATTENEN; /* Enable attenuator */
+    tempreg |= (pHsDacCfg->HsDacUpdateRate & 0xff) << BITP_AFE_HSDACCON_RATE;
+    AD5940_WriteReg(REG_AFE_HSDACCON, tempreg);
 }
-
 
 static void __AD5940_SetDExRTIA(uint32_t DExPin, uint32_t DeRtia, uint32_t DeRload)
 {
-  uint32_t tempreg;
-  /* deal with HSTIA DE RTIA */
-  if(DeRtia >= HSTIADERTIA_OPEN)
-    tempreg = 0x1f << 3;  /* bit field HPTIRES03CON[7:3] */
-  else if(DeRtia >= HSTIADERTIA_1K)
-  {
-    tempreg = (DeRtia - 3 + 11) << 3;
-  }
-  else  /* DERTIA 50/100/200Ohm */
-  {
-    const uint8_t DeRtiaTable[3][5] = 
+    uint32_t tempreg;
+    /* deal with HSTIA DE RTIA */
+    if (DeRtia >= HSTIADERTIA_OPEN)
+        tempreg = 0x1f << 3; /* bit field HPTIRES03CON[7:3] */
+    else if (DeRtia >= HSTIADERTIA_1K) {
+        tempreg = (DeRtia - 3 + 11) << 3;
+    } else /* DERTIA 50/100/200Ohm */
     {
-//Rload  0      10    30    50    100 
-			{0x00, 0x01, 0x02, 0x03, 0x06}, /* RTIA 50Ohm */
-			{0x03, 0x04, 0x05, 0x06, 0x07}, /* RTIA 100Ohm */
-			{0x07, 0x07, 0x09, 0x09, 0x0a}, /* RTIA 200Ohm */
-    };
-    if(DeRload < HSTIADERLOAD_OPEN)
-      tempreg = (uint32_t)(DeRtiaTable[DeRtia][DeRload])<<3;
-    else
-      tempreg = (0x1f)<<3;  /* Set it to HSTIADERTIA_OPEN. This setting is illegal */
-  }
-  /* deal with HSTIA Rload */
-  tempreg |= DeRload;
-  if(DExPin) //DE1
-    AD5940_WriteReg(REG_AFE_DE1RESCON, tempreg);
-  else  //DE0
-    AD5940_WriteReg(REG_AFE_DE0RESCON, tempreg);
+        const uint8_t DeRtiaTable[3][5] = {
+            //Rload  0      10    30    50    100
+            { 0x00, 0x01, 0x02, 0x03, 0x06 }, /* RTIA 50Ohm */
+            { 0x03, 0x04, 0x05, 0x06, 0x07 }, /* RTIA 100Ohm */
+            { 0x07, 0x07, 0x09, 0x09, 0x0a }, /* RTIA 200Ohm */
+        };
+        if (DeRload < HSTIADERLOAD_OPEN)
+            tempreg = (uint32_t)(DeRtiaTable[DeRtia][DeRload]) << 3;
+        else
+            tempreg = (0x1f) << 3; /* Set it to HSTIADERTIA_OPEN. This setting is illegal */
+    }
+    /* deal with HSTIA Rload */
+    tempreg |= DeRload;
+    if (DExPin) //DE1
+        AD5940_WriteReg(REG_AFE_DE1RESCON, tempreg);
+    else //DE0
+        AD5940_WriteReg(REG_AFE_DE0RESCON, tempreg);
 }
 
 /**
@@ -1629,36 +1561,37 @@ static void __AD5940_SetDExRTIA(uint32_t DExPin, uint32_t DeRtia, uint32_t DeRlo
 */
 AD5940Err AD5940_HSTIACfgS(HSTIACfg_Type *pHsTiaCfg)
 {
-  uint32_t tempreg;
-  //Check parameters
-  if(pHsTiaCfg == NULL) return AD5940ERR_NULLP;
+    uint32_t tempreg;
+    //Check parameters
+    if (pHsTiaCfg == NULL)
+        return AD5940ERR_NULLP;
     /* Available parameter is 1k, 5k,...,160k, short, OPEN */
-  if(pHsTiaCfg->HstiaDeRtia < HSTIADERTIA_1K)
-    return AD5940ERR_PARA;
-  if(pHsTiaCfg->HstiaDeRtia > HSTIADERTIA_OPEN)
-    return AD5940ERR_PARA;  /* Parameter is invalid */
+    if (pHsTiaCfg->HstiaDeRtia < HSTIADERTIA_1K)
+        return AD5940ERR_PARA;
+    if (pHsTiaCfg->HstiaDeRtia > HSTIADERTIA_OPEN)
+        return AD5940ERR_PARA; /* Parameter is invalid */
 
-  if(pHsTiaCfg->HstiaDeRload > HSTIADERLOAD_OPEN)
-    return AD5940ERR_PARA;  /* Available parameter is OPEN, 0R,..., 100R */
+    if (pHsTiaCfg->HstiaDeRload > HSTIADERLOAD_OPEN)
+        return AD5940ERR_PARA; /* Available parameter is OPEN, 0R,..., 100R */
 
-  tempreg = 0;
-  tempreg |= pHsTiaCfg->HstiaBias;
-  AD5940_WriteReg(REG_AFE_HSTIACON, tempreg);
-  /* HSRTIACON */
-  /* Calculate CTIA value */
-  tempreg = pHsTiaCfg->HstiaCtia << BITP_AFE_HSRTIACON_CTIACON;
-  tempreg |= pHsTiaCfg->HstiaRtiaSel;
-  if(pHsTiaCfg->DiodeClose == bTRUE)
-    tempreg |= BITM_AFE_HSRTIACON_TIASW6CON; /* Close switch 6 */
-  AD5940_WriteReg(REG_AFE_HSRTIACON, tempreg);
-  /* DExRESCON */
-  __AD5940_SetDExRTIA(0, pHsTiaCfg->HstiaDeRtia, pHsTiaCfg->HstiaDeRload);
+    tempreg = 0;
+    tempreg |= pHsTiaCfg->HstiaBias;
+    AD5940_WriteReg(REG_AFE_HSTIACON, tempreg);
+    /* HSRTIACON */
+    /* Calculate CTIA value */
+    tempreg = pHsTiaCfg->HstiaCtia << BITP_AFE_HSRTIACON_CTIACON;
+    tempreg |= pHsTiaCfg->HstiaRtiaSel;
+    if (pHsTiaCfg->DiodeClose == bTRUE)
+        tempreg |= BITM_AFE_HSRTIACON_TIASW6CON; /* Close switch 6 */
+    AD5940_WriteReg(REG_AFE_HSRTIACON, tempreg);
+    /* DExRESCON */
+    __AD5940_SetDExRTIA(0, pHsTiaCfg->HstiaDeRtia, pHsTiaCfg->HstiaDeRload);
 #ifdef CHIPSEL_M355
-  __AD5940_SetDExRTIA(1, pHsTiaCfg->HstiaDe1Rtia, pHsTiaCfg->HstiaDe1Rload);
+    __AD5940_SetDExRTIA(1, pHsTiaCfg->HstiaDe1Rtia, pHsTiaCfg->HstiaDe1Rload);
 #endif
 
-  /* Done */
-  return AD5940ERR_OK;
+    /* Done */
+    return AD5940ERR_OK;
 }
 /**
  * @brief Configure HSTIA RTIA resistor and keep other parameters unchanged.
@@ -1667,12 +1600,12 @@ AD5940Err AD5940_HSTIACfgS(HSTIACfg_Type *pHsTiaCfg)
 */
 void AD5940_HSRTIACfgS(uint32_t HSTIARtia)
 {
-  uint32_t tempreg;
-  tempreg = AD5940_ReadReg(REG_AFE_HSRTIACON);
-  tempreg &= ~BITM_AFE_HSRTIACON_RTIACON;
-  HSTIARtia &= BITM_AFE_HSRTIACON_RTIACON;
-  tempreg |= HSTIARtia<<BITP_AFE_HSRTIACON_RTIACON;
-  AD5940_WriteReg(REG_AFE_HSRTIACON, tempreg);
+    uint32_t tempreg;
+    tempreg = AD5940_ReadReg(REG_AFE_HSRTIACON);
+    tempreg &= ~BITM_AFE_HSRTIACON_RTIACON;
+    HSTIARtia &= BITM_AFE_HSRTIACON_RTIACON;
+    tempreg |= HSTIARtia << BITP_AFE_HSRTIACON_RTIACON;
+    AD5940_WriteReg(REG_AFE_HSRTIACON, tempreg);
 }
 
 /**
@@ -1686,39 +1619,34 @@ void AD5940_HSRTIACfgS(uint32_t HSTIARtia)
 */
 void AD5940_WGCfgS(WGCfg_Type *pWGInit)
 {
-  //Check parameters
-  uint32_t tempreg;
-  if(pWGInit->WgType == WGTYPE_SIN)
-  {
-    /* Configure Sine wave Generator */
-    AD5940_WriteReg(REG_AFE_WGFCW, pWGInit->SinCfg.SinFreqWord);
-    AD5940_WriteReg(REG_AFE_WGAMPLITUDE, pWGInit->SinCfg.SinAmplitudeWord);
-    AD5940_WriteReg(REG_AFE_WGOFFSET, pWGInit->SinCfg.SinOffsetWord);
-    AD5940_WriteReg(REG_AFE_WGPHASE, pWGInit->SinCfg.SinPhaseWord);
-  }
-  else if(pWGInit->WgType == WGTYPE_TRAPZ)
-  {
-    /* Configure Trapezoid Generator */
-    AD5940_WriteReg(REG_AFE_WGDCLEVEL1, pWGInit->TrapzCfg.WGTrapzDCLevel1);
-    AD5940_WriteReg(REG_AFE_WGDCLEVEL2, pWGInit->TrapzCfg.WGTrapzDCLevel2);
-    AD5940_WriteReg(REG_AFE_WGDELAY1, pWGInit->TrapzCfg.WGTrapzDelay1);
-    AD5940_WriteReg(REG_AFE_WGDELAY2, pWGInit->TrapzCfg.WGTrapzDelay2);
-    AD5940_WriteReg(REG_AFE_WGSLOPE1, pWGInit->TrapzCfg.WGTrapzSlope1);
-    AD5940_WriteReg(REG_AFE_WGSLOPE2, pWGInit->TrapzCfg.WGTrapzSlope2);
-  }
-  else
-  {
-    /* Write DAC data. It's only have effect when WgType set to WGTYPE_MMR */ 
-    AD5940_WriteReg(REG_AFE_HSDACDAT, pWGInit->WgCode);
-  }
-  tempreg = 0;
-  
-  if(pWGInit->GainCalEn == bTRUE)
-    tempreg |= BITM_AFE_WGCON_DACGAINCAL;
-  if(pWGInit->OffsetCalEn == bTRUE)
-    tempreg |= BITM_AFE_WGCON_DACOFFSETCAL;
-  tempreg |= (pWGInit->WgType) << BITP_AFE_WGCON_TYPESEL;
-  AD5940_WriteReg(REG_AFE_WGCON, tempreg);
+    //Check parameters
+    uint32_t tempreg;
+    if (pWGInit->WgType == WGTYPE_SIN) {
+        /* Configure Sine wave Generator */
+        AD5940_WriteReg(REG_AFE_WGFCW, pWGInit->SinCfg.SinFreqWord);
+        AD5940_WriteReg(REG_AFE_WGAMPLITUDE, pWGInit->SinCfg.SinAmplitudeWord);
+        AD5940_WriteReg(REG_AFE_WGOFFSET, pWGInit->SinCfg.SinOffsetWord);
+        AD5940_WriteReg(REG_AFE_WGPHASE, pWGInit->SinCfg.SinPhaseWord);
+    } else if (pWGInit->WgType == WGTYPE_TRAPZ) {
+        /* Configure Trapezoid Generator */
+        AD5940_WriteReg(REG_AFE_WGDCLEVEL1, pWGInit->TrapzCfg.WGTrapzDCLevel1);
+        AD5940_WriteReg(REG_AFE_WGDCLEVEL2, pWGInit->TrapzCfg.WGTrapzDCLevel2);
+        AD5940_WriteReg(REG_AFE_WGDELAY1, pWGInit->TrapzCfg.WGTrapzDelay1);
+        AD5940_WriteReg(REG_AFE_WGDELAY2, pWGInit->TrapzCfg.WGTrapzDelay2);
+        AD5940_WriteReg(REG_AFE_WGSLOPE1, pWGInit->TrapzCfg.WGTrapzSlope1);
+        AD5940_WriteReg(REG_AFE_WGSLOPE2, pWGInit->TrapzCfg.WGTrapzSlope2);
+    } else {
+        /* Write DAC data. It's only have effect when WgType set to WGTYPE_MMR */
+        AD5940_WriteReg(REG_AFE_HSDACDAT, pWGInit->WgCode);
+    }
+    tempreg = 0;
+
+    if (pWGInit->GainCalEn == bTRUE)
+        tempreg |= BITM_AFE_WGCON_DACGAINCAL;
+    if (pWGInit->OffsetCalEn == bTRUE)
+        tempreg |= BITM_AFE_WGCON_DACOFFSETCAL;
+    tempreg |= (pWGInit->WgType) << BITP_AFE_WGCON_TYPESEL;
+    AD5940_WriteReg(REG_AFE_WGCON, tempreg);
 }
 
 /**
@@ -1728,9 +1656,9 @@ void AD5940_WGCfgS(WGCfg_Type *pWGInit)
 */
 AD5940Err AD5940_WGDACCodeS(uint32_t code)
 {
-  code &= 0xfff;
-  AD5940_WriteReg(REG_AFE_HSDACDAT, code);
-  return AD5940ERR_OK;
+    code &= 0xfff;
+    AD5940_WriteReg(REG_AFE_HSDACDAT, code);
+    return AD5940ERR_OK;
 }
 
 /**
@@ -1741,9 +1669,9 @@ AD5940Err AD5940_WGDACCodeS(uint32_t code)
 */
 void AD5940_WGFreqCtrlS(float SinFreqHz, float WGClock)
 {
-  uint32_t freq_word;
-  freq_word = AD5940_WGFreqWordCal(SinFreqHz, WGClock);
-  AD5940_WriteReg(REG_AFE_WGFCW, freq_word);
+    uint32_t freq_word;
+    freq_word = AD5940_WGFreqWordCal(SinFreqHz, WGClock);
+    AD5940_WriteReg(REG_AFE_WGFCW, freq_word);
 }
 
 /**
@@ -1754,16 +1682,17 @@ void AD5940_WGFreqCtrlS(float SinFreqHz, float WGClock)
 */
 uint32_t AD5940_WGFreqWordCal(float SinFreqHz, float WGClock)
 {
-  uint32_t temp;
-  uint32_t __BITWIDTH_WGFCW = 26;
-  if(bIsS2silicon == bTRUE)
-    __BITWIDTH_WGFCW = 30;
-  if(WGClock == 0) return 0;
-  temp = (uint32_t)(SinFreqHz*(1LL<<__BITWIDTH_WGFCW)/WGClock + 0.5f);
-  if(temp > ((__BITWIDTH_WGFCW == 26)?0xfffff:0xffffff))
-    temp = (__BITWIDTH_WGFCW == 26)?0xfffff:0xffffff;
-  
-  return temp;
+    uint32_t temp;
+    uint32_t __BITWIDTH_WGFCW = 26;
+    if (bIsS2silicon == bTRUE)
+        __BITWIDTH_WGFCW = 30;
+    if (WGClock == 0)
+        return 0;
+    temp = (uint32_t)(SinFreqHz * (1LL << __BITWIDTH_WGFCW) / WGClock + 0.5f);
+    if (temp > ((__BITWIDTH_WGFCW == 26) ? 0xfffff : 0xffffff))
+        temp = (__BITWIDTH_WGFCW == 26) ? 0xfffff : 0xffffff;
+
+    return temp;
 }
 
 /**
@@ -1771,7 +1700,6 @@ uint32_t AD5940_WGFreqWordCal(float SinFreqHz, float WGClock)
  * @} High_Speed_Loop_Functions
  * @} High_Speed_Loop
 */
-
 
 /**
  * @defgroup Low_Power_Loop
@@ -1788,8 +1716,8 @@ uint32_t AD5940_WGFreqWordCal(float SinFreqHz, float WGClock)
 */
 void AD5940_LPLoopCfgS(LPLoopCfg_Type *pLpLoopCfg)
 {
-  AD5940_LPDACCfgS(&pLpLoopCfg->LpDacCfg);
-  AD5940_LPAMPCfgS(&pLpLoopCfg->LpAmpCfg);
+    AD5940_LPDACCfgS(&pLpLoopCfg->LpDacCfg);
+    AD5940_LPAMPCfgS(&pLpLoopCfg->LpAmpCfg);
 }
 
 /**
@@ -1799,28 +1727,25 @@ void AD5940_LPLoopCfgS(LPLoopCfg_Type *pLpLoopCfg)
 */
 void AD5940_LPDACCfgS(LPDACCfg_Type *pLpDacCfg)
 {
-  uint32_t tempreg;
-  tempreg = 0;
-  tempreg = (pLpDacCfg->LpDacSrc)<<BITP_AFE_LPDACCON0_WAVETYPE;
-  tempreg |= (pLpDacCfg->LpDacVzeroMux)<<BITP_AFE_LPDACCON0_VZEROMUX;
-  tempreg |= (pLpDacCfg->LpDacVbiasMux)<<BITP_AFE_LPDACCON0_VBIASMUX;
-  tempreg |= (pLpDacCfg->LpDacRef)<<BITP_AFE_LPDACCON0_REFSEL;
-  if(pLpDacCfg->DataRst == bFALSE)
-    tempreg |= BITM_AFE_LPDACCON0_RSTEN;
-  if(pLpDacCfg->PowerEn == bFALSE)
-    tempreg |= BITM_AFE_LPDACCON0_PWDEN;
-  if(pLpDacCfg->LpdacSel == LPDAC0)
-  {
-    AD5940_WriteReg(REG_AFE_LPDACCON0, tempreg);
-    AD5940_LPDAC0WriteS(pLpDacCfg->DacData12Bit, pLpDacCfg->DacData6Bit);
-    AD5940_WriteReg(REG_AFE_LPDACSW0, pLpDacCfg->LpDacSW|BITM_AFE_LPDACSW0_LPMODEDIS);  /* Overwrite LPDACSW settings. On Si1, this register is not accessible. */
-  }
-  else
-  {
-    AD5940_WriteReg(REG_AFE_LPDACCON1, tempreg);
-    AD5940_LPDAC1WriteS(pLpDacCfg->DacData12Bit, pLpDacCfg->DacData6Bit);
-    AD5940_WriteReg(REG_AFE_LPDACSW1, pLpDacCfg->LpDacSW|BITM_AFE_LPDACSW0_LPMODEDIS);  /* Overwrite LPDACSW settings. On Si1, this register is not accessible. */
-  }
+    uint32_t tempreg;
+    tempreg = 0;
+    tempreg = (pLpDacCfg->LpDacSrc) << BITP_AFE_LPDACCON0_WAVETYPE;
+    tempreg |= (pLpDacCfg->LpDacVzeroMux) << BITP_AFE_LPDACCON0_VZEROMUX;
+    tempreg |= (pLpDacCfg->LpDacVbiasMux) << BITP_AFE_LPDACCON0_VBIASMUX;
+    tempreg |= (pLpDacCfg->LpDacRef) << BITP_AFE_LPDACCON0_REFSEL;
+    if (pLpDacCfg->DataRst == bFALSE)
+        tempreg |= BITM_AFE_LPDACCON0_RSTEN;
+    if (pLpDacCfg->PowerEn == bFALSE)
+        tempreg |= BITM_AFE_LPDACCON0_PWDEN;
+    if (pLpDacCfg->LpdacSel == LPDAC0) {
+        AD5940_WriteReg(REG_AFE_LPDACCON0, tempreg);
+        AD5940_LPDAC0WriteS(pLpDacCfg->DacData12Bit, pLpDacCfg->DacData6Bit);
+        AD5940_WriteReg(REG_AFE_LPDACSW0, pLpDacCfg->LpDacSW | BITM_AFE_LPDACSW0_LPMODEDIS); /* Overwrite LPDACSW settings. On Si1, this register is not accessible. */
+    } else {
+        AD5940_WriteReg(REG_AFE_LPDACCON1, tempreg);
+        AD5940_LPDAC1WriteS(pLpDacCfg->DacData12Bit, pLpDacCfg->DacData6Bit);
+        AD5940_WriteReg(REG_AFE_LPDACSW1, pLpDacCfg->LpDacSW | BITM_AFE_LPDACSW0_LPMODEDIS); /* Overwrite LPDACSW settings. On Si1, this register is not accessible. */
+    }
 }
 
 /**
@@ -1831,10 +1756,10 @@ void AD5940_LPDACCfgS(LPDACCfg_Type *pLpDacCfg)
 */
 void AD5940_LPDACWriteS(uint16_t Data12Bit, uint8_t Data6Bit)
 {
-  /* Check parameter */
-  Data6Bit &= 0x3f;
-  Data12Bit &= 0xfff;
-  AD5940_WriteReg(REG_AFE_LPDACDAT0, ((uint32_t)Data6Bit<<12)|Data12Bit);
+    /* Check parameter */
+    Data6Bit &= 0x3f;
+    Data12Bit &= 0xfff;
+    AD5940_WriteReg(REG_AFE_LPDACDAT0, ((uint32_t)Data6Bit << 12) | Data12Bit);
 }
 
 /**
@@ -1845,10 +1770,10 @@ void AD5940_LPDACWriteS(uint16_t Data12Bit, uint8_t Data6Bit)
 */
 void AD5940_LPDAC0WriteS(uint16_t Data12Bit, uint8_t Data6Bit)
 {
-  /* Check parameter */
-  Data6Bit &= 0x3f;
-  Data12Bit &= 0xfff;
-  AD5940_WriteReg(REG_AFE_LPDACDAT0, ((uint32_t)Data6Bit<<12)|Data12Bit);
+    /* Check parameter */
+    Data6Bit &= 0x3f;
+    Data12Bit &= 0xfff;
+    AD5940_WriteReg(REG_AFE_LPDACDAT0, ((uint32_t)Data6Bit << 12) | Data12Bit);
 }
 
 /**
@@ -1859,10 +1784,10 @@ void AD5940_LPDAC0WriteS(uint16_t Data12Bit, uint8_t Data6Bit)
 */
 void AD5940_LPDAC1WriteS(uint16_t Data12Bit, uint8_t Data6Bit)
 {
-  /* Check parameter */
-  Data6Bit &= 0x3f;
-  Data12Bit &= 0xfff;
-  AD5940_WriteReg(REG_AFE_LPDACDAT1, ((uint32_t)Data6Bit<<12)|Data12Bit);
+    /* Check parameter */
+    Data6Bit &= 0x3f;
+    Data12Bit &= 0xfff;
+    AD5940_WriteReg(REG_AFE_LPDACDAT1, ((uint32_t)Data6Bit << 12) | Data12Bit);
 }
 
 /**
@@ -1872,39 +1797,34 @@ void AD5940_LPDAC1WriteS(uint16_t Data12Bit, uint8_t Data6Bit)
 */
 void AD5940_LPAMPCfgS(LPAmpCfg_Type *pLpAmpCfg)
 {
-  //check parameters
-  uint32_t tempreg;
+    //check parameters
+    uint32_t tempreg;
 
-  tempreg = 0;
-  if(pLpAmpCfg->LpPaPwrEn == bFALSE)
-    tempreg |= BITM_AFE_LPTIACON0_PAPDEN; 
-  if(pLpAmpCfg->LpTiaPwrEn == bFALSE)
-    tempreg |= BITM_AFE_LPTIACON0_TIAPDEN;
-  if(pLpAmpCfg->LpAmpPwrMod == LPAMPPWR_HALF) 
-    tempreg |= BITM_AFE_LPTIACON0_HALFPWR;
-  else
-  {
-    tempreg |= pLpAmpCfg->LpAmpPwrMod<<BITP_AFE_LPTIACON0_IBOOST;
-  }
-  tempreg |= pLpAmpCfg->LpTiaRtia<<BITP_AFE_LPTIACON0_TIAGAIN;
-  tempreg |= pLpAmpCfg->LpTiaRload<<BITP_AFE_LPTIACON0_TIARL;
-  tempreg |= pLpAmpCfg->LpTiaRf<<BITP_AFE_LPTIACON0_TIARF;
-  if(pLpAmpCfg->LpAmpSel == LPAMP0)
-  {
-    AD5940_WriteReg(REG_AFE_LPTIACON0, tempreg);
-    AD5940_WriteReg(REG_AFE_LPTIASW0, pLpAmpCfg->LpTiaSW);
-  }
-  else
-  {
-    AD5940_WriteReg(REG_AFE_LPTIACON1, tempreg);
-    AD5940_WriteReg(REG_AFE_LPTIASW1, pLpAmpCfg->LpTiaSW);
-  }
+    tempreg = 0;
+    if (pLpAmpCfg->LpPaPwrEn == bFALSE)
+        tempreg |= BITM_AFE_LPTIACON0_PAPDEN;
+    if (pLpAmpCfg->LpTiaPwrEn == bFALSE)
+        tempreg |= BITM_AFE_LPTIACON0_TIAPDEN;
+    if (pLpAmpCfg->LpAmpPwrMod == LPAMPPWR_HALF)
+        tempreg |= BITM_AFE_LPTIACON0_HALFPWR;
+    else {
+        tempreg |= pLpAmpCfg->LpAmpPwrMod << BITP_AFE_LPTIACON0_IBOOST;
+    }
+    tempreg |= pLpAmpCfg->LpTiaRtia << BITP_AFE_LPTIACON0_TIAGAIN;
+    tempreg |= pLpAmpCfg->LpTiaRload << BITP_AFE_LPTIACON0_TIARL;
+    tempreg |= pLpAmpCfg->LpTiaRf << BITP_AFE_LPTIACON0_TIARF;
+    if (pLpAmpCfg->LpAmpSel == LPAMP0) {
+        AD5940_WriteReg(REG_AFE_LPTIACON0, tempreg);
+        AD5940_WriteReg(REG_AFE_LPTIASW0, pLpAmpCfg->LpTiaSW);
+    } else {
+        AD5940_WriteReg(REG_AFE_LPTIACON1, tempreg);
+        AD5940_WriteReg(REG_AFE_LPTIASW1, pLpAmpCfg->LpTiaSW);
+    }
 }
 /**
  * @} Low_Power_Loop_Functions
  * @} Low_Power_Loop
 */
-
 
 /**
  * @defgroup DSP_Block
@@ -1921,11 +1841,11 @@ void AD5940_LPAMPCfgS(LPAmpCfg_Type *pLpAmpCfg)
 */
 void AD5940_DSPCfgS(DSPCfg_Type *pDSPCfg)
 {
-  AD5940_ADCBaseCfgS(&pDSPCfg->ADCBaseCfg);
-  AD5940_ADCFilterCfgS(&pDSPCfg->ADCFilterCfg);
-  AD5940_ADCDigCompCfgS(&pDSPCfg->ADCDigCompCfg);
-  AD5940_DFTCfgS(&pDSPCfg->DftCfg);
-  AD5940_StatisticCfgS(&pDSPCfg->StatCfg);
+    AD5940_ADCBaseCfgS(&pDSPCfg->ADCBaseCfg);
+    AD5940_ADCFilterCfgS(&pDSPCfg->ADCFilterCfg);
+    AD5940_ADCDigCompCfgS(&pDSPCfg->ADCDigCompCfg);
+    AD5940_DFTCfgS(&pDSPCfg->DftCfg);
+    AD5940_StatisticCfgS(&pDSPCfg->StatCfg);
 }
 
 /**
@@ -1938,34 +1858,33 @@ void AD5940_DSPCfgS(DSPCfg_Type *pDSPCfg)
 */
 uint32_t AD5940_ReadAfeResult(uint32_t AfeResultSel)
 {
-  uint32_t rd = 0;
-  //PARA_CHECK((AfeResultSel));
-  switch (AfeResultSel)
-  {
-    case AFERESULT_SINC3:
-      rd = AD5940_ReadReg(REG_AFE_ADCDAT);
-      break;
-    case AFERESULT_SINC2:
-      rd = AD5940_ReadReg(REG_AFE_SINC2DAT);
-      break;
-    case AFERESULT_TEMPSENSOR:
-      rd = AD5940_ReadReg(REG_AFE_TEMPSENSDAT);
-      break;
-    case AFERESULT_DFTREAL:
-      rd = AD5940_ReadReg(REG_AFE_DFTREAL);
-      break;
-    case AFERESULT_DFTIMAGE:
-      rd = AD5940_ReadReg(REG_AFE_DFTIMAG);
-      break;
-    case AFERESULT_STATSMEAN:
-      rd = AD5940_ReadReg(REG_AFE_STATSMEAN);
-      break;
-    case AFERESULT_STATSVAR:
-      rd = AD5940_ReadReg(REG_AFE_STATSVAR);
-      break;
-  }
-  
-  return rd;
+    uint32_t rd = 0;
+    //PARA_CHECK((AfeResultSel));
+    switch (AfeResultSel) {
+        case AFERESULT_SINC3:
+            rd = AD5940_ReadReg(REG_AFE_ADCDAT);
+            break;
+        case AFERESULT_SINC2:
+            rd = AD5940_ReadReg(REG_AFE_SINC2DAT);
+            break;
+        case AFERESULT_TEMPSENSOR:
+            rd = AD5940_ReadReg(REG_AFE_TEMPSENSDAT);
+            break;
+        case AFERESULT_DFTREAL:
+            rd = AD5940_ReadReg(REG_AFE_DFTREAL);
+            break;
+        case AFERESULT_DFTIMAGE:
+            rd = AD5940_ReadReg(REG_AFE_DFTIMAG);
+            break;
+        case AFERESULT_STATSMEAN:
+            rd = AD5940_ReadReg(REG_AFE_STATSMEAN);
+            break;
+        case AFERESULT_STATSVAR:
+            rd = AD5940_ReadReg(REG_AFE_STATSVAR);
+            break;
+    }
+
+    return rd;
 }
 
 /**
@@ -1980,19 +1899,19 @@ uint32_t AD5940_ReadAfeResult(uint32_t AfeResultSel)
 */
 void AD5940_ADCBaseCfgS(ADCBaseCfg_Type *pADCInit)
 {
-  uint32_t tempreg = 0;
-  //PARA_CHECK(IS_ADCMUXP(pADCInit->ADCMuxP));
-  //PARA_CHECK(IS_ADCMUXN(pADCInit->ADCMuxN));
-  PARA_CHECK(IS_ADCPGA(pADCInit->ADCPga));
-  PARA_CHECK(IS_ADCAAF(pADCInit->ADCAAF));
+    uint32_t tempreg = 0;
+    //PARA_CHECK(IS_ADCMUXP(pADCInit->ADCMuxP));
+    //PARA_CHECK(IS_ADCMUXN(pADCInit->ADCMuxN));
+    PARA_CHECK(IS_ADCPGA(pADCInit->ADCPga));
+    PARA_CHECK(IS_ADCAAF(pADCInit->ADCAAF));
 
-  tempreg = pADCInit->ADCMuxP;
-  tempreg |= (uint32_t)(pADCInit->ADCMuxN)<<BITP_AFE_ADCCON_MUXSELN;
-  //if(pADCInit->OffCancEnable == bTRUE)
-  //  tempreg |= BITM_AFE_ADCCON_GNOFSELPGA;
-  tempreg |= (uint32_t)(pADCInit->ADCPga)<<BITP_AFE_ADCCON_GNPGA;
+    tempreg = pADCInit->ADCMuxP;
+    tempreg |= (uint32_t)(pADCInit->ADCMuxN) << BITP_AFE_ADCCON_MUXSELN;
+    //if(pADCInit->OffCancEnable == bTRUE)
+    //  tempreg |= BITM_AFE_ADCCON_GNOFSELPGA;
+    tempreg |= (uint32_t)(pADCInit->ADCPga) << BITP_AFE_ADCCON_GNPGA;
 
-  AD5940_WriteReg(REG_AFE_ADCCON, tempreg);
+    AD5940_WriteReg(REG_AFE_ADCCON, tempreg);
 }
 
 /**
@@ -2002,37 +1921,36 @@ void AD5940_ADCBaseCfgS(ADCBaseCfg_Type *pADCInit)
 */
 void AD5940_ADCFilterCfgS(ADCFilterCfg_Type *pFiltCfg)
 {
-  uint32_t tempreg;
-  PARA_CHECK(IS_ADCSINC3OSR(pFiltCfg->ADCSinc3Osr));
-  PARA_CHECK(IS_ADCSINC2OSR(pFiltCfg->ADCSinc2Osr));
-  PARA_CHECK(IS_ADCAVGNUM(pFiltCfg->ADCAvgNum));
-  PARA_CHECK(IS_ADCRATE(pFiltCfg->ADCRate));
+    uint32_t tempreg;
+    PARA_CHECK(IS_ADCSINC3OSR(pFiltCfg->ADCSinc3Osr));
+    PARA_CHECK(IS_ADCSINC2OSR(pFiltCfg->ADCSinc2Osr));
+    PARA_CHECK(IS_ADCAVGNUM(pFiltCfg->ADCAvgNum));
+    PARA_CHECK(IS_ADCRATE(pFiltCfg->ADCRate));
 
-  tempreg = AD5940_ReadReg(REG_AFE_ADCFILTERCON);
-  tempreg &= BITM_AFE_ADCFILTERCON_AVRGEN; /* Keep this bit setting. */
+    tempreg = AD5940_ReadReg(REG_AFE_ADCFILTERCON);
+    tempreg &= BITM_AFE_ADCFILTERCON_AVRGEN; /* Keep this bit setting. */
 
-  tempreg |= pFiltCfg->ADCRate;
-  if(pFiltCfg->BpNotch == bTRUE)
-    tempreg |= BITM_AFE_ADCFILTERCON_LPFBYPEN;
-  if(pFiltCfg->BpSinc3 == bTRUE)
-    tempreg |= BITM_AFE_ADCFILTERCON_SINC3BYP;
-  /**
+    tempreg |= pFiltCfg->ADCRate;
+    if (pFiltCfg->BpNotch == bTRUE)
+        tempreg |= BITM_AFE_ADCFILTERCON_LPFBYPEN;
+    if (pFiltCfg->BpSinc3 == bTRUE)
+        tempreg |= BITM_AFE_ADCFILTERCON_SINC3BYP;
+    /**
    * Average filter is enabled when DFT source is @ref DFTSRC_AVG in function @ref AD5940_DFTCfgS.
    * Once average function is enabled, it's automatically set as DFT source, register DFTCON.DFTINSEL is ignored.
    */
-  //if(pFiltCfg->AverageEnable == bTRUE)
-  //  tempreg |= BITM_AFE_ADCFILTERCON_AVRGEN;
-  tempreg |= (uint32_t)(pFiltCfg->ADCSinc2Osr)<<BITP_AFE_ADCFILTERCON_SINC2OSR;
-  tempreg |= (uint32_t)(pFiltCfg->ADCSinc3Osr)<<BITP_AFE_ADCFILTERCON_SINC3OSR;
-  tempreg |= (uint32_t)(pFiltCfg->ADCAvgNum)<<BITP_AFE_ADCFILTERCON_AVRGNUM;
+    //if(pFiltCfg->AverageEnable == bTRUE)
+    //  tempreg |= BITM_AFE_ADCFILTERCON_AVRGEN;
+    tempreg |= (uint32_t)(pFiltCfg->ADCSinc2Osr) << BITP_AFE_ADCFILTERCON_SINC2OSR;
+    tempreg |= (uint32_t)(pFiltCfg->ADCSinc3Osr) << BITP_AFE_ADCFILTERCON_SINC3OSR;
+    tempreg |= (uint32_t)(pFiltCfg->ADCAvgNum) << BITP_AFE_ADCFILTERCON_AVRGNUM;
 
-  AD5940_WriteReg(REG_AFE_ADCFILTERCON, tempreg);
+    AD5940_WriteReg(REG_AFE_ADCFILTERCON, tempreg);
 
-  /* SINC2+Notch has a block enable/disable bit in AFECON register */
-  if(pFiltCfg->Sinc2NotchEnable)
-  {
-    AD5940_AFECtrlS(AFECTRL_SINC2NOTCH,bTRUE);
-  }
+    /* SINC2+Notch has a block enable/disable bit in AFECON register */
+    if (pFiltCfg->Sinc2NotchEnable) {
+        AD5940_AFECtrlS(AFECTRL_SINC2NOTCH, bTRUE);
+    }
 }
 
 /**
@@ -2044,17 +1962,14 @@ void AD5940_ADCFilterCfgS(ADCFilterCfg_Type *pFiltCfg)
 */
 void AD5940_ADCPowerCtrlS(BoolFlag State)
 {
-  uint32_t tempreg;
-  tempreg = AD5940_ReadReg(REG_AFE_AFECON);
-  if(State == bTRUE)
-  {
-    tempreg |= BITM_AFE_AFECON_ADCEN;
-  }
-  else
-  {
-    tempreg &= ~BITM_AFE_AFECON_ADCEN;
-  }
-  AD5940_WriteReg(REG_AFE_AFECON,tempreg);
+    uint32_t tempreg;
+    tempreg = AD5940_ReadReg(REG_AFE_AFECON);
+    if (State == bTRUE) {
+        tempreg |= BITM_AFE_AFECON_ADCEN;
+    } else {
+        tempreg &= ~BITM_AFE_AFECON_ADCEN;
+    }
+    AD5940_WriteReg(REG_AFE_AFECON, tempreg);
 }
 
 /**
@@ -2066,17 +1981,14 @@ void AD5940_ADCPowerCtrlS(BoolFlag State)
 */
 void AD5940_ADCConvtCtrlS(BoolFlag State)
 {
-  uint32_t tempreg;
-  tempreg = AD5940_ReadReg(REG_AFE_AFECON);
-  if(State == bTRUE)
-  {
-    tempreg |= BITM_AFE_AFECON_ADCCONVEN;
-  }
-  else
-  {
-    tempreg &= ~BITM_AFE_AFECON_ADCCONVEN;
-  }
-  AD5940_WriteReg(REG_AFE_AFECON,tempreg);
+    uint32_t tempreg;
+    tempreg = AD5940_ReadReg(REG_AFE_AFECON);
+    if (State == bTRUE) {
+        tempreg |= BITM_AFE_AFECON_ADCCONVEN;
+    } else {
+        tempreg &= ~BITM_AFE_AFECON_ADCCONVEN;
+    }
+    AD5940_WriteReg(REG_AFE_AFECON, tempreg);
 }
 
 /**
@@ -2094,15 +2006,15 @@ void AD5940_ADCConvtCtrlS(BoolFlag State)
 */
 void AD5940_ADCMuxCfgS(uint32_t ADCMuxP, uint32_t ADCMuxN)
 {
-  uint32_t tempreg;
-  //PARA_CHECK(IS_ADCMUXP(ADCMuxP));
-  //PARA_CHECK(IS_ADCMUXN(ADCMuxN));
-  
-  tempreg = AD5940_ReadReg(REG_AFE_ADCCON);
-  tempreg &= ~(BITM_AFE_ADCCON_MUXSELN|BITM_AFE_ADCCON_MUXSELP);
-  tempreg |= ADCMuxP<<BITP_AFE_ADCCON_MUXSELP;
-  tempreg |= ADCMuxN<<BITP_AFE_ADCCON_MUXSELN;
-  AD5940_WriteReg(REG_AFE_ADCCON, tempreg);
+    uint32_t tempreg;
+    //PARA_CHECK(IS_ADCMUXP(ADCMuxP));
+    //PARA_CHECK(IS_ADCMUXN(ADCMuxN));
+
+    tempreg = AD5940_ReadReg(REG_AFE_ADCCON);
+    tempreg &= ~(BITM_AFE_ADCCON_MUXSELN | BITM_AFE_ADCCON_MUXSELP);
+    tempreg |= ADCMuxP << BITP_AFE_ADCCON_MUXSELP;
+    tempreg |= ADCMuxN << BITP_AFE_ADCCON_MUXSELN;
+    AD5940_WriteReg(REG_AFE_ADCCON, tempreg);
 }
 
 /**
@@ -2112,11 +2024,11 @@ void AD5940_ADCMuxCfgS(uint32_t ADCMuxP, uint32_t ADCMuxN)
 */
 void AD5940_ADCDigCompCfgS(ADCDigComp_Type *pCompCfg)
 {
-  //PARA_CHECK((AfeResultSel));
-  AD5940_WriteReg(REG_AFE_ADCMIN, pCompCfg->ADCMin);
-  AD5940_WriteReg(REG_AFE_ADCMINSM, pCompCfg->ADCMinHys);
-  AD5940_WriteReg(REG_AFE_ADCMAX, pCompCfg->ADCMax);
-  AD5940_WriteReg(REG_AFE_ADCMAXSMEN, pCompCfg->ADCMaxHys);
+    //PARA_CHECK((AfeResultSel));
+    AD5940_WriteReg(REG_AFE_ADCMIN, pCompCfg->ADCMin);
+    AD5940_WriteReg(REG_AFE_ADCMINSM, pCompCfg->ADCMinHys);
+    AD5940_WriteReg(REG_AFE_ADCMAX, pCompCfg->ADCMax);
+    AD5940_WriteReg(REG_AFE_ADCMAXSMEN, pCompCfg->ADCMaxHys);
 }
 /** @} ADC_Block_Functions */
 
@@ -2127,14 +2039,14 @@ void AD5940_ADCDigCompCfgS(ADCDigComp_Type *pCompCfg)
 */
 void AD5940_StatisticCfgS(StatCfg_Type *pStatCfg)
 {
-  uint32_t tempreg;
-  //check parameters
-  tempreg = 0;
-  if(pStatCfg->StatEnable == bTRUE)
-    tempreg |= BITM_AFE_STATSCON_STATSEN;
-  tempreg |= (pStatCfg->StatSample) << BITP_AFE_STATSCON_SAMPLENUM;
-  tempreg |= (pStatCfg->StatDev) << BITP_AFE_STATSCON_STDDEV;
-  AD5940_WriteReg(REG_AFE_STATSCON, tempreg);
+    uint32_t tempreg;
+    //check parameters
+    tempreg = 0;
+    if (pStatCfg->StatEnable == bTRUE)
+        tempreg |= BITM_AFE_STATSCON_STATSEN;
+    tempreg |= (pStatCfg->StatSample) << BITP_AFE_STATSCON_SAMPLENUM;
+    tempreg |= (pStatCfg->StatDev) << BITP_AFE_STATSCON_STDDEV;
+    AD5940_WriteReg(REG_AFE_STATSCON, tempreg);
 }
 
 /**
@@ -2144,8 +2056,8 @@ void AD5940_StatisticCfgS(StatCfg_Type *pStatCfg)
 */
 void AD5940_ADCRepeatCfgS(uint32_t Number)
 {
-  //check parameter if(number<255)
-  AD5940_WriteReg(REG_AFE_REPEATADCCNV, Number<<BITP_AFE_REPEATADCCNV_NUM);
+    //check parameter if(number<255)
+    AD5940_WriteReg(REG_AFE_REPEATADCCNV, Number << BITP_AFE_REPEATADCCNV_NUM);
 }
 
 /**
@@ -2155,31 +2067,28 @@ void AD5940_ADCRepeatCfgS(uint32_t Number)
 */
 void AD5940_DFTCfgS(DFTCfg_Type *pDftCfg)
 {
-  uint32_t reg_dftcon, reg_adcfilter;
+    uint32_t reg_dftcon, reg_adcfilter;
 
-  reg_dftcon = 0;
-  /* Deal with DFTSRC_AVG. Once average function is enabled, it's automatically set as DFT source */
-  reg_adcfilter = AD5940_ReadReg(REG_AFE_ADCFILTERCON);
-  if(pDftCfg->DftSrc == DFTSRC_AVG)
-  {
-    reg_adcfilter |= BITM_AFE_ADCFILTERCON_AVRGEN;
-    AD5940_WriteReg(REG_AFE_ADCFILTERCON, reg_adcfilter);
-  }
-  else
-  {
-    /* Disable Average function and set correct DFT source */
-    reg_adcfilter &= ~BITM_AFE_ADCFILTERCON_AVRGEN;
-    AD5940_WriteReg(REG_AFE_ADCFILTERCON, reg_adcfilter);
+    reg_dftcon = 0;
+    /* Deal with DFTSRC_AVG. Once average function is enabled, it's automatically set as DFT source */
+    reg_adcfilter = AD5940_ReadReg(REG_AFE_ADCFILTERCON);
+    if (pDftCfg->DftSrc == DFTSRC_AVG) {
+        reg_adcfilter |= BITM_AFE_ADCFILTERCON_AVRGEN;
+        AD5940_WriteReg(REG_AFE_ADCFILTERCON, reg_adcfilter);
+    } else {
+        /* Disable Average function and set correct DFT source */
+        reg_adcfilter &= ~BITM_AFE_ADCFILTERCON_AVRGEN;
+        AD5940_WriteReg(REG_AFE_ADCFILTERCON, reg_adcfilter);
 
-    /* Set new DFT source */
-    reg_dftcon |= (pDftCfg->DftSrc) << BITP_AFE_DFTCON_DFTINSEL;
-  }
-  /* Set DFT number */
-  reg_dftcon |= (pDftCfg->DftNum) << BITP_AFE_DFTCON_DFTNUM;
-  
-  if(pDftCfg->HanWinEn == bTRUE)
-    reg_dftcon |= BITM_AFE_DFTCON_HANNINGEN;
-  AD5940_WriteReg(REG_AFE_DFTCON, reg_dftcon);
+        /* Set new DFT source */
+        reg_dftcon |= (pDftCfg->DftSrc) << BITP_AFE_DFTCON_DFTINSEL;
+    }
+    /* Set DFT number */
+    reg_dftcon |= (pDftCfg->DftNum) << BITP_AFE_DFTCON_DFTNUM;
+
+    if (pDftCfg->HanWinEn == bTRUE)
+        reg_dftcon |= BITM_AFE_DFTCON_HANNINGEN;
+    AD5940_WriteReg(REG_AFE_DFTCON, reg_dftcon);
 }
 
 /**
@@ -2202,25 +2111,25 @@ void AD5940_DFTCfgS(DFTCfg_Type *pDftCfg)
 */
 void AD5940_FIFOCfg(FIFOCfg_Type *pFifoCfg)
 {
-  uint32_t tempreg;
-  //check parameters
-  AD5940_WriteReg(REG_AFE_FIFOCON, 0);  /* Disable FIFO firstly! */
-  /* CMDDATACON register. Configure this firstly */
-  tempreg = AD5940_ReadReg(REG_AFE_CMDDATACON);
-  tempreg &= BITM_AFE_CMDDATACON_CMD_MEM_SEL|BITM_AFE_CMDDATACON_CMDMEMMDE; /* Keep sequencer memory settings */
-  tempreg |= pFifoCfg->FIFOMode << BITP_AFE_CMDDATACON_DATAMEMMDE; 				  /* Data FIFO mode: stream or FIFO */
-  tempreg |= pFifoCfg->FIFOSize << BITP_AFE_CMDDATACON_DATA_MEM_SEL;  		  /* Data FIFO memory size */
-  /* The reset memory can be used for sequencer, configure it by function AD5940_SEQCfg() */
-  AD5940_WriteReg(REG_AFE_CMDDATACON, tempreg);
+    uint32_t tempreg;
+    //check parameters
+    AD5940_WriteReg(REG_AFE_FIFOCON, 0); /* Disable FIFO firstly! */
+    /* CMDDATACON register. Configure this firstly */
+    tempreg = AD5940_ReadReg(REG_AFE_CMDDATACON);
+    tempreg &= BITM_AFE_CMDDATACON_CMD_MEM_SEL | BITM_AFE_CMDDATACON_CMDMEMMDE; /* Keep sequencer memory settings */
+    tempreg |= pFifoCfg->FIFOMode << BITP_AFE_CMDDATACON_DATAMEMMDE;            /* Data FIFO mode: stream or FIFO */
+    tempreg |= pFifoCfg->FIFOSize << BITP_AFE_CMDDATACON_DATA_MEM_SEL;          /* Data FIFO memory size */
+    /* The reset memory can be used for sequencer, configure it by function AD5940_SEQCfg() */
+    AD5940_WriteReg(REG_AFE_CMDDATACON, tempreg);
 
-  /* FIFO Threshold */
-  AD5940_WriteReg(REG_AFE_DATAFIFOTHRES, pFifoCfg->FIFOThresh << BITP_AFE_DATAFIFOTHRES_HIGHTHRES);
-  /* FIFOCON register. Final step is to enable FIFO */
-  tempreg = 0;
-  if(pFifoCfg->FIFOEn == bTRUE)
-    tempreg |= BITM_AFE_FIFOCON_DATAFIFOEN;																/* Enable FIFO after everything set. */
-  tempreg |= pFifoCfg->FIFOSrc << BITP_AFE_FIFOCON_DATAFIFOSRCSEL;
-  AD5940_WriteReg(REG_AFE_FIFOCON, tempreg);
+    /* FIFO Threshold */
+    AD5940_WriteReg(REG_AFE_DATAFIFOTHRES, pFifoCfg->FIFOThresh << BITP_AFE_DATAFIFOTHRES_HIGHTHRES);
+    /* FIFOCON register. Final step is to enable FIFO */
+    tempreg = 0;
+    if (pFifoCfg->FIFOEn == bTRUE)
+        tempreg |= BITM_AFE_FIFOCON_DATAFIFOEN; /* Enable FIFO after everything set. */
+    tempreg |= pFifoCfg->FIFOSrc << BITP_AFE_FIFOCON_DATAFIFOSRCSEL;
+    AD5940_WriteReg(REG_AFE_FIFOCON, tempreg);
 }
 
 /**
@@ -2230,23 +2139,24 @@ void AD5940_FIFOCfg(FIFOCfg_Type *pFifoCfg)
 */
 AD5940Err AD5940_FIFOGetCfg(FIFOCfg_Type *pFifoCfg)
 {
-  uint32_t tempreg;
-  //check parameters
-  if(pFifoCfg == NULL) return AD5940ERR_NULLP;
-  /* CMDDATACON register. */
-  tempreg = AD5940_ReadReg(REG_AFE_CMDDATACON);
-  pFifoCfg->FIFOMode = (tempreg&BITM_AFE_CMDDATACON_DATAMEMMDE)>>BITP_AFE_CMDDATACON_DATAMEMMDE;
-  pFifoCfg->FIFOSize = (tempreg&BITM_AFE_CMDDATACON_DATA_MEM_SEL)>>BITP_AFE_CMDDATACON_DATA_MEM_SEL;
+    uint32_t tempreg;
+    //check parameters
+    if (pFifoCfg == NULL)
+        return AD5940ERR_NULLP;
+    /* CMDDATACON register. */
+    tempreg = AD5940_ReadReg(REG_AFE_CMDDATACON);
+    pFifoCfg->FIFOMode = (tempreg & BITM_AFE_CMDDATACON_DATAMEMMDE) >> BITP_AFE_CMDDATACON_DATAMEMMDE;
+    pFifoCfg->FIFOSize = (tempreg & BITM_AFE_CMDDATACON_DATA_MEM_SEL) >> BITP_AFE_CMDDATACON_DATA_MEM_SEL;
 
-  /* FIFO Threshold */
-  tempreg = AD5940_ReadReg(REG_AFE_DATAFIFOTHRES);
-  pFifoCfg->FIFOThresh = (tempreg&BITM_AFE_DATAFIFOTHRES_HIGHTHRES)>>BITP_AFE_DATAFIFOTHRES_HIGHTHRES;
-  /* FIFOCON register. */
-  tempreg = AD5940_ReadReg(REG_AFE_FIFOCON);
-  pFifoCfg->FIFOEn = (tempreg&BITM_AFE_FIFOCON_DATAFIFOEN)?bTRUE:bFALSE;
-  pFifoCfg->FIFOSrc = (tempreg&BITM_AFE_FIFOCON_DATAFIFOSRCSEL)>>BITP_AFE_FIFOCON_DATAFIFOSRCSEL;
+    /* FIFO Threshold */
+    tempreg = AD5940_ReadReg(REG_AFE_DATAFIFOTHRES);
+    pFifoCfg->FIFOThresh = (tempreg & BITM_AFE_DATAFIFOTHRES_HIGHTHRES) >> BITP_AFE_DATAFIFOTHRES_HIGHTHRES;
+    /* FIFOCON register. */
+    tempreg = AD5940_ReadReg(REG_AFE_FIFOCON);
+    pFifoCfg->FIFOEn = (tempreg & BITM_AFE_FIFOCON_DATAFIFOEN) ? bTRUE : bFALSE;
+    pFifoCfg->FIFOSrc = (tempreg & BITM_AFE_FIFOCON_DATAFIFOSRCSEL) >> BITP_AFE_FIFOCON_DATAFIFOSRCSEL;
 
-  return AD5940ERR_OK;
+    return AD5940ERR_OK;
 }
 
 /**
@@ -2262,13 +2172,13 @@ AD5940Err AD5940_FIFOGetCfg(FIFOCfg_Type *pFifoCfg)
 */
 void AD5940_FIFOCtrlS(uint32_t FifoSrc, BoolFlag FifoEn)
 {
-  uint32_t tempreg;
+    uint32_t tempreg;
 
-  tempreg = 0;
-  if(FifoEn == bTRUE)
-    tempreg |= BITM_AFE_FIFOCON_DATAFIFOEN;
-  tempreg |= FifoSrc << BITP_AFE_FIFOCON_DATAFIFOSRCSEL;
-  AD5940_WriteReg(REG_AFE_FIFOCON, tempreg);
+    tempreg = 0;
+    if (FifoEn == bTRUE)
+        tempreg |= BITM_AFE_FIFOCON_DATAFIFOEN;
+    tempreg |= FifoSrc << BITP_AFE_FIFOCON_DATAFIFOSRCSEL;
+    AD5940_WriteReg(REG_AFE_FIFOCON, tempreg);
 }
 
 /**
@@ -2278,8 +2188,8 @@ void AD5940_FIFOCtrlS(uint32_t FifoSrc, BoolFlag FifoEn)
 */
 void AD5940_FIFOThrshSet(uint32_t FIFOThresh)
 {
-  /* FIFO Threshold */
-  AD5940_WriteReg(REG_AFE_DATAFIFOTHRES, FIFOThresh << BITP_AFE_DATAFIFOTHRES_HIGHTHRES);
+    /* FIFO Threshold */
+    AD5940_WriteReg(REG_AFE_DATAFIFOTHRES, FIFOThresh << BITP_AFE_DATAFIFOTHRES_HIGHTHRES);
 }
 
 /**
@@ -2288,9 +2198,8 @@ void AD5940_FIFOThrshSet(uint32_t FIFOThresh)
 */
 uint32_t AD5940_FIFOGetCnt(void)
 {
-  return AD5940_ReadReg(REG_AFE_FIFOCNTSTA) >> BITP_AFE_FIFOCNTSTA_DATAFIFOCNTSTA;
+    return AD5940_ReadReg(REG_AFE_FIFOCNTSTA) >> BITP_AFE_FIFOCNTSTA_DATAFIFOCNTSTA;
 }
-
 
 /* Sequencer */
 /**
@@ -2300,35 +2209,35 @@ uint32_t AD5940_FIFOGetCnt(void)
 */
 void AD5940_SEQCfg(SEQCfg_Type *pSeqCfg)
 {
-  /* check parameters */
-  uint32_t tempreg, fifocon;
+    /* check parameters */
+    uint32_t tempreg, fifocon;
 
-  fifocon = AD5940_ReadReg(REG_AFE_FIFOCON);
-  AD5940_WriteReg(REG_AFE_FIFOCON, 0); /* Disable FIFO before changing memory configuration */
-  /* Configure CMDDATACON register */
-  tempreg = AD5940_ReadReg(REG_AFE_CMDDATACON);
-  tempreg &= ~(BITM_AFE_CMDDATACON_CMDMEMMDE | BITM_AFE_CMDDATACON_CMD_MEM_SEL); /* Clear settings for sequencer memory */
-  tempreg |= (1L) << BITP_AFE_CMDDATACON_CMDMEMMDE;                              /* Sequencer is always in memory mode */
-  tempreg |= (pSeqCfg->SeqMemSize) << BITP_AFE_CMDDATACON_CMD_MEM_SEL;
-  AD5940_WriteReg(REG_AFE_CMDDATACON, tempreg);
+    fifocon = AD5940_ReadReg(REG_AFE_FIFOCON);
+    AD5940_WriteReg(REG_AFE_FIFOCON, 0); /* Disable FIFO before changing memory configuration */
+    /* Configure CMDDATACON register */
+    tempreg = AD5940_ReadReg(REG_AFE_CMDDATACON);
+    tempreg &= ~(BITM_AFE_CMDDATACON_CMDMEMMDE | BITM_AFE_CMDDATACON_CMD_MEM_SEL); /* Clear settings for sequencer memory */
+    tempreg |= (1L) << BITP_AFE_CMDDATACON_CMDMEMMDE;                              /* Sequencer is always in memory mode */
+    tempreg |= (pSeqCfg->SeqMemSize) << BITP_AFE_CMDDATACON_CMD_MEM_SEL;
+    AD5940_WriteReg(REG_AFE_CMDDATACON, tempreg);
 
-  if (pSeqCfg->SeqCntCRCClr) {
-    AD5940_WriteReg(REG_AFE_SEQCON, 0); /* Disable sequencer firstly */
-    AD5940_WriteReg(REG_AFE_SEQCNT, 0); /* When sequencer is disabled, any write to SEQCNT will clear CNT and CRC register */
-  }
-  tempreg = 0;
-  if (pSeqCfg->SeqEnable == bTRUE)
-    tempreg |= BITM_AFE_SEQCON_SEQEN;
-  tempreg |= (pSeqCfg->SeqWrTimer) << BITP_AFE_SEQCON_SEQWRTMR;
-  AD5940_WriteReg(REG_AFE_SEQCON, tempreg);
-  AD5940_WriteReg(REG_AFE_FIFOCON, fifocon); /* restore FIFO configuration */
+    if (pSeqCfg->SeqCntCRCClr) {
+        AD5940_WriteReg(REG_AFE_SEQCON, 0); /* Disable sequencer firstly */
+        AD5940_WriteReg(REG_AFE_SEQCNT, 0); /* When sequencer is disabled, any write to SEQCNT will clear CNT and CRC register */
+    }
+    tempreg = 0;
+    if (pSeqCfg->SeqEnable == bTRUE)
+        tempreg |= BITM_AFE_SEQCON_SEQEN;
+    tempreg |= (pSeqCfg->SeqWrTimer) << BITP_AFE_SEQCON_SEQWRTMR;
+    AD5940_WriteReg(REG_AFE_SEQCON, tempreg);
+    AD5940_WriteReg(REG_AFE_FIFOCON, fifocon); /* restore FIFO configuration */
 
-  // tempreg = 0;
-  // if(pSeqCfg->SeqBreakEn)
-  //   tempreg |= 0x01;  // add register definition? bitm_afe_
-  // if(pSeqCfg->SeqIgnoreEn)
-  //   tempreg |= 0x02;
-  // AD5940_WriteReg(0x21dc, tempreg);
+    // tempreg = 0;
+    // if(pSeqCfg->SeqBreakEn)
+    //   tempreg |= 0x01;  // add register definition? bitm_afe_
+    // if(pSeqCfg->SeqIgnoreEn)
+    //   tempreg |= 0x02;
+    // AD5940_WriteReg(0x21dc, tempreg);
 }
 /**
  * @brief Read back current sequencer configuration and store it to pSeqCfg
@@ -2337,19 +2246,19 @@ void AD5940_SEQCfg(SEQCfg_Type *pSeqCfg)
 */
 AD5940Err AD5940_SEQGetCfg(SEQCfg_Type *pSeqCfg)
 {
-  /* check parameters */
-  uint32_t tempreg;
-  if(pSeqCfg == NULL)
-    return AD5940ERR_NULLP;
-  /* Read CMDDATACON register */
-  tempreg = AD5940_ReadReg(REG_AFE_CMDDATACON);
-  pSeqCfg->SeqMemSize = (tempreg&BITM_AFE_CMDDATACON_CMD_MEM_SEL) >> BITP_AFE_CMDDATACON_CMD_MEM_SEL;
-  pSeqCfg->SeqCntCRCClr = bFALSE; /* Has no meaning */
-  /* SEQCON register */
-  tempreg = AD5940_ReadReg(REG_AFE_SEQCON);
-  pSeqCfg->SeqEnable = (tempreg&BITM_AFE_SEQCON_SEQEN)?bTRUE:bFALSE;
-  pSeqCfg->SeqWrTimer = (tempreg&BITM_AFE_SEQCON_SEQWRTMR) >> BITP_AFE_SEQCON_SEQWRTMR;
-  return AD5940ERR_OK;
+    /* check parameters */
+    uint32_t tempreg;
+    if (pSeqCfg == NULL)
+        return AD5940ERR_NULLP;
+    /* Read CMDDATACON register */
+    tempreg = AD5940_ReadReg(REG_AFE_CMDDATACON);
+    pSeqCfg->SeqMemSize = (tempreg & BITM_AFE_CMDDATACON_CMD_MEM_SEL) >> BITP_AFE_CMDDATACON_CMD_MEM_SEL;
+    pSeqCfg->SeqCntCRCClr = bFALSE; /* Has no meaning */
+    /* SEQCON register */
+    tempreg = AD5940_ReadReg(REG_AFE_SEQCON);
+    pSeqCfg->SeqEnable = (tempreg & BITM_AFE_SEQCON_SEQEN) ? bTRUE : bFALSE;
+    pSeqCfg->SeqWrTimer = (tempreg & BITM_AFE_SEQCON_SEQWRTMR) >> BITP_AFE_SEQCON_SEQWRTMR;
+    return AD5940ERR_OK;
 }
 
 /**
@@ -2359,13 +2268,13 @@ AD5940Err AD5940_SEQGetCfg(SEQCfg_Type *pSeqCfg)
 */
 void AD5940_SEQCtrlS(BoolFlag SeqEn)
 {
-  uint32_t tempreg = AD5940_ReadReg(REG_AFE_SEQCON);
-  if(SeqEn == bTRUE)
-    tempreg |= BITM_AFE_SEQCON_SEQEN;
-  else
-    tempreg &= ~BITM_AFE_SEQCON_SEQEN;
+    uint32_t tempreg = AD5940_ReadReg(REG_AFE_SEQCON);
+    if (SeqEn == bTRUE)
+        tempreg |= BITM_AFE_SEQCON_SEQEN;
+    else
+        tempreg &= ~BITM_AFE_SEQCON_SEQEN;
 
-  AD5940_WriteReg(REG_AFE_SEQCON, tempreg);
+    AD5940_WriteReg(REG_AFE_SEQCON, tempreg);
 }
 
 /**
@@ -2374,7 +2283,7 @@ void AD5940_SEQCtrlS(BoolFlag SeqEn)
 */
 void AD5940_SEQHaltS(void)
 {
-  AD5940_WriteReg(REG_AFE_SEQCON, BITM_AFE_SEQCON_SEQHALT|BITM_AFE_SEQCON_SEQEN);
+    AD5940_WriteReg(REG_AFE_SEQCON, BITM_AFE_SEQCON_SEQHALT | BITM_AFE_SEQCON_SEQEN);
 }
 
 /**
@@ -2383,9 +2292,9 @@ void AD5940_SEQHaltS(void)
 **/
 void AD5940_SEQMmrTrig(uint32_t SeqId)
 {
-  if(SeqId > SEQID_3)
-    return;
-  AD5940_WriteReg(REG_AFECON_TRIGSEQ, 1L<<SeqId);
+    if (SeqId > SEQID_3)
+        return;
+    AD5940_WriteReg(REG_AFECON_TRIGSEQ, 1L << SeqId);
 }
 
 /**
@@ -2394,11 +2303,10 @@ void AD5940_SEQMmrTrig(uint32_t SeqId)
 **/
 void AD5940_SEQCmdWrite(uint32_t StartAddr, const uint32_t *pCommand, uint32_t CmdCnt)
 {
-  while(CmdCnt--)
-  {
-    AD5940_WriteReg(REG_AFE_CMDFIFOWADDR, StartAddr++);
-    AD5940_WriteReg(REG_AFE_CMDFIFOWRITE, *pCommand++);
-  }
+    while (CmdCnt--) {
+        AD5940_WriteReg(REG_AFE_CMDFIFOWADDR, StartAddr++);
+        AD5940_WriteReg(REG_AFE_CMDFIFOWRITE, *pCommand++);
+    }
 }
 
 /**
@@ -2413,28 +2321,26 @@ void AD5940_SEQCmdWrite(uint32_t StartAddr, const uint32_t *pCommand, uint32_t C
 */
 void AD5940_SEQInfoCfg(SEQInfo_Type *pSeq)
 {
-  switch(pSeq->SeqId)
-  {
-    case SEQID_0:
-    /* Configure SEQINFO register */
-    AD5940_WriteReg(REG_AFE_SEQ0INFO, (pSeq->SeqLen<< 16) | pSeq->SeqRamAddr);
-    break;
-    case SEQID_1:
-    AD5940_WriteReg(REG_AFE_SEQ1INFO, (pSeq->SeqLen<< 16) | pSeq->SeqRamAddr);
-    break;
-    case SEQID_2:
-    AD5940_WriteReg(REG_AFE_SEQ2INFO, (pSeq->SeqLen<< 16) | pSeq->SeqRamAddr);
-    break;
-    case SEQID_3:
-    AD5940_WriteReg(REG_AFE_SEQ3INFO, (pSeq->SeqLen<< 16) | pSeq->SeqRamAddr);
-    break;
-    default:
-    break;
-  }
-  if(pSeq->WriteSRAM == bTRUE)
-  {
-    AD5940_SEQCmdWrite(pSeq->SeqRamAddr, pSeq->pSeqCmd, pSeq->SeqLen);
-  }
+    switch (pSeq->SeqId) {
+        case SEQID_0:
+            /* Configure SEQINFO register */
+            AD5940_WriteReg(REG_AFE_SEQ0INFO, (pSeq->SeqLen << 16) | pSeq->SeqRamAddr);
+            break;
+        case SEQID_1:
+            AD5940_WriteReg(REG_AFE_SEQ1INFO, (pSeq->SeqLen << 16) | pSeq->SeqRamAddr);
+            break;
+        case SEQID_2:
+            AD5940_WriteReg(REG_AFE_SEQ2INFO, (pSeq->SeqLen << 16) | pSeq->SeqRamAddr);
+            break;
+        case SEQID_3:
+            AD5940_WriteReg(REG_AFE_SEQ3INFO, (pSeq->SeqLen << 16) | pSeq->SeqRamAddr);
+            break;
+        default:
+            break;
+    }
+    if (pSeq->WriteSRAM == bTRUE) {
+        AD5940_SEQCmdWrite(pSeq->SeqRamAddr, pSeq->pSeqCmd, pSeq->SeqLen);
+    }
 }
 
 /**
@@ -2446,34 +2352,33 @@ void AD5940_SEQInfoCfg(SEQInfo_Type *pSeq)
 */
 AD5940Err AD5940_SEQInfoGet(uint32_t SeqId, SEQInfo_Type *pSeqInfo)
 {
-  uint32_t tempreg;
-  if(pSeqInfo == NULL) return AD5940ERR_NULLP;
-  switch(SeqId)
-  {
-    case SEQID_0:
-    tempreg = AD5940_ReadReg(REG_AFE_SEQ0INFO);
-    break;
-    case SEQID_1:
-    tempreg = AD5940_ReadReg(REG_AFE_SEQ1INFO);
-    break;
-    case SEQID_2:
-    tempreg = AD5940_ReadReg(REG_AFE_SEQ2INFO);
-    break;
-    case SEQID_3:
-    tempreg = AD5940_ReadReg(REG_AFE_SEQ3INFO);
-    break;
-    default:
-			return AD5940ERR_PARA;
-  }
-  pSeqInfo->pSeqCmd = 0;    /* We don't know where you store the sequence in MCU SRAM */
-  pSeqInfo->SeqId = SeqId;
-  pSeqInfo->SeqLen = (tempreg>>16)&0x7ff;
-  pSeqInfo->SeqRamAddr = tempreg&0x7ff;
-  pSeqInfo->WriteSRAM = bFALSE;  /* Don't care */
+    uint32_t tempreg;
+    if (pSeqInfo == NULL)
+        return AD5940ERR_NULLP;
+    switch (SeqId) {
+        case SEQID_0:
+            tempreg = AD5940_ReadReg(REG_AFE_SEQ0INFO);
+            break;
+        case SEQID_1:
+            tempreg = AD5940_ReadReg(REG_AFE_SEQ1INFO);
+            break;
+        case SEQID_2:
+            tempreg = AD5940_ReadReg(REG_AFE_SEQ2INFO);
+            break;
+        case SEQID_3:
+            tempreg = AD5940_ReadReg(REG_AFE_SEQ3INFO);
+            break;
+        default:
+            return AD5940ERR_PARA;
+    }
+    pSeqInfo->pSeqCmd = 0; /* We don't know where you store the sequence in MCU SRAM */
+    pSeqInfo->SeqId = SeqId;
+    pSeqInfo->SeqLen = (tempreg >> 16) & 0x7ff;
+    pSeqInfo->SeqRamAddr = tempreg & 0x7ff;
+    pSeqInfo->WriteSRAM = bFALSE; /* Don't care */
 
-  return AD5940ERR_OK;
+    return AD5940ERR_OK;
 }
-
 
 /**
    @brief Control GPIO with register SYNCEXTDEVICE. Because sequencer have no ability to access register GPIOOUT,
@@ -2485,7 +2390,7 @@ AD5940Err AD5940_SEQInfoGet(uint32_t SeqId, SEQInfo_Type *pSeqInfo)
 **/
 void AD5940_SEQGpioCtrlS(uint32_t Gpio)
 {
-  AD5940_WriteReg(REG_AFE_SYNCEXTDEVICE, Gpio);
+    AD5940_WriteReg(REG_AFE_SYNCEXTDEVICE, Gpio);
 }
 
 /**
@@ -2494,7 +2399,7 @@ void AD5940_SEQGpioCtrlS(uint32_t Gpio)
 **/
 uint32_t AD5940_SEQTimeOutRd(void)
 {
-  return AD5940_ReadReg(REG_AFE_SEQTIMEOUT);
+    return AD5940_ReadReg(REG_AFE_SEQTIMEOUT);
 }
 
 /**
@@ -2509,48 +2414,44 @@ uint32_t AD5940_SEQTimeOutRd(void)
 **/
 AD5940Err AD5940_SEQGpioTrigCfg(SeqGpioTrig_Cfg *pSeqGpioTrigCfg)
 {
-  uint32_t reg_ei0con, reg_ei1con;
-  uint32_t pin_count, pin_mask;
-  uint32_t mode, en;
-  if(pSeqGpioTrigCfg == NULL)
-    return AD5940ERR_NULLP;
-  reg_ei0con = AD5940_ReadReg(REG_ALLON_EI0CON);
-  reg_ei1con = AD5940_ReadReg(REG_ALLON_EI1CON);
+    uint32_t reg_ei0con, reg_ei1con;
+    uint32_t pin_count, pin_mask;
+    uint32_t mode, en;
+    if (pSeqGpioTrigCfg == NULL)
+        return AD5940ERR_NULLP;
+    reg_ei0con = AD5940_ReadReg(REG_ALLON_EI0CON);
+    reg_ei1con = AD5940_ReadReg(REG_ALLON_EI1CON);
 
-  pin_count = 0;    /* Start from pin0 */
-  pin_mask = 0x01;  /* start from pin0, mask 0x01 */
-  pSeqGpioTrigCfg->SeqPinTrigMode &= 0x07;  /* 3bit width */
+    pin_count = 0;                           /* Start from pin0 */
+    pin_mask = 0x01;                         /* start from pin0, mask 0x01 */
+    pSeqGpioTrigCfg->SeqPinTrigMode &= 0x07; /* 3bit width */
 
-  mode = pSeqGpioTrigCfg->SeqPinTrigMode;
-  en = pSeqGpioTrigCfg->bEnable?1:0;
-  for(;;)
-  {
-    uint32_t bit_position;
-    if(pSeqGpioTrigCfg->PinSel&pin_mask)
-    {
-      if(pin_count < 4) /* EI0CON register */
-      {
-        bit_position = pin_count*4;
-        reg_ei1con &= ~(0xfL<<bit_position); /* Clear bits */
-        reg_ei1con |= mode << bit_position;
-        reg_ei1con |= en << (bit_position + 3); /* bit offset 3 is the EN bit. */
-      }
-      else
-      {
-        bit_position = (pin_count-4)*4;
-        reg_ei1con &= ~(0xfL<<bit_position); /* Clear bits */
-        reg_ei1con |= mode << bit_position;
-        reg_ei1con |= en << (bit_position + 3); /* bit offset 3 is the EN bit. */
-      }
+    mode = pSeqGpioTrigCfg->SeqPinTrigMode;
+    en = pSeqGpioTrigCfg->bEnable ? 1 : 0;
+    for (;;) {
+        uint32_t bit_position;
+        if (pSeqGpioTrigCfg->PinSel & pin_mask) {
+            if (pin_count < 4) /* EI0CON register */
+            {
+                bit_position = pin_count * 4;
+                reg_ei1con &= ~(0xfL << bit_position); /* Clear bits */
+                reg_ei1con |= mode << bit_position;
+                reg_ei1con |= en << (bit_position + 3); /* bit offset 3 is the EN bit. */
+            } else {
+                bit_position = (pin_count - 4) * 4;
+                reg_ei1con &= ~(0xfL << bit_position); /* Clear bits */
+                reg_ei1con |= mode << bit_position;
+                reg_ei1con |= en << (bit_position + 3); /* bit offset 3 is the EN bit. */
+            }
+        }
+        pin_count++;
+        pin_mask <<= 1;
+        if (pin_count == 8)
+            break;
     }
-    pin_count ++;
-    pin_mask <<= 1;
-    if(pin_count == 8)
-      break;
-  }
-  AD5940_WriteReg(REG_ALLON_EI0CON, reg_ei0con);
-  AD5940_WriteReg(REG_ALLON_EI0CON, reg_ei1con);
-  return AD5940ERR_OK;
+    AD5940_WriteReg(REG_ALLON_EI0CON, reg_ei0con);
+    AD5940_WriteReg(REG_ALLON_EI0CON, reg_ei1con);
+    return AD5940ERR_OK;
 }
 
 /**
@@ -2560,52 +2461,52 @@ AD5940Err AD5940_SEQGpioTrigCfg(SeqGpioTrig_Cfg *pSeqGpioTrigCfg)
 */
 void AD5940_WUPTCfg(WUPTCfg_Type *pWuptCfg)
 {
-  uint32_t tempreg;
-  //check parameters
-  /* Sleep and Wakeup time */
-  AD5940_WriteReg(REG_WUPTMR_SEQ0WUPL, (pWuptCfg->SeqxWakeupTime[0] & 0xFFFF));    
-  AD5940_WriteReg(REG_WUPTMR_SEQ0WUPH, (pWuptCfg->SeqxWakeupTime[0] & 0xF0000)>>16);
-  AD5940_WriteReg(REG_WUPTMR_SEQ0SLEEPL, (pWuptCfg->SeqxSleepTime[0] & 0xFFFF));    
-  AD5940_WriteReg(REG_WUPTMR_SEQ0SLEEPH, (pWuptCfg->SeqxSleepTime[0] & 0xF0000)>>16);
+    uint32_t tempreg;
+    //check parameters
+    /* Sleep and Wakeup time */
+    AD5940_WriteReg(REG_WUPTMR_SEQ0WUPL, (pWuptCfg->SeqxWakeupTime[0] & 0xFFFF));
+    AD5940_WriteReg(REG_WUPTMR_SEQ0WUPH, (pWuptCfg->SeqxWakeupTime[0] & 0xF0000) >> 16);
+    AD5940_WriteReg(REG_WUPTMR_SEQ0SLEEPL, (pWuptCfg->SeqxSleepTime[0] & 0xFFFF));
+    AD5940_WriteReg(REG_WUPTMR_SEQ0SLEEPH, (pWuptCfg->SeqxSleepTime[0] & 0xF0000) >> 16);
 
-  AD5940_WriteReg(REG_WUPTMR_SEQ1WUPL, (pWuptCfg->SeqxWakeupTime[1] & 0xFFFF));    
-  AD5940_WriteReg(REG_WUPTMR_SEQ1WUPH, (pWuptCfg->SeqxWakeupTime[1] & 0xF0000)>>16);
-  AD5940_WriteReg(REG_WUPTMR_SEQ1SLEEPL, (pWuptCfg->SeqxSleepTime[1] & 0xFFFF));    
-  AD5940_WriteReg(REG_WUPTMR_SEQ1SLEEPH, (pWuptCfg->SeqxSleepTime[1] & 0xF0000)>>16);
+    AD5940_WriteReg(REG_WUPTMR_SEQ1WUPL, (pWuptCfg->SeqxWakeupTime[1] & 0xFFFF));
+    AD5940_WriteReg(REG_WUPTMR_SEQ1WUPH, (pWuptCfg->SeqxWakeupTime[1] & 0xF0000) >> 16);
+    AD5940_WriteReg(REG_WUPTMR_SEQ1SLEEPL, (pWuptCfg->SeqxSleepTime[1] & 0xFFFF));
+    AD5940_WriteReg(REG_WUPTMR_SEQ1SLEEPH, (pWuptCfg->SeqxSleepTime[1] & 0xF0000) >> 16);
 
-  AD5940_WriteReg(REG_WUPTMR_SEQ2WUPL, (pWuptCfg->SeqxWakeupTime[2] & 0xFFFF));    
-  AD5940_WriteReg(REG_WUPTMR_SEQ2WUPH, (pWuptCfg->SeqxWakeupTime[2] & 0xF0000)>>16);
-  AD5940_WriteReg(REG_WUPTMR_SEQ2SLEEPL, (pWuptCfg->SeqxSleepTime[2] & 0xFFFF));    
-  AD5940_WriteReg(REG_WUPTMR_SEQ2SLEEPH, (pWuptCfg->SeqxSleepTime[2] & 0xF0000)>>16);
+    AD5940_WriteReg(REG_WUPTMR_SEQ2WUPL, (pWuptCfg->SeqxWakeupTime[2] & 0xFFFF));
+    AD5940_WriteReg(REG_WUPTMR_SEQ2WUPH, (pWuptCfg->SeqxWakeupTime[2] & 0xF0000) >> 16);
+    AD5940_WriteReg(REG_WUPTMR_SEQ2SLEEPL, (pWuptCfg->SeqxSleepTime[2] & 0xFFFF));
+    AD5940_WriteReg(REG_WUPTMR_SEQ2SLEEPH, (pWuptCfg->SeqxSleepTime[2] & 0xF0000) >> 16);
 
-  AD5940_WriteReg(REG_WUPTMR_SEQ3WUPL, (pWuptCfg->SeqxWakeupTime[3] & 0xFFFF));    
-  AD5940_WriteReg(REG_WUPTMR_SEQ3WUPH, (pWuptCfg->SeqxWakeupTime[3] & 0xF0000)>>16);
-  AD5940_WriteReg(REG_WUPTMR_SEQ3SLEEPL, (pWuptCfg->SeqxSleepTime[3] & 0xFFFF));    
-  AD5940_WriteReg(REG_WUPTMR_SEQ3SLEEPH, (pWuptCfg->SeqxSleepTime[3] & 0xF0000)>>16);
-  
-  /* TMRCON register */
-  //if(pWuptCfg->WakeupEn == bTRUE)  /* enable use Wupt to wakeup AFE */
-  /* We always allow Wupt to wakeup AFE automatically. */
-  AD5940_WriteReg(REG_ALLON_TMRCON, BITM_ALLON_TMRCON_TMRINTEN);
-  /* Wupt order */
-  tempreg = 0;
-  tempreg |= (pWuptCfg->WuptOrder[0]&0x03) << BITP_WUPTMR_SEQORDER_SEQA; /* position A */
-  tempreg |= (pWuptCfg->WuptOrder[1]&0x03) << BITP_WUPTMR_SEQORDER_SEQB; /* position B */
-  tempreg |= (pWuptCfg->WuptOrder[2]&0x03) << BITP_WUPTMR_SEQORDER_SEQC; /* position C */
-  tempreg |= (pWuptCfg->WuptOrder[3]&0x03) << BITP_WUPTMR_SEQORDER_SEQD; /* position D */
-  tempreg |= (pWuptCfg->WuptOrder[4]&0x03) << BITP_WUPTMR_SEQORDER_SEQE; /* position E */
-  tempreg |= (pWuptCfg->WuptOrder[5]&0x03) << BITP_WUPTMR_SEQORDER_SEQF; /* position F */
-  tempreg |= (pWuptCfg->WuptOrder[6]&0x03) << BITP_WUPTMR_SEQORDER_SEQG; /* position G */
-  tempreg |= (pWuptCfg->WuptOrder[7]&0x03) << BITP_WUPTMR_SEQORDER_SEQH; /* position H */
-  AD5940_WriteReg(REG_WUPTMR_SEQORDER, tempreg);
+    AD5940_WriteReg(REG_WUPTMR_SEQ3WUPL, (pWuptCfg->SeqxWakeupTime[3] & 0xFFFF));
+    AD5940_WriteReg(REG_WUPTMR_SEQ3WUPH, (pWuptCfg->SeqxWakeupTime[3] & 0xF0000) >> 16);
+    AD5940_WriteReg(REG_WUPTMR_SEQ3SLEEPL, (pWuptCfg->SeqxSleepTime[3] & 0xFFFF));
+    AD5940_WriteReg(REG_WUPTMR_SEQ3SLEEPH, (pWuptCfg->SeqxSleepTime[3] & 0xF0000) >> 16);
 
-  tempreg = 0;
-  if(pWuptCfg->WuptEn == bTRUE)
-    tempreg |= BITM_WUPTMR_CON_EN;
-  /* We always allow Wupt to trigger sequencer */
-  tempreg |= pWuptCfg->WuptEndSeq << BITP_WUPTMR_CON_ENDSEQ;
-  //tempreg |= 1L<<4;
-  AD5940_WriteReg(REG_WUPTMR_CON, tempreg);
+    /* TMRCON register */
+    //if(pWuptCfg->WakeupEn == bTRUE)  /* enable use Wupt to wakeup AFE */
+    /* We always allow Wupt to wakeup AFE automatically. */
+    AD5940_WriteReg(REG_ALLON_TMRCON, BITM_ALLON_TMRCON_TMRINTEN);
+    /* Wupt order */
+    tempreg = 0;
+    tempreg |= (pWuptCfg->WuptOrder[0] & 0x03) << BITP_WUPTMR_SEQORDER_SEQA; /* position A */
+    tempreg |= (pWuptCfg->WuptOrder[1] & 0x03) << BITP_WUPTMR_SEQORDER_SEQB; /* position B */
+    tempreg |= (pWuptCfg->WuptOrder[2] & 0x03) << BITP_WUPTMR_SEQORDER_SEQC; /* position C */
+    tempreg |= (pWuptCfg->WuptOrder[3] & 0x03) << BITP_WUPTMR_SEQORDER_SEQD; /* position D */
+    tempreg |= (pWuptCfg->WuptOrder[4] & 0x03) << BITP_WUPTMR_SEQORDER_SEQE; /* position E */
+    tempreg |= (pWuptCfg->WuptOrder[5] & 0x03) << BITP_WUPTMR_SEQORDER_SEQF; /* position F */
+    tempreg |= (pWuptCfg->WuptOrder[6] & 0x03) << BITP_WUPTMR_SEQORDER_SEQG; /* position G */
+    tempreg |= (pWuptCfg->WuptOrder[7] & 0x03) << BITP_WUPTMR_SEQORDER_SEQH; /* position H */
+    AD5940_WriteReg(REG_WUPTMR_SEQORDER, tempreg);
+
+    tempreg = 0;
+    if (pWuptCfg->WuptEn == bTRUE)
+        tempreg |= BITM_WUPTMR_CON_EN;
+    /* We always allow Wupt to trigger sequencer */
+    tempreg |= pWuptCfg->WuptEndSeq << BITP_WUPTMR_CON_ENDSEQ;
+    //tempreg |= 1L<<4;
+    AD5940_WriteReg(REG_WUPTMR_CON, tempreg);
 }
 
 /**
@@ -2617,14 +2518,14 @@ void AD5940_WUPTCfg(WUPTCfg_Type *pWuptCfg)
 */
 void AD5940_WUPTCtrl(BoolFlag Enable)
 {
-  uint16_t tempreg;
-  tempreg = AD5940_ReadReg(REG_WUPTMR_CON);
-  tempreg &= ~BITM_WUPTMR_CON_EN;
+    uint16_t tempreg;
+    tempreg = AD5940_ReadReg(REG_WUPTMR_CON);
+    tempreg &= ~BITM_WUPTMR_CON_EN;
 
-  if(Enable == bTRUE)
-    tempreg |= BITM_WUPTMR_CON_EN;
-  
-  AD5940_WriteReg(REG_WUPTMR_CON, tempreg);
+    if (Enable == bTRUE)
+        tempreg |= BITM_WUPTMR_CON_EN;
+
+    AD5940_WriteReg(REG_WUPTMR_CON, tempreg);
 }
 
 /**
@@ -2637,44 +2538,39 @@ void AD5940_WUPTCtrl(BoolFlag Enable)
 */
 AD5940Err AD5940_WUPTTime(uint32_t SeqId, uint32_t SleepTime, uint32_t WakeupTime)
 {
-  switch (SeqId)
-  {
-    case SEQID_0:
-    {
-      AD5940_WriteReg(REG_WUPTMR_SEQ0WUPL, (WakeupTime & 0xFFFF));    
-      AD5940_WriteReg(REG_WUPTMR_SEQ0WUPH, (WakeupTime & 0xF0000)>>16);
-      AD5940_WriteReg(REG_WUPTMR_SEQ0SLEEPL, (SleepTime & 0xFFFF));    
-      AD5940_WriteReg(REG_WUPTMR_SEQ0SLEEPH, (SleepTime & 0xF0000)>>16);
-      break;
+    switch (SeqId) {
+        case SEQID_0: {
+            AD5940_WriteReg(REG_WUPTMR_SEQ0WUPL, (WakeupTime & 0xFFFF));
+            AD5940_WriteReg(REG_WUPTMR_SEQ0WUPH, (WakeupTime & 0xF0000) >> 16);
+            AD5940_WriteReg(REG_WUPTMR_SEQ0SLEEPL, (SleepTime & 0xFFFF));
+            AD5940_WriteReg(REG_WUPTMR_SEQ0SLEEPH, (SleepTime & 0xF0000) >> 16);
+            break;
+        }
+        case SEQID_1: {
+            AD5940_WriteReg(REG_WUPTMR_SEQ1WUPL, (WakeupTime & 0xFFFF));
+            AD5940_WriteReg(REG_WUPTMR_SEQ1WUPH, (WakeupTime & 0xF0000) >> 16);
+            AD5940_WriteReg(REG_WUPTMR_SEQ1SLEEPL, (SleepTime & 0xFFFF));
+            AD5940_WriteReg(REG_WUPTMR_SEQ1SLEEPH, (SleepTime & 0xF0000) >> 16);
+            break;
+        }
+        case SEQID_2: {
+            AD5940_WriteReg(REG_WUPTMR_SEQ2WUPL, (WakeupTime & 0xFFFF));
+            AD5940_WriteReg(REG_WUPTMR_SEQ2WUPH, (WakeupTime & 0xF0000) >> 16);
+            AD5940_WriteReg(REG_WUPTMR_SEQ2SLEEPL, (SleepTime & 0xFFFF));
+            AD5940_WriteReg(REG_WUPTMR_SEQ2SLEEPH, (SleepTime & 0xF0000) >> 16);
+            break;
+        }
+        case SEQID_3: {
+            AD5940_WriteReg(REG_WUPTMR_SEQ3WUPL, (WakeupTime & 0xFFFF));
+            AD5940_WriteReg(REG_WUPTMR_SEQ3WUPH, (WakeupTime & 0xF0000) >> 16);
+            AD5940_WriteReg(REG_WUPTMR_SEQ3SLEEPL, (SleepTime & 0xFFFF));
+            AD5940_WriteReg(REG_WUPTMR_SEQ3SLEEPH, (SleepTime & 0xF0000) >> 16);
+            break;
+        }
+        default:
+            return AD5940ERR_PARA;
     }
-    case SEQID_1:
-    {
-      AD5940_WriteReg(REG_WUPTMR_SEQ1WUPL, (WakeupTime & 0xFFFF));    
-      AD5940_WriteReg(REG_WUPTMR_SEQ1WUPH, (WakeupTime & 0xF0000)>>16);
-      AD5940_WriteReg(REG_WUPTMR_SEQ1SLEEPL, (SleepTime & 0xFFFF));    
-      AD5940_WriteReg(REG_WUPTMR_SEQ1SLEEPH, (SleepTime & 0xF0000)>>16);
-      break;
-    }
-    case SEQID_2:
-    {
-      AD5940_WriteReg(REG_WUPTMR_SEQ2WUPL, (WakeupTime & 0xFFFF));    
-      AD5940_WriteReg(REG_WUPTMR_SEQ2WUPH, (WakeupTime & 0xF0000)>>16);
-      AD5940_WriteReg(REG_WUPTMR_SEQ2SLEEPL, (SleepTime & 0xFFFF));    
-      AD5940_WriteReg(REG_WUPTMR_SEQ2SLEEPH, (SleepTime & 0xF0000)>>16);
-      break;
-    }
-    case SEQID_3:
-    {
-      AD5940_WriteReg(REG_WUPTMR_SEQ3WUPL, (WakeupTime & 0xFFFF));    
-      AD5940_WriteReg(REG_WUPTMR_SEQ3WUPH, (WakeupTime & 0xF0000)>>16);
-      AD5940_WriteReg(REG_WUPTMR_SEQ3SLEEPL, (SleepTime & 0xFFFF));    
-      AD5940_WriteReg(REG_WUPTMR_SEQ3SLEEPH, (SleepTime & 0xF0000)>>16);
-      break;
-    }
-    default:
-    return AD5940ERR_PARA;
-  }
-  return AD5940ERR_OK;
+    return AD5940ERR_OK;
 }
 
 /**
@@ -2697,60 +2593,60 @@ AD5940Err AD5940_WUPTTime(uint32_t SeqId, uint32_t SleepTime, uint32_t WakeupTim
 */
 void AD5940_CLKCfg(CLKCfg_Type *pClkCfg)
 {
-  uint32_t tempreg, reg_osccon;
+    uint32_t tempreg, reg_osccon;
 
-  reg_osccon = AD5940_ReadReg(REG_ALLON_OSCCON);
-  /* Enable clocks */
-  if(pClkCfg->HFXTALEn == bTRUE)
-  {
-    reg_osccon |= BITM_ALLON_OSCCON_HFXTALEN;
-    AD5940_WriteReg(REG_ALLON_OSCKEY,KEY_OSCCON); /* Write Key */
-    AD5940_WriteReg(REG_ALLON_OSCCON, reg_osccon); /* Enable HFXTAL */
-    while((AD5940_ReadReg(REG_ALLON_OSCCON)&BITM_ALLON_OSCCON_HFXTALOK) == 0); /* Wait for clock ready */
-  }
+    reg_osccon = AD5940_ReadReg(REG_ALLON_OSCCON);
+    /* Enable clocks */
+    if (pClkCfg->HFXTALEn == bTRUE) {
+        reg_osccon |= BITM_ALLON_OSCCON_HFXTALEN;
+        AD5940_WriteReg(REG_ALLON_OSCKEY, KEY_OSCCON); /* Write Key */
+        AD5940_WriteReg(REG_ALLON_OSCCON, reg_osccon); /* Enable HFXTAL */
+        while ((AD5940_ReadReg(REG_ALLON_OSCCON) & BITM_ALLON_OSCCON_HFXTALOK) == 0)
+            ; /* Wait for clock ready */
+    }
 
-  if(pClkCfg->HFOSCEn == bTRUE)
-  {
-    reg_osccon |= BITM_ALLON_OSCCON_HFOSCEN;
-    AD5940_WriteReg(REG_ALLON_OSCKEY,KEY_OSCCON); /* Write Key */
-    AD5940_WriteReg(REG_ALLON_OSCCON, reg_osccon); /* Enable HFOSC */
-    while((AD5940_ReadReg(REG_ALLON_OSCCON)&BITM_ALLON_OSCCON_HFOSCOK) == 0); /* Wait for clock ready */
-    /* Configure HFOSC mode if it's enabled. */
-    if(pClkCfg->HfOSC32MHzMode  == bTRUE)
-      AD5940_HFOSC32MHzCtrl(bTRUE);
-    else
-      AD5940_HFOSC32MHzCtrl(bFALSE);
-  }
+    if (pClkCfg->HFOSCEn == bTRUE) {
+        reg_osccon |= BITM_ALLON_OSCCON_HFOSCEN;
+        AD5940_WriteReg(REG_ALLON_OSCKEY, KEY_OSCCON); /* Write Key */
+        AD5940_WriteReg(REG_ALLON_OSCCON, reg_osccon); /* Enable HFOSC */
+        while ((AD5940_ReadReg(REG_ALLON_OSCCON) & BITM_ALLON_OSCCON_HFOSCOK) == 0)
+            ; /* Wait for clock ready */
+        /* Configure HFOSC mode if it's enabled. */
+        if (pClkCfg->HfOSC32MHzMode == bTRUE)
+            AD5940_HFOSC32MHzCtrl(bTRUE);
+        else
+            AD5940_HFOSC32MHzCtrl(bFALSE);
+    }
 
-  if(pClkCfg->LFOSCEn == bTRUE)
-  {
-    reg_osccon |= BITM_ALLON_OSCCON_LFOSCEN;  
-    AD5940_WriteReg(REG_ALLON_OSCKEY,KEY_OSCCON); /* Write Key */  
-    AD5940_WriteReg(REG_ALLON_OSCCON, reg_osccon); /* Enable LFOSC */
-    while((AD5940_ReadReg(REG_ALLON_OSCCON)&BITM_ALLON_OSCCON_LFOSCOK) == 0); /* Wait for clock ready */
-  }
+    if (pClkCfg->LFOSCEn == bTRUE) {
+        reg_osccon |= BITM_ALLON_OSCCON_LFOSCEN;
+        AD5940_WriteReg(REG_ALLON_OSCKEY, KEY_OSCCON); /* Write Key */
+        AD5940_WriteReg(REG_ALLON_OSCCON, reg_osccon); /* Enable LFOSC */
+        while ((AD5940_ReadReg(REG_ALLON_OSCCON) & BITM_ALLON_OSCCON_LFOSCOK) == 0)
+            ; /* Wait for clock ready */
+    }
 
-  /* Switch clocks */
-  /* step1. Set clock divider */
-  tempreg = pClkCfg->SysClkDiv&0x3f;
-  tempreg |= (pClkCfg->SysClkDiv&0x3f) << BITP_AFECON_CLKCON0_SYSCLKDIV;
-  tempreg |= (pClkCfg->ADCClkDiv&0xf) << BITP_AFECON_CLKCON0_ADCCLKDIV;
-  AD5940_WriteReg(REG_AFECON_CLKCON0, tempreg);
-  AD5940_Delay10us(10);
-  /* Step2. set clock source */
-  tempreg = pClkCfg->SysClkSrc;
-  tempreg |= pClkCfg->ADCCLkSrc << BITP_AFECON_CLKSEL_ADCCLKSEL;
-  AD5940_WriteReg(REG_AFECON_CLKSEL, tempreg);
+    /* Switch clocks */
+    /* step1. Set clock divider */
+    tempreg = pClkCfg->SysClkDiv & 0x3f;
+    tempreg |= (pClkCfg->SysClkDiv & 0x3f) << BITP_AFECON_CLKCON0_SYSCLKDIV;
+    tempreg |= (pClkCfg->ADCClkDiv & 0xf) << BITP_AFECON_CLKCON0_ADCCLKDIV;
+    AD5940_WriteReg(REG_AFECON_CLKCON0, tempreg);
+    AD5940_Delay10us(10);
+    /* Step2. set clock source */
+    tempreg = pClkCfg->SysClkSrc;
+    tempreg |= pClkCfg->ADCCLkSrc << BITP_AFECON_CLKSEL_ADCCLKSEL;
+    AD5940_WriteReg(REG_AFECON_CLKSEL, tempreg);
 
-  /* Disable clocks */
-  if(pClkCfg->HFXTALEn == bFALSE)
-    reg_osccon &= ~BITM_ALLON_OSCCON_HFXTALEN;
-  if(pClkCfg->HFOSCEn == bFALSE)
-    reg_osccon &= ~BITM_ALLON_OSCCON_HFOSCEN;
-  if(pClkCfg->LFOSCEn == bFALSE)
-    reg_osccon &= ~BITM_ALLON_OSCCON_LFOSCEN;
-  AD5940_WriteReg(REG_ALLON_OSCKEY, KEY_OSCCON); /* Write Key */
-  AD5940_WriteReg(REG_ALLON_OSCCON, reg_osccon);
+    /* Disable clocks */
+    if (pClkCfg->HFXTALEn == bFALSE)
+        reg_osccon &= ~BITM_ALLON_OSCCON_HFXTALEN;
+    if (pClkCfg->HFOSCEn == bFALSE)
+        reg_osccon &= ~BITM_ALLON_OSCCON_HFOSCEN;
+    if (pClkCfg->LFOSCEn == bFALSE)
+        reg_osccon &= ~BITM_ALLON_OSCCON_LFOSCEN;
+    AD5940_WriteReg(REG_ALLON_OSCKEY, KEY_OSCCON); /* Write Key */
+    AD5940_WriteReg(REG_ALLON_OSCCON, reg_osccon);
 }
 
 /**
@@ -2762,31 +2658,30 @@ void AD5940_CLKCfg(CLKCfg_Type *pClkCfg)
 */
 void AD5940_HFOSC32MHzCtrl(BoolFlag Mode32MHz)
 {
-  uint32_t RdCLKEN1;
-  uint32_t RdHPOSCCON;   
+    uint32_t RdCLKEN1;
+    uint32_t RdHPOSCCON;
 
-  uint32_t bit8,bit9;
-    
-  RdCLKEN1 = AD5940_ReadReg(REG_AFECON_CLKEN1);
-  bit8 = (RdCLKEN1>>9)&0x01;
-  bit9 = (RdCLKEN1>>8)&0x01;  /* Fix bug in silicon, bit8 and bit9 is swapped when read back. */
-  RdCLKEN1 = RdCLKEN1&0xff;
-  RdCLKEN1 |= (bit8<<8)|(bit9<<9);
-  AD5940_WriteReg(REG_AFECON_CLKEN1,RdCLKEN1|BITM_AFECON_CLKEN1_ACLKDIS); /* Disable ACLK during clock changing */
+    uint32_t bit8, bit9;
 
-  RdHPOSCCON = AD5940_ReadReg(REG_AFE_HPOSCCON); 
-  if(Mode32MHz == bTRUE)
-  {
-    AD5940_WriteReg(REG_AFE_HPOSCCON,RdHPOSCCON&(~BITM_AFE_HPOSCCON_CLK32MHZEN)); /* Enable 32MHz output(bit definition-0: 32MHz, 1: 16MHz) */  
-    while((AD5940_ReadReg(REG_ALLON_OSCCON)&BITM_ALLON_OSCCON_HFOSCOK) == 0); /* Wait for clock ready */
-  }
-  else
-  {
-    AD5940_WriteReg(REG_AFE_HPOSCCON,RdHPOSCCON|BITM_AFE_HPOSCCON_CLK32MHZEN); /* Enable 16MHz output(bit definition-0: 32MHz, 1: 16MHz) */       
-    while((AD5940_ReadReg(REG_ALLON_OSCCON)&BITM_ALLON_OSCCON_HFOSCOK) == 0); /* Wait for clock ready */
-  }
+    RdCLKEN1 = AD5940_ReadReg(REG_AFECON_CLKEN1);
+    bit8 = (RdCLKEN1 >> 9) & 0x01;
+    bit9 = (RdCLKEN1 >> 8) & 0x01; /* Fix bug in silicon, bit8 and bit9 is swapped when read back. */
+    RdCLKEN1 = RdCLKEN1 & 0xff;
+    RdCLKEN1 |= (bit8 << 8) | (bit9 << 9);
+    AD5940_WriteReg(REG_AFECON_CLKEN1, RdCLKEN1 | BITM_AFECON_CLKEN1_ACLKDIS); /* Disable ACLK during clock changing */
 
-  AD5940_WriteReg(REG_AFECON_CLKEN1,RdCLKEN1&(~BITM_AFECON_CLKEN1_ACLKDIS)); /* Enable ACLK */
+    RdHPOSCCON = AD5940_ReadReg(REG_AFE_HPOSCCON);
+    if (Mode32MHz == bTRUE) {
+        AD5940_WriteReg(REG_AFE_HPOSCCON, RdHPOSCCON & (~BITM_AFE_HPOSCCON_CLK32MHZEN)); /* Enable 32MHz output(bit definition-0: 32MHz, 1: 16MHz) */
+        while ((AD5940_ReadReg(REG_ALLON_OSCCON) & BITM_ALLON_OSCCON_HFOSCOK) == 0)
+            ; /* Wait for clock ready */
+    } else {
+        AD5940_WriteReg(REG_AFE_HPOSCCON, RdHPOSCCON | BITM_AFE_HPOSCCON_CLK32MHZEN); /* Enable 16MHz output(bit definition-0: 32MHz, 1: 16MHz) */
+        while ((AD5940_ReadReg(REG_ALLON_OSCCON) & BITM_ALLON_OSCCON_HFOSCOK) == 0)
+            ; /* Wait for clock ready */
+    }
+
+    AD5940_WriteReg(REG_AFECON_CLKEN1, RdCLKEN1 & (~BITM_AFECON_CLKEN1_ACLKDIS)); /* Enable ACLK */
 }
 /**
  * @brief Enable high power mode for high frequency EIS
@@ -2795,30 +2690,28 @@ void AD5940_HFOSC32MHzCtrl(BoolFlag Mode32MHz)
  *        - bFALSE: HFOSC 16MHz mode.
  * @return return none.
 */
-void 			AD5940_HPModeEn(BoolFlag Enable)
+void AD5940_HPModeEn(BoolFlag Enable)
 {
-	CLKCfg_Type clk_cfg;
-	uint32_t temp_reg = 0;
-	
-	/* Check what the system clock is */
-	temp_reg = AD5940_ReadReg(REG_AFECON_CLKSEL);
-	clk_cfg.ADCCLkSrc = (temp_reg>>2)&0x3; 
-  clk_cfg.SysClkSrc = temp_reg & 0x3; 
-	if(Enable == bTRUE)
-	{
-		clk_cfg.SysClkDiv = SYSCLKDIV_2;
-		clk_cfg.HfOSC32MHzMode = bTRUE;
-		AD5940_AFEPwrBW(AFEPWR_HP, AFEBW_250KHZ);
-	}
-	else
-	{
-		clk_cfg.SysClkDiv = SYSCLKDIV_1;
-		clk_cfg.HfOSC32MHzMode = bFALSE;
-		AD5940_AFEPwrBW(AFEPWR_LP, AFEBW_100KHZ);
-	}
-    clk_cfg.ADCClkDiv = ADCCLKDIV_1;       
-    clk_cfg.HFOSCEn = (temp_reg & 0x3) == 0x1? bFALSE : bTRUE;;
-	clk_cfg.HFXTALEn = (temp_reg & 0x3) == 0x1? bTRUE : bFALSE;
+    CLKCfg_Type clk_cfg;
+    uint32_t temp_reg = 0;
+
+    /* Check what the system clock is */
+    temp_reg = AD5940_ReadReg(REG_AFECON_CLKSEL);
+    clk_cfg.ADCCLkSrc = (temp_reg >> 2) & 0x3;
+    clk_cfg.SysClkSrc = temp_reg & 0x3;
+    if (Enable == bTRUE) {
+        clk_cfg.SysClkDiv = SYSCLKDIV_2;
+        clk_cfg.HfOSC32MHzMode = bTRUE;
+        AD5940_AFEPwrBW(AFEPWR_HP, AFEBW_250KHZ);
+    } else {
+        clk_cfg.SysClkDiv = SYSCLKDIV_1;
+        clk_cfg.HfOSC32MHzMode = bFALSE;
+        AD5940_AFEPwrBW(AFEPWR_LP, AFEBW_100KHZ);
+    }
+    clk_cfg.ADCClkDiv = ADCCLKDIV_1;
+    clk_cfg.HFOSCEn = (temp_reg & 0x3) == 0x1 ? bFALSE : bTRUE;
+    ;
+    clk_cfg.HFXTALEn = (temp_reg & 0x3) == 0x1 ? bTRUE : bFALSE;
     clk_cfg.LFOSCEn = bTRUE;
     AD5940_CLKCfg(&clk_cfg);
 }
@@ -2874,18 +2767,18 @@ void 			AD5940_HPModeEn(BoolFlag Enable)
 */
 void AD5940_INTCCfg(uint32_t AfeIntcSel, uint32_t AFEIntSrc, BoolFlag State)
 {
-  uint32_t tempreg;
-  uint32_t regaddr = REG_INTC_INTCSEL0;
-  
-  if(AfeIntcSel == AFEINTC_1)
-    regaddr = REG_INTC_INTCSEL1;
-  
-  tempreg = AD5940_ReadReg(regaddr);
-  if(State == bTRUE)
-    tempreg |= AFEIntSrc;    /* Enable this interrupt */
-  else
-    tempreg &= ~(AFEIntSrc); /* Disable this interrupt  */
-  AD5940_WriteReg(regaddr,tempreg);
+    uint32_t tempreg;
+    uint32_t regaddr = REG_INTC_INTCSEL0;
+
+    if (AfeIntcSel == AFEINTC_1)
+        regaddr = REG_INTC_INTCSEL1;
+
+    tempreg = AD5940_ReadReg(regaddr);
+    if (State == bTRUE)
+        tempreg |= AFEIntSrc; /* Enable this interrupt */
+    else
+        tempreg &= ~(AFEIntSrc); /* Disable this interrupt  */
+    AD5940_WriteReg(regaddr, tempreg);
 }
 
 /**
@@ -2896,12 +2789,12 @@ void AD5940_INTCCfg(uint32_t AfeIntcSel, uint32_t AFEIntSrc, BoolFlag State)
 */
 uint32_t AD5940_INTCGetCfg(uint32_t AfeIntcSel)
 {
-  uint32_t tempreg;
-  if(AfeIntcSel == AFEINTC_0)
-    tempreg = AD5940_ReadReg(REG_INTC_INTCSEL0);
-  else
-    tempreg = AD5940_ReadReg(REG_INTC_INTCSEL1);
-  return tempreg;
+    uint32_t tempreg;
+    if (AfeIntcSel == AFEINTC_0)
+        tempreg = AD5940_ReadReg(REG_INTC_INTCSEL0);
+    else
+        tempreg = AD5940_ReadReg(REG_INTC_INTCSEL1);
+    return tempreg;
 }
 
 /**
@@ -2911,7 +2804,7 @@ uint32_t AD5940_INTCGetCfg(uint32_t AfeIntcSel)
 **/
 void AD5940_INTCClrFlag(uint32_t AfeIntSrcSel)
 {
-  AD5940_WriteReg(REG_INTC_INTCCLR,AfeIntSrcSel);
+    AD5940_WriteReg(REG_INTC_INTCCLR, AfeIntSrcSel);
 }
 
 /**
@@ -2924,15 +2817,15 @@ void AD5940_INTCClrFlag(uint32_t AfeIntSrcSel)
 **/
 BoolFlag AD5940_INTCTestFlag(uint32_t AfeIntcSel, uint32_t AfeIntSrcSel)
 {
-  uint32_t tempreg;
-  uint32_t regaddr = (AfeIntcSel == AFEINTC_0)? REG_INTC_INTCFLAG0: REG_INTC_INTCFLAG1;
-  //NRF_LOG_INFO("regaddr = %x   ",regaddr);
-  tempreg = AD5940_ReadReg(regaddr);
-	//NRF_LOG_INFO("tempreg = %x   ",tempreg);
-  if(tempreg & AfeIntSrcSel)
-    return bTRUE;
-  else
-    return bFALSE;
+    uint32_t tempreg;
+    uint32_t regaddr = (AfeIntcSel == AFEINTC_0) ? REG_INTC_INTCFLAG0 : REG_INTC_INTCFLAG1;
+    //NRF_LOG_INFO("regaddr = %x   ",regaddr);
+    tempreg = AD5940_ReadReg(regaddr);
+    //NRF_LOG_INFO("tempreg = %x   ",tempreg);
+    if (tempreg & AfeIntSrcSel)
+        return bTRUE;
+    else
+        return bFALSE;
 }
 
 /**
@@ -2944,11 +2837,11 @@ BoolFlag AD5940_INTCTestFlag(uint32_t AfeIntcSel, uint32_t AfeIntSrcSel)
 **/
 uint32_t AD5940_INTCGetFlag(uint32_t AfeIntcSel)
 {
-  uint32_t tempreg;
-  uint32_t regaddr = (AfeIntcSel == AFEINTC_0)? REG_INTC_INTCFLAG0: REG_INTC_INTCFLAG1;
-  
-  tempreg = AD5940_ReadReg(regaddr);
-  return tempreg;
+    uint32_t tempreg;
+    uint32_t regaddr = (AfeIntcSel == AFEINTC_0) ? REG_INTC_INTCFLAG0 : REG_INTC_INTCFLAG1;
+
+    tempreg = AD5940_ReadReg(regaddr);
+    return tempreg;
 }
 
 /**
@@ -2967,11 +2860,11 @@ uint32_t AD5940_INTCGetFlag(uint32_t AfeIntcSel)
 */
 void AD5940_AGPIOCfg(AGPIOCfg_Type *pAgpioCfg)
 {
-  AD5940_AGPIOFuncCfg(pAgpioCfg->FuncSet);
-  AD5940_AGPIOOen(pAgpioCfg->OutputEnSet);
-  AD5940_AGPIOIen(pAgpioCfg->InputEnSet);
-  AD5940_AGPIOPen(pAgpioCfg->PullEnSet);
-  AD5940_WriteReg(REG_AGPIO_GP0OUT, pAgpioCfg->OutVal);
+    AD5940_AGPIOFuncCfg(pAgpioCfg->FuncSet);
+    AD5940_AGPIOOen(pAgpioCfg->OutputEnSet);
+    AD5940_AGPIOIen(pAgpioCfg->InputEnSet);
+    AD5940_AGPIOPen(pAgpioCfg->PullEnSet);
+    AD5940_WriteReg(REG_AGPIO_GP0OUT, pAgpioCfg->OutVal);
 }
 
 /**
@@ -2988,7 +2881,7 @@ void AD5940_AGPIOCfg(AGPIOCfg_Type *pAgpioCfg)
 **/
 void AD5940_AGPIOFuncCfg(uint32_t uiCfgSet)
 {
-   AD5940_WriteReg(REG_AGPIO_GP0CON,uiCfgSet);
+    AD5940_WriteReg(REG_AGPIO_GP0CON, uiCfgSet);
 }
 
 /**
@@ -2998,7 +2891,7 @@ void AD5940_AGPIOFuncCfg(uint32_t uiCfgSet)
 **/
 void AD5940_AGPIOOen(uint32_t uiPinSet)
 {
-   AD5940_WriteReg(REG_AGPIO_GP0OEN,uiPinSet);
+    AD5940_WriteReg(REG_AGPIO_GP0OEN, uiPinSet);
 }
 
 /**
@@ -3008,7 +2901,7 @@ void AD5940_AGPIOOen(uint32_t uiPinSet)
 **/
 void AD5940_AGPIOIen(uint32_t uiPinSet)
 {
-   AD5940_WriteReg(REG_AGPIO_GP0IEN,uiPinSet);
+    AD5940_WriteReg(REG_AGPIO_GP0IEN, uiPinSet);
 }
 
 /**
@@ -3017,7 +2910,7 @@ void AD5940_AGPIOIen(uint32_t uiPinSet)
 **/
 uint32_t AD5940_AGPIOIn(void)
 {
-  return AD5940_ReadReg(REG_AGPIO_GP0IN);
+    return AD5940_ReadReg(REG_AGPIO_GP0IN);
 }
 
 /**
@@ -3027,7 +2920,7 @@ uint32_t AD5940_AGPIOIn(void)
 **/
 void AD5940_AGPIOPen(uint32_t uiPinSet)
 {
-   AD5940_WriteReg(REG_AGPIO_GP0PE,uiPinSet);
+    AD5940_WriteReg(REG_AGPIO_GP0PE, uiPinSet);
 }
 
 /**
@@ -3037,7 +2930,7 @@ void AD5940_AGPIOPen(uint32_t uiPinSet)
 **/
 void AD5940_AGPIOSet(uint32_t uiPinSet)
 {
-   AD5940_WriteReg(REG_AGPIO_GP0SET,uiPinSet);
+    AD5940_WriteReg(REG_AGPIO_GP0SET, uiPinSet);
 }
 
 /**
@@ -3047,7 +2940,7 @@ void AD5940_AGPIOSet(uint32_t uiPinSet)
 **/
 void AD5940_AGPIOClr(uint32_t uiPinSet)
 {
-   AD5940_WriteReg(REG_AGPIO_GP0CLR,uiPinSet);
+    AD5940_WriteReg(REG_AGPIO_GP0CLR, uiPinSet);
 }
 
 /**
@@ -3057,7 +2950,7 @@ void AD5940_AGPIOClr(uint32_t uiPinSet)
 **/
 void AD5940_AGPIOToggle(uint32_t uiPinSet)
 {
-   AD5940_WriteReg(REG_AGPIO_GP0TGL,uiPinSet);
+    AD5940_WriteReg(REG_AGPIO_GP0TGL, uiPinSet);
 }
 
 /**
@@ -3076,11 +2969,11 @@ void AD5940_AGPIOToggle(uint32_t uiPinSet)
 **/
 AD5940Err AD5940_LPModeEnS(BoolFlag LPModeEn)
 {
-  if(LPModeEn == bTRUE)
-    AD5940_WriteReg(REG_AFE_LPMODEKEY, KEY_LPMODEKEY);  /* Enter LP mode by right key. */
-  else
-    AD5940_WriteReg(REG_AFE_LPMODEKEY, 0); /* Write wrong key to exit LP mode */
-  return AD5940ERR_OK;
+    if (LPModeEn == bTRUE)
+        AD5940_WriteReg(REG_AFE_LPMODEKEY, KEY_LPMODEKEY); /* Enter LP mode by right key. */
+    else
+        AD5940_WriteReg(REG_AFE_LPMODEKEY, 0); /* Write wrong key to exit LP mode */
+    return AD5940ERR_OK;
 }
 
 /**
@@ -3093,7 +2986,7 @@ AD5940Err AD5940_LPModeEnS(BoolFlag LPModeEn)
 */
 void AD5940_LPModeClkS(uint32_t LPModeClk)
 {
-  AD5940_WriteReg(REG_AFE_LPMODECLKSEL, LPModeClk);
+    AD5940_WriteReg(REG_AFE_LPMODECLKSEL, LPModeClk);
 }
 
 /**
@@ -3110,7 +3003,7 @@ void AD5940_LPModeClkS(uint32_t LPModeClk)
 */
 void AD5940_SleepKeyCtrlS(uint32_t SlpKey)
 {
-  AD5940_WriteReg(REG_AFE_SEQSLPLOCK, SlpKey);
+    AD5940_WriteReg(REG_AFE_SEQSLPLOCK, SlpKey);
 }
 
 /**
@@ -3120,8 +3013,8 @@ void AD5940_SleepKeyCtrlS(uint32_t SlpKey)
 */
 void AD5940_EnterSleepS(void)
 {
-  AD5940_WriteReg(REG_AFE_SEQTRGSLP, 0);
-  AD5940_WriteReg(REG_AFE_SEQTRGSLP, 1);
+    AD5940_WriteReg(REG_AFE_SEQTRGSLP, 0);
+    AD5940_WriteReg(REG_AFE_SEQTRGSLP, 1);
 }
 
 /**
@@ -3132,16 +3025,16 @@ void AD5940_EnterSleepS(void)
 */
 void AD5940_ShutDownS(void)
 {
-  /* Turn off LPloop related blocks which are not controlled automatically by hibernate operation */
-  AFERefCfg_Type aferef_cfg;
-  LPLoopCfg_Type lp_loop;
-  /* Turn off LP-loop manually because it's not affected by sleep/hibernate mode */
-  AD5940_StructInit(&aferef_cfg, sizeof(aferef_cfg));
-  AD5940_StructInit(&lp_loop, sizeof(lp_loop));
-  AD5940_REFCfgS(&aferef_cfg);
-  AD5940_LPLoopCfgS(&lp_loop);
-  AD5940_SleepKeyCtrlS(SLPKEY_UNLOCK);  /* Unlock the key */
-  AD5940_EnterSleepS();  /* Enter Hibernate */
+    /* Turn off LPloop related blocks which are not controlled automatically by hibernate operation */
+    AFERefCfg_Type aferef_cfg;
+    LPLoopCfg_Type lp_loop;
+    /* Turn off LP-loop manually because it's not affected by sleep/hibernate mode */
+    AD5940_StructInit(&aferef_cfg, sizeof(aferef_cfg));
+    AD5940_StructInit(&lp_loop, sizeof(lp_loop));
+    AD5940_REFCfgS(&aferef_cfg);
+    AD5940_LPLoopCfgS(&lp_loop);
+    AD5940_SleepKeyCtrlS(SLPKEY_UNLOCK); /* Unlock the key */
+    AD5940_EnterSleepS();                /* Enter Hibernate */
 }
 
 /**
@@ -3150,23 +3043,22 @@ void AD5940_ShutDownS(void)
  * @param TryCount Specify how many times we will read register. Zero or negative number means always waiting here.
  * @return How many times register is read. If returned value is bigger than TryCount, it means wakeup failed.
 */
-uint32_t  AD5940_WakeUp(int32_t TryCount)
+uint32_t AD5940_WakeUp(int32_t TryCount)
 {
-  uint32_t count = 0;
-  while(1)
-  {
-    count++;
-    // printf("AD5940_ADIID:%04x\r\n", AD5940_ReadReg(REG_AFECON_ADIID));
-    // printf("AD5940_CHIPID:%04x\r\n", AD5940_ReadReg(REG_AFECON_CHIPID));
-    if (AD5940_ReadReg(REG_AFECON_ADIID) == AD5940_ADIID) 
-      break; /* Succeed */
-    if(TryCount<=0) 
-      continue; /* Always try to wakeup AFE */
+    uint32_t count = 0;
+    while (1) {
+        count++;
+        // printf("AD5940_ADIID:%04x\r\n", AD5940_ReadReg(REG_AFECON_ADIID));
+        // printf("AD5940_CHIPID:%04x\r\n", AD5940_ReadReg(REG_AFECON_CHIPID));
+        if (AD5940_ReadReg(REG_AFECON_ADIID) == AD5940_ADIID)
+            break; /* Succeed */
+        if (TryCount <= 0)
+            continue; /* Always try to wakeup AFE */
 
-    if(count > TryCount)
-      break;    /* Failed */
-  }
-  return count;
+        if (count > TryCount)
+            break; /* Failed */
+    }
+    return count;
 }
 
 /**
@@ -3175,7 +3067,7 @@ uint32_t  AD5940_WakeUp(int32_t TryCount)
 */
 uint32_t AD5940_GetADIID(void)
 {
-  return AD5940_ReadReg(REG_AFECON_ADIID);
+    return AD5940_ReadReg(REG_AFECON_ADIID);
 }
 
 /**
@@ -3184,7 +3076,7 @@ uint32_t AD5940_GetADIID(void)
 */
 uint32_t AD5940_GetChipID(void)
 {
-  return AD5940_ReadReg(REG_AFECON_CHIPID);
+    return AD5940_ReadReg(REG_AFECON_CHIPID);
 }
 /**
  * @brief Reset AD5940 by register.
@@ -3193,12 +3085,12 @@ uint32_t AD5940_GetChipID(void)
  *       we need to make sure register write is successfully.
  * @return return none.
 */
-AD5940Err  AD5940_SoftRst(void)
+AD5940Err AD5940_SoftRst(void)
 {
-  AD5940_WriteReg(REG_AFECON_SWRSTCON, AD5940_SWRST);
-  AD5940_Delay10us(20); /* AD5940 need some time to exit reset status. 200us looks good. */
-  /* We can check RSTSTA register to make sure software reset happened. */
-  return AD5940ERR_OK;
+    AD5940_WriteReg(REG_AFECON_SWRSTCON, AD5940_SWRST);
+    AD5940_Delay10us(20); /* AD5940 need some time to exit reset status. 200us looks good. */
+    /* We can check RSTSTA register to make sure software reset happened. */
+    return AD5940ERR_OK;
 }
 
 /**
@@ -3208,14 +3100,14 @@ AD5940Err  AD5940_SoftRst(void)
 */
 void AD5940_HWReset(void)
 {
-// #ifndef CHIPSEL_M355
-  AD5940_RstClr();
-  AD5940_Delay10us(5000); /* Delay some time */
-  AD5940_RstSet();
-  AD5940_Delay10us(1000); /* AD5940 need some time to exit reset status. 200us looks good. */
-// #else
-//   //There is no method to reset AFE only for M355.
-// #endif
+    // #ifndef CHIPSEL_M355
+    AD5940_RstClr();
+    AD5940_Delay10us(5000); /* Delay some time */
+    AD5940_RstSet();
+    AD5940_Delay10us(1000); /* AD5940 need some time to exit reset status. 200us looks good. */
+    // #else
+    //   //There is no method to reset AFE only for M355.
+    // #endif
 }
 
 /**
@@ -3238,23 +3130,23 @@ void AD5940_HWReset(void)
 */
 static void __AD5940_ReferenceON(void)
 {
-  AFERefCfg_Type ref_cfg;
-  /* Turn ON ADC/DAC and LPDAC reference */
-  ref_cfg.Hp1V1BuffEn = bTRUE;
-  ref_cfg.Hp1V8BuffEn = bTRUE;
-  ref_cfg.HpBandgapEn = bTRUE;
-  ref_cfg.HSDACRefEn = bTRUE;
-  ref_cfg.LpBandgapEn = bTRUE;
-  ref_cfg.LpRefBufEn = bTRUE;
+    AFERefCfg_Type ref_cfg;
+    /* Turn ON ADC/DAC and LPDAC reference */
+    ref_cfg.Hp1V1BuffEn = bTRUE;
+    ref_cfg.Hp1V8BuffEn = bTRUE;
+    ref_cfg.HpBandgapEn = bTRUE;
+    ref_cfg.HSDACRefEn = bTRUE;
+    ref_cfg.LpBandgapEn = bTRUE;
+    ref_cfg.LpRefBufEn = bTRUE;
 
-  ref_cfg.Disc1V1Cap = bFALSE;
-  ref_cfg.Disc1V8Cap = bFALSE;
-  ref_cfg.Hp1V8Ilimit = bFALSE;
-  ref_cfg.Hp1V8ThemBuff = bFALSE;
-  ref_cfg.Lp1V1BuffEn = bFALSE;
-  ref_cfg.Lp1V8BuffEn = bFALSE;
-  ref_cfg.LpRefBoostEn = bFALSE;
-  AD5940_REFCfgS(&ref_cfg);
+    ref_cfg.Disc1V1Cap = bFALSE;
+    ref_cfg.Disc1V8Cap = bFALSE;
+    ref_cfg.Hp1V8Ilimit = bFALSE;
+    ref_cfg.Hp1V8ThemBuff = bFALSE;
+    ref_cfg.Lp1V1BuffEn = bFALSE;
+    ref_cfg.Lp1V8BuffEn = bFALSE;
+    ref_cfg.LpRefBoostEn = bFALSE;
+    AD5940_REFCfgS(&ref_cfg);
 }
 
 /**
@@ -3263,22 +3155,20 @@ static void __AD5940_ReferenceON(void)
 */
 static uint32_t __AD5940_TakeMeasurement(int32_t *time_out)
 {
-  uint32_t ADCCode = 0;
-  AD5940_INTCClrFlag(AFEINTSRC_SINC2RDY);
-  AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_SINC2NOTCH, bTRUE);/* Start conversion */
-  do
-  {
-    AD5940_Delay10us(1);  /* Delay 10us */
-    if(AD5940_INTCTestFlag(AFEINTC_1,AFEINTSRC_SINC2RDY))
-    {
-        ADCCode = AD5940_ReadAfeResult(AFERESULT_SINC2);
-        break;
-    }
-    if(*time_out != -1)
-      (*time_out)--;	
-  }while(*time_out != 0);
-  AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_SINC2NOTCH, bFALSE);/* Stop conversion */
-  return ADCCode;
+    uint32_t ADCCode = 0;
+    AD5940_INTCClrFlag(AFEINTSRC_SINC2RDY);
+    AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_SINC2NOTCH, bTRUE); /* Start conversion */
+    do {
+        AD5940_Delay10us(1); /* Delay 10us */
+        if (AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_SINC2RDY)) {
+            ADCCode = AD5940_ReadAfeResult(AFERESULT_SINC2);
+            break;
+        }
+        if (*time_out != -1)
+            (*time_out)--;
+    } while (*time_out != 0);
+    AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_SINC2NOTCH, bFALSE); /* Stop conversion */
+    return ADCCode;
 }
 
 /**
@@ -3288,173 +3178,173 @@ static uint32_t __AD5940_TakeMeasurement(int32_t *time_out)
 **/
 AD5940Err AD5940_ADCPGACal(ADCPGACal_Type *pADCPGACal)
 {
-  const float kFactor = 1.835f/1.82f;
-  ADCBaseCfg_Type adc_base;
+    const float kFactor = 1.835f / 1.82f;
+    ADCBaseCfg_Type adc_base;
 
-  int32_t time_out;
-  uint32_t INTCCfg;
-  int32_t ADCCode;
-  BoolFlag bADCClk32MHzMode;
+    int32_t time_out;
+    uint32_t INTCCfg;
+    int32_t ADCCode;
+    BoolFlag bADCClk32MHzMode;
 
-  uint32_t regaddr_gain, regaddr_offset;
-  
-  if(pADCPGACal == NULL) return AD5940ERR_NULLP;
-  if(pADCPGACal->ADCPga > ADCPGA_9) return AD5940ERR_PARA;  /* Parameter Error */
-  
-  if(pADCPGACal->AdcClkFreq > (32000000*0.8))
-    bADCClk32MHzMode = bTRUE; 
+    uint32_t regaddr_gain, regaddr_offset;
 
-  /**
+    if (pADCPGACal == NULL)
+        return AD5940ERR_NULLP;
+    if (pADCPGACal->ADCPga > ADCPGA_9)
+        return AD5940ERR_PARA; /* Parameter Error */
+
+    if (pADCPGACal->AdcClkFreq > (32000000 * 0.8))
+        bADCClk32MHzMode = bTRUE;
+
+    /**
    *  Determine Gain calibration method according to different gain value...
    *  and calibration register 
    * */
-  static const struct _cal_registers
-  {
-    uint16_t gain_reg;
-    uint16_t offset_reg;
-  }cal_registers[] = {
-    {REG_AFE_ADCGAINGN1,REG_AFE_ADCOFFSETGN1},
-    {REG_AFE_ADCGAINGN1P5,REG_AFE_ADCOFFSETGN1P5},
-    {REG_AFE_ADCGAINGN2,REG_AFE_ADCOFFSETGN2},
-    {REG_AFE_ADCGAINGN4,REG_AFE_ADCOFFSETGN4},
-    {REG_AFE_ADCGAINGN9,REG_AFE_ADCOFFSETGN9},
-  };
-  regaddr_gain = cal_registers[pADCPGACal->ADCPga].gain_reg;
-  regaddr_offset = cal_registers[pADCPGACal->ADCPga].offset_reg;
+    static const struct _cal_registers {
+        uint16_t gain_reg;
+        uint16_t offset_reg;
+    } cal_registers[] = {
+        { REG_AFE_ADCGAINGN1, REG_AFE_ADCOFFSETGN1 },
+        { REG_AFE_ADCGAINGN1P5, REG_AFE_ADCOFFSETGN1P5 },
+        { REG_AFE_ADCGAINGN2, REG_AFE_ADCOFFSETGN2 },
+        { REG_AFE_ADCGAINGN4, REG_AFE_ADCOFFSETGN4 },
+        { REG_AFE_ADCGAINGN9, REG_AFE_ADCOFFSETGN9 },
+    };
+    regaddr_gain = cal_registers[pADCPGACal->ADCPga].gain_reg;
+    regaddr_offset = cal_registers[pADCPGACal->ADCPga].offset_reg;
 
-  /* Do initialization */
-  __AD5940_ReferenceON();
-  ADCFilterCfg_Type adc_filter;
-  /* Initialize ADC filters ADCRawData-->SINC3-->SINC2+NOTCH. Use SIN2 data for calibration-->Lower noise */
-  adc_filter.ADCSinc3Osr = pADCPGACal->ADCSinc3Osr;
-  adc_filter.ADCSinc2Osr = pADCPGACal->ADCSinc2Osr;  /* 800KSPS/4/1333 = 150SPS */
-  adc_filter.ADCAvgNum = ADCAVGNUM_2;         /* Don't care about it. Average function is only used for DFT */
-  adc_filter.ADCRate = bADCClk32MHzMode?ADCRATE_1P6MHZ:ADCRATE_800KHZ;        /* If ADC clock is 32MHz, then set it to ADCRATE_1P6MHZ. Default is 16MHz, use ADCRATE_800KHZ. */
-  adc_filter.BpNotch = bTRUE;                 /* SINC2+Notch is one block, when bypass notch filter, we can get fresh data from SINC2 filter. */
-  adc_filter.BpSinc3 = bFALSE;                /* We use SINC3 filter. */
-  adc_filter.Sinc2NotchEnable = bTRUE;        /* Enable the SINC2+Notch block. You can also use function AD5940_AFECtrlS */
-  AD5940_ADCFilterCfgS(&adc_filter);
-  /* Turn ON reference and ADC power, and DAC reference. We use DAC 1.8V reference to calibrate ADC because of the ADC reference bug. */
-  AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Disable all */
-  AD5940_AFECtrlS(AFECTRL_ADCPWR|AFECTRL_HPREFPWR|AFECTRL_DACREFPWR|AFECTRL_HSDACPWR|AFECTRL_SINC2NOTCH, bTRUE);
-  AD5940_Delay10us(25);   /* Wait 250us for reference power up */
-  /* INTC configure and open calibration lock */
-  INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
-  AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, KEY_CALDATLOCK);  /* Unlock KEY */
+    /* Do initialization */
+    __AD5940_ReferenceON();
+    ADCFilterCfg_Type adc_filter;
+    /* Initialize ADC filters ADCRawData-->SINC3-->SINC2+NOTCH. Use SIN2 data for calibration-->Lower noise */
+    adc_filter.ADCSinc3Osr = pADCPGACal->ADCSinc3Osr;
+    adc_filter.ADCSinc2Osr = pADCPGACal->ADCSinc2Osr;                        /* 800KSPS/4/1333 = 150SPS */
+    adc_filter.ADCAvgNum = ADCAVGNUM_2;                                      /* Don't care about it. Average function is only used for DFT */
+    adc_filter.ADCRate = bADCClk32MHzMode ? ADCRATE_1P6MHZ : ADCRATE_800KHZ; /* If ADC clock is 32MHz, then set it to ADCRATE_1P6MHZ. Default is 16MHz, use ADCRATE_800KHZ. */
+    adc_filter.BpNotch = bTRUE;                                              /* SINC2+Notch is one block, when bypass notch filter, we can get fresh data from SINC2 filter. */
+    adc_filter.BpSinc3 = bFALSE;                                             /* We use SINC3 filter. */
+    adc_filter.Sinc2NotchEnable = bTRUE;                                     /* Enable the SINC2+Notch block. You can also use function AD5940_AFECtrlS */
+    AD5940_ADCFilterCfgS(&adc_filter);
+    /* Turn ON reference and ADC power, and DAC reference. We use DAC 1.8V reference to calibrate ADC because of the ADC reference bug. */
+    AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Disable all */
+    AD5940_AFECtrlS(AFECTRL_ADCPWR | AFECTRL_HPREFPWR | AFECTRL_DACREFPWR | AFECTRL_HSDACPWR | AFECTRL_SINC2NOTCH, bTRUE);
+    AD5940_Delay10us(25); /* Wait 250us for reference power up */
+    /* INTC configure and open calibration lock */
+    INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
+    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, KEY_CALDATLOCK);  /* Unlock KEY */
 
-  /* Do offset calibration. */
-  if(pADCPGACal->PGACalType != PGACALTYPE_GAIN){  /* Need offset calibration */
-    int32_t ExpectedCode = 0x8000;        /* Ideal ADC output */
-    AD5940_WriteReg(regaddr_offset, 0);   /* Reset offset register */
+    /* Do offset calibration. */
+    if (pADCPGACal->PGACalType != PGACALTYPE_GAIN) { /* Need offset calibration */
+        int32_t ExpectedCode = 0x8000;               /* Ideal ADC output */
+        AD5940_WriteReg(regaddr_offset, 0);          /* Reset offset register */
 
-    adc_base.ADCMuxP = ADCMUXP_VSET1P1;
-    adc_base.ADCMuxN = ADCMUXN_VSET1P1;   /* Short input with common voltage set to 1.11v */
-    adc_base.ADCPga = pADCPGACal->ADCPga; /* Set correct Gain value. */
-    AD5940_ADCBaseCfgS(&adc_base);
-    AD5940_Delay10us(5);                  /* Wait for sometime */
-    ADCCode = 0;
-    for(int i=0; i<8; i++)
-    { /* ADC offset calibration register has resolution of 0.25LSB. take full use of it. */
-      time_out = pADCPGACal->TimeOut10us;   /* Reset time out counter */
-      ADCCode += __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-      if(time_out == 0) goto ADCPGACALERROR_TIMEOUT;  /* Time out error. */
-    }
-    /* Calculate and write the result to registers before gain calibration */
-    ADCCode = (ExpectedCode<<3) - ADCCode;  /* We will shift back 1bit below */
-    /**
+        adc_base.ADCMuxP = ADCMUXP_VSET1P1;
+        adc_base.ADCMuxN = ADCMUXN_VSET1P1;   /* Short input with common voltage set to 1.11v */
+        adc_base.ADCPga = pADCPGACal->ADCPga; /* Set correct Gain value. */
+        AD5940_ADCBaseCfgS(&adc_base);
+        AD5940_Delay10us(5); /* Wait for sometime */
+        ADCCode = 0;
+        for (int i = 0; i < 8; i++) {                       /* ADC offset calibration register has resolution of 0.25LSB. take full use of it. */
+            time_out = pADCPGACal->TimeOut10us;             /* Reset time out counter */
+            ADCCode += __AD5940_TakeMeasurement(&time_out); /* Turn on ADC to get one valid data and then turn off ADC. */
+            if (time_out == 0)
+                goto ADCPGACALERROR_TIMEOUT; /* Time out error. */
+        }
+        /* Calculate and write the result to registers before gain calibration */
+        ADCCode = (ExpectedCode << 3) - ADCCode; /* We will shift back 1bit below */
+        /**
      * AD5940 use formular Output = gain*(input + offset) for calibration.
      * So, the measured results should be divided by gain to get value for offset register.
     */
-    uint32_t gain = AD5940_ReadReg(regaddr_gain);
-    ADCCode = (ADCCode*0x4000)/gain;
-    ADCCode = ((ADCCode+1)>>1)&0x7fff;      /* Round 0.5 */
-    AD5940_WriteReg(regaddr_offset, ADCCode);
-  }
-  
-  /* Do gain calibration */
-  if(pADCPGACal->PGACalType != PGACALTYPE_OFFSET)  /* Need gain calibration */
-  {
-    int32_t ExpectedGainCode;
-    static const float ideal_pga_gain[]={1,1.5,2,4,9};
-    AD5940_WriteReg(regaddr_gain, 0x4000);  /* Reset gain register */
-    if(pADCPGACal->ADCPga <= ADCPGA_2)
-    {
-      //gain1,1.5,2 could use reference directly
-      adc_base.ADCMuxP = ADCMUXP_VREF1P8DAC;
-      adc_base.ADCMuxN = ADCMUXN_VSET1P1;
-      ExpectedGainCode = (int32_t)((pADCPGACal->VRef1p82 - pADCPGACal->VRef1p11)*ideal_pga_gain[pADCPGACal->ADCPga]/\
-                                    pADCPGACal->VRef1p82*32768/kFactor)\
-                                    + 0x8000;
+        uint32_t gain = AD5940_ReadReg(regaddr_gain);
+        ADCCode = (ADCCode * 0x4000) / gain;
+        ADCCode = ((ADCCode + 1) >> 1) & 0x7fff; /* Round 0.5 */
+        AD5940_WriteReg(regaddr_offset, ADCCode);
     }
+
+    /* Do gain calibration */
+    if (pADCPGACal->PGACalType != PGACALTYPE_OFFSET) /* Need gain calibration */
+    {
+        int32_t ExpectedGainCode;
+        static const float ideal_pga_gain[] = { 1, 1.5, 2, 4, 9 };
+        AD5940_WriteReg(regaddr_gain, 0x4000); /* Reset gain register */
+        if (pADCPGACal->ADCPga <= ADCPGA_2) {
+            //gain1,1.5,2 could use reference directly
+            adc_base.ADCMuxP = ADCMUXP_VREF1P8DAC;
+            adc_base.ADCMuxN = ADCMUXN_VSET1P1;
+            ExpectedGainCode = (int32_t)((pADCPGACal->VRef1p82 - pADCPGACal->VRef1p11) * ideal_pga_gain[pADCPGACal->ADCPga] /
+                                         pADCPGACal->VRef1p82 * 32768 / kFactor) +
+                               0x8000;
+        } else {
+            //gain4,9 use DAC generated voltage
+            adc_base.ADCMuxP = ADCMUXP_P_NODE;
+            adc_base.ADCMuxN = ADCMUXN_N_NODE;
+            /* Setup HSLOOP to generate voltage for GAIN4/9 calibration. */
+            AD5940_AFECtrlS(AFECTRL_EXTBUFPWR | AFECTRL_INAMPPWR | AFECTRL_HSTIAPWR | AFECTRL_WG, bTRUE);
+            HSLoopCfg_Type hsloop_cfg;
+            hsloop_cfg.HsDacCfg.ExcitBufGain = EXCITBUFGAIN_2;
+            hsloop_cfg.HsDacCfg.HsDacGain = HSDACGAIN_1;
+            hsloop_cfg.HsDacCfg.HsDacUpdateRate = 7;
+            hsloop_cfg.HsTiaCfg.DiodeClose = bFALSE;
+            hsloop_cfg.HsTiaCfg.HstiaBias = HSTIABIAS_1P1;
+            hsloop_cfg.HsTiaCfg.HstiaCtia = 31;
+            hsloop_cfg.HsTiaCfg.HstiaDeRload = HSTIADERLOAD_OPEN;
+            hsloop_cfg.HsTiaCfg.HstiaDeRtia = HSTIADERTIA_OPEN;
+            hsloop_cfg.HsTiaCfg.HstiaDe1Rload = HSTIADERLOAD_OPEN;
+            hsloop_cfg.HsTiaCfg.HstiaDe1Rtia = HSTIADERTIA_OPEN;
+            hsloop_cfg.HsTiaCfg.HstiaRtiaSel = HSTIARTIA_200;
+            hsloop_cfg.SWMatCfg.Dswitch = SWD_OPEN;
+            hsloop_cfg.SWMatCfg.Pswitch = SWP_PL;
+            hsloop_cfg.SWMatCfg.Nswitch = SWN_NL;
+            hsloop_cfg.SWMatCfg.Tswitch = SWT_TRTIA;
+            hsloop_cfg.WgCfg.GainCalEn = bTRUE;
+            hsloop_cfg.WgCfg.OffsetCalEn = bTRUE;
+            hsloop_cfg.WgCfg.WgType = WGTYPE_MMR;
+            uint32_t HSDACCode;
+            if (pADCPGACal->ADCPga == ADCPGA_4)
+                HSDACCode = 0x800 + 0x300; /* 0x300--> 0x300/0x1000*0.8*BUFFERGAIN2 = 0.3V. */
+            else if (pADCPGACal->ADCPga == ADCPGA_9)
+                HSDACCode = 0x800 + 0x155; /* 0x155--> 0x155/0x1000*0.8*BUFFERGAIN2 = 0.133V. */
+            hsloop_cfg.WgCfg.WgCode = HSDACCode;
+            AD5940_HSLoopCfgS(&hsloop_cfg);
+
+            //measure expected code
+            adc_base.ADCPga = ADCPGA_1P5;
+            AD5940_ADCBaseCfgS(&adc_base);
+            AD5940_Delay10us(5);
+            time_out = pADCPGACal->TimeOut10us; /* Reset time out counter */
+            ExpectedGainCode = 0x8000 + (int32_t)((__AD5940_TakeMeasurement(&time_out) - 0x8000) / 1.5f * ideal_pga_gain[pADCPGACal->ADCPga]);
+            if (time_out == 0)
+                goto ADCPGACALERROR_TIMEOUT;
+        }
+        adc_base.ADCPga = pADCPGACal->ADCPga; /* Set to gain under calibration */
+        AD5940_ADCBaseCfgS(&adc_base);
+        AD5940_Delay10us(5);
+        time_out = pADCPGACal->TimeOut10us; /* Reset time out counter */
+        ADCCode = __AD5940_TakeMeasurement(&time_out);
+        if (time_out == 0)
+            goto ADCPGACALERROR_TIMEOUT;
+        /* Calculate and write the result to registers */
+        ADCCode = (ExpectedGainCode - 0x8000) * 0x4000 / (ADCCode - 0x8000);
+        ADCCode &= 0x7fff;
+        AD5940_WriteReg(regaddr_gain, ADCCode);
+    }
+
+    /* Restore INTC1 SINC2 configure */
+    if (INTCCfg & AFEINTSRC_SINC2RDY)
+        ;
     else
-    {
-      //gain4,9 use DAC generated voltage
-      adc_base.ADCMuxP = ADCMUXP_P_NODE;
-      adc_base.ADCMuxN = ADCMUXN_N_NODE;
-      /* Setup HSLOOP to generate voltage for GAIN4/9 calibration. */
-      AD5940_AFECtrlS(AFECTRL_EXTBUFPWR|AFECTRL_INAMPPWR|AFECTRL_HSTIAPWR|AFECTRL_WG, bTRUE);
-      HSLoopCfg_Type hsloop_cfg;
-      hsloop_cfg.HsDacCfg.ExcitBufGain = EXCITBUFGAIN_2;
-      hsloop_cfg.HsDacCfg.HsDacGain = HSDACGAIN_1;
-      hsloop_cfg.HsDacCfg.HsDacUpdateRate = 7;
-      hsloop_cfg.HsTiaCfg.DiodeClose = bFALSE;
-      hsloop_cfg.HsTiaCfg.HstiaBias = HSTIABIAS_1P1;
-      hsloop_cfg.HsTiaCfg.HstiaCtia = 31;
-      hsloop_cfg.HsTiaCfg.HstiaDeRload = HSTIADERLOAD_OPEN;
-      hsloop_cfg.HsTiaCfg.HstiaDeRtia = HSTIADERTIA_OPEN;
-      hsloop_cfg.HsTiaCfg.HstiaDe1Rload = HSTIADERLOAD_OPEN;
-      hsloop_cfg.HsTiaCfg.HstiaDe1Rtia = HSTIADERTIA_OPEN;
-      hsloop_cfg.HsTiaCfg.HstiaRtiaSel = HSTIARTIA_200;
-      hsloop_cfg.SWMatCfg.Dswitch = SWD_OPEN;
-      hsloop_cfg.SWMatCfg.Pswitch = SWP_PL;
-      hsloop_cfg.SWMatCfg.Nswitch = SWN_NL;
-      hsloop_cfg.SWMatCfg.Tswitch = SWT_TRTIA;
-      hsloop_cfg.WgCfg.GainCalEn = bTRUE;
-      hsloop_cfg.WgCfg.OffsetCalEn = bTRUE;
-      hsloop_cfg.WgCfg.WgType = WGTYPE_MMR;
-      uint32_t HSDACCode;
-      if(pADCPGACal->ADCPga == ADCPGA_4)
-        HSDACCode = 0x800 + 0x300;  /* 0x300--> 0x300/0x1000*0.8*BUFFERGAIN2 = 0.3V. */
-      else if(pADCPGACal->ADCPga == ADCPGA_9)
-        HSDACCode = 0x800 + 0x155;  /* 0x155--> 0x155/0x1000*0.8*BUFFERGAIN2 = 0.133V. */
-      hsloop_cfg.WgCfg.WgCode = HSDACCode;
-      AD5940_HSLoopCfgS(&hsloop_cfg);
+        AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bFALSE); /* Disable SINC2 Interrupt */
 
-      //measure expected code
-      adc_base.ADCPga = ADCPGA_1P5;
-      AD5940_ADCBaseCfgS(&adc_base);  
-      AD5940_Delay10us(5);
-      time_out = pADCPGACal->TimeOut10us;   /* Reset time out counter */
-      ExpectedGainCode = 0x8000 + (int32_t)((__AD5940_TakeMeasurement(&time_out) - 0x8000)/1.5f\
-                                            *ideal_pga_gain[pADCPGACal->ADCPga]);
-      if(time_out == 0) goto ADCPGACALERROR_TIMEOUT;
-    }
-    adc_base.ADCPga = pADCPGACal->ADCPga;    /* Set to gain under calibration */
-    AD5940_ADCBaseCfgS(&adc_base);
-    AD5940_Delay10us(5);
-    time_out = pADCPGACal->TimeOut10us;      /* Reset time out counter */
-    ADCCode = __AD5940_TakeMeasurement(&time_out);
-    if(time_out == 0) goto ADCPGACALERROR_TIMEOUT;
-    /* Calculate and write the result to registers */
-    ADCCode = (ExpectedGainCode - 0x8000)*0x4000/(ADCCode-0x8000);
-    ADCCode &= 0x7fff;
-    AD5940_WriteReg(regaddr_gain, ADCCode);
-  }
-
-  /* Restore INTC1 SINC2 configure */
-  if(INTCCfg&AFEINTSRC_SINC2RDY);
-  else
-    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bFALSE); /* Disable SINC2 Interrupt */
-
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, 0);  /* Lock KEY */
-  /* Done */
-  return AD5940ERR_OK;
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, 0); /* Lock KEY */
+    /* Done */
+    return AD5940ERR_OK;
 
 ADCPGACALERROR_TIMEOUT:
-  AD5940_ADCConvtCtrlS(bFALSE);  /* Stop conversion */
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, 0);  /* Lock KEY */
-  return AD5940ERR_TIMEOUT;
+    AD5940_ADCConvtCtrlS(bFALSE);           /* Stop conversion */
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, 0); /* Lock KEY */
+    return AD5940ERR_TIMEOUT;
 }
 
 /**
@@ -3464,116 +3354,114 @@ ADCPGACALERROR_TIMEOUT:
 **/
 AD5940Err AD5940_LPTIAOffsetCal(LPTIAOffsetCal_Type *pLPTIAOffsetCal)
 {
-  AD5940Err error = AD5940ERR_OK;
-  LPLoopCfg_Type lploop_cfg;
-  ADCBaseCfg_Type adc_base;
-  ADCFilterCfg_Type adc_filter;
+    AD5940Err error = AD5940ERR_OK;
+    LPLoopCfg_Type lploop_cfg;
+    ADCBaseCfg_Type adc_base;
+    ADCFilterCfg_Type adc_filter;
 
-  int32_t time_out;
-  uint32_t INTCCfg;
-  int32_t ADCCode;
-  BoolFlag bADCClk32MHzMode;
-  
-  if(pLPTIAOffsetCal == NULL) return AD5940ERR_NULLP;  
-  if(pLPTIAOffsetCal->AdcClkFreq > (32000000*0.8))
-    bADCClk32MHzMode = bTRUE;
+    int32_t time_out;
+    uint32_t INTCCfg;
+    int32_t ADCCode;
+    BoolFlag bADCClk32MHzMode;
 
-  /* Step0: Do initialization */
-  /* Turn on AD5940 references in case it's disabled. */
-  __AD5940_ReferenceON();
-  lploop_cfg.LpAmpCfg.LpAmpSel = pLPTIAOffsetCal->LpAmpSel;
-  lploop_cfg.LpAmpCfg.LpAmpPwrMod = pLPTIAOffsetCal->LpAmpPwrMod;  /* Power mode will affect amp offset. */
-  lploop_cfg.LpAmpCfg.LpPaPwrEn = bTRUE;
-  lploop_cfg.LpAmpCfg.LpTiaPwrEn = bTRUE;
-  lploop_cfg.LpAmpCfg.LpTiaRf = LPTIARF_OPEN;
-  lploop_cfg.LpAmpCfg.LpTiaRload = LPTIARLOAD_100R;
-  lploop_cfg.LpAmpCfg.LpTiaRtia = pLPTIAOffsetCal->LpTiaRtia;
-  lploop_cfg.LpAmpCfg.LpTiaSW = pLPTIAOffsetCal->LpTiaSW;  /* Disconnect capacitors so it settles quickly */
-  lploop_cfg.LpDacCfg.LpdacSel = (pLPTIAOffsetCal->LpAmpSel == LPAMP0)?LPDAC0:LPDAC1;
-  lploop_cfg.LpDacCfg.DacData12Bit = pLPTIAOffsetCal->DacData12Bit;
-  lploop_cfg.LpDacCfg.DacData6Bit = pLPTIAOffsetCal->DacData6Bit;  
-  lploop_cfg.LpDacCfg.DataRst = bFALSE;
-  lploop_cfg.LpDacCfg.LpDacRef = LPDACREF_2P5;
-  lploop_cfg.LpDacCfg.LpDacSrc = LPDACSRC_MMR;
-  lploop_cfg.LpDacCfg.LpDacVzeroMux = pLPTIAOffsetCal->LpDacVzeroMux;
-  lploop_cfg.LpDacCfg.LpDacSW = LPDACSW_VZERO2LPTIA;
-  lploop_cfg.LpDacCfg.LpDacVbiasMux = LPDACVBIAS_12BIT;
-  lploop_cfg.LpDacCfg.PowerEn = bTRUE;
-  AD5940_LPLoopCfgS(&lploop_cfg);
+    if (pLPTIAOffsetCal == NULL)
+        return AD5940ERR_NULLP;
+    if (pLPTIAOffsetCal->AdcClkFreq > (32000000 * 0.8))
+        bADCClk32MHzMode = bTRUE;
 
-  /* Initialize ADC filters ADCRawData-->SINC3-->SINC2+NOTCH. Use SIN2 data for calibration-->Lower noise */
-  adc_filter.ADCSinc3Osr = pLPTIAOffsetCal->ADCSinc3Osr;
-  adc_filter.ADCSinc2Osr = pLPTIAOffsetCal->ADCSinc2Osr;  /* 800KSPS/4/1333 = 150SPS */
-  adc_filter.ADCAvgNum = ADCAVGNUM_2;               /* Don't care about it. Average function is only used for DFT */
-  adc_filter.ADCRate = bADCClk32MHzMode?ADCRATE_1P6MHZ:ADCRATE_800KHZ;        /* If ADC clock is 32MHz, then set it to ADCRATE_1P6MHZ. Default is 16MHz, use ADCRATE_800KHZ. */
-  adc_filter.BpNotch = bTRUE;                       /* SINC2+Notch is one block, when bypass notch filter, we can get fresh data from SINC2 filter. */
-  adc_filter.BpSinc3 = bFALSE;                      /* We use SINC3 filter. */
-  adc_filter.Sinc2NotchEnable = bTRUE;              /* Enable the SINC2+Notch block. You can also use function AD5940_AFECtrlS */
-  AD5940_ADCFilterCfgS(&adc_filter);
-  /* Initialize ADC MUx and PGA */
-  if(pLPTIAOffsetCal->LpAmpSel == LPAMP0)
-  {
-    adc_base.ADCMuxP = ADCMUXP_LPTIA0_P;      
-    adc_base.ADCMuxN = ADCMUXN_LPTIA0_N;
-  }
-  else
-  {
-    adc_base.ADCMuxP = ADCMUXP_LPTIA1_P;      
-    adc_base.ADCMuxN = ADCMUXN_LPTIA1_N;
-  }
-  adc_base.ADCPga = pLPTIAOffsetCal->ADCPga;                 /* Set correct Gain value. */
-  AD5940_ADCBaseCfgS(&adc_base);
-  /* Turn ON ADC and its reference. And SINC2. */
-  AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Disable all firstly, we only enable things we use */
-  AD5940_AFECtrlS(AFECTRL_ADCPWR|AFECTRL_HPREFPWR|AFECTRL_SINC2NOTCH, bTRUE);
-  AD5940_Delay10us(25);                     /* Wait 250us for reference power up */
-  /* INTC configure and open calibration lock */
-  INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
-  AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, KEY_CALDATLOCK);  /* Unlock KEY */
+    /* Step0: Do initialization */
+    /* Turn on AD5940 references in case it's disabled. */
+    __AD5940_ReferenceON();
+    lploop_cfg.LpAmpCfg.LpAmpSel = pLPTIAOffsetCal->LpAmpSel;
+    lploop_cfg.LpAmpCfg.LpAmpPwrMod = pLPTIAOffsetCal->LpAmpPwrMod; /* Power mode will affect amp offset. */
+    lploop_cfg.LpAmpCfg.LpPaPwrEn = bTRUE;
+    lploop_cfg.LpAmpCfg.LpTiaPwrEn = bTRUE;
+    lploop_cfg.LpAmpCfg.LpTiaRf = LPTIARF_OPEN;
+    lploop_cfg.LpAmpCfg.LpTiaRload = LPTIARLOAD_100R;
+    lploop_cfg.LpAmpCfg.LpTiaRtia = pLPTIAOffsetCal->LpTiaRtia;
+    lploop_cfg.LpAmpCfg.LpTiaSW = pLPTIAOffsetCal->LpTiaSW; /* Disconnect capacitors so it settles quickly */
+    lploop_cfg.LpDacCfg.LpdacSel = (pLPTIAOffsetCal->LpAmpSel == LPAMP0) ? LPDAC0 : LPDAC1;
+    lploop_cfg.LpDacCfg.DacData12Bit = pLPTIAOffsetCal->DacData12Bit;
+    lploop_cfg.LpDacCfg.DacData6Bit = pLPTIAOffsetCal->DacData6Bit;
+    lploop_cfg.LpDacCfg.DataRst = bFALSE;
+    lploop_cfg.LpDacCfg.LpDacRef = LPDACREF_2P5;
+    lploop_cfg.LpDacCfg.LpDacSrc = LPDACSRC_MMR;
+    lploop_cfg.LpDacCfg.LpDacVzeroMux = pLPTIAOffsetCal->LpDacVzeroMux;
+    lploop_cfg.LpDacCfg.LpDacSW = LPDACSW_VZERO2LPTIA;
+    lploop_cfg.LpDacCfg.LpDacVbiasMux = LPDACVBIAS_12BIT;
+    lploop_cfg.LpDacCfg.PowerEn = bTRUE;
+    AD5940_LPLoopCfgS(&lploop_cfg);
 
-  /* Do offset calibration. */
-  {
-    int32_t ExpectedCode = 0x8000;        /* Ideal ADC output */
-    AD5940_WriteReg(REG_AFE_ADCOFFSETLPTIA0, 0);   /* Reset offset register */
-
-    if(pLPTIAOffsetCal->SettleTime10us > 0)
-      AD5940_Delay10us(pLPTIAOffsetCal->SettleTime10us);  /* Delay 10us */
-    time_out = pLPTIAOffsetCal->TimeOut10us;   /* Reset time out counter */
-    ADCCode = __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-    if(time_out == 0)
-    {
-      error = AD5940ERR_TIMEOUT;
-      goto LPTIAOFFSETCALERROR;
-    }  /* Time out error. */
-    /* Calculate and write the result to registers before gain calibration */
-    ADCCode = ((ExpectedCode - ADCCode)<<3);  /* We will shift back 1bit below */
-    ADCCode = ((ADCCode+1)>>1); /* Round 0.5 */
-    if((ADCCode > 0x3fff) ||
-        (ADCCode < -0x4000))    /* The register used for offset calibration is limited to -0x4000 to 0x3fff */
-    {
-      error = AD5940ERR_CALOR;
-      goto LPTIAOFFSETCALERROR;
+    /* Initialize ADC filters ADCRawData-->SINC3-->SINC2+NOTCH. Use SIN2 data for calibration-->Lower noise */
+    adc_filter.ADCSinc3Osr = pLPTIAOffsetCal->ADCSinc3Osr;
+    adc_filter.ADCSinc2Osr = pLPTIAOffsetCal->ADCSinc2Osr;                   /* 800KSPS/4/1333 = 150SPS */
+    adc_filter.ADCAvgNum = ADCAVGNUM_2;                                      /* Don't care about it. Average function is only used for DFT */
+    adc_filter.ADCRate = bADCClk32MHzMode ? ADCRATE_1P6MHZ : ADCRATE_800KHZ; /* If ADC clock is 32MHz, then set it to ADCRATE_1P6MHZ. Default is 16MHz, use ADCRATE_800KHZ. */
+    adc_filter.BpNotch = bTRUE;                                              /* SINC2+Notch is one block, when bypass notch filter, we can get fresh data from SINC2 filter. */
+    adc_filter.BpSinc3 = bFALSE;                                             /* We use SINC3 filter. */
+    adc_filter.Sinc2NotchEnable = bTRUE;                                     /* Enable the SINC2+Notch block. You can also use function AD5940_AFECtrlS */
+    AD5940_ADCFilterCfgS(&adc_filter);
+    /* Initialize ADC MUx and PGA */
+    if (pLPTIAOffsetCal->LpAmpSel == LPAMP0) {
+        adc_base.ADCMuxP = ADCMUXP_LPTIA0_P;
+        adc_base.ADCMuxN = ADCMUXN_LPTIA0_N;
+    } else {
+        adc_base.ADCMuxP = ADCMUXP_LPTIA1_P;
+        adc_base.ADCMuxN = ADCMUXN_LPTIA1_N;
     }
-    ADCCode &= 0x7fff;
-    if(pLPTIAOffsetCal->LpAmpSel == LPAMP0)
-      AD5940_WriteReg(REG_AFE_ADCOFFSETLPTIA0, ADCCode);
+    adc_base.ADCPga = pLPTIAOffsetCal->ADCPga; /* Set correct Gain value. */
+    AD5940_ADCBaseCfgS(&adc_base);
+    /* Turn ON ADC and its reference. And SINC2. */
+    AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Disable all firstly, we only enable things we use */
+    AD5940_AFECtrlS(AFECTRL_ADCPWR | AFECTRL_HPREFPWR | AFECTRL_SINC2NOTCH, bTRUE);
+    AD5940_Delay10us(25); /* Wait 250us for reference power up */
+    /* INTC configure and open calibration lock */
+    INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
+    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, KEY_CALDATLOCK);  /* Unlock KEY */
+
+    /* Do offset calibration. */
+    {
+        int32_t ExpectedCode = 0x8000;               /* Ideal ADC output */
+        AD5940_WriteReg(REG_AFE_ADCOFFSETLPTIA0, 0); /* Reset offset register */
+
+        if (pLPTIAOffsetCal->SettleTime10us > 0)
+            AD5940_Delay10us(pLPTIAOffsetCal->SettleTime10us); /* Delay 10us */
+        time_out = pLPTIAOffsetCal->TimeOut10us;               /* Reset time out counter */
+        ADCCode = __AD5940_TakeMeasurement(&time_out);         /* Turn on ADC to get one valid data and then turn off ADC. */
+        if (time_out == 0) {
+            error = AD5940ERR_TIMEOUT;
+            goto LPTIAOFFSETCALERROR;
+        } /* Time out error. */
+        /* Calculate and write the result to registers before gain calibration */
+        ADCCode = ((ExpectedCode - ADCCode) << 3); /* We will shift back 1bit below */
+        ADCCode = ((ADCCode + 1) >> 1);            /* Round 0.5 */
+        if ((ADCCode > 0x3fff) ||
+            (ADCCode < -0x4000)) /* The register used for offset calibration is limited to -0x4000 to 0x3fff */
+        {
+            error = AD5940ERR_CALOR;
+            goto LPTIAOFFSETCALERROR;
+        }
+        ADCCode &= 0x7fff;
+        if (pLPTIAOffsetCal->LpAmpSel == LPAMP0)
+            AD5940_WriteReg(REG_AFE_ADCOFFSETLPTIA0, ADCCode);
+        else
+            AD5940_WriteReg(REG_AFE_ADCOFFSETLPTIA1, ADCCode);
+    }
+    /* Restore INTC1 SINC2 configure */
+    if (INTCCfg & AFEINTSRC_SINC2RDY)
+        ;
     else
-      AD5940_WriteReg(REG_AFE_ADCOFFSETLPTIA1, ADCCode);
-  }
-  /* Restore INTC1 SINC2 configure */
-  if(INTCCfg&AFEINTSRC_SINC2RDY);
-  else
-    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bFALSE); /* Disable SINC2 Interrupt */
-  
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, 0);  /* Lock KEY */
-  /* Done */
-  return AD5940ERR_OK;
+        AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bFALSE); /* Disable SINC2 Interrupt */
+
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, 0); /* Lock KEY */
+    /* Done */
+    return AD5940ERR_OK;
 
 LPTIAOFFSETCALERROR:
-  AD5940_ADCConvtCtrlS(bFALSE);  /* Stop conversion */
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, 0);  /* Lock KEY */
-  return error;
+    AD5940_ADCConvtCtrlS(bFALSE);           /* Stop conversion */
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, 0); /* Lock KEY */
+    return error;
 }
 
 /**
@@ -3583,7 +3471,7 @@ LPTIAOFFSETCALERROR:
 **/
 AD5940Err AD5940_HSTIAOffsetCal(LPTIAOffsetCal_Type *pHSTIAOffsetCal)
 {
-  return AD5940ERR_OK;
+    return AD5940ERR_OK;
 }
 
 /**
@@ -3595,38 +3483,39 @@ AD5940Err AD5940_HSTIAOffsetCal(LPTIAOffsetCal_Type *pHSTIAOffsetCal)
 **/
 AD5940Err AD5940_HSRtiaCal(HSRTIACal_Type *pCalCfg, void *pResult)
 {
-  AFERefCfg_Type aferef_cfg;
-  HSLoopCfg_Type hs_loop;
-  DSPCfg_Type dsp_cfg;
-  uint32_t INTCCfg;
-  
-  BoolFlag bADCClk32MHzMode = bFALSE;
-  uint32_t ExcitBuffGain = EXCITBUFGAIN_2;
-  uint32_t HsDacGain = HSDACGAIN_1;
+    AFERefCfg_Type aferef_cfg;
+    HSLoopCfg_Type hs_loop;
+    DSPCfg_Type dsp_cfg;
+    uint32_t INTCCfg;
 
-  float ExcitVolt; /* Excitation voltage, unit is mV */
-  uint32_t RtiaVal;
-  uint32_t const HpRtiaTable[]={200,1000,5000,10000,20000,40000,80000,160000,0};
-  uint32_t WgAmpWord;
+    BoolFlag bADCClk32MHzMode = bFALSE;
+    uint32_t ExcitBuffGain = EXCITBUFGAIN_2;
+    uint32_t HsDacGain = HSDACGAIN_1;
 
-  iImpCar_Type DftRcal, DftRtia;
+    float ExcitVolt; /* Excitation voltage, unit is mV */
+    uint32_t RtiaVal;
+    uint32_t const HpRtiaTable[] = { 200, 1000, 5000, 10000, 20000, 40000, 80000, 160000, 0 };
+    uint32_t WgAmpWord;
 
-  if(pCalCfg == NULL) return AD5940ERR_NULLP;
-  if(pCalCfg->fRcal == 0)
-    return AD5940ERR_PARA;
-  if(pCalCfg->HsTiaCfg.HstiaRtiaSel > HSTIARTIA_160K)
-    return AD5940ERR_PARA;
-  if(pCalCfg->HsTiaCfg.HstiaRtiaSel == HSTIARTIA_OPEN)
-    return AD5940ERR_PARA; /* Do not support calibrating DE0-RTIA */
-  if(pResult == NULL)
-      return AD5940ERR_NULLP;
+    iImpCar_Type DftRcal, DftRtia;
 
-  if(pCalCfg->AdcClkFreq > (32000000*0.8))
-    bADCClk32MHzMode = bTRUE; 
+    if (pCalCfg == NULL)
+        return AD5940ERR_NULLP;
+    if (pCalCfg->fRcal == 0)
+        return AD5940ERR_PARA;
+    if (pCalCfg->HsTiaCfg.HstiaRtiaSel > HSTIARTIA_160K)
+        return AD5940ERR_PARA;
+    if (pCalCfg->HsTiaCfg.HstiaRtiaSel == HSTIARTIA_OPEN)
+        return AD5940ERR_PARA; /* Do not support calibrating DE0-RTIA */
+    if (pResult == NULL)
+        return AD5940ERR_NULLP;
 
-  /* Calculate the excitation voltage we should use based on RCAL/Rtia */
-  RtiaVal = HpRtiaTable[pCalCfg->HsTiaCfg.HstiaRtiaSel];
-  /*
+    if (pCalCfg->AdcClkFreq > (32000000 * 0.8))
+        bADCClk32MHzMode = bTRUE;
+
+    /* Calculate the excitation voltage we should use based on RCAL/Rtia */
+    RtiaVal = HpRtiaTable[pCalCfg->HsTiaCfg.HstiaRtiaSel];
+    /*
     DAC output voltage calculation
     Note: RCAL value should be similar to RTIA so the accuracy is best.
     HSTIA output voltage should be limited to 0.2V to AVDD-0.2V, with 1.1V bias. We use 80% of this range for safe. 
@@ -3635,166 +3524,164 @@ AD5940Err AD5940_HSRtiaCal(HSRTIACal_Type *pCalCfg, void *pResult)
     ADC input range is +-1.5V which is enough for calibration.
     
   */
-  ExcitVolt = 1800*0.8*pCalCfg->fRcal/RtiaVal;
+    ExcitVolt = 1800 * 0.8 * pCalCfg->fRcal / RtiaVal;
 
-  if(ExcitVolt <= 800*0.05) /* Voltage is so small that we can enable the attenuator of DAC(1/5) and Excitation buffer(1/4). 800mVpp is the DAC output voltage */
-  {
-    ExcitBuffGain = EXCITBUFGAIN_0P25;
-    HsDacGain = HSDACGAIN_0P2;
-    /* Excitation buffer voltage full range is 800mVpp*0.05 = 40mVpp */
-    WgAmpWord = ((uint32_t)(ExcitVolt/40*2047*2)+1)>>1; /* Assign value with rounding (0.5 LSB error) */
-  }
-  else if(ExcitVolt <= 800*0.25) /* Enable Excitation buffer attenuator */
-  {
-    ExcitBuffGain = EXCITBUFGAIN_0P25;
-    HsDacGain = HSDACGAIN_1;
-    /* Excitation buffer voltage full range is 800mVpp*0.25 = 200mVpp */
-    WgAmpWord = ((uint32_t)(ExcitVolt/200*2047*2)+1)>>1; /* Assign value with rounding (0.5 LSB error) */
-  }
-  else if(ExcitVolt <= 800*0.4) /* Enable DAC attenuator */
-  {
-    ExcitBuffGain = EXCITBUFGAIN_2;
-    HsDacGain = HSDACGAIN_0P2;
-    /* Excitation buffer voltage full range is 800mVpp*0.4 = 320mV */
-    WgAmpWord = ((uint32_t)(ExcitVolt/320*2047*2)+1)>>1; /* Assign value with rounding (0.5 LSB error) */
-  }
-  else /* No attenuator is needed. This is the best condition which means RTIA is close to RCAL */
-  {
-    ExcitBuffGain = EXCITBUFGAIN_2;
-    HsDacGain = HSDACGAIN_1;
-    /* Excitation buffer voltage full range is 800mVpp*2=1600mVpp */
-    WgAmpWord = ((uint32_t)(ExcitVolt/1600*2047*2)+1)>>1; /* Assign value with rounding (0.5 LSB error) */
-  }
+    if (ExcitVolt <= 800 * 0.05) /* Voltage is so small that we can enable the attenuator of DAC(1/5) and Excitation buffer(1/4). 800mVpp is the DAC output voltage */
+    {
+        ExcitBuffGain = EXCITBUFGAIN_0P25;
+        HsDacGain = HSDACGAIN_0P2;
+        /* Excitation buffer voltage full range is 800mVpp*0.05 = 40mVpp */
+        WgAmpWord = ((uint32_t)(ExcitVolt / 40 * 2047 * 2) + 1) >> 1; /* Assign value with rounding (0.5 LSB error) */
+    } else if (ExcitVolt <= 800 * 0.25)                               /* Enable Excitation buffer attenuator */
+    {
+        ExcitBuffGain = EXCITBUFGAIN_0P25;
+        HsDacGain = HSDACGAIN_1;
+        /* Excitation buffer voltage full range is 800mVpp*0.25 = 200mVpp */
+        WgAmpWord = ((uint32_t)(ExcitVolt / 200 * 2047 * 2) + 1) >> 1; /* Assign value with rounding (0.5 LSB error) */
+    } else if (ExcitVolt <= 800 * 0.4)                                 /* Enable DAC attenuator */
+    {
+        ExcitBuffGain = EXCITBUFGAIN_2;
+        HsDacGain = HSDACGAIN_0P2;
+        /* Excitation buffer voltage full range is 800mVpp*0.4 = 320mV */
+        WgAmpWord = ((uint32_t)(ExcitVolt / 320 * 2047 * 2) + 1) >> 1; /* Assign value with rounding (0.5 LSB error) */
+    } else                                                             /* No attenuator is needed. This is the best condition which means RTIA is close to RCAL */
+    {
+        ExcitBuffGain = EXCITBUFGAIN_2;
+        HsDacGain = HSDACGAIN_1;
+        /* Excitation buffer voltage full range is 800mVpp*2=1600mVpp */
+        WgAmpWord = ((uint32_t)(ExcitVolt / 1600 * 2047 * 2) + 1) >> 1; /* Assign value with rounding (0.5 LSB error) */
+    }
 
-  if(WgAmpWord > 0x7ff)
-  WgAmpWord = 0x7ff;
-  
-  /*INTC configuration */
-  INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
-  AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_DFTRDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
-  
-  AD5940_AFECtrlS(AFECTRL_ALL, bFALSE);  /* Init all to disable state */
-  /* Configure reference system */
-  aferef_cfg.HpBandgapEn = bTRUE;
-  aferef_cfg.Hp1V1BuffEn = bTRUE;
-  aferef_cfg.Hp1V8BuffEn = bTRUE;
-  aferef_cfg.Disc1V1Cap = bFALSE;
-  aferef_cfg.Disc1V8Cap = bFALSE;
-  aferef_cfg.Hp1V8ThemBuff = bFALSE;
-  aferef_cfg.Hp1V8Ilimit = bFALSE;
-  aferef_cfg.Lp1V1BuffEn = bFALSE;
-  aferef_cfg.Lp1V8BuffEn = bFALSE;
-  aferef_cfg.LpBandgapEn = bFALSE;
-  aferef_cfg.LpRefBufEn = bFALSE;
-  aferef_cfg.LpRefBoostEn = bFALSE;
-  AD5940_REFCfgS(&aferef_cfg);	
-  /* Configure HP Loop */
-  hs_loop.HsDacCfg.ExcitBufGain = ExcitBuffGain;
-  hs_loop.HsDacCfg.HsDacGain = HsDacGain;
-  hs_loop.HsDacCfg.HsDacUpdateRate = 7; /* Set it to highest update rate */
-  memcpy(&hs_loop.HsTiaCfg, &pCalCfg->HsTiaCfg, sizeof(pCalCfg->HsTiaCfg));
-  hs_loop.SWMatCfg.Dswitch = SWD_RCAL0;
-  hs_loop.SWMatCfg.Pswitch = SWP_RCAL0;
-  hs_loop.SWMatCfg.Nswitch = SWN_RCAL1;
-  hs_loop.SWMatCfg.Tswitch = SWT_RCAL1|SWT_TRTIA;
-  hs_loop.WgCfg.WgType = WGTYPE_SIN;
-  hs_loop.WgCfg.GainCalEn = bTRUE;
-  hs_loop.WgCfg.OffsetCalEn = bTRUE;
-  hs_loop.WgCfg.SinCfg.SinFreqWord = AD5940_WGFreqWordCal(pCalCfg->fFreq, pCalCfg->SysClkFreq);
-  hs_loop.WgCfg.SinCfg.SinAmplitudeWord = WgAmpWord;
-  hs_loop.WgCfg.SinCfg.SinOffsetWord = 0;
-  hs_loop.WgCfg.SinCfg.SinPhaseWord = 0;
-  AD5940_HSLoopCfgS(&hs_loop);
-  /* Configure DSP */
-  dsp_cfg.ADCBaseCfg.ADCMuxN = ADCMUXN_N_NODE;
-  dsp_cfg.ADCBaseCfg.ADCMuxP = ADCMUXP_P_NODE;
-  dsp_cfg.ADCBaseCfg.ADCPga = ADCPGA_1P5;
-  AD5940_StructInit(&dsp_cfg.ADCDigCompCfg, sizeof(dsp_cfg.ADCDigCompCfg));
-  dsp_cfg.ADCFilterCfg.ADCAvgNum = ADCAVGNUM_16;  /* Don't care because it's disabled */
-  dsp_cfg.ADCFilterCfg.ADCRate = bADCClk32MHzMode?ADCRATE_1P6MHZ:ADCRATE_800KHZ;
-  dsp_cfg.ADCFilterCfg.ADCSinc2Osr = pCalCfg->ADCSinc2Osr;
-  dsp_cfg.ADCFilterCfg.ADCSinc3Osr = pCalCfg->ADCSinc3Osr;
-  dsp_cfg.ADCFilterCfg.BpNotch = bTRUE;
-  dsp_cfg.ADCFilterCfg.BpSinc3 = bFALSE;
-  dsp_cfg.ADCFilterCfg.Sinc2NotchEnable = bTRUE;
-  
-  memcpy(&dsp_cfg.DftCfg, &pCalCfg->DftCfg, sizeof(pCalCfg->DftCfg));
-  memset(&dsp_cfg.StatCfg, 0, sizeof(dsp_cfg.StatCfg));
-  AD5940_DSPCfgS(&dsp_cfg);
+    if (WgAmpWord > 0x7ff)
+        WgAmpWord = 0x7ff;
 
-  /* Enable all of them. They are automatically turned off during hibernate mode to save power */
-  AD5940_AFECtrlS(AFECTRL_HSTIAPWR|AFECTRL_INAMPPWR|AFECTRL_EXTBUFPWR|\
-                /*AFECTRL_WG|*/AFECTRL_DACREFPWR|AFECTRL_HSDACPWR|\
-                AFECTRL_SINC2NOTCH, bTRUE);
-  
-  AD5940_AFECtrlS(AFECTRL_WG|AFECTRL_ADCPWR, bTRUE);  /* Enable Waveform generator, ADC power */
-  //wait for sometime.
-  AD5940_Delay10us(25);
-  AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_DFT, bTRUE);  /* Start ADC convert and DFT */
-  /* Wait until DFT ready */
-  while(AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_DFTRDY) == bFALSE);  
-  AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_DFT|AFECTRL_WG|AFECTRL_ADCPWR, bFALSE);  /* Stop ADC convert and DFT */
-  AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
-  
-  DftRcal.Real = AD5940_ReadAfeResult(AFERESULT_DFTREAL);
-  DftRcal.Image = AD5940_ReadAfeResult(AFERESULT_DFTIMAGE);
+    /*INTC configuration */
+    INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
+    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_DFTRDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
 
-  AD5940_ADCMuxCfgS(ADCMUXP_HSTIA_P, ADCMUXN_HSTIA_N);
-  AD5940_AFECtrlS(AFECTRL_WG|AFECTRL_ADCPWR, bTRUE);  /* Enable Waveform generator, ADC power */
-  //wait for sometime.
-  AD5940_Delay10us(25);
-  AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_DFT, bTRUE);  /* Start ADC convert and DFT */
-  /* Wait until DFT ready */
-  while(AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_DFTRDY) == bFALSE);  
-  AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_DFT|AFECTRL_WG|AFECTRL_ADCPWR, bFALSE);  /* Stop ADC convert and DFT */
-  AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
+    AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Init all to disable state */
+    /* Configure reference system */
+    aferef_cfg.HpBandgapEn = bTRUE;
+    aferef_cfg.Hp1V1BuffEn = bTRUE;
+    aferef_cfg.Hp1V8BuffEn = bTRUE;
+    aferef_cfg.Disc1V1Cap = bFALSE;
+    aferef_cfg.Disc1V8Cap = bFALSE;
+    aferef_cfg.Hp1V8ThemBuff = bFALSE;
+    aferef_cfg.Hp1V8Ilimit = bFALSE;
+    aferef_cfg.Lp1V1BuffEn = bFALSE;
+    aferef_cfg.Lp1V8BuffEn = bFALSE;
+    aferef_cfg.LpBandgapEn = bFALSE;
+    aferef_cfg.LpRefBufEn = bFALSE;
+    aferef_cfg.LpRefBoostEn = bFALSE;
+    AD5940_REFCfgS(&aferef_cfg);
+    /* Configure HP Loop */
+    hs_loop.HsDacCfg.ExcitBufGain = ExcitBuffGain;
+    hs_loop.HsDacCfg.HsDacGain = HsDacGain;
+    hs_loop.HsDacCfg.HsDacUpdateRate = 7; /* Set it to highest update rate */
+    memcpy(&hs_loop.HsTiaCfg, &pCalCfg->HsTiaCfg, sizeof(pCalCfg->HsTiaCfg));
+    hs_loop.SWMatCfg.Dswitch = SWD_RCAL0;
+    hs_loop.SWMatCfg.Pswitch = SWP_RCAL0;
+    hs_loop.SWMatCfg.Nswitch = SWN_RCAL1;
+    hs_loop.SWMatCfg.Tswitch = SWT_RCAL1 | SWT_TRTIA;
+    hs_loop.WgCfg.WgType = WGTYPE_SIN;
+    hs_loop.WgCfg.GainCalEn = bTRUE;
+    hs_loop.WgCfg.OffsetCalEn = bTRUE;
+    hs_loop.WgCfg.SinCfg.SinFreqWord = AD5940_WGFreqWordCal(pCalCfg->fFreq, pCalCfg->SysClkFreq);
+    hs_loop.WgCfg.SinCfg.SinAmplitudeWord = WgAmpWord;
+    hs_loop.WgCfg.SinCfg.SinOffsetWord = 0;
+    hs_loop.WgCfg.SinCfg.SinPhaseWord = 0;
+    AD5940_HSLoopCfgS(&hs_loop);
+    /* Configure DSP */
+    dsp_cfg.ADCBaseCfg.ADCMuxN = ADCMUXN_N_NODE;
+    dsp_cfg.ADCBaseCfg.ADCMuxP = ADCMUXP_P_NODE;
+    dsp_cfg.ADCBaseCfg.ADCPga = ADCPGA_1P5;
+    AD5940_StructInit(&dsp_cfg.ADCDigCompCfg, sizeof(dsp_cfg.ADCDigCompCfg));
+    dsp_cfg.ADCFilterCfg.ADCAvgNum = ADCAVGNUM_16; /* Don't care because it's disabled */
+    dsp_cfg.ADCFilterCfg.ADCRate = bADCClk32MHzMode ? ADCRATE_1P6MHZ : ADCRATE_800KHZ;
+    dsp_cfg.ADCFilterCfg.ADCSinc2Osr = pCalCfg->ADCSinc2Osr;
+    dsp_cfg.ADCFilterCfg.ADCSinc3Osr = pCalCfg->ADCSinc3Osr;
+    dsp_cfg.ADCFilterCfg.BpNotch = bTRUE;
+    dsp_cfg.ADCFilterCfg.BpSinc3 = bFALSE;
+    dsp_cfg.ADCFilterCfg.Sinc2NotchEnable = bTRUE;
 
-  DftRtia.Real = AD5940_ReadAfeResult(AFERESULT_DFTREAL);
-  DftRtia.Image = AD5940_ReadAfeResult(AFERESULT_DFTIMAGE);
-  
-  if(DftRcal.Real&(1L<<17))
-    DftRcal.Real |= 0xfffc0000;
-  if(DftRcal.Image&(1L<<17))
-    DftRcal.Image |= 0xfffc0000;
-  if(DftRtia.Real&(1L<<17))
-    DftRtia.Real |= 0xfffc0000;
-  if(DftRtia.Image&(1L<<17))
-    DftRtia.Image |= 0xfffc0000;
-  /* 
+    memcpy(&dsp_cfg.DftCfg, &pCalCfg->DftCfg, sizeof(pCalCfg->DftCfg));
+    memset(&dsp_cfg.StatCfg, 0, sizeof(dsp_cfg.StatCfg));
+    AD5940_DSPCfgS(&dsp_cfg);
+
+    /* Enable all of them. They are automatically turned off during hibernate mode to save power */
+    AD5940_AFECtrlS(AFECTRL_HSTIAPWR | AFECTRL_INAMPPWR | AFECTRL_EXTBUFPWR |
+                        /*AFECTRL_WG|*/ AFECTRL_DACREFPWR | AFECTRL_HSDACPWR |
+                        AFECTRL_SINC2NOTCH,
+                    bTRUE);
+
+    AD5940_AFECtrlS(AFECTRL_WG | AFECTRL_ADCPWR, bTRUE); /* Enable Waveform generator, ADC power */
+    //wait for sometime.
+    AD5940_Delay10us(25);
+    AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_DFT, bTRUE); /* Start ADC convert and DFT */
+    /* Wait until DFT ready */
+    while (AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_DFTRDY) == bFALSE)
+        ;
+    AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_DFT | AFECTRL_WG | AFECTRL_ADCPWR, bFALSE); /* Stop ADC convert and DFT */
+    AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
+
+    DftRcal.Real = AD5940_ReadAfeResult(AFERESULT_DFTREAL);
+    DftRcal.Image = AD5940_ReadAfeResult(AFERESULT_DFTIMAGE);
+
+    AD5940_ADCMuxCfgS(ADCMUXP_HSTIA_P, ADCMUXN_HSTIA_N);
+    AD5940_AFECtrlS(AFECTRL_WG | AFECTRL_ADCPWR, bTRUE); /* Enable Waveform generator, ADC power */
+    //wait for sometime.
+    AD5940_Delay10us(25);
+    AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_DFT, bTRUE); /* Start ADC convert and DFT */
+    /* Wait until DFT ready */
+    while (AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_DFTRDY) == bFALSE)
+        ;
+    AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_DFT | AFECTRL_WG | AFECTRL_ADCPWR, bFALSE); /* Stop ADC convert and DFT */
+    AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
+
+    DftRtia.Real = AD5940_ReadAfeResult(AFERESULT_DFTREAL);
+    DftRtia.Image = AD5940_ReadAfeResult(AFERESULT_DFTIMAGE);
+
+    if (DftRcal.Real & (1L << 17))
+        DftRcal.Real |= 0xfffc0000;
+    if (DftRcal.Image & (1L << 17))
+        DftRcal.Image |= 0xfffc0000;
+    if (DftRtia.Real & (1L << 17))
+        DftRtia.Real |= 0xfffc0000;
+    if (DftRtia.Image & (1L << 17))
+        DftRtia.Image |= 0xfffc0000;
+    /* 
     ADC MUX is set to HSTIA_P and HSTIA_N.
     While the current flow through RCAL and then into RTIA, the current direction should be from HSTIA_N to HSTIA_P if we 
     measure the voltage across RCAL by MUXSELP_P_NODE and MUXSELN_N_NODE.
     So here, we add a negative sign to results
   */
-  DftRtia.Image = -DftRtia.Image;
-  DftRtia.Real = -DftRtia.Real; /* Current is measured by MUX HSTIA_P-HSTIA_N. It should be  */
-   /*
+    DftRtia.Image = -DftRtia.Image;
+    DftRtia.Real = -DftRtia.Real; /* Current is measured by MUX HSTIA_P-HSTIA_N. It should be  */
+                                  /*
       The impedance engine inside of AD594x give us Real part and Imaginary part of DFT. Due to technology used, the Imaginary 
       part in register is the opposite number. So we add a negative sign on the Imaginary part of results. 
    */
-  DftRtia.Image = -DftRtia.Image;
-  DftRcal.Image = -DftRcal.Image;
+    DftRtia.Image = -DftRtia.Image;
+    DftRcal.Image = -DftRcal.Image;
 
-  fImpCar_Type temp;
-  temp = AD5940_ComplexDivInt(&DftRtia, &DftRcal);
-  temp.Real *= pCalCfg->fRcal;
-  temp.Image *= pCalCfg->fRcal;
-  if(pCalCfg->bPolarResult == bFALSE)
-  {
-    *(fImpCar_Type*)pResult = temp;
-  }
-  else
-  {
-    ((fImpPol_Type*)pResult)->Magnitude = AD5940_ComplexMag(&temp);
-    ((fImpPol_Type*)pResult)->Phase = AD5940_ComplexPhase(&temp);
-  }
-  
-  /* Restore INTC1 DFT configure */
-  if(INTCCfg&AFEINTSRC_DFTRDY);
-  else
-    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_DFTRDY, bFALSE); /* Disable DFT Interrupt */
+    fImpCar_Type temp;
+    temp = AD5940_ComplexDivInt(&DftRtia, &DftRcal);
+    temp.Real *= pCalCfg->fRcal;
+    temp.Image *= pCalCfg->fRcal;
+    if (pCalCfg->bPolarResult == bFALSE) {
+        *(fImpCar_Type *)pResult = temp;
+    } else {
+        ((fImpPol_Type *)pResult)->Magnitude = AD5940_ComplexMag(&temp);
+        ((fImpPol_Type *)pResult)->Phase = AD5940_ComplexPhase(&temp);
+    }
 
-  return AD5940ERR_OK;
+    /* Restore INTC1 DFT configure */
+    if (INTCCfg & AFEINTSRC_DFTRDY)
+        ;
+    else
+        AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_DFTRDY, bFALSE); /* Disable DFT Interrupt */
+
+    return AD5940ERR_OK;
 }
 
 /**
@@ -3806,48 +3693,49 @@ AD5940Err AD5940_HSRtiaCal(HSRTIACal_Type *pCalCfg, void *pResult)
 **/
 AD5940Err AD5940_LPRtiaCal(LPRTIACal_Type *pCalCfg, void *pResult)
 {
-  HSLoopCfg_Type hs_loop;
-  LPLoopCfg_Type lp_loop;
-  DSPCfg_Type dsp_cfg;
-  ADCBaseCfg_Type *pADCBaseCfg; 
-  SWMatrixCfg_Type *pSWCfg;  
-  uint32_t INTCCfg, reg_afecon;
-  BoolFlag bADCClk32MHzMode = bTRUE;
-  BoolFlag bDCMode = bFALSE;                /* Indicate if frequency is 0, which means we calibrate at DC. */
+    HSLoopCfg_Type hs_loop;
+    LPLoopCfg_Type lp_loop;
+    DSPCfg_Type dsp_cfg;
+    ADCBaseCfg_Type *pADCBaseCfg;
+    SWMatrixCfg_Type *pSWCfg;
+    uint32_t INTCCfg, reg_afecon;
+    BoolFlag bADCClk32MHzMode = bTRUE;
+    BoolFlag bDCMode = bFALSE; /* Indicate if frequency is 0, which means we calibrate at DC. */
 
-  float ExcitVolt; /* Excitation voltage, unit is mV */
-  uint32_t RtiaVal;
-  /* RTIA value table when RLOAD set to 100Ohm */
-  uint32_t const LpRtiaTable[]={0,110,1000,2000,3000,4000,6000,8000,10000,12000,16000,20000,24000,30000,32000,40000,48000,64000,85000,96000,100000,120000,128000,160000,196000,256000,512000};
-  float const ADCPGAGainTable[] = {1, 1.5, 2, 4, 9};
-  uint32_t WgAmpWord;
+    float ExcitVolt; /* Excitation voltage, unit is mV */
+    uint32_t RtiaVal;
+    /* RTIA value table when RLOAD set to 100Ohm */
+    uint32_t const LpRtiaTable[] = { 0, 110, 1000, 2000, 3000, 4000, 6000, 8000, 10000, 12000, 16000, 20000, 24000, 30000, 32000, 40000, 48000, 64000, 85000, 96000, 100000, 120000, 128000, 160000, 196000, 256000, 512000 };
+    float const ADCPGAGainTable[] = { 1, 1.5, 2, 4, 9 };
+    uint32_t WgAmpWord;
 
-  uint32_t ADCPgaGainRtia, ADCPgaGainRcal;
-  float GainRatio;
+    uint32_t ADCPgaGainRtia, ADCPgaGainRcal;
+    float GainRatio;
 
-  iImpCar_Type DftRcal, DftRtia;
+    iImpCar_Type DftRcal, DftRtia;
 
-  if(pCalCfg == NULL)  return AD5940ERR_NULLP;  /* Parameters illegal */
-  
-  if(pCalCfg->fRcal == 0)
-    return AD5940ERR_PARA;
-  if(pCalCfg->LpTiaRtia > LPTIARTIA_512K)
-    return AD5940ERR_PARA;
-  if(pCalCfg->LpTiaRtia == LPTIARTIA_OPEN)
-    return AD5940ERR_PARA; /* Not supported now. By setting RTIA to open and set corresponding switches can calibrate external RTIA */
-  if(pResult == NULL)
-      return AD5940ERR_NULLP;
+    if (pCalCfg == NULL)
+        return AD5940ERR_NULLP; /* Parameters illegal */
 
-  if(pCalCfg->AdcClkFreq > (32000000*0.8))
-    bADCClk32MHzMode = bTRUE;   /* Clock frequency is high. */
-  if(pCalCfg->fFreq == 0.0f)    /* Frequency is zero means we calibrate RTIA at DC. */
-    bDCMode = bTRUE;
-  /* Init two pointers */
-  pSWCfg = &hs_loop.SWMatCfg;
-  pADCBaseCfg = &dsp_cfg.ADCBaseCfg;
-  /* Calculate the excitation voltage we should use based on RCAL/Rtia */
-  RtiaVal = LpRtiaTable[pCalCfg->LpTiaRtia];
-  /*
+    if (pCalCfg->fRcal == 0)
+        return AD5940ERR_PARA;
+    if (pCalCfg->LpTiaRtia > LPTIARTIA_512K)
+        return AD5940ERR_PARA;
+    if (pCalCfg->LpTiaRtia == LPTIARTIA_OPEN)
+        return AD5940ERR_PARA; /* Not supported now. By setting RTIA to open and set corresponding switches can calibrate external RTIA */
+    if (pResult == NULL)
+        return AD5940ERR_NULLP;
+
+    if (pCalCfg->AdcClkFreq > (32000000 * 0.8))
+        bADCClk32MHzMode = bTRUE; /* Clock frequency is high. */
+    if (pCalCfg->fFreq == 0.0f)   /* Frequency is zero means we calibrate RTIA at DC. */
+        bDCMode = bTRUE;
+    /* Init two pointers */
+    pSWCfg = &hs_loop.SWMatCfg;
+    pADCBaseCfg = &dsp_cfg.ADCBaseCfg;
+    /* Calculate the excitation voltage we should use based on RCAL/Rtia */
+    RtiaVal = LpRtiaTable[pCalCfg->LpTiaRtia];
+    /*
    * DAC output voltage calculation
    * Note: RCAL value should be similar to RTIA so the accuracy is best.
    * LPTIA output voltage should be limited to 0.3V to AVDD-0.4V, with 1.3V bias. We use 80% of this range for safe. 
@@ -3863,285 +3751,287 @@ AD5940Err AD5940_LPRtiaCal(LPRTIACal_Type *pCalCfg, void *pResult)
    * Maximum Vzero voltage is 1.9V when Rcal is 200Ohm and Switch On resistance is 50Ohm*2. Vzero_max = 1.3V + (2.3V-1.3V)/(200+200+50*2)*300. 
    * Maximum AC signal is (1.9-1.3)*2 = 1.2Vpp(for ADuCM355, RCAl=200Ohm).
   */
- /** @cond */
-  #define MAXVOLT_P2P 1400  /* Maximum peak to peak voltage 1200mV for ADuCM355. */  
-                            /* Maximum peak2peak voltage for AD5940 10kOhm RCAL is 1400mV */
-  #define __MAXVOLT_AMP_CODE  (MAXVOLT_P2P*2047L/2200)
- /** @endcond */
-  ExcitVolt = 2000*0.8*pCalCfg->fRcal/RtiaVal;
-  WgAmpWord = ((uint32_t)(ExcitVolt/2200*2047*2)+1)>>1; /* Assign value with rounding (0.5 LSB error) */
-  
-  if (WgAmpWord > __MAXVOLT_AMP_CODE)
-    WgAmpWord = __MAXVOLT_AMP_CODE;
-  // printf("WgAmpWord:%d\r\n", WgAmpWord);
-  /**
+    /** @cond */
+#define MAXVOLT_P2P        1400 /* Maximum peak to peak voltage 1200mV for ADuCM355. */
+                                /* Maximum peak2peak voltage for AD5940 10kOhm RCAL is 1400mV */
+#define __MAXVOLT_AMP_CODE (MAXVOLT_P2P * 2047L / 2200)
+    /** @endcond */
+    ExcitVolt = 2000 * 0.8 * pCalCfg->fRcal / RtiaVal;
+    WgAmpWord = ((uint32_t)(ExcitVolt / 2200 * 2047 * 2) + 1) >> 1; /* Assign value with rounding (0.5 LSB error) */
+
+    if (WgAmpWord > __MAXVOLT_AMP_CODE)
+        WgAmpWord = __MAXVOLT_AMP_CODE;
+    // printf("WgAmpWord:%d\r\n", WgAmpWord);
+    /**
    * Determine the best ADC PGA gain for both RCAL and RTIA voltage measurement.
   */
-  {
-    float RtiaVolt, RcalVolt, temp;
-    ExcitVolt = WgAmpWord*2000.0f/2047; /* 2000mVpp -->ExcitVolt in Peak to Peak unit */
-    RtiaVolt = ExcitVolt/(pCalCfg->fRcal + 100)*RtiaVal;
-    RcalVolt = RtiaVolt/RtiaVal*pCalCfg->fRcal;
-    /* The input range of ADC is 1.5Vp, we calculate how much gain we need */
-    temp = 3000.0f/RcalVolt;
-    if(temp >= 9.0f)  ADCPgaGainRcal = ADCPGA_9;
-    else if(temp >= 4.0f) ADCPgaGainRcal = ADCPGA_4;
-    else if(temp >= 2.0f) ADCPgaGainRcal = ADCPGA_2;
-    else if(temp >= 1.5f) ADCPgaGainRcal = ADCPGA_1P5;
-    else ADCPgaGainRcal = ADCPGA_1;
-    temp = 3000.0f/RtiaVolt;
-    if(temp >= 9.0f)  ADCPgaGainRtia = ADCPGA_9;
-    else if(temp >= 4.0f) ADCPgaGainRtia = ADCPGA_4;
-    else if(temp >= 2.0f) ADCPgaGainRtia = ADCPGA_2;
-    else if(temp >= 1.5f) ADCPgaGainRtia = ADCPGA_1P5;
-    else ADCPgaGainRtia = ADCPGA_1;
-    GainRatio = ADCPGAGainTable[ADCPgaGainRtia]/ADCPGAGainTable[ADCPgaGainRcal];
-    // printf("ADCPgaGainRtia:%d; ADCPgaGainRcal:%d\r\n", ADCPgaGainRtia, ADCPgaGainRcal);
-    // printf("ADCPGAGainTable[ADCPgaGainRtia]:%f; ADCPGAGainTable[ADCPgaGainRcal]:%f; GainRatio:%f\r\n", ADCPGAGainTable[ADCPgaGainRtia], ADCPGAGainTable[ADCPgaGainRcal], GainRatio);
-  }
-  reg_afecon = AD5940_ReadReg(REG_AFE_AFECON);
-  /* INTC configuration */
-  INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
-  AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_DFTRDY|AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
-  AD5940_INTCClrFlag(AFEINTSRC_ALLINT);
-
-  AD5940_AFECtrlS(AFECTRL_ALL, bFALSE);  /* Init all to disable state */
-  /* Configure reference system */
-	__AD5940_ReferenceON();
-	/* Configure DSP */
-	AD5940_StructInit(&dsp_cfg, sizeof(dsp_cfg));
-	dsp_cfg.ADCFilterCfg.ADCAvgNum = ADCAVGNUM_16;  /* Don't care because it's disabled */
-	dsp_cfg.ADCFilterCfg.ADCRate = bADCClk32MHzMode?ADCRATE_1P6MHZ:ADCRATE_800KHZ;
-	dsp_cfg.ADCFilterCfg.ADCSinc2Osr = pCalCfg->ADCSinc2Osr;
-	dsp_cfg.ADCFilterCfg.ADCSinc3Osr = pCalCfg->ADCSinc3Osr;
-	dsp_cfg.ADCFilterCfg.BpNotch = bTRUE;
-	dsp_cfg.ADCFilterCfg.BpSinc3 = bFALSE;
-	dsp_cfg.ADCFilterCfg.Sinc2NotchEnable = bTRUE;
-	memcpy(&dsp_cfg.DftCfg, &pCalCfg->DftCfg, sizeof(pCalCfg->DftCfg));
-	AD5940_DSPCfgS(&dsp_cfg);
-  /* Configure LP Loop */
-  AD5940_StructInit(&lp_loop, sizeof(lp_loop));
-  /* Configure LP Amplifies(LPPA and LPTIA). We won't use LP-PA */
-  lp_loop.LpDacCfg.LpdacSel = (pCalCfg->LpAmpSel  == LPAMP0)?LPDAC0:LPDAC1;
-	lp_loop.LpDacCfg.DacData12Bit = 0x800;                 		/* Controlled by WG */
-  lp_loop.LpDacCfg.DacData6Bit = 32;                    /* middle scale value */
-  lp_loop.LpDacCfg.DataRst =bFALSE;                    	/* Do not keep DATA registers at reset status */
-  lp_loop.LpDacCfg.LpDacSW = LPDACSW_VBIAS2LPPA|LPDACSW_VZERO2HSTIA;
-  lp_loop.LpDacCfg.LpDacRef = LPDACREF_2P5;            	/* Select internal 2.5V reference */
-  lp_loop.LpDacCfg.LpDacSrc = LPDACSRC_WG;             	/* The LPDAC data comes from WG not MMR in this case */
-  lp_loop.LpDacCfg.LpDacVbiasMux = LPDACVBIAS_6BIT;    	/* Connect Vbias signal to 6Bit LPDAC output */
-  lp_loop.LpDacCfg.LpDacVzeroMux = LPDACVZERO_12BIT;   	/* Connect Vzero signal to 12bit LPDAC output */
-  lp_loop.LpDacCfg.PowerEn = bTRUE;                    	/* Power up LPDAC */
-
-  lp_loop.LpAmpCfg.LpAmpSel = pCalCfg->LpAmpSel;
-  lp_loop.LpAmpCfg.LpAmpPwrMod = pCalCfg->LpAmpPwrMod;  /* Set low power amplifiers to normal power mode */
-  lp_loop.LpAmpCfg.LpPaPwrEn = bTRUE;                  	/* Enable LP PA(potential-stat amplifier) power */
-  lp_loop.LpAmpCfg.LpTiaPwrEn = bTRUE;                	/* Enable LPTIA*/
-  lp_loop.LpAmpCfg.LpTiaRload = LPTIARLOAD_100R;
-  lp_loop.LpAmpCfg.LpTiaRtia = pCalCfg->LpTiaRtia;
-  lp_loop.LpAmpCfg.LpTiaRf = LPTIARF_OPEN;
-  lp_loop.LpAmpCfg.LpTiaSW = LPTIASW(6)|LPTIASW(8)|(pCalCfg->bWithCtia==bTRUE?LPTIASW(5)/*|LPTIASW(9)*/:0);
-  AD5940_LPLoopCfgS(&lp_loop);
-  /* Configure HS Loop */
-  AD5940_StructInit(&hs_loop, sizeof(hs_loop));
-  /* Take care of HSTIA, we need to disconnect internal RTIA because it connects to Tswitch directly. */
-	hs_loop.HsTiaCfg.DiodeClose = bFALSE;
-  hs_loop.HsTiaCfg.HstiaBias = (pCalCfg->LpAmpSel  == LPAMP0)?HSTIABIAS_VZERO0:HSTIABIAS_VZERO1;
-  hs_loop.HsTiaCfg.HstiaCtia = 32;
-  hs_loop.HsTiaCfg.HstiaDeRload = HSTIADERLOAD_OPEN;
-  hs_loop.HsTiaCfg.HstiaDeRtia = HSTIADERLOAD_OPEN;
-  hs_loop.HsTiaCfg.HstiaDe1Rload = HSTIADERLOAD_OPEN;
-  hs_loop.HsTiaCfg.HstiaDe1Rtia = HSTIADERTIA_OPEN;
-  hs_loop.HsTiaCfg.HstiaRtiaSel = HSTIARTIA_200;
-  /* Configure HSDAC */
-	hs_loop.HsDacCfg.ExcitBufGain = 0;
-  hs_loop.HsDacCfg.HsDacGain = 0;  					/* Don't care */
-  hs_loop.HsDacCfg.HsDacUpdateRate = 255;  	/* Lowest for LPDAC */
-
-  hs_loop.SWMatCfg.Dswitch = SWD_RCAL0|((pCalCfg->LpAmpSel  == LPAMP0)?SWD_SE0:SWD_SE1);
-  hs_loop.SWMatCfg.Pswitch = SWP_RCAL0;
-  hs_loop.SWMatCfg.Nswitch = SWN_RCAL1;
-  hs_loop.SWMatCfg.Tswitch = SWT_TRTIA | SWT_RCAL1;
-  if(bDCMode)
-  {
-    int32_t time_out = -1;    /* Always wait. */
-    int32_t offset_rcal, offset_rtia;  
-    /* Configure WG */
-    hs_loop.WgCfg.WgType = WGTYPE_MMR;
-    hs_loop.WgCfg.WgCode = WgAmpWord;       /* Amplitude word is exactly the maximum DC voltage we could use */
-    hs_loop.WgCfg.GainCalEn = bFALSE;		    /* We don't have calibration value for LPDAC, so we don't use it. */
-    hs_loop.WgCfg.OffsetCalEn = bFALSE;
-    AD5940_HSLoopCfgS(&hs_loop);
-    AD5940_WGDACCodeS(WgAmpWord + 0x800);
-		AD5940_AFECtrlS(AFECTRL_HSTIAPWR|AFECTRL_INAMPPWR|AFECTRL_WG|AFECTRL_ADCPWR, bTRUE); /* Apply voltage to loop and turn on ADC */
-    /* Do offset measurement */
-    pSWCfg->Dswitch = SWD_RCAL0;//|SWD_SE0;   /* Disconnect SE0 for now to measure the offset voltage. */
-    pSWCfg->Pswitch = SWP_RCAL0;
-    pSWCfg->Nswitch = SWN_RCAL1;
-    pSWCfg->Tswitch = SWT_TRTIA|SWT_RCAL1;
-    AD5940_SWMatrixCfgS(pSWCfg);    
-    AD5940_Delay10us(1000);   /* Wait some time here. */
-    /* Measure RCAL channel voltage offset */
-    pADCBaseCfg->ADCMuxN = ADCMUXN_N_NODE;
-    pADCBaseCfg->ADCMuxP = ADCMUXP_P_NODE;
-    pADCBaseCfg->ADCPga = ADCPgaGainRcal;
-    AD5940_ADCBaseCfgS(pADCBaseCfg);
-    AD5940_Delay10us(50);   /* Wait some time here. */
-    offset_rcal = __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-    /* Measure RTIA channel voltage offset */
-    if(pCalCfg->LpAmpSel == LPAMP0)
     {
-      pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA0_N;
-      pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA0_P;
-    }else
-    {
-      pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA1_N;
-      pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA1_P;
+        float RtiaVolt, RcalVolt, temp;
+        ExcitVolt = WgAmpWord * 2000.0f / 2047; /* 2000mVpp -->ExcitVolt in Peak to Peak unit */
+        RtiaVolt = ExcitVolt / (pCalCfg->fRcal + 100) * RtiaVal;
+        RcalVolt = RtiaVolt / RtiaVal * pCalCfg->fRcal;
+        /* The input range of ADC is 1.5Vp, we calculate how much gain we need */
+        temp = 3000.0f / RcalVolt;
+        if (temp >= 9.0f)
+            ADCPgaGainRcal = ADCPGA_9;
+        else if (temp >= 4.0f)
+            ADCPgaGainRcal = ADCPGA_4;
+        else if (temp >= 2.0f)
+            ADCPgaGainRcal = ADCPGA_2;
+        else if (temp >= 1.5f)
+            ADCPgaGainRcal = ADCPGA_1P5;
+        else
+            ADCPgaGainRcal = ADCPGA_1;
+        temp = 3000.0f / RtiaVolt;
+        if (temp >= 9.0f)
+            ADCPgaGainRtia = ADCPGA_9;
+        else if (temp >= 4.0f)
+            ADCPgaGainRtia = ADCPGA_4;
+        else if (temp >= 2.0f)
+            ADCPgaGainRtia = ADCPGA_2;
+        else if (temp >= 1.5f)
+            ADCPgaGainRtia = ADCPGA_1P5;
+        else
+            ADCPgaGainRtia = ADCPGA_1;
+        GainRatio = ADCPGAGainTable[ADCPgaGainRtia] / ADCPGAGainTable[ADCPgaGainRcal];
+        // printf("ADCPgaGainRtia:%d; ADCPgaGainRcal:%d\r\n", ADCPgaGainRtia, ADCPgaGainRcal);
+        // printf("ADCPGAGainTable[ADCPgaGainRtia]:%f; ADCPGAGainTable[ADCPgaGainRcal]:%f; GainRatio:%f\r\n", ADCPGAGainTable[ADCPgaGainRtia], ADCPGAGainTable[ADCPgaGainRcal], GainRatio);
     }
-    pADCBaseCfg->ADCPga = ADCPgaGainRtia;    
-    AD5940_ADCBaseCfgS(pADCBaseCfg);
-    AD5940_Delay10us(50);   /* Wait some time here. */
-    offset_rtia = __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-    /* Connect LPTIA loop, let current flow to RTIA. */
-    pSWCfg->Dswitch = SWD_RCAL0|((pCalCfg->LpAmpSel == LPAMP0)?SWD_SE0:SWD_SE1);
-    pSWCfg->Pswitch = SWP_RCAL0;
-    pSWCfg->Nswitch = SWN_RCAL1;
-    pSWCfg->Tswitch = SWT_TRTIA|SWT_RCAL1;
-    AD5940_SWMatrixCfgS(pSWCfg);
-    AD5940_Delay10us(1000);   /* Wait some time here. */
-		/* Measure RCAL */
-    pADCBaseCfg = &dsp_cfg.ADCBaseCfg;
-    pADCBaseCfg->ADCMuxN = ADCMUXN_N_NODE;
-    pADCBaseCfg->ADCMuxP = ADCMUXP_P_NODE;
-    pADCBaseCfg->ADCPga = ADCPgaGainRcal;
-    AD5940_ADCBaseCfgS(pADCBaseCfg);
-    AD5940_Delay10us(50);   /* Wait some time here. */
-    DftRcal.Real = (int32_t)__AD5940_TakeMeasurement(&time_out)- offset_rcal;
-    DftRcal.Image = 0;
-    
+    reg_afecon = AD5940_ReadReg(REG_AFE_AFECON);
+    /* INTC configuration */
+    INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
+    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_DFTRDY | AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
+    AD5940_INTCClrFlag(AFEINTSRC_ALLINT);
+
+    AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Init all to disable state */
+                                          /* Configure reference system */
+    __AD5940_ReferenceON();
+    /* Configure DSP */
+    AD5940_StructInit(&dsp_cfg, sizeof(dsp_cfg));
+    dsp_cfg.ADCFilterCfg.ADCAvgNum = ADCAVGNUM_16; /* Don't care because it's disabled */
+    dsp_cfg.ADCFilterCfg.ADCRate = bADCClk32MHzMode ? ADCRATE_1P6MHZ : ADCRATE_800KHZ;
+    dsp_cfg.ADCFilterCfg.ADCSinc2Osr = pCalCfg->ADCSinc2Osr;
+    dsp_cfg.ADCFilterCfg.ADCSinc3Osr = pCalCfg->ADCSinc3Osr;
+    dsp_cfg.ADCFilterCfg.BpNotch = bTRUE;
+    dsp_cfg.ADCFilterCfg.BpSinc3 = bFALSE;
+    dsp_cfg.ADCFilterCfg.Sinc2NotchEnable = bTRUE;
+    memcpy(&dsp_cfg.DftCfg, &pCalCfg->DftCfg, sizeof(pCalCfg->DftCfg));
+    AD5940_DSPCfgS(&dsp_cfg);
+    /* Configure LP Loop */
+    AD5940_StructInit(&lp_loop, sizeof(lp_loop));
+    /* Configure LP Amplifies(LPPA and LPTIA). We won't use LP-PA */
+    lp_loop.LpDacCfg.LpdacSel = (pCalCfg->LpAmpSel == LPAMP0) ? LPDAC0 : LPDAC1;
+    lp_loop.LpDacCfg.DacData12Bit = 0x800; /* Controlled by WG */
+    lp_loop.LpDacCfg.DacData6Bit = 32;     /* middle scale value */
+    lp_loop.LpDacCfg.DataRst = bFALSE;     /* Do not keep DATA registers at reset status */
+    lp_loop.LpDacCfg.LpDacSW = LPDACSW_VBIAS2LPPA | LPDACSW_VZERO2HSTIA;
+    lp_loop.LpDacCfg.LpDacRef = LPDACREF_2P5;          /* Select internal 2.5V reference */
+    lp_loop.LpDacCfg.LpDacSrc = LPDACSRC_WG;           /* The LPDAC data comes from WG not MMR in this case */
+    lp_loop.LpDacCfg.LpDacVbiasMux = LPDACVBIAS_6BIT;  /* Connect Vbias signal to 6Bit LPDAC output */
+    lp_loop.LpDacCfg.LpDacVzeroMux = LPDACVZERO_12BIT; /* Connect Vzero signal to 12bit LPDAC output */
+    lp_loop.LpDacCfg.PowerEn = bTRUE;                  /* Power up LPDAC */
+
+    lp_loop.LpAmpCfg.LpAmpSel = pCalCfg->LpAmpSel;
+    lp_loop.LpAmpCfg.LpAmpPwrMod = pCalCfg->LpAmpPwrMod; /* Set low power amplifiers to normal power mode */
+    lp_loop.LpAmpCfg.LpPaPwrEn = bTRUE;                  /* Enable LP PA(potential-stat amplifier) power */
+    lp_loop.LpAmpCfg.LpTiaPwrEn = bTRUE;                 /* Enable LPTIA*/
+    lp_loop.LpAmpCfg.LpTiaRload = LPTIARLOAD_100R;
+    lp_loop.LpAmpCfg.LpTiaRtia = pCalCfg->LpTiaRtia;
+    lp_loop.LpAmpCfg.LpTiaRf = LPTIARF_OPEN;
+    lp_loop.LpAmpCfg.LpTiaSW = LPTIASW(6) | LPTIASW(8) | (pCalCfg->bWithCtia == bTRUE ? LPTIASW(5) /*|LPTIASW(9)*/ : 0);
+    AD5940_LPLoopCfgS(&lp_loop);
+    /* Configure HS Loop */
+    AD5940_StructInit(&hs_loop, sizeof(hs_loop));
+    /* Take care of HSTIA, we need to disconnect internal RTIA because it connects to Tswitch directly. */
+    hs_loop.HsTiaCfg.DiodeClose = bFALSE;
+    hs_loop.HsTiaCfg.HstiaBias = (pCalCfg->LpAmpSel == LPAMP0) ? HSTIABIAS_VZERO0 : HSTIABIAS_VZERO1;
+    hs_loop.HsTiaCfg.HstiaCtia = 32;
+    hs_loop.HsTiaCfg.HstiaDeRload = HSTIADERLOAD_OPEN;
+    hs_loop.HsTiaCfg.HstiaDeRtia = HSTIADERLOAD_OPEN;
+    hs_loop.HsTiaCfg.HstiaDe1Rload = HSTIADERLOAD_OPEN;
+    hs_loop.HsTiaCfg.HstiaDe1Rtia = HSTIADERTIA_OPEN;
+    hs_loop.HsTiaCfg.HstiaRtiaSel = HSTIARTIA_200;
+    /* Configure HSDAC */
+    hs_loop.HsDacCfg.ExcitBufGain = 0;
+    hs_loop.HsDacCfg.HsDacGain = 0;         /* Don't care */
+    hs_loop.HsDacCfg.HsDacUpdateRate = 255; /* Lowest for LPDAC */
+
+    hs_loop.SWMatCfg.Dswitch = SWD_RCAL0 | ((pCalCfg->LpAmpSel == LPAMP0) ? SWD_SE0 : SWD_SE1);
+    hs_loop.SWMatCfg.Pswitch = SWP_RCAL0;
+    hs_loop.SWMatCfg.Nswitch = SWN_RCAL1;
+    hs_loop.SWMatCfg.Tswitch = SWT_TRTIA | SWT_RCAL1;
+    if (bDCMode) {
+        int32_t time_out = -1; /* Always wait. */
+        int32_t offset_rcal, offset_rtia;
+        /* Configure WG */
+        hs_loop.WgCfg.WgType = WGTYPE_MMR;
+        hs_loop.WgCfg.WgCode = WgAmpWord; /* Amplitude word is exactly the maximum DC voltage we could use */
+        hs_loop.WgCfg.GainCalEn = bFALSE; /* We don't have calibration value for LPDAC, so we don't use it. */
+        hs_loop.WgCfg.OffsetCalEn = bFALSE;
+        AD5940_HSLoopCfgS(&hs_loop);
+        AD5940_WGDACCodeS(WgAmpWord + 0x800);
+        AD5940_AFECtrlS(AFECTRL_HSTIAPWR | AFECTRL_INAMPPWR | AFECTRL_WG | AFECTRL_ADCPWR, bTRUE); /* Apply voltage to loop and turn on ADC */
+        /* Do offset measurement */
+        pSWCfg->Dswitch = SWD_RCAL0; //|SWD_SE0;   /* Disconnect SE0 for now to measure the offset voltage. */
+        pSWCfg->Pswitch = SWP_RCAL0;
+        pSWCfg->Nswitch = SWN_RCAL1;
+        pSWCfg->Tswitch = SWT_TRTIA | SWT_RCAL1;
+        AD5940_SWMatrixCfgS(pSWCfg);
+        AD5940_Delay10us(1000); /* Wait some time here. */
+        /* Measure RCAL channel voltage offset */
+        pADCBaseCfg->ADCMuxN = ADCMUXN_N_NODE;
+        pADCBaseCfg->ADCMuxP = ADCMUXP_P_NODE;
+        pADCBaseCfg->ADCPga = ADCPgaGainRcal;
+        AD5940_ADCBaseCfgS(pADCBaseCfg);
+        AD5940_Delay10us(50);                              /* Wait some time here. */
+        offset_rcal = __AD5940_TakeMeasurement(&time_out); /* Turn on ADC to get one valid data and then turn off ADC. */
+        /* Measure RTIA channel voltage offset */
+        if (pCalCfg->LpAmpSel == LPAMP0) {
+            pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA0_N;
+            pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA0_P;
+        } else {
+            pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA1_N;
+            pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA1_P;
+        }
+        pADCBaseCfg->ADCPga = ADCPgaGainRtia;
+        AD5940_ADCBaseCfgS(pADCBaseCfg);
+        AD5940_Delay10us(50);                              /* Wait some time here. */
+        offset_rtia = __AD5940_TakeMeasurement(&time_out); /* Turn on ADC to get one valid data and then turn off ADC. */
+        /* Connect LPTIA loop, let current flow to RTIA. */
+        pSWCfg->Dswitch = SWD_RCAL0 | ((pCalCfg->LpAmpSel == LPAMP0) ? SWD_SE0 : SWD_SE1);
+        pSWCfg->Pswitch = SWP_RCAL0;
+        pSWCfg->Nswitch = SWN_RCAL1;
+        pSWCfg->Tswitch = SWT_TRTIA | SWT_RCAL1;
+        AD5940_SWMatrixCfgS(pSWCfg);
+        AD5940_Delay10us(1000); /* Wait some time here. */
+                                /* Measure RCAL */
+        pADCBaseCfg = &dsp_cfg.ADCBaseCfg;
+        pADCBaseCfg->ADCMuxN = ADCMUXN_N_NODE;
+        pADCBaseCfg->ADCMuxP = ADCMUXP_P_NODE;
+        pADCBaseCfg->ADCPga = ADCPgaGainRcal;
+        AD5940_ADCBaseCfgS(pADCBaseCfg);
+        AD5940_Delay10us(50); /* Wait some time here. */
+        DftRcal.Real = (int32_t)__AD5940_TakeMeasurement(&time_out) - offset_rcal;
+        DftRcal.Image = 0;
+
         /* Measure RTIA */
-    if (pCalCfg->LpAmpSel == LPAMP0)
-    {
-      pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA0_N;
-      pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA0_P;
-    }else
-    {
-      pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA1_N;
-      pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA1_P;
-    }
-    pADCBaseCfg->ADCPga = ADCPgaGainRtia;
-    AD5940_ADCBaseCfgS(pADCBaseCfg);
-    AD5940_Delay10us(50);   /* Wait some time here. */
-    DftRtia.Real = (int32_t)__AD5940_TakeMeasurement(&time_out)- offset_rtia;
-    DftRtia.Image = 0;
-  }
-  else
-  {
-		hs_loop.WgCfg.SinCfg.SinAmplitudeWord = WgAmpWord;
-		hs_loop.WgCfg.SinCfg.SinFreqWord = AD5940_WGFreqWordCal(pCalCfg->fFreq, pCalCfg->SysClkFreq);
-		hs_loop.WgCfg.SinCfg.SinOffsetWord = 0;
-		hs_loop.WgCfg.SinCfg.SinPhaseWord = 0;
-		hs_loop.WgCfg.WgCode = 0;
-		hs_loop.WgCfg.WgType = WGTYPE_SIN;
-    hs_loop.WgCfg.GainCalEn = bFALSE;      /* disable it */
-    hs_loop.WgCfg.OffsetCalEn = bFALSE;
-    AD5940_HSLoopCfgS(&hs_loop);
-    AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
+        if (pCalCfg->LpAmpSel == LPAMP0) {
+            pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA0_N;
+            pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA0_P;
+        } else {
+            pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA1_N;
+            pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA1_P;
+        }
+        pADCBaseCfg->ADCPga = ADCPgaGainRtia;
+        AD5940_ADCBaseCfgS(pADCBaseCfg);
+        AD5940_Delay10us(50); /* Wait some time here. */
+        DftRtia.Real = (int32_t)__AD5940_TakeMeasurement(&time_out) - offset_rtia;
+        DftRtia.Image = 0;
+    } else {
+        hs_loop.WgCfg.SinCfg.SinAmplitudeWord = WgAmpWord;
+        hs_loop.WgCfg.SinCfg.SinFreqWord = AD5940_WGFreqWordCal(pCalCfg->fFreq, pCalCfg->SysClkFreq);
+        hs_loop.WgCfg.SinCfg.SinOffsetWord = 0;
+        hs_loop.WgCfg.SinCfg.SinPhaseWord = 0;
+        hs_loop.WgCfg.WgCode = 0;
+        hs_loop.WgCfg.WgType = WGTYPE_SIN;
+        hs_loop.WgCfg.GainCalEn = bFALSE; /* disable it */
+        hs_loop.WgCfg.OffsetCalEn = bFALSE;
+        AD5940_HSLoopCfgS(&hs_loop);
+        AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
 
-    AD5940_AFECtrlS(AFECTRL_HSTIAPWR|AFECTRL_INAMPPWR, bTRUE);
-    AD5940_Delay10us(1000);      /* Wait for loop stable. */
-    pADCBaseCfg = &dsp_cfg.ADCBaseCfg;
-		/* DFT on RCAL */
-    pADCBaseCfg->ADCMuxN = ADCMUXN_N_NODE;
-    pADCBaseCfg->ADCMuxP = ADCMUXP_P_NODE;
-    pADCBaseCfg->ADCPga = ADCPgaGainRcal;
-    AD5940_ADCBaseCfgS(pADCBaseCfg);
-    AD5940_AFECtrlS(AFECTRL_ADCPWR|AFECTRL_WG, bTRUE);
-    AD5940_Delay10us(250);
-    AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_DFT, bTRUE);
-    int32_t t = AD5940_ReadReg(REG_AFE_ADCDAT);
-    // printf("REG_AFE_ADCDAT:%d\r\n", t);
-    /* Wait until DFT ready */
-    while(AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_DFTRDY) == bFALSE);  
-    AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_DFT|AFECTRL_WG|AFECTRL_ADCPWR, bFALSE);  /* Stop ADC convert and DFT */
-    AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
-    DftRcal.Real = AD5940_ReadAfeResult(AFERESULT_DFTREAL);
-    DftRcal.Image = AD5940_ReadAfeResult(AFERESULT_DFTIMAGE);
-    // printf("RCAL DftRcal.Real:%d; DftRcal.Image:%d\r\n", DftRcal.Real, DftRcal.Image);
-    /* DFT on RTIA */  
-    if(pCalCfg->LpAmpSel == LPAMP0)
-    {
-      pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA0_N;
-      pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA0_P;
-    }else
-    {
-      pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA1_N;
-      pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA1_P;
+        AD5940_AFECtrlS(AFECTRL_HSTIAPWR | AFECTRL_INAMPPWR, bTRUE);
+        AD5940_Delay10us(1000); /* Wait for loop stable. */
+        pADCBaseCfg = &dsp_cfg.ADCBaseCfg;
+        /* DFT on RCAL */
+        pADCBaseCfg->ADCMuxN = ADCMUXN_N_NODE;
+        pADCBaseCfg->ADCMuxP = ADCMUXP_P_NODE;
+        pADCBaseCfg->ADCPga = ADCPgaGainRcal;
+        AD5940_ADCBaseCfgS(pADCBaseCfg);
+        AD5940_AFECtrlS(AFECTRL_ADCPWR | AFECTRL_WG, bTRUE);
+        AD5940_Delay10us(250);
+        AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_DFT, bTRUE);
+        int32_t t = AD5940_ReadReg(REG_AFE_ADCDAT);
+        // printf("REG_AFE_ADCDAT:%d\r\n", t);
+        /* Wait until DFT ready */
+        while (AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_DFTRDY) == bFALSE)
+            ;
+        AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_DFT | AFECTRL_WG | AFECTRL_ADCPWR, bFALSE); /* Stop ADC convert and DFT */
+        AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
+        DftRcal.Real = AD5940_ReadAfeResult(AFERESULT_DFTREAL);
+        DftRcal.Image = AD5940_ReadAfeResult(AFERESULT_DFTIMAGE);
+        // printf("RCAL DftRcal.Real:%d; DftRcal.Image:%d\r\n", DftRcal.Real, DftRcal.Image);
+        /* DFT on RTIA */
+        if (pCalCfg->LpAmpSel == LPAMP0) {
+            pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA0_N;
+            pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA0_P;
+        } else {
+            pADCBaseCfg->ADCMuxN = ADCMUXN_LPTIA1_N;
+            pADCBaseCfg->ADCMuxP = ADCMUXP_LPTIA1_P;
+        }
+        pADCBaseCfg->ADCPga = ADCPgaGainRtia;
+        AD5940_ADCBaseCfgS(pADCBaseCfg);
+        AD5940_AFECtrlS(AFECTRL_ADCPWR | AFECTRL_WG, bTRUE);
+        AD5940_Delay10us(250);
+        AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_DFT, bTRUE);
+        t = AD5940_ReadReg(REG_AFE_ADCDAT);
+        // printf("REG_AFE_ADCDAT:%d\r\n", t);
+        /* Wait until DFT ready */
+        while (AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_DFTRDY) == bFALSE)
+            ;
+        AD5940_AFECtrlS(AFECTRL_ADCCNV | AFECTRL_DFT | AFECTRL_WG | AFECTRL_ADCPWR, bFALSE); /* Stop ADC convert and DFT */
+        AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
+        DftRtia.Real = AD5940_ReadAfeResult(AFERESULT_DFTREAL);
+        DftRtia.Image = AD5940_ReadAfeResult(AFERESULT_DFTIMAGE);
+        // printf("RTIA DftRtia.Real:%d; DftRtia.Image:%d\r\n",DftRtia.Real, DftRtia.Image);
+        if (DftRcal.Real & (1L << 17))
+            DftRcal.Real |= 0xfffc0000;
+        if (DftRcal.Image & (1L << 17))
+            DftRcal.Image |= 0xfffc0000;
+        if (DftRtia.Real & (1L << 17))
+            DftRtia.Real |= 0xfffc0000;
+        if (DftRtia.Image & (1L << 17))
+            DftRtia.Image |= 0xfffc0000;
+        printf("Processed RTIA DftRtia.Real:%d; DftRtia.Image:%d\r\n", DftRtia.Real, DftRtia.Image);
+        // printf("Processed RCAL DftRcal.Real:%d; DftRcal.Image:%d\r\n", DftRcal.Real, DftRcal.Image);
     }
-    pADCBaseCfg->ADCPga = ADCPgaGainRtia;
-    AD5940_ADCBaseCfgS(pADCBaseCfg);
-    AD5940_AFECtrlS(AFECTRL_ADCPWR|AFECTRL_WG, bTRUE);
-    AD5940_Delay10us(250);
-    AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_DFT, bTRUE);
-    t = AD5940_ReadReg(REG_AFE_ADCDAT);
-    // printf("REG_AFE_ADCDAT:%d\r\n", t);
-    /* Wait until DFT ready */
-    while(AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_DFTRDY) == bFALSE);  
-    AD5940_AFECtrlS(AFECTRL_ADCCNV|AFECTRL_DFT|AFECTRL_WG|AFECTRL_ADCPWR, bFALSE);  /* Stop ADC convert and DFT */
-    AD5940_INTCClrFlag(AFEINTSRC_DFTRDY);
-    DftRtia.Real = AD5940_ReadAfeResult(AFERESULT_DFTREAL);
-    DftRtia.Image = AD5940_ReadAfeResult(AFERESULT_DFTIMAGE);
-    // printf("RTIA DftRtia.Real:%d; DftRtia.Image:%d\r\n",DftRtia.Real, DftRtia.Image);
-    if(DftRcal.Real&(1L<<17))
-      DftRcal.Real |= 0xfffc0000;
-    if(DftRcal.Image&(1L<<17))
-      DftRcal.Image |= 0xfffc0000;
-    if(DftRtia.Real&(1L<<17))
-      DftRtia.Real |= 0xfffc0000;
-    if(DftRtia.Image&(1L<<17))
-      DftRtia.Image |= 0xfffc0000;
-    printf("Processed RTIA DftRtia.Real:%d; DftRtia.Image:%d\r\n", DftRtia.Real, DftRtia.Image);
-    // printf("Processed RCAL DftRcal.Real:%d; DftRcal.Image:%d\r\n", DftRcal.Real, DftRcal.Image);
-  }
-  /*
+    /*
       The impedance engine inside of AD594x give us Real part and Imaginary part of DFT. Due to technology used, the Imaginary 
       part in register is the opposite number. So we add a negative sign on the Imaginary part of results. 
   */
-  DftRtia.Image = -DftRtia.Image;
-  DftRcal.Image = -DftRcal.Image;
+    DftRtia.Image = -DftRtia.Image;
+    DftRcal.Image = -DftRcal.Image;
 
-  fImpCar_Type res;
-  /* RTIA = (DftRtia.Real, DftRtia.Image)/(DftRcal.Real, DftRcal.Image)*fRcal */
-  res = AD5940_ComplexDivInt(&DftRtia, &DftRcal);
-  res.Real *= pCalCfg->fRcal/GainRatio;
-  res.Image *= pCalCfg->fRcal/GainRatio;
-  if(pCalCfg->bPolarResult == bFALSE)
-  {
-    ((fImpCar_Type*)pResult)->Real = res.Real;
-    ((fImpCar_Type*)pResult)->Image = res.Image;
-  }
-  else
-  {
-    ((fImpPol_Type*)pResult)->Magnitude = AD5940_ComplexMag(&res);
-    ((fImpPol_Type*)pResult)->Phase = AD5940_ComplexPhase(&res);
-  }
-    
-  /* Restore INTC1 DFT configure */
-  if(INTCCfg&AFEINTSRC_DFTRDY);
-  else
-    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_DFTRDY, bFALSE);    /* Disable DFT Interrupt */
-  if(INTCCfg&AFEINTSRC_SINC2RDY);
-  else
-    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bFALSE);  /* Disable SINC2 Interrupt */
-  AD5940_WriteReg(REG_AFE_AFECON, reg_afecon);              /* Restore AFECON register */
-  /* Open all switches in switch-matrix */
-  hs_loop.SWMatCfg.Dswitch = SWD_OPEN;
-  hs_loop.SWMatCfg.Pswitch = SWP_OPEN;
-  hs_loop.SWMatCfg.Nswitch = SWN_OPEN;
-  hs_loop.SWMatCfg.Tswitch = SWT_OPEN;
-  AD5940_SWMatrixCfgS(&hs_loop.SWMatCfg);
-  
-  return AD5940ERR_OK;
+    fImpCar_Type res;
+    /* RTIA = (DftRtia.Real, DftRtia.Image)/(DftRcal.Real, DftRcal.Image)*fRcal */
+    res = AD5940_ComplexDivInt(&DftRtia, &DftRcal);
+    res.Real *= pCalCfg->fRcal / GainRatio;
+    res.Image *= pCalCfg->fRcal / GainRatio;
+    if (pCalCfg->bPolarResult == bFALSE) {
+        ((fImpCar_Type *)pResult)->Real = res.Real;
+        ((fImpCar_Type *)pResult)->Image = res.Image;
+    } else {
+        ((fImpPol_Type *)pResult)->Magnitude = AD5940_ComplexMag(&res);
+        ((fImpPol_Type *)pResult)->Phase = AD5940_ComplexPhase(&res);
+    }
+
+    /* Restore INTC1 DFT configure */
+    if (INTCCfg & AFEINTSRC_DFTRDY)
+        ;
+    else
+        AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_DFTRDY, bFALSE); /* Disable DFT Interrupt */
+    if (INTCCfg & AFEINTSRC_SINC2RDY)
+        ;
+    else
+        AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bFALSE); /* Disable SINC2 Interrupt */
+    AD5940_WriteReg(REG_AFE_AFECON, reg_afecon);               /* Restore AFECON register */
+    /* Open all switches in switch-matrix */
+    hs_loop.SWMatCfg.Dswitch = SWD_OPEN;
+    hs_loop.SWMatCfg.Pswitch = SWP_OPEN;
+    hs_loop.SWMatCfg.Nswitch = SWN_OPEN;
+    hs_loop.SWMatCfg.Tswitch = SWT_OPEN;
+    AD5940_SWMatrixCfgS(&hs_loop.SWMatCfg);
+
+    return AD5940ERR_OK;
 }
 
 /**
@@ -4152,162 +4042,160 @@ AD5940Err AD5940_LPRtiaCal(LPRTIACal_Type *pCalCfg, void *pResult)
 */
 AD5940Err AD5940_HSDACCal(HSDACCal_Type *pCalCfg)
 {
-  ADCBaseCfg_Type adc_base;
-  ADCFilterCfg_Type adc_filter;
-  HSLoopCfg_Type hsloop_cfg;
-  LPLoopCfg_Type lploop_cfg;
-  
-  /* LSB_Numerator and LSB_Denometer are used to calculate 
+    ADCBaseCfg_Type adc_base;
+    ADCFilterCfg_Type adc_filter;
+    HSLoopCfg_Type hsloop_cfg;
+    LPLoopCfg_Type lploop_cfg;
+
+    /* LSB_Numerator and LSB_Denometer are used to calculate 
   the codes to write to calibration registers depending on
   which calibration register is used
   There are LSB_Numerator ADC LSBs in
   LSB_Denominator DAC Calibration LSBs*/
-  int32_t LSB_Numerator;
-  int32_t LEB_Denominator;
-  int32_t time_out;
-  int32_t ADCCode;
-  uint32_t HSDACCode = 0x800;     /* Mid scale DAC */
-  
-  uint32_t regaddr_offset;
-  uint32_t ADCPGA_Sel;
-  BoolFlag bHPMode;
+    int32_t LSB_Numerator;
+    int32_t LEB_Denominator;
+    int32_t time_out;
+    int32_t ADCCode;
+    uint32_t HSDACCode = 0x800; /* Mid scale DAC */
 
-  if(pCalCfg == NULL) return AD5940ERR_NULLP;
-  if(pCalCfg->ExcitBufGain > 1) return AD5940ERR_PARA;
-  if(pCalCfg->HsDacGain > 1) return AD5940ERR_PARA;
+    uint32_t regaddr_offset;
+    uint32_t ADCPGA_Sel;
+    BoolFlag bHPMode;
 
-  bHPMode = pCalCfg->AfePwrMode == AFEPWR_HP?bTRUE:bFALSE;
+    if (pCalCfg == NULL)
+        return AD5940ERR_NULLP;
+    if (pCalCfg->ExcitBufGain > 1)
+        return AD5940ERR_PARA;
+    if (pCalCfg->HsDacGain > 1)
+        return AD5940ERR_PARA;
 
-  switch(pCalCfg->ExcitBufGain)
-  {
-  case EXCITBUFGAIN_2:
-    regaddr_offset = bHPMode?REG_AFE_DACOFFSETHP:REG_AFE_DACOFFSET;
-    if(pCalCfg->HsDacGain == HSDACGAIN_0P2)
-    {
-      LSB_Numerator = 40;
-      LEB_Denominator = 14;
-      ADCPGA_Sel = ADCPGA_4;
+    bHPMode = pCalCfg->AfePwrMode == AFEPWR_HP ? bTRUE : bFALSE;
+
+    switch (pCalCfg->ExcitBufGain) {
+        case EXCITBUFGAIN_2:
+            regaddr_offset = bHPMode ? REG_AFE_DACOFFSETHP : REG_AFE_DACOFFSET;
+            if (pCalCfg->HsDacGain == HSDACGAIN_0P2) {
+                LSB_Numerator = 40;
+                LEB_Denominator = 14;
+                ADCPGA_Sel = ADCPGA_4;
+            } else {
+                LSB_Numerator = 7;
+                LEB_Denominator = 2;
+                ADCPGA_Sel = ADCPGA_1;
+            }
+            break;
+        case EXCITBUFGAIN_0P25:
+            regaddr_offset = bHPMode ? REG_AFE_DACOFFSETATTENHP : REG_AFE_DACOFFSETATTEN;
+            if (pCalCfg->HsDacGain == HSDACGAIN_0P2) {
+                LSB_Numerator = 5;
+                LEB_Denominator = 14;
+            } else {
+                LSB_Numerator = 25;
+                LEB_Denominator = 14;
+            }
+            ADCPGA_Sel = ADCPGA_4;
+            break;
+        default:
+            return AD5940ERR_PARA;
     }
-    else
-    {
-      LSB_Numerator = 7;
-      LEB_Denominator = 2;
-      ADCPGA_Sel = ADCPGA_1;
-    }
-    break;
-  case EXCITBUFGAIN_0P25:
-    regaddr_offset = bHPMode?REG_AFE_DACOFFSETATTENHP:REG_AFE_DACOFFSETATTEN;
-    if(pCalCfg->HsDacGain == HSDACGAIN_0P2)
-    {
-      LSB_Numerator = 5;
-      LEB_Denominator = 14;
-    }
-    else
-    {
-      LSB_Numerator = 25;
-      LEB_Denominator = 14;
-    }
-    ADCPGA_Sel = ADCPGA_4;
-    break;
-	default:
-		return AD5940ERR_PARA;
-  }
 
-  /* Turn On References*/
-  __AD5940_ReferenceON();
-  /* Step0.0 Initialize ADC filters ADCRawData-->SINC3-->SINC2+NOTCH. Use SIN2 data for calibration-->Lower noise */
-  adc_filter.ADCSinc3Osr = pCalCfg->ADCSinc3Osr;
-  adc_filter.ADCSinc2Osr = pCalCfg->ADCSinc2Osr;  /* 800KSPS/4/1333 = 150SPS */
-  adc_filter.ADCAvgNum = ADCAVGNUM_2;         /* Don't care about it. Average function is only used for DFT */
-  adc_filter.ADCRate = bHPMode?ADCRATE_1P6MHZ:ADCRATE_800KHZ;        /* If ADC clock is 32MHz, then set it to ADCRATE_1P6MHZ. Default is 16MHz, use ADCRATE_800KHZ. */
-  adc_filter.BpNotch = bTRUE;                 /* SINC2+Notch is one block, when bypass notch filter, we can get fresh data from SINC2 filter. */
-  adc_filter.BpSinc3 = bFALSE;                /* We use SINC3 filter. */
-  adc_filter.Sinc2NotchEnable = bTRUE;        /* Enable the SINC2+Notch block. You can also use function AD5940_AFECtrlS */
-  AD5940_ADCFilterCfgS(&adc_filter);
-  /* Step0.1 Initialize ADC basic function */
-  adc_base.ADCMuxP = ADCMUXP_P_NODE;
-  adc_base.ADCMuxN = ADCMUXN_N_NODE;
-  adc_base.ADCPga = ADCPGA_Sel;
-  AD5940_ADCBaseCfgS(&adc_base);
-  
-  /* Step0.2 Configure LPDAC to connect VZERO to HSTIA */
-  lploop_cfg.LpDacCfg.LpdacSel = LPDAC0;
-  lploop_cfg.LpDacCfg.DacData12Bit = 0x7C0;
-  lploop_cfg.LpDacCfg.DacData6Bit = 0x1F;  
-  lploop_cfg.LpDacCfg.DataRst = bFALSE;
-  lploop_cfg.LpDacCfg.LpDacRef = LPDACREF_2P5;
-  lploop_cfg.LpDacCfg.LpDacSrc = LPDACSRC_MMR;
-  lploop_cfg.LpDacCfg.LpDacVzeroMux = LPDACVZERO_6BIT;
-  lploop_cfg.LpDacCfg.LpDacVbiasMux = LPDACVBIAS_12BIT;
-  lploop_cfg.LpDacCfg.PowerEn = bTRUE;
-  lploop_cfg.LpDacCfg.LpDacSW = LPDACSW_VBIAS2LPPA|LPDACSW_VBIAS2PIN|LPDACSW_VZERO2HSTIA;
-  AD5940_LPLoopCfgS(&lploop_cfg);
-  
-  /* Step0.3 Configure HSLOOP */
-  hsloop_cfg.HsDacCfg.ExcitBufGain = pCalCfg->ExcitBufGain;
-  hsloop_cfg.HsDacCfg.HsDacGain = pCalCfg->HsDacGain;
-  hsloop_cfg.HsDacCfg.HsDacUpdateRate = bHPMode?0x7:0x1B;
-  hsloop_cfg.HsTiaCfg.DiodeClose = bFALSE;
-  hsloop_cfg.HsTiaCfg.HstiaBias = HSTIABIAS_VZERO0;
-  hsloop_cfg.HsTiaCfg.HstiaCtia = 8;
-  hsloop_cfg.HsTiaCfg.HstiaDeRload = HSTIADERLOAD_OPEN;
-  hsloop_cfg.HsTiaCfg.HstiaDeRtia = HSTIADERTIA_OPEN;
-  hsloop_cfg.HsTiaCfg.HstiaDe1Rload = HSTIADERLOAD_OPEN;
-  hsloop_cfg.HsTiaCfg.HstiaDe1Rtia = HSTIADERTIA_OPEN;
-  hsloop_cfg.HsTiaCfg.HstiaRtiaSel = HSTIARTIA_200;
-  hsloop_cfg.SWMatCfg.Dswitch = SWD_RCAL0;
-  hsloop_cfg.SWMatCfg.Pswitch = SWP_RCAL0;
-  hsloop_cfg.SWMatCfg.Nswitch = SWN_RCAL1;
-  hsloop_cfg.SWMatCfg.Tswitch = SWT_TRTIA|SWT_RCAL1;
-  hsloop_cfg.WgCfg.GainCalEn = bTRUE;
-  hsloop_cfg.WgCfg.OffsetCalEn = bTRUE;
-  hsloop_cfg.WgCfg.WgType = WGTYPE_MMR;
-  hsloop_cfg.WgCfg.WgCode = HSDACCode;
-  AD5940_HSLoopCfgS(&hsloop_cfg);
-  /* Step0.4 Turn ON reference and ADC power, and DAC power and DAC reference. We use DAC 1.8V reference to calibrate ADC. */
-  AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Disable all */
-  AD5940_AFECtrlS(AFECTRL_ADCPWR|AFECTRL_HPREFPWR|AFECTRL_DACREFPWR|AFECTRL_HSDACPWR|AFECTRL_SINC2NOTCH|\
-    AFECTRL_EXTBUFPWR|AFECTRL_INAMPPWR|AFECTRL_HSTIAPWR|AFECTRL_WG, bTRUE);
-  AD5940_Delay10us(25);   /* Wait 250us for reference power up */
-  /* Step0.5 INTC configure and open calibration lock */
-  AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, KEY_CALDATLOCK);  /* Unlock KEY */
-	/* Reset Offset register before calibration */
-	AD5940_WriteReg(regaddr_offset, 0);
-	/* Update HSDACDAT after resetting calibration register */
-	AD5940_WriteReg(REG_AFE_HSDACDAT, 0x800);
-  /* Step1: Do offset calibration. */
-  {
-    int32_t ExpectedCode = 0x8000;        /* Ideal ADC output */
-    AD5940_Delay10us(10);
-    time_out = 1000;   /* Reset time out counter */
-    ADCCode = __AD5940_TakeMeasurement(&time_out);
-#ifdef ADI_DEBUG
-    ADI_Print("Voltage before cal: %f \n", AD5940_ADCCode2Volt(ADCCode, ADCPGA_Sel, 1.82));
-#endif
+    /* Turn On References*/
+    __AD5940_ReferenceON();
+    /* Step0.0 Initialize ADC filters ADCRawData-->SINC3-->SINC2+NOTCH. Use SIN2 data for calibration-->Lower noise */
+    adc_filter.ADCSinc3Osr = pCalCfg->ADCSinc3Osr;
+    adc_filter.ADCSinc2Osr = pCalCfg->ADCSinc2Osr;                  /* 800KSPS/4/1333 = 150SPS */
+    adc_filter.ADCAvgNum = ADCAVGNUM_2;                             /* Don't care about it. Average function is only used for DFT */
+    adc_filter.ADCRate = bHPMode ? ADCRATE_1P6MHZ : ADCRATE_800KHZ; /* If ADC clock is 32MHz, then set it to ADCRATE_1P6MHZ. Default is 16MHz, use ADCRATE_800KHZ. */
+    adc_filter.BpNotch = bTRUE;                                     /* SINC2+Notch is one block, when bypass notch filter, we can get fresh data from SINC2 filter. */
+    adc_filter.BpSinc3 = bFALSE;                                    /* We use SINC3 filter. */
+    adc_filter.Sinc2NotchEnable = bTRUE;                            /* Enable the SINC2+Notch block. You can also use function AD5940_AFECtrlS */
+    AD5940_ADCFilterCfgS(&adc_filter);
+    /* Step0.1 Initialize ADC basic function */
+    adc_base.ADCMuxP = ADCMUXP_P_NODE;
+    adc_base.ADCMuxN = ADCMUXN_N_NODE;
+    adc_base.ADCPga = ADCPGA_Sel;
+    AD5940_ADCBaseCfgS(&adc_base);
 
-    if(time_out == 0) goto DACCALERROR_TIMEOUT;  /* Time out error. */
-    ADCCode = ADCCode - ExpectedCode;
-    ADCCode = (((ADCCode)*LEB_Denominator)/LSB_Numerator); 
-    if(ADCCode>0)
-      ADCCode = 0xFFF - ADCCode;
-    else
-      ADCCode = -ADCCode;
-    AD5940_WriteReg(regaddr_offset, ADCCode);
-    AD5940_Delay10us(10);
+    /* Step0.2 Configure LPDAC to connect VZERO to HSTIA */
+    lploop_cfg.LpDacCfg.LpdacSel = LPDAC0;
+    lploop_cfg.LpDacCfg.DacData12Bit = 0x7C0;
+    lploop_cfg.LpDacCfg.DacData6Bit = 0x1F;
+    lploop_cfg.LpDacCfg.DataRst = bFALSE;
+    lploop_cfg.LpDacCfg.LpDacRef = LPDACREF_2P5;
+    lploop_cfg.LpDacCfg.LpDacSrc = LPDACSRC_MMR;
+    lploop_cfg.LpDacCfg.LpDacVzeroMux = LPDACVZERO_6BIT;
+    lploop_cfg.LpDacCfg.LpDacVbiasMux = LPDACVBIAS_12BIT;
+    lploop_cfg.LpDacCfg.PowerEn = bTRUE;
+    lploop_cfg.LpDacCfg.LpDacSW = LPDACSW_VBIAS2LPPA | LPDACSW_VBIAS2PIN | LPDACSW_VZERO2HSTIA;
+    AD5940_LPLoopCfgS(&lploop_cfg);
+
+    /* Step0.3 Configure HSLOOP */
+    hsloop_cfg.HsDacCfg.ExcitBufGain = pCalCfg->ExcitBufGain;
+    hsloop_cfg.HsDacCfg.HsDacGain = pCalCfg->HsDacGain;
+    hsloop_cfg.HsDacCfg.HsDacUpdateRate = bHPMode ? 0x7 : 0x1B;
+    hsloop_cfg.HsTiaCfg.DiodeClose = bFALSE;
+    hsloop_cfg.HsTiaCfg.HstiaBias = HSTIABIAS_VZERO0;
+    hsloop_cfg.HsTiaCfg.HstiaCtia = 8;
+    hsloop_cfg.HsTiaCfg.HstiaDeRload = HSTIADERLOAD_OPEN;
+    hsloop_cfg.HsTiaCfg.HstiaDeRtia = HSTIADERTIA_OPEN;
+    hsloop_cfg.HsTiaCfg.HstiaDe1Rload = HSTIADERLOAD_OPEN;
+    hsloop_cfg.HsTiaCfg.HstiaDe1Rtia = HSTIADERTIA_OPEN;
+    hsloop_cfg.HsTiaCfg.HstiaRtiaSel = HSTIARTIA_200;
+    hsloop_cfg.SWMatCfg.Dswitch = SWD_RCAL0;
+    hsloop_cfg.SWMatCfg.Pswitch = SWP_RCAL0;
+    hsloop_cfg.SWMatCfg.Nswitch = SWN_RCAL1;
+    hsloop_cfg.SWMatCfg.Tswitch = SWT_TRTIA | SWT_RCAL1;
+    hsloop_cfg.WgCfg.GainCalEn = bTRUE;
+    hsloop_cfg.WgCfg.OffsetCalEn = bTRUE;
+    hsloop_cfg.WgCfg.WgType = WGTYPE_MMR;
+    hsloop_cfg.WgCfg.WgCode = HSDACCode;
+    AD5940_HSLoopCfgS(&hsloop_cfg);
+    /* Step0.4 Turn ON reference and ADC power, and DAC power and DAC reference. We use DAC 1.8V reference to calibrate ADC. */
+    AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Disable all */
+    AD5940_AFECtrlS(AFECTRL_ADCPWR | AFECTRL_HPREFPWR | AFECTRL_DACREFPWR | AFECTRL_HSDACPWR | AFECTRL_SINC2NOTCH |
+                        AFECTRL_EXTBUFPWR | AFECTRL_INAMPPWR | AFECTRL_HSTIAPWR | AFECTRL_WG,
+                    bTRUE);
+    AD5940_Delay10us(25); /* Wait 250us for reference power up */
+    /* Step0.5 INTC configure and open calibration lock */
+    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, KEY_CALDATLOCK);  /* Unlock KEY */
+    /* Reset Offset register before calibration */
+    AD5940_WriteReg(regaddr_offset, 0);
+    /* Update HSDACDAT after resetting calibration register */
     AD5940_WriteReg(REG_AFE_HSDACDAT, 0x800);
-    AD5940_Delay10us(10);
+    /* Step1: Do offset calibration. */
+    {
+        int32_t ExpectedCode = 0x8000; /* Ideal ADC output */
+        AD5940_Delay10us(10);
+        time_out = 1000; /* Reset time out counter */
+        ADCCode = __AD5940_TakeMeasurement(&time_out);
 #ifdef ADI_DEBUG
-		ADCCode = __AD5940_TakeMeasurement(&time_out);
-		ADI_Print("Voltage after cal: %f \n", AD5940_ADCCode2Volt(ADCCode, ADCPGA_Sel, 1.82));
+        ADI_Print("Voltage before cal: %f \n", AD5940_ADCCode2Volt(ADCCode, ADCPGA_Sel, 1.82));
 #endif
-  }
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, 0);  /* Lock KEY */
-  return AD5940ERR_OK;
+
+        if (time_out == 0)
+            goto DACCALERROR_TIMEOUT; /* Time out error. */
+        ADCCode = ADCCode - ExpectedCode;
+        ADCCode = (((ADCCode)*LEB_Denominator) / LSB_Numerator);
+        if (ADCCode > 0)
+            ADCCode = 0xFFF - ADCCode;
+        else
+            ADCCode = -ADCCode;
+        AD5940_WriteReg(regaddr_offset, ADCCode);
+        AD5940_Delay10us(10);
+        AD5940_WriteReg(REG_AFE_HSDACDAT, 0x800);
+        AD5940_Delay10us(10);
+#ifdef ADI_DEBUG
+        ADCCode = __AD5940_TakeMeasurement(&time_out);
+        ADI_Print("Voltage after cal: %f \n", AD5940_ADCCode2Volt(ADCCode, ADCPGA_Sel, 1.82));
+#endif
+    }
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, 0); /* Lock KEY */
+    return AD5940ERR_OK;
 DACCALERROR_TIMEOUT:
-  AD5940_ADCConvtCtrlS(bFALSE);  /* Stop conversion */
-  AD5940_WriteReg(REG_AFE_CALDATLOCK, 0);  /* Lock KEY */
-  return AD5940ERR_TIMEOUT;
+    AD5940_ADCConvtCtrlS(bFALSE);           /* Stop conversion */
+    AD5940_WriteReg(REG_AFE_CALDATLOCK, 0); /* Lock KEY */
+    return AD5940ERR_TIMEOUT;
 }
 
 /**
@@ -4319,161 +4207,159 @@ DACCALERROR_TIMEOUT:
 **/
 AD5940Err AD5940_LPDACCal(LPDACCal_Type *pCalCfg, LPDACPara_Type *pResult)
 {
-  AD5940Err error = AD5940ERR_OK;
-  LPDACCfg_Type LpDacCfg;
-  ADCBaseCfg_Type adc_base;
-  ADCFilterCfg_Type adc_filter;
+    AD5940Err error = AD5940ERR_OK;
+    LPDACCfg_Type LpDacCfg;
+    ADCBaseCfg_Type adc_base;
+    ADCFilterCfg_Type adc_filter;
 
-  int32_t time_out;
-  uint32_t INTCCfg;
-  int32_t ADCCode, ADCCodeVref1p1;
-  BoolFlag bADCClk32MHzMode;
-  
-  if(pCalCfg == NULL) return AD5940ERR_NULLP; 
-  if(pResult == NULL) return AD5940ERR_NULLP;  
-  if(pCalCfg->AdcClkFreq > (32000000*0.8))
-    bADCClk32MHzMode = bTRUE;
+    int32_t time_out;
+    uint32_t INTCCfg;
+    int32_t ADCCode, ADCCodeVref1p1;
+    BoolFlag bADCClk32MHzMode;
 
-  /* Step0: Do initialization */
-  /* Turn on AD5940 references in case it's disabled. */
-  __AD5940_ReferenceON();
-  LpDacCfg.LpdacSel = pCalCfg->LpdacSel;
-  LpDacCfg.DacData12Bit = 0;
-  LpDacCfg.DacData6Bit = 0;  
-  LpDacCfg.DataRst = bFALSE;
-  LpDacCfg.LpDacRef = LPDACREF_2P5;
-  LpDacCfg.LpDacSrc = LPDACSRC_MMR;
-  LpDacCfg.LpDacSW = LPDACSW_VBIAS2PIN|LPDACSW_VZERO2PIN;
-  LpDacCfg.LpDacVbiasMux = LPDACVBIAS_12BIT;
-  LpDacCfg.LpDacVzeroMux = LPDACVZERO_6BIT;
-  LpDacCfg.PowerEn = bTRUE;
-  AD5940_LPDACCfgS(&LpDacCfg);
+    if (pCalCfg == NULL)
+        return AD5940ERR_NULLP;
+    if (pResult == NULL)
+        return AD5940ERR_NULLP;
+    if (pCalCfg->AdcClkFreq > (32000000 * 0.8))
+        bADCClk32MHzMode = bTRUE;
 
-  /* Initialize ADC filters ADCRawData-->SINC3-->SINC2+NOTCH. Use SIN2 data for calibration-->Lower noise */
-  adc_filter.ADCSinc3Osr = pCalCfg->ADCSinc3Osr;
-  adc_filter.ADCSinc2Osr = pCalCfg->ADCSinc2Osr;  /* 800KSPS/4/1333 = 150SPS */
-  adc_filter.ADCAvgNum = ADCAVGNUM_2;               /* Don't care about it. Average function is only used for DFT */
-  adc_filter.ADCRate = bADCClk32MHzMode?ADCRATE_1P6MHZ:ADCRATE_800KHZ;        /* If ADC clock is 32MHz, then set it to ADCRATE_1P6MHZ. Default is 16MHz, use ADCRATE_800KHZ. */
-  adc_filter.BpNotch = bTRUE;                       /* SINC2+Notch is one block, when bypass notch filter, we can get fresh data from SINC2 filter. */
-  adc_filter.BpSinc3 = bFALSE;                      /* We use SINC3 filter. */
-  adc_filter.Sinc2NotchEnable = bTRUE;              /* Enable the SINC2+Notch block. You can also use function AD5940_AFECtrlS */
-  AD5940_ADCFilterCfgS(&adc_filter);
-  /* Initialize ADC MUx and PGA */
-  adc_base.ADCMuxP = ADCMUXP_AGND;
-  adc_base.ADCMuxN = ADCMUXN_VSET1P1;
-  adc_base.ADCPga = ADCPGA_1;
-  AD5940_ADCBaseCfgS(&adc_base);
-  /* Turn ON ADC and its reference. And SINC2. */
-  AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Disable all firstly, we only enable things we use */
-  AD5940_AFECtrlS(AFECTRL_ADCPWR|AFECTRL_HPREFPWR|AFECTRL_SINC2NOTCH, bTRUE);
-  AD5940_Delay10us(25);                     /* Wait 250us for reference power up */
-  /* INTC configure and open calibration lock */
-  INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
-  AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
-  /* Step1: Measure internal 1.1V reference. */
-  {
-    //AD5940_ADCMuxCfgS(ADCMUXP_AGND, ADCMUXN_VSET1P1);
-    time_out = pCalCfg->TimeOut10us;   /* Reset time out counter */
-    ADCCodeVref1p1 = __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-    if(time_out == 0)
-    {
-      error = AD5940ERR_TIMEOUT;
-      goto LPDACCALERROR;
-    }  /* Time out error. */
-    /* Equation1: ADCCodeVref1p1 = AGND - Vref1p1 */
-  }
-  /* Step2: Do offset measurement. */
-  {
-    /* Equation2': ADCCode = Vbias0/1 - Vref1p1 */
-    AD5940_LPDACWriteS(0,0);  /* Set LPDAC output voltage to 0.2V(zero code) */
-    if(pCalCfg->SettleTime10us > 0)
-      AD5940_Delay10us(pCalCfg->SettleTime10us);  /* Delay nx10us */
-    if(pCalCfg->LpdacSel == LPDAC0)
-      AD5940_ADCMuxCfgS(ADCMUXP_VBIAS0, ADCMUXN_VREF1P1); /* Vbias0 is routed to 12BIT LPDAC */
-    else
-      AD5940_ADCMuxCfgS(ADCMUXP_VBIAS1, ADCMUXN_VREF1P1); /* Vbias1 is routed to 12BIT LPDAC */
+    /* Step0: Do initialization */
+    /* Turn on AD5940 references in case it's disabled. */
+    __AD5940_ReferenceON();
+    LpDacCfg.LpdacSel = pCalCfg->LpdacSel;
+    LpDacCfg.DacData12Bit = 0;
+    LpDacCfg.DacData6Bit = 0;
+    LpDacCfg.DataRst = bFALSE;
+    LpDacCfg.LpDacRef = LPDACREF_2P5;
+    LpDacCfg.LpDacSrc = LPDACSRC_MMR;
+    LpDacCfg.LpDacSW = LPDACSW_VBIAS2PIN | LPDACSW_VZERO2PIN;
+    LpDacCfg.LpDacVbiasMux = LPDACVBIAS_12BIT;
+    LpDacCfg.LpDacVzeroMux = LPDACVZERO_6BIT;
+    LpDacCfg.PowerEn = bTRUE;
+    AD5940_LPDACCfgS(&LpDacCfg);
 
-    AD5940_Delay10us(5);  /* Delay 50us */
-    time_out = pCalCfg->TimeOut10us;   /* Reset time out counter */
-    ADCCode = __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-    if(time_out == 0)
+    /* Initialize ADC filters ADCRawData-->SINC3-->SINC2+NOTCH. Use SIN2 data for calibration-->Lower noise */
+    adc_filter.ADCSinc3Osr = pCalCfg->ADCSinc3Osr;
+    adc_filter.ADCSinc2Osr = pCalCfg->ADCSinc2Osr;                           /* 800KSPS/4/1333 = 150SPS */
+    adc_filter.ADCAvgNum = ADCAVGNUM_2;                                      /* Don't care about it. Average function is only used for DFT */
+    adc_filter.ADCRate = bADCClk32MHzMode ? ADCRATE_1P6MHZ : ADCRATE_800KHZ; /* If ADC clock is 32MHz, then set it to ADCRATE_1P6MHZ. Default is 16MHz, use ADCRATE_800KHZ. */
+    adc_filter.BpNotch = bTRUE;                                              /* SINC2+Notch is one block, when bypass notch filter, we can get fresh data from SINC2 filter. */
+    adc_filter.BpSinc3 = bFALSE;                                             /* We use SINC3 filter. */
+    adc_filter.Sinc2NotchEnable = bTRUE;                                     /* Enable the SINC2+Notch block. You can also use function AD5940_AFECtrlS */
+    AD5940_ADCFilterCfgS(&adc_filter);
+    /* Initialize ADC MUx and PGA */
+    adc_base.ADCMuxP = ADCMUXP_AGND;
+    adc_base.ADCMuxN = ADCMUXN_VSET1P1;
+    adc_base.ADCPga = ADCPGA_1;
+    AD5940_ADCBaseCfgS(&adc_base);
+    /* Turn ON ADC and its reference. And SINC2. */
+    AD5940_AFECtrlS(AFECTRL_ALL, bFALSE); /* Disable all firstly, we only enable things we use */
+    AD5940_AFECtrlS(AFECTRL_ADCPWR | AFECTRL_HPREFPWR | AFECTRL_SINC2NOTCH, bTRUE);
+    AD5940_Delay10us(25); /* Wait 250us for reference power up */
+    /* INTC configure and open calibration lock */
+    INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
+    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bTRUE); /* Enable SINC2 Interrupt in INTC1 */
+    /* Step1: Measure internal 1.1V reference. */
     {
-      error = AD5940ERR_TIMEOUT;
-      goto LPDACCALERROR;
-    }  /* Time out error. */
-    /* Calculate the offset voltage using Equation2 - Equation1 */
-    ADCCode -= ADCCodeVref1p1;  /* Get the code of Vbias0-AGND. Then calculate the offset voltage in mV. */
-    pResult->bC2V_DAC12B = ADCCode*pCalCfg->ADCRefVolt*1e3f/32768*1.835f/1.82f; /*mV unit*/
-    /* Measure 6BIT DAC output(Vzero0/1) */
-    if(pCalCfg->LpdacSel == LPDAC0)
-      AD5940_ADCMuxCfgS(ADCMUXP_VZERO0, ADCMUXN_VREF1P1); /* Vbias0 is routed to 12BIT LPDAC */
+        //AD5940_ADCMuxCfgS(ADCMUXP_AGND, ADCMUXN_VSET1P1);
+        time_out = pCalCfg->TimeOut10us;                      /* Reset time out counter */
+        ADCCodeVref1p1 = __AD5940_TakeMeasurement(&time_out); /* Turn on ADC to get one valid data and then turn off ADC. */
+        if (time_out == 0) {
+            error = AD5940ERR_TIMEOUT;
+            goto LPDACCALERROR;
+        } /* Time out error. */
+        /* Equation1: ADCCodeVref1p1 = AGND - Vref1p1 */
+    }
+    /* Step2: Do offset measurement. */
+    {
+        /* Equation2': ADCCode = Vbias0/1 - Vref1p1 */
+        AD5940_LPDACWriteS(0, 0); /* Set LPDAC output voltage to 0.2V(zero code) */
+        if (pCalCfg->SettleTime10us > 0)
+            AD5940_Delay10us(pCalCfg->SettleTime10us); /* Delay nx10us */
+        if (pCalCfg->LpdacSel == LPDAC0)
+            AD5940_ADCMuxCfgS(ADCMUXP_VBIAS0, ADCMUXN_VREF1P1); /* Vbias0 is routed to 12BIT LPDAC */
+        else
+            AD5940_ADCMuxCfgS(ADCMUXP_VBIAS1, ADCMUXN_VREF1P1); /* Vbias1 is routed to 12BIT LPDAC */
+
+        AD5940_Delay10us(5);                           /* Delay 50us */
+        time_out = pCalCfg->TimeOut10us;               /* Reset time out counter */
+        ADCCode = __AD5940_TakeMeasurement(&time_out); /* Turn on ADC to get one valid data and then turn off ADC. */
+        if (time_out == 0) {
+            error = AD5940ERR_TIMEOUT;
+            goto LPDACCALERROR;
+        } /* Time out error. */
+        /* Calculate the offset voltage using Equation2 - Equation1 */
+        ADCCode -= ADCCodeVref1p1;                                                            /* Get the code of Vbias0-AGND. Then calculate the offset voltage in mV. */
+        pResult->bC2V_DAC12B = ADCCode * pCalCfg->ADCRefVolt * 1e3f / 32768 * 1.835f / 1.82f; /*mV unit*/
+        /* Measure 6BIT DAC output(Vzero0/1) */
+        if (pCalCfg->LpdacSel == LPDAC0)
+            AD5940_ADCMuxCfgS(ADCMUXP_VZERO0, ADCMUXN_VREF1P1); /* Vbias0 is routed to 12BIT LPDAC */
+        else
+            AD5940_ADCMuxCfgS(ADCMUXP_VZERO1, ADCMUXN_VREF1P1); /* Vbias1 is routed to 12BIT LPDAC */
+        AD5940_Delay10us(5);                                    /* Delay 50us */
+        time_out = pCalCfg->TimeOut10us;                        /* Reset time out counter */
+        ADCCode = __AD5940_TakeMeasurement(&time_out);          /* Turn on ADC to get one valid data and then turn off ADC. */
+        if (time_out == 0) {
+            error = AD5940ERR_TIMEOUT;
+            goto LPDACCALERROR;
+        } /* Time out error. */
+        /* Calculate the offset voltage */
+        ADCCode -= ADCCodeVref1p1;                                                           /* Get the code of Vbias0-AGND. Then calculate the offset voltage in mV. */
+        pResult->bC2V_DAC6B = ADCCode * pCalCfg->ADCRefVolt * 1e3f / 32768 * 1.835f / 1.82f; /*mV unit*/
+    }
+    /* Step3: Do gain measurement */
+    {
+        /* Equation2: ADCCode = Vbias0 - Vref1p1 */
+        AD5940_LPDACWriteS(0xfff, 0x3f); /* Set LPDAC output voltage to 2.4V(zero code) */
+        if (pCalCfg->SettleTime10us > 0)
+            AD5940_Delay10us(pCalCfg->SettleTime10us); /* Delay nx10us */
+        if (pCalCfg->LpdacSel == LPDAC0)
+            AD5940_ADCMuxCfgS(ADCMUXP_VBIAS0, ADCMUXN_VREF1P1); /* Vbias0 is routed to 12BIT LPDAC */
+        else
+            AD5940_ADCMuxCfgS(ADCMUXP_VBIAS1, ADCMUXN_VREF1P1); /* Vbias1 is routed to 12BIT LPDAC */
+        AD5940_Delay10us(5);                                    /* Delay 50us */
+        time_out = pCalCfg->TimeOut10us;                        /* Reset time out counter */
+        ADCCode = __AD5940_TakeMeasurement(&time_out);          /* Turn on ADC to get one valid data and then turn off ADC. */
+        if (time_out == 0) {
+            error = AD5940ERR_TIMEOUT;
+            goto LPDACCALERROR;
+        } /* Time out error. */
+        /* Calculate the offset voltage */
+        ADCCode -= ADCCodeVref1p1;                                                                                             /* Get the code of Vbias0-AGND. Then calculate the gain factor 'k'. */
+        pResult->kC2V_DAC12B = (ADCCode * pCalCfg->ADCRefVolt * 1e3f / 32768 * 1.835f / 1.82f - pResult->bC2V_DAC12B) / 0xfff; /*mV unit*/
+        /* Measure 6BIT DAC output(Vzero0) */
+        if (pCalCfg->LpdacSel == LPDAC0)
+            AD5940_ADCMuxCfgS(ADCMUXP_VZERO0, ADCMUXN_VREF1P1); /* Vbias0 is routed to 12BIT LPDAC */
+        else
+            AD5940_ADCMuxCfgS(ADCMUXP_VZERO1, ADCMUXN_VREF1P1); /* Vbias1 is routed to 12BIT LPDAC */
+        AD5940_Delay10us(5);                                    /* Delay 50us */
+        time_out = pCalCfg->TimeOut10us;                        /* Reset time out counter */
+        ADCCode = __AD5940_TakeMeasurement(&time_out);          /* Turn on ADC to get one valid data and then turn off ADC. */
+        if (time_out == 0) {
+            error = AD5940ERR_TIMEOUT;
+            goto LPDACCALERROR;
+        } /* Time out error. */
+        /* Calculate the offset voltage */
+        ADCCode -= ADCCodeVref1p1;                                                                                          /* Get the code of Vbias0-AGND. Then calculate the offset voltage in mV. */
+        pResult->kC2V_DAC6B = (ADCCode * pCalCfg->ADCRefVolt * 1e3f / 32768 * 1.835f / 1.82f - pResult->bC2V_DAC6B) / 0x3f; /*mV unit*/
+    }
+    /* Step4: calculate the parameters for voltage to code calculation. */
+    pResult->kV2C_DAC12B = 1 / pResult->kC2V_DAC12B;
+    pResult->bV2C_DAC12B = -pResult->bC2V_DAC12B / pResult->kC2V_DAC12B;
+    pResult->kV2C_DAC6B = 1 / pResult->kC2V_DAC6B;
+    pResult->bV2C_DAC6B = -pResult->bC2V_DAC6B / pResult->kC2V_DAC6B;
+    /* Restore INTC1 SINC2 configure */
+    if (INTCCfg & AFEINTSRC_SINC2RDY)
+        ;
     else
-      AD5940_ADCMuxCfgS(ADCMUXP_VZERO1, ADCMUXN_VREF1P1); /* Vbias1 is routed to 12BIT LPDAC */
-    AD5940_Delay10us(5);  /* Delay 50us */
-    time_out = pCalCfg->TimeOut10us;   /* Reset time out counter */
-    ADCCode = __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-    if(time_out == 0)
-    {
-      error = AD5940ERR_TIMEOUT;
-      goto LPDACCALERROR;
-    }  /* Time out error. */
-    /* Calculate the offset voltage */
-    ADCCode -= ADCCodeVref1p1;  /* Get the code of Vbias0-AGND. Then calculate the offset voltage in mV. */
-    pResult->bC2V_DAC6B = ADCCode*pCalCfg->ADCRefVolt*1e3f/32768*1.835f/1.82f; /*mV unit*/
-  }
-  /* Step3: Do gain measurement */
-  {
-    /* Equation2: ADCCode = Vbias0 - Vref1p1 */
-    AD5940_LPDACWriteS(0xfff,0x3f);  /* Set LPDAC output voltage to 2.4V(zero code) */
-    if(pCalCfg->SettleTime10us > 0)
-      AD5940_Delay10us(pCalCfg->SettleTime10us);  /* Delay nx10us */
-    if(pCalCfg->LpdacSel == LPDAC0)
-      AD5940_ADCMuxCfgS(ADCMUXP_VBIAS0, ADCMUXN_VREF1P1); /* Vbias0 is routed to 12BIT LPDAC */
-    else
-      AD5940_ADCMuxCfgS(ADCMUXP_VBIAS1, ADCMUXN_VREF1P1); /* Vbias1 is routed to 12BIT LPDAC */
-    AD5940_Delay10us(5);  /* Delay 50us */
-    time_out = pCalCfg->TimeOut10us;   /* Reset time out counter */
-    ADCCode = __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-    if(time_out == 0)
-    {
-      error = AD5940ERR_TIMEOUT;
-      goto LPDACCALERROR;
-    }  /* Time out error. */
-    /* Calculate the offset voltage */
-    ADCCode -= ADCCodeVref1p1;  /* Get the code of Vbias0-AGND. Then calculate the gain factor 'k'. */
-    pResult->kC2V_DAC12B = (ADCCode*pCalCfg->ADCRefVolt*1e3f/32768*1.835f/1.82f - pResult->bC2V_DAC12B)/0xfff;/*mV unit*/
-    /* Measure 6BIT DAC output(Vzero0) */
-    if(pCalCfg->LpdacSel == LPDAC0)
-      AD5940_ADCMuxCfgS(ADCMUXP_VZERO0, ADCMUXN_VREF1P1); /* Vbias0 is routed to 12BIT LPDAC */
-    else
-      AD5940_ADCMuxCfgS(ADCMUXP_VZERO1, ADCMUXN_VREF1P1); /* Vbias1 is routed to 12BIT LPDAC */
-    AD5940_Delay10us(5);  /* Delay 50us */
-    time_out = pCalCfg->TimeOut10us;   /* Reset time out counter */
-    ADCCode = __AD5940_TakeMeasurement(&time_out);  /* Turn on ADC to get one valid data and then turn off ADC. */
-    if(time_out == 0)
-    {
-      error = AD5940ERR_TIMEOUT;
-      goto LPDACCALERROR;
-    }  /* Time out error. */
-    /* Calculate the offset voltage */
-    ADCCode -= ADCCodeVref1p1;  /* Get the code of Vbias0-AGND. Then calculate the offset voltage in mV. */
-    pResult->kC2V_DAC6B = (ADCCode*pCalCfg->ADCRefVolt*1e3f/32768*1.835f/1.82f - pResult->bC2V_DAC6B)/0x3f;/*mV unit*/
-  }
-  /* Step4: calculate the parameters for voltage to code calculation. */
-  pResult->kV2C_DAC12B = 1/pResult->kC2V_DAC12B;
-  pResult->bV2C_DAC12B = -pResult->bC2V_DAC12B/pResult->kC2V_DAC12B;
-  pResult->kV2C_DAC6B = 1/pResult->kC2V_DAC6B;
-  pResult->bV2C_DAC6B = -pResult->bC2V_DAC6B/pResult->kC2V_DAC6B;
-  /* Restore INTC1 SINC2 configure */
-  if(INTCCfg&AFEINTSRC_SINC2RDY);
-  else
-    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bFALSE); /* Disable SINC2 Interrupt */
-  /* Done */
-  return AD5940ERR_OK;
+        AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_SINC2RDY, bFALSE); /* Disable SINC2 Interrupt */
+    /* Done */
+    return AD5940ERR_OK;
 
 LPDACCALERROR:
-  AD5940_ADCConvtCtrlS(bFALSE);  /* Stop conversion */
-  return error;
+    AD5940_ADCConvtCtrlS(bFALSE); /* Stop conversion */
+    return error;
 }
 
 /**
@@ -4486,7 +4372,7 @@ LPDACCALERROR:
 **/
 AD5940Err AD5940_LFOSCMeasure(LFOSCMeasure_Type *pCfg, float *pFreq) /* Measure current LFOSC frequency. */
 {
-  /**
+    /**
    * @code
    *  Sleep wakeup timer running...
    *  -SLP----WKP----SLP----WKP----SLP----WKP
@@ -4499,101 +4385,102 @@ AD5940Err AD5940_LFOSCMeasure(LFOSCMeasure_Type *pCfg, float *pFreq) /* Measure 
    *  ---------|--------------|---TimerCount2--|-------We change SeqB to reset timer so we measure how much time needed for MCU to read back SEQTIMEOUT register(TimerCount2)
    * @endcode
    * **/
-  uint32_t TimerCount, TimerCount2;
-  SEQCfg_Type seq_cfg, seq_cfg_backup;
-  SEQInfo_Type seqinfo;
-  WUPTCfg_Type wupt_cfg;
-  uint32_t INTCCfg;
-  uint32_t WuptPeriod;
+    uint32_t TimerCount, TimerCount2;
+    SEQCfg_Type seq_cfg, seq_cfg_backup;
+    SEQInfo_Type seqinfo;
+    WUPTCfg_Type wupt_cfg;
+    uint32_t INTCCfg;
+    uint32_t WuptPeriod;
 
-  static const uint32_t SeqA[]=
-  {
-    SEQ_TOUT(0x3fffffff),   /* Set time-out timer. It will always run until disable Sequencer by SPI interface. */
-  };
-  static const uint32_t SeqB[]=
-  {
-    /**
+    static const uint32_t SeqA[] = {
+        SEQ_TOUT(0x3fffffff), /* Set time-out timer. It will always run until disable Sequencer by SPI interface. */
+    };
+    static const uint32_t SeqB[] = {
+        /**
      * Interrupt flag AFEINTSRC_ENDSEQ will be set after this command. So We can inform MCU to read back 
      * current timer value. MCU will need some additional time to read back time count.
      * So we use SeqB to measure how much time needed for MCU to read back 
      * */
-    SEQ_STOP(),             
-  };
-  static const uint32_t SeqBB[]=
-  {
-    SEQ_TOUT(0x3fffffff),   /* Re-Set time-out timer, so we can measure the time needed for MCU to read out Timer Count register. */
-    SEQ_STOP(),             /* Interrupt flag AFEINTSRC_ENDSEQ will be set here */
-  };
+        SEQ_STOP(),
+    };
+    static const uint32_t SeqBB[] = {
+        SEQ_TOUT(0x3fffffff), /* Re-Set time-out timer, so we can measure the time needed for MCU to read out Timer Count register. */
+        SEQ_STOP(),           /* Interrupt flag AFEINTSRC_ENDSEQ will be set here */
+    };
 
-  if(pCfg == NULL) return AD5940ERR_NULLP;
-  if(pFreq == NULL) return AD5940ERR_NULLP;
-  if(pCfg->CalDuration < 1.0f)
-    return AD5940ERR_PARA;
-  AD5940_SEQGetCfg(&seq_cfg_backup);
-  INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
-  AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_ENDSEQ, bTRUE);
-	AD5940_INTCClrFlag(AFEINTSRC_ALLINT);
+    if (pCfg == NULL)
+        return AD5940ERR_NULLP;
+    if (pFreq == NULL)
+        return AD5940ERR_NULLP;
+    if (pCfg->CalDuration < 1.0f)
+        return AD5940ERR_PARA;
+    AD5940_SEQGetCfg(&seq_cfg_backup);
+    INTCCfg = AD5940_INTCGetCfg(AFEINTC_1);
+    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_ENDSEQ, bTRUE);
+    AD5940_INTCClrFlag(AFEINTSRC_ALLINT);
 
-  seq_cfg.SeqMemSize = SEQMEMSIZE_2KB;  /* 2kB SRAM is used for sequencer */
-  seq_cfg.SeqBreakEn = bFALSE;
-  seq_cfg.SeqIgnoreEn = bFALSE;
-  seq_cfg.SeqCntCRCClr = bFALSE;
-  seq_cfg.SeqEnable = bTRUE;
-  seq_cfg.SeqWrTimer = 0;
-  AD5940_SEQCfg(&seq_cfg);          /* Enable sequencer */
-  
-  seqinfo.pSeqCmd = SeqA;
-  seqinfo.SeqId = SEQID_0;
-  seqinfo.SeqLen = SEQ_LEN(SeqA);
-  seqinfo.SeqRamAddr = pCfg->CalSeqAddr;
-  seqinfo.WriteSRAM = bTRUE;
-  AD5940_SEQInfoCfg(&seqinfo);
-  seqinfo.SeqId = SEQID_1;
-  seqinfo.SeqRamAddr = pCfg->CalSeqAddr + SEQ_LEN(SeqA) ;
-  seqinfo.SeqLen = SEQ_LEN(SeqB);
-  seqinfo.pSeqCmd = SeqB;
-  AD5940_SEQInfoCfg(&seqinfo);      /* Configure sequence0 and sequence1 with command SeqA and SeqB */
-	
-  wupt_cfg.WuptEn = bFALSE;
-  wupt_cfg.WuptOrder[0] = SEQID_0;
-  wupt_cfg.WuptOrder[1] = SEQID_1;
-  wupt_cfg.WuptEndSeq = WUPTENDSEQ_B;
-  wupt_cfg.SeqxWakeupTime[0] = 4;       /* Don't care. >4 is acceptable */
-  wupt_cfg.SeqxSleepTime[0] = (uint32_t)((pCfg->CalDuration)*32 + 0.5f) - 1 - 4;
-  wupt_cfg.SeqxWakeupTime[1] = 4-1;
-  wupt_cfg.SeqxSleepTime[1] = 0xffffffff; /* Don't care */
-  WuptPeriod = (wupt_cfg.SeqxSleepTime[0]+1) + (wupt_cfg.SeqxWakeupTime[1]+1);
-  AD5940_WUPTCfg(&wupt_cfg);
-  
-  AD5940_INTCClrFlag(AFEINTSRC_ENDSEQ);
-  AD5940_WUPTCtrl(bTRUE);
-  
-  while(AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_ENDSEQ) == bFALSE);
-  TimerCount = AD5940_SEQTimeOutRd();
-  
-  AD5940_WUPTCtrl(bFALSE);
-	AD5940_WUPTTime(SEQID_0, 4, 4);	/* Set it to minimum value because we don't care about sequence0 now. We only want to measure how much time MCU will need to read register */
-  seqinfo.SeqId = SEQID_1;
-  seqinfo.SeqRamAddr = pCfg->CalSeqAddr + SEQ_LEN(SeqA) ;
-  seqinfo.SeqLen = SEQ_LEN(SeqBB);
-  seqinfo.pSeqCmd = SeqBB;
-  seqinfo.WriteSRAM = bTRUE;
-  AD5940_SEQInfoCfg(&seqinfo);
-  AD5940_SEQCtrlS(bTRUE); /* Enable Sequencer again */
+    seq_cfg.SeqMemSize = SEQMEMSIZE_2KB; /* 2kB SRAM is used for sequencer */
+    seq_cfg.SeqBreakEn = bFALSE;
+    seq_cfg.SeqIgnoreEn = bFALSE;
+    seq_cfg.SeqCntCRCClr = bFALSE;
+    seq_cfg.SeqEnable = bTRUE;
+    seq_cfg.SeqWrTimer = 0;
+    AD5940_SEQCfg(&seq_cfg); /* Enable sequencer */
 
-  AD5940_INTCClrFlag(AFEINTSRC_ENDSEQ);
-  AD5940_WUPTCtrl(bTRUE);
-  while(AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_ENDSEQ) == bFALSE);
-  TimerCount2 = AD5940_SEQTimeOutRd();
-	AD5940_INTCTestFlag(AFEINTC_0, AFEINTSRC_ENDSEQ);
+    seqinfo.pSeqCmd = SeqA;
+    seqinfo.SeqId = SEQID_0;
+    seqinfo.SeqLen = SEQ_LEN(SeqA);
+    seqinfo.SeqRamAddr = pCfg->CalSeqAddr;
+    seqinfo.WriteSRAM = bTRUE;
+    AD5940_SEQInfoCfg(&seqinfo);
+    seqinfo.SeqId = SEQID_1;
+    seqinfo.SeqRamAddr = pCfg->CalSeqAddr + SEQ_LEN(SeqA);
+    seqinfo.SeqLen = SEQ_LEN(SeqB);
+    seqinfo.pSeqCmd = SeqB;
+    AD5940_SEQInfoCfg(&seqinfo); /* Configure sequence0 and sequence1 with command SeqA and SeqB */
 
-  AD5940_WUPTCtrl(bFALSE);
-  AD5940_SEQCfg(&seq_cfg_backup);          /* restore sequencer configuration */
-  AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_ENDSEQ, (INTCCfg&AFEINTSRC_ENDSEQ)?bTRUE:bFALSE); /* Restore interrupt configuration */
-  AD5940_INTCClrFlag(AFEINTSRC_ENDSEQ);
-  //printf("Time duration:%d ", (TimerCount2 - TimerCount));
-	*pFreq = pCfg->SystemClkFreq*WuptPeriod/(TimerCount2 - TimerCount);
-  return AD5940ERR_OK;
+    wupt_cfg.WuptEn = bFALSE;
+    wupt_cfg.WuptOrder[0] = SEQID_0;
+    wupt_cfg.WuptOrder[1] = SEQID_1;
+    wupt_cfg.WuptEndSeq = WUPTENDSEQ_B;
+    wupt_cfg.SeqxWakeupTime[0] = 4; /* Don't care. >4 is acceptable */
+    wupt_cfg.SeqxSleepTime[0] = (uint32_t)((pCfg->CalDuration) * 32 + 0.5f) - 1 - 4;
+    wupt_cfg.SeqxWakeupTime[1] = 4 - 1;
+    wupt_cfg.SeqxSleepTime[1] = 0xffffffff; /* Don't care */
+    WuptPeriod = (wupt_cfg.SeqxSleepTime[0] + 1) + (wupt_cfg.SeqxWakeupTime[1] + 1);
+    AD5940_WUPTCfg(&wupt_cfg);
+
+    AD5940_INTCClrFlag(AFEINTSRC_ENDSEQ);
+    AD5940_WUPTCtrl(bTRUE);
+
+    while (AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_ENDSEQ) == bFALSE)
+        ;
+    TimerCount = AD5940_SEQTimeOutRd();
+
+    AD5940_WUPTCtrl(bFALSE);
+    AD5940_WUPTTime(SEQID_0, 4, 4); /* Set it to minimum value because we don't care about sequence0 now. We only want to measure how much time MCU will need to read register */
+    seqinfo.SeqId = SEQID_1;
+    seqinfo.SeqRamAddr = pCfg->CalSeqAddr + SEQ_LEN(SeqA);
+    seqinfo.SeqLen = SEQ_LEN(SeqBB);
+    seqinfo.pSeqCmd = SeqBB;
+    seqinfo.WriteSRAM = bTRUE;
+    AD5940_SEQInfoCfg(&seqinfo);
+    AD5940_SEQCtrlS(bTRUE); /* Enable Sequencer again */
+
+    AD5940_INTCClrFlag(AFEINTSRC_ENDSEQ);
+    AD5940_WUPTCtrl(bTRUE);
+    while (AD5940_INTCTestFlag(AFEINTC_1, AFEINTSRC_ENDSEQ) == bFALSE)
+        ;
+    TimerCount2 = AD5940_SEQTimeOutRd();
+    AD5940_INTCTestFlag(AFEINTC_0, AFEINTSRC_ENDSEQ);
+
+    AD5940_WUPTCtrl(bFALSE);
+    AD5940_SEQCfg(&seq_cfg_backup);                                                             /* restore sequencer configuration */
+    AD5940_INTCCfg(AFEINTC_1, AFEINTSRC_ENDSEQ, (INTCCfg & AFEINTSRC_ENDSEQ) ? bTRUE : bFALSE); /* Restore interrupt configuration */
+    AD5940_INTCClrFlag(AFEINTSRC_ENDSEQ);
+    //printf("Time duration:%d ", (TimerCount2 - TimerCount));
+    *pFreq = pCfg->SystemClkFreq * WuptPeriod / (TimerCount2 - TimerCount);
+    return AD5940ERR_OK;
 }
 
 /**

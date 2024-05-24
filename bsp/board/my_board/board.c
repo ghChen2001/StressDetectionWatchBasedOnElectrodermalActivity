@@ -4,6 +4,7 @@
 #include "bflb_rtc.h"
 #include "bflb_flash.h"
 #include "bflb_acomp.h"
+#include "bflb_efuse.h"
 #include "board.h"
 #include "bl616_tzc_sec.h"
 #include "bl616_psram.h"
@@ -11,7 +12,7 @@
 
 #include "mem.h"
 
-#define WB_4MB_PSRAM (1)
+// #define WB_4MB_PSRAM (1)
 
 #ifdef CONFIG_BSP_SDH_SDCARD
 #include "sdh_sdcard.h"
@@ -48,7 +49,7 @@ static void system_clock_init(void)
 
 static void peripheral_clock_init(void)
 {
-    PERIPHERAL_CLOCK_ADC_DAC_ENABLE();
+    // PERIPHERAL_CLOCK_ADC_DAC_ENABLE();
     PERIPHERAL_CLOCK_SEC_ENABLE();
     PERIPHERAL_CLOCK_DMA0_ENABLE();
     PERIPHERAL_CLOCK_UART0_ENABLE();
@@ -62,17 +63,18 @@ static void peripheral_clock_init(void)
     PERIPHERAL_CLOCK_USB_ENABLE();
     PERIPHERAL_CLOCK_CAN_ENABLE();
     PERIPHERAL_CLOCK_AUDIO_ENABLE();
+    PERIPHERAL_CLOCK_CKS_ENABLE();
 
     GLB_Set_UART_CLK(ENABLE, HBN_UART_CLK_XCLK, 0);
     GLB_Set_SPI_CLK(ENABLE, GLB_SPI_CLK_MCU_MUXPLL_160M, 0);
     GLB_Set_DBI_CLK(ENABLE, GLB_SPI_CLK_MCU_MUXPLL_160M, 0);
     GLB_Set_I2C_CLK(ENABLE, GLB_I2C_CLK_XCLK, 0);
-    GLB_Set_ADC_CLK(ENABLE, GLB_ADC_CLK_XCLK, 1);
+    // GLB_Set_ADC_CLK(ENABLE, GLB_ADC_CLK_XCLK, 1);
     GLB_Set_DIG_CLK_Sel(GLB_DIG_CLK_XCLK);
     GLB_Set_DIG_512K_CLK(ENABLE, ENABLE, 0x4E);
     GLB_Set_PWM1_IO_Sel(GLB_PWM1_IO_SINGLE_END);
-    GLB_Set_IR_CLK(ENABLE, GLB_IR_CLK_SRC_XCLK, 19);
-    GLB_Set_CAM_CLK(ENABLE, GLB_CAM_CLK_WIFIPLL_96M, 3);
+    // GLB_Set_IR_CLK(ENABLE, GLB_IR_CLK_SRC_XCLK, 19);
+    // GLB_Set_CAM_CLK(ENABLE, GLB_CAM_CLK_WIFIPLL_96M, 3);
 
     GLB_Set_PKA_CLK_Sel(GLB_PKA_CLK_MCU_MUXPLL_160M);
 #ifdef CONFIG_BSP_SDH_SDCARD
@@ -151,6 +153,40 @@ void bl_show_log(void)
     printf("Build:%s,%s\r\n", __TIME__, __DATE__);
     printf("Copyright (c) 2022 Bouffalolab team\r\n");
 }
+
+// static const char *bl_sys_version(const char ***ctx)
+// {
+//     extern uint8_t _version_info_section_start;
+//     extern uint8_t _version_info_section_end;
+//     const char **const version_section_start = (const char **)&_version_info_section_start;
+//     const char **const version_section_end = (const char **)&_version_info_section_end;
+//     const char *version_str;
+
+//     //init
+//     if (NULL == (*ctx)) {
+//         (*ctx) = version_section_start;
+//     }
+//     //check the end
+//     if (version_section_end == (*ctx)) {
+//         return NULL;
+//     }
+//     version_str = (**ctx);
+//     *ctx = (*ctx) + 1;
+//     return version_str;
+// }
+
+// void bl_show_component_version(void)
+// {
+//     const char **ctx = NULL;
+//     const char *version_str;
+
+//     puts("Version of used components:\r\n");
+//     while ((version_str = bl_sys_version(&ctx))) {
+//         puts("\tVersion: ");
+//         puts(version_str);
+//         puts("\r\n");
+//     }
+// }
 
 void bl_show_flashinfo(void)
 {
@@ -236,7 +272,7 @@ void board_init(void)
     size_t heap_len;
 
     flag = bflb_irq_save();
-#ifndef CONFIG_PSRAM_COPY_CODE
+#ifndef CONFIG_BOARD_FLASH_INIT_SKIP
     ret = bflb_flash_init();
 #endif
     system_clock_init();
@@ -246,11 +282,24 @@ void board_init(void)
     // console_init();
     uart_tx_init();
 
+    bl_show_log();
+    // bl_show_component_version();
+
 #ifdef CONFIG_PSRAM
-#ifndef CONFIG_PSRAM_COPY_CODE
-    board_psram_x8_init();
-    Tzc_Sec_PSRAMB_Access_Release();
-#endif
+// #ifndef CONFIG_PSRAM_COPY_CODE
+    static bflb_efuse_device_info_type device_info;
+
+    bflb_efuse_get_device_info(&device_info);
+    if (device_info.psram_info == 0) {
+        printf("This chip has no psram, please disable CONFIG_PSRAM\r\n");
+        while (1) {}
+    }
+
+    if (BL616_PSRAM_INIT_DONE == 0) {
+        board_psram_x8_init();
+        Tzc_Sec_PSRAMB_Access_Release();
+    }
+// #endif
     // extern uint32_t __psram_load_addr;
 
     // extern uint32_t __psram_data_start__;
@@ -273,7 +322,6 @@ void board_init(void)
     heap_len = ((size_t)&__HeapLimit - (size_t)&__HeapBase);
     kmem_init((void *)&__HeapBase, heap_len);
 
-    bl_show_log();
     if (ret != 0) {
         printf("flash init fail!!!\r\n");
     }

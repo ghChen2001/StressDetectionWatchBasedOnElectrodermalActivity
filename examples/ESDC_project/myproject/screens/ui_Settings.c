@@ -14,6 +14,7 @@ void ui_onAccEnabled(lv_event_t *e);
 void ui_onEdaEnabled(lv_event_t *e);
 void ui_onTempEnabled(lv_event_t *e);
 void ui_onHrEnabled(lv_event_t *e);
+void ui_onAlgoEnabled(lv_event_t *e);
 void ui_onMscEnabled(lv_event_t *e);
 void ui_onBrightnessSliderChanged(lv_event_t *e);
 
@@ -187,6 +188,24 @@ void ui_Settings_screen_init(void)
     lv_obj_add_state(ui_Switch_HR, LV_STATE_DEFAULT);
     lv_obj_add_event_cb(ui_Switch_HR, ui_onHrEnabled, LV_EVENT_CLICKED, NULL);
 
+    ui_Switch_TF_Label = lv_label_create(flex_container);
+    lv_obj_set_width(ui_Switch_TF_Label, 100); /// 1
+    lv_obj_set_height(ui_Switch_TF_Label, 30); /// 1
+    lv_obj_set_x(ui_Switch_TF_Label, 20);
+    lv_obj_set_y(ui_Switch_TF_Label, 175);
+    lv_label_set_text(ui_Switch_TF_Label, "TensorFlow");
+    lv_obj_set_style_text_color(ui_Switch_TF_Label, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Switch_TF_Label, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Switch_TF_Label, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Switch_TF = lv_switch_create(flex_container);
+    lv_obj_set_width(ui_Switch_TF, 60);  /// 1
+    lv_obj_set_height(ui_Switch_TF, 30); /// 1
+    lv_obj_set_x(ui_Switch_TF, 150);
+    lv_obj_set_y(ui_Switch_TF, 170);
+    lv_obj_add_state(ui_Switch_TF, LV_STATE_DEFAULT);
+    lv_obj_add_event_cb(ui_Switch_TF, ui_onAlgoEnabled, LV_EVENT_CLICKED, NULL);
+
     ui_Switch_MSC_Label = lv_label_create(flex_container);
     lv_obj_set_width(ui_Switch_MSC_Label, 100); /// 1
     lv_obj_set_height(ui_Switch_MSC_Label, 30); /// 1
@@ -327,6 +346,7 @@ void ui_onMscEnabled(lv_event_t *e)
         TEMP_task_pre_delete();
         HR_task_pre_delete();
         ACCE_task_pre_delete();
+        Algo_task_pre_delete();
         fatfs2msc();
         lv_obj_clear_state(ui_Switch_EDA, LV_STATE_CHECKED);
         lv_obj_clear_state(ui_Switch_ACC, LV_STATE_CHECKED);
@@ -347,4 +367,17 @@ void ui_onBrightnessSliderChanged(lv_event_t *e)
     printf("ui_onBrightnessSliderChanged: %d\r\n", lv_slider_get_value(target));
 
     lv_port_disp_set_brightness((uint16_t)lv_slider_get_value(target));
+}
+
+void ui_onAlgoEnabled(lv_event_t *e){
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t *target = lv_event_get_target(e);
+    // printf("STATE %d\r\n", lv_obj_get_state(target));
+    if ((event_code == LV_EVENT_CLICKED) && (lv_obj_get_state(target) == (LV_STATE_DEFAULT | LV_STATE_FOCUSED))) {
+        printf("Algo Clicked DEFAULT\r\n");
+        Algo_task_pre_delete();
+    } else if ((event_code == LV_EVENT_CLICKED) && (lv_obj_get_state(target) == (LV_STATE_CHECKED | LV_STATE_FOCUSED))) {
+        printf("Algo Clicked CHECKED\r\n");
+        Algo_task_create();
+    }
 }

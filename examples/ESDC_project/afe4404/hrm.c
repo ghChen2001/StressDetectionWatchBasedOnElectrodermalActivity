@@ -40,7 +40,7 @@ void initStatHRM(void)
         HR[(unsigned char)(i - 1)] = 0;
 
     // Sampling frequency
-    freq = 100;
+    freq = 64;
     // Moving average window size (removes high frequency noise)
     movingWindowSize = freq / 50;
     // Length of the shortest pulse possible

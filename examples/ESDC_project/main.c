@@ -117,6 +117,8 @@
 
 #include "main_head.h"
 
+#include "model_test.h"
+
 #define DBG_TAG "MAIN"
 #include "log.h"
 
@@ -179,12 +181,17 @@ uint32_t AppBuff[APPBUFF_SIZE];
 //     .Real = 103808.81f,
 //     .Image = -120586.1855f,
 // }; // device 1
+// fImpCar_Type EDABase = {
+//     .Real = 106158.5718f,
+//     .Image = -117342.1136f,
+// }; // device 2
 fImpCar_Type EDABase = {
-    .Real = 106158.5718f,
-    .Image = -117342.1136f,
-}; // device 2
+    .Real = 106252.1935f,
+    .Image = -114552.1958f,
+}; // device 0
 int err_code_ad5940;
 static bool isAD5940Init = false;
+float lastS = 0;
 
 // LSM6DSO
 static uint8_t whoamI, rst;
@@ -197,6 +204,7 @@ static float angular_rate_mdps[3];
 
 /* AFE4404 */
 uint8_t afe4404_adcrdy = 0;
+float afe4404_adcrdy_freq = 0;
 // HRM algo
 extern unsigned char HeartRate;
 uint8_t offsetDACcalibFlag = 0;
@@ -260,6 +268,7 @@ SemaphoreHandle_t xSem_EDAEN = NULL;
 SemaphoreHandle_t xSem_BVPEN = NULL;
 SemaphoreHandle_t xSem_ACCEN = NULL;
 SemaphoreHandle_t xSem_TEMPEN = NULL;
+SemaphoreHandle_t xSem_ALGOEN = NULL;
 SemaphoreHandle_t xSem_BLEDISCONN = NULL;
 SemaphoreHandle_t xSem_BTNINT = NULL;
 // SemaphoreHandle_t xSem_UpdateHRLabel = NULL;
@@ -269,12 +278,14 @@ QueueHandle_t Queue_HRBLE;
 QueueHandle_t Queue_AccBLE_XL;
 QueueHandle_t Queue_AccBLE_GY;
 QueueHandle_t Queue_TempBLE;
+QueueHandle_t Queue_EdaBLE;
 // Fifo for file system.
 QueueHandle_t Queue_EdaConFile;
 QueueHandle_t Queue_EdaPhaFile;
 QueueHandle_t Queue_EdaRealFile;
 QueueHandle_t Queue_EdaImageFile;
 QueueHandle_t Queue_BvpFile;
+QueueHandle_t Queue_HRFile;
 QueueHandle_t Queue_TempFile_To;
 QueueHandle_t Queue_TempPlot_To;
 QueueHandle_t Queue_TempFile_Ta;
@@ -287,15 +298,24 @@ QueueHandle_t Queue_AccFile_GY_Z;
 QueueHandle_t Queue_AccPlot_XL_X;
 QueueHandle_t Queue_AccPlot_XL_Y;
 QueueHandle_t Queue_AccPlot_XL_Z;
+QueueHandle_t Queue_AlgoFile;
+QueueHandle_t Queue_AlgoPlot;
 QueueHandle_t Queue_HRLabelUpdate;
 QueueHandle_t Queue_PPGChartUpdate;
+QueueHandle_t Queue_BvpAlgo;
+QueueHandle_t Queue_EdaAlgo;
 /* END freeRTOS */
 
 /* Algo */
-float EDAwindow_o[4 * 30] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(32)));
-float EDAwindow_f[4 * 30];
+// float EDAwindow_o[4 * 30] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(32)));
+// float EDAwindow_f[4 * 30];
 // float SCR_nonezero[25] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(32)));
 // uint32_t SCR_nonezero_timepoint[25] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(32)));
+float EDA_Window_ori[4 * 40] __attribute__((section(".psram_noinit"), aligned(32)));
+float EDA_Window_scale[4 * 40] __attribute__((section(".psram_noinit"), aligned(32)));
+int32_t BVP_Window_ori[64 * 40] __attribute__((section(".psram_noinit"), aligned(32)));
+int32_t BVP_Window_scale[64 * 40] __attribute__((section(".psram_noinit"), aligned(32)));
+float BVP_Window_scale2[64 * 40] __attribute__((section(".psram_noinit"), aligned(32)));
 uint32_t eda_cycle_cnt = 0;
 uint8_t scr_transfer_pointer = 0;
 uint8_t eda_ready_flag = 0;
@@ -303,6 +323,7 @@ uint16_t EDAcnt = 0;
 float TEMPwindow[4 * 30] = { 0 };
 uint8_t tw_pointer = 0;
 int output_class = -1;
+bool isAlgoOn = false;
 /* END Algo*/
 
 long long time_base = 0;
@@ -345,6 +366,7 @@ FIL f_eda;
 FIL f_temp;
 FIL f_acc;
 FIL f_bvp;
+FIL f_algo;
 
 /* Private Function Defination */
 /*Function Definations For lsm6dso */
@@ -411,9 +433,10 @@ static void ble_connected(struct bt_conn *conn, u8_t err)
     xQueueReset(Queue_TempBLE);
 
     isBleConnected = true;
-    xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-    ui_setBleImg(1);
-    xSemaphoreGive(xMutex_lvgl);
+    if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+        ui_setBleImg(1);
+        xSemaphoreGive(xMutex_lvgl);
+    }
 
     //set data length after connected.
     ret = bt_le_set_data_len(conn, tx_octets, tx_time);
@@ -445,9 +468,10 @@ static void ble_disconnected(struct bt_conn *conn, u8_t reason)
 
     printf("%s", __func__);
     isBleConnected = false;
-    xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-    ui_setBleImg(0);
-    xSemaphoreGive(xMutex_lvgl);
+    if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+        ui_setBleImg(0);
+        xSemaphoreGive(xMutex_lvgl);
+    }
 
     if (xSemaphoreTake(xSem_BLEDISCONN, 0) == pdTRUE) {
         bt_le_adv_stop();
@@ -660,6 +684,7 @@ void GPIO_Interrupt(int irq, void *arg)
         // afe4404_adcrdy = 1;
         bflb_gpio_int_clear(gpio, AFE_ADC_DRDY);
         xSemaphoreGiveFromISR(xSem_HR, &xHigherPriorityTaskWoken);
+        // printf("GPIO AFE4404 INT\r\n");
     }
 
     xHigherPriorityTaskWoken = pdFALSE;
@@ -840,7 +865,7 @@ static void peripheral_init(void)
     bflb_irq_attach(gpio->irq_num, GPIO_Interrupt, gpio);
 
     /* AFE4404 Pin Init */
-    bflb_gpio_init(gpio, AFE_ADC_DRDY, GPIO_INPUT | GPIO_PULLUP | GPIO_SMT_EN);
+    bflb_gpio_init(gpio, AFE_ADC_DRDY, GPIO_INPUT | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
     bflb_gpio_int_init(gpio, AFE_ADC_DRDY, GPIO_INT_TRIG_MODE_ASYNC_RISING_EDGE);
     bflb_gpio_int_mask(gpio, AFE_ADC_DRDY, true); // Now Disable Pin 28 Interrupt For AFE4404
 
@@ -980,7 +1005,7 @@ void AD5940_ReadWriteNBytes(unsigned char *pSendBuffer, unsigned char *pRecvBuff
     // printf("bflb_dma_channel_start(dma0_ch0)");
     // bflb_dma_channel_start(dma0_ch1);
     // printf("bflb_dma_channel_start");
-    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 14 * 1000 * 1000);
+    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 16 * 1000 * 1000);
     bflb_spi_poll_exchange(spi0, pSendBuffer, pRecvBuff, length);
 }
 
@@ -1038,29 +1063,41 @@ AD5940Err EDAShowResult(void *pData, uint32_t DataCount)
         //     EDAwindow_o[EDAcnt] = S;
         //     EDAcnt++;
         // }
+        if (isnanf(S) || (S < 0.0f) || (S > 10000.0f)) {
+            S = lastS;
+        }
         dataBuf[i] = S;
-        xQueueSend(Queue_EdaConFile, &S, portMAX_DELAY);
-        xQueueSend(Queue_EdaPhaFile, &phase, portMAX_DELAY);
-        xQueueSend(Queue_EdaRealFile, &res.Real, portMAX_DELAY);
-        xQueueSend(Queue_EdaImageFile, &res.Image, portMAX_DELAY);
+        xQueueSend(Queue_EdaConFile, &S, 0);
+        xQueueSend(Queue_EdaPhaFile, &phase, 0);
+        xQueueSend(Queue_EdaRealFile, &res.Real, 0);
+        xQueueSend(Queue_EdaImageFile, &res.Image, 0);
+        if (isAlgoOn) {
+            xQueueSend(Queue_EdaAlgo, &S, 0);
+        }
+        if (isPlotedaInit && isBleConnected) {
+            xQueueSend(Queue_EdaBLE, &S, 0);
+        }
+        lastS = S;
     }
 
-    if (isPlotedaInit && isBleConnected) {
-        xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
-        bt_gatt_ploteda_update(dataBuf, DataCount);
-        xSemaphoreGive(xMutex_BLE);
-    }
+    // if (isPlotedaInit && isBleConnected) {
+    //     if (xSemaphoreTake(xMutex_BLE, 0) == pdTRUE) {
+    //         bt_gatt_ploteda_update(dataBuf, DataCount);
+    //         xSemaphoreGive(xMutex_BLE);
+    //     }
+    // }
     return 0;
 }
 
 uint8_t BL618_I2C_TRANSMIT(struct bflb_i2c_msg_s *msg, uint16_t msglen)
 {
-    xSemaphoreTake(xMutex_IIC0,
-                   portMAX_DELAY);
-    uint8_t ret_code = bflb_i2c_transfer(i2c0, msg, msglen);
-    xSemaphoreGive(xMutex_IIC0);
-
-    return ret_code;
+    if (xSemaphoreTake(xMutex_IIC0,
+                       portMAX_DELAY) == pdTRUE) {
+        uint8_t ret_code = bflb_i2c_transfer(i2c0, msg, msglen);
+        xSemaphoreGive(xMutex_IIC0);
+        return ret_code;
+    }
+    return -1;
 }
 
 /*
@@ -1509,10 +1546,11 @@ void sntp_set_time(uint32_t sntp_time) // call back configured at "sntp_opts.h"
     // time_base = (long long)sntp_time;
     // bflb_rtc_set_time(rtc, BFLB_RTC_SEC2TIME(0));
     printf("TIME SET\r\n");
-    xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
-    time = bflb_rtc_set_utc_time_sec(sntp_time);
-    ins5699_set_time(&time);
-    xSemaphoreGive(xMutex_RTC);
+    if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+        time = bflb_rtc_set_utc_time_sec(sntp_time);
+        ins5699_set_time(&time);
+        xSemaphoreGive(xMutex_RTC);
+    }
 }
 
 static void EDA_task(void *pvParameters)
@@ -1542,20 +1580,24 @@ static void EDA_task(void *pvParameters)
     vTaskDelay(100);
     ResistorForBaseline = 100000;
 
-    xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-    lv_obj_clear_flag(ui_AD5940, LV_OBJ_FLAG_HIDDEN);
-    xSemaphoreGive(xMutex_lvgl);
+    if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+        lv_obj_clear_flag(ui_AD5940, LV_OBJ_FLAG_HIDDEN);
+        xSemaphoreGive(xMutex_lvgl);
+    }
     err_code_ad5940 = AppEDAInit(AppBuff, APPBUFF_SIZE); /* Initialize BIA(EDA) application. Provide a buffer, which is used to store sequencer commands */
-    xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-    lv_obj_add_flag(ui_AD5940, LV_OBJ_FLAG_HIDDEN);
-    xSemaphoreGive(xMutex_lvgl);
+    if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+        lv_obj_add_flag(ui_AD5940, LV_OBJ_FLAG_HIDDEN);
+        xSemaphoreGive(xMutex_lvgl);
+    }
+
     vTaskDelay(500);
     printf("AppEDAInit:%d\r\n", err_code_ad5940);
 
     if (AD5940WarmUp == false) {
-        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-        lv_obj_clear_flag(ui_AD5940_WarmUp, LV_OBJ_FLAG_HIDDEN);
-        xSemaphoreGive(xMutex_lvgl);
+        if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+            lv_obj_clear_flag(ui_AD5940_WarmUp, LV_OBJ_FLAG_HIDDEN);
+            xSemaphoreGive(xMutex_lvgl);
+        }
         err_code_ad5940 = AppEDACtrl(APPCTRL_START, 0); /* Control BIA(EDA) measurement to start. Second parameter has no meaning with this command. */
         AppEDACtrl(EDACTRL_MEASVOLT, 0);
         printf("APPCTRL_START(WarmUp):%d\r\n", err_code_ad5940);
@@ -1583,9 +1625,10 @@ static void EDA_task(void *pvParameters)
         err_code_ad5940 = AppEDACtrl(APPCTRL_START, 0); /* Control BIA(EDA) measurement to start. Second parameter has no meaning with this command. */
         AD5940WarmUp = true;
 
-        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-        lv_obj_add_flag(ui_AD5940_WarmUp, LV_OBJ_FLAG_HIDDEN);
-        xSemaphoreGive(xMutex_lvgl);
+        if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+            lv_obj_add_flag(ui_AD5940_WarmUp, LV_OBJ_FLAG_HIDDEN);
+            xSemaphoreGive(xMutex_lvgl);
+        }
     } else {
         err_code_ad5940 = AppEDACtrl(APPCTRL_START, 0); /* Control BIA(EDA) measurement to start. Second parameter has no meaning with this command. */
     }
@@ -1620,7 +1663,7 @@ void EDA_task_pre_delete()
     AppEDACtrl(APPCTRL_SHUTDOWN, 0);
 
     bflb_gpio_int_mask(gpio, KEY0, true);
-    bflb_gpio_int_clear(gpio, KEY0);
+    // bflb_gpio_int_clear(gpio, KEY0);
 
     while (uxSemaphoreGetCount(xMutex_SPI) == 0) {
         vTaskDelay(1);
@@ -1634,6 +1677,11 @@ void EDA_task_pre_delete()
     // while (uxQueueMessagesWaiting(Queue_EdaPhaFile) >= 4) {
     //     vTaskDelay(1);
     // }
+
+    xQueueReset(Queue_EdaConFile);
+    xQueueReset(Queue_EdaPhaFile);
+    xQueueReset(Queue_EdaRealFile);
+    xQueueReset(Queue_EdaImageFile);
 
     if (EDA_handle != NULL) {
         vTaskDelete(EDA_handle);
@@ -1649,7 +1697,7 @@ void EDA_task_pre_delete()
 void EDA_task_create()
 {
     AD5940_HWReset();
-    AD5940_SoftRst();
+    // AD5940_SoftRst();
     bflb_gpio_int_mask(gpio, KEY0, false);
     bflb_gpio_int_clear(gpio, KEY0);
 
@@ -1668,8 +1716,8 @@ static void ACCE_task(void *pvParameters)
     uint8_t reg;
     uint8_t stepCounter = 0;
 
-    // /* Uncomment to configure INT 1 */
-    // //lsm6dso_pin_int1_route_t int1_route;
+    /* Uncomment to configure INT 1 */
+    // lsm6dso_pin_int1_route_t int1_route;
     // /* Uncomment to configure INT 2 */
     // //lsm6dso_pin_int2_route_t int2_route;
     // /* Initialize driver interface */
@@ -1704,14 +1752,14 @@ static void ACCE_task(void *pvParameters)
     /* Enable latched interrupt notification. */
     //lsm6dso_int_notification_set(&dev_ctx, LSM6DSO_ALL_INT_LATCHED);
     /* Enable drdy 75 μs pulse: uncomment if interrupt must be pulsed. */
-    //lsm6dso_data_ready_mode_set(&dev_ctx, LSM6DSO_DRDY_PULSED);
+    lsm6dso_data_ready_mode_set(&dev_ctx, LSM6DSO_DRDY_PULSED);
     /*
    * Uncomment to configure INT 1
    * Remember that INT1 pin is used by sensor to switch in I3C mode
    */
-    //lsm6dso_pin_int1_route_get(&dev_ctx, &int1_route);
-    //int1_route.reg.emb_func_int1.int1_step_detector = PROPERTY_ENABLE;
-    //lsm6dso_pin_int1_route_set(&dev_ctx, &int1_route);
+    // lsm6dso_pin_int1_route_get(&dev_ctx, &int1_route);
+    // int1_route.reg.emb_func_int1.int1_step_detector = PROPERTY_ENABLE;
+    // int1_route.reg.emb_func_int1.lsm6dso_pin_int1_route_set(&dev_ctx, &int1_route);
     /* Uncomment to configure INT 2 */
     //lsm6dso_pin_int2_route_get(&dev_ctx, &int2_route);
     //int2_route.reg.emb_func_int2.int2_step_detector = PROPERTY_ENABLE;
@@ -1749,9 +1797,9 @@ static void ACCE_task(void *pvParameters)
             // ui_UpdateAccelerationChart(acceleration_mg[0] * 0.016, acceleration_mg[1] * 0.016, acceleration_mg[2] * 0.016);
             // xSemaphoreGive(xMutex_lvgl);
             if (isBleConnected && isPlotAccInit) {
-                xQueueSend(Queue_AccBLE_XL, acceleration_mg, portMAX_DELAY);
-                xQueueSend(Queue_AccBLE_XL, acceleration_mg + 1, portMAX_DELAY);
-                xQueueSend(Queue_AccBLE_XL, acceleration_mg + 2, portMAX_DELAY);
+                xQueueSend(Queue_AccBLE_XL, acceleration_mg, 0);
+                xQueueSend(Queue_AccBLE_XL, acceleration_mg + 1, 0);
+                xQueueSend(Queue_AccBLE_XL, acceleration_mg + 2, 0);
             }
             xQueueSend(Queue_AccFile_XL_X, acceleration_mg, portMAX_DELAY);
             xQueueSend(Queue_AccFile_XL_Y, acceleration_mg + 1, portMAX_DELAY);
@@ -1776,21 +1824,24 @@ static void ACCE_task(void *pvParameters)
                 lsm6dso_from_fs1000_to_mdps(data_raw_angular_rate[2]);
             // printf("Angular rate [mdps]:%4.2f\t%4.2f\t%4.2f\r\n", angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
             if (isBleConnected && isPlotAccInit) {
-                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps, portMAX_DELAY);
-                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps + 1, portMAX_DELAY);
-                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps + 2, portMAX_DELAY);
+                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps, 0);
+                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps + 1, 0);
+                xQueueSend(Queue_AccBLE_GY, angular_rate_mdps + 2, 0);
             }
             xQueueSend(Queue_AccFile_GY_X, angular_rate_mdps, portMAX_DELAY);
             xQueueSend(Queue_AccFile_GY_Y, angular_rate_mdps + 1, portMAX_DELAY);
             xQueueSend(Queue_AccFile_GY_Z, angular_rate_mdps + 2, portMAX_DELAY);
+            // printf("length Queue_AccFile_GY_Z %d\r\n", uxQueueMessagesWaiting(Queue_AccFile_GY_Z));
         }
 
         /* Read steps */
         if (stepCounter >= 200) {
             lsm6dso_number_of_steps_get(&dev_ctx, &stepCnt);
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateStepLabel(stepCnt);
-            xSemaphoreGive(xMutex_lvgl);
+
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_UpdateStepLabel(stepCnt);
+                xSemaphoreGive(xMutex_lvgl);
+            }
             stepCounter = 0;
         }
         stepCounter++;
@@ -1812,6 +1863,14 @@ void ACCE_task_pre_delete()
         vTaskDelete(ACCE_handle);
         printf("ACC task delete\r\n");
     }
+
+    xQueueReset(Queue_AccFile_XL_Z);
+    xQueueReset(Queue_AccFile_GY_Z);
+    xQueueReset(Queue_AccFile_XL_X);
+    xQueueReset(Queue_AccFile_XL_Y);
+    xQueueReset(Queue_AccFile_GY_X);
+    xQueueReset(Queue_AccFile_GY_Y);
+
     lsm6dso_reset_set(&dev_ctx, PROPERTY_ENABLE);
     ACCE_handle = NULL;
 }
@@ -1949,6 +2008,9 @@ void TEMP_task_pre_delete()
     //     vTaskDelay(1);
     // }
 
+    xQueueReset(Queue_TempFile_To);
+    xQueueReset(Queue_TempFile_Ta);
+
     if (TEMP_handle != NULL) {
         vTaskDelete(TEMP_handle);
         printf("TEMP task delete\r\n");
@@ -1969,12 +2031,14 @@ void TEMP_task_create()
 static void HR_task(void *pvParameters)
 {
     printf("HR task enter \r\n");
-    vTaskDelay(1000);
+    // vTaskDelay(1000);
     printf("HR task start \r\n");
-    printf("begin to loop %s\r\n", __func__);
 
     uint32_t NUMBER = 0;
     uint8_t uiUpdateCntHr = 0;
+    uint8_t ADCRDY_count = 0;
+    uint64_t startUs = 0;
+    uint64_t deltaUs = 0;
 
     // /* AFE4404 INIT */
     initStatHRM();
@@ -1984,18 +2048,32 @@ static void HR_task(void *pvParameters)
     /* END AFE4404 INIT */
 
     /* AFE4404 */
-    offsetDACcalibFlag = 1;
-    afe4404_adcrdy = 0;
-    AFE4404_ADCRDY_Interrupt_Enable();
-
-    CALIBRATION_ENABLED = 1;
-    AFE4404_Reg_Write(AFE_CONTROL0, 0x000000); // write mode
+    // AFE4404_Reg_Write(AFE_CONTROL0, 0x000000); // write mode
     AFE4404_Reg_Init();
     // AFE4404_Reg_Write(AFE_CONTROL0,0x000000); //write mode
     // AFE4404_Reg_Write(AFE_EXT_CLK_DIV_REG,0x04);      // CLKDIV_EXTMODE
-    AFE4404_Reg_Write(AFE_CONTROL0, 0x000001); // read mode
-    initCalibrationRoutine();
+    // AFE4404_Reg_Write(AFE_CONTROL0, 0x000001); // read mode
 
+    AFE4404_ADCRDY_Interrupt_Enable();
+    // Measure Frequency.
+    startUs = bflb_mtimer_get_time_us();
+    ADCRDY_count = 0;
+    while (xSemaphoreTake(xSem_HR, portMAX_DELAY) == pdTRUE) {
+        ADCRDY_count++;
+        if (ADCRDY_count == 100)
+            break;
+    }
+    deltaUs = bflb_mtimer_get_time_us() - startUs;
+    afe4404_adcrdy_freq = 1000000.0000 / (deltaUs / 100.0);
+    printf("afe4404_adcrdy_freq %.3f\r\n", afe4404_adcrdy_freq);
+
+    CALIBRATION_ENABLED = 1;
+    initCalibrationRoutine();
+    offsetDACcalibFlag = 1;
+    afe4404_adcrdy = 0;
+
+    xSemaphoreGive(xSem_BVPEN);
+    printf("begin to loop %s\r\n", __func__);
     while (1) {
         if (offsetDACcalibFlag == 0) {
             // printf("1\r\n");
@@ -2003,9 +2081,9 @@ static void HR_task(void *pvParameters)
                 // printf("2\r\n");
                 afe4404_adcrdy = 0;
                 offsetDACcalibFlag = OFFSET_DAC_Code_Est(AFE4404_Reg_Read(45));
-                // printf("offsetDACcalibFlag %d\r\n", offsetDACcalibFlag);
+                printf("offsetDACcalibFlag %d\r\n", offsetDACcalibFlag);
                 if (offsetDACcalibFlag)
-                    AFE4404_ADCRDY_Interrupt_Disable(); // Disable DRDY interrupt
+                    AFE4404_ADCRDY_Interrupt_Enable(); // Disable DRDY interrupt
             }
         } else {
             offsetDACcalibFlag = 1;
@@ -2018,6 +2096,7 @@ static void HR_task(void *pvParameters)
                 AFE44xx_SPO2_Data_buf[3] = AFE4404_Reg_Read(45); //read Ambient Data
                 AFE44xx_SPO2_Data_buf[4] = AFE4404_Reg_Read(46); //read LED2 - LED3 Data
                 AFE44xx_SPO2_Data_buf[5] = AFE4404_Reg_Read(47); //read LED1 - Ambient Data
+                // AFE44xx_SPO2_Data_buf[5] = AFE4404_Reg_Read(64); //read LED1 - Ambient Data
 
                 // printf("READ DATA\r\n");
 
@@ -2054,9 +2133,10 @@ static void HR_task(void *pvParameters)
 
         if (sendDataFlag) {
             // printf("Start Send Data\r\n");
-            xSemaphoreTake(xMutex_interArrayWindow, 0);
-            statHRMAlgo((long)AFE44xx_SPO2_Data_buf[5]);
-            xSemaphoreGive(xMutex_interArrayWindow);
+            if (xSemaphoreTake(xMutex_interArrayWindow, 0) == pdTRUE) {
+                statHRMAlgo((long)AFE44xx_SPO2_Data_buf[5]);
+                xSemaphoreGive(xMutex_interArrayWindow);
+            }
 
             if (isPlotBvpInit && isBleConnected) {
                 xQueueSend(Queue_HRBLE, AFE44xx_SPO2_Data_buf + 5, 0);
@@ -2083,15 +2163,19 @@ static void HR_task(void *pvParameters)
                 // ui_UpdateHRLabel(hr_transfer);
                 // xSemaphoreGive(xMutex_lvgl);
                 xQueueSend(Queue_HRLabelUpdate, &hr_transfer, 0);
+                xQueueSend(Queue_HRFile, &hr_transfer, 0);
                 NUMBER = 0;
                 hr_transfer = 0;
             }
-            if (uiUpdateCntHr >= 5) {
+            if (uiUpdateCntHr >= 2) {
                 // xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
                 // ui_UpdatePPGChart(AFE44xx_SPO2_Data_buf[5], 0, 0);
                 // xSemaphoreGive(xMutex_lvgl);
                 xQueueSend(Queue_PPGChartUpdate, AFE44xx_SPO2_Data_buf + 5, 0);
                 uiUpdateCntHr = 0;
+            }
+            if (isAlgoOn == true) {
+                xQueueSend(Queue_BvpAlgo, AFE44xx_SPO2_Data_buf + 5, 0);
             }
             NUMBER++;
             uiUpdateCntHr++;
@@ -2148,6 +2232,9 @@ void HR_task_pre_delete()
     }
     printf("HR xMutex_IIC0 == 1\r\n");
 
+    xQueueReset(Queue_BvpFile);
+    xQueueReset(Queue_HRFile);
+
     if (HR_handle != NULL) {
         vTaskDelete(HR_handle);
         printf("HR task delete\r\n");
@@ -2162,8 +2249,6 @@ void HR_task_create()
 {
     bflb_gpio_int_mask(gpio, AFE_ADC_DRDY, false);
     bflb_gpio_int_clear(gpio, AFE_ADC_DRDY);
-
-    xSemaphoreGive(xSem_BVPEN);
 
     if (HR_handle == NULL) {
         xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
@@ -2185,9 +2270,10 @@ static void BLE_trans_task(void *pvParameters)
                     break;
                 }
             }
-            xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
-            bt_gatt_plotbvp_update(data);
-            xSemaphoreGive(xMutex_BLE);
+            if (xSemaphoreTake(xMutex_BLE, portMAX_DELAY) == pdTRUE) {
+                bt_gatt_plotbvp_update(data);
+                xSemaphoreGive(xMutex_BLE);
+            }
         }
         // Send Acc
         if ((uxQueueMessagesWaiting(Queue_AccBLE_GY) >= 6) && (uxQueueMessagesWaiting(Queue_AccBLE_XL) >= 6)) {
@@ -2202,16 +2288,29 @@ static void BLE_trans_task(void *pvParameters)
                     break;
                 }
             }
-            xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
-            bt_gatt_plotacc_update(data);
-            xSemaphoreGive(xMutex_BLE);
+            if (xSemaphoreTake(xMutex_BLE, portMAX_DELAY) == pdTRUE) {
+                bt_gatt_plotacc_update(data);
+                xSemaphoreGive(xMutex_BLE);
+            }
         }
         // Send Temp
         if (uxQueueMessagesWaiting(Queue_TempBLE) >= 1) {
             xQueueReceive(Queue_TempBLE, data, portMAX_DELAY);
-            xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
-            bt_gatt_plottemp_update(data);
-            xSemaphoreGive(xMutex_BLE);
+            if (xSemaphoreTake(xMutex_BLE, portMAX_DELAY) == pdTRUE) {
+                bt_gatt_plottemp_update(data);
+                xSemaphoreGive(xMutex_BLE);
+            }
+        }
+        // Send Eda
+        if (uxQueueMessagesWaiting(Queue_EdaBLE) >= 4) {
+            xQueueReceive(Queue_EdaBLE, data, portMAX_DELAY);
+            xQueueReceive(Queue_EdaBLE, data + 1, portMAX_DELAY);
+            xQueueReceive(Queue_EdaBLE, data + 2, portMAX_DELAY);
+            xQueueReceive(Queue_EdaBLE, data + 3, portMAX_DELAY);
+            if (xSemaphoreTake(xMutex_BLE, portMAX_DELAY) == pdTRUE) {
+                bt_gatt_ploteda_update(data, 4);
+                xSemaphoreGive(xMutex_BLE);
+            }
         }
 
         vTaskDelay(1);
@@ -2222,6 +2321,7 @@ static void BLE_trans_task(void *pvParameters)
 static void LVGL_task(void *pvParameters)
 {
     uint32_t hrLabel = 0;
+    uint8_t AlgoLabel = 0;
     int32_t ppgSignal = 0;
     uint16_t ppgNum = 0;
     float AccX = 0;
@@ -2237,54 +2337,60 @@ static void LVGL_task(void *pvParameters)
 
     // lv_task_handler();
     while (1) {
-        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-        if (uxQueueMessagesWaiting(Queue_HRLabelUpdate) > 0) {
-            xQueueReceive(Queue_HRLabelUpdate, &hrLabel, 0);
-            ui_UpdateHRLabel((uint16_t)hrLabel);
-            xQueueReset(Queue_HRLabelUpdate);
-        }
+        if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+            if (uxQueueMessagesWaiting(Queue_HRLabelUpdate) > 0) {
+                xQueueReceive(Queue_HRLabelUpdate, &hrLabel, 0);
+                ui_UpdateHRLabel((uint16_t)hrLabel);
+                xQueueReset(Queue_HRLabelUpdate);
+            }
 
-        if (xSemaphoreTake(xSem_BTNINT, 0) == pdTRUE) {
-            if (isTouchLocked == false) {
-                isTouchLocked = true;
-                ui_back2home();
-                touchpad_remove();
+            if (uxQueueMessagesWaiting(Queue_AlgoPlot) > 0) {
+                xQueueReceive(Queue_AlgoPlot, &AlgoLabel, 0);
+                ui_UpdateAlgoChart(AlgoLabel);
+            }
+
+            if (xSemaphoreTake(xSem_BTNINT, 0) == pdTRUE) {
+                if (isTouchLocked == false) {
+                    isTouchLocked = true;
+                    ui_back2home();
+                    touchpad_remove();
+                } else {
+                    isTouchLocked = false;
+                    touchpad_restore();
+                }
+                // printf("xSem_BTNINT %d\r\n", isTouchLocked);
+                ui_UpdateTouchLock(isTouchLocked);
+            }
+
+            if ((uxQueueMessagesWaiting(Queue_AccPlot_XL_X) >= 4) && (uxQueueMessagesWaiting(Queue_AccPlot_XL_Y) >= 4) && (uxQueueMessagesWaiting(Queue_AccPlot_XL_Z) >= 4)) {
+                for (int8_t i = 0; i < 4; i++) {
+                    xQueueReceive(Queue_AccPlot_XL_X, &AccX, portMAX_DELAY);
+                    xQueueReceive(Queue_AccPlot_XL_Y, &AccY, portMAX_DELAY);
+                    xQueueReceive(Queue_AccPlot_XL_Z, &AccZ, portMAX_DELAY);
+                    ui_UpdateAccelerationChart(AccX, AccY, AccZ);
+                }
+            }
+
+            if (uxQueueMessagesWaiting(Queue_TempPlot_To) > 0) {
+                xQueueReceive(Queue_TempPlot_To, &Temp, portMAX_DELAY);
+                ui_UpdateTemperatureChart(Temp);
+                ui_UpdateTempLabel(Temp);
+            }
+
+            ppgNum = 2;
+            while (ppgNum) {
+                xQueueReceive(Queue_PPGChartUpdate, &ppgSignal, 0);
+                ui_UpdatePPGChart(ppgSignal, 0, 0);
+                ppgNum--;
+            }
+            if (wifi_connected) {
+                ui_setWifiImg(1);
             } else {
-                isTouchLocked = false;
-                touchpad_restore();
+                ui_setWifiImg(0);
             }
-            // printf("xSem_BTNINT %d\r\n", isTouchLocked);
-            ui_UpdateTouchLock(isTouchLocked);
+            lv_task_handler();
+            xSemaphoreGive(xMutex_lvgl);
         }
-
-        if ((uxQueueMessagesWaiting(Queue_AccPlot_XL_X) >= 4) && (uxQueueMessagesWaiting(Queue_AccPlot_XL_Y) >= 4) && (uxQueueMessagesWaiting(Queue_AccPlot_XL_Z) >= 4)) {
-            for (int8_t i = 0; i < 4; i++) {
-                xQueueReceive(Queue_AccPlot_XL_X, &AccX, portMAX_DELAY);
-                xQueueReceive(Queue_AccPlot_XL_Y, &AccY, portMAX_DELAY);
-                xQueueReceive(Queue_AccPlot_XL_Z, &AccZ, portMAX_DELAY);
-                ui_UpdateAccelerationChart(AccX, AccY, AccZ);
-            }
-        }
-
-        if(uxQueueMessagesWaiting(Queue_TempPlot_To) > 0){
-            xQueueReceive(Queue_TempPlot_To, &Temp, portMAX_DELAY);
-            ui_UpdateTemperatureChart(Temp);
-            ui_UpdateTempLabel(Temp);
-        }
-
-        ppgNum = 2;
-        while (ppgNum) {
-            xQueueReceive(Queue_PPGChartUpdate, &ppgSignal, 0);
-            ui_UpdatePPGChart(ppgSignal, 0, 0);
-            ppgNum--;
-        }
-        if (wifi_connected) {
-            ui_setWifiImg(1);
-        } else {
-            ui_setWifiImg(0);
-        }
-        lv_task_handler();
-        xSemaphoreGive(xMutex_lvgl);
         vTaskDelay(20);
     }
     vTaskDelete(NULL);
@@ -2314,58 +2420,66 @@ static void CLOCK_task(void *pvParameters)
     bflb_rtc_set_utc_time(&time); // set time into on-chip rtc.
 
     while (1) {
-        xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
-        bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
-        xSemaphoreGive(xMutex_RTC);
+        if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+            xSemaphoreGive(xMutex_RTC);
+        }
 
         // update label.
         if (time.tm_sec != rtc_sec0) {
             rtc_sec0 = time.tm_sec;
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateSecLabel(time.tm_sec);
-            xSemaphoreGive(xMutex_lvgl);
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_UpdateSecLabel(time.tm_sec);
+                xSemaphoreGive(xMutex_lvgl);
+            }
         }
 
         if (time.tm_min != rtc_min) {
             rtc_min = time.tm_min;
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateMinLabel(rtc_min);
-            xSemaphoreGive(xMutex_lvgl);
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_UpdateMinLabel(rtc_min);
+                xSemaphoreGive(xMutex_lvgl);
+            }
         }
 
         if (time.tm_hour != rtc_hour) {
             rtc_hour = time.tm_hour;
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateHourLabel(rtc_hour);
-            xSemaphoreGive(xMutex_lvgl);
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_UpdateHourLabel(rtc_hour);
+                xSemaphoreGive(xMutex_lvgl);
+            }
         }
 
         if (time.tm_mday != rtc_date) {
             rtc_date = time.tm_mday;
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateDateLabel(rtc_date);
-            xSemaphoreGive(xMutex_lvgl);
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_UpdateDateLabel(rtc_date);
+                xSemaphoreGive(xMutex_lvgl);
+            }
         }
 
         if (time.tm_mon != rtc_mon) {
             rtc_mon = time.tm_mon;
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateMonLabel(rtc_mon + 1);
-            xSemaphoreGive(xMutex_lvgl);
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_UpdateMonLabel(rtc_mon + 1);
+                xSemaphoreGive(xMutex_lvgl);
+            }
         }
 
         if (time.tm_year != rtc_year) {
             rtc_year = time.tm_year;
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateYearLabel(rtc_year + 1900);
-            xSemaphoreGive(xMutex_lvgl);
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_UpdateYearLabel(rtc_year + 1900);
+                xSemaphoreGive(xMutex_lvgl);
+            }
         }
 
         if (time.tm_wday != rtc_week) {
             rtc_week = time.tm_wday;
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_UpdateWeekLabel(rtc_week);
-            xSemaphoreGive(xMutex_lvgl);
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_UpdateWeekLabel(rtc_week);
+                xSemaphoreGive(xMutex_lvgl);
+            }
         }
 
         // sntp set time.
@@ -2417,9 +2531,10 @@ static void WIFI_task(void *pvParameters)
                 memset(weatherTemp, 0, 10);
                 weather_get("nanjing", weatherCityName, weatherText, &weatherCode, weatherTemp);
                 // weather_get("ip", weatherCityName, weatherText, &weatherCode, weatherTemp);
-                xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-                ui_updateWeather(weatherCityName, weatherText, weatherCode, weatherTemp);
-                xSemaphoreGive(xMutex_lvgl);
+                if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                    ui_updateWeather(weatherCityName, weatherText, weatherCode, weatherTemp);
+                    xSemaphoreGive(xMutex_lvgl);
+                }
                 weatherCounter = 0;
             }
             vTaskDelay(10000);
@@ -2431,305 +2546,182 @@ static void WIFI_task(void *pvParameters)
 
 static void Algo_task(void *pvParameters)
 {
+    uint8_t resultArray[350] = { 0 };
+    uint8_t result = 0;
+    int16_t accurateNumber = 0;
+    int64_t meanBVP = 0;
+    uint64_t startMs = 0;
+    uint32_t deltaMs = 0;
+    uint32_t sumMs = 0;
+
+    uint16_t pointerBvpO = 0;
+    uint16_t pointerEdaO = 0;
+
     printf("Algo task enter \r\n");
     vTaskDelay(20);
 
     printf("Algo task start \r\n");
-    // vTaskDelay(5000);
-    // // float e[120];
-    // // float p[120];
-    // // float r[120];
-    // // float t[120];
-    // // float obj;
-    // // float EDA_STD = 0;
-    // // float EDA_mean = 0;
-    // // f_sparse l;
-    // // g_sparse d;
 
-    // /* EDA Feature */
-    // float EDA_mean = 0;
-    // float EDA_std = 0;
-    // float EDA_min = 0;
-
-    // emxArray_real32_T *z;
-
-    // float distance_tmp = 4.0f * 4;
-    // int EDA_peakNum = 0;
-    // float EDA_peakHeightAvg = 0.0f;
-    // float EDA_peakHeightMin = 1e6;
-    // float EDA_peakHeightMax = 1e-6;
-    // float EDA_peakHeightStd = 0.0f;
-    // float temp = 0;
-
-    // /* HR Feature */
-    // float HRM_max = 0;
-    // float HRM_min = 0;
-    // float HRM_std = 0;
-    // float HRM_mean = 0;
-    // uint index = 0;
-
-    // /* TEMP Feature */
-    // float TEMP_max = 0;
-    // float TEMP_min = 0;
-    // float TEMP_avg = 0;
-
-    // float input_data[15] = { 1.6, 1.0, 1.0, 1.0, 1.0,
-    //                          1.7, 1.9, 1.2, 1.0, 1.0,
-    //                          1.1, 0.5, 1.0, 1.0, 1.0 };
-
-    // // float input_data[15] = { EDA_mean, EDA_std, EDA_min, EDA_peakNum, EDA_peakHeightAvg,
-    // //                          EDA_peakHeightMin, EDA_peakHeightMax, EDA_peakHeightStd, HRM_max, HRM_min,
-    // //                          HRM_std, HeartRate, TEMP_avg, TEMP_max, TEMP_min };
-
-    // TM_DBGT_INIT();
-    // TM_PRINTF("tinymaix start\n");
-    // tm_mdl_t mdl;
-    // tm_err_t res;
-    // tm_mdl_t mdl_bin;
-    // // tm_mat_t in = { 1, 1, 1, 15, { NULL } };
-    // tm_mat_t outs[1];
-    // tm_mat_t outs_bin[1];
-    // tm_mat_t in = { 1, 1, 1, 15, { NULL } };
-    // tm_mat_t in_bin = { 1, 1, 1, 13, { NULL } };
-
-    // tm_stat((tm_mdlbin_t *)mdl_data);
-    // tm_stat((tm_mdlbin_t *)mdl_data_bin);
-
-    // res = tm_load(&mdl, mdl_data, NULL, layer_cb, &in);
-    // if (res != TM_OK) {
-    //     TM_PRINTF("tm model load err %d\n", res);
-    // }
-    // res = tm_load(&mdl_bin, mdl_data_bin, NULL, layer_cb, &in_bin);
-    // if (res != TM_OK) {
-    //     TM_PRINTF("tm bin model load err %d\n", res);
-    // }
-
-    // emxInitArray_real32_T(&z, 1);
-    // uint16_t temp_min = 0;
-    // uint16_t temp_max = 0;
-    // while (1) {
-    //     if (eda_ready_flag) {
-    //         //     // float b_dv[120];
-    //         //     emxInit_sparse(&l);
-    //         //     emxInit_sparse1(&d);
-    //         //     printf("Enter cvxEDA\r\n");
-    //         //     /* Initialize function 'cvxEDA' input arguments. */
-    //         //     /* Initialize function input argument 'y'. */
-    //         //     /* Call the entry-point 'cvxEDA'. */
-    //         //     EDA_STD = 0;
-    //         //     EDA_mean = 0;
-    //         //     for (int i = 0; i < 120; i++) {
-    //         //         EDA_mean += EDAwindow_f[i];
-    //         //     }
-    //         //     EDA_mean = EDA_mean / 120;
-    //         //     printf("EDA_mean %.3f\r\n", EDA_mean);
-    //         //     for (int i = 0; i < 120; i++) {
-    //         //         EDA_STD += (EDAwindow_f[i] - EDA_mean) * (EDAwindow_f[i] - EDA_mean);
-    //         //     }
-    //         //     EDA_STD = sqrtf(EDA_STD/120);
-    //         //     printf("EDA_STD %.3f\r\n", EDA_STD);
-    //         //     for (int i = 0; i < 120; i++) {
-    //         //         printf("{EDAwindow_f_o} %.3f\r\n", EDAwindow_f[i]);
-    //         //         EDAwindow_f[i] = (EDAwindow_f[i] - EDA_mean) / EDA_STD;
-    //         //         printf("{EDAwindow_f} %.3f\r\n", EDAwindow_f[i]);
-    //         //     }
-    //         //     cvxEDA(EDAwindow_f, 0.25, r, p, t, &l, &d, e, &obj);
-    //         //     emxDestroy_sparse1(d);
-    //         //     emxDestroy_sparse(l);
-    //         //     for (int i = 0; i < 120; i++) {
-    //         //         printf("{cvxEDA_p} %.3f\r\n", p[i]);
-    //         //     }
-    //         //     for (int i = 0; i < 120; i++) {
-    //         //         printf("{cvxEDA_r} %.3f\r\n", r[i]);
-    //         //     }
-    //         //     for (int i = 0; i < 120; i++) {
-    //         //         printf("{cvxEDA_t} %.3f\r\n", t[i]);
-    //         //     }
-    //         //     printf("Exit cvxEDA\r\n");
-    //         //     // cvxEDA_terminate();
-    //         //     eda_ready_flag = 0;
-
-    //         EDA_min = 1e6;
-    //         EDA_mean = 0;
-    //         for (uint8_t i = 0; i < 120; i++) {
-    //             if (EDAwindow_f[i] < EDA_min) {
-    //                 EDA_min = EDAwindow_f[i];
-    //             }
-    //             EDA_mean += EDAwindow_f[i];
-    //         }
-    //         EDA_mean /= 120;
-    //         EDA_std = 0;
-    //         for (uint8_t i = 0; i < 120; i++) {
-    //             EDA_std += (EDAwindow_f[i] - EDA_mean) * (EDAwindow_f[i] - EDA_mean);
-    //         }
-    //         EDA_std = sqrtf(EDA_std / 120);
-
-    //         // csi_mean_f32(EDAwindow_f, 120, &EDA_mean);
-    //         // csi_std_f32(EDAwindow_f, 120, &EDA_std);
-    //         // csi_std_f32(EDAwindow_f, 120, &EDA_min);
-    //         printf("EDA_min %.3f\r\n", EDA_min);
-
-    //         my_findpeaks(EDAwindow_f, distance_tmp, 120, z);
-    //         EDA_peakHeightAvg = 0.0f;
-    //         EDA_peakHeightMin = 1e6;
-    //         EDA_peakHeightMax = 1e-6;
-    //         EDA_peakHeightStd = 0.0f;
-    //         temp = 0;
-
-    //         for (uint8_t i = 0; i < 120; i++) {
-    //             temp = z->data[i];
-    //             if (temp > 1e-3) {
-    //                 EDA_peakNum++;
-    //                 EDA_peakHeightAvg += temp;
-    //                 if (temp > EDA_peakHeightMax) {
-    //                     EDA_peakHeightMax = temp;
-    //                 }
-    //                 if (temp < EDA_peakHeightMin) {
-    //                     EDA_peakHeightMin = temp;
-    //                 }
-    //             }
-    //         }
-    //         EDA_peakHeightAvg /= EDA_peakNum;
-    //         for (uint8_t i = 0; i < 120; i++) {
-    //             temp = z->data[i];
-    //             if (temp > 1e-3) {
-    //                 EDA_peakHeightStd += (temp - EDA_peakHeightAvg) * (temp - EDA_peakHeightAvg);
-    //             }
-    //         }
-    //         EDA_peakHeightStd = sqrtf(EDA_peakHeightStd / EDA_peakNum);
-    //         // emxDestroyArray_real32_T(z);
-    //         printf("EDA_max %.3f\r\n", EDA_peakHeightMax);
-
-    //         temp_min = (uint16_t)floorf(EDA_min * 1000);
-    //         temp_max = (uint16_t)ceilf(EDA_peakHeightMax * 1000);
-    //         // printf("(uint16_t)ceilf(EDA_peakHeightMax * 100) %d\r\n", (uint16_t)ceilf(EDA_peakHeightMax * 1000));
-    //         // printf("(uint16_t)floorf(EDA_min * 100) %d\r\n", (uint16_t)floorf(EDA_min * 1000));
-
-    //         HRM_min = 1e6;
-    //         HRM_max = 1e-6;
-    //         HRM_std = 0.0f;
-    //         HRM_mean = 0;
-
-    //         xSemaphoreTake(xMutex_interArrayWindow, portMAX_DELAY);
-
-    //         for (uint8_t i = 0; i < iA_pointer; i++) {
-    //             if ((float)interArrayWindow[i] < HRM_min) {
-    //                 HRM_min = (float)interArrayWindow[i];
-    //             }
-    //             if ((float)interArrayWindow[i] > HRM_max) {
-    //                 HRM_max = (float)interArrayWindow[i];
-    //             }
-    //             HRM_mean += (float)interArrayWindow[i];
-    //         }
-    //         HRM_mean /= iA_pointer;
-
-    //         for (uint8_t i = 0; i < iA_pointer; i++) {
-    //             HRM_std += ((float)interArrayWindow[i] - HRM_mean) * ((float)interArrayWindow[i] - HRM_mean);
-    //         }
-    //         HRM_std = sqrtf(HRM_std / iA_pointer);
-
-    //         xSemaphoreGive(xMutex_interArrayWindow);
-    //         printf("interArrayWindow\r\n");
-
-    //         // csi_max_f32(interArrayWindow, iA_pointer, &HRM_max, &index);
-    //         // csi_min_f32(interArrayWindow, iA_pointer, &HRM_min, &index);
-    //         // csi_std_f32(interArrayWindow, iA_pointer, &HRM_std);
-
-    //         // csi_max_f32(TEMPwindow, 120, &TEMP_max, &index);
-    //         // csi_min_f32(TEMPwindow, 120, &TEMP_min, &index);
-    //         // csi_mean_f32(TEMPwindow, 120, &TEMP_avg);
-
-    //         TEMP_min = 1e6;
-    //         TEMP_max = 1e-6;
-    //         TEMP_avg = 0;
-    //         for (uint8_t i = 0; i < 120; i++) {
-    //             if (TEMPwindow[i] < TEMP_min) {
-    //                 TEMP_min = TEMPwindow[i];
-    //             }
-    //             if (TEMPwindow[i] > TEMP_max) {
-    //                 TEMP_max = TEMPwindow[i];
-    //             }
-    //             TEMP_avg += TEMPwindow[i];
-    //         }
-    //         TEMP_avg /= 120;
-
-    //         printf("TEMPwindow\r\n");
-
-    //         input_data[0] = (EDA_mean - 1.9635107565854033f) / 2.653874198543756f;
-    //         input_data[1] = (EDA_std - 0.04519523431581202f) / 0.0796896165882909f;
-    //         input_data[2] = (EDA_min - 1.868224049678013f) / 2.51363460423691f;
-    //         input_data[3] = (EDA_peakNum - 4.0f) / 1.5f;
-    //         input_data[4] = (EDA_peakHeightAvg - 1.9726016026110904f) / 2.6678769175713786f;
-    //         input_data[5] = (EDA_peakHeightMin - 1.9058191315547377f) / 2.5812927451430987f;
-    //         input_data[6] = (EDA_peakHeightMax - 2.060425913523459f) / 2.7624762331501787f;
-    //         input_data[7] = (EDA_peakHeightStd - 0.04304164967248956f) / 0.07752566272303067f;
-    //         input_data[8] = (HRM_max - 88.47838086476541f / 64 * 100) / 20.74675891492638f / 64 * 100;
-    //         input_data[9] = (HRM_min - 23.879484820607175f / 64 * 100) / 6.484658316275455f / 64 * 100;
-    //         input_data[10] = (HRM_std - 14.116718579677409f) / 4.923849396461889f;
-    //         input_data[11] = (HeartRate - 81.20699172033119f) / 12.742457294618461f;
-    //         input_data[12] = (TEMP_avg - 33.80643054277829f) / 0.017385464484055594f;
-    //         input_data[13] = (TEMP_max - 33.80643054277829f) / 0.017385464484055594f;
-    //         input_data[14] = (TEMP_min - 33.80643054277829f) / 0.017385464484055594f;
-    //         printf("Feature Done\r\n");
-
-    //         tm_mat_t in_float;
-    //         in_float.dims = 1;
-    //         in_float.h = 1;
-    //         in_float.w = 1;
-    //         in_float.c = 15;
-    //         in_float.dataf = input_data;
-    //         tm_mat_t in_float_bin;
-    //         in_float_bin.dims = 1;
-    //         in_float_bin.h = 1;
-    //         in_float_bin.w = 1;
-    //         in_float_bin.c = 15;
-    //         in_float_bin.dataf = input_data;
-
-    //         res = tm_preprocess(&mdl, TMPP_FP2INT, &in_float, &in);
-    //         res = tm_preprocess(&mdl_bin, TMPP_FP2INT, &in_float_bin, &in_bin);
-
-    //         TM_DBGT_START();
-    //         res = tm_run(&mdl_bin, &in_bin, outs_bin);
-    //         TM_DBGT("tm_run_bin");
-    //         if (res == TM_OK)
-    //             parse_output(outs_bin, 2);
-    //         else
-    //             TM_PRINTF("tm bin run error: %d\n", res);
-
-    //         TM_DBGT_START();
-    //         res = tm_run(&mdl, &in, outs);
-    //         TM_DBGT("tm_run");
-    //         if (res == TM_OK)
-    //             parse_output(outs, 3);
-    //         else
-    //             TM_PRINTF("tm run error: %d\n", res);
-
-    //         eda_ready_flag = 0;
-
-    //         xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-    //         ui_UpdateEDAChartRange(temp_max, temp_min);
-    //         ui_UpdateEDAChart(EDAwindow_f, 120);
-    //         ui_UpdateEda1(EDA_min, EDA_mean, EDA_std);
-    //         ui_UpdateEda2(EDA_peakNum, EDA_peakHeightAvg);
-    //         ui_UpdateEda3(EDA_peakHeightMin, EDA_peakHeightMax, EDA_peakHeightStd);
-    //         ui_UpdateBvp(HRM_min, HRM_max, HRM_mean, HeartRate);
-    //         ui_UpdateTemp(TEMP_avg);
-    //         xSemaphoreGive(xMutex_lvgl);
-
-    //         printf("EdaChartUpdate\r\n");
-    //     }
-    //     vTaskDelay(250);
-    // }
-    
     setup();
     printf("model load successfully!!\r\n");
 
-    while (1) {
-        // loop();
+    sumMs = 0;
+    // DEMO
+    // vTaskDelay(5000);
+    for (uint16_t i = 0; i < 350; i++) {
+        startMs = bflb_mtimer_get_time_ms();
+        // resultArray[i] = Calculate(test_data_input[i], 2720);
+        resultArray[i] = Calculate2(test_data_input[i], test_data_input[i] + 2560, 2560, 160);
+        deltaMs = bflb_mtimer_get_time_ms() - startMs;
+        sumMs += deltaMs;
+        printf("%d, time %d\r\n", resultArray[i], deltaMs);
+        if (resultArray[i] == test_label[i]) {
+            accurateNumber++;
+        }
         vTaskDelay(1);
     }
-    
+    printf("accurateNumber %d\r\n", accurateNumber);
+    printf("Avg Time %d\r\n", sumMs);
+
+    isAlgoOn = true;
+    while (1) {
+        if ((uxQueueMessagesWaiting(Queue_BvpAlgo) >= 320) && (uxQueueMessagesWaiting(Queue_EdaAlgo) >= 20)) {
+            // printf("Enter\r\n");
+            if (pointerBvpO < 64 * 40) {
+                for (int16_t i = pointerBvpO; i < pointerBvpO + 320; i++) {
+                    xQueueReceive(Queue_BvpAlgo, BVP_Window_ori + i, 0);
+                    // printf("{Bvp} %d\r\n", *(BVP_Window_ori + i));
+                }
+
+                if (pointerBvpO == 0) {
+                    meanBVP = 0;
+                    for (int16_t i = 0; i < 64; i++) {
+                        meanBVP += BVP_Window_ori[i];
+                    }
+                } else {
+                    meanBVP = 0;
+                    for (int16_t i = pointerBvpO - 32 - 32; i < pointerBvpO; i++) {
+                        meanBVP += BVP_Window_ori[i];
+                    }
+                }
+
+                for (int16_t i = pointerBvpO - 32; i < pointerBvpO + 320; i++) {
+                    if (i < 32) {
+                        BVP_Window_scale[i] = BVP_Window_ori[i] - meanBVP / 64;
+                    } else if (i < pointerBvpO + 320 - 32) {
+                        BVP_Window_scale[i] = BVP_Window_ori[i] - meanBVP / 64;
+                        meanBVP -= BVP_Window_ori[i - 32];
+                        meanBVP += BVP_Window_ori[i + 32];
+                        // BVP_Window_scale[i] = BVP_Window_ori[i] - mean(i-32, i+31);
+                    } else {
+                        // BVP_Window_scale[i] = BVP_Window_ori[i] - mean(pointerBvpO + 320 - 1 - 63, pointerBvpO + 320 - 1);
+                        BVP_Window_scale[i] = BVP_Window_ori[i] - meanBVP / 64;
+                    }
+                    // printf("{BVP_Window_scale} %d\r\n", BVP_Window_scale[i]);
+                }
+                pointerBvpO += 320;
+            } else {
+                for (int16_t i = 0, j = 64 * 5; j < 64 * 40; i++, j++) {
+                    BVP_Window_ori[i] = BVP_Window_ori[j];
+                    BVP_Window_scale[i] = BVP_Window_scale[j];
+                }
+                pointerBvpO = 64 * 35;
+                while (pointerBvpO < 64 * 40) {
+                    // printf("pointerBvpO %d\r\n", pointerBvpO);
+                    xQueueReceive(Queue_BvpAlgo, BVP_Window_ori + pointerBvpO, 0);
+                    // printf("{Bvp} %d\r\n", *(BVP_Window_ori + pointerBvpO));
+                    pointerBvpO++;
+                }
+
+                meanBVP = 0;
+                for (int16_t i = 64 * 35 - 32 - 32; i < 64 * 35; i++) {
+                    meanBVP += BVP_Window_ori[i];
+                }
+
+                for (int16_t i = 64 * 35 - 32; i < pointerBvpO; i++) {
+                    if (i < pointerBvpO - 32) {
+                        // BVP_Window_scale[i] = BVP_Window_ori[i] - mean(i - 32, i + 31);
+                        BVP_Window_scale[i] = BVP_Window_ori[i] - meanBVP / 64;
+                        meanBVP -= BVP_Window_ori[i - 32];
+                        meanBVP += BVP_Window_ori[i + 32];
+                    } else {
+                        // BVP_Window_scale[i] = BVP_Window_ori[i] - mean(pointerBvpO - 1 - 63, pointerBvpO - 1);
+                        BVP_Window_scale[i] = BVP_Window_ori[i] - meanBVP / 64;
+                    }
+                    // printf("{BVP_Window_scale} %d\r\n", BVP_Window_scale[i]);
+                }
+            }
+
+            if (pointerEdaO < 4 * 40) {
+                for (int i = pointerEdaO; i < pointerEdaO + 20; i++) {
+                    xQueueReceive(Queue_EdaAlgo, EDA_Window_ori + i, 0);
+                    // printf("{Eda} %.4f\r\n", *(EDA_Window_ori + i));
+                }
+                pointerEdaO += 20;
+            } else {
+                for (int16_t i = 0, j = 4 * 5; j < 4 * 40; i++, j++) {
+                    EDA_Window_ori[i] = EDA_Window_ori[j];
+                }
+                pointerEdaO = 4 * 35;
+                while (pointerEdaO < 4 * 40) {
+                    xQueueReceive(Queue_EdaAlgo, EDA_Window_ori + pointerEdaO, 0);
+                    // printf("pointerEdaO %d\r\n", pointerEdaO);
+                    // printf("{Eda} %.4f\r\n", *(EDA_Window_ori + pointerEdaO));
+                    pointerEdaO++;
+                }
+            }
+
+            if ((pointerEdaO >= 4 * 40) && (pointerBvpO >= 64 * 40)) {
+                // Scale.
+                printf("Calculate\r\n");
+                for (int16_t i = 0; i < 4 * 40; i++) {
+                    EDA_Window_scale[i] = (float)(EDA_Window_ori[i] - 13.0) / 30.0f;
+                }
+
+                for (int16_t i = 0; i < 64 * 40; i++) {
+                    BVP_Window_scale2[i] = (float)(BVP_Window_scale[i] / 80000.0f);
+                }
+
+                // Calculate on model.
+                result = Calculate2(BVP_Window_scale2, EDA_Window_scale, 2560, 160);
+                printf("{result} %d\r\n", result);
+                output_class = result;
+                xQueueSend(Queue_AlgoFile, &result, portMAX_DELAY);
+                xQueueSend(Queue_AlgoPlot, &result, portMAX_DELAY);
+            }
+        }
+
+        vTaskDelay(1);
+    }
+
     vTaskDelete(NULL);
+}
+
+void Algo_task_pre_delete()
+{
+    isAlgoOn = false;
+
+    xQueueReset(Queue_BvpAlgo);
+    xQueueReset(Queue_EdaAlgo);
+
+    if (Algo_handle != NULL) {
+        vTaskDelete(Algo_handle);
+        printf("Algo task delete\r\n");
+    }
+
+    Algo_handle = NULL;
+}
+
+void Algo_task_create()
+{
+    xQueueReset(Queue_BvpAlgo);
+    xQueueReset(Queue_EdaAlgo);
+
+    if (Algo_handle == NULL) {
+        xSemaphoreGive(xSem_ALGOEN);
+        xTaskCreate(Algo_task, (char *)"Algo_task", 5 * 1024, NULL, configMAX_PRIORITIES - 5, &Algo_handle);
+        printf("Algo task create\r\n");
+    }
 }
 
 static void BLE_task(void *pvParameters)
@@ -2766,9 +2758,10 @@ static void BLE_task(void *pvParameters)
         // bt_hrs_notify(HeartRate);
         if (isBleConnected) {
             sprintf(tempArray, "%.1f", Tempurature);
-            xSemaphoreTake(xMutex_BLE, portMAX_DELAY);
-            bt_gatt_mysvc_update(hr_onenet, stepCnt, tempArray, output_class);
-            xSemaphoreGive(xMutex_BLE);
+            if (xSemaphoreTake(xMutex_BLE, portMAX_DELAY) == pdTRUE) {
+                bt_gatt_mysvc_update(hr_onenet, stepCnt, tempArray, output_class);
+                xSemaphoreGive(xMutex_BLE);
+            }
         }
         vTaskDelay(250);
     }
@@ -2786,8 +2779,10 @@ static void MOTOR_task(void *pvParameters)
     bflb_gpio_set(gpio, GPIO_PIN_13);
 
     vTaskDelay(250);
-    bflb_gpio_reset(gpio, GPIO_PIN_13);
     bflb_pwm_v2_stop(pwm);
+    vTaskDelay(5); // break.
+    bflb_gpio_reset(gpio, GPIO_PIN_13);
+    // bflb_pwm_v2_stop(pwm);
     // }
     // }
     vTaskDelete(NULL);
@@ -2799,9 +2794,11 @@ static void BAT_task(void *pvParameters)
     vTaskDelay(20);
     printf("MAX17048 VERSION: %04x\r\n", max17048_get_version());
 
-    xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-    ui_updateBat((uint8_t)max17048_get_SOC());
-    xSemaphoreGive(xMutex_lvgl);
+    if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+        ui_updateBat((uint8_t)max17048_get_SOC());
+        xSemaphoreGive(xMutex_lvgl);
+    }
+
     if (bflb_gpio_read(gpio, GPIO_PIN_33)) { // 1:2 Not Charging
         CHG_Interrupted = 2;
     } else { // 0:1 Charging
@@ -2810,16 +2807,19 @@ static void BAT_task(void *pvParameters)
 
     while (1) {
         if (CHG_Interrupted) {
-            xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-            ui_updateBatColor(CHG_Interrupted, (uint8_t)max17048_get_SOC());
-            xSemaphoreGive(xMutex_lvgl);
+            if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+                ui_updateBatColor(CHG_Interrupted, (uint8_t)max17048_get_SOC());
+                xSemaphoreGive(xMutex_lvgl);
+            }
             CHG_Interrupted = 0;
         }
 
-        xSemaphoreTake(xMutex_lvgl, portMAX_DELAY);
-        ui_updateBat((uint8_t)max17048_get_SOC());
-        xSemaphoreGive(xMutex_lvgl);
+        if (xSemaphoreTake(xMutex_lvgl, portMAX_DELAY) == pdTRUE) {
+            ui_updateBat((uint8_t)max17048_get_SOC());
+            xSemaphoreGive(xMutex_lvgl);
+        }
         // printf("CHG %d\r\n", bflb_gpio_read(gpio, GPIO_PIN_33));
+        // printf("kfree_size %d, pfree_size %d\r\n", kfree_size(), pfree_size());
 
         vTaskDelay(250);
     }
@@ -2846,7 +2846,7 @@ char test_data[] =
     Somebody I can kiss\r\n\
     I want something just like this\r\n\r\n";
 
-__attribute((aligned(64))) BYTE RW_Buffer[4 * 1024] = { 0 };
+__attribute((aligned(64))) BYTE RW_Buffer[32 * 1024] = { 0 };
 #if SDU_DATA_CHECK
 __attribute((aligned(64))) BYTE Check_Buffer[sizeof(RW_Buffer)] = { 0 };
 #endif
@@ -3069,11 +3069,14 @@ static void FILE_task(void *pvParameters)
     uint32_t tempFileCnt = 0;
     uint32_t bvpFileCnt = 0;
     uint32_t accFileCnt = 0;
+    uint32_t AlgoFileCnt = 0;
     float edaBuffer[4] = { 0 };
     float edaPhaBuffer[4] = { 0 };
     float edaRealBuffer[4] = { 0 };
     float edaImageBuffer[4] = { 0 };
-    int32_t bvpBuffer[25] = { 0 };
+    int32_t bvpBuffer = 0;
+    int32_t hrBuffer = 0;
+    int8_t AlgoBuffer = 0;
     float accXLxBuffer[26] = { 0 };
     float accXLyBuffer[26] = { 0 };
     float accXLzBuffer[26] = { 0 };
@@ -3086,6 +3089,7 @@ static void FILE_task(void *pvParameters)
     char FileNameTemp[128] = { 0 };
     char FileNameBvp[128] = { 0 };
     char FileNameAcc[128] = { 0 };
+    char FileNameAlgo[128] = { 0 };
     char tempBuffer[1024] = { 0 };
 
     fatfs_nand_driver_register();
@@ -3119,14 +3123,19 @@ static void FILE_task(void *pvParameters)
         LOG_D("Succeed to mount filesystem\r\n");
     }
 
+    
     if (ret == FR_OK) {
         LOG_I("FileSystem cluster size:%d-sectors (%d-Byte)\r\n", fs.csize, fs.csize * 512);
     }
 
+    // vTaskDelay(1000);
+    // fatfs_write_read_test();
+
     printf("Start to create file.\r\n");
-    xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
-    bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
-    xSemaphoreGive(xMutex_RTC);
+    if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+        bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+        xSemaphoreGive(xMutex_RTC);
+    }
     printf("Get time\r\n");
 
     // // Create file name with time.
@@ -3170,60 +3179,79 @@ static void FILE_task(void *pvParameters)
 
     while (1) {
         if (xSemaphoreTake(xSem_EDAEN, 0) == pdTRUE) {
-            xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
-            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
-            xSemaphoreGive(xMutex_RTC);
+            if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+                bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+                xSemaphoreGive(xMutex_RTC);
+            }
 
             memset(FileNameEda, 0, 128 * sizeof(char));
             strcat(FileNameEda, "/sd2/eda_");
             sprintf(FileNameEda + strlen(FileNameEda), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
             strcat(FileNameEda, ".csv");
             ret = f_open(&f_eda, FileNameEda, FA_OPEN_APPEND | FA_WRITE);
-            sprintf(RW_Buffer, "Eda Num, Real(Ohm), Image(Ohm), Conductance(uS), Phase(°)\r\n");
+            sprintf(RW_Buffer, "EdaNum, Real(Ohm), Image(Ohm), Conductance(uS), Phase(°)\r\n");
             f_write(&f_eda, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
             f_close(&f_eda);
         }
         if (xSemaphoreTake(xSem_TEMPEN, 0) == pdTRUE) {
-            xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
-            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
-            xSemaphoreGive(xMutex_RTC);
+            if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+                bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+                xSemaphoreGive(xMutex_RTC);
+            }
 
             memset(FileNameTemp, 0, 128 * sizeof(char));
             strcat(FileNameTemp, "/sd2/temp_");
             sprintf(FileNameTemp + strlen(FileNameTemp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
             strcat(FileNameTemp, ".csv");
             ret = f_open(&f_temp, FileNameTemp, FA_OPEN_APPEND | FA_WRITE);
-            sprintf(RW_Buffer, "Temp Num, Object(℃), Ambient(℃)\r\n");
+            sprintf(RW_Buffer, "TempNum, Object(℃), Ambient(℃)\r\n");
             f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
             f_close(&f_temp);
         }
         if (xSemaphoreTake(xSem_BVPEN, 0) == pdTRUE) {
-            xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
-            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
-            xSemaphoreGive(xMutex_RTC);
+            if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+                bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+                xSemaphoreGive(xMutex_RTC);
+            }
 
             memset(FileNameBvp, 0, 128 * sizeof(char));
             strcat(FileNameBvp, "/sd2/bvp_");
             sprintf(FileNameBvp + strlen(FileNameBvp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
             strcat(FileNameBvp, ".csv");
             ret = f_open(&f_bvp, FileNameBvp, FA_OPEN_APPEND | FA_WRITE);
-            sprintf(RW_Buffer, "Bvp Num, Bvp\r\n");
+            sprintf(RW_Buffer, "Num, Bvp(%.6fHz), Hr\r\n", afe4404_adcrdy_freq);
             f_write(&f_bvp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
             f_close(&f_bvp);
         }
         if (xSemaphoreTake(xSem_ACCEN, 0) == pdTRUE) {
-            xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
-            bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
-            xSemaphoreGive(xMutex_RTC);
+            if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+                bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+                xSemaphoreGive(xMutex_RTC);
+            }
 
             memset(FileNameAcc, 0, 128 * sizeof(char));
             strcat(FileNameAcc, "/sd2/acc_");
             sprintf(FileNameAcc + strlen(FileNameAcc), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
             strcat(FileNameAcc, ".csv");
             ret = f_open(&f_acc, FileNameAcc, FA_OPEN_APPEND | FA_WRITE);
-            sprintf(RW_Buffer, "Acc Num, Acceleration1(mg), Acceleration2(mg), Acceleration3(mg), Angular Rate1(mdps), Angular Rate2(mdps), Angular Rate3(mdps)\r\n");
+            sprintf(RW_Buffer, "AccNum, Acceleration1(mg), Acceleration2(mg), Acceleration3(mg), Angular Rate1(mdps), Angular Rate2(mdps), Angular Rate3(mdps)\r\n");
             f_write(&f_acc, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
             f_close(&f_acc);
+        }
+        if (xSemaphoreTake(xSem_ALGOEN, 0) == pdTRUE) {
+            if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+                bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+                xSemaphoreGive(xMutex_RTC);
+            }
+
+            memset(FileNameAlgo, 0, 128 * sizeof(char));
+            strcat(FileNameAlgo, "/sd2/algo_");
+            sprintf(FileNameAlgo + strlen(FileNameAlgo), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+            strcat(FileNameAlgo, ".csv");
+            ret = f_open(&f_algo, FileNameAlgo, FA_OPEN_APPEND | FA_WRITE);
+            sprintf(RW_Buffer, "AlgoNum, output\r\n");
+            f_write(&f_algo, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            f_close(&f_algo);
         }
         if ((uxQueueMessagesWaiting(Queue_EdaConFile) >= 4) && (uxQueueMessagesWaiting(Queue_EdaPhaFile) >= 4) && (uxQueueMessagesWaiting(Queue_EdaRealFile) >= 4) && (uxQueueMessagesWaiting(Queue_EdaImageFile) >= 4)) {
             ret = f_open(&f_eda, FileNameEda, FA_OPEN_APPEND | FA_WRITE);
@@ -3280,7 +3308,7 @@ static void FILE_task(void *pvParameters)
         }
 
         // printf("uxQueueMessagesWaiting(Queue_BvpFile) %d\r\n", uxQueueMessagesWaiting(Queue_BvpFile));
-        if ((uxQueueMessagesWaiting(Queue_BvpFile) >= 25)) {
+        if ((uxQueueMessagesWaiting(Queue_BvpFile) >= 64)) {
             ret = f_open(&f_bvp, FileNameBvp, FA_OPEN_APPEND | FA_WRITE);
             if (ret) {
                 printf("f_open failed ret: %d\r\n", ret);
@@ -3288,14 +3316,18 @@ static void FILE_task(void *pvParameters)
             }
             uint16_t bufferPtr = 0;
 
+            xQueueReceive(Queue_HRFile, &hrBuffer, 0);
+
             memset(RW_Buffer, 0x00, sizeof(RW_Buffer));
-            for (int16_t i = 0; i < 25; i++) {
-                xQueueReceive(Queue_BvpFile, bvpBuffer + i, portMAX_DELAY);
-                sprintf(tempBuffer, "%d, %d\r\n", bvpFileCnt++, bvpBuffer[i]);
+            for (int16_t i = 0; i < 64; i++) {
+                xQueueReceive(Queue_BvpFile, &bvpBuffer, portMAX_DELAY);
+                xQueueReceive(Queue_HRFile, &hrBuffer, 0);
+                sprintf(tempBuffer, "%d, %d, %d\r\n", bvpFileCnt++, bvpBuffer, hrBuffer);
                 strcat(RW_Buffer, tempBuffer);
             }
 
             f_write(&f_bvp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+            // printf("length Queue_BvpFile %d\r\n", uxQueueMessagesWaiting(Queue_BvpFile));
 
             // ret = f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
             f_close(&f_bvp);
@@ -3327,6 +3359,22 @@ static void FILE_task(void *pvParameters)
             // printf("AccWrite\r\n");
             // ret = f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
             f_close(&f_acc);
+        }
+
+        if ((uxQueueMessagesWaiting(Queue_AlgoFile) >= 1)) {
+            ret = f_open(&f_algo, FileNameAlgo, FA_OPEN_APPEND | FA_WRITE);
+            if (ret) {
+                printf("f_open failed ret: %d\r\n", ret);
+                continue;
+            }
+
+            memset(RW_Buffer, 0x00, sizeof(RW_Buffer));
+            xQueueReceive(Queue_AlgoFile, &AlgoBuffer, portMAX_DELAY);
+            sprintf(RW_Buffer, "%d, %d\r\n", AlgoFileCnt++, AlgoBuffer);
+
+            f_write(&f_algo, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+
+            f_close(&f_algo);
         }
 
         // printf("Write Cycle End\r\n");
@@ -3363,9 +3411,10 @@ DWORD get_fattime()
 {
     struct bflb_tm time;
     uint32_t ret = 0;
-    xSemaphoreTake(xMutex_RTC, portMAX_DELAY);
-    bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
-    xSemaphoreGive(xMutex_RTC);
+    if (xSemaphoreTake(xMutex_RTC, portMAX_DELAY) == pdTRUE) {
+        bflb_rtc_get_local_time(&time, +8); // get utc +8 time.
+        xSemaphoreGive(xMutex_RTC);
+    }
 
     ret |= ((time.tm_year - 80) & 0x7F) << 25;
     ret |= ((time.tm_mon + 1) & 0x0F) << 21;
@@ -3397,7 +3446,7 @@ void fatfs2msc()
         printf("Queue_TempFile_Ta %d\r\n", uxQueueMessagesWaiting(Queue_TempFile_Ta));
         vTaskDelay(1);
     }
-    while (uxQueueMessagesWaiting(Queue_BvpFile) >= 25) {
+    while (uxQueueMessagesWaiting(Queue_BvpFile) >= 64) {
         printf("Queue_BvpFile %d\r\n", uxQueueMessagesWaiting(Queue_BvpFile));
         vTaskDelay(1);
     }
@@ -3410,10 +3459,35 @@ void fatfs2msc()
         vTaskDelay(1);
     }
 
+    xQueueReset(Queue_EdaConFile);
+    xQueueReset(Queue_EdaPhaFile);
+    xQueueReset(Queue_EdaRealFile);
+    xQueueReset(Queue_EdaImageFile);
+    xQueueReset(Queue_TempFile_To);
+    xQueueReset(Queue_TempFile_Ta);
+    xQueueReset(Queue_BvpFile);
+    xQueueReset(Queue_HRFile);
+    xQueueReset(Queue_AccFile_XL_Z);
+    xQueueReset(Queue_AccFile_GY_Z);
+    xQueueReset(Queue_AccFile_XL_X);
+    xQueueReset(Queue_AccFile_XL_Y);
+    xQueueReset(Queue_AccFile_GY_X);
+    xQueueReset(Queue_AccFile_GY_Y);
+    xQueueReset(Queue_AlgoFile);
+
     while (f_eda.obj.fs != 0) {
         vTaskDelay(1);
     }
     while (f_temp.obj.fs != 0) {
+        vTaskDelay(1);
+    }
+    while (f_bvp.obj.fs != 0) {
+        vTaskDelay(1);
+    }
+    while (f_acc.obj.fs != 0) {
+        vTaskDelay(1);
+    }
+    while (f_algo.obj.fs != 0) {
         vTaskDelay(1);
     }
 
@@ -3433,6 +3507,22 @@ void msc2fatfs()
     usbd_deinitialize();
 
     vTaskDelay(10);
+
+    xQueueReset(Queue_EdaConFile);
+    xQueueReset(Queue_EdaPhaFile);
+    xQueueReset(Queue_EdaRealFile);
+    xQueueReset(Queue_EdaImageFile);
+    xQueueReset(Queue_TempFile_To);
+    xQueueReset(Queue_TempFile_Ta);
+    xQueueReset(Queue_BvpFile);
+    xQueueReset(Queue_HRFile);
+    xQueueReset(Queue_AccFile_XL_Z);
+    xQueueReset(Queue_AccFile_GY_Z);
+    xQueueReset(Queue_AccFile_XL_X);
+    xQueueReset(Queue_AccFile_XL_Y);
+    xQueueReset(Queue_AccFile_GY_X);
+    xQueueReset(Queue_AccFile_GY_Y);
+    xQueueReset(Queue_AlgoFile);
 
     if (FILE_handle == NULL) {
         xTaskCreate(FILE_task, (char *)"File_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &FILE_handle);
@@ -3559,7 +3649,7 @@ int main(void)
         bt_enable(bt_enable_cb);
         printf("bt_enable\r\n");
     }
-    if (1) {
+    if (0) {
         tcpip_init(NULL, NULL);
         printf("tcpip_init\r\n");
         wifi_start_firmware_task();
@@ -3568,6 +3658,18 @@ int main(void)
 
     /* Peripheral Init (spi0, i2c0)*/
     peripheral_init();
+
+    // afe4404 reset
+    bflb_gpio_reset(gpio, AFE_RESETZ);
+    bflb_mtimer_delay_us(60); // ~30us delay
+    bflb_gpio_set(gpio, AFE_RESETZ);
+    bflb_mtimer_delay_ms(10); // ~10ms delay with 16MHz clock
+
+    // ad5941 reset
+    AD5940_RstClr();
+    bflb_mtimer_delay_ms(1); /* Delay some time */
+    AD5940_RstSet();
+    bflb_mtimer_delay_us(200); /* AD5940 need some time to exit reset status. 200us looks good. */
 
     printf("peripheral_init\n");
 
@@ -3616,6 +3718,7 @@ int main(void)
     xSem_ACCEN = xSemaphoreCreateBinary();
     xSem_BVPEN = xSemaphoreCreateBinary();
     xSem_TEMPEN = xSemaphoreCreateBinary();
+    xSem_ALGOEN = xSemaphoreCreateBinary();
     xSem_BLEDISCONN = xSemaphoreCreateBinary();
     xSemaphoreTake(xSem_BLEDISCONN, 0);
     xSem_BTNINT = xSemaphoreCreateBinary();
@@ -3626,11 +3729,12 @@ int main(void)
     Queue_AccBLE_GY = xQueueCreate(52, sizeof(float));
     Queue_AccBLE_XL = xQueueCreate(52, sizeof(float));
     Queue_TempBLE = xQueueCreate(8, sizeof(float));
+    Queue_EdaBLE = xQueueCreate(16, sizeof(float));
     Queue_TempPlot_To = xQueueCreate(8, sizeof(float));
-    Queue_EdaConFile = xQueueCreate(16, sizeof(float));
-    Queue_EdaPhaFile = xQueueCreate(16, sizeof(float));
-    Queue_EdaRealFile = xQueueCreate(16, sizeof(float));
-    Queue_EdaImageFile = xQueueCreate(16, sizeof(float));
+    Queue_EdaConFile = xQueueCreate(64, sizeof(float));
+    Queue_EdaPhaFile = xQueueCreate(64, sizeof(float));
+    Queue_EdaRealFile = xQueueCreate(64, sizeof(float));
+    Queue_EdaImageFile = xQueueCreate(64, sizeof(float));
     Queue_TempFile_Ta = xQueueCreate(8, sizeof(float));
     Queue_TempFile_To = xQueueCreate(8, sizeof(float));
     Queue_AccFile_GY_X = xQueueCreate(256, sizeof(float));
@@ -3642,9 +3746,14 @@ int main(void)
     Queue_AccPlot_XL_X = xQueueCreate(256, sizeof(float));
     Queue_AccPlot_XL_Y = xQueueCreate(256, sizeof(float));
     Queue_AccPlot_XL_Z = xQueueCreate(256, sizeof(float));
-    Queue_BvpFile = xQueueCreate(400, sizeof(int32_t));
+    Queue_BvpFile = xQueueCreate(1000, sizeof(int32_t));
+    Queue_BvpAlgo = xQueueCreate(1600, sizeof(int32_t)); // 320.
+    Queue_EdaAlgo = xQueueCreate(100, sizeof(float));    // 20.
+    Queue_HRFile = xQueueCreate(4, sizeof(uint32_t));
     Queue_PPGChartUpdate = xQueueCreate(100, sizeof(int32_t));
     Queue_HRLabelUpdate = xQueueCreate(10, sizeof(uint32_t));
+    Queue_AlgoFile = xQueueCreate(5, sizeof(uint8_t));
+    Queue_AlgoPlot = xQueueCreate(5, sizeof(uint8_t));
 
     xSem_MOTOR = xSemaphoreCreateBinary();
 
@@ -3664,11 +3773,11 @@ int main(void)
     // msc_ram_init();
 
     // xTaskCreate(EDA_task, (char *)"EDA_task", 1024, NULL, configMAX_PRIORITIES - 4, &EDA_handle);
-    xTaskCreate(Algo_task, (char *)"Algo_task", 4 * 1024, NULL, configMAX_PRIORITIES - 5, &Algo_handle);
+    // xTaskCreate(Algo_task, (char *)"Algo_task", 4 * 1024, NULL, configMAX_PRIORITIES - 5, &Algo_handle);
     // xTaskCreate(ACCE_task, (char *)"ACCE_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &ACCE_handle);
     // xTaskCreate(TEMP_task, (char *)"TEMP_task", 1024, NULL, configMAX_PRIORITIES - 4, &TEMP_handle);
     // xTaskCreate(HR_task, (char *)"HR_task", 1024, NULL, configMAX_PRIORITIES - 4, &HR_handle);
-    xTaskCreate(LVGL_task, (char *)"LVGL_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &LVGL_handle);
+    xTaskCreate(LVGL_task, (char *)"LVGL_task", 8 * 1024, NULL, configMAX_PRIORITIES - 4, &LVGL_handle);
     xTaskCreate(CLOCK_task, (char *)"Clock_task", 1024, NULL, configMAX_PRIORITIES - 4, &CLOCK_handle);
     // xTaskCreate(WIFI_task, (char *)"Wifi_task", 2 * 1024, NULL, configMAX_PRIORITIES - 4, &WIFI_handle);
     xTaskCreate(BLE_task, (char *)"Ble_task", 1024, NULL, configMAX_PRIORITIES - 4, &BLE_handle);
@@ -3676,6 +3785,8 @@ int main(void)
     xTaskCreate(MOTOR_task, (char *)"Motor_task", 1024, NULL, configMAX_PRIORITIES - 5, &MOTOR_handle);
     xTaskCreate(BAT_task, (char *)"Bat_task", 1024, NULL, configMAX_PRIORITIES - 4, &BAT_handle);
     xTaskCreate(FILE_task, (char *)"File_task", 4 * 1024, NULL, configMAX_PRIORITIES - 4, &FILE_handle);
+
+    printf("kfree_size %d, pfree_size %d\r\n", kfree_size(), pfree_size());
 
     vTaskStartScheduler();
     while (1) {

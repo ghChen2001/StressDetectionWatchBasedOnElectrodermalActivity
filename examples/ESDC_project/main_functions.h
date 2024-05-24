@@ -31,6 +31,9 @@ void setup();
 // compatibility.
 void loop();
 
+int Calculate(float *data_input, int len);
+int Calculate2(float *data_input1, float *data_input2, int len1, int len2);
+
 #ifdef __cplusplus
 }
 #endif

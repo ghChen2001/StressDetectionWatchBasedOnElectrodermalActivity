@@ -61,10 +61,10 @@ void AFE4404_Reg_Init(void)
   AFE4404_Reg_Write(28, 3614);  //AFE_ADCRSTENDCT3  NACK
   AFE4404_Reg_Write(54, 401);   //AFE_LED3LEDSTC
   AFE4404_Reg_Write(55, 800);   //AFE_LED3LEDENDC
-  AFE4404_Reg_Write(29, 39999); //AFE_PRPCOUNT      NACK
+  AFE4404_Reg_Write(29, 62499); //AFE_PRPCOUNT 64Hz.
   AFE4404_Reg_Write(30, 0x000103);	//AFE_CONTROL1 TimerEN = 1; NUMAV = 3
   AFE4404_Reg_Write(32, 0x008003);  //AFE_TIA_SEP_GAIN (LED2) ENSEPGAIN = 1; LED2/LED3 gain = 50K
-  AFE4404_Reg_Write(33, 0x000103);  //AFE_TIA_GAIN (LED1) LED1/LED1AMB gain = 50K
+  AFE4404_Reg_Write(33, 0x000003);  //AFE_TIA_GAIN (LED1) LED1/LED1AMB gain = 50K
   AFE4404_Reg_Write(58, 0x000000);  //AFE_DAC_SETTING_REG
   AFE4404_Reg_Write(34, 0x0030CF); 	//LED3 - 3.125mA; LED2 - 3.125mA; LED1 - 12.5mA
   // AFE4404_Reg_Write(35, 0x124018); 	//DYN1, LEDCurr, DYN2, Ext CLK, DYN3, DYN4 //0x000200); - 0x200 Osc mode //AFE_CONTROL2
@@ -73,6 +73,7 @@ void AFE4404_Reg_Init(void)
   AFE4404_Reg_Write(57, 0);     	//CLKDIV_PRF
   AFE4404_Reg_Write(50, 5475);  	//AFE_DPD1STC
   AFE4404_Reg_Write(51, 39199); 	//AFE_DPD1ENDC  NACK
+  // AFE4404_Reg_Write(0x3D, 0x000022); // DECIMATION ON, FACTOR = 2.
   AFE4404_Reg_Write(52, 0x000FFF);
   AFE4404_Reg_Write(53, 0x003FFF);
   AFE4404_Enable_Read();
@@ -88,7 +89,7 @@ void AFE4404_Init(void)
   AFE4404_Disable_HWPDN ();
   AFE4404_Trigger_HWReset ();
   // AFE4404_ADCRDY_Interrupt_Init(); // Included in AFE4404_PinInit
-  AFE4404_Reg_Init();
+  // AFE4404_Reg_Init();
 }
 
 // /**********************************************************************************************************/

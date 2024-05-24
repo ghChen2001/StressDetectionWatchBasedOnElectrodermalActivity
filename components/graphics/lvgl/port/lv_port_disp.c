@@ -52,8 +52,8 @@ void sh8501a_rounder(lv_disp_drv_t *disp_drv, lv_area_t *area);
 // static lv_color_t draw_buf_1[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* A buffer */
 // static lv_color_t draw_buf_2[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* An other buffer */
 #if defined(CONFIG_PSRAM)
-static lv_color_t draw_buf_1[LVGL_BUFFER_SIZE] ATTR_PSRAM_SECTION;
-static lv_color_t draw_buf_2[LVGL_BUFFER_SIZE] ATTR_PSRAM_SECTION;
+DRAW_BUFF_ATTR static lv_color_t draw_buf_1[LVGL_BUFFER_SIZE];
+DRAW_BUFF_ATTR static lv_color_t draw_buf_2[LVGL_BUFFER_SIZE];
 #else
 #error "No config psram!"
 #endif

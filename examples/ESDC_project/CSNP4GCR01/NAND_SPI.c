@@ -199,194 +199,197 @@ uint8_t NAND_WriteMultiBlocks(uint8_t *writebuff, uint32_t WriteAddr, uint16_t B
     uint16_t timeout = 128;
 
     // printf("NAND W WAIT MUTEX\r\n");
-    xSemaphoreTake(xMutex_SPI,
-                   portMAX_DELAY);
+    if (xSemaphoreTake(xMutex_SPI,
+                       portMAX_DELAY) == pdTRUE) {
+        // printf("SPI0 FREQ %d\r\n", bflb_spi_feature_control(spi0, SPI_CMD_GET_FREQ, 0));
+        bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 40 * 1000 * 1000);
+        // taskENTER_CRITICAL();
+        // bflb_mtimer_delay_us(10);
+        // printf("NAND W TAKE MUTEX\r\n");
+        // printf("After xMutex_SPI\r\n");
 
-    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 48 * 1000 * 1000);
-    // taskENTER_CRITICAL();
-    // bflb_mtimer_delay_us(10);
-    // printf("NAND W TAKE MUTEX\r\n");
-    // printf("After xMutex_SPI\r\n");
+        bflb_gpio_reset(gpio, GPIO_PIN_22);
 
-    bflb_gpio_reset(gpio, GPIO_PIN_22);
-
-    // // Write ACMD55
-    // uint8_t CMD55_WRITE[6] = { NAND_CMD55, 0x00, 0x00, 0x00, 0x00, 0xFF };
-    // bflb_spi_poll_exchange(spi0, CMD55_WRITE, NULL, 6);
-    // recv = 0xFF;
-    // while (recv != 0x01) {
-    //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-    // }
-    // bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-    // printf("Write CMD55\r\n");
-
-    // // CMD23
-    // uint8_t CMD23_WRITE[6] = { NAND_CMD23, (NumberOfBlocks >> 24) & 0xFF, (NumberOfBlocks >> 16) & 0xFF, (NumberOfBlocks >> 8) & 0xFF, NumberOfBlocks & 0xFF, 0xFF };
-    // bflb_spi_poll_exchange(spi0, CMD23_WRITE, NULL, 6);
-    // recv = 0xFF;
-    // while (recv != 23) {
-    //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-    // }
-    // bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-    // printf("Write CMD23\r\n");
-
-    // Wait Busy
-    recv = 0x00;
-    timeout = 512;
-    while ((recv != 0xFF) && timeout) {
-        bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-        timeout--;
-        if (timeout == 0) {
-            bflb_gpio_set(gpio, GPIO_PIN_22);
-            bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-            xSemaphoreGive(xMutex_SPI);
-            return 1;
-        }
-    }
-    // printf("Not Busy\r\n");
-
-    if (NumberOfBlocks == 1) {
-        uint8_t SingleStart = 0xFE;
-        // CMD24
-        // WriteAddr *= BlockSize;
-        uint8_t CMD24_WRITE[6] = { NAND_CMD24, (WriteAddr >> 24) & 0xFF, (WriteAddr >> 16) & 0xFF, (WriteAddr >> 8) & 0xFF, WriteAddr & 0xFF, 0xFF };
-        bflb_spi_poll_exchange(spi0, CMD24_WRITE, NULL, 6);
-        recv = 0xFF;
-        // timeout = 128;
-        while (recv != 0x00) {
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            // printf("CMD24 recv 0x%02x\r\n", recv);
-        }
-        // printf("CMD24\r\n");
-
-        timeout = 512;
-        recv = 0x00;
-        while ((recv != 0xFF) && timeout) {
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            timeout--;
-            if (timeout == 0) {
-                bflb_gpio_set(gpio, GPIO_PIN_22);
-                bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-                xSemaphoreGive(xMutex_SPI);
-                return 1;
-            }
-        }
-
-        bflb_spi_poll_exchange(spi0, &SingleStart, NULL, 1);
-        bflb_spi_poll_exchange(spi0, writebuff, NULL, BlockSize);
-        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        // bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        recv = 0x00;
-        // timeout = 256;
-        while ((recv & 0x1F) != 0x05) { // Wait 0x05.
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            // bflb_mtimer_delay_us(1);
-            // printf("Single recv 0x%02x\r\n", recv);
-        }
-        recv = 0x00;
-        while (recv != 0xFF) { // Wait Busy.
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            // printf("End recv 0x%02x\r\n", recv);
-        }
-
-        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        // printf("Write End\r\n");
-
-        // CMD
-
-    } else {
-        // CMD25
-        // WriteAddr *= BlockSize;
-        uint8_t CMD25_WRITE[6] = { NAND_CMD25, (WriteAddr >> 24) & 0xFF, (WriteAddr >> 16) & 0xFF, (WriteAddr >> 8) & 0xFF, WriteAddr & 0xFF, 0xFF };
-        bflb_spi_poll_exchange(spi0, CMD25_WRITE, NULL, 6);
-        recv = 0xFF;
-        while (recv != 0x00) {
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-        }
-        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        // printf("CMD25\r\n");
-
-        timeout = 512;
-        recv = 0x00;
-        while ((recv != 0xFF) && timeout) {
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            timeout--;
-            if (timeout == 0) {
-                bflb_gpio_set(gpio, GPIO_PIN_22);
-                bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-                xSemaphoreGive(xMutex_SPI);
-                return 1;
-            }
-        }
-
-        // Start Transfer
-        uint32_t pData = 0;
-        uint8_t MultiStart = 0xFC;
-        uint8_t MultiEnd = 0xFD;
-        // // Wait Busy
+        // // Write ACMD55
+        // uint8_t CMD55_WRITE[6] = { NAND_CMD55, 0x00, 0x00, 0x00, 0x00, 0xFF };
+        // bflb_spi_poll_exchange(spi0, CMD55_WRITE, NULL, 6);
         // recv = 0xFF;
-        // timeout = 512;
-        // while ((recv != 0xFF) && timeout) {
+        // while (recv != 0x01) {
         //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-        //     timeout--;
-        //     if (timeout == 0) {
-        //         return 1;
-        //     }
         // }
+        // bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+        // printf("Write CMD55\r\n");
 
-        for (uint8_t i = 0; i < NumberOfBlocks; i++) {
-            // printf("WRITE %d\r\n", i);
-            bflb_spi_poll_exchange(spi0, &MultiStart, NULL, 1);
-            bflb_spi_poll_exchange(spi0, writebuff + pData, NULL, BlockSize);
+        // // CMD23
+        // uint8_t CMD23_WRITE[6] = { NAND_CMD23, (NumberOfBlocks >> 24) & 0xFF, (NumberOfBlocks >> 16) & 0xFF, (NumberOfBlocks >> 8) & 0xFF, NumberOfBlocks & 0xFF, 0xFF };
+        // bflb_spi_poll_exchange(spi0, CMD23_WRITE, NULL, 6);
+        // recv = 0xFF;
+        // while (recv != 23) {
+        //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+        // }
+        // bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+        // printf("Write CMD23\r\n");
+
+        // Wait Busy
+        recv = 0x00;
+        timeout = 512;
+        while ((recv != 0xFF) && timeout) {
+            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+            timeout--;
+            if (timeout == 0) {
+                bflb_gpio_set(gpio, GPIO_PIN_22);
+                bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                xSemaphoreGive(xMutex_SPI);
+                return 1;
+            }
+        }
+        // printf("Not Busy\r\n");
+
+        if (NumberOfBlocks == 1) {
+            uint8_t SingleStart = 0xFE;
+            // CMD24
+            // WriteAddr *= BlockSize;
+            uint8_t CMD24_WRITE[6] = { NAND_CMD24, (WriteAddr >> 24) & 0xFF, (WriteAddr >> 16) & 0xFF, (WriteAddr >> 8) & 0xFF, WriteAddr & 0xFF, 0xFF };
+            bflb_spi_poll_exchange(spi0, CMD24_WRITE, NULL, 6);
+            recv = 0xFF;
+            // timeout = 128;
+            while (recv != 0x00) {
+                bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                // printf("CMD24 recv 0x%02x\r\n", recv);
+            }
+            // printf("CMD24\r\n");
+
+            timeout = 512;
+            recv = 0x00;
+            while ((recv != 0xFF) && timeout) {
+                bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                timeout--;
+                if (timeout == 0) {
+                    bflb_gpio_set(gpio, GPIO_PIN_22);
+                    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                    xSemaphoreGive(xMutex_SPI);
+                    return 1;
+                }
+            }
+
+            bflb_spi_poll_exchange(spi0, &SingleStart, NULL, 1);
+            bflb_spi_poll_exchange(spi0, writebuff, NULL, BlockSize);
             bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
             bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
             // bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-            pData += BlockSize;
             recv = 0x00;
             // timeout = 256;
-            while ((recv & 0x1F) != 0x05) { // Wait 0x05
+            while ((recv & 0x1F) != 0x05) { // Wait 0x05.
                 bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-                // printf("Multi recv 0x%02x\r\n", recv);
+                // bflb_mtimer_delay_us(1);
+                // printf("Single recv 0x%02x\r\n", recv);
             }
             recv = 0x00;
             while (recv != 0xFF) { // Wait Busy.
                 bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
                 // printf("End recv 0x%02x\r\n", recv);
             }
-        }
-        // // Wait Busy
-        // timeout = 1024;
-        // while ((recv != 0xFF) && timeout) {
-        //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-        //     printf("End recv 0x%02x\r\n", recv);
-        //     timeout--;
-        //     if (timeout == 0) {
-        //         return 1;
-        //     }
-        // }
 
-        bflb_spi_poll_exchange(spi0, &MultiEnd, NULL, 1);
-        // printf("Write End\r\n");
+            bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+            bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+            bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+            // printf("Write End\r\n");
 
-        recv = 0xFF;
-        timeout = 256;
-        while (recv == 0xFF) {
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            // printf("End recv 0x%02x\r\n", recv);
+            // CMD
+
+        } else {
+            // CMD25
+            // WriteAddr *= BlockSize;
+            uint8_t CMD25_WRITE[6] = { NAND_CMD25, (WriteAddr >> 24) & 0xFF, (WriteAddr >> 16) & 0xFF, (WriteAddr >> 8) & 0xFF, WriteAddr & 0xFF, 0xFF };
+            bflb_spi_poll_exchange(spi0, CMD25_WRITE, NULL, 6);
+            recv = 0xFF;
+            while (recv != 0x00) {
+                bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+            }
+            bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+            // printf("CMD25\r\n");
+
+            timeout = 512;
+            recv = 0x00;
+            while ((recv != 0xFF) && timeout) {
+                bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                timeout--;
+                if (timeout == 0) {
+                    bflb_gpio_set(gpio, GPIO_PIN_22);
+                    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                    xSemaphoreGive(xMutex_SPI);
+                    return 1;
+                }
+            }
+
+            // Start Transfer
+            uint32_t pData = 0;
+            uint8_t MultiStart = 0xFC;
+            uint8_t MultiEnd = 0xFD;
+            // // Wait Busy
+            // recv = 0xFF;
+            // timeout = 512;
+            // while ((recv != 0xFF) && timeout) {
+            //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+            //     timeout--;
+            //     if (timeout == 0) {
+            //         return 1;
+            //     }
+            // }
+
+            for (uint8_t i = 0; i < NumberOfBlocks; i++) {
+                // printf("WRITE %d\r\n", i);
+                bflb_spi_poll_exchange(spi0, &MultiStart, NULL, 1);
+                bflb_spi_poll_exchange(spi0, writebuff + pData, NULL, BlockSize);
+                bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                // bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                pData += BlockSize;
+                recv = 0x00;
+                // timeout = 256;
+                while ((recv & 0x1F) != 0x05) { // Wait 0x05
+                    bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                    // printf("Multi recv 0x%02x\r\n", recv);
+                }
+                recv = 0x00;
+                while (recv != 0xFF) { // Wait Busy.
+                    bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                    // printf("End recv 0x%02x\r\n", recv);
+                }
+            }
+            // // Wait Busy
+            // timeout = 1024;
+            // while ((recv != 0xFF) && timeout) {
+            //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+            //     printf("End recv 0x%02x\r\n", recv);
+            //     timeout--;
+            //     if (timeout == 0) {
+            //         return 1;
+            //     }
+            // }
+
+            bflb_spi_poll_exchange(spi0, &MultiEnd, NULL, 1);
+            // printf("Write End\r\n");
+
+            recv = 0xFF;
+            timeout = 256;
+            while (recv == 0xFF) {
+                bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                // printf("End recv 0x%02x\r\n", recv);
+            }
         }
+
+        bflb_gpio_set(gpio, GPIO_PIN_22);
+        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+
+        // bflb_mtimer_delay_us(10);
+        // printf("NAND W GIVE MUTEX\r\n");
+        xSemaphoreGive(xMutex_SPI);
+    } else {
+        return 1;
     }
-
-    bflb_gpio_set(gpio, GPIO_PIN_22);
-    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-
-    // bflb_mtimer_delay_us(10);
-    // printf("NAND W GIVE MUTEX\r\n");
-    xSemaphoreGive(xMutex_SPI);
     // taskEXIT_CRITICAL();
     // printf("give xMutex_SPI\r\n");
 
@@ -405,39 +408,19 @@ uint8_t NAND_ReadMultiBlocks(uint8_t *readbuff, uint32_t ReadAddr, uint16_t Bloc
     }
 
     // printf("NAND RD WAIT MUTEX\r\n");
-    xSemaphoreTake(xMutex_SPI,
-                   portMAX_DELAY);
-    // bflb_mtimer_delay_us(10);
-    // printf("NAND RD TAKE MUTEX\r\n");
-    // taskENTER_CRITICAL();
-    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 48 * 1000 * 1000);
-    bflb_gpio_reset(gpio, GPIO_PIN_22);
+    if (xSemaphoreTake(xMutex_SPI,
+                       portMAX_DELAY) == pdTRUE) {
+        // bflb_mtimer_delay_us(10);
+        // printf("NAND RD TAKE MUTEX\r\n");
+        // taskENTER_CRITICAL();
+        bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 48 * 1000 * 1000);
+        bflb_gpio_reset(gpio, GPIO_PIN_22);
 
-    // Wait Busy
-    timeout = 512;
-    recv = 0x00;
-    while ((recv != 0xFF) && timeout) {
-        bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-        timeout--;
-        if (timeout == 0) {
-            bflb_gpio_set(gpio, GPIO_PIN_22);
-            bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-            xSemaphoreGive(xMutex_SPI);
-            return 1;
-        }
-    }
-    // printf("Not Busy\r\n");
-
-    if (NumberOfBlocks == 1){
-        // CMD18
-        // ReadAddr *= BlockSize;
-        uint8_t CMD17_WRITE[6] = { NAND_CMD17, (ReadAddr >> 24) & 0xFF, (ReadAddr >> 16) & 0xFF, (ReadAddr >> 8) & 0xFF, ReadAddr & 0xFF, 0xFF };
-        bflb_spi_poll_exchange(spi0, CMD17_WRITE, NULL, 6);
-        recv = 0xFF;
-        timeout = 128;
-        while ((recv != 0x00) && timeout) {
+        // Wait Busy
+        timeout = 512;
+        recv = 0x00;
+        while ((recv != 0xFF) && timeout) {
             bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            // printf("CMD18 0x%02x\r\n", recv);
             timeout--;
             if (timeout == 0) {
                 bflb_gpio_set(gpio, GPIO_PIN_22);
@@ -446,109 +429,130 @@ uint8_t NAND_ReadMultiBlocks(uint8_t *readbuff, uint32_t ReadAddr, uint16_t Bloc
                 return 1;
             }
         }
+        // printf("Not Busy\r\n");
 
-        // // Wait Busy. 
-        // timeout = 512;
-        // recv = 0x00;
-        // while ((recv != 0xFF) && timeout) {
-        //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-        //     // printf("Wait CMD18 recv 0x%02x\r\n", recv);
-        //     timeout--;
-        //     if (timeout == 0) {
-        //         bflb_gpio_set(gpio, GPIO_PIN_22);
-        //         bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        //         xSemaphoreGive(xMutex_SPI);
-        //         return 1;
-        //     }
-        // }
-
-        // Start Read
-
-        recv = 0xFF;
-        while (recv != 0xFE) {
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            // printf("Read 0xFE recv 0x%02x\r\n", recv);
-        }
-
-        bflb_spi_poll_exchange(spi0, sendDummy, readbuff, BlockSize);
-        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-
-
-
-    } else {
-        // CMD18
-        // ReadAddr *= BlockSize;
-        uint8_t CMD18_WRITE[6] = { NAND_CMD18, (ReadAddr >> 24) & 0xFF, (ReadAddr >> 16) & 0xFF, (ReadAddr >> 8) & 0xFF, ReadAddr & 0xFF, 0xFF };
-        bflb_spi_poll_exchange(spi0, CMD18_WRITE, NULL, 6);
-        recv = 0xFF;
-        timeout = 128;
-        while ((recv != 0x00) && timeout) {
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            // printf("CMD18 0x%02x\r\n", recv);
-            timeout--;
-            if (timeout == 0) {
-                bflb_gpio_set(gpio, GPIO_PIN_22);
-                bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-                xSemaphoreGive(xMutex_SPI);
-                return 1;
+        if (NumberOfBlocks == 1) {
+            // CMD18
+            // ReadAddr *= BlockSize;
+            uint8_t CMD17_WRITE[6] = { NAND_CMD17, (ReadAddr >> 24) & 0xFF, (ReadAddr >> 16) & 0xFF, (ReadAddr >> 8) & 0xFF, ReadAddr & 0xFF, 0xFF };
+            bflb_spi_poll_exchange(spi0, CMD17_WRITE, NULL, 6);
+            recv = 0xFF;
+            timeout = 128;
+            while ((recv != 0x00) && timeout) {
+                bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                // printf("CMD18 0x%02x\r\n", recv);
+                timeout--;
+                if (timeout == 0) {
+                    bflb_gpio_set(gpio, GPIO_PIN_22);
+                    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                    xSemaphoreGive(xMutex_SPI);
+                    return 1;
+                }
             }
-        }
-        // printf("CMD18\r\n");
 
-        // timeout = 512;
-        // recv = 0x00;
-        // while ((recv != 0xFF) && timeout) {
-        //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-        //     // printf("Wait CMD18 recv 0x%02x\r\n", recv);
-        //     timeout--;
-        //     if (timeout == 0) {
-        //         bflb_gpio_set(gpio, GPIO_PIN_22);
-        //         bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-        //         xSemaphoreGive(xMutex_SPI);
-        //         return 1;
-        //     }
-        // }
+            // // Wait Busy.
+            // timeout = 512;
+            // recv = 0x00;
+            // while ((recv != 0xFF) && timeout) {
+            //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+            //     // printf("Wait CMD18 recv 0x%02x\r\n", recv);
+            //     timeout--;
+            //     if (timeout == 0) {
+            //         bflb_gpio_set(gpio, GPIO_PIN_22);
+            //         bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+            //         xSemaphoreGive(xMutex_SPI);
+            //         return 1;
+            //     }
+            // }
 
-        // Start Read
-        uint32_t pData = 0;
+            // Start Read
 
-        // Start Receive
-        for (uint8_t i = 0; i < NumberOfBlocks; i++) {
-            // Wait 0xFE
-            // timeout = 128;
             recv = 0xFF;
             while (recv != 0xFE) {
                 bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
                 // printf("Read 0xFE recv 0x%02x\r\n", recv);
             }
-            // printf("Wait 0xFE\r\n");
 
-            bflb_spi_poll_exchange(spi0, sendDummy, readbuff + pData, BlockSize);
+            bflb_spi_poll_exchange(spi0, sendDummy, readbuff, BlockSize);
             bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
             bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-            pData += BlockSize;
+
+        } else {
+            // CMD18
+            // ReadAddr *= BlockSize;
+            uint8_t CMD18_WRITE[6] = { NAND_CMD18, (ReadAddr >> 24) & 0xFF, (ReadAddr >> 16) & 0xFF, (ReadAddr >> 8) & 0xFF, ReadAddr & 0xFF, 0xFF };
+            bflb_spi_poll_exchange(spi0, CMD18_WRITE, NULL, 6);
+            recv = 0xFF;
+            timeout = 128;
+            while ((recv != 0x00) && timeout) {
+                bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                // printf("CMD18 0x%02x\r\n", recv);
+                timeout--;
+                if (timeout == 0) {
+                    bflb_gpio_set(gpio, GPIO_PIN_22);
+                    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                    xSemaphoreGive(xMutex_SPI);
+                    return 1;
+                }
+            }
+            // printf("CMD18\r\n");
+
+            // timeout = 512;
+            // recv = 0x00;
+            // while ((recv != 0xFF) && timeout) {
+            //     bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+            //     // printf("Wait CMD18 recv 0x%02x\r\n", recv);
+            //     timeout--;
+            //     if (timeout == 0) {
+            //         bflb_gpio_set(gpio, GPIO_PIN_22);
+            //         bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+            //         xSemaphoreGive(xMutex_SPI);
+            //         return 1;
+            //     }
+            // }
+
+            // Start Read
+            uint32_t pData = 0;
+
+            // Start Receive
+            for (uint8_t i = 0; i < NumberOfBlocks; i++) {
+                // Wait 0xFE
+                // timeout = 128;
+                recv = 0xFF;
+                while (recv != 0xFE) {
+                    bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                    // printf("Read 0xFE recv 0x%02x\r\n", recv);
+                }
+                // printf("Wait 0xFE\r\n");
+
+                bflb_spi_poll_exchange(spi0, sendDummy, readbuff + pData, BlockSize);
+                bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+                pData += BlockSize;
+            }
+
+            // Stop Receive: CMD12
+            uint8_t CMD12_WRITE[6] = { NAND_CMD12, 0x00, 0x00, 0x00, 0x00, 0xFF };
+            bflb_spi_poll_exchange(spi0, CMD12_WRITE, NULL, 6);
+            recv = 0xFF;
+            while (recv != 0x00) {
+                bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
+                // printf("Read CMD12 recv 0x%02x\r\n", recv);
+            }
+            // printf("CMD12\r\n");
         }
 
-        // Stop Receive: CMD12
-        uint8_t CMD12_WRITE[6] = { NAND_CMD12, 0x00, 0x00, 0x00, 0x00, 0xFF };
-        bflb_spi_poll_exchange(spi0, CMD12_WRITE, NULL, 6);
-        recv = 0xFF;
-        while (recv != 0x00) {
-            bflb_spi_poll_exchange(spi0, &sDummy, &recv, 1);
-            // printf("Read CMD12 recv 0x%02x\r\n", recv);
-        }
-        // printf("CMD12\r\n");
+        bflb_gpio_set(gpio, GPIO_PIN_22);
+        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+        bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
+
+        // printf("NAND RD GIVE MUTEX\r\n");
+        // bflb_mtimer_delay_us(10);
+        xSemaphoreGive(xMutex_SPI);
+    } else {
+        return 1;
     }
-
-    bflb_gpio_set(gpio, GPIO_PIN_22);
-    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-    bflb_spi_poll_exchange(spi0, &sDummy, NULL, 1);
-
-    // printf("NAND RD GIVE MUTEX\r\n");
-    // bflb_mtimer_delay_us(10);
-    xSemaphoreGive(xMutex_SPI);
     // taskEXIT_CRITICAL();
     // printf("give xMutex_SPI\r\n");
 

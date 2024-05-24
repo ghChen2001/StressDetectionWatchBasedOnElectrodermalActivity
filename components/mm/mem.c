@@ -137,7 +137,7 @@ void *kcalloc(size_t size, size_t len)
 
 void pmem_init(void *heapstart, size_t heapsize)
 {
-    MEM_LOG("Heap: start=%p size=%u\r\n", heapstart, heapsize);
+    printf("Heap: start=%p size=%u\r\n", heapstart, heapsize);
 
     bflb_mem_init(PMEM_HEAP, heapstart, heapsize);
 }

@@ -25,9 +25,10 @@ int ins5699_write_regs(uint8_t start_addr, uint8_t len, const uint8_t *data)
     msgs[0].buffer = subaddr;
     msgs[0].length = len + 1;
 
-    xSemaphoreTake(xMutex_IIC1, portMAX_DELAY);
-    ins5699_err = bflb_i2c_transfer(i2c1, msgs, 1);
-    xSemaphoreGive(xMutex_IIC1);
+    if (xSemaphoreTake(xMutex_IIC1, portMAX_DELAY) == pdTRUE) {
+        ins5699_err = bflb_i2c_transfer(i2c1, msgs, 1);
+        xSemaphoreGive(xMutex_IIC1);
+    }
 
     return ins5699_err;
 }
@@ -48,9 +49,10 @@ int ins5699_read_regs(uint8_t start_addr, uint8_t len, uint8_t *data)
     msgs[1].buffer = data;
     msgs[1].length = len;
 
-    xSemaphoreTake(xMutex_IIC1, portMAX_DELAY);
-    ins5699_err = bflb_i2c_transfer(i2c1, msgs, 2);
-    xSemaphoreGive(xMutex_IIC1);
+    if (xSemaphoreTake(xMutex_IIC1, portMAX_DELAY) == pdTRUE) {
+        ins5699_err = bflb_i2c_transfer(i2c1, msgs, 2);
+        xSemaphoreGive(xMutex_IIC1);
+    }
 
     return ins5699_err;
 }
@@ -66,9 +68,10 @@ int ins5699_write_reg(uint8_t start_addr, uint8_t data)
     msgs[0].buffer = subaddr;
     msgs[0].length = 2;
 
-    xSemaphoreTake(xMutex_IIC1, portMAX_DELAY);
-    ins5699_err = bflb_i2c_transfer(i2c1, msgs, 1);
-    xSemaphoreGive(xMutex_IIC1);
+    if (xSemaphoreTake(xMutex_IIC1, portMAX_DELAY) == pdTRUE) {
+        ins5699_err = bflb_i2c_transfer(i2c1, msgs, 1);
+        xSemaphoreGive(xMutex_IIC1);
+    }
 
     return ins5699_err;
 }
@@ -90,9 +93,10 @@ int ins5699_read_reg(uint8_t start_addr, uint8_t *data)
     msgs[1].length = 1;
 
     // printf("00\r\n");
-    xSemaphoreTake(xMutex_IIC1, portMAX_DELAY);
-    ins5699_err = bflb_i2c_transfer(i2c1, msgs, 2);
-    xSemaphoreGive(xMutex_IIC1);
+    if (xSemaphoreTake(xMutex_IIC1, portMAX_DELAY) == pdTRUE) {
+        ins5699_err = bflb_i2c_transfer(i2c1, msgs, 2);
+        xSemaphoreGive(xMutex_IIC1);
+    }
     // printf("000\r\n");
     return ins5699_err;
 }
@@ -259,11 +263,11 @@ static int ins5699_recover()
     ins5699_err = ins5699_write_reg(0x40, 0x00);
     if (ins5699_err)
         return ins5699_err;
-    
+
     ins5699_err = ins5699_write_reg(0x32, 0x81);
     if (ins5699_err)
         return ins5699_err;
-    
+
     mdelay(50);
 
     ins5699_err = ins5699_write_reg(0x32, 0x80);
@@ -340,8 +344,9 @@ int ins5699_init_client(int *need_reset)
     printf("0\r\n");
     ins5699_err = ins5699_read_reg(INS5699_BTC_FLAG, &flags);
     printf("ins5699_err %d\r\n", ins5699_err);
-    
-    if (ins5699_err) return ins5699_err;
+
+    if (ins5699_err)
+        return ins5699_err;
     printf("1\r\n");
     //***turn off 0x32 for current  2022-03-10
     ins5699_err = ins5699_write_reg(0x30, 0xD1);

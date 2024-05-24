@@ -13,6 +13,8 @@ void ui_Settings_screen_init(void);
 void ui_event_Settings(lv_event_t *e);
 lv_obj_t *ui_Settings;
 lv_obj_t *ui_SettingsLabel;
+lv_obj_t *ui_Switch_TF;
+lv_obj_t *ui_Switch_TF_Label;
 lv_obj_t *ui_Switch_HR;
 lv_obj_t *ui_Switch_HR_Label;
 lv_obj_t *ui_Switch_EDA;

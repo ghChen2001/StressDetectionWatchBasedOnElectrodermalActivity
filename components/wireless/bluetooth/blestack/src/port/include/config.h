@@ -380,8 +380,9 @@
 #elif defined(BL702L)
 #define CONFIG_BT_DEVICE_NAME "BL702L-BLE-DEV"
 #else
+#define CONFIG_BT_DEVICE_NAME "EDA_SmartWatch_0"
 // #define CONFIG_BT_DEVICE_NAME "EDA_SmartWatch_1"
-#define CONFIG_BT_DEVICE_NAME "EDA_SmartWatch_2"
+// #define CONFIG_BT_DEVICE_NAME "EDA_SmartWatch_2"
 #endif
 #endif
 #endif

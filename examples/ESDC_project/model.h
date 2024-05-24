@@ -29,4 +29,7 @@ limitations under the License.
 extern const unsigned char g_model[];
 extern const int g_model_len;
 
+extern const unsigned char model_cnn_without_acctemp_ft_bin_quant_20240521_203209_tflite[];
+extern const int model_cnn_without_acctemp_ft_bin_quant_20240521_203209_tflite_len;
+
 #endif // TENSORFLOW_LITE_MICRO_EXAMPLES_HELLO_WORLD_MODEL_H_

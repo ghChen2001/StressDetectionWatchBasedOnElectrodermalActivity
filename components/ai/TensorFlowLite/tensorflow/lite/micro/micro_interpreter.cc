@@ -187,9 +187,12 @@ TfLiteStatus MicroInterpreter::AllocateTensors()
 {
     SubgraphAllocations *allocations = allocator_.StartModelAllocation(model_);
 
+    printf("AllocateTensors\r\n");
+
     if (allocations == nullptr) {
         TF_LITE_REPORT_ERROR(error_reporter_,
                              "Failed starting model allocation.\n");
+        printf("Failed starting model allocation.\n");
         initialization_status_ = kTfLiteError;
         return kTfLiteError;
     }
@@ -231,6 +234,9 @@ TfLiteStatus MicroInterpreter::AllocateTensors()
             "Failed to allocate memory for context->input_tensors_, "
             "%d bytes required",
             sizeof(TfLiteTensor *) * inputs_size());
+        printf("Failed to allocate memory for context->input_tensors_, "
+               "%d bytes required",
+               sizeof(TfLiteTensor *) * inputs_size());
         return kTfLiteError;
     }
 
@@ -240,6 +246,7 @@ TfLiteStatus MicroInterpreter::AllocateTensors()
         if (input_tensors_[i] == nullptr) {
             TF_LITE_REPORT_ERROR(error_reporter_,
                                  "Failed to initialize input tensor %d", i);
+            printf("Failed to initialize input tensor %d", i);
             return kTfLiteError;
         }
     }
@@ -255,6 +262,9 @@ TfLiteStatus MicroInterpreter::AllocateTensors()
             "Failed to allocate memory for context->output_tensors_, "
             "%d bytes required",
             sizeof(TfLiteTensor *) * outputs_size());
+        printf("Failed to allocate memory for context->output_tensors_, "
+               "%d bytes required",
+               sizeof(TfLiteTensor *) * outputs_size());
         return kTfLiteError;
     }
 
@@ -264,6 +274,7 @@ TfLiteStatus MicroInterpreter::AllocateTensors()
         if (output_tensors_[i] == nullptr) {
             TF_LITE_REPORT_ERROR(error_reporter_,
                                  "Failed to initialize output tensor %d", i);
+            printf("Failed to initialize output tensor %d", i);
             return kTfLiteError;
         }
     }

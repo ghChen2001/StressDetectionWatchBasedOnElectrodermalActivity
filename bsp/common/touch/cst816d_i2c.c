@@ -63,10 +63,11 @@ static int cst816d_i2c_read_byte(uint8_t register_addr, uint8_t *data_buf, uint1
     msg[1].buffer = data_buf;
     msg[1].length = len;
 
-    xSemaphoreTake(xMutex_IIC1,
-                   portMAX_DELAY);
-    bflb_i2c_transfer(i2c1, msg, 2);
-    xSemaphoreGive(xMutex_IIC1);
+    if (xSemaphoreTake(xMutex_IIC1,
+                       portMAX_DELAY) == pdTRUE) {
+        bflb_i2c_transfer(i2c1, msg, 2);
+        xSemaphoreGive(xMutex_IIC1);
+    }
 
     return 0;
 }
@@ -85,11 +86,11 @@ static int cst816d_i2c_write_byte(uint8_t register_addr, uint8_t *data_buf, uint
     msg[1].buffer = data_buf;
     msg[1].length = len;
 
-    xSemaphoreTake(xMutex_IIC1,
-                   portMAX_DELAY);
-
-    bflb_i2c_transfer(i2c1, msg, 2);
-    xSemaphoreGive(xMutex_IIC1);
+    if (xSemaphoreTake(xMutex_IIC1,
+                       portMAX_DELAY) == pdTRUE) {
+        bflb_i2c_transfer(i2c1, msg, 2);
+        xSemaphoreGive(xMutex_IIC1);
+    }
     return 0;
 }
 
