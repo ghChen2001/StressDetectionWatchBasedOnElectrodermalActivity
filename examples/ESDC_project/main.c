@@ -164,8 +164,8 @@ struct bflb_device_s *i2c0; // For LIS2DH12, TMP117, AFE4404
 struct bflb_device_s *rtc;
 struct bflb_device_s *pwm;
 struct bflb_device_s *i2c1 = NULL;
-// struct bflb_device_s *dma0_ch0;
-// struct bflb_device_s *dma0_ch1;
+struct bflb_device_s *dma0_ch0;
+struct bflb_device_s *dma0_ch1;
 
 // AD5940
 uint8_t ucInterrupted;
@@ -271,6 +271,9 @@ SemaphoreHandle_t xSem_TEMPEN = NULL;
 SemaphoreHandle_t xSem_ALGOEN = NULL;
 SemaphoreHandle_t xSem_BLEDISCONN = NULL;
 SemaphoreHandle_t xSem_BTNINT = NULL;
+SemaphoreHandle_t xSem_spirx = NULL;
+SemaphoreHandle_t xSem_spitx = NULL;
+SemaphoreHandle_t xSem_spitc = NULL;
 // SemaphoreHandle_t xSem_UpdateHRLabel = NULL;
 // SemaphoreHandle_t xSem_UpdatePPGChart = NULL;
 /* Queues */
@@ -333,10 +336,8 @@ bool timeCorrected = false;
 // static ATTR_NOCACHE_NOINIT_RAM_SECTION uint8_t tx_buffer[BUFFERLEN]; /**< TX buffer. */
 // static ATTR_NOCACHE_NOINIT_RAM_SECTION uint8_t rx_buffer[BUFFERLEN]; /**< RX buffer. */
 
-// struct bflb_dma_channel_lli_pool_s tx_llipool[1];
-// struct bflb_dma_channel_lli_transfer_s tx_transfers[1];
-// struct bflb_dma_channel_lli_pool_s rx_llipool[1];
-// struct bflb_dma_channel_lli_transfer_s rx_transfers[1];
+struct bflb_dma_channel_lli_pool_s tx_llipool[1];
+struct bflb_dma_channel_lli_pool_s rx_llipool[1];
 
 volatile bool spi0_tc = false; /**< Flag used to indicate that SPI instance completed the transfer. */
 
@@ -351,8 +352,8 @@ struct bt_gatt_exchange_params exchg_mtu;
 int tx_mtu_size = 20;
 // extern void shell_init_with_task(struct bflb_device_s *shell);
 
-FATFS fs;
-__attribute((aligned(64))) static uint32_t workbuf[4096];
+ATTR_NOCACHE_NOINIT_RAM_SECTION __attribute((aligned(32))) FATFS fs;
+__attribute((aligned(32))) static ATTR_NOCACHE_NOINIT_RAM_SECTION uint32_t workbuf[4096];
 
 MKFS_PARM fs_para = {
     .fmt = FM_FAT32,     /* Format option (FM_FAT, FM_FAT32, FM_EXFAT and FM_SFD) */
@@ -362,11 +363,11 @@ MKFS_PARM fs_para = {
     .au_size = 512 * 32, /* Cluster size (byte) */
 };
 
-FIL f_eda;
-FIL f_temp;
-FIL f_acc;
-FIL f_bvp;
-FIL f_algo;
+ATTR_NOCACHE_RAM_SECTION __attribute((aligned(8))) FIL f_eda;
+ATTR_NOCACHE_RAM_SECTION __attribute((aligned(8))) FIL f_temp;
+ATTR_NOCACHE_RAM_SECTION __attribute((aligned(8))) FIL f_acc;
+ATTR_NOCACHE_RAM_SECTION __attribute((aligned(8))) FIL f_bvp;
+ATTR_NOCACHE_RAM_SECTION __attribute((aligned(8))) FIL f_algo;
 
 /* Private Function Defination */
 /*Function Definations For lsm6dso */
@@ -659,19 +660,39 @@ void wifi_event_handler(uint32_t code)
     }
 }
 
+void dma0_ch0_isr(void *arg)
+{
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    // printf("tx done\r\n");
+    xSemaphoreGiveFromISR(xSem_spitx, &xHigherPriorityTaskWoken);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
+
+void dma0_ch1_isr(void *arg)
+{
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    // printf("rx done\r\n");
+    xSemaphoreGiveFromISR(xSem_spirx, &xHigherPriorityTaskWoken);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
+
 void spi_isr(int irq, void *arg)
 {
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     uint32_t intstatus = bflb_spi_get_intstatus(spi0);
     // printf("tc done1\r\n");
     if (intstatus & SPI_INTSTS_TC) {
         bflb_spi_int_clear(spi0, SPI_INTCLR_TC);
         // spi0_tc = true;
         // printf("tc done\r\n");
+        xSemaphoreGiveFromISR(xSem_spitc, &xHigherPriorityTaskWoken);
+        
     } else if (intstatus & SPI_INTSTS_TX_FIFO) {
         // printf("tx fifo\r\n");
     } else if (intstatus & SPI_INTSTS_RX_FIFO) {
         // printf("rx fifo\r\n");
     }
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 /* MCU related external line interrupt service routine */
@@ -722,17 +743,17 @@ static void spi0_init(void)
     // For AD5941 & NAND
 
     /* spi clk */
-    bflb_gpio_init(gpio, GPIO_PIN_25, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
+    bflb_gpio_init(gpio, GPIO_PIN_25, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0 | GPIO_DRV_3);
     /* spi miso */
-    bflb_gpio_init(gpio, GPIO_PIN_18, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
+    bflb_gpio_init(gpio, GPIO_PIN_18, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0 | GPIO_DRV_3);
     /* spi mosi */
-    bflb_gpio_init(gpio, GPIO_PIN_19, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_3);
+    bflb_gpio_init(gpio, GPIO_PIN_19, GPIO_FUNC_SPI0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_0 | GPIO_DRV_3);
 
     //CS pin For AD5941
-    bflb_gpio_init(gpio, AD5940_CS_PIN, GPIO_OUTPUT | GPIO_PULLUP | GPIO_DRV_3);
+    bflb_gpio_init(gpio, AD5940_CS_PIN, GPIO_OUTPUT | GPIO_PULLUP | GPIO_DRV_0 | GPIO_DRV_3);
     bflb_gpio_set(gpio, AD5940_CS_PIN);
     //CS Pin For NAND
-    bflb_gpio_init(gpio, GPIO_PIN_22, GPIO_OUTPUT | GPIO_PULLUP | GPIO_DRV_3);
+    bflb_gpio_init(gpio, GPIO_PIN_22, GPIO_OUTPUT | GPIO_PULLUP | GPIO_DRV_0 | GPIO_DRV_3);
     bflb_gpio_set(gpio, GPIO_PIN_22);
 
     /* Set the SPI parameters */
@@ -747,17 +768,52 @@ static void spi0_init(void)
         .rx_fifo_threshold = 0,
     };
 
+    struct bflb_dma_channel_config_s tx_config = {
+        .direction = DMA_MEMORY_TO_PERIPH,
+        .src_req = DMA_REQUEST_NONE,
+        .dst_req = DMA_REQUEST_SPI0_TX,
+        .src_addr_inc = DMA_ADDR_INCREMENT_ENABLE,
+        .dst_addr_inc = DMA_ADDR_INCREMENT_DISABLE,
+        .src_burst_count = DMA_BURST_INCR1,
+        .dst_burst_count = DMA_BURST_INCR1,
+        .src_width = DMA_DATA_WIDTH_8BIT,
+        .dst_width = DMA_DATA_WIDTH_8BIT,
+    };
+    struct bflb_dma_channel_config_s rx_config = {
+        .direction = DMA_PERIPH_TO_MEMORY,
+        .src_req = DMA_REQUEST_SPI0_RX,
+        .dst_req = DMA_REQUEST_NONE,
+        .src_addr_inc = DMA_ADDR_INCREMENT_DISABLE,
+        .dst_addr_inc = DMA_ADDR_INCREMENT_ENABLE,
+        .src_burst_count = DMA_BURST_INCR1,
+        .dst_burst_count = DMA_BURST_INCR1,
+        .src_width = DMA_DATA_WIDTH_8BIT,
+        .dst_width = DMA_DATA_WIDTH_8BIT,
+    };
+
     bflb_spi_init(spi0, &spi_cfg_0);
 
     NAND_DeviceInit();
 
-    // spi_cfg_0.freq = 14 * 1000 * 1000; // 12MHz
-    // bflb_spi_deinit(spi0);
-    // bflb_spi_init(spi0, &spi_cfg_0);
-
-    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 14 * 1000 * 1000);
+    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 16 * 1000 * 1000);
 
     NAND_GetInfo();
+
+    // bflb_spi_link_txdma(spi0, true);
+    // bflb_spi_link_rxdma(spi0, true);
+
+    // bflb_spi_tcint_mask(spi0, true);
+    // bflb_irq_attach(spi0->irq_num, spi_isr, NULL);
+    // bflb_irq_enable(spi0->irq_num);
+
+    dma0_ch0 = bflb_device_get_by_name("dma0_ch0");
+    dma0_ch1 = bflb_device_get_by_name("dma0_ch1");
+
+    bflb_dma_channel_init(dma0_ch0, &tx_config);
+    bflb_dma_channel_init(dma0_ch1, &rx_config);
+
+    bflb_dma_channel_irq_attach(dma0_ch0, dma0_ch0_isr, NULL);
+    bflb_dma_channel_irq_attach(dma0_ch1, dma0_ch1_isr, NULL);
 }
 
 static void peripheral_init(void)
@@ -825,9 +881,6 @@ static void peripheral_init(void)
 
     // bflb_spi_link_txdma(spi0, true);
     // bflb_spi_link_rxdma(spi0, true);
-
-    // dma0_ch0 = bflb_device_get_by_name("dma0_ch0");
-    // dma0_ch1 = bflb_device_get_by_name("dma0_ch1");
 
     // bflb_dma_channel_init(dma0_ch0, &tx_config);
     // bflb_dma_channel_init(dma0_ch1, &rx_config);
@@ -1005,7 +1058,37 @@ void AD5940_ReadWriteNBytes(unsigned char *pSendBuffer, unsigned char *pRecvBuff
     // printf("bflb_dma_channel_start(dma0_ch0)");
     // bflb_dma_channel_start(dma0_ch1);
     // printf("bflb_dma_channel_start");
-    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 16 * 1000 * 1000);
+
+    // printf("AD5940_ReadWriteNBytes Enter\r\n");
+    bflb_spi_feature_control(spi0, SPI_CMD_SET_FREQ, 8 * 1000 * 1000);
+
+    // struct bflb_dma_channel_lli_transfer_s tx_transfers[1];
+    // struct bflb_dma_channel_lli_transfer_s rx_transfers[1];
+
+    // tx_transfers[0].src_addr = (uint32_t)pSendBuffer;
+    // tx_transfers[0].dst_addr = (uint32_t)DMA_ADDR_SPI0_TDR;
+    // tx_transfers[0].nbytes = length;
+
+    // rx_transfers[0].src_addr = (uint32_t)DMA_ADDR_SPI0_RDR;
+    // rx_transfers[0].dst_addr = (uint32_t)pRecvBuff;
+    // rx_transfers[0].nbytes = length;
+
+    // bflb_dma_channel_lli_reload(dma0_ch0, tx_llipool, 1, tx_transfers, 1);
+    // bflb_dma_channel_lli_reload(dma0_ch1, rx_llipool, 1, rx_transfers, 1);
+    // bflb_dma_channel_start(dma0_ch1);
+    // bflb_dma_channel_start(dma0_ch0);
+    // printf("bflb_dma_channel_start\r\n");
+
+    // if (xSemaphoreTake(xSem_spitx, portMAX_DELAY) == pdFALSE) {
+    //     return;
+    // }
+    // if (xSemaphoreTake(xSem_spirx, portMAX_DELAY) == pdFALSE) {
+    //     return;
+    // }
+    // if (xSemaphoreTake(xSem_spitc, portMAX_DELAY) == pdFALSE) {
+    //     return;
+    // }
+
     bflb_spi_poll_exchange(spi0, pSendBuffer, pRecvBuff, length);
 }
 
@@ -1660,38 +1743,43 @@ void EDA_task_pre_delete()
 {
     printf("EDA_task_pre_delete\r\n");
 
-    AppEDACtrl(APPCTRL_SHUTDOWN, 0);
-
-    bflb_gpio_int_mask(gpio, KEY0, true);
-    // bflb_gpio_int_clear(gpio, KEY0);
-
-    while (uxSemaphoreGetCount(xMutex_SPI) == 0) {
-        vTaskDelay(1);
-        printf("while (uxSemaphoreGetCount\r\n");
-    }
-    printf("xMutex_SPI == 1");
-
-    // while (uxQueueMessagesWaiting(Queue_EdaConFile) >= 4) {
-    //     vTaskDelay(1);
-    // }
-    // while (uxQueueMessagesWaiting(Queue_EdaPhaFile) >= 4) {
-    //     vTaskDelay(1);
-    // }
-
-    xQueueReset(Queue_EdaConFile);
-    xQueueReset(Queue_EdaPhaFile);
-    xQueueReset(Queue_EdaRealFile);
-    xQueueReset(Queue_EdaImageFile);
-
     if (EDA_handle != NULL) {
+        while (uxSemaphoreGetCount(xMutex_SPI) == 0) {
+            vTaskDelay(1);
+            printf("while xMutex_SPI\r\n");
+        }
+
+        AD5940_HWReset();
+
+        bflb_gpio_int_mask(gpio, KEY0, true);
+        // bflb_gpio_int_clear(gpio, KEY0);
+
+        while (uxSemaphoreGetCount(xMutex_SPI) == 0) {
+            vTaskDelay(1);
+            printf("while (uxSemaphoreGetCount\r\n");
+        }
+        printf("xMutex_SPI == 1");
+
+        // while (uxQueueMessagesWaiting(Queue_EdaConFile) >= 4) {
+        //     vTaskDelay(1);
+        // }
+        // while (uxQueueMessagesWaiting(Queue_EdaPhaFile) >= 4) {
+        //     vTaskDelay(1);
+        // }
+
+        xQueueReset(Queue_EdaConFile);
+        xQueueReset(Queue_EdaPhaFile);
+        xQueueReset(Queue_EdaRealFile);
+        xQueueReset(Queue_EdaImageFile);
+
         vTaskDelete(EDA_handle);
         printf("EDA task delete\r\n");
-    }
 
-    // AD5940_HWReset();
-    AD5940_CsSet();
-    // xSemaphoreGive(xMutex_SPI);
-    EDA_handle = NULL;
+        // AD5940_HWReset();
+        AD5940_CsSet();
+        // xSemaphoreGive(xMutex_SPI);
+        EDA_handle = NULL;
+    }
 }
 
 void EDA_task_create()
@@ -1854,25 +1942,25 @@ static void ACCE_task(void *pvParameters)
 
 void ACCE_task_pre_delete()
 {
-    while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
-        vTaskDelay(1);
-    }
-    printf("xMutex_IIC0 == 1");
-
     if (ACCE_handle != NULL) {
+        while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
+            vTaskDelay(1);
+        }
+        printf("xMutex_IIC0 == 1");
+
         vTaskDelete(ACCE_handle);
         printf("ACC task delete\r\n");
+
+        xQueueReset(Queue_AccFile_XL_Z);
+        xQueueReset(Queue_AccFile_GY_Z);
+        xQueueReset(Queue_AccFile_XL_X);
+        xQueueReset(Queue_AccFile_XL_Y);
+        xQueueReset(Queue_AccFile_GY_X);
+        xQueueReset(Queue_AccFile_GY_Y);
+
+        lsm6dso_reset_set(&dev_ctx, PROPERTY_ENABLE);
+        ACCE_handle = NULL;
     }
-
-    xQueueReset(Queue_AccFile_XL_Z);
-    xQueueReset(Queue_AccFile_GY_Z);
-    xQueueReset(Queue_AccFile_XL_X);
-    xQueueReset(Queue_AccFile_XL_Y);
-    xQueueReset(Queue_AccFile_GY_X);
-    xQueueReset(Queue_AccFile_GY_Y);
-
-    lsm6dso_reset_set(&dev_ctx, PROPERTY_ENABLE);
-    ACCE_handle = NULL;
 }
 
 void ACCE_task_create()
@@ -1996,27 +2084,27 @@ static void TEMP_task(void *pvParameters)
 
 void TEMP_task_pre_delete()
 {
-    while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
-        vTaskDelay(1);
-    }
-    printf("xMutex_IIC0 == 1\r\n");
-
-    // while (uxQueueMessagesWaiting(Queue_TempFile_To) >= 1) {
-    //     vTaskDelay(1);
-    // }
-    // while (uxQueueMessagesWaiting(Queue_TempFile_Ta) >= 1) {
-    //     vTaskDelay(1);
-    // }
-
-    xQueueReset(Queue_TempFile_To);
-    xQueueReset(Queue_TempFile_Ta);
-
     if (TEMP_handle != NULL) {
+        while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
+            vTaskDelay(1);
+        }
+        printf("xMutex_IIC0 == 1\r\n");
+
+        // while (uxQueueMessagesWaiting(Queue_TempFile_To) >= 1) {
+        //     vTaskDelay(1);
+        // }
+        // while (uxQueueMessagesWaiting(Queue_TempFile_Ta) >= 1) {
+        //     vTaskDelay(1);
+        // }
+
+        xQueueReset(Queue_TempFile_To);
+        xQueueReset(Queue_TempFile_Ta);
+
         vTaskDelete(TEMP_handle);
         printf("TEMP task delete\r\n");
-    }
 
-    TEMP_handle = NULL;
+        TEMP_handle = NULL;
+    }
 }
 
 void TEMP_task_create()
@@ -2216,33 +2304,33 @@ static void HR_task(void *pvParameters)
 
 void HR_task_pre_delete()
 {
-    bflb_gpio_int_mask(gpio, AFE_ADC_DRDY, true);
-    bflb_gpio_int_clear(gpio, AFE_ADC_DRDY);
-
-    // printf("AFE_ADC_DRDY\r\n");
-
-    while (uxSemaphoreGetCount(xSem_HR) == 1) {
-        vTaskDelay(1);
-        printf("uxSemaphoreGetCount(xSem_HR) == 1\r\n");
-    }
-    printf("xSem_HR == 0\r\n");
-
-    while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
-        vTaskDelay(1);
-    }
-    printf("HR xMutex_IIC0 == 1\r\n");
-
-    xQueueReset(Queue_BvpFile);
-    xQueueReset(Queue_HRFile);
-
     if (HR_handle != NULL) {
+        bflb_gpio_int_mask(gpio, AFE_ADC_DRDY, true);
+        bflb_gpio_int_clear(gpio, AFE_ADC_DRDY);
+
+        // printf("AFE_ADC_DRDY\r\n");
+
+        while (uxSemaphoreGetCount(xSem_HR) == 1) {
+            vTaskDelay(1);
+            printf("uxSemaphoreGetCount(xSem_HR) == 1\r\n");
+        }
+        printf("xSem_HR == 0\r\n");
+
+        while (uxSemaphoreGetCount(xMutex_IIC0) == 0) {
+            vTaskDelay(1);
+        }
+        printf("HR xMutex_IIC0 == 1\r\n");
+
+        xQueueReset(Queue_BvpFile);
+        xQueueReset(Queue_HRFile);
+
         vTaskDelete(HR_handle);
         printf("HR task delete\r\n");
+
+        AFE4404_Trigger_HWReset();
+
+        HR_handle = NULL;
     }
-
-    AFE4404_Trigger_HWReset();
-
-    HR_handle = NULL;
 }
 
 void HR_task_create()
@@ -2568,20 +2656,20 @@ static void Algo_task(void *pvParameters)
     sumMs = 0;
     // DEMO
     // vTaskDelay(5000);
-    for (uint16_t i = 0; i < 350; i++) {
-        startMs = bflb_mtimer_get_time_ms();
-        // resultArray[i] = Calculate(test_data_input[i], 2720);
-        resultArray[i] = Calculate2(test_data_input[i], test_data_input[i] + 2560, 2560, 160);
-        deltaMs = bflb_mtimer_get_time_ms() - startMs;
-        sumMs += deltaMs;
-        printf("%d, time %d\r\n", resultArray[i], deltaMs);
-        if (resultArray[i] == test_label[i]) {
-            accurateNumber++;
-        }
-        vTaskDelay(1);
-    }
-    printf("accurateNumber %d\r\n", accurateNumber);
-    printf("Avg Time %d\r\n", sumMs);
+    // for (uint16_t i = 0; i < 350; i++) {
+    //     startMs = bflb_mtimer_get_time_ms();
+    //     // resultArray[i] = Calculate(test_data_input[i], 2720);
+    //     resultArray[i] = Calculate2(test_data_input[i], test_data_input[i] + 2560, 2560, 160);
+    //     deltaMs = bflb_mtimer_get_time_ms() - startMs;
+    //     sumMs += deltaMs;
+    //     printf("%d, time %d\r\n", resultArray[i], deltaMs);
+    //     if (resultArray[i] == test_label[i]) {
+    //         accurateNumber++;
+    //     }
+    //     vTaskDelay(1);
+    // }
+    // printf("accurateNumber %d\r\n", accurateNumber);
+    // printf("Avg Time %d\r\n", sumMs);
 
     isAlgoOn = true;
     while (1) {
@@ -2699,17 +2787,17 @@ static void Algo_task(void *pvParameters)
 
 void Algo_task_pre_delete()
 {
-    isAlgoOn = false;
-
-    xQueueReset(Queue_BvpAlgo);
-    xQueueReset(Queue_EdaAlgo);
-
     if (Algo_handle != NULL) {
+        isAlgoOn = false;
+
+        xQueueReset(Queue_BvpAlgo);
+        xQueueReset(Queue_EdaAlgo);
+
         vTaskDelete(Algo_handle);
         printf("Algo task delete\r\n");
-    }
 
-    Algo_handle = NULL;
+        Algo_handle = NULL;
+    }
 }
 
 void Algo_task_create()
@@ -2780,7 +2868,7 @@ static void MOTOR_task(void *pvParameters)
 
     vTaskDelay(250);
     bflb_pwm_v2_stop(pwm);
-    vTaskDelay(5); // break.
+    vTaskDelay(20); // break.
     bflb_gpio_reset(gpio, GPIO_PIN_13);
     // bflb_pwm_v2_stop(pwm);
     // }
@@ -2826,7 +2914,7 @@ static void BAT_task(void *pvParameters)
     vTaskDelete(NULL);
 }
 
-#define SDU_DATA_CHECK 0
+#define SDU_DATA_CHECK 1
 
 char test_data[] =
     "I've been reading books of old \r\n\
@@ -2846,15 +2934,16 @@ char test_data[] =
     Somebody I can kiss\r\n\
     I want something just like this\r\n\r\n";
 
-__attribute((aligned(64))) BYTE RW_Buffer[32 * 1024] = { 0 };
+ATTR_NOCACHE_NOINIT_RAM_SECTION __attribute((aligned(64))) BYTE RW_Buffer[4 * 1024] = { 0 };
 #if SDU_DATA_CHECK
 __attribute((aligned(64))) BYTE Check_Buffer[sizeof(RW_Buffer)] = { 0 };
 #endif
 
+ATTR_NOCACHE_RAM_SECTION __attribute((aligned(8))) FIL fnew;
+
 void fatfs_write_read_test()
 {
     FRESULT ret;
-    FIL fnew;
     UINT fnum;
 
     vTaskDelay(10);
@@ -3018,46 +3107,44 @@ static void FILE_task(void *pvParameters)
     struct bflb_tm time;
 
     vTaskDelay(10);
-    uint8_t sendbuf[2048] = { 0 };
-    uint8_t readbuf[2048] = { 0 };
-    // sendbuf[0] = 11;
-    // sendbuf[1] = 129;
-    // sendbuf[2] = 130;
-    // sendbuf[511] = 120;
-    // sendbuf[512] = 121;
-    // sendbuf[1020] = 128;
-    // sendbuf[1024] = 127;
-    // sendbuf[2047] = 13;
+    // RW_Buffer[0] = 11;
+    // RW_Buffer[1] = 129;
+    // RW_Buffer[2] = 130;
+    // RW_Buffer[511] = 120;
+    // RW_Buffer[512] = 121;
+    // RW_Buffer[1020] = 128;
+    // RW_Buffer[1024] = 127;
+    // RW_Buffer[2047] = 13;
 
-    // while (NAND_WriteMultiBlocks(sendbuf, 0, 512, 4) == 1)
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 0, 512, 4) == 1)
     //     ;
-    // while (NAND_WriteMultiBlocks(sendbuf, 4, 512, 4) == 1)
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 4, 512, 16) == 1)
     //     ;
-    // while (NAND_WriteMultiBlocks(sendbuf, 8, 512, 4) == 1)
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 8, 512, 1) == 1)
     //     ;
-    // while (NAND_WriteMultiBlocks(sendbuf, 12, 512, 4) == 1)
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 12, 512, 1) == 1)
     //     ;
-    // while (NAND_WriteMultiBlocks(sendbuf, 16, 512, 4) == 1)
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 16, 512, 1) == 1)
     //     ;
-    // while (NAND_WriteMultiBlocks(sendbuf, 32, 512, 4) == 1)
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 32, 512, 1) == 1)
     //     ;
-    // while (NAND_WriteMultiBlocks(sendbuf, 63, 512, 4) == 1)
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 63, 512, 1) == 1)
     //     ;
     // // printf("NAND_Write\r\n");
-    // while (NAND_ReadMultiBlocks(readbuf, 0, 512, 4) == 1)
+    // while (NAND_ReadMultiBlocks(RW_Buffer, 0, 512, 1) == 1)
     //     ;
 
     // for (uint8_t i = 0; i < 64; i++) {
-    //     printf("Read %d\r\n", readbuf[i]);
+    //     printf("Read %d\r\n", RW_Buffer[i]);
     // }
-    // printf("Read end1020 %d\r\n", readbuf[1020]);
-    // printf("Read end1024 %d\r\n", readbuf[1024]);
-    // printf("Read end2047 %d\r\n", readbuf[2047]);
-    // printf("Read end511 %d\r\n", readbuf[511]);
-    // printf("Read end512 %d\r\n", readbuf[512]);
-    // while (NAND_WriteMultiBlocks(sendbuf, 95, 512, 32) == 1)
+    // printf("Read end1020 %d\r\n", RW_Buffer[1020]);
+    // printf("Read end1024 %d\r\n", RW_Buffer[1024]);
+    // printf("Read end2047 %d\r\n", RW_Buffer[2047]);
+    // printf("Read end511 %d\r\n", RW_Buffer[511]);
+    // printf("Read end512 %d\r\n", RW_Buffer[512]);
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 95, 512, 32) == 1)
     //     ;
-    // while (NAND_WriteMultiBlocks(sendbuf, 95, 512, 1) == 1)
+    // while (NAND_WriteMultiBlocks(RW_Buffer, 95, 512, 128) == 1)
     //     ;
 
     // printf("TEST END\r\n");
@@ -3123,9 +3210,10 @@ static void FILE_task(void *pvParameters)
         LOG_D("Succeed to mount filesystem\r\n");
     }
 
-    
     if (ret == FR_OK) {
         LOG_I("FileSystem cluster size:%d-sectors (%d-Byte)\r\n", fs.csize, fs.csize * 512);
+    } else {
+        LOG_F("fail to mount filesystem,error= %d\r\n", ret);
     }
 
     // vTaskDelay(1000);
@@ -3138,44 +3226,44 @@ static void FILE_task(void *pvParameters)
     }
     printf("Get time\r\n");
 
-    // // Create file name with time.
-    // memset(FileNameEda, 0, 128 * sizeof(char));
-    // strcat(FileNameEda, "/sd2/eda_");
-    // sprintf(FileNameEda + strlen(FileNameEda), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
-    // strcat(FileNameEda, ".csv");
-    // ret = f_open(&f_eda, FileNameEda, FA_OPEN_APPEND | FA_WRITE);
-    // sprintf(RW_Buffer, "Eda Num, Real(Ohm), Image(Ohm), Conductance(uS), Phase(°)\r\n");
-    // f_write(&f_eda, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
-    // f_close(&f_eda);
+    // // // Create file name with time.
+    // // memset(FileNameEda, 0, 128 * sizeof(char));
+    // // strcat(FileNameEda, "/sd2/eda_");
+    // // sprintf(FileNameEda + strlen(FileNameEda), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+    // // strcat(FileNameEda, ".csv");
+    // // ret = f_open(&f_eda, FileNameEda, FA_OPEN_APPEND | FA_WRITE);
+    // // sprintf(RW_Buffer, "Eda Num, Real(Ohm), Image(Ohm), Conductance(uS), Phase(°)\r\n");
+    // // f_write(&f_eda, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+    // // f_close(&f_eda);
 
-    // memset(FileNameTemp, 0, 128 * sizeof(char));
-    // strcat(FileNameTemp, "/sd2/temp_");
-    // sprintf(FileNameTemp + strlen(FileNameTemp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
-    // strcat(FileNameTemp, ".csv");
-    // ret = f_open(&f_temp, FileNameTemp, FA_OPEN_APPEND | FA_WRITE);
-    // sprintf(RW_Buffer, "Temp Num, Object(℃), Ambient(℃)\r\n");
-    // f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
-    // f_close(&f_temp);
+    // // memset(FileNameTemp, 0, 128 * sizeof(char));
+    // // strcat(FileNameTemp, "/sd2/temp_");
+    // // sprintf(FileNameTemp + strlen(FileNameTemp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+    // // strcat(FileNameTemp, ".csv");
+    // // ret = f_open(&f_temp, FileNameTemp, FA_OPEN_APPEND | FA_WRITE);
+    // // sprintf(RW_Buffer, "Temp Num, Object(℃), Ambient(℃)\r\n");
+    // // f_write(&f_temp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+    // // f_close(&f_temp);
 
-    // memset(FileNameBvp, 0, 128 * sizeof(char));
-    // strcat(FileNameBvp, "/sd2/bvp_");
-    // sprintf(FileNameBvp + strlen(FileNameBvp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
-    // strcat(FileNameBvp, ".csv");
-    // ret = f_open(&f_bvp, FileNameBvp, FA_OPEN_APPEND | FA_WRITE);
-    // sprintf(RW_Buffer, "Bvp Num, Bvp\r\n");
-    // f_write(&f_bvp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
-    // f_close(&f_bvp);
+    // // memset(FileNameBvp, 0, 128 * sizeof(char));
+    // // strcat(FileNameBvp, "/sd2/bvp_");
+    // // sprintf(FileNameBvp + strlen(FileNameBvp), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+    // // strcat(FileNameBvp, ".csv");
+    // // ret = f_open(&f_bvp, FileNameBvp, FA_OPEN_APPEND | FA_WRITE);
+    // // sprintf(RW_Buffer, "Bvp Num, Bvp\r\n");
+    // // f_write(&f_bvp, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+    // // f_close(&f_bvp);
 
-    // memset(FileNameAcc, 0, 128 * sizeof(char));
-    // strcat(FileNameAcc, "/sd2/acc_");
-    // sprintf(FileNameAcc + strlen(FileNameAcc), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
-    // strcat(FileNameAcc, ".csv");
-    // ret = f_open(&f_acc, FileNameAcc, FA_OPEN_APPEND | FA_WRITE);
-    // sprintf(RW_Buffer, "Acc Num, Acceleration1(mg), Acceleration2(mg), Acceleration3(mg), Angular Rate1(mdps), Angular Rate2(mdps), Angular Rate3(mdps)\r\n");
-    // f_write(&f_acc, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
-    // f_close(&f_acc);
+    // // memset(FileNameAcc, 0, 128 * sizeof(char));
+    // // strcat(FileNameAcc, "/sd2/acc_");
+    // // sprintf(FileNameAcc + strlen(FileNameAcc), "%4d%02d%02d_%02d%02d%02d", time.tm_year + 1900, time.tm_mon + 1, time.tm_mday, time.tm_hour, time.tm_min, time.tm_sec);
+    // // strcat(FileNameAcc, ".csv");
+    // // ret = f_open(&f_acc, FileNameAcc, FA_OPEN_APPEND | FA_WRITE);
+    // // sprintf(RW_Buffer, "Acc Num, Acceleration1(mg), Acceleration2(mg), Acceleration3(mg), Angular Rate1(mdps), Angular Rate2(mdps), Angular Rate3(mdps)\r\n");
+    // // f_write(&f_acc, RW_Buffer, sizeof(RW_Buffer[0]) * strlen(RW_Buffer), &fnum);
+    // // f_close(&f_acc);
 
-    printf("FileNameEda %s\r\n", FileNameEda);
+    // printf("FileNameEda %s\r\n", FileNameEda);
 
     while (1) {
         if (xSemaphoreTake(xSem_EDAEN, 0) == pdTRUE) {
@@ -3401,9 +3489,9 @@ static void FILE_task(void *pvParameters)
     //     vTaskDelay(100);
     // }
 
-    // while (1) {
-    //     vTaskDelay(1000);
-    // }
+    while (1) {
+        vTaskDelay(1000);
+    }
     vTaskDelete(NULL);
 }
 
@@ -3491,10 +3579,14 @@ void fatfs2msc()
         vTaskDelay(1);
     }
 
+    while (uxSemaphoreGetCount(xMutex_SPI) == 0) {
+        vTaskDelay(1);
+        printf("while xMutex_SPI\r\n");
+    }
     if (FILE_handle != NULL) {
+        ret = f_mount(NULL, "/sd2", 1);
         vTaskDelete(FILE_handle);
         printf("File task delete\r\n");
-        ret = f_mount(NULL, "/sd2", 1);
         printf("f_mount ret %d\r\n", ret);
     }
     FILE_handle = NULL;
@@ -3504,6 +3596,11 @@ void fatfs2msc()
 
 void msc2fatfs()
 {
+    while (uxSemaphoreGetCount(xMutex_SPI) == 0) {
+        vTaskDelay(1);
+        printf("while xMutex_SPI\r\n");
+    }
+
     usbd_deinitialize();
 
     vTaskDelay(10);
@@ -3607,8 +3704,10 @@ int main(void)
     rtc = bflb_device_get_by_name("rtc");
     i2c1 = bflb_device_get_by_name("i2c1");
     pwm = bflb_device_get_by_name("pwm_v2_0");
+    dma0_ch0 = bflb_device_get_by_name("dma0_ch0");
+    dma0_ch1 = bflb_device_get_by_name("dma0_ch1");
 
-    configASSERT((configMAX_PRIORITIES > 4));
+    configASSERT((configMAX_PRIORITIES > 5));
 
     /* Shell init */ // No Shell.
     // shell_init_with_task(uart0);
@@ -3639,7 +3738,7 @@ int main(void)
 #if defined(BL702) || defined(BL602)
     ble_controller_init(configMAX_PRIORITIES - 1);
 #else
-    btble_controller_init(configMAX_PRIORITIES - 1);
+    btble_controller_init(configMAX_PRIORITIES - 5);
 #endif
     printf("btble_controller_init\r\n");
     // Initialize BLE Host stack
@@ -3723,6 +3822,12 @@ int main(void)
     xSemaphoreTake(xSem_BLEDISCONN, 0);
     xSem_BTNINT = xSemaphoreCreateBinary();
     xSemaphoreTake(xSem_BTNINT, 0);
+    xSem_spirx = xSemaphoreCreateBinary();
+    xSemaphoreTake(xSem_spirx, 0);
+    xSem_spitx = xSemaphoreCreateBinary();
+    xSemaphoreTake(xSem_spitx, 0);
+    xSem_spitc = xSemaphoreCreateBinary();
+    xSemaphoreTake(xSem_spitc, 0);
 
     // xSem_usb = xSemaphoreCreateBinary();
     Queue_HRBLE = xQueueCreate(200, sizeof(int32_t));

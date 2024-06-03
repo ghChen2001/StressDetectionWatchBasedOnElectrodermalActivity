@@ -136,8 +136,7 @@ int main(void)
     bflb_dma_channel_lli_reload(dma0_ch0, tx_llipool, 1, tx_transfers, 1);
     bflb_dma_channel_lli_reload(dma0_ch1, rx_llipool, 1, rx_transfers, 1);
     bflb_dma_channel_start(dma0_ch0);
-    //bflb_mtimer_delay_ms(1);
-    //bflb_dma_channel_start(dma0_ch1);
+    bflb_dma_channel_start(dma0_ch1);
 
     while (dma_tc_flag0 != 1) {
         bflb_mtimer_delay_ms(1);

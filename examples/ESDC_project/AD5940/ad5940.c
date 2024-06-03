@@ -15,6 +15,11 @@
 #include "board.h"
 #include <FreeRTOS.h>
 #include "semphr.h"
+#include <malloc.h>
+#include "bflb_core.h"
+
+static ATTR_NOCACHE_NOINIT_RAM_SECTION __attribute((aligned(8))) uint8_t SendBuffer[64];
+static ATTR_NOCACHE_NOINIT_RAM_SECTION __attribute((aligned(8))) uint8_t RecvBuffer[64];
 /*! \mainpage AD5940 Library Introduction
  * 
  * ![AD5940 EVAL Board](https://www.analog.com/-/media/analog/en/evaluation-board-images/images/eval-ad5940elcztop-web.gif?h=500&thn=1&hash=1F38F7CC1002894616F74D316365C0A2631C432B "ADI logo") 
@@ -847,10 +852,10 @@ void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
 **/
 static unsigned char AD5940_ReadWrite8B(unsigned char data)
 {
-    uint8_t tx[1], rx[1];
-    tx[0] = data;
-    AD5940_ReadWriteNBytes(tx, rx, 1);
-    return rx[0];
+    // uint8_t tx[1], rx[1];
+    SendBuffer[0] = data;
+    AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 1);
+    return RecvBuffer[0];
 }
 
 /**
@@ -860,8 +865,8 @@ static unsigned char AD5940_ReadWrite8B(unsigned char data)
 **/
 static uint16_t AD5940_ReadWrite16B(uint16_t data)
 {
-    uint8_t SendBuffer[2];
-    uint8_t RecvBuffer[2];
+    // uint8_t SendBuffer[2];
+    // uint8_t RecvBuffer[2];
     SendBuffer[0] = data >> 8;
     SendBuffer[1] = data & 0xff;
     AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 2);
@@ -870,8 +875,8 @@ static uint16_t AD5940_ReadWrite16B(uint16_t data)
 
 static uint32_t AD5940_ReadWrite24B(uint32_t data)
 {
-    uint8_t SendBuffer[3];
-    uint8_t RecvBuffer[3];
+    // uint8_t SendBuffer[3];
+    // uint8_t RecvBuffer[3];
     //  printf("Enter AD5940_ReadWrite24B");
     SendBuffer[0] = (data >> 16) & 0xff;
     SendBuffer[1] = (data >> 8) & 0xff;
@@ -882,8 +887,8 @@ static uint32_t AD5940_ReadWrite24B(uint32_t data)
 
 static uint64_t AD5940_ReadWrite40B(uint64_t data)
 {
-    uint8_t SendBuffer[5];
-    uint8_t RecvBuffer[5];
+    // uint8_t SendBuffer[5];
+    // uint8_t RecvBuffer[5];
     SendBuffer[0] = (data >> 32) & 0xff;
     SendBuffer[1] = (data >> 24) & 0xff;
     SendBuffer[2] = (data >> 16) & 0xff;
@@ -895,8 +900,8 @@ static uint64_t AD5940_ReadWrite40B(uint64_t data)
 
 static uint64_t AD5940_ReadWrite48B(uint64_t data)
 {
-    uint8_t SendBuffer[6];
-    uint8_t RecvBuffer[6];
+    // uint8_t SendBuffer[6];
+    // uint8_t RecvBuffer[6];
     SendBuffer[0] = (data >> 40) & 0xff;
     SendBuffer[1] = (data >> 32) & 0xff;
     SendBuffer[2] = (data >> 24) & 0xff;
@@ -909,8 +914,8 @@ static uint64_t AD5940_ReadWrite48B(uint64_t data)
 
 static uint64_t AD5940_ReadWrite56B(uint64_t data)
 {
-    uint8_t SendBuffer[7];
-    uint8_t RecvBuffer[7];
+    // uint8_t SendBuffer[7];
+    // uint8_t RecvBuffer[7];
     SendBuffer[0] = (data >> 48) & 0xff;
     SendBuffer[1] = (data >> 40) & 0xff;
     SendBuffer[2] = (data >> 32) & 0xff;
@@ -929,8 +934,8 @@ static uint64_t AD5940_ReadWrite56B(uint64_t data)
 **/
 static uint32_t AD5940_ReadWrite32B(uint32_t data)
 {
-    uint8_t SendBuffer[4];
-    uint8_t RecvBuffer[4];
+    // uint8_t SendBuffer[4];
+    // uint8_t RecvBuffer[4] = {0};
 
     SendBuffer[0] = (data >> 24) & 0xff;
     SendBuffer[1] = (data >> 16) & 0xff;
@@ -938,6 +943,7 @@ static uint32_t AD5940_ReadWrite32B(uint32_t data)
     SendBuffer[3] = (data) & 0xff;
     AD5940_ReadWriteNBytes(SendBuffer, RecvBuffer, 4);
     return (((uint32_t)RecvBuffer[0]) << 24) | (((uint32_t)RecvBuffer[1]) << 16) | (((uint32_t)RecvBuffer[2]) << 8) | (RecvBuffer[3]);
+    // return (((uint32_t)RecvBuffer[3]) << 24) | (((uint32_t)RecvBuffer[2]) << 16) | (((uint32_t)RecvBuffer[1]) << 8) | (RecvBuffer[0]);
 }
 
 /**
@@ -973,8 +979,8 @@ static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
         }
         AD5940_CsSet();
         // bflb_mtimer_delay_us(10);
-        // printf("5940 W GIVE MUTEX\r\n");
         xSemaphoreGive(xMutex_SPI);
+        // printf("5940 W GIVE MUTEX\r\n");
     }
 }
 //static void AD5940_SPIWriteReg(uint16_t RegAddr, uint32_t RegData)
@@ -1039,8 +1045,8 @@ uint32_t AD5940_SPIReadReg(uint16_t RegAddr)
 
         AD5940_CsSet();
         // bflb_mtimer_delay_us(10);
-        // printf("5940 R GIVE MUTEX\r\n");
         xSemaphoreGive(xMutex_SPI);
+        // printf("5940 R GIVE MUTEX\r\n");
     }
     return Data;
 }
@@ -1119,8 +1125,8 @@ void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
         // printf("AD5940 FIFORD END\r\n");
         // bflb_mtimer_delay_us(10);
         // taskEXIT_CRITICAL();
-        // printf("5940 FIFO GIVE MUTEX\r\n");
         xSemaphoreGive(xMutex_SPI);
+        // printf("5940 FIFO GIVE MUTEX\r\n");
     }
 }
 //void AD5940_FIFORd(uint32_t *pBuffer, uint32_t uiReadCount)
@@ -1272,7 +1278,6 @@ void AD5940_Initialize(void)
     SeqGenDB.EngineStart = bFALSE;
 #ifndef CHIPSEL_M355
     AD5940_CsSet(); /* Pull high CS in case it's low */
-                    //NRF_LOG_INFO("AD5940_CsSet0");
 #endif
     // printf("Enter Init\r\n");
     for (i = 0; i < sizeof(RegTable) / sizeof(RegTable[0]); i++) {
@@ -1289,8 +1294,8 @@ void AD5940_Initialize(void)
         bIsS2silicon = bFALSE;
     // #ifdef ADI_DEBUG
     else {
-        printf("CHIPID read error:0x%04x. AD5940 is not present?\n", i);
-        // while(1);
+        printf("CHIPID read error:0x%08x. AD5940 is not present?\n", i);
+        while(1);
     }
 #ifdef CHIPSEL_M355
     printf("This ADuCM355!\n");

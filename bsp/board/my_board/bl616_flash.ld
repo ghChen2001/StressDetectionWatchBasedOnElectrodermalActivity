@@ -17,7 +17,7 @@ ENTRY(__start)
 StackSize    = 0x1000; /*  4KB */
 HeapMinSize  = 0x1000; /*  4KB */
 psram_heap_min_size = 0x1000;
-nocache_max_size = 20K;
+nocache_max_size = 40K;
 __EM_SIZE = DEFINED(btble_controller_init) ? 32K : 0K;
 wifi_ram_max_size = DEFINED(wifi_main) ? (160K -  __EM_SIZE): 32K;
 
