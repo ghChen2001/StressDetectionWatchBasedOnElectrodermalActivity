@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_main"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="@string/mainPage" />
+    <item
+        android:id="@+id/menu_link"
+        android:enabled="true"
+        android:title="@string/btn_LinkDevice"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_plot"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="@string/graph" />
+</menu>

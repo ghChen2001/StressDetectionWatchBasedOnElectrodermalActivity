@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DataPlotFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <view
+            android:id="@+id/BvpPlotView"
+            class="com.github.mikephil.charting.charts.LineChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:rotation="0"
+            app:layout_constraintBottom_toTopOf="@+id/AccPlotView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DataPlotView"
+            app:layout_constraintVertical_bias="0.508" />
+
+        <view
+            android:id="@+id/DataPlotView"
+            class="com.github.mikephil.charting.charts.LineChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:rotation="0"
+            app:layout_constraintBottom_toTopOf="@+id/BvpPlotView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <view
+            android:id="@+id/AccPlotView"
+            class="com.github.mikephil.charting.charts.LineChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:rotation="0"
+            app:layout_constraintBottom_toTopOf="@+id/TempPlotView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BvpPlotView" />
+
+        <view
+            android:id="@+id/TempPlotView"
+            class="com.github.mikephil.charting.charts.LineChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:rotation="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/AccPlotView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TableRow
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <Button
+            android:id="@+id/dataPlotClrBtn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:rotation="0"
+            android:text="@string/clear"
+            android:textColor="#120E0E" />
+
+        <Button
+            android:id="@+id/dataPlotSaveBtn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:rotation="0"
+            android:text="@string/save"
+            android:textColor="#120E0E" />
+    </TableRow>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

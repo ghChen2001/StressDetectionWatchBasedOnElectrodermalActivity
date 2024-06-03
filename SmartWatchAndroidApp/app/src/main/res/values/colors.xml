@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorDot">#ff1e90ff</color>
+    <color name="colorDotReserve">#ff4500</color>
+    <color name="colorText">#a9a9a9</color>
+    <color name="colorAccX">#e48c87</color>
+    <color name="colorAccY">#1f82ab</color>
+    <color name="colorAccZ">#4cd88c</color>
+    <color name="colorAnrX">#f6bebd</color>
+    <color name="colorAnrY">#ccefff</color>
+    <color name="colorAnrZ">#9bf6c5</color>
+    <color name="colorTemp">#3d566d</color>
+    <color name="colorBvp">#008000</color>
+</resources>
