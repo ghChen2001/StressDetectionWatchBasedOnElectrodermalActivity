@@ -2655,21 +2655,21 @@ static void Algo_task(void *pvParameters)
 
     sumMs = 0;
     // DEMO
-    // vTaskDelay(5000);
-    // for (uint16_t i = 0; i < 350; i++) {
-    //     startMs = bflb_mtimer_get_time_ms();
-    //     // resultArray[i] = Calculate(test_data_input[i], 2720);
-    //     resultArray[i] = Calculate2(test_data_input[i], test_data_input[i] + 2560, 2560, 160);
-    //     deltaMs = bflb_mtimer_get_time_ms() - startMs;
-    //     sumMs += deltaMs;
-    //     printf("%d, time %d\r\n", resultArray[i], deltaMs);
-    //     if (resultArray[i] == test_label[i]) {
-    //         accurateNumber++;
-    //     }
-    //     vTaskDelay(1);
-    // }
-    // printf("accurateNumber %d\r\n", accurateNumber);
-    // printf("Avg Time %d\r\n", sumMs);
+    vTaskDelay(5000);
+    for (uint16_t i = 0; i < 350; i++) {
+        startMs = bflb_mtimer_get_time_ms();
+        // resultArray[i] = Calculate(test_data_input[i], 2720);
+        resultArray[i] = Calculate2(test_data_input[i], test_data_input[i] + 2560, 2560, 160);
+        deltaMs = bflb_mtimer_get_time_ms() - startMs;
+        sumMs += deltaMs;
+        printf("%d, time %d\r\n", resultArray[i], deltaMs);
+        if (resultArray[i] == test_label[i]) {
+            accurateNumber++;
+        }
+        vTaskDelay(1);
+    }
+    printf("accurateNumber %d\r\n", accurateNumber);
+    printf("Avg Time %d\r\n", sumMs);
 
     isAlgoOn = true;
     while (1) {
