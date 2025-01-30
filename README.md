@@ -6,11 +6,10 @@ Project directory: ./examples/ESDC_project/
 
 # Project Architecture
 
-![Project Architecture](fig1.svg)
+![Project Architecture](fig1update.png)
 
 # Images
-![Show0](show0.jpg)
-![Show1](show1.jpg)
-![Show2](show2.jpg)
-![Show3](show3.jpg)
-![Show4](show4.jpg)
+![Show0](show0update.png)
+![Show1](show1update.png)
+![Show2](show2update.png)
+![Show3](show3update.png)
